@@ -291,6 +291,26 @@ body.hide-transliteration .iast-line {
   background: var(--color-gold-light);
 }
 
+.token-repeat {
+  display: inline-block;
+  border: 1px solid rgba(240, 168, 60, 0.25);
+  border-radius: 4px;
+  padding: 0 2px;
+  margin: 0 1px;
+  cursor: pointer;
+  transition: border-color 0.15s ease, background 0.15s ease, box-shadow 0.15s ease;
+}
+
+.token-repeat:hover {
+  border-color: rgba(240, 168, 60, 0.55);
+}
+
+.token-repeat.active {
+  border-color: var(--color-gold-light);
+  background: rgba(240, 168, 60, 0.14);
+  box-shadow: 0 0 10px rgba(240, 168, 60, 0.3);
+}
+
 .accent-anudatta::after {
   content: '';
   position: absolute;
