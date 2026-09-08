@@ -1,0 +1,323 @@
+:root {
+  --color-bg: #0b0508;
+  --color-bg-alt: #170a13;
+  --color-panel: #1d0f1a;
+  --color-gold: #f0a83c;
+  --color-gold-light: #ffd27a;
+  --color-magenta: #ff2ea6;
+  --color-crimson: #e11d5c;
+  --color-text: #f7ece9;
+  --color-text-muted: #c7abb8;
+  --color-border: rgba(240, 168, 60, 0.22);
+
+  --font-display: 'Cinzel', serif;
+  --font-body: 'Cormorant Garamond', serif;
+  --font-ui: 'Inter', sans-serif;
+  --font-sanskrit: 'Noto Sans Devanagari', sans-serif;
+
+  --max-width: 900px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  font-size: 1.1rem;
+  line-height: 1.7;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.glow-gold {
+  background: linear-gradient(135deg, var(--color-gold-light), var(--color-gold));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: 0 0 40px rgba(240, 168, 60, 0.25);
+}
+
+/* Header */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(11, 5, 8, 0.9);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.navbar {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 14px 24px;
+  font-family: var(--font-ui);
+}
+
+.logo-group {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logo-mark {
+  width: 38px;
+  height: 38px;
+}
+
+.logo-word {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.15rem;
+  letter-spacing: 0.5px;
+}
+
+/* Chant chooser */
+.chant-select {
+  background: var(--color-panel);
+  color: var(--color-text);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-family: var(--font-ui);
+  font-size: 0.85rem;
+}
+
+/* Hero-ish title block */
+.chant-header {
+  padding: 56px 0 32px;
+  text-align: center;
+  background:
+    radial-gradient(circle at 22% 20%, rgba(255, 46, 166, 0.16), transparent 55%),
+    radial-gradient(circle at 78% 80%, rgba(240, 168, 60, 0.12), transparent 55%),
+    var(--color-bg);
+}
+
+.chant-title-deva {
+  font-family: var(--font-sanskrit);
+  font-size: clamp(2rem, 6vw, 3rem);
+  margin-bottom: 8px;
+}
+
+.chant-title-iast {
+  font-family: var(--font-display);
+  font-style: italic;
+  color: var(--color-text-muted);
+  font-size: 1.1rem;
+  letter-spacing: 0.5px;
+}
+
+.chant-source {
+  margin-top: 14px;
+  font-family: var(--font-ui);
+  font-size: 0.78rem;
+  color: var(--color-text-muted);
+}
+
+.chant-source a {
+  color: var(--color-gold-light);
+  border-bottom: 1px dotted var(--color-border);
+}
+
+/* Toggle control bar */
+.control-bar {
+  position: sticky;
+  top: 66px;
+  z-index: 90;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 10px 24px;
+  background: rgba(23, 10, 19, 0.92);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--color-border);
+  font-family: var(--font-ui);
+  font-size: 0.85rem;
+}
+
+.toggle-switch {
+  position: relative;
+  display: inline-block;
+  width: 44px;
+  height: 24px;
+  flex-shrink: 0;
+}
+
+.toggle-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.toggle-slider {
+  position: absolute;
+  cursor: pointer;
+  inset: 0;
+  background: var(--color-panel);
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  transition: background 0.2s ease;
+}
+
+.toggle-slider::before {
+  content: '';
+  position: absolute;
+  height: 16px;
+  width: 16px;
+  left: 3px;
+  top: 3px;
+  background: var(--color-text-muted);
+  border-radius: 50%;
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.toggle-switch input:checked + .toggle-slider {
+  background: rgba(240, 168, 60, 0.25);
+  border-color: var(--color-gold);
+}
+
+.toggle-switch input:checked + .toggle-slider::before {
+  transform: translateX(20px);
+  background: var(--color-gold-light);
+}
+
+/* Chant body */
+.chant-body {
+  padding: 40px 0 100px;
+}
+
+.section-block {
+  margin-bottom: 44px;
+}
+
+.section-label {
+  font-family: var(--font-ui);
+  font-size: 0.75rem;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--color-magenta);
+  margin-bottom: 18px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.colophon {
+  font-style: italic;
+  color: var(--color-text-muted);
+  font-size: 0.95rem;
+  margin-bottom: 40px;
+  padding: 16px 20px;
+  border-left: 2px solid var(--color-border);
+}
+
+.colophon .deva-line {
+  font-family: var(--font-sanskrit);
+  font-style: normal;
+  font-size: 1.1rem;
+  margin-bottom: 4px;
+}
+
+.verse-line {
+  margin-bottom: 18px;
+}
+
+.deva-line {
+  font-family: var(--font-sanskrit);
+  font-size: 1.4rem;
+  line-height: 1.9;
+}
+
+.iast-line {
+  font-family: 'Gentium Plus', var(--font-body);
+  font-style: italic;
+  color: var(--color-text-muted);
+  font-size: 1.05rem;
+  margin-top: 3px;
+  padding-top: 10px;
+  padding-bottom: 6px;
+  transition: opacity 0.15s ease;
+}
+
+body.hide-transliteration .iast-line {
+  display: none;
+}
+
+.accented-char {
+  position: relative;
+  display: inline-block;
+}
+
+.accent-udatta::before,
+.accent-svarita::before {
+  content: '';
+  position: absolute;
+  top: -7px;
+  left: 10%;
+  right: 10%;
+  height: 1.5px;
+  background: var(--color-gold-light);
+}
+
+.accent-svarita::after {
+  content: '';
+  position: absolute;
+  top: -11px;
+  left: 10%;
+  right: 10%;
+  height: 1.5px;
+  background: var(--color-gold-light);
+}
+
+.accent-anudatta::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 10%;
+  right: 10%;
+  height: 1.5px;
+  background: var(--color-magenta);
+}
+
+.loading,
+.error {
+  text-align: center;
+  padding: 60px 24px;
+  color: var(--color-text-muted);
+  font-family: var(--font-ui);
+}
+
+.error {
+  color: var(--color-crimson);
+}
+
+@media (max-width: 600px) {
+  .navbar {
+    flex-wrap: wrap;
+  }
+  .deva-line {
+    font-size: 1.2rem;
+  }
+}

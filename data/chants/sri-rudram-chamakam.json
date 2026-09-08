@@ -1,0 +1,950 @@
+{
+  "id": "sri-rudram-chamakam",
+  "title": {
+    "devanagari": "श्री रुद्रं चमकम्",
+    "iast": "Śrī Rudraṁ Chamakam"
+  },
+  "source": {
+    "site": "vignanam.org",
+    "devanagari_url": "https://vignanam.org/devanagari/sri-rudram-chamakam.html",
+    "iast_url": "https://vignanam.org/english/sri-rudram-chamakam.html"
+  },
+  "colophon": null,
+  "sections": [
+    {
+      "label": "1",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "ॐ अग्ना॑विष्णू स॒जोष॑से॒माव॑र्धन्तु वा॒-ङ्गिरः॑ ।",
+          "iast": "ōṃ agnā̍viṣṇū sa̠jōṣa̍sē̠māva̍rdhantu vā̠-ṅgira̍ḥ ।"
+        },
+        {
+          "n": 2,
+          "devanagari": "द्यु॒म्नैर्वाजे॑भि॒राग॑तम् ।",
+          "iast": "dyu̠mnairvājē̍bhi̠rāga̍tam ।"
+        },
+        {
+          "n": 3,
+          "devanagari": "वाज॑श्च मे प्रस॒वश्च॑ मे॒",
+          "iast": "vāja̍ścha mē prasa̠vaścha̍ mē̠"
+        },
+        {
+          "n": 4,
+          "devanagari": "प्रय॑तिश्च मे॒ प्रसि॑तिश्च मे",
+          "iast": "praya̍tiścha mē̠ prasi̍tiścha mē"
+        },
+        {
+          "n": 5,
+          "devanagari": "धी॒तिश्च॑ मे॒ क्रतु॑श्च मे॒",
+          "iast": "dhī̠tiścha̍ mē̠ kratu̍ścha mē̠"
+        },
+        {
+          "n": 6,
+          "devanagari": "स्वर॑श्च मे॒ श्लोक॑श्च मे",
+          "iast": "svara̍ścha mē̠ ślōka̍ścha mē"
+        },
+        {
+          "n": 7,
+          "devanagari": "श्रा॒वश्च॑ मे॒ श्रुति॑श्च मे॒",
+          "iast": "śrā̠vaścha̍ mē̠ śruti̍ścha mē̠"
+        },
+        {
+          "n": 8,
+          "devanagari": "ज्योति॑श्च मे॒ सुव॑श्च मे",
+          "iast": "jyōti̍ścha mē̠ suva̍ścha mē"
+        },
+        {
+          "n": 9,
+          "devanagari": "प्रा॒णश्च॑ मे-ऽपा॒नश्च॑ मे",
+          "iast": "prā̠ṇaścha̍ mē-'pā̠naścha̍ mē"
+        },
+        {
+          "n": 10,
+          "devanagari": "व्या॒नश्च॒ मे-ऽसु॑श्च मे",
+          "iast": "vyā̠naścha̠ mē-'su̍ścha mē"
+        },
+        {
+          "n": 11,
+          "devanagari": "चि॒त्त-ञ्च॑ म॒ आधी॑त-ञ्च मे॒",
+          "iast": "chi̠tta-ñcha̍ ma̠ ādhī̍ta-ñcha mē̠"
+        },
+        {
+          "n": 12,
+          "devanagari": "वाक्च॑ मे॒ मन॑श्च मे॒",
+          "iast": "vākcha̍ mē̠ mana̍ścha mē̠"
+        },
+        {
+          "n": 13,
+          "devanagari": "चक्षु॑श्च मे॒ श्रोत्र॑-ञ्च मे॒",
+          "iast": "chakṣu̍ścha mē̠ śrōtra̍-ñcha mē̠"
+        },
+        {
+          "n": 14,
+          "devanagari": "दक्ष॑श्च मे॒ बल॑-ञ्च म॒",
+          "iast": "dakṣa̍ścha mē̠ bala̍-ñcha ma̠"
+        },
+        {
+          "n": 15,
+          "devanagari": "ओज॑श्च मे॒ सह॑श्च म॒",
+          "iast": "ōja̍ścha mē̠ saha̍ścha ma̠"
+        },
+        {
+          "n": 16,
+          "devanagari": "आयु॑श्च मे ज॒रा च॑ म",
+          "iast": "āyu̍ścha mē ja̠rā cha̍ ma"
+        },
+        {
+          "n": 17,
+          "devanagari": "आ॒त्मा च॑ मे त॒नूश्च॑ मे॒",
+          "iast": "ā̠tmā cha̍ mē ta̠nūścha̍ mē̠"
+        },
+        {
+          "n": 18,
+          "devanagari": "शर्म॑ च मे॒ वर्म॑ च॒ मे-ऽङ्गा॑नि च मे॒-ऽस्थानि॑ च मे॒",
+          "iast": "śarma̍ cha mē̠ varma̍ cha̠ mē-'ṅgā̍ni cha mē̠-'sthāni̍ cha mē̠"
+        },
+        {
+          "n": 19,
+          "devanagari": "परूग्ं॑षि च मे॒ शरी॑राणि च मे ॥ 1 ॥",
+          "iast": "parūg̍ṃṣi cha mē̠ śarī̍rāṇi cha mē ॥ 1 ॥"
+        }
+      ]
+    },
+    {
+      "label": "2",
+      "lines": [
+        {
+          "n": 20,
+          "devanagari": "जैष्ठ्य॑-ञ्च म॒ आधि॑पत्य-ञ्च मे",
+          "iast": "jaiṣṭhya̍-ñcha ma̠ ādhi̍patya-ñcha mē"
+        },
+        {
+          "n": 21,
+          "devanagari": "म॒न्युश्च॑ मे॒ भाम॑श्च॒ मे-ऽम॑श्च॒ मे-ऽम्भ॑श्च मे",
+          "iast": "ma̠nyuścha̍ mē̠ bhāma̍ścha̠ mē-'ma̍ścha̠ mē-'mbha̍ścha mē"
+        },
+        {
+          "n": 22,
+          "devanagari": "जे॒मा च॑ मे महि॒मा च॑ मे",
+          "iast": "jē̠mā cha̍ mē mahi̠mā cha̍ mē"
+        },
+        {
+          "n": 23,
+          "devanagari": "वरि॒मा च॑ मे प्रथि॒मा च॑ मे",
+          "iast": "vari̠mā cha̍ mē prathi̠mā cha̍ mē"
+        },
+        {
+          "n": 24,
+          "devanagari": "व॒र्​ष्मा च॑ मे द्राघु॒या च॑ मे",
+          "iast": "va̠r​ṣmā cha̍ mē drāghu̠yā cha̍ mē"
+        },
+        {
+          "n": 25,
+          "devanagari": "वृ॒द्ध-ञ्च॑ मे॒ वृद्धि॑श्च मे",
+          "iast": "vṛ̠ddha-ñcha̍ mē̠ vṛddhi̍ścha mē"
+        },
+        {
+          "n": 26,
+          "devanagari": "स॒त्य-ञ्च॑ मे श्र॒द्धा च॑ मे॒",
+          "iast": "sa̠tya-ñcha̍ mē śra̠ddhā cha̍ mē̠"
+        },
+        {
+          "n": 27,
+          "devanagari": "जग॑च्च मे॒ धन॑-ञ्च मे॒",
+          "iast": "jaga̍chcha mē̠ dhana̍-ñcha mē̠"
+        },
+        {
+          "n": 28,
+          "devanagari": "वश॑श्च मे॒ त्विषि॑श्च मे",
+          "iast": "vaśa̍ścha mē̠ tviṣi̍ścha mē"
+        },
+        {
+          "n": 29,
+          "devanagari": "क्री॒डा च॑ मे॒ मोद॑श्च मे",
+          "iast": "krī̠ḍā cha̍ mē̠ mōda̍ścha mē"
+        },
+        {
+          "n": 30,
+          "devanagari": "जा॒त-ञ्च॑ मे जनि॒ष्यमा॑ण-ञ्च मे",
+          "iast": "jā̠ta-ñcha̍ mē jani̠ṣyamā̍ṇa-ñcha mē"
+        },
+        {
+          "n": 31,
+          "devanagari": "सू॒क्त-ञ्च॑ मे सुकृ॒त-ञ्च॑ मे",
+          "iast": "sū̠kta-ñcha̍ mē sukṛ̠ta-ñcha̍ mē"
+        },
+        {
+          "n": 32,
+          "devanagari": "वि॒त्त-ञ्च॑ मे॒ वेद्य॑-ञ्च मे",
+          "iast": "vi̠tta-ñcha̍ mē̠ vēdya̍-ñcha mē"
+        },
+        {
+          "n": 33,
+          "devanagari": "भू॒त-ञ्च॑ मे भवि॒ष्यच्च॑ मे",
+          "iast": "bhū̠ta-ñcha̍ mē bhavi̠ṣyachcha̍ mē"
+        },
+        {
+          "n": 34,
+          "devanagari": "सु॒ग-ञ्च॑ मे सु॒पथ॑-ञ्च म",
+          "iast": "su̠ga-ñcha̍ mē su̠patha̍-ñcha ma"
+        },
+        {
+          "n": 35,
+          "devanagari": "ऋ॒द्ध-ञ्च॑ म॒ ऋद्धि॑श्च मे",
+          "iast": "ṛ̠ddha-ñcha̍ ma̠ ṛddhi̍ścha mē"
+        },
+        {
+          "n": 36,
+          "devanagari": "कॢ॒प्त-ञ्च॑ मे॒ कॢप्ति॑श्च मे",
+          "iast": "kL​i̠pta-ñcha̍ mē̠ kL​ipti̍ścha mē"
+        },
+        {
+          "n": 37,
+          "devanagari": "म॒तिश्च॑ मे सुम॒तिश्च॑ मे ॥ 2 ॥",
+          "iast": "ma̠tiścha̍ mē suma̠tiścha̍ mē ॥ 2 ॥"
+        }
+      ]
+    },
+    {
+      "label": "3",
+      "lines": [
+        {
+          "n": 38,
+          "devanagari": "श-ञ्च॑ मे॒ मय॑श्च मे",
+          "iast": "śa-ñcha̍ mē̠ maya̍ścha mē"
+        },
+        {
+          "n": 39,
+          "devanagari": "प्रि॒य-ञ्च॑ मे-ऽनुका॒मश्च॑ मे॒ काम॑श्च मे",
+          "iast": "pri̠ya-ñcha̍ mē-'nukā̠maścha̍ mē̠ kāma̍ścha mē"
+        },
+        {
+          "n": 40,
+          "devanagari": "सौमन॒सश्च॑ मे भ॒द्र-ञ्च॑ मे॒",
+          "iast": "saumana̠saścha̍ mē bha̠dra-ñcha̍ mē̠"
+        },
+        {
+          "n": 41,
+          "devanagari": "श्रेय॑श्च मे॒ वस्य॑श्च मे॒",
+          "iast": "śrēya̍ścha mē̠ vasya̍ścha mē̠"
+        },
+        {
+          "n": 42,
+          "devanagari": "यश॑श्च मे॒ भग॑श्च मे॒ द्रवि॑ण-ञ्च मे",
+          "iast": "yaśa̍ścha mē̠ bhaga̍ścha mē̠ dravi̍ṇa-ñcha mē"
+        },
+        {
+          "n": 43,
+          "devanagari": "य॒न्ता च॑ मे ध॒र्ता च॑ मे॒",
+          "iast": "ya̠ntā cha̍ mē dha̠rtā cha̍ mē̠"
+        },
+        {
+          "n": 44,
+          "devanagari": "क्षेम॑श्च मे॒ धृति॑श्च मे॒",
+          "iast": "kṣēma̍ścha mē̠ dhṛti̍ścha mē̠"
+        },
+        {
+          "n": 45,
+          "devanagari": "विश्व॑-ञ्च मे॒ मह॑श्च मे",
+          "iast": "viśva̍-ñcha mē̠ maha̍ścha mē"
+        },
+        {
+          "n": 46,
+          "devanagari": "सं॒​विँच्च॑ मे॒ ज्ञात्र॑-ञ्च मे॒",
+          "iast": "sa̠ṃvichcha̍ mē̠ jñātra̍-ñcha mē̠"
+        },
+        {
+          "n": 47,
+          "devanagari": "सूश्च॑ मे प्र॒सूश्च॑ मे॒",
+          "iast": "sūścha̍ mē pra̠sūścha̍ mē̠"
+        },
+        {
+          "n": 48,
+          "devanagari": "सीर॑-ञ्च मे ल॒यश्च॑ म",
+          "iast": "sīra̍-ñcha mē la̠yaścha̍ ma"
+        },
+        {
+          "n": 49,
+          "devanagari": "ऋ॒त-ञ्च॑ मे॒-ऽमृत॑-ञ्च मे-ऽय॒क्ष्म-ञ्च॒ मे-ऽना॑मयच्च मे",
+          "iast": "ṛ̠ta-ñcha̍ mē̠-'mṛta̍-ñcha mē-'ya̠kṣma-ñcha̠ mē-'nā̍mayachcha mē"
+        },
+        {
+          "n": 50,
+          "devanagari": "जी॒वातु॑श्च मे दीर्घायु॒त्व-ञ्च॑ मे-ऽनमि॒त्र-ञ्च॒ मे-ऽभ॑य-ञ्च मे",
+          "iast": "jī̠vātu̍ścha mē dīrghāyu̠tva-ñcha̍ mē-'nami̠tra-ñcha̠ mē-'bha̍ya-ñcha mē"
+        },
+        {
+          "n": 51,
+          "devanagari": "सु॒ग-ञ्च॑ मे॒ शय॑न-ञ्च मे",
+          "iast": "su̠ga-ñcha̍ mē̠ śaya̍na-ñcha mē"
+        },
+        {
+          "n": 52,
+          "devanagari": "सू॒षा च॑ मे सु॒दिन॑-ञ्च मे ॥ 3 ॥",
+          "iast": "sū̠ṣā cha̍ mē su̠dina̍-ñcha mē ॥ 3 ॥"
+        }
+      ]
+    },
+    {
+      "label": "4",
+      "lines": [
+        {
+          "n": 53,
+          "devanagari": "ऊर्क्च॑ मे सू॒नृता॑ च मे॒",
+          "iast": "ūrkcha̍ mē sū̠nṛtā̍ cha mē̠"
+        },
+        {
+          "n": 54,
+          "devanagari": "पय॑श्च मे॒ रस॑श्च मे",
+          "iast": "paya̍ścha mē̠ rasa̍ścha mē"
+        },
+        {
+          "n": 55,
+          "devanagari": "घृ॒त-ञ्च॑ मे॒ मधु॑ च मे॒",
+          "iast": "ghṛ̠ta-ñcha̍ mē̠ madhu̍ cha mē̠"
+        },
+        {
+          "n": 56,
+          "devanagari": "सग्धि॑श्च मे॒ सपी॑तिश्च मे",
+          "iast": "sagdhi̍ścha mē̠ sapī̍tiścha mē"
+        },
+        {
+          "n": 57,
+          "devanagari": "कृ॒षिश्च॑ मे॒ वृष्टि॑श्च मे॒",
+          "iast": "kṛ̠ṣiścha̍ mē̠ vṛṣṭi̍ścha mē̠"
+        },
+        {
+          "n": 58,
+          "devanagari": "जैत्र॑-ञ्च म॒ औद्भि॑द्य-ञ्च मे",
+          "iast": "jaitra̍-ñcha ma̠ audbhi̍dya-ñcha mē"
+        },
+        {
+          "n": 59,
+          "devanagari": "र॒यिश्च॑ मे॒ राय॑श्च मे",
+          "iast": "ra̠yiścha̍ mē̠ rāya̍ścha mē"
+        },
+        {
+          "n": 60,
+          "devanagari": "पु॒ष्ट-ञ्च॑ मे॒ पुष्टि॑श्च मे",
+          "iast": "pu̠ṣṭa-ñcha̍ mē̠ puṣṭi̍ścha mē"
+        },
+        {
+          "n": 61,
+          "devanagari": "वि॒भु च॑ मे प्र॒भु च॑ मे",
+          "iast": "vi̠bhu cha̍ mē pra̠bhu cha̍ mē"
+        },
+        {
+          "n": 62,
+          "devanagari": "ब॒हु च॑ मे॒ भूय॑श्च मे",
+          "iast": "ba̠hu cha̍ mē̠ bhūya̍ścha mē"
+        },
+        {
+          "n": 63,
+          "devanagari": "पू॒र्ण-ञ्च॑ मे पू॒र्णत॑र-ञ्च॒ मे-ऽक्षि॑तिश्च मे॒ कूय॑वाश्च॒ मे-ऽन्न॑-ञ्च॒ मे-ऽक्षु॑च्च मे",
+          "iast": "pū̠rṇa-ñcha̍ mē pū̠rṇata̍ra-ñcha̠ mē-'kṣi̍tiścha mē̠ kūya̍vāścha̠ mē-'nna̍-ñcha̠ mē-'kṣu̍chcha mē"
+        },
+        {
+          "n": 64,
+          "devanagari": "व्री॒हय॑श्च मे॒ यवा᳚श्च मे॒",
+          "iast": "vrī̠haya̍ścha mē̠ yavā̎ścha mē̠"
+        },
+        {
+          "n": 65,
+          "devanagari": "माषा᳚श्च मे॒ तिला᳚श्च मे",
+          "iast": "māṣā̎ścha mē̠ tilā̎ścha mē"
+        },
+        {
+          "n": 66,
+          "devanagari": "मु॒द्गाश्च॑ मे ख॒ल्वा᳚श्च मे",
+          "iast": "mu̠dgāścha̍ mē kha̠lvā̎ścha mē"
+        },
+        {
+          "n": 67,
+          "devanagari": "गो॒धूमा᳚श्च मे म॒सुरा᳚श्च मे",
+          "iast": "gō̠dhūmā̎ścha mē ma̠surā̎ścha mē"
+        },
+        {
+          "n": 68,
+          "devanagari": "प्रि॒यङ्ग॑वश्च॒ मे-ऽण॑वश्च मे",
+          "iast": "pri̠yaṅga̍vaścha̠ mē-'ṇa̍vaścha mē"
+        },
+        {
+          "n": 69,
+          "devanagari": "श्या॒माका᳚श्च मे नी॒वारा᳚श्च मे ॥ 4 ॥",
+          "iast": "śyā̠mākā̎ścha mē nī̠vārā̎ścha mē ॥ 4 ॥"
+        }
+      ]
+    },
+    {
+      "label": "5",
+      "lines": [
+        {
+          "n": 70,
+          "devanagari": "अश्मा॑ च मे॒ मृत्ति॑का च मे",
+          "iast": "aśmā̍ cha mē̠ mṛtti̍kā cha mē"
+        },
+        {
+          "n": 71,
+          "devanagari": "गि॒रय॑श्च मे॒ पर्व॑ताश्च मे॒",
+          "iast": "gi̠raya̍ścha mē̠ parva̍tāścha mē̠"
+        },
+        {
+          "n": 72,
+          "devanagari": "सिक॑ताश्च मे॒ वन॒स्पत॑यश्च मे॒",
+          "iast": "sika̍tāścha mē̠ vana̠spata̍yaścha mē̠"
+        },
+        {
+          "n": 73,
+          "devanagari": "हिर॑ण्य-ञ्च॒ मे-ऽय॑श्च मे॒",
+          "iast": "hira̍ṇya-ñcha̠ mē-'ya̍ścha mē̠"
+        },
+        {
+          "n": 74,
+          "devanagari": "सीस॑-ञ्च॒ मे त्रपु॑श्च मे",
+          "iast": "sīsa̍-ñcha̠ mē trapu̍ścha mē"
+        },
+        {
+          "n": 75,
+          "devanagari": "श्या॒म-ञ्च॑ मे लो॒ह-ञ्च॑ मे॒-ऽग्निश्च॑ म॒",
+          "iast": "śyā̠ma-ñcha̍ mē lō̠ha-ñcha̍ mē̠-'gniścha̍ ma̠"
+        },
+        {
+          "n": 76,
+          "devanagari": "आप॑श्च मे वी॒रुध॑श्च म॒ ओष॑धयश्च मे",
+          "iast": "āpa̍ścha mē vī̠rudha̍ścha ma̠ ōṣa̍dhayaścha mē"
+        },
+        {
+          "n": 77,
+          "devanagari": "कृष्टप॒च्य-ञ्च॑ मे-ऽकृष्टप॒च्य-ञ्च॑ मे",
+          "iast": "kṛṣṭapa̠chya-ñcha̍ mē-'kṛṣṭapa̠chya-ñcha̍ mē"
+        },
+        {
+          "n": 78,
+          "devanagari": "ग्रा॒म्याश्च॑ मे प॒शव॑ आर॒ण्याश्च॑ य॒ज्ञेन॑ कल्पन्तां",
+          "iast": "grā̠myāścha̍ mē pa̠śava̍ āra̠ṇyāścha̍ ya̠jñēna̍ kalpantāṃ"
+        },
+        {
+          "n": 79,
+          "devanagari": "वि॒त्त-ञ्च॑ मे॒ वित्ति॑श्च मे",
+          "iast": "vi̠tta-ñcha̍ mē̠ vitti̍ścha mē"
+        },
+        {
+          "n": 80,
+          "devanagari": "भू॒त-ञ्च॑ मे॒ भूति॑श्च मे॒",
+          "iast": "bhū̠ta-ñcha̍ mē̠ bhūti̍ścha mē̠"
+        },
+        {
+          "n": 81,
+          "devanagari": "वसु॑ च मे वस॒तिश्च॑ मे॒",
+          "iast": "vasu̍ cha mē vasa̠tiścha̍ mē̠"
+        },
+        {
+          "n": 82,
+          "devanagari": "कर्म॑ च मे॒ शक्ति॑श्च॒ मे-ऽर्थ॑श्च म॒",
+          "iast": "karma̍ cha mē̠ śakti̍ścha̠ mē-'rtha̍ścha ma̠"
+        },
+        {
+          "n": 83,
+          "devanagari": "एम॑श्च म॒ इति॑श्च मे॒ गति॑श्च मे ॥ 5 ॥",
+          "iast": "ēma̍ścha ma̠ iti̍ścha mē̠ gati̍ścha mē ॥ 5 ॥"
+        }
+      ]
+    },
+    {
+      "label": "6",
+      "lines": [
+        {
+          "n": 84,
+          "devanagari": "अ॒ग्निश्च॑ म॒ इन्द्र॑श्च मे॒",
+          "iast": "a̠gniścha̍ ma̠ indra̍ścha mē̠"
+        },
+        {
+          "n": 85,
+          "devanagari": "सोम॑श्च म॒ इन्द्र॑श्च मे",
+          "iast": "sōma̍ścha ma̠ indra̍ścha mē"
+        },
+        {
+          "n": 86,
+          "devanagari": "सवि॒ता च॑ म॒ इन्द्र॑श्च मे॒",
+          "iast": "savi̠tā cha̍ ma̠ indra̍ścha mē̠"
+        },
+        {
+          "n": 87,
+          "devanagari": "सर॑स्वती च म॒ इन्द्र॑श्च मे",
+          "iast": "sara̍svatī cha ma̠ indra̍ścha mē"
+        },
+        {
+          "n": 88,
+          "devanagari": "पू॒षा च॑ म॒ इन्द्र॑श्च मे॒",
+          "iast": "pū̠ṣā cha̍ ma̠ indra̍ścha mē̠"
+        },
+        {
+          "n": 89,
+          "devanagari": "बृह॒स्पति॑श्च म॒ इन्द्र॑श्च मे",
+          "iast": "bṛha̠spati̍ścha ma̠ indra̍ścha mē"
+        },
+        {
+          "n": 90,
+          "devanagari": "मि॒त्रश्च॑ म॒ इन्द्र॑श्च मे॒",
+          "iast": "mi̠traścha̍ ma̠ indra̍ścha mē̠"
+        },
+        {
+          "n": 91,
+          "devanagari": "वरु॑णश्च म॒ इन्द्र॑श्च मे॒",
+          "iast": "varu̍ṇaścha ma̠ indra̍ścha mē̠"
+        },
+        {
+          "n": 92,
+          "devanagari": "त्वष्ठा॑ च म॒ इन्द्र॑श्च मे",
+          "iast": "tvaṣṭhā̍ cha ma̠ indra̍ścha mē"
+        },
+        {
+          "n": 93,
+          "devanagari": "धा॒ता च॑ म॒ इन्द्र॑श्च मे॒",
+          "iast": "dhā̠tā cha̍ ma̠ indra̍ścha mē̠"
+        },
+        {
+          "n": 94,
+          "devanagari": "विष्णु॑श्च म॒ इन्द्र॑श्च मे॒-ऽश्विनौ॑ च म॒ इन्द्र॑श्च मे",
+          "iast": "viṣṇu̍ścha ma̠ indra̍ścha mē̠-'śvinau̍ cha ma̠ indra̍ścha mē"
+        },
+        {
+          "n": 95,
+          "devanagari": "म॒रुत॑श्च म॒ इन्द्र॑श्च मे॒",
+          "iast": "ma̠ruta̍ścha ma̠ indra̍ścha mē̠"
+        },
+        {
+          "n": 96,
+          "devanagari": "विश्वे॑ च मे दे॒वा इन्द्र॑श्च मे",
+          "iast": "viśvē̍ cha mē dē̠vā indra̍ścha mē"
+        },
+        {
+          "n": 97,
+          "devanagari": "पृथि॒वी च॑ म॒ इन्द्र॑श्च मे॒-ऽन्तरि॑क्ष-ञ्च म॒ इन्द्र॑श्च मे॒",
+          "iast": "pṛthi̠vī cha̍ ma̠ indra̍ścha mē̠-'ntari̍kṣa-ñcha ma̠ indra̍ścha mē̠"
+        },
+        {
+          "n": 98,
+          "devanagari": "द्यौश्च॑ म॒ इन्द्र॑श्च मे॒",
+          "iast": "dyauścha̍ ma̠ indra̍ścha mē̠"
+        },
+        {
+          "n": 99,
+          "devanagari": "दिश॑श्च म॒ इन्द्र॑श्च मे",
+          "iast": "diśa̍ścha ma̠ indra̍ścha mē"
+        },
+        {
+          "n": 100,
+          "devanagari": "मू॒र्धा च॑ म॒ इन्द्र॑श्च मे",
+          "iast": "mū̠rdhā cha̍ ma̠ indra̍ścha mē"
+        },
+        {
+          "n": 101,
+          "devanagari": "प्र॒जाप॑तिश्च म॒ इन्द्र॑श्च मे ॥ 6 ॥",
+          "iast": "pra̠jāpa̍tiścha ma̠ indra̍ścha mē ॥ 6 ॥"
+        }
+      ]
+    },
+    {
+      "label": "7",
+      "lines": [
+        {
+          "n": 102,
+          "devanagari": "अ॒ग्ं॒शुश्च॑ मे र॒श्मिश्च॒ मे-ऽदा᳚भ्यश्च॒ मे-ऽधि॑पतिश्च म",
+          "iast": "a̠gṃ̠śuścha̍ mē ra̠śmiścha̠ mē-'dā̎bhyaścha̠ mē-'dhi̍patiścha ma"
+        },
+        {
+          "n": 103,
+          "devanagari": "उपा॒ग्ं॒शुश्च॑ मे-ऽन्तर्या॒मश्च॑ म",
+          "iast": "upā̠gṃ̠śuścha̍ mē-'ntaryā̠maścha̍ ma"
+        },
+        {
+          "n": 104,
+          "devanagari": "ऐन्द्रवाय॒वश्च॑ मे मैत्रावरु॒णश्च॑ म",
+          "iast": "aindravāya̠vaścha̍ mē maitrāvaru̠ṇaścha̍ ma"
+        },
+        {
+          "n": 105,
+          "devanagari": "आश्वि॒नश्च॑ मे प्रतिप्र॒स्थान॑श्च मे",
+          "iast": "āśvi̠naścha̍ mē pratipra̠sthāna̍ścha mē"
+        },
+        {
+          "n": 106,
+          "devanagari": "शु॒क्रश्च॑ मे म॒न्थी च॑ म",
+          "iast": "śu̠kraścha̍ mē ma̠nthī cha̍ ma"
+        },
+        {
+          "n": 107,
+          "devanagari": "आग्रय॒णश्च॑ मे वैश्वदे॒वश्च॑ मे",
+          "iast": "āgraya̠ṇaścha̍ mē vaiśvadē̠vaścha̍ mē"
+        },
+        {
+          "n": 108,
+          "devanagari": "ध्रु॒वश्च॑ मे वैश्वान॒रश्च॑ म",
+          "iast": "dhru̠vaścha̍ mē vaiśvāna̠raścha̍ ma"
+        },
+        {
+          "n": 109,
+          "devanagari": "ऋतुग्र॒हाश्च॑ मे-ऽतिग्रा॒ह्या᳚श्च म",
+          "iast": "ṛtugra̠hāścha̍ mē-'tigrā̠hyā̎ścha ma"
+        },
+        {
+          "n": 110,
+          "devanagari": "ऐन्द्रा॒ग्नश्च॑ मे वैश्वदे॒वश्च॑ मे",
+          "iast": "aindrā̠gnaścha̍ mē vaiśvadē̠vaścha̍ mē"
+        },
+        {
+          "n": 111,
+          "devanagari": "मरुत्व॒तीया᳚श्च मे माहे॒न्द्रश्च॑ म",
+          "iast": "marutva̠tīyā̎ścha mē māhē̠ndraścha̍ ma"
+        },
+        {
+          "n": 112,
+          "devanagari": "आदि॒त्यश्च॑ मे सावि॒त्रश्च॑ मे",
+          "iast": "ādi̠tyaścha̍ mē sāvi̠traścha̍ mē"
+        },
+        {
+          "n": 113,
+          "devanagari": "सारस्व॒तश्च॑ मे पौ॒ष्णश्च॑ मे",
+          "iast": "sārasva̠taścha̍ mē pau̠ṣṇaścha̍ mē"
+        },
+        {
+          "n": 114,
+          "devanagari": "पात्नीव॒तश्च॑ मे हारियोज॒नश्च॑ मे ॥ 7 ॥",
+          "iast": "pātnīva̠taścha̍ mē hāriyōja̠naścha̍ mē ॥ 7 ॥"
+        }
+      ]
+    },
+    {
+      "label": "8",
+      "lines": [
+        {
+          "n": 115,
+          "devanagari": "इ॒ध्मश्च॑ मे ब॒र्॒हिश्च॑ मे॒",
+          "iast": "i̠dhmaścha̍ mē ba̠r̠hiścha̍ mē̠"
+        },
+        {
+          "n": 116,
+          "devanagari": "वेदि॑श्च मे॒ धिष्णि॑याश्च मे॒",
+          "iast": "vēdi̍ścha mē̠ dhiṣṇi̍yāścha mē̠"
+        },
+        {
+          "n": 117,
+          "devanagari": "स्रुच॑श्च मे चम॒साश्च॑ मे॒",
+          "iast": "srucha̍ścha mē chama̠sāścha̍ mē̠"
+        },
+        {
+          "n": 118,
+          "devanagari": "ग्रावा॑णश्च मे॒ स्वर॑वश्च म",
+          "iast": "grāvā̍ṇaścha mē̠ svara̍vaścha ma"
+        },
+        {
+          "n": 119,
+          "devanagari": "उपर॒वाश्च॑ मे-ऽधि॒षव॑णे च मे",
+          "iast": "upara̠vāścha̍ mē-'dhi̠ṣava̍ṇē cha mē"
+        },
+        {
+          "n": 120,
+          "devanagari": "द्रोणकल॒शश्च॑ मे वाय॒व्या॑नि च मे",
+          "iast": "drōṇakala̠śaścha̍ mē vāya̠vyā̍ni cha mē"
+        },
+        {
+          "n": 121,
+          "devanagari": "पूत॒भृच्च॑ म आधव॒नीय॑श्च म॒",
+          "iast": "pūta̠bhṛchcha̍ ma ādhava̠nīya̍ścha ma̠"
+        },
+        {
+          "n": 122,
+          "devanagari": "आग्नी᳚ध्र-ञ्च मे हवि॒र्धान॑-ञ्च मे",
+          "iast": "āgnī̎dhra-ñcha mē havi̠rdhāna̍-ñcha mē"
+        },
+        {
+          "n": 123,
+          "devanagari": "गृ॒हाश्च॑ मे॒ सद॑श्च मे पुरो॒डाशा᳚श्च मे",
+          "iast": "gṛ̠hāścha̍ mē̠ sada̍ścha mē purō̠ḍāśā̎ścha mē"
+        },
+        {
+          "n": 124,
+          "devanagari": "पच॒ताश्च॑ मे-ऽवभृ॒थश्च॑ मे स्वगाका॒रश्च॑ मे ॥ 8 ॥",
+          "iast": "pacha̠tāścha̍ mē-'vabhṛ̠thaścha̍ mē svagākā̠raścha̍ mē ॥ 8 ॥"
+        }
+      ]
+    },
+    {
+      "label": "9",
+      "lines": [
+        {
+          "n": 125,
+          "devanagari": "अ॒ग्निश्च॑ मे घ॒र्मश्च॑ मे॒-ऽर्कश्च॑ मे॒",
+          "iast": "a̠gniścha̍ mē gha̠rmaścha̍ mē̠-'rkaścha̍ mē̠"
+        },
+        {
+          "n": 126,
+          "devanagari": "सूर्य॑श्च मे प्रा॒णश्च॑ मे-ऽश्वमे॒धश्च॑ मे",
+          "iast": "sūrya̍ścha mē prā̠ṇaścha̍ mē-'śvamē̠dhaścha̍ mē"
+        },
+        {
+          "n": 127,
+          "devanagari": "पृथि॒वी च॒ मे-ऽदि॑तिश्च मे॒ दिति॑श्च मे॒",
+          "iast": "pṛthi̠vī cha̠ mē-'di̍tiścha mē̠ diti̍ścha mē̠"
+        },
+        {
+          "n": 128,
+          "devanagari": "द्यौश्च॑ मे॒ शक्व॑रीर॒ङ्गुल॑यो॒ दिश॑श्च मे",
+          "iast": "dyauścha̍ mē̠ śakva̍rīra̠ṅgula̍yō̠ diśa̍ścha mē"
+        },
+        {
+          "n": 129,
+          "devanagari": "य॒ज्ञेन॑ कल्पन्ता॒मृक्च॑ मे॒",
+          "iast": "ya̠jñēna̍ kalpantā̠mṛkcha̍ mē̠"
+        },
+        {
+          "n": 130,
+          "devanagari": "साम॑ च मे॒ स्तोम॑श्च मे॒",
+          "iast": "sāma̍ cha mē̠ stōma̍ścha mē̠"
+        },
+        {
+          "n": 131,
+          "devanagari": "यजु॑श्च मे दी॒क्षा च॑ मे॒",
+          "iast": "yaju̍ścha mē dī̠kṣā cha̍ mē̠"
+        },
+        {
+          "n": 132,
+          "devanagari": "तप॑श्च म ऋ॒तुश्च॑ मे",
+          "iast": "tapa̍ścha ma ṛ̠tuścha̍ mē"
+        },
+        {
+          "n": 133,
+          "devanagari": "व्र॒त-ञ्च॑ मे-ऽहोरा॒त्रयो᳚र्वृ॒ष्ट्या बृ॑हद्रथन्त॒रे च॑ मे",
+          "iast": "vra̠ta-ñcha̍ mē-'hōrā̠trayō̎rvṛ̠ṣṭyā bṛ̍hadrathanta̠rē cha̍ mē"
+        },
+        {
+          "n": 134,
+          "devanagari": "य॒ज्ञेन॑ कल्पेताम् ॥ 9 ॥",
+          "iast": "ya̠jñēna̍ kalpētām ॥ 9 ॥"
+        }
+      ]
+    },
+    {
+      "label": "10",
+      "lines": [
+        {
+          "n": 135,
+          "devanagari": "गर्भा᳚श्च मे व॒त्साश्च॑ मे॒",
+          "iast": "garbhā̎ścha mē va̠tsāścha̍ mē̠"
+        },
+        {
+          "n": 136,
+          "devanagari": "त्र्यवि॑श्च मे त्र्य॒वीच॑ मे",
+          "iast": "tryavi̍ścha mē trya̠vīcha̍ mē"
+        },
+        {
+          "n": 137,
+          "devanagari": "दित्य॒वाट् च॑ मे दित्यौ॒ही च॑ मे॒",
+          "iast": "ditya̠vāṭ cha̍ mē dityau̠hī cha̍ mē̠"
+        },
+        {
+          "n": 138,
+          "devanagari": "पञ्चा॑विश्च मे पञ्चा॒वी च॑ मे",
+          "iast": "pañchā̍viścha mē pañchā̠vī cha̍ mē"
+        },
+        {
+          "n": 139,
+          "devanagari": "त्रिव॒त्सश्च॑ मे त्रिव॒त्सा च॑ मे",
+          "iast": "triva̠tsaścha̍ mē triva̠tsā cha̍ mē"
+        },
+        {
+          "n": 140,
+          "devanagari": "तुर्य॒वाट् च॑ मे तुर्यौ॒ही च॑ मे",
+          "iast": "turya̠vāṭ cha̍ mē turyau̠hī cha̍ mē"
+        },
+        {
+          "n": 141,
+          "devanagari": "पष्ठ॒वाट् च॑ मे पष्ठौ॒ही च॑ म",
+          "iast": "paṣṭha̠vāṭ cha̍ mē paṣṭhau̠hī cha̍ ma"
+        },
+        {
+          "n": 142,
+          "devanagari": "उ॒क्षा च॑ मे व॒शा च॑ म",
+          "iast": "u̠kṣā cha̍ mē va̠śā cha̍ ma"
+        },
+        {
+          "n": 143,
+          "devanagari": "ऋष॒भश्च॑ मे वे॒हच्च॑ मे-ऽन॒ड्वाञ्च॑ मे",
+          "iast": "ṛṣa̠bhaścha̍ mē vē̠hachcha̍ mē-'na̠ḍvāñcha̍ mē"
+        },
+        {
+          "n": 144,
+          "devanagari": "धे॒नुश्च॑ म॒ आयु॑र्य॒ज्ञेन॑ कल्पतां",
+          "iast": "dhē̠nuścha̍ ma̠ āyu̍rya̠jñēna̍ kalpatāṃ"
+        },
+        {
+          "n": 145,
+          "devanagari": "प्रा॒णो य॒ज्ञेन॑ कल्पतामपा॒नो य॒ज्ञेन॑ कल्पतां",
+          "iast": "prā̠ṇō ya̠jñēna̍ kalpatāmapā̠nō ya̠jñēna̍ kalpatāṃ"
+        },
+        {
+          "n": 146,
+          "devanagari": "व्या॒नो य॒ज्ञेन॑ कल्पतां॒",
+          "iast": "vyā̠nō ya̠jñēna̍ kalpatā̠ṃ"
+        },
+        {
+          "n": 147,
+          "devanagari": "चक्षु॑र्य॒ज्ञेन॑ कल्पता॒ग्॒ श्रोत्रं॑-यँ॒ज्ञेन॑ कल्पतां॒",
+          "iast": "chakṣu̍rya̠jñēna̍ kalpatā̠g̠ śrōtra̍ṃ ya̠jñēna̍ kalpatā̠ṃ"
+        },
+        {
+          "n": 148,
+          "devanagari": "मनो॑ य॒ज्ञेन॑ कल्पतां॒",
+          "iast": "manō̍ ya̠jñēna̍ kalpatā̠ṃ"
+        },
+        {
+          "n": 149,
+          "devanagari": "वाग्य॒ज्ञेन॑ कल्पतामा॒त्मा य॒ज्ञेन॑ कल्पतां",
+          "iast": "vāgya̠jñēna̍ kalpatāmā̠tmā ya̠jñēna̍ kalpatāṃ"
+        },
+        {
+          "n": 150,
+          "devanagari": "य॒ज्ञो य॒ज्ञेन॑ कल्पताम् ॥ 10 ॥",
+          "iast": "ya̠jñō ya̠jñēna̍ kalpatām ॥ 10 ॥"
+        }
+      ]
+    },
+    {
+      "label": "11",
+      "lines": [
+        {
+          "n": 151,
+          "devanagari": "एका॑ च मे ति॒स्रश्च॑ मे॒",
+          "iast": "ēkā̍ cha mē ti̠sraścha̍ mē̠"
+        },
+        {
+          "n": 152,
+          "devanagari": "पञ्च॑ च मे स॒प्त च॑ मे॒",
+          "iast": "pañcha̍ cha mē sa̠pta cha̍ mē̠"
+        },
+        {
+          "n": 153,
+          "devanagari": "नव॑ च म॒ एका॑दश च मे॒",
+          "iast": "nava̍ cha ma̠ ēkā̍daśa cha mē̠"
+        },
+        {
+          "n": 154,
+          "devanagari": "त्रयो॑दश च मे॒ पञ्च॑दश च मे",
+          "iast": "trayō̍daśa cha mē̠ pañcha̍daśa cha mē"
+        },
+        {
+          "n": 155,
+          "devanagari": "स॒प्तद॑श च मे॒ नव॑दश च म॒",
+          "iast": "sa̠ptada̍śa cha mē̠ nava̍daśa cha ma̠"
+        },
+        {
+          "n": 156,
+          "devanagari": "एक॑विग्ंशतिश्च मे॒ त्रयो॑विग्ंशतिश्च मे॒",
+          "iast": "ēka̍vigṃśatiścha mē̠ trayō̍vigṃśatiścha mē̠"
+        },
+        {
+          "n": 157,
+          "devanagari": "पञ्च॑विग्ंशतिश्च मे स॒प्तविग्ं॑शतिश्च मे॒",
+          "iast": "pañcha̍vigṃśatiścha mē sa̠ptavig̍ṃśatiścha mē̠"
+        },
+        {
+          "n": 158,
+          "devanagari": "नव॑विग्ंशतिश्च म॒ एक॑त्रिग्ंशच्च मे॒",
+          "iast": "nava̍vigṃśatiścha ma̠ ēka̍trigṃśachcha mē̠"
+        },
+        {
+          "n": 159,
+          "devanagari": "त्रय॑स्त्रिग्ंशच्च मे॒ चत॑स्रश्च मे॒-ऽष्टौ च॑ मे॒",
+          "iast": "traya̍strigṃśachcha mē̠ chata̍sraścha mē̠-'ṣṭau cha̍ mē̠"
+        },
+        {
+          "n": 160,
+          "devanagari": "द्वाद॑श च मे॒ षोड॑श च मे",
+          "iast": "dvāda̍śa cha mē̠ ṣōḍa̍śa cha mē"
+        },
+        {
+          "n": 161,
+          "devanagari": "विग्ंश॒तिश्च॑ मे॒ चतु॑र्विग्ंशतिश्च मे॒-ऽष्टाविग्ं॑शतिश्च मे॒",
+          "iast": "vigṃśa̠tiścha̍ mē̠ chatu̍rvigṃśatiścha mē̠-'ṣṭāvig̍ṃśatiścha mē̠"
+        },
+        {
+          "n": 162,
+          "devanagari": "द्वात्रिग्ं॑शच्च मे॒ षट्-त्रिग्ं॑शच्च मे",
+          "iast": "dvātrig̍ṃśachcha mē̠ ṣaṭ-trig̍ṃśachcha mē"
+        },
+        {
+          "n": 163,
+          "devanagari": "चत्वारि॒ग्ं॒शच्च॑ मे॒ चतु॑श्चत्वारिग्ंशच्च मे॒-ऽष्टाच॑त्वारिग्ंशच्च मे॒",
+          "iast": "chatvāri̠g̠ṃśachcha̍ mē̠ chatu̍śchatvārigṃśachcha mē̠-'ṣṭācha̍tvārigṃśachcha mē̠"
+        },
+        {
+          "n": 164,
+          "devanagari": "वाज॑श्च प्रस॒वश्चा॑पि॒जश्च॒",
+          "iast": "vāja̍ścha prasa̠vaśchā̍pi̠jaścha̠"
+        },
+        {
+          "n": 165,
+          "devanagari": "क्रतु॑श्च॒ सुव॑श्च मू॒र्धा च॒",
+          "iast": "kratu̍ścha̠ suva̍ścha mū̠rdhā cha̠"
+        },
+        {
+          "n": 166,
+          "devanagari": "व्यश्नि॑यश्चान्त्याय॒नश्चान्त्य॑श्च",
+          "iast": "vyaśni̍yaśchāntyāya̠naśchāntya̍ścha"
+        },
+        {
+          "n": 167,
+          "devanagari": "भौव॒नश्च॒ भुव॑न॒श्चाधि॑पतिश्च ॥ 11 ॥",
+          "iast": "bhauva̠naścha̠ bhuva̍na̠śchādhi̍patiścha ॥ 11 ॥"
+        }
+      ]
+    },
+    {
+      "label": "12",
+      "lines": [
+        {
+          "n": 168,
+          "devanagari": "ॐ इडा॑ देव॒हू-र्मनु॑र्यज्ञ॒नी-र्बृह॒स्पति॑रुक्थाम॒दानि॑",
+          "iast": "ōṃ iḍā̍ dēva̠hū-rmanu̍ryajña̠nī-rbṛha̠spati̍rukthāma̠dāni̍"
+        },
+        {
+          "n": 169,
+          "devanagari": "शग्ंसिष॒द्विश्वे॑ दे॒वा-स्सू᳚क्त॒वाचः॒ पृथि॑विमात॒र्मा",
+          "iast": "śagṃsiṣa̠dviśvē̍ dē̠vā-ssū̎kta̠vācha̠ḥ pṛthi̍vimāta̠rmā"
+        },
+        {
+          "n": 170,
+          "devanagari": "मा॑ हिग्ंसी॒र्मधु॑ मनिष्ये॒ मधु॑ जनिष्ये॒",
+          "iast": "mā̍ higṃsī̠rmadhu̍ maniṣyē̠ madhu̍ janiṣyē̠"
+        },
+        {
+          "n": 171,
+          "devanagari": "मधु॑ वक्ष्यामि॒ मधु॑ वदिष्यामि॒",
+          "iast": "madhu̍ vakṣyāmi̠ madhu̍ vadiṣyāmi̠"
+        },
+        {
+          "n": 172,
+          "devanagari": "मधु॑मती-न्दे॒वेभ्यो॒ वाच॒मुद्यासग्ंशुश्रूषे॒ण्या᳚म्",
+          "iast": "madhu̍matī-ndē̠vēbhyō̠ vācha̠mudyāsagṃśuśrūṣē̠ṇyā̎m"
+        },
+        {
+          "n": 173,
+          "devanagari": "मनु॒ष्ये᳚भ्य॒स्तं",
+          "iast": "manu̠ṣyē̎bhya̠staṃ"
+        },
+        {
+          "n": 174,
+          "devanagari": "मा॑ दे॒वा अ॑वन्तु शो॒भायै॑ पि॒तरो-ऽनु॑मदन्तु ॥",
+          "iast": "mā̍ dē̠vā a̍vantu śō̠bhāyai̍ pi̠tarō-'nu̍madantu ॥"
+        },
+        {
+          "n": 175,
+          "devanagari": "ॐ शान्ति॒-श्शान्ति॒-श्शान्तिः॑  ॥",
+          "iast": "ōṃ śānti̠-śśānti̠-śśānti̍ḥ  ॥"
+        }
+      ]
+    }
+  ]
+}

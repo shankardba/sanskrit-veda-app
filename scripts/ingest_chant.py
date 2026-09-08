@@ -21,6 +21,11 @@ USER_AGENT = (
     "(KHTML, like Gecko) Chrome/120.0 Safari/537.36"
 )
 VERSE_MARKER_RE = re.compile(r"॥\s*(\d+)\s*॥\s*$")
+# Vedic svara (pitch-accent) marks: udatta, anudatta, and the two dependent
+# svarita variants. A paragraph carrying none of these and no verse-ending
+# danda is front-matter (title/lineage), not chant content.
+ACCENT_RE = re.compile("[॒᳝॑᳚]")
+DANDA_RE = re.compile("[।॥]")
 
 DATA_DIR = Path(__file__).resolve().parent.parent / "data" / "chants"
 
@@ -80,16 +85,23 @@ def build_chant(chant_id: str, deva_url: str, iast_url: str, title_deva: str, ti
             f"Line count mismatch: devanagari={len(deva_lines)} iast={len(iast_lines)}"
         )
 
-    # First paragraph is the colophon (text lineage), not chant content.
-    colophon_deva = deva_paragraphs[0]
-    colophon_iast = iast_paragraphs[0]
-    colophon = {
-        "devanagari": " / ".join(colophon_deva),
-        "iast": " / ".join(colophon_iast),
-    }
-
-    body_deva = flatten(deva_paragraphs[1:])
-    body_iast = flatten(iast_paragraphs[1:])
+    # Some chants open with a plain title/lineage paragraph (no accents, no
+    # danda) before the numbered content; others start straight into anuvaka
+    # 1. Detect which by content, not position.
+    first_para_is_colophon = not any(
+        ACCENT_RE.search(line) or DANDA_RE.search(line) for line in deva_paragraphs[0]
+    )
+    if first_para_is_colophon:
+        colophon = {
+            "devanagari": " / ".join(deva_paragraphs[0]),
+            "iast": " / ".join(iast_paragraphs[0]),
+        }
+        body_deva = flatten(deva_paragraphs[1:])
+        body_iast = flatten(iast_paragraphs[1:])
+    else:
+        colophon = None
+        body_deva = flatten(deva_paragraphs)
+        body_iast = flatten(iast_paragraphs)
 
     sections: dict[str, list[dict]] = {}
     current_section = "1"
