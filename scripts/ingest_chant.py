@@ -3,7 +3,11 @@
 pages line-by-line (by DOM position) and writes a single cached JSON file.
 
 Usage:
-    python3 ingest_chant.py <chant-id> <devanagari-url> <iast-url> <title-devanagari> <title-iast>
+    python3 ingest_chant.py <chant-id> <devanagari-url> <iast-url> <title-devanagari> <title-iast> [section-unit]
+
+section-unit labels each chant.sections[] block in the UI (default "Anuvāka";
+pass e.g. "Verse" for a stotram numbered by individual verses rather than
+grouped sections).
 
 Relies on the two source pages sharing identical <p>/<br> structure, which is
 true for vignanam.org's per-language renderings of the same stotram.
@@ -20,12 +24,19 @@ USER_AGENT = (
     "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 "
     "(KHTML, like Gecko) Chrome/120.0 Safari/537.36"
 )
-VERSE_MARKER_RE = re.compile(r"॥\s*(\d+)\s*॥\s*$")
+VERSE_MARKER_RE = re.compile(r"॥\s*(\d+)\s*॥")
 # Vedic svara (pitch-accent) marks: udatta, anudatta, and the two dependent
 # svarita variants. A paragraph carrying none of these and no verse-ending
-# danda is front-matter (title/lineage), not chant content.
-ACCENT_RE = re.compile("[॒᳝॑᳚]")
+# danda is front-matter (title/lineage), not chant content. Not every source
+# text carries these marks at all (later devotional stotras vs. Vedic
+# mantras) — a chant without any accents simply never matches here, which is
+# fine since DANDA_RE alone still identifies real verse content.
+ACCENT_RE = re.compile("[॒᳝॑᳚]")
 DANDA_RE = re.compile("[।॥]")
+# Editorial alternate-reading annotations vignanam.org appends inline after
+# some words/verses, e.g. "...शरणकोणाः परिणताः ॥ 11 ॥ [चरणकोणाः, भवनकिणाः]" —
+# not part of the chant text itself, so stripped rather than ingested.
+BRACKET_ANNOTATION_RE = re.compile(r"\s*\[[^\]]*\]")
 
 DATA_DIR = Path(__file__).resolve().parent.parent / "data" / "chants"
 
@@ -50,11 +61,11 @@ def extract_paragraphs(html: str) -> list[list[str]]:
         current: list[str] = []
         for node in p.children:
             if getattr(node, "name", None) == "br":
-                lines.append("".join(current).strip())
+                lines.append(BRACKET_ANNOTATION_RE.sub("", "".join(current)).strip())
                 current = []
             else:
                 current.append(node.get_text() if hasattr(node, "get_text") else str(node))
-        lines.append("".join(current).strip())
+        lines.append(BRACKET_ANNOTATION_RE.sub("", "".join(current)).strip())
         lines = [ln for ln in lines if ln]
         if lines:
             paragraphs.append(lines)
@@ -65,7 +76,14 @@ def flatten(paragraphs: list[list[str]]) -> list[str]:
     return [line for para in paragraphs for line in para]
 
 
-def build_chant(chant_id: str, deva_url: str, iast_url: str, title_deva: str, title_iast: str) -> dict:
+def build_chant(
+    chant_id: str,
+    deva_url: str,
+    iast_url: str,
+    title_deva: str,
+    title_iast: str,
+    section_unit: str = "Anuvāka",
+) -> dict:
     deva_html = fetch(deva_url)
     iast_html = fetch(iast_url)
 
@@ -124,6 +142,7 @@ def build_chant(chant_id: str, deva_url: str, iast_url: str, title_deva: str, ti
             "iast_url": iast_url,
         },
         "colophon": colophon,
+        "sectionUnit": section_unit,
         "sections": [
             {"label": label, "lines": lines} for label, lines in sections.items()
         ],
@@ -131,12 +150,13 @@ def build_chant(chant_id: str, deva_url: str, iast_url: str, title_deva: str, ti
 
 
 def main() -> None:
-    if len(sys.argv) != 6:
+    if len(sys.argv) not in (6, 7):
         print(__doc__)
         sys.exit(1)
 
     chant_id, deva_url, iast_url, title_deva, title_iast = sys.argv[1:6]
-    chant = build_chant(chant_id, deva_url, iast_url, title_deva, title_iast)
+    section_unit = sys.argv[6] if len(sys.argv) == 7 else "Anuvāka"
+    chant = build_chant(chant_id, deva_url, iast_url, title_deva, title_iast, section_unit)
 
     DATA_DIR.mkdir(parents=True, exist_ok=True)
     out_path = DATA_DIR / f"{chant_id}.json"

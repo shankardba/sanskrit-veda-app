@@ -17,6 +17,7 @@
 const CHANTS = [
   { id: 'sri-rudram-namakam', label: 'Sri Rudram Namakam' },
   { id: 'sri-rudram-chamakam', label: 'Sri Rudram Chamakam' },
+  { id: 'soundarya-lahari', label: 'Soundarya Lahari' },
 ];
 
 const chantSelect = document.getElementById('chantSelect');
@@ -375,7 +376,7 @@ function renderChant(chant, translation) {
     const devaCounts = buildRepeatCounts(section.lines.map((l) => l.devanagari), 'deva');
     const iastCounts = buildRepeatCounts(section.lines.map((l) => l.iast), 'iast');
     const block = el('div', 'section-block');
-    block.appendChild(el('div', 'section-label', `Anuvāka ${section.label}`));
+    block.appendChild(el('div', 'section-label', `${chant.sectionUnit || 'Anuvāka'} ${section.label}`));
     for (const line of section.lines) {
       block.appendChild(renderLine(line, devaCounts, iastCounts));
       appendTranslationLine(
