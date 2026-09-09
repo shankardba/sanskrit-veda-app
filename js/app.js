@@ -92,16 +92,6 @@ function segmentLine(rawText, script) {
   });
 }
 
-function collectLineTexts(chant, script) {
-  const field = script === 'deva' ? 'devanagari' : 'iast';
-  const texts = [];
-  if (chant.colophon) texts.push(chant.colophon[field]);
-  for (const section of chant.sections) {
-    for (const line of section.lines) texts.push(line[field]);
-  }
-  return texts;
-}
-
 // Counts every contiguous word n-gram (1..MAX_PHRASE_WORDS), never crossing
 // a punctuation segment, across the whole chant for one script.
 function buildRepeatCounts(lineTexts, script) {
@@ -166,7 +156,7 @@ function renderScriptLine(rawText, script, counts) {
     }
 
     if (matchedN === 0) {
-      frag.appendChild(document.createTextNode(seg.text));
+      frag.appendChild(script === 'iast' ? renderIastChars(seg.text) : document.createTextNode(seg.text));
       i += 1;
       continue;
     }
@@ -209,12 +199,18 @@ function renderChant(chant) {
   chantTitleIast.textContent = chant.title.iast;
   chantSource.innerHTML = `Source: <a href="${chant.source.devanagari_url}" target="_blank" rel="noopener">${chant.source.site}</a>`;
 
-  const devaCounts = buildRepeatCounts(collectLineTexts(chant, 'deva'), 'deva');
-  const iastCounts = buildRepeatCounts(collectLineTexts(chant, 'iast'), 'iast');
-
   chantBody.innerHTML = '';
 
+  // Repeat detection is scoped to each anuvāka rather than the whole chant:
+  // two unrelated epithet-litany sections can coincidentally share one rare
+  // phrase (e.g. the same deity name shows up once in anuvāka 7 and once in
+  // anuvāka 9), which would otherwise "win" over a word like cha/च that
+  // genuinely repeats throughout the local section. Scoping to the section
+  // — already the app's natural unit of context — keeps the highlighting
+  // reflecting what actually recurs *here*, not coincidences elsewhere.
   if (chant.colophon) {
+    const devaCounts = buildRepeatCounts([chant.colophon.devanagari], 'deva');
+    const iastCounts = buildRepeatCounts([chant.colophon.iast], 'iast');
     const colophon = el('div', 'colophon');
     const devaPara = el('p', 'deva-line');
     devaPara.appendChild(renderScriptLine(chant.colophon.devanagari, 'deva', devaCounts));
@@ -226,6 +222,8 @@ function renderChant(chant) {
   }
 
   for (const section of chant.sections) {
+    const devaCounts = buildRepeatCounts(section.lines.map((l) => l.devanagari), 'deva');
+    const iastCounts = buildRepeatCounts(section.lines.map((l) => l.iast), 'iast');
     const block = el('div', 'section-block');
     block.appendChild(el('div', 'section-label', `Anuvāka ${section.label}`));
     for (const line of section.lines) {

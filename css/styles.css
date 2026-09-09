@@ -270,25 +270,37 @@ body.hide-transliteration .iast-line {
   display: inline-block;
 }
 
-.accent-udatta::before,
-.accent-svarita::before {
+/* Udatta/svarita are vertical strokes above the letter in the original
+   Devanagari (॑ / ᳚) — matched here rather than the horizontal bars used
+   below, so they read distinctly from a long-vowel macron (ā, ē, ō) sitting
+   on the same letter. Anudatta (below) stays horizontal, as in the source. */
+.accent-udatta::before {
   content: '';
   position: absolute;
-  top: -7px;
-  left: 10%;
-  right: 10%;
-  height: 1.5px;
+  top: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 1.5px;
+  height: 7px;
   background: var(--color-gold-light);
 }
 
+.accent-svarita::before,
 .accent-svarita::after {
   content: '';
   position: absolute;
-  top: -11px;
-  left: 10%;
-  right: 10%;
-  height: 1.5px;
+  top: -8px;
+  width: 1.5px;
+  height: 7px;
   background: var(--color-gold-light);
+}
+
+.accent-svarita::before {
+  left: 38%;
+}
+
+.accent-svarita::after {
+  left: 62%;
 }
 
 .token-repeat {
