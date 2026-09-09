@@ -85,7 +85,9 @@ const MEANING_CONCEPTS = [
   { id: 'namah', deva: ['नमः', 'नमो', 'नमस्ते'], iast: ['namaḥ', 'namastē'], english: ['salutation'] },
   { id: 'rudra', deva: ['रुद्र'], iast: ['rudra'], english: ['rudra'] },
   { id: 'shiva', deva: ['शिवा'], iast: ['śivā'], english: ['auspicious'] },
-  { id: 'me', deva: ['मे'], iast: ['mē'], english: ['mine', 'me'] },
+  // 'म'/'ma' is the regular sandhi elision of मे before a vowel-initial
+  // word (e.g. मे + एकादश -> म एकादश) — same word, not a different one.
+  { id: 'me', deva: ['मे', 'म'], iast: ['mē', 'ma'], english: ['mine', 'me'] },
   // Known imprecise: "and" also translates other Sanskrit connectives (e.g.
   // uta), so this will box some "and"s that aren't actually cha — kept in
   // deliberately for manual review/correction rather than left out.
@@ -203,9 +205,19 @@ function renderScriptLine(rawText, script, counts, lineKey) {
       }
     }
 
+    // A multi-word candidate is skipped if it would end on a word that has
+    // its own meaning mapping (MEANING_CONCEPTS) — otherwise a short,
+    // near-universal collocation like "cha mē" ("and mine", repeated after
+    // every single item in a list) greedily swallows मे every time it's a
+    // separate token, so it never surfaces as its own box and never links
+    // to the "mine" concept. A concept word always gets to be its own unit;
+    // longer genuine phrases (e.g. a repeated invocation line) still match
+    // as long as they don't end on one.
+    const conceptLookup = script === 'deva' ? CONCEPT_BY_DEVA : CONCEPT_BY_IAST;
     let matchedN = 0;
     let matchedKey = '';
     for (let n = normsAhead.length; n >= 1; n--) {
+      if (n > 1 && conceptLookup.has(normsAhead[n - 1])) continue;
       const key = normsAhead.slice(0, n).join(' ');
       if ((counts.get(key) || 0) >= 2) {
         matchedN = n;
