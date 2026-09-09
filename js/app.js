@@ -86,6 +86,10 @@ const MEANING_CONCEPTS = [
   { id: 'rudra', deva: ['रुद्र'], iast: ['rudra'], english: ['rudra'] },
   { id: 'shiva', deva: ['शिवा'], iast: ['śivā'], english: ['auspicious'] },
   { id: 'me', deva: ['मे'], iast: ['mē'], english: ['mine', 'me'] },
+  // Known imprecise: "and" also translates other Sanskrit connectives (e.g.
+  // uta), so this will box some "and"s that aren't actually cha — kept in
+  // deliberately for manual review/correction rather than left out.
+  { id: 'cha', deva: ['च'], iast: ['cha'], english: ['and'] },
 ];
 
 const MEANING_CONCEPTS_BY_ID = new Map(MEANING_CONCEPTS.map((c) => [c.id, c]));
