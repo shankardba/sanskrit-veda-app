@@ -282,7 +282,7 @@ body.hide-transliteration .iast-line {
   transform: translateX(-50%);
   width: 1.5px;
   height: 7px;
-  background: var(--color-gold-light);
+  background: var(--color-text);
 }
 
 .accent-svarita::before,
@@ -292,7 +292,7 @@ body.hide-transliteration .iast-line {
   top: -8px;
   width: 1.5px;
   height: 7px;
-  background: var(--color-gold-light);
+  background: var(--color-text);
 }
 
 .accent-svarita::before {
@@ -330,7 +330,7 @@ body.hide-transliteration .iast-line {
   left: 10%;
   right: 10%;
   height: 1.5px;
-  background: var(--color-magenta);
+  background: var(--color-text);
 }
 
 .loading,
