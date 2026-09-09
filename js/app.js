@@ -104,6 +104,11 @@ const MEANING_CONCEPTS = [
   // uta), so this will box some "and"s that aren't actually cha — kept in
   // deliberately for manual review/correction rather than left out.
   { id: 'cha', deva: ['च'], iast: ['cha'], english: ['and'] },
+  // मधु also means "honey" as a plain offering noun elsewhere (Chamakam's
+  // ghee-and-honey line) rather than "sweet" as here — harmless in
+  // practice since repeat-counting is scoped per section and that line
+  // doesn't repeat "मधु" within its own section, so it never gets boxed.
+  { id: 'madhu', deva: ['मधु'], iast: ['madhu'], english: ['sweet'] },
 ];
 
 const MEANING_CONCEPTS_BY_ID = new Map(MEANING_CONCEPTS.map((c) => [c.id, c]));
