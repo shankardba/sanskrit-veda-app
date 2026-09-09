@@ -70,6 +70,45 @@ function renderIastChars(text) {
   return frag;
 }
 
+// --- Word-meaning links between Sanskrit and the English translation -----
+//
+// A small, hand-curated dictionary: each entry ties surface forms in both
+// scripts to the English word(s) that translate them, so a box on one side
+// can highlight its counterpart on the other. This is intentionally a
+// starter set of high-precision, high-frequency words rather than an
+// attempt at full automatic alignment (which would need real bilingual
+// alignment data to do reliably) — extend this array as more mappings are
+// confirmed. Notably excludes "cha" -> "and": "and" is used in the
+// translation for other Sanskrit connectives too (e.g. "uta"), so mapping
+// it would box far more English words than actually correspond to "cha".
+const MEANING_CONCEPTS = [
+  { id: 'namah', deva: ['नमः', 'नमो', 'नमस्ते'], iast: ['namaḥ', 'namastē'], english: ['salutation'] },
+  { id: 'rudra', deva: ['रुद्र'], iast: ['rudra'], english: ['rudra'] },
+  { id: 'shiva', deva: ['शिवा'], iast: ['śivā'], english: ['auspicious'] },
+  { id: 'me', deva: ['मे'], iast: ['mē'], english: ['mine', 'me'] },
+];
+
+const MEANING_CONCEPTS_BY_ID = new Map(MEANING_CONCEPTS.map((c) => [c.id, c]));
+const CONCEPT_BY_DEVA = new Map(MEANING_CONCEPTS.flatMap((c) => c.deva.map((form) => [form, c.id])));
+const CONCEPT_BY_IAST = new Map(MEANING_CONCEPTS.flatMap((c) => c.iast.map((form) => [form, c.id])));
+const CONCEPT_BY_ENGLISH = new Map(MEANING_CONCEPTS.flatMap((c) => c.english.map((word) => [word, c.id])));
+
+// Which concepts actually occur in this specific verse-line, so an English
+// word only gets boxed on lines where its Sanskrit counterpart genuinely
+// appears — not everywhere that English word happens to occur in the text.
+function conceptsInLine(devanagari, iast) {
+  const ids = new Set();
+  for (const word of devanagari.split(/\s+/)) {
+    const id = CONCEPT_BY_DEVA.get(normalizeToken(word, 'deva'));
+    if (id) ids.add(id);
+  }
+  for (const word of iast.split(/\s+/)) {
+    const id = CONCEPT_BY_IAST.get(normalizeToken(word, 'iast'));
+    if (id) ids.add(id);
+  }
+  return ids;
+}
+
 // --- Repeated word/phrase detection -----------------------------------
 //
 // Devanagari and IAST don't always tokenize 1:1 (e.g. one script joins a
@@ -215,6 +254,32 @@ function renderLine(line, devaCounts, iastCounts) {
   return wrapper;
 }
 
+// Wraps English words in a `.token-repeat` box (same class as the Sanskrit
+// side, so it picks up the same dim/active styling and the same click
+// handling) wherever that word is one of `conceptIds`' mapped English words.
+function renderTranslationText(text, conceptIds) {
+  const frag = document.createDocumentFragment();
+  if (!conceptIds || conceptIds.size === 0) {
+    frag.appendChild(document.createTextNode(text));
+    return frag;
+  }
+  const parts = text.match(/[A-Za-z']+|[^A-Za-z']+/g) || [text];
+  for (const part of parts) {
+    const conceptId = CONCEPT_BY_ENGLISH.get(part.toLowerCase());
+    if (conceptId && conceptIds.has(conceptId)) {
+      const span = document.createElement('span');
+      span.className = 'token-repeat';
+      span.dataset.script = 'en';
+      span.dataset.key = conceptId;
+      span.textContent = part;
+      frag.appendChild(span);
+    } else {
+      frag.appendChild(document.createTextNode(part));
+    }
+  }
+  return frag;
+}
+
 function renderChant(chant, translation) {
   chantTitleDeva.textContent = chant.title.devanagari;
   chantTitleIast.textContent = chant.title.iast;
@@ -235,9 +300,12 @@ function renderChant(chant, translation) {
 
   const translationLines = translation ? translation.lines : {};
 
-  function appendTranslationLine(lineKey, text) {
+  function appendTranslationLine(lineKey, text, conceptIds) {
     if (!text) return;
-    chantTranslationEl.appendChild(el('p', 'translation-line', text)).dataset.line = lineKey;
+    const p = el('p', 'translation-line');
+    p.dataset.line = lineKey;
+    p.appendChild(renderTranslationText(text, conceptIds));
+    chantTranslationEl.appendChild(p);
   }
 
   // Repeat detection is scoped to each anuvāka rather than the whole chant:
@@ -259,7 +327,11 @@ function renderChant(chant, translation) {
     iastPara.appendChild(renderScriptLine(chant.colophon.iast, 'iast', iastCounts, 'colophon'));
     colophon.appendChild(iastPara);
     chantTextEl.appendChild(colophon);
-    appendTranslationLine('colophon', translation && translation.colophon);
+    appendTranslationLine(
+      'colophon',
+      translation && translation.colophon,
+      conceptsInLine(chant.colophon.devanagari, chant.colophon.iast)
+    );
   }
 
   for (const section of chant.sections) {
@@ -269,7 +341,11 @@ function renderChant(chant, translation) {
     block.appendChild(el('div', 'section-label', `Anuvāka ${section.label}`));
     for (const line of section.lines) {
       block.appendChild(renderLine(line, devaCounts, iastCounts));
-      appendTranslationLine(String(line.n), translationLines[String(line.n)]);
+      appendTranslationLine(
+        String(line.n),
+        translationLines[String(line.n)],
+        conceptsInLine(line.devanagari, line.iast)
+      );
     }
     chantTextEl.appendChild(block);
   }
@@ -443,12 +519,20 @@ function applyTransliterationPref(show) {
   transliterationToggle.setAttribute('aria-pressed', String(show));
 }
 
-// Links the click across scripts: activating a word also activates its
-// counterpart in the other script (same line, same position among that
-// line's repeat-spans), so the highlighted word stays the same regardless of
-// whether transliteration is shown. If no counterpart exists at that slot
-// (the two scripts split that particular line into a different number of
-// repeat-spans), only the clicked script's matches are activated.
+// Links a click across all three columns. Two mechanisms, both additive:
+//
+// 1. Cross-script bridge (deva <-> iast): activating a word also activates
+//    its counterpart at the same (line, slot) in the other script, so the
+//    highlight survives toggling transliteration. Unaffected by whether the
+//    word has a meaning mapping.
+// 2. Meaning concept (deva/iast <-> en): if the clicked word is in
+//    MEANING_CONCEPTS, every surface form of that concept lights up in both
+//    scripts (e.g. नमः, नमो, and नमस्ते together) along with its English
+//    word(s) in the translation panel. Clicking an English box runs this in
+//    reverse.
+//
+// Each side tracks a Set (not a single key) since a concept can span
+// multiple surface forms in the same script.
 function initRepeatClickHandling() {
   chantBody.addEventListener('click', (e) => {
     const span = e.target.closest('.token-repeat');
@@ -456,16 +540,32 @@ function initRepeatClickHandling() {
     const { script, key, line, slot } = span.dataset;
     const wasActive = span.classList.contains('active');
 
-    const otherScript = script === 'deva' ? 'iast' : 'deva';
-    const sibling = wasActive
-      ? null
-      : chantBody.querySelector(
+    const activeKeys = { deva: new Set(), iast: new Set(), en: new Set() };
+
+    if (!wasActive) {
+      const addConcept = (conceptId) => {
+        const concept = MEANING_CONCEPTS_BY_ID.get(conceptId);
+        if (!concept) return;
+        concept.deva.forEach((k) => activeKeys.deva.add(k));
+        concept.iast.forEach((k) => activeKeys.iast.add(k));
+        activeKeys.en.add(conceptId);
+      };
+
+      if (script === 'en') {
+        addConcept(key);
+      } else {
+        activeKeys[script].add(key);
+        const otherScript = script === 'deva' ? 'iast' : 'deva';
+        const sibling = chantBody.querySelector(
           `.token-repeat[data-script="${otherScript}"][data-line="${line}"][data-slot="${slot}"]`
         );
-    const activeKeys = { [script]: wasActive ? null : key, [otherScript]: sibling ? sibling.dataset.key : null };
+        if (sibling) activeKeys[otherScript].add(sibling.dataset.key);
+        addConcept((script === 'deva' ? CONCEPT_BY_DEVA : CONCEPT_BY_IAST).get(key));
+      }
+    }
 
     document.querySelectorAll('.token-repeat').forEach((node) => {
-      node.classList.toggle('active', node.dataset.key === activeKeys[node.dataset.script]);
+      node.classList.toggle('active', activeKeys[node.dataset.script].has(node.dataset.key));
     });
     updateNetworkOverlay();
   });
