@@ -272,11 +272,17 @@ function renderChant(chant) {
 // verse-lines) land at different points on the trunk, never merged into a
 // single shared point. The trunk sits at the seam right after the text
 // column (in `chant-rail`'s space) rather than the outer page edge — that
-// seam is where a future translation/commentary panel will attach. Routed
-// below the text (not above) so it never crosses the udatta/svarita accent
-// ticks that sit above certain letters.
+// seam is where a future translation/commentary panel will attach.
+//
+// The drop below a Devanagari row has to stay clear of the IAST row's own
+// udatta/svarita ticks, which poke up into that gap: with iast-line's
+// margin-top(3) + padding-top(10) and a tick reaching 8px above its own
+// character, the ticks start ~5px below the Devanagari row's bottom edge.
+// Since the connector's horizontal segment runs the full row width, going
+// any deeper would clip through every tick in the line below it — so the
+// drop is kept short rather than widening the line spacing to make room.
 const SVG_NS = 'http://www.w3.org/2000/svg';
-const CONNECTOR_DROP = 8;
+const CONNECTOR_DROP = 3;
 
 function updateNetworkOverlay() {
   const layout = networkLayout;
