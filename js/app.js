@@ -15,9 +15,11 @@ const chantTitleIast = document.getElementById('chantTitleIast');
 const chantSource = document.getElementById('chantSource');
 const transliterationToggle = document.getElementById('transliterationToggle');
 
-// The current chant's layout (text column + rail) and its network SVG,
-// rebuilt on every renderChant() call — see updateNetworkOverlay.
+// The current chant's layout (text column + rail + translation column) and
+// its network SVG, rebuilt on every renderChant() call — see
+// updateNetworkOverlay.
 let chantTextEl = null;
+let chantTranslationEl = null;
 let networkLayout = null;
 let networkRail = null;
 let networkSvg = null;
@@ -212,7 +214,7 @@ function renderLine(line, devaCounts, iastCounts) {
   return wrapper;
 }
 
-function renderChant(chant) {
+function renderChant(chant, translation) {
   chantTitleDeva.textContent = chant.title.devanagari;
   chantTitleIast.textContent = chant.title.iast;
   chantSource.innerHTML = `Source: <a href="${chant.source.devanagari_url}" target="_blank" rel="noopener">${chant.source.site}</a>`;
@@ -221,12 +223,21 @@ function renderChant(chant) {
   networkLayout = el('div', 'chant-layout');
   chantTextEl = el('div', 'chant-text');
   networkRail = el('div', 'chant-rail');
+  chantTranslationEl = el('div', 'chant-translation');
   networkSvg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
   networkSvg.setAttribute('class', 'network-svg');
   networkLayout.appendChild(chantTextEl);
   networkLayout.appendChild(networkRail);
+  networkLayout.appendChild(chantTranslationEl);
   networkLayout.appendChild(networkSvg);
   chantBody.appendChild(networkLayout);
+
+  const translationLines = translation ? translation.lines : {};
+
+  function appendTranslationLine(lineKey, text) {
+    if (!text) return;
+    chantTranslationEl.appendChild(el('p', 'translation-line', text)).dataset.line = lineKey;
+  }
 
   // Repeat detection is scoped to each anuvāka rather than the whole chant:
   // two unrelated epithet-litany sections can coincidentally share one rare
@@ -246,6 +257,7 @@ function renderChant(chant) {
     iastPara.appendChild(renderScriptLine(chant.colophon.iast, 'iast', iastCounts, 'colophon'));
     colophon.appendChild(iastPara);
     chantTextEl.appendChild(colophon);
+    appendTranslationLine('colophon', translation && translation.colophon);
   }
 
   for (const section of chant.sections) {
@@ -255,6 +267,7 @@ function renderChant(chant) {
     block.appendChild(el('div', 'section-label', `Anuvāka ${section.label}`));
     for (const line of section.lines) {
       block.appendChild(renderLine(line, devaCounts, iastCounts));
+      appendTranslationLine(String(line.n), translationLines[String(line.n)]);
     }
     chantTextEl.appendChild(block);
   }
@@ -280,6 +293,7 @@ function renderChant(chant) {
 // curve.
 const SVG_NS = 'http://www.w3.org/2000/svg';
 const CONNECTOR_DROP = 3;
+const TRANSLATION_STUB_INSET = 6;
 
 function updateNetworkOverlay() {
   const layout = networkLayout;
@@ -328,6 +342,34 @@ function updateNetworkOverlay() {
     svg.appendChild(path);
   }
 
+  // Mirror stub on the translation side: one per active verse-line (not per
+  // row — Devanagari and IAST both point at the same single translation
+  // line), reaching left to the trunk. Its own point is added to the
+  // trunk's span too, so the shared vertical line is what actually bridges
+  // the gap between wherever the Sanskrit box sits and wherever its
+  // translation line happens to fall — no attempt to vertically align the
+  // two columns, since wrapped lines make that unreliable.
+  if (chantTranslationEl && chantTranslationEl.offsetParent !== null) {
+    const translationRect = chantTranslationEl.getBoundingClientRect();
+    const translationX = translationRect.left - layoutRect.left + TRANSLATION_STUB_INSET;
+    const seenLines = new Set();
+    for (const span of activeSpans) {
+      const lineKey = span.dataset.line;
+      if (seenLines.has(lineKey)) continue;
+      seenLines.add(lineKey);
+      const para = chantTranslationEl.querySelector(`.translation-line[data-line="${lineKey}"]`);
+      if (!para) continue;
+      const paraRect = para.getBoundingClientRect();
+      const paraY = paraRect.top + paraRect.height / 2 - layoutRect.top;
+      elbowYs.push(paraY);
+
+      const path = document.createElementNS(SVG_NS, 'path');
+      path.setAttribute('d', `M ${translationX} ${paraY} L ${trunkX} ${paraY}`);
+      path.setAttribute('class', 'network-path');
+      svg.appendChild(path);
+    }
+  }
+
   if (elbowYs.length > 1) {
     const trunk = document.createElementNS(SVG_NS, 'line');
     trunk.setAttribute('x1', trunkX);
@@ -339,17 +381,28 @@ function updateNetworkOverlay() {
   }
 }
 
+async function loadTranslation(id) {
+  try {
+    const res = await fetch(`data/translations/${id}.json`);
+    if (!res.ok) return null;
+    return await res.json();
+  } catch {
+    return null; // translation is optional — chant still renders without it
+  }
+}
+
 async function loadChant(id) {
   chantTextEl = null;
+  chantTranslationEl = null;
   networkLayout = null;
   networkRail = null;
   networkSvg = null;
   chantBody.innerHTML = '<p class="loading">Loading chant…</p>';
   try {
-    const res = await fetch(`data/chants/${id}.json`);
+    const [res, translation] = await Promise.all([fetch(`data/chants/${id}.json`), loadTranslation(id)]);
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     const chant = await res.json();
-    renderChant(chant);
+    renderChant(chant, translation);
     localStorage.setItem('vedavani:lastChant', id);
   } catch (err) {
     chantBody.innerHTML = `<p class="error">Could not load this chant (${err.message}). If you opened this file directly in the browser, serve it over local HTTP instead (e.g. "python3 -m http.server").</p>`;

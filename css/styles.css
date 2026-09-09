@@ -186,6 +186,7 @@ a {
 /* Chant body */
 .chant-body {
   padding: 40px 0 100px;
+  max-width: 1140px;
 }
 
 .chant-layout {
@@ -227,8 +228,23 @@ a {
   stroke-width: 1;
 }
 
-@media (max-width: 720px) {
-  .chant-rail {
+.chant-translation {
+  flex: 1 1 320px;
+  min-width: 0;
+  padding-top: 4px;
+}
+
+.translation-line {
+  font-family: var(--font-body);
+  font-size: 0.98rem;
+  line-height: 1.6;
+  color: var(--color-text-muted);
+  margin-bottom: 18px;
+}
+
+@media (max-width: 900px) {
+  .chant-rail,
+  .chant-translation {
     display: none;
   }
 }
