@@ -109,6 +109,27 @@ const MEANING_CONCEPTS = [
   // practice since repeat-counting is scoped per section and that line
   // doesn't repeat "मधु" within its own section, so it never gets boxed.
   { id: 'madhu', deva: ['मधु'], iast: ['madhu'], english: ['sweet'] },
+  // यज्ञ (sacrifice): यज्ञेन "through the sacrifice" is the common
+  // instrumental refrain (Chamakam's "may X be fashioned through the
+  // sacrifice" lines, sections 5/9/10); यज्ञो "the sacrifice itself"
+  // (nominative, Chamakam 150) and यज्ञस्य "of the sacrifice" (genitive,
+  // Namakam 207) are catalogued too, though neither currently repeats
+  // enough within its own section to get its own box yet. Also includes
+  // "यज्ञेन कल्पतां" as a literal 2-word key: whichever verb form follows
+  // यज्ञेन (कल्पतां/कल्पताम्/कल्पन्तां/कल्पेताम्, each a different
+  // grammatical number) sometimes repeats often enough itself that the
+  // greedy matcher boxes the pair together rather than यज्ञेन alone — the
+  // same kind of swallowing that motivated protecting concept words from
+  // being absorbed as the *trailing* half of a match (see the matching
+  // loop below), but here as the *leading* half, which isn't specially
+  // protected. Doesn't include यज्ञनी (Chamakam 168), a different word —
+  // an epithet ("leading the sacrifices"), not this noun.
+  {
+    id: 'yajna',
+    deva: ['यज्ञेन', 'यज्ञो', 'यज्ञस्य', 'यज्ञेन कल्पतां'],
+    iast: ['yajñēna', 'yajñō', 'yajñasya', 'yajñēna kalpatāṃ'],
+    english: ['sacrifice'],
+  },
 ];
 
 const MEANING_CONCEPTS_BY_ID = new Map(MEANING_CONCEPTS.map((c) => [c.id, c]));
