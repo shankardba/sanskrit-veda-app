@@ -178,8 +178,23 @@ function normalizeToken(raw, script) {
 // data, rendered as an actual line break — see renderScriptLine — and
 // treated like punctuation for phrase-matching purposes: a repeated phrase
 // never spans across one).
+//
+// Hyphens split out as their own segment (rather than staying fused inside
+// a \S+ run) for the same reason: vignanam.org marks a sandhi/avagraha
+// join with a hyphen instead of a space throughout — "मे-ऽष्टौ" (mē +
+// aṣṭau), "चित्त-ञ्च" (chitta + cha), "भूमि-रे-वावलम्बनम्" — and this is
+// not rare (well over a hundred lines per chant). Left fused, whichever
+// word sits on either side of that hyphen is invisible to both repeat
+// detection and MEANING_CONCEPTS: e.g. the "मे" inside "मे-ऽष्टौ" (Chamakam
+// 11's numbers list) never boxed or linked to its "mine" siblings, purely
+// because this one occurrence happened to be spelled with a hyphen rather
+// than a space. Splitting it out costs nothing on the rendering side
+// (PUNCT_ONLY_RE already treats a bare hyphen as punctuation, so it prints
+// exactly as before) and costs nothing on the matching side (it already
+// breaks a phrase run the same as any other punctuation) — it only adds
+// the word on each side back into consideration.
 function segmentLine(rawText, script) {
-  const parts = rawText.match(/\S+|\n|[^\S\n]+/g) || [];
+  const parts = rawText.match(/[^\s-]+|-+|\n|[^\S\n]+/g) || [];
   return parts.map((text) => {
     if (text === '\n') return { text, kind: 'break', norm: '' };
     if (/^[^\S\n]+$/.test(text)) return { text, kind: 'space', norm: '' };
