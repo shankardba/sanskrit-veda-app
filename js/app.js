@@ -2,6 +2,17 @@
 // the schema written by scripts/ingest_chant.py, renders Devanagari lines
 // with their IAST transliteration underneath, toggle-able on/off, and boxes
 // repeated words/phrases so recurring formulas are visible at a glance.
+//
+// Manual line breaks: a literal "\n" inside a devanagari/iast string (in
+// data/chants/*.json) or a translation string (in data/translations/*.json)
+// renders as an actual line break in that column — see segmentLine/
+// renderScriptLine (Sanskrit side) and renderTranslationText (English
+// side). Intended for hand-editing an unusually long verse-line so its
+// three columns wrap to a similar, more balanced height; each column's
+// break points are independent (Sanskrit and English word order differ),
+// and alignTranslationLines already measures actual rendered height per
+// line rather than assuming one, so wrapped lines don't need special
+// handling elsewhere.
 
 const CHANTS = [
   { id: 'sri-rudram-namakam', label: 'Sri Rudram Namakam' },
@@ -134,12 +145,16 @@ function normalizeToken(raw, script) {
 }
 
 // Splits a line into ordered segments, each tagged 'word' (counts toward
-// phrases), 'punct' (breaks a phrase run), or 'space' (preserved verbatim,
-// doesn't break a run).
+// phrases), 'punct' (breaks a phrase run), 'space' (preserved verbatim,
+// doesn't break a run), or 'break' (a manually-inserted "\n" in the source
+// data, rendered as an actual line break — see renderScriptLine — and
+// treated like punctuation for phrase-matching purposes: a repeated phrase
+// never spans across one).
 function segmentLine(rawText, script) {
-  const parts = rawText.match(/\S+|\s+/g) || [];
+  const parts = rawText.match(/\S+|\n|[^\S\n]+/g) || [];
   return parts.map((text) => {
-    if (/^\s+$/.test(text)) return { text, kind: 'space', norm: '' };
+    if (text === '\n') return { text, kind: 'break', norm: '' };
+    if (/^[^\S\n]+$/.test(text)) return { text, kind: 'space', norm: '' };
     const norm = normalizeToken(text, script);
     return { text, kind: norm ? 'word' : 'punct', norm };
   });
@@ -163,7 +178,7 @@ function buildRepeatCounts(lineTexts, script) {
     };
     for (const seg of segments) {
       if (seg.kind === 'word') run.push(seg.norm);
-      else if (seg.kind === 'punct') flushRun();
+      else if (seg.kind === 'punct' || seg.kind === 'break') flushRun();
     }
     flushRun();
   }
@@ -186,6 +201,11 @@ function renderScriptLine(rawText, script, counts, lineKey) {
   let i = 0;
   while (i < segments.length) {
     const seg = segments[i];
+    if (seg.kind === 'break') {
+      frag.appendChild(document.createElement('br'));
+      i += 1;
+      continue;
+    }
     if (seg.kind !== 'word') {
       frag.appendChild(document.createTextNode(seg.text));
       i += 1;
@@ -275,13 +295,14 @@ function renderLine(line, devaCounts, iastCounts) {
 // handling) wherever that word is one of `conceptIds`' mapped English words.
 function renderTranslationText(text, conceptIds) {
   const frag = document.createDocumentFragment();
-  if (!conceptIds || conceptIds.size === 0) {
-    frag.appendChild(document.createTextNode(text));
-    return frag;
-  }
-  const parts = text.match(/[A-Za-z']+|[^A-Za-z']+/g) || [text];
+  const hasConcepts = conceptIds && conceptIds.size > 0;
+  const parts = text.match(/[A-Za-z']+|\n|[^A-Za-z'\n]+/g) || [text];
   for (const part of parts) {
-    const conceptId = CONCEPT_BY_ENGLISH.get(part.toLowerCase());
+    if (part === '\n') {
+      frag.appendChild(document.createElement('br'));
+      continue;
+    }
+    const conceptId = hasConcepts ? CONCEPT_BY_ENGLISH.get(part.toLowerCase()) : null;
     if (conceptId && conceptIds.has(conceptId)) {
       const span = document.createElement('span');
       span.className = 'token-repeat';
