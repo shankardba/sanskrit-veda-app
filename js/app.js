@@ -114,21 +114,22 @@ const MEANING_CONCEPTS = [
   // sacrifice" lines, sections 5/9/10); यज्ञो "the sacrifice itself"
   // (nominative, Chamakam 150) and यज्ञस्य "of the sacrifice" (genitive,
   // Namakam 207) are catalogued too, though neither currently repeats
-  // enough within its own section to get its own box yet. Also includes
-  // "यज्ञेन कल्पतां" as a literal 2-word key: whichever verb form follows
-  // यज्ञेन (कल्पतां/कल्पताम्/कल्पन्तां/कल्पेताम्, each a different
-  // grammatical number) sometimes repeats often enough itself that the
-  // greedy matcher boxes the pair together rather than यज्ञेन alone — the
-  // same kind of swallowing that motivated protecting concept words from
-  // being absorbed as the *trailing* half of a match (see the matching
-  // loop below), but here as the *leading* half, which isn't specially
-  // protected. Doesn't include यज्ञनी (Chamakam 168), a different word —
-  // an epithet ("leading the sacrifices"), not this noun.
+  // enough within its own section to get its own box yet. Doesn't include
+  // यज्ञनी (Chamakam 168), a different word — an epithet ("leading the
+  // sacrifices"), not this noun.
+  { id: 'yajna', deva: ['यज्ञेन', 'यज्ञो', 'यज्ञस्य'], iast: ['yajñēna', 'yajñō', 'yajñasya'], english: ['sacrifice'] },
+  // कल्प- "may/would be fashioned/made" (optative of kḷp): कल्पतां/कल्पताम्
+  // is singular, कल्पन्तां plural (Chamakam 78 — only appears once in its
+  // own section, so not yet its own box there), कल्पेताम् dual (Chamakam
+  // 134), कल्पताग् a sandhi variant before a following श् (Chamakam 147).
+  // Only "fashioned" is registered on the English side — Chamakam 78
+  // translates this same verb as "made fit" instead, so that line's
+  // English side won't box anything for this concept, which is fine.
   {
-    id: 'yajna',
-    deva: ['यज्ञेन', 'यज्ञो', 'यज्ञस्य', 'यज्ञेन कल्पतां'],
-    iast: ['yajñēna', 'yajñō', 'yajñasya', 'yajñēna kalpatāṃ'],
-    english: ['sacrifice'],
+    id: 'kalpatam',
+    deva: ['कल्पतां', 'कल्पताम्', 'कल्पन्तां', 'कल्पेताम्', 'कल्पताग्'],
+    iast: ['kalpatāṃ', 'kalpatām', 'kalpantāṃ', 'kalpētām', 'kalpatāg'],
+    english: ['fashioned'],
   },
 ];
 
@@ -252,19 +253,23 @@ function renderScriptLine(rawText, script, counts, lineKey) {
       }
     }
 
-    // A multi-word candidate is skipped if it would end on a word that has
-    // its own meaning mapping (MEANING_CONCEPTS) — otherwise a short,
-    // near-universal collocation like "cha mē" ("and mine", repeated after
-    // every single item in a list) greedily swallows मे every time it's a
-    // separate token, so it never surfaces as its own box and never links
-    // to the "mine" concept. A concept word always gets to be its own unit;
-    // longer genuine phrases (e.g. a repeated invocation line) still match
-    // as long as they don't end on one.
+    // A multi-word candidate is skipped if it would start or end on a word
+    // that has its own meaning mapping (MEANING_CONCEPTS) — otherwise a
+    // short, near-universal collocation like "cha mē" ("and mine", repeated
+    // after every single item in a list) greedily swallows मे every time
+    // it's a separate token, so it never surfaces as its own box and never
+    // links to the "mine" concept — likewise "yajñēna kalpatāṃ" swallowing
+    // yajñēna so it never links to "sacrifice" on its own. A concept word
+    // always gets to be its own unit, on either end; longer genuine phrases
+    // (e.g. a repeated invocation line) still match as long as neither end
+    // is one — which in practice tends to split an old joint phrase-box
+    // into two adjacent concept boxes instead (e.g. yajñēna and kalpatāṃ
+    // each standing alone), which is what lets each link separately.
     const conceptLookup = script === 'deva' ? CONCEPT_BY_DEVA : CONCEPT_BY_IAST;
     let matchedN = 0;
     let matchedKey = '';
     for (let n = normsAhead.length; n >= 1; n--) {
-      if (n > 1 && conceptLookup.has(normsAhead[n - 1])) continue;
+      if (n > 1 && (conceptLookup.has(normsAhead[n - 1]) || conceptLookup.has(normsAhead[0]))) continue;
       const key = normsAhead.slice(0, n).join(' ');
       if ((counts.get(key) || 0) >= 2) {
         matchedN = n;
@@ -723,6 +728,16 @@ function initRepeatClickHandling() {
         addConcept(key);
       } else {
         activeKeys[script].add(key);
+        // Assumes deva/iast box the same words in the same order per line,
+        // which is true almost everywhere but not guaranteed — e.g.
+        // Chamakam 147's "śrōtraṃ-yajñēna" is one hyphen-joined token in
+        // Devanagari (यज्ञेन stays fused, never its own box) but two
+        // space-separated words in the IAST source, so their boxes there
+        // land on different slots and this pairs the wrong ones. Harmless
+        // currently since both यज्ञेन and कल्पतां are registered concepts
+        // that end up highlighted together anyway, but worth knowing if a
+        // future concept pair on either side of a slot mismatch like this
+        // should stay independent.
         const otherScript = script === 'deva' ? 'iast' : 'deva';
         const sibling = chantBody.querySelector(
           `.token-repeat[data-script="${otherScript}"][data-line="${line}"][data-slot="${slot}"]`
