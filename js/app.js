@@ -265,15 +265,18 @@ function renderChant(chant) {
 
 // --- Connector network: links every currently-highlighted occurrence -----
 //
-// One thin curved line per active occurrence, dipping below its own row and
-// sweeping right to a shared vertical trunk. The trunk sits at the seam
-// right after the text column (in `chant-rail`'s space) rather than the
-// outer page edge — that seam is where a future translation/commentary
-// panel will attach, so the network is positioned to extend into it later.
-// Curves route below the text (not above) so they never cross the udatta/
-// svarita accent ticks that sit above certain letters.
+// One right-angle elbow per active occurrence: straight down a short drop
+// below its own box, then straight across to a shared vertical trunk. Each
+// occurrence gets its own elbow at its own height — two occurrences on
+// different rows (the Devanagari vs. IAST row of one line, or two different
+// verse-lines) land at different points on the trunk, never merged into a
+// single shared point. The trunk sits at the seam right after the text
+// column (in `chant-rail`'s space) rather than the outer page edge — that
+// seam is where a future translation/commentary panel will attach. Routed
+// below the text (not above) so it never crosses the udatta/svarita accent
+// ticks that sit above certain letters.
 const SVG_NS = 'http://www.w3.org/2000/svg';
-const CURVE_DIP = 10;
+const CONNECTOR_DROP = 8;
 
 function updateNetworkOverlay() {
   const layout = networkLayout;
@@ -293,46 +296,29 @@ function updateNetworkOverlay() {
   );
   if (activeSpans.length === 0) return;
 
-  // One trunk point per verse-line (bottom edge of the whole line block, so
-  // an occurrence in either the Devanagari or the IAST row still lands on
-  // the same point), deduped so a line with two hits gets one trunk point.
-  const trunkYByLine = new Map();
-  for (const span of activeSpans) {
-    const lineKey = span.dataset.line;
-    if (trunkYByLine.has(lineKey)) continue;
-    const row = span.closest('.verse-line') || span.closest('.colophon');
-    if (!row) continue;
-    const rowRect = row.getBoundingClientRect();
-    trunkYByLine.set(lineKey, rowRect.bottom - layoutRect.top);
-  }
-  if (trunkYByLine.size === 0) return;
-
   const railRect = rail.getBoundingClientRect();
   const trunkX = railRect.left - layoutRect.left + railRect.width / 2;
 
+  const elbowYs = [];
   for (const span of activeSpans) {
-    const trunkY = trunkYByLine.get(span.dataset.line);
-    if (trunkY === undefined) continue;
     const boxRect = span.getBoundingClientRect();
     const boxX = boxRect.left + boxRect.width / 2 - layoutRect.left;
     const boxY = boxRect.bottom - layoutRect.top;
+    const elbowY = boxY + CONNECTOR_DROP;
+    elbowYs.push(elbowY);
 
     const path = document.createElementNS(SVG_NS, 'path');
-    path.setAttribute(
-      'd',
-      `M ${boxX} ${boxY} C ${boxX} ${boxY + CURVE_DIP}, ${trunkX} ${trunkY - CURVE_DIP}, ${trunkX} ${trunkY}`
-    );
+    path.setAttribute('d', `M ${boxX} ${boxY} L ${boxX} ${elbowY} L ${trunkX} ${elbowY}`);
     path.setAttribute('class', 'network-path');
     svg.appendChild(path);
   }
 
-  const trunkYs = [...trunkYByLine.values()];
-  if (trunkYs.length > 1) {
+  if (elbowYs.length > 1) {
     const trunk = document.createElementNS(SVG_NS, 'line');
     trunk.setAttribute('x1', trunkX);
     trunk.setAttribute('x2', trunkX);
-    trunk.setAttribute('y1', Math.min(...trunkYs));
-    trunk.setAttribute('y2', Math.max(...trunkYs));
+    trunk.setAttribute('y1', Math.min(...elbowYs));
+    trunk.setAttribute('y2', Math.max(...elbowYs));
     trunk.setAttribute('class', 'network-trunk');
     svg.appendChild(trunk);
   }
