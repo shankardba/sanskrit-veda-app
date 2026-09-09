@@ -207,7 +207,6 @@ a {
 /* Chant body */
 .chant-body {
   padding: 40px 0 100px;
-  max-width: calc(var(--max-width) + 60px);
 }
 
 .chant-layout {
@@ -217,14 +216,18 @@ a {
   gap: 8px;
 }
 
+/* A fixed reading-column width (not flex:1) so the rail — and the trunk it
+   holds — sits right up against the text regardless of how wide the page
+   is, instead of trailing off at the edge of a stretched container. Shrinks
+   on narrow viewports via min-width:0. */
 .chant-text {
-  flex: 1;
+  flex: 0 1 640px;
   min-width: 0;
 }
 
 /* Reserves the seam where a future translation/commentary panel will sit;
    the network's trunk lives here, close to the text rather than the outer
-   page edge. */
+   page edge. Anything past the rail is empty for now — future panel space. */
 .chant-rail {
   width: 32px;
   flex-shrink: 0;
