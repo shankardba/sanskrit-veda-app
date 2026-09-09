@@ -122,14 +122,17 @@ const MEANING_CONCEPTS = [
   // is singular, कल्पन्तां plural (Chamakam 78 — only appears once in its
   // own section, so not yet its own box there), कल्पेताम् dual (Chamakam
   // 134), कल्पताग् a sandhi variant before a following श् (Chamakam 147).
-  // Only "fashioned" is registered on the English side — Chamakam 78
-  // translates this same verb as "made fit" instead, so that line's
-  // English side won't box anything for this concept, which is fine.
+  // English side is the full phrase "may it be fashioned" (matched as a
+  // unit — see renderTranslationText) rather than just "fashioned", to
+  // read as the actual optative sense rather than a bare past participle.
+  // Flattened to one phrase regardless of the Sanskrit's own number
+  // (कल्पन्तां is plural "may they", कल्पेताम् dual "may they both") for a
+  // single, consistently boxable English form.
   {
     id: 'kalpatam',
     deva: ['कल्पतां', 'कल्पताम्', 'कल्पन्तां', 'कल्पेताम्', 'कल्पताग्'],
     iast: ['kalpatāṃ', 'kalpatām', 'kalpantāṃ', 'kalpētām', 'kalpatāg'],
-    english: ['fashioned'],
+    english: ['may it be fashioned'],
   },
 ];
 
@@ -339,31 +342,80 @@ function renderLine(line, devaCounts, iastCounts) {
 
 // Wraps English words in a `.token-repeat` box (same class as the Sanskrit
 // side, so it picks up the same dim/active styling and the same click
-// handling) wherever that word is one of `conceptIds`' mapped English words.
-// Tagged with the same `data-line` as its Sanskrit/IAST counterparts so
-// updateNetworkOverlay can anchor a connector to it, not just to a generic
-// point in the translation column.
+// handling) wherever a run of them is one of `conceptIds`' mapped English
+// phrases. Concept phrases can be more than one word (e.g. "may it be
+// fashioned") — matched the same greedy-longest-first way the Sanskrit/IAST
+// side matches multi-word repeats, just against MEANING_CONCEPTS directly
+// rather than a repeat count, since English concept text is deliberately
+// consistent rather than something to detect. Tagged with the same
+// `data-line` as its Sanskrit/IAST counterparts so updateNetworkOverlay can
+// anchor a connector to it, not just to a generic point in the translation
+// column.
 function renderTranslationText(text, conceptIds, lineKey) {
   const frag = document.createDocumentFragment();
   const hasConcepts = conceptIds && conceptIds.size > 0;
   const parts = text.match(/[A-Za-z']+|\n|[^A-Za-z'\n]+/g) || [text];
-  for (const part of parts) {
+  const isWord = (p) => /^[A-Za-z']+$/.test(p);
+  const isSpace = (p) => /^\s+$/.test(p);
+
+  let i = 0;
+  while (i < parts.length) {
+    const part = parts[i];
     if (part === '\n') {
       frag.appendChild(document.createElement('br'));
+      i += 1;
       continue;
     }
-    const conceptId = hasConcepts ? CONCEPT_BY_ENGLISH.get(part.toLowerCase()) : null;
-    if (conceptId && conceptIds.has(conceptId)) {
-      const span = document.createElement('span');
-      span.className = 'token-repeat';
-      span.dataset.script = 'en';
-      span.dataset.key = conceptId;
-      span.dataset.line = lineKey;
-      span.textContent = part;
-      frag.appendChild(span);
-    } else {
+    if (!isWord(part)) {
       frag.appendChild(document.createTextNode(part));
+      i += 1;
+      continue;
     }
+
+    // Collect up to MAX_PHRASE_WORDS word-parts ahead (by index into
+    // `parts`), skipping spaces, stopping at the first non-space/non-word.
+    const wordIdxAhead = [];
+    let k = i;
+    while (k < parts.length && wordIdxAhead.length < MAX_PHRASE_WORDS) {
+      if (isWord(parts[k])) {
+        wordIdxAhead.push(k);
+        k += 1;
+      } else if (isSpace(parts[k])) {
+        k += 1;
+      } else {
+        break;
+      }
+    }
+
+    let matchedConceptId = null;
+    let matchedEndIdx = -1;
+    for (let n = wordIdxAhead.length; n >= 1; n--) {
+      const key = wordIdxAhead
+        .slice(0, n)
+        .map((idx) => parts[idx].toLowerCase())
+        .join(' ');
+      const conceptId = hasConcepts ? CONCEPT_BY_ENGLISH.get(key) : null;
+      if (conceptId && conceptIds.has(conceptId)) {
+        matchedConceptId = conceptId;
+        matchedEndIdx = wordIdxAhead[n - 1];
+        break;
+      }
+    }
+
+    if (!matchedConceptId) {
+      frag.appendChild(document.createTextNode(part));
+      i += 1;
+      continue;
+    }
+
+    const span = document.createElement('span');
+    span.className = 'token-repeat';
+    span.dataset.script = 'en';
+    span.dataset.key = matchedConceptId;
+    span.dataset.line = lineKey;
+    span.textContent = parts.slice(i, matchedEndIdx + 1).join('');
+    frag.appendChild(span);
+    i = matchedEndIdx + 1;
   }
   return frag;
 }
