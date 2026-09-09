@@ -300,6 +300,7 @@ a {
   font-style: italic;
   color: var(--color-text-muted);
   font-size: 1.05rem;
+  line-height: 1.3;
   margin-top: 3px;
   padding-top: 5px;
   padding-bottom: 2px;
@@ -310,9 +311,14 @@ body.hide-transliteration .iast-line {
   display: none;
 }
 
+/* line-height:1 (not inherited 1.7) so this inline-block's own box is just
+   the glyph's natural height — otherwise the accent strokes below are
+   positioned relative to a box ~1.7x the character's height, floating them
+   far from the letter even at small top/bottom offsets. */
 .accented-char {
   position: relative;
   display: inline-block;
+  line-height: 1;
 }
 
 /* Udatta/svarita are vertical strokes above the letter in the original
