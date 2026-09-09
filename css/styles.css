@@ -211,6 +211,7 @@ a {
 }
 
 .chant-layout {
+  position: relative;
   display: flex;
   align-items: stretch;
   gap: 8px;
@@ -221,10 +222,12 @@ a {
   min-width: 0;
 }
 
+/* Reserves the seam where a future translation/commentary panel will sit;
+   the network's trunk lives here, close to the text rather than the outer
+   page edge. */
 .chant-rail {
-  width: 40px;
+  width: 32px;
   flex-shrink: 0;
-  position: relative;
 }
 
 .network-svg {
@@ -235,14 +238,11 @@ a {
   pointer-events: none;
 }
 
-.network-svg line {
+.network-path,
+.network-trunk {
+  fill: none;
   stroke: var(--color-gold-light);
-  stroke-width: 1.5;
-  opacity: 0.8;
-}
-
-.network-svg .network-node {
-  fill: var(--color-gold-light);
+  stroke-width: 1;
 }
 
 @media (max-width: 720px) {

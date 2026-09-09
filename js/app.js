@@ -16,9 +16,10 @@ const chantSource = document.getElementById('chantSource');
 const transliterationToggle = document.getElementById('transliterationToggle');
 const toggleLabel = document.getElementById('toggleLabel');
 
-// The current chant's text column and side-rail network SVG, rebuilt on
-// every renderChant() call — see buildNetworkOverlay/updateNetworkOverlay.
+// The current chant's layout (text column + rail) and its network SVG,
+// rebuilt on every renderChant() call — see updateNetworkOverlay.
 let chantTextEl = null;
+let networkLayout = null;
 let networkRail = null;
 let networkSvg = null;
 
@@ -218,15 +219,15 @@ function renderChant(chant) {
   chantSource.innerHTML = `Source: <a href="${chant.source.devanagari_url}" target="_blank" rel="noopener">${chant.source.site}</a>`;
 
   chantBody.innerHTML = '';
-  const layout = el('div', 'chant-layout');
+  networkLayout = el('div', 'chant-layout');
   chantTextEl = el('div', 'chant-text');
   networkRail = el('div', 'chant-rail');
   networkSvg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
   networkSvg.setAttribute('class', 'network-svg');
-  networkRail.appendChild(networkSvg);
-  layout.appendChild(chantTextEl);
-  layout.appendChild(networkRail);
-  chantBody.appendChild(layout);
+  networkLayout.appendChild(chantTextEl);
+  networkLayout.appendChild(networkRail);
+  networkLayout.appendChild(networkSvg);
+  chantBody.appendChild(networkLayout);
 
   // Repeat detection is scoped to each anuvāka rather than the whole chant:
   // two unrelated epithet-litany sections can coincidentally share one rare
@@ -262,78 +263,84 @@ function renderChant(chant) {
   updateNetworkOverlay();
 }
 
-// --- Side-rail network: connects every currently-highlighted occurrence --
+// --- Connector network: links every currently-highlighted occurrence -----
 //
-// One node per verse-line that contains an active occurrence (deduped, so a
-// line with both a Devanagari and an IAST hit — or two hits in one script —
-// still gets a single node), joined by a single vertical trunk with a
-// horizontal stub reaching toward each node's row. Orthogonal lines only
-// ("square"), confined entirely to the rail so it never touches the text.
-const RAIL_STUB_INSET = 6;
+// One thin curved line per active occurrence, dipping below its own row and
+// sweeping right to a shared vertical trunk. The trunk sits at the seam
+// right after the text column (in `chant-rail`'s space) rather than the
+// outer page edge — that seam is where a future translation/commentary
+// panel will attach, so the network is positioned to extend into it later.
+// Curves route below the text (not above) so they never cross the udatta/
+// svarita accent ticks that sit above certain letters.
+const SVG_NS = 'http://www.w3.org/2000/svg';
+const CURVE_DIP = 10;
 
 function updateNetworkOverlay() {
+  const layout = networkLayout;
   const rail = networkRail;
   const svg = networkSvg;
-  if (!rail || !svg) return;
-  if (rail.offsetParent === null) return; // hidden (e.g. narrow viewport)
+  if (!layout || !rail || !svg) return;
 
-  const width = rail.clientWidth;
-  const height = rail.clientHeight;
-  svg.setAttribute('width', String(width));
-  svg.setAttribute('height', String(height));
+  const layoutRect = layout.getBoundingClientRect();
+  svg.setAttribute('width', String(layout.clientWidth));
+  svg.setAttribute('height', String(layout.scrollHeight));
   svg.innerHTML = '';
+
+  if (rail.offsetParent === null) return; // hidden (e.g. narrow viewport)
 
   const activeSpans = [...chantTextEl.querySelectorAll('.token-repeat.active')].filter(
     (node) => node.offsetParent !== null
   );
   if (activeSpans.length === 0) return;
 
-  const railRect = rail.getBoundingClientRect();
-  const rowYByLine = new Map();
+  // One trunk point per verse-line (bottom edge of the whole line block, so
+  // an occurrence in either the Devanagari or the IAST row still lands on
+  // the same point), deduped so a line with two hits gets one trunk point.
+  const trunkYByLine = new Map();
   for (const span of activeSpans) {
     const lineKey = span.dataset.line;
-    if (rowYByLine.has(lineKey)) continue;
+    if (trunkYByLine.has(lineKey)) continue;
     const row = span.closest('.verse-line') || span.closest('.colophon');
     if (!row) continue;
     const rowRect = row.getBoundingClientRect();
-    rowYByLine.set(lineKey, rowRect.top + rowRect.height / 2 - railRect.top);
+    trunkYByLine.set(lineKey, rowRect.bottom - layoutRect.top);
+  }
+  if (trunkYByLine.size === 0) return;
+
+  const railRect = rail.getBoundingClientRect();
+  const trunkX = railRect.left - layoutRect.left + railRect.width / 2;
+
+  for (const span of activeSpans) {
+    const trunkY = trunkYByLine.get(span.dataset.line);
+    if (trunkY === undefined) continue;
+    const boxRect = span.getBoundingClientRect();
+    const boxX = boxRect.left + boxRect.width / 2 - layoutRect.left;
+    const boxY = boxRect.bottom - layoutRect.top;
+
+    const path = document.createElementNS(SVG_NS, 'path');
+    path.setAttribute(
+      'd',
+      `M ${boxX} ${boxY} C ${boxX} ${boxY + CURVE_DIP}, ${trunkX} ${trunkY - CURVE_DIP}, ${trunkX} ${trunkY}`
+    );
+    path.setAttribute('class', 'network-path');
+    svg.appendChild(path);
   }
 
-  const ys = [...rowYByLine.values()].sort((a, b) => a - b);
-  if (ys.length === 0) return;
-
-  const trunkX = width - RAIL_STUB_INSET;
-  const stubX = RAIL_STUB_INSET;
-  const svgNS = 'http://www.w3.org/2000/svg';
-
-  if (ys.length > 1) {
-    const trunk = document.createElementNS(svgNS, 'line');
+  const trunkYs = [...trunkYByLine.values()];
+  if (trunkYs.length > 1) {
+    const trunk = document.createElementNS(SVG_NS, 'line');
     trunk.setAttribute('x1', trunkX);
     trunk.setAttribute('x2', trunkX);
-    trunk.setAttribute('y1', ys[0]);
-    trunk.setAttribute('y2', ys[ys.length - 1]);
+    trunk.setAttribute('y1', Math.min(...trunkYs));
+    trunk.setAttribute('y2', Math.max(...trunkYs));
+    trunk.setAttribute('class', 'network-trunk');
     svg.appendChild(trunk);
-  }
-
-  for (const y of ys) {
-    const stub = document.createElementNS(svgNS, 'line');
-    stub.setAttribute('x1', stubX);
-    stub.setAttribute('x2', trunkX);
-    stub.setAttribute('y1', y);
-    stub.setAttribute('y2', y);
-    svg.appendChild(stub);
-
-    const node = document.createElementNS(svgNS, 'circle');
-    node.setAttribute('cx', stubX);
-    node.setAttribute('cy', y);
-    node.setAttribute('r', 2.5);
-    node.setAttribute('class', 'network-node');
-    svg.appendChild(node);
   }
 }
 
 async function loadChant(id) {
   chantTextEl = null;
+  networkLayout = null;
   networkRail = null;
   networkSvg = null;
   chantBody.innerHTML = '<p class="loading">Loading chant…</p>';
