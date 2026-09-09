@@ -265,24 +265,29 @@ function renderChant(chant) {
 
 // --- Connector network: links every currently-highlighted occurrence -----
 //
-// One right-angle elbow per active occurrence: straight down a short drop
-// below its own box, then straight across to a shared vertical trunk. Each
-// occurrence gets its own elbow at its own height — two occurrences on
-// different rows (the Devanagari vs. IAST row of one line, or two different
-// verse-lines) land at different points on the trunk, never merged into a
-// single shared point. The trunk sits at the seam right after the text
-// column (in `chant-rail`'s space) rather than the outer page edge — that
-// seam is where a future translation/commentary panel will attach.
+// One connector per active occurrence, each landing at its own distinct
+// point on a shared vertical trunk — two occurrences on different rows (the
+// Devanagari vs. IAST row of one line, or two different verse-lines) never
+// merge into a single shared point. The trunk sits at the seam right after
+// the text column (in `chant-rail`'s space) rather than the outer page
+// edge — that seam is where a future translation/commentary panel will
+// attach.
 //
-// The drop below a Devanagari row has to stay clear of the IAST row's own
-// udatta/svarita ticks, which poke up into that gap: with iast-line's
-// margin-top(3) + padding-top(10) and a tick reaching 8px above its own
-// character, the ticks start ~5px below the Devanagari row's bottom edge.
-// Since the connector's horizontal segment runs the full row width, going
-// any deeper would clip through every tick in the line below it — so the
-// drop is kept short rather than widening the line spacing to make room.
+// A flat horizontal run right below a row is fragile: the IAST row's own
+// udatta/svarita ticks poke up only ~6px below the Devanagari row above it,
+// and IAST's own anudatta strokes on a *later* word in the same row sit only
+// ~4px below that row's own baseline — there's no single height a
+// horizontal line can hold for the full row width without grazing one of
+// these somewhere along the way. Instead, each connector curves quickly
+// down into the verse-line's own margin-bottom gap (genuinely empty space
+// below both rows) and only runs flat once it's there, so it briefly
+// crosses near its own word's column (expected — that's its own IAST
+// translation right below it) rather than running parallel past *other*
+// words' accents further along the row.
 const SVG_NS = 'http://www.w3.org/2000/svg';
-const CONNECTOR_DROP = 3;
+const CURVE_ROUND = 8; // softens the corner into the flat run
+const GAP_BASE_OFFSET = 3; // first point's depth into the verse-line's margin gap
+const GAP_STEP = 4; // vertical spacing between multiple points in the same gap
 
 function updateNetworkOverlay() {
   const layout = networkLayout;
@@ -305,26 +310,42 @@ function updateNetworkOverlay() {
   const railRect = rail.getBoundingClientRect();
   const trunkX = railRect.left - layoutRect.left + railRect.width / 2;
 
-  const elbowYs = [];
+  // Each verse-line's own bottom edge (past both its rows) plus a small,
+  // per-occurrence step — so occurrences sharing a line still land at
+  // distinct points, all within that line's empty margin-bottom gap.
+  const nextOffsetByLine = new Map();
+  const targetYs = [];
+
   for (const span of activeSpans) {
+    const lineKey = span.dataset.line;
+    const row = span.closest('.verse-line') || span.closest('.colophon');
+    if (!row) continue;
+    const rowBottom = row.getBoundingClientRect().bottom - layoutRect.top;
+
+    const offset = nextOffsetByLine.get(lineKey) ?? GAP_BASE_OFFSET;
+    nextOffsetByLine.set(lineKey, offset + GAP_STEP);
+    const targetY = rowBottom + offset;
+    targetYs.push(targetY);
+
     const boxRect = span.getBoundingClientRect();
     const boxX = boxRect.left + boxRect.width / 2 - layoutRect.left;
     const boxY = boxRect.bottom - layoutRect.top;
-    const elbowY = boxY + CONNECTOR_DROP;
-    elbowYs.push(elbowY);
 
     const path = document.createElementNS(SVG_NS, 'path');
-    path.setAttribute('d', `M ${boxX} ${boxY} L ${boxX} ${elbowY} L ${trunkX} ${elbowY}`);
+    path.setAttribute(
+      'd',
+      `M ${boxX} ${boxY} C ${boxX} ${targetY}, ${trunkX - CURVE_ROUND} ${targetY}, ${trunkX} ${targetY}`
+    );
     path.setAttribute('class', 'network-path');
     svg.appendChild(path);
   }
 
-  if (elbowYs.length > 1) {
+  if (targetYs.length > 1) {
     const trunk = document.createElementNS(SVG_NS, 'line');
     trunk.setAttribute('x1', trunkX);
     trunk.setAttribute('x2', trunkX);
-    trunk.setAttribute('y1', Math.min(...elbowYs));
-    trunk.setAttribute('y2', Math.max(...elbowYs));
+    trunk.setAttribute('y1', Math.min(...targetYs));
+    trunk.setAttribute('y2', Math.max(...targetYs));
     trunk.setAttribute('class', 'network-trunk');
     svg.appendChild(trunk);
   }
