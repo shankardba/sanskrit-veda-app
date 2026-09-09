@@ -205,11 +205,14 @@ a {
   min-width: 0;
 }
 
-/* Reserves the seam where a future translation/commentary panel will sit;
-   the network's trunk lives here, close to the text rather than the outer
-   page edge. Anything past the rail is empty for now — future panel space. */
+/* Holds the network's trunk and the gutter its connector curves bend
+   through. Wide enough that a curve reaching the trunk from either side
+   has real room to bend gently rather than snapping into a sharp point —
+   the translation column in particular sits much closer to the trunk than
+   the wide Sanskrit/IAST column does, so this width is what keeps its
+   curves comparably smooth rather than a narrow special case. */
 .chant-rail {
-  width: 32px;
+  width: 80px;
   flex-shrink: 0;
 }
 

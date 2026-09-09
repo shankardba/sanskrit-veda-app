@@ -294,7 +294,10 @@ function renderLine(line, devaCounts, iastCounts) {
 // Wraps English words in a `.token-repeat` box (same class as the Sanskrit
 // side, so it picks up the same dim/active styling and the same click
 // handling) wherever that word is one of `conceptIds`' mapped English words.
-function renderTranslationText(text, conceptIds) {
+// Tagged with the same `data-line` as its Sanskrit/IAST counterparts so
+// updateNetworkOverlay can anchor a connector to it, not just to a generic
+// point in the translation column.
+function renderTranslationText(text, conceptIds, lineKey) {
   const frag = document.createDocumentFragment();
   const hasConcepts = conceptIds && conceptIds.size > 0;
   const parts = text.match(/[A-Za-z']+|\n|[^A-Za-z'\n]+/g) || [text];
@@ -309,6 +312,7 @@ function renderTranslationText(text, conceptIds) {
       span.className = 'token-repeat';
       span.dataset.script = 'en';
       span.dataset.key = conceptId;
+      span.dataset.line = lineKey;
       span.textContent = part;
       frag.appendChild(span);
     } else {
@@ -342,7 +346,7 @@ function renderChant(chant, translation) {
     if (!text) return;
     const p = el('p', 'translation-line');
     p.dataset.line = lineKey;
-    p.appendChild(renderTranslationText(text, conceptIds));
+    p.appendChild(renderTranslationText(text, conceptIds, lineKey));
     chantTranslationEl.appendChild(p);
   }
 
@@ -419,22 +423,58 @@ function alignTranslationLines() {
 
 // --- Connector network: links every currently-highlighted occurrence -----
 //
-// One right-angle elbow per *row* that contains an active occurrence — all
-// occurrences sharing a row (e.g. two "cha" in the same Devanagari line)
-// resolve to a single connector, anchored at the rightmost one, rather than
-// each drawing its own. Devanagari and IAST rows of the same verse-line
-// still land at different points on the trunk (never merged with each
-// other), since they're different rows.
+// Every verse-line converges on exactly one point on the trunk, shared by
+// its Devanagari row, its IAST row, and its boxed English word(s) in the
+// translation column — not one point per row, and not wherever the
+// translation paragraph itself happens to sit (it can wrap to a different
+// height than the Sanskrit/IAST pair), but the vertical midpoint between
+// the Devanagari and IAST rows — the middle of the *line* itself.
 //
-// Anchoring at the rightmost occurrence in a row keeps the flat run short:
-// usually there's nothing left after the last repeated word but punctuation
-// or a verse number, neither of which carries an accent mark to graze.
-// Combined with the tighter accent marks (udatta/svarita now reach only 5px
-// above, IAST's own anudatta only 2.5px below), a short drop clears both the
-// row-below's ticks and this row's own trailing marks without needing a
-// curve.
+// Each row's connector stays flat for a short safety drop, then bends —
+// not at a fixed point, but as soon as it has cleared its own anchor box
+// (plus a small clearance for whatever trailing punctuation follows it).
+// Bending immediately rather than waiting for the far edge of its column
+// gives the curve the most horizontal room to work with, which is what
+// keeps it gentle: the same vertical rise spread over more distance is a
+// shallower, smoother arc instead of a sharp last-minute bend. That bend
+// is an S-curve with a horizontal tangent at both ends — level leaving the
+// row, level again arriving at the shared point — so it never touches the
+// trunk while still visibly curving. This applies uniformly to every side:
+// Devanagari, IAST, and the English translation column alike — the rail
+// itself is wide enough (RAIL curve budget, see styles.css) that even the
+// translation column, which sits much closer to the trunk than the wide
+// Sanskrit/IAST column does, still gets a real curve rather than a sharp
+// point.
+//
+// The bend itself is the *entire* rest of the path once a row has cleared
+// its text — no further straight segments once it starts curving. It runs
+// all the way to the shared point on the trunk, so every row belonging to
+// the same verse-line arrives there as one continuous curve, from
+// whichever side (Sanskrit/IAST from the left, English from the right),
+// meeting exactly at that point rather than flattening out early.
+//
+// One anchor span per (line, script) row — occurrences sharing a row (e.g.
+// two "cha" in the same Devanagari line) still resolve to a single
+// connector, anchored at whichever occurrence sits closest to the trunk,
+// keeping the flat run short.
+//
+// English is chosen differently: a translated line can wrap across several
+// visual rows (unlike Devanagari/IAST, which don't), so "two mine's in one
+// translated line" can actually mean two mine's at two different heights.
+// Picking whichever is horizontally closest to the trunk, ignoring height,
+// could anchor to one on a *different* wrapped row than the convergence
+// point, forcing the curve to travel past — visually through — the other
+// wrapped row on its way there. Instead, English anchors on whichever
+// occurrence's own row is vertically closest to the line's convergence
+// point, so the curve only ever travels within (or near) its own row.
+//
+// A line whose translation exists but happens not to contain any boxed
+// concept word (a plain repeat with no English mapping yet) still gets a
+// generic stub into the translation column, anchored at a fixed inset
+// rather than a specific word, so it isn't left disconnected.
 const SVG_NS = 'http://www.w3.org/2000/svg';
 const CONNECTOR_DROP = 3;
+const ROW_CLEARANCE = 16;
 const TRANSLATION_STUB_INSET = 6;
 
 function updateNetworkOverlay() {
@@ -450,7 +490,7 @@ function updateNetworkOverlay() {
 
   if (rail.offsetParent === null) return; // hidden (e.g. narrow viewport)
 
-  const activeSpans = [...chantTextEl.querySelectorAll('.token-repeat.active')].filter(
+  const activeSpans = [...layout.querySelectorAll('.token-repeat.active')].filter(
     (node) => node.offsetParent !== null
   );
   if (activeSpans.length === 0) return;
@@ -458,11 +498,19 @@ function updateNetworkOverlay() {
   const railRect = rail.getBoundingClientRect();
   const trunkX = railRect.left - layoutRect.left + railRect.width / 2;
 
-  // One anchor span per (line, script) row — keep whichever is furthest
-  // right, so the flat run to the trunk covers as little of the row as
-  // possible.
+  // One anchor span per Devanagari/IAST row — keep whichever occurrence
+  // sits furthest right (closest to the trunk), so the flat run toward the
+  // trunk covers as little of the row as possible. English is handled
+  // separately below, once each line's convergence point is known.
   const anchorByRow = new Map();
+  const enSpansByLine = new Map();
   for (const span of activeSpans) {
+    if (span.dataset.script === 'en') {
+      const lineKey = span.dataset.line;
+      if (!enSpansByLine.has(lineKey)) enSpansByLine.set(lineKey, []);
+      enSpansByLine.get(lineKey).push(span);
+      continue;
+    }
     const rowKey = `${span.dataset.line}:${span.dataset.script}`;
     const existing = anchorByRow.get(rowKey);
     if (!existing || span.getBoundingClientRect().right > existing.getBoundingClientRect().right) {
@@ -470,54 +518,110 @@ function updateNetworkOverlay() {
     }
   }
 
-  const elbowYs = [];
-  for (const span of anchorByRow.values()) {
-    const boxRect = span.getBoundingClientRect();
-    const boxX = boxRect.left + boxRect.width / 2 - layoutRect.left;
-    const boxY = boxRect.bottom - layoutRect.top;
-    const elbowY = boxY + CONNECTOR_DROP;
-    elbowYs.push(elbowY);
-
-    const path = document.createElementNS(SVG_NS, 'path');
-    path.setAttribute('d', `M ${boxX} ${boxY} L ${boxX} ${elbowY} L ${trunkX} ${elbowY}`);
-    path.setAttribute('class', 'network-path');
-    svg.appendChild(path);
+  function rowClearance(boxRect, isEnglish) {
+    // Where this row's connector has cleared its own anchor (plus whatever
+    // trailing text follows it) and may begin to bend — measured from the
+    // box itself, not the shared column edge, so short lines and early
+    // anchors get a wide, gentle bend rather than being squeezed into the
+    // narrow gutter right before the trunk. Mirrored for English: it
+    // clears leftward, toward the trunk on its right.
+    return isEnglish
+      ? Math.max(boxRect.left - layoutRect.left - ROW_CLEARANCE, trunkX)
+      : Math.min(boxRect.right - layoutRect.left + ROW_CLEARANCE, trunkX);
   }
 
-  // Mirror stub on the translation side: one per active verse-line (not per
-  // row — Devanagari and IAST both point at the same single translation
-  // line), reaching left to the trunk. Its own point is added to the
-  // trunk's span too, so the shared vertical line is what actually bridges
-  // the gap between wherever the Sanskrit box sits and wherever its
-  // translation line happens to fall — no attempt to vertically align the
-  // two columns, since wrapped lines make that unreliable.
-  if (chantTranslationEl && chantTranslationEl.offsetParent !== null) {
-    const translationRect = chantTranslationEl.getBoundingClientRect();
-    const translationX = translationRect.left - layoutRect.left + TRANSLATION_STUB_INSET;
-    const seenLines = new Set();
-    for (const span of activeSpans) {
-      const lineKey = span.dataset.line;
-      if (seenLines.has(lineKey)) continue;
-      seenLines.add(lineKey);
-      const para = chantTranslationEl.querySelector(`.translation-line[data-line="${lineKey}"]`);
-      if (!para) continue;
-      const paraRect = para.getBoundingClientRect();
-      const paraY = paraRect.top + paraRect.height / 2 - layoutRect.top;
-      elbowYs.push(paraY);
+  // Group Devanagari/IAST row anchors by verse-line, so every row belonging
+  // to the same line can be aimed at one shared convergence point below.
+  const rowsByLine = new Map();
+  for (const span of anchorByRow.values()) {
+    const lineKey = span.dataset.line;
+    const boxRect = span.getBoundingClientRect();
+    const dropY = boxRect.bottom - layoutRect.top + CONNECTOR_DROP;
+    if (!rowsByLine.has(lineKey)) rowsByLine.set(lineKey, []);
+    rowsByLine.get(lineKey).push({ span, dropY, rowClearX: rowClearance(boxRect, false), isEnglish: false });
+  }
+
+  const translationVisible = chantTranslationEl && chantTranslationEl.offsetParent !== null;
+  const translationRect = translationVisible ? chantTranslationEl.getBoundingClientRect() : null;
+
+  const allLineKeys = new Set([...rowsByLine.keys(), ...enSpansByLine.keys()]);
+
+  const convergeYs = [];
+  for (const lineKey of allLineKeys) {
+    const rows = [...(rowsByLine.get(lineKey) || [])];
+    const enCandidates = enSpansByLine.get(lineKey) || [];
+
+    // The shared point every row of this line bends toward: the vertical
+    // midpoint between its Devanagari/IAST rows, so the network reads as
+    // arriving at the middle of the line, not wherever the translation
+    // text sits. Falls back to averaging the English candidates when a
+    // line is (unusually) all-English, e.g. clicked directly with no
+    // matching Sanskrit/IAST box currently active.
+    const convergeY =
+      rows.length > 0
+        ? rows.reduce((sum, r) => sum + r.dropY, 0) / rows.length
+        : enCandidates.reduce((sum, s) => sum + (s.getBoundingClientRect().bottom - layoutRect.top + CONNECTOR_DROP), 0) /
+          enCandidates.length;
+    convergeYs.push(convergeY);
+
+    // English anchors on whichever occurrence's own row sits vertically
+    // closest to convergeY — not simply the one closest to the trunk — so
+    // a translated line that wraps across several visual rows never forces
+    // the curve to travel past (visually through) another one of its own
+    // wrapped rows just to reach the point.
+    let hasEnglishAnchor = enCandidates.length > 0;
+    if (hasEnglishAnchor) {
+      let best = null;
+      let bestDropY = 0;
+      let bestDist = Infinity;
+      for (const span of enCandidates) {
+        const boxRect = span.getBoundingClientRect();
+        const dropY = boxRect.bottom - layoutRect.top + CONNECTOR_DROP;
+        const dist = Math.abs(dropY - convergeY);
+        if (dist < bestDist) {
+          best = span;
+          bestDropY = dropY;
+          bestDist = dist;
+        }
+      }
+      const boxRect = best.getBoundingClientRect();
+      rows.push({ span: best, dropY: bestDropY, rowClearX: rowClearance(boxRect, true), isEnglish: true });
+    }
+
+    for (const { span, dropY, rowClearX } of rows) {
+      const boxRect = span.getBoundingClientRect();
+      const boxX = boxRect.left + boxRect.width / 2 - layoutRect.left;
+      const boxY = boxRect.bottom - layoutRect.top;
+      const bendMidX = (rowClearX + trunkX) / 2;
 
       const path = document.createElementNS(SVG_NS, 'path');
-      path.setAttribute('d', `M ${translationX} ${paraY} L ${trunkX} ${paraY}`);
+      path.setAttribute(
+        'd',
+        `M ${boxX} ${boxY} L ${boxX} ${dropY} L ${rowClearX} ${dropY} ` +
+          `C ${bendMidX} ${dropY} ${bendMidX} ${convergeY} ${trunkX} ${convergeY}`
+      );
       path.setAttribute('class', 'network-path');
       svg.appendChild(path);
     }
+
+    const para = translationVisible
+      ? chantTranslationEl.querySelector(`.translation-line[data-line="${lineKey}"]`)
+      : null;
+    if (para && !hasEnglishAnchor) {
+      const translationX = translationRect.left - layoutRect.left + TRANSLATION_STUB_INSET;
+      const stub = document.createElementNS(SVG_NS, 'path');
+      stub.setAttribute('d', `M ${translationX} ${convergeY} L ${trunkX} ${convergeY}`);
+      stub.setAttribute('class', 'network-path');
+      svg.appendChild(stub);
+    }
   }
 
-  if (elbowYs.length > 1) {
+  if (convergeYs.length > 1) {
     const trunk = document.createElementNS(SVG_NS, 'line');
     trunk.setAttribute('x1', trunkX);
     trunk.setAttribute('x2', trunkX);
-    trunk.setAttribute('y1', Math.min(...elbowYs));
-    trunk.setAttribute('y2', Math.max(...elbowYs));
+    trunk.setAttribute('y1', Math.min(...convergeYs));
+    trunk.setAttribute('y2', Math.max(...convergeYs));
     trunk.setAttribute('class', 'network-trunk');
     svg.appendChild(trunk);
   }
