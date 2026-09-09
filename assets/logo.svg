@@ -10,17 +10,19 @@
       <stop offset="100%" stop-color="#ff2ea6"/>
     </linearGradient>
     <filter id="glow" x="-60%" y="-60%" width="220%" height="220%">
-      <feGaussianBlur stdDeviation="4.5" result="blur"/>
-      <feMerge>
-        <feMergeNode in="blur"/>
-        <feMergeNode in="SourceGraphic"/>
-      </feMerge>
+      <feGaussianBlur stdDeviation="4.5"/>
     </filter>
   </defs>
 
   <circle cx="100" cy="100" r="94" fill="#0b0508" stroke="url(#ringGrad)" stroke-width="6"/>
 
+  <!-- Glow sits on its own blurred layer so the blur never touches the
+       glyph itself; a crisp, unfiltered copy on top keeps the edges sharp
+       even at the small navbar render size. -->
   <text x="100" y="146" text-anchor="middle"
         font-family="'Noto Sans Devanagari','Noto Serif Devanagari',sans-serif"
         font-size="130" fill="url(#omGrad)" filter="url(#glow)">ॐ</text>
+  <text x="100" y="146" text-anchor="middle"
+        font-family="'Noto Sans Devanagari','Noto Serif Devanagari',sans-serif"
+        font-size="130" fill="url(#omGrad)">ॐ</text>
 </svg>
