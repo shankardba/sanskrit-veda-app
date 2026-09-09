@@ -207,6 +207,48 @@ a {
 /* Chant body */
 .chant-body {
   padding: 40px 0 100px;
+  max-width: calc(var(--max-width) + 60px);
+}
+
+.chant-layout {
+  display: flex;
+  align-items: stretch;
+  gap: 8px;
+}
+
+.chant-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.chant-rail {
+  width: 40px;
+  flex-shrink: 0;
+  position: relative;
+}
+
+.network-svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  overflow: visible;
+  pointer-events: none;
+}
+
+.network-svg line {
+  stroke: var(--color-gold-light);
+  stroke-width: 1.5;
+  opacity: 0.8;
+}
+
+.network-svg .network-node {
+  fill: var(--color-gold-light);
+}
+
+@media (max-width: 720px) {
+  .chant-rail {
+    display: none;
+  }
 }
 
 .section-block {

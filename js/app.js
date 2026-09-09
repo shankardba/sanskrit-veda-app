@@ -16,6 +16,12 @@ const chantSource = document.getElementById('chantSource');
 const transliterationToggle = document.getElementById('transliterationToggle');
 const toggleLabel = document.getElementById('toggleLabel');
 
+// The current chant's text column and side-rail network SVG, rebuilt on
+// every renderChant() call — see buildNetworkOverlay/updateNetworkOverlay.
+let chantTextEl = null;
+let networkRail = null;
+let networkSvg = null;
+
 function populateChantSelect() {
   for (const chant of CHANTS) {
     const option = document.createElement('option');
@@ -212,6 +218,15 @@ function renderChant(chant) {
   chantSource.innerHTML = `Source: <a href="${chant.source.devanagari_url}" target="_blank" rel="noopener">${chant.source.site}</a>`;
 
   chantBody.innerHTML = '';
+  const layout = el('div', 'chant-layout');
+  chantTextEl = el('div', 'chant-text');
+  networkRail = el('div', 'chant-rail');
+  networkSvg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+  networkSvg.setAttribute('class', 'network-svg');
+  networkRail.appendChild(networkSvg);
+  layout.appendChild(chantTextEl);
+  layout.appendChild(networkRail);
+  chantBody.appendChild(layout);
 
   // Repeat detection is scoped to each anuvāka rather than the whole chant:
   // two unrelated epithet-litany sections can coincidentally share one rare
@@ -230,7 +245,7 @@ function renderChant(chant) {
     const iastPara = el('p', 'iast-line');
     iastPara.appendChild(renderScriptLine(chant.colophon.iast, 'iast', iastCounts, 'colophon'));
     colophon.appendChild(iastPara);
-    chantBody.appendChild(colophon);
+    chantTextEl.appendChild(colophon);
   }
 
   for (const section of chant.sections) {
@@ -241,11 +256,86 @@ function renderChant(chant) {
     for (const line of section.lines) {
       block.appendChild(renderLine(line, devaCounts, iastCounts));
     }
-    chantBody.appendChild(block);
+    chantTextEl.appendChild(block);
+  }
+
+  updateNetworkOverlay();
+}
+
+// --- Side-rail network: connects every currently-highlighted occurrence --
+//
+// One node per verse-line that contains an active occurrence (deduped, so a
+// line with both a Devanagari and an IAST hit — or two hits in one script —
+// still gets a single node), joined by a single vertical trunk with a
+// horizontal stub reaching toward each node's row. Orthogonal lines only
+// ("square"), confined entirely to the rail so it never touches the text.
+const RAIL_STUB_INSET = 6;
+
+function updateNetworkOverlay() {
+  const rail = networkRail;
+  const svg = networkSvg;
+  if (!rail || !svg) return;
+  if (rail.offsetParent === null) return; // hidden (e.g. narrow viewport)
+
+  const width = rail.clientWidth;
+  const height = rail.clientHeight;
+  svg.setAttribute('width', String(width));
+  svg.setAttribute('height', String(height));
+  svg.innerHTML = '';
+
+  const activeSpans = [...chantTextEl.querySelectorAll('.token-repeat.active')].filter(
+    (node) => node.offsetParent !== null
+  );
+  if (activeSpans.length === 0) return;
+
+  const railRect = rail.getBoundingClientRect();
+  const rowYByLine = new Map();
+  for (const span of activeSpans) {
+    const lineKey = span.dataset.line;
+    if (rowYByLine.has(lineKey)) continue;
+    const row = span.closest('.verse-line') || span.closest('.colophon');
+    if (!row) continue;
+    const rowRect = row.getBoundingClientRect();
+    rowYByLine.set(lineKey, rowRect.top + rowRect.height / 2 - railRect.top);
+  }
+
+  const ys = [...rowYByLine.values()].sort((a, b) => a - b);
+  if (ys.length === 0) return;
+
+  const trunkX = width - RAIL_STUB_INSET;
+  const stubX = RAIL_STUB_INSET;
+  const svgNS = 'http://www.w3.org/2000/svg';
+
+  if (ys.length > 1) {
+    const trunk = document.createElementNS(svgNS, 'line');
+    trunk.setAttribute('x1', trunkX);
+    trunk.setAttribute('x2', trunkX);
+    trunk.setAttribute('y1', ys[0]);
+    trunk.setAttribute('y2', ys[ys.length - 1]);
+    svg.appendChild(trunk);
+  }
+
+  for (const y of ys) {
+    const stub = document.createElementNS(svgNS, 'line');
+    stub.setAttribute('x1', stubX);
+    stub.setAttribute('x2', trunkX);
+    stub.setAttribute('y1', y);
+    stub.setAttribute('y2', y);
+    svg.appendChild(stub);
+
+    const node = document.createElementNS(svgNS, 'circle');
+    node.setAttribute('cx', stubX);
+    node.setAttribute('cy', y);
+    node.setAttribute('r', 2.5);
+    node.setAttribute('class', 'network-node');
+    svg.appendChild(node);
   }
 }
 
 async function loadChant(id) {
+  chantTextEl = null;
+  networkRail = null;
+  networkSvg = null;
   chantBody.innerHTML = '<p class="loading">Loading chant…</p>';
   try {
     const res = await fetch(`data/chants/${id}.json`);
@@ -287,6 +377,7 @@ function initRepeatClickHandling() {
     document.querySelectorAll('.token-repeat').forEach((node) => {
       node.classList.toggle('active', node.dataset.key === activeKeys[node.dataset.script]);
     });
+    updateNetworkOverlay();
   });
 }
 
@@ -303,7 +394,12 @@ function init() {
     const show = transliterationToggle.checked;
     applyTransliterationPref(show);
     localStorage.setItem('vedavani:showTransliteration', String(show));
+    // Rows reflow when transliteration is shown/hidden, so node positions
+    // need recomputing even though the active selection itself didn't change.
+    updateNetworkOverlay();
   });
+
+  window.addEventListener('resize', () => updateNetworkOverlay());
 
   const lastChant = localStorage.getItem('vedavani:lastChant');
   const initialId = CHANTS.some((c) => c.id === lastChant) ? lastChant : CHANTS[0].id;
