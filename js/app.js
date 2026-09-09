@@ -119,9 +119,17 @@ function buildRepeatCounts(lineTexts, script) {
 
 // Renders one line's text, wrapping the longest repeated word-run starting
 // at each position in a `.token-repeat` span (greedy, non-overlapping).
-function renderScriptLine(rawText, script, counts) {
+//
+// Each span also gets `data-line`/`data-slot`: the line it came from and its
+// order among that line's repeat-spans in this script. Devanagari and IAST
+// don't always tokenize 1:1 (see note above), but within one line their
+// repeat-spans usually appear in the same relative order, so (line, slot) is
+// used to bridge a click on one script to its counterpart in the other —
+// see initRepeatClickHandling.
+function renderScriptLine(rawText, script, counts, lineKey) {
   const frag = document.createDocumentFragment();
   const segments = segmentLine(rawText, script);
+  let slot = 0;
   let i = 0;
   while (i < segments.length) {
     const seg = segments[i];
@@ -165,6 +173,9 @@ function renderScriptLine(rawText, script, counts) {
     span.className = 'token-repeat';
     span.dataset.script = script;
     span.dataset.key = matchedKey;
+    span.dataset.line = lineKey;
+    span.dataset.slot = String(slot);
+    slot += 1;
     let consumedWords = 0;
     let p = i;
     while (p < segments.length && consumedWords < matchedN) {
@@ -184,12 +195,13 @@ function renderScriptLine(rawText, script, counts) {
 }
 
 function renderLine(line, devaCounts, iastCounts) {
+  const lineKey = String(line.n);
   const wrapper = el('div', 'verse-line');
   const devaPara = el('p', 'deva-line');
-  devaPara.appendChild(renderScriptLine(line.devanagari, 'deva', devaCounts));
+  devaPara.appendChild(renderScriptLine(line.devanagari, 'deva', devaCounts, lineKey));
   wrapper.appendChild(devaPara);
   const iastPara = el('p', 'iast-line');
-  iastPara.appendChild(renderScriptLine(line.iast, 'iast', iastCounts));
+  iastPara.appendChild(renderScriptLine(line.iast, 'iast', iastCounts, lineKey));
   wrapper.appendChild(iastPara);
   return wrapper;
 }
@@ -213,10 +225,10 @@ function renderChant(chant) {
     const iastCounts = buildRepeatCounts([chant.colophon.iast], 'iast');
     const colophon = el('div', 'colophon');
     const devaPara = el('p', 'deva-line');
-    devaPara.appendChild(renderScriptLine(chant.colophon.devanagari, 'deva', devaCounts));
+    devaPara.appendChild(renderScriptLine(chant.colophon.devanagari, 'deva', devaCounts, 'colophon'));
     colophon.appendChild(devaPara);
     const iastPara = el('p', 'iast-line');
-    iastPara.appendChild(renderScriptLine(chant.colophon.iast, 'iast', iastCounts));
+    iastPara.appendChild(renderScriptLine(chant.colophon.iast, 'iast', iastCounts, 'colophon'));
     colophon.appendChild(iastPara);
     chantBody.appendChild(colophon);
   }
@@ -251,15 +263,29 @@ function applyTransliterationPref(show) {
   toggleLabel.textContent = show ? 'Hide transliteration' : 'Show transliteration';
 }
 
+// Links the click across scripts: activating a word also activates its
+// counterpart in the other script (same line, same position among that
+// line's repeat-spans), so the highlighted word stays the same regardless of
+// whether transliteration is shown. If no counterpart exists at that slot
+// (the two scripts split that particular line into a different number of
+// repeat-spans), only the clicked script's matches are activated.
 function initRepeatClickHandling() {
   chantBody.addEventListener('click', (e) => {
     const span = e.target.closest('.token-repeat');
     if (!span) return;
-    const { script, key } = span.dataset;
+    const { script, key, line, slot } = span.dataset;
     const wasActive = span.classList.contains('active');
+
+    const otherScript = script === 'deva' ? 'iast' : 'deva';
+    const sibling = wasActive
+      ? null
+      : chantBody.querySelector(
+          `.token-repeat[data-script="${otherScript}"][data-line="${line}"][data-slot="${slot}"]`
+        );
+    const activeKeys = { [script]: wasActive ? null : key, [otherScript]: sibling ? sibling.dataset.key : null };
+
     document.querySelectorAll('.token-repeat').forEach((node) => {
-      if (node.dataset.script !== script) return;
-      node.classList.toggle('active', !wasActive && node.dataset.key === key);
+      node.classList.toggle('active', node.dataset.key === activeKeys[node.dataset.script]);
     });
   });
 }
