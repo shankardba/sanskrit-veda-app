@@ -205,6 +205,7 @@ function renderScriptLine(rawText, script, counts, lineKey) {
 function renderLine(line, devaCounts, iastCounts) {
   const lineKey = String(line.n);
   const wrapper = el('div', 'verse-line');
+  wrapper.dataset.line = lineKey;
   const devaPara = el('p', 'deva-line');
   devaPara.appendChild(renderScriptLine(line.devanagari, 'deva', devaCounts, lineKey));
   wrapper.appendChild(devaPara);
@@ -250,6 +251,7 @@ function renderChant(chant, translation) {
     const devaCounts = buildRepeatCounts([chant.colophon.devanagari], 'deva');
     const iastCounts = buildRepeatCounts([chant.colophon.iast], 'iast');
     const colophon = el('div', 'colophon');
+    colophon.dataset.line = 'colophon';
     const devaPara = el('p', 'deva-line');
     devaPara.appendChild(renderScriptLine(chant.colophon.devanagari, 'deva', devaCounts, 'colophon'));
     colophon.appendChild(devaPara);
@@ -272,7 +274,33 @@ function renderChant(chant, translation) {
     chantTextEl.appendChild(block);
   }
 
+  alignTranslationLines();
   updateNetworkOverlay();
+}
+
+// Positions each translation paragraph at the same vertical offset as its
+// matching Sanskrit verse-line, rather than letting the translation column
+// flow independently (which drifts out of sync and finishes early/late,
+// since English and Sanskrit+IAST rarely take the same vertical space per
+// line). Absolute positioning inside chant-translation is used instead of
+// margins so a short translation next to a tall wrapped Sanskrit line
+// doesn't accumulate drift — every line is placed fresh from its own
+// verse-line's measured position.
+function alignTranslationLines() {
+  if (!chantTextEl || !chantTranslationEl) return;
+  if (chantTranslationEl.offsetParent === null) return; // hidden (narrow viewport)
+
+  chantTranslationEl.style.height = `${chantTextEl.scrollHeight}px`;
+  const containerRect = chantTranslationEl.getBoundingClientRect();
+
+  for (const para of chantTranslationEl.querySelectorAll('.translation-line')) {
+    const target = chantTextEl.querySelector(
+      `.verse-line[data-line="${para.dataset.line}"], .colophon[data-line="${para.dataset.line}"]`
+    );
+    if (!target) continue;
+    const top = target.getBoundingClientRect().top - containerRect.top;
+    para.style.top = `${top}px`;
+  }
 }
 
 // --- Connector network: links every currently-highlighted occurrence -----
@@ -455,12 +483,17 @@ function init() {
     showTransliteration = !showTransliteration;
     applyTransliterationPref(showTransliteration);
     localStorage.setItem('vedavani:showTransliteration', String(showTransliteration));
-    // Rows reflow when transliteration is shown/hidden, so node positions
-    // need recomputing even though the active selection itself didn't change.
+    // Rows reflow when transliteration is shown/hidden, so both the
+    // translation column's positions and the network need recomputing even
+    // though the active selection itself didn't change.
+    alignTranslationLines();
     updateNetworkOverlay();
   });
 
-  window.addEventListener('resize', () => updateNetworkOverlay());
+  window.addEventListener('resize', () => {
+    alignTranslationLines();
+    updateNetworkOverlay();
+  });
 
   const lastChant = localStorage.getItem('vedavani:lastChant');
   const initialId = CHANTS.some((c) => c.id === lastChant) ? lastChant : CHANTS[0].id;

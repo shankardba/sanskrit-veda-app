@@ -229,17 +229,22 @@ a {
 }
 
 .chant-translation {
+  position: relative;
   flex: 1 1 320px;
   min-width: 0;
-  padding-top: 4px;
 }
 
+/* Positioned absolutely via JS (alignTranslationLines) to match its
+   verse-line's own vertical offset, so this column reads in lockstep with
+   the Sanskrit instead of drifting out of sync as line heights differ. */
 .translation-line {
+  position: absolute;
+  left: 0;
+  right: 0;
   font-family: var(--font-body);
   font-size: 0.98rem;
   line-height: 1.6;
   color: var(--color-text-muted);
-  margin-bottom: 18px;
 }
 
 @media (max-width: 900px) {
