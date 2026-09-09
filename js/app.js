@@ -14,7 +14,6 @@ const chantTitleDeva = document.getElementById('chantTitleDeva');
 const chantTitleIast = document.getElementById('chantTitleIast');
 const chantSource = document.getElementById('chantSource');
 const transliterationToggle = document.getElementById('transliterationToggle');
-const toggleLabel = document.getElementById('toggleLabel');
 
 // The current chant's layout (text column + rail) and its network SVG,
 // rebuilt on every renderChant() call — see updateNetworkOverlay.
@@ -370,7 +369,8 @@ async function loadChant(id) {
 
 function applyTransliterationPref(show) {
   document.body.classList.toggle('hide-transliteration', !show);
-  toggleLabel.textContent = show ? 'Hide transliteration' : 'Show transliteration';
+  transliterationToggle.classList.toggle('active', show);
+  transliterationToggle.setAttribute('aria-pressed', String(show));
 }
 
 // Links the click across scripts: activating a word also activates its
@@ -406,14 +406,13 @@ function init() {
   initRepeatClickHandling();
 
   const savedShow = localStorage.getItem('vedavani:showTransliteration');
-  const showInitially = savedShow === null ? true : savedShow === 'true';
-  transliterationToggle.checked = showInitially;
-  applyTransliterationPref(showInitially);
+  let showTransliteration = savedShow === null ? true : savedShow === 'true';
+  applyTransliterationPref(showTransliteration);
 
-  transliterationToggle.addEventListener('change', () => {
-    const show = transliterationToggle.checked;
-    applyTransliterationPref(show);
-    localStorage.setItem('vedavani:showTransliteration', String(show));
+  transliterationToggle.addEventListener('click', () => {
+    showTransliteration = !showTransliteration;
+    applyTransliterationPref(showTransliteration);
+    localStorage.setItem('vedavani:showTransliteration', String(showTransliteration));
     // Rows reflow when transliteration is shown/hidden, so node positions
     // need recomputing even though the active selection itself didn't change.
     updateNetworkOverlay();
