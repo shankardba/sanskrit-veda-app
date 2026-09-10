@@ -80,7 +80,7 @@ function buildSquaresMathNote() {
       <p>Every odd number the verse counts off is the gap between two consecutive squares; every multiple of four it counts off next is what two neighboring gaps add up to. The table below is the same thing laid out row by row.</p>
       <div class="math-table-wrap">
         <table class="math-table">
-          <thead><tr><th>Row</th><th>N</th><th>N²</th><th>R<sub>N<sup>2</sup></sub> − R<sub>N<sup>2</sup>−1</sub></th></tr></thead>
+          <thead><tr><th>Row</th><th>N</th><th>N²</th><th>R<sub>N<sup>2</sup></sub> − R<sub>N<sup>(2−1)</sup></sub></th></tr></thead>
           <tbody>${tableRows}</tbody>
         </table>
       </div>
