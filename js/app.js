@@ -20,6 +20,113 @@ const CHANTS = [
   { id: 'soundarya-lahari', label: 'Soundarya Lahari' },
 ];
 
+// Optional per-section popup notes, keyed by chant id then section label —
+// a section-label only becomes clickable (see renderChant) when an entry
+// exists here. Content is built lazily (each value a function, not the
+// note itself) since it's only ever needed once the user actually clicks.
+const SECTION_NOTES = {
+  'sri-rudram-chamakam': {
+    11: () => buildSquaresMathNote(),
+  },
+};
+
+// Chamakam anuvāka 11 recites two number sequences — 1, 3, 5, ... 33 (Ēkāṃ
+// cha mē tisraścha mē, ...) and then 4, 8, 12, ... 48 (Dvādaśa cha mē
+// ṣōḍaśa cha mē, ...) — that are exactly the first- and second-order
+// differences of the squares 0² through 17². Builds the explanatory table
+// and callouts for that, mirroring the classic "differences of squares are
+// odd numbers, sums of consecutive odd numbers are multiples of four"
+// construction.
+function buildSquaresMathNote() {
+  const maxN = 17;
+  const oddDiffs = []; // N² − (N−1)², N = 1..17 → 1..33 (the verse's full first sequence)
+  for (let n = 1; n <= maxN; n++) oddDiffs.push(2 * n - 1);
+  // The verse's second sequence stops at 48, i.e. exactly 12 overlapping-pair
+  // sums — only the first 13 odd differences (1..25) are needed to produce
+  // them, not all 17 (which would run past 48 up to 31+33=64).
+  const VERSE_SUM_COUNT = 12;
+  const fourSums = [];
+  for (let i = 0; i < VERSE_SUM_COUNT; i++) fourSums.push(oddDiffs[i] + oddDiffs[i + 1]);
+
+  let tableRows = '';
+  for (let n = 0; n <= maxN; n++) {
+    const sq = n * n;
+    const diffCell = n === 0 ? '' : `${sq} − ${(n - 1) * (n - 1)} = ${2 * n - 1}`;
+    tableRows += `<tr><td>R<sub>${n + 1}</sub></td><td>${n}</td><td>${sq}</td><td class="diff-col">${diffCell}</td></tr>`;
+  }
+
+  const sumLines = fourSums
+    .map((sum, i) => `${oddDiffs[i]} + ${oddDiffs[i + 1]} = ${sum}`)
+    .join('<br>');
+
+  return {
+    title: 'The Mathematics of Anuvāka 11',
+    subtitle: 'Śrī Rudram Chamakam · Anuvāka 11',
+    bodyHtml: `
+      <p>This anuvāka recites two number sequences in a row — <em>one and three, five and seven, nine and eleven…</em> up through <em>thirty-three</em>, then <em>twelve and sixteen, twenty and twenty-four and twenty-eight…</em> up through <em>forty-eight</em>. Both fall directly out of the squares 0² through 17².</p>
+      <div class="math-callouts">
+        <div class="math-callout">
+          <h4>First sequence — differences</h4>
+          <div class="formula">N² − (N−1)² = 2N − 1</div>
+          <div class="sequence">${oddDiffs.join(', ')}</div>
+        </div>
+        <div class="math-callout">
+          <h4>Second sequence — sums</h4>
+          <div class="formula">(2N−1) + (2N+1) = 4N</div>
+          <div class="sequence">${sumLines}</div>
+        </div>
+      </div>
+      <p>Every odd number the verse counts off is the gap between two consecutive squares; every multiple of four it counts off next is what two neighboring gaps add up to. The table below is the same thing laid out row by row.</p>
+      <div class="math-table-wrap">
+        <table class="math-table">
+          <thead><tr><th>Row</th><th>N</th><th>N²</th><th>R<sub>n</sub> − R<sub>n−1</sub></th></tr></thead>
+          <tbody>${tableRows}</tbody>
+        </table>
+      </div>
+    `,
+  };
+}
+
+let mathModalOverlay = null;
+
+function ensureMathModal() {
+  if (mathModalOverlay) return mathModalOverlay;
+  const overlay = el('div', 'modal-overlay');
+  overlay.id = 'mathModalOverlay';
+  overlay.hidden = true;
+  overlay.innerHTML = `
+    <div class="modal-box" role="dialog" aria-modal="true">
+      <button type="button" class="modal-close" aria-label="Close">&times;</button>
+      <h2 class="modal-title"><span class="glow-gold" id="mathModalTitle"></span></h2>
+      <p class="modal-subtitle" id="mathModalSubtitle"></p>
+      <div class="modal-body" id="mathModalBody"></div>
+    </div>
+  `;
+  document.body.appendChild(overlay);
+
+  const close = () => {
+    overlay.hidden = true;
+  };
+  overlay.querySelector('.modal-close').addEventListener('click', close);
+  overlay.addEventListener('click', (e) => {
+    if (e.target === overlay) close();
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && !overlay.hidden) close();
+  });
+
+  mathModalOverlay = overlay;
+  return overlay;
+}
+
+function openMathModal(note) {
+  const overlay = ensureMathModal();
+  overlay.querySelector('#mathModalTitle').textContent = note.title;
+  overlay.querySelector('#mathModalSubtitle').textContent = note.subtitle || '';
+  overlay.querySelector('#mathModalBody').innerHTML = note.bodyHtml;
+  overlay.hidden = false;
+}
+
 const chantSelect = document.getElementById('chantSelect');
 const chantBody = document.getElementById('chantBody');
 const chantTitleDeva = document.getElementById('chantTitleDeva');
@@ -478,7 +585,13 @@ function renderChant(chant, translation) {
     const devaCounts = buildRepeatCounts(section.lines.map((l) => l.devanagari), 'deva');
     const iastCounts = buildRepeatCounts(section.lines.map((l) => l.iast), 'iast');
     const block = el('div', 'section-block');
-    block.appendChild(el('div', 'section-label', `${chant.sectionUnit || 'Anuvāka'} ${section.label}`));
+    const labelText = `${chant.sectionUnit || 'Anuvāka'} ${section.label}`;
+    const buildNote = SECTION_NOTES[chant.id] && SECTION_NOTES[chant.id][section.label];
+    const labelEl = el('div', buildNote ? 'section-label has-note' : 'section-label', labelText);
+    if (buildNote) {
+      labelEl.addEventListener('click', () => openMathModal(buildNote()));
+    }
+    block.appendChild(labelEl);
     for (const line of section.lines) {
       block.appendChild(renderLine(line, devaCounts, iastCounts));
       appendTranslationLine(

@@ -272,6 +272,206 @@ a {
   border-bottom: 1px solid var(--color-border);
 }
 
+/* Only sections with a registered note (see SECTION_NOTES in app.js) get
+   this — a plain-text label otherwise, so the affordance never implies a
+   popup that isn't actually there. */
+.section-label.has-note {
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  width: fit-content;
+}
+
+.section-label.has-note:hover {
+  color: var(--color-gold-light);
+}
+
+.section-label.has-note::after {
+  content: '∑';
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--color-gold);
+  border: 1px solid var(--color-border);
+  border-radius: 50%;
+  width: 16px;
+  height: 16px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.section-label.has-note:hover::after {
+  border-color: var(--color-gold);
+  color: var(--color-gold-light);
+}
+
+/* --- Math note modal ---------------------------------------------------- */
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  background: rgba(5, 2, 4, 0.75);
+  backdrop-filter: blur(3px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.modal-overlay[hidden] {
+  display: none;
+}
+
+.modal-box {
+  position: relative;
+  max-width: 640px;
+  width: 100%;
+  max-height: 85vh;
+  overflow-y: auto;
+  background: var(--color-panel);
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  padding: 32px 32px 28px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+.modal-close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 1px solid var(--color-border);
+  background: transparent;
+  color: var(--color-text-muted);
+  font-family: var(--font-ui);
+  font-size: 1rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: border-color 0.15s ease, color 0.15s ease;
+}
+
+.modal-close:hover {
+  border-color: var(--color-gold);
+  color: var(--color-gold-light);
+}
+
+.modal-title {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: 6px;
+  padding-right: 30px;
+}
+
+.modal-title .glow-gold {
+  background: linear-gradient(135deg, var(--color-gold-light), var(--color-gold));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.modal-subtitle {
+  font-family: var(--font-ui);
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+  margin-bottom: 20px;
+}
+
+.modal-body p {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--color-text);
+  margin-bottom: 14px;
+}
+
+.modal-body .math-callouts {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-bottom: 20px;
+}
+
+@media (max-width: 520px) {
+  .modal-body .math-callouts {
+    grid-template-columns: 1fr;
+  }
+}
+
+.math-callout {
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  padding: 14px 16px;
+}
+
+.math-callout h4 {
+  font-family: var(--font-ui);
+  font-size: 0.72rem;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: var(--color-magenta);
+  margin-bottom: 8px;
+}
+
+.math-callout .formula {
+  font-family: 'Gentium Plus', var(--font-body);
+  font-style: italic;
+  color: var(--color-gold-light);
+  font-size: 1rem;
+  margin-bottom: 8px;
+}
+
+.math-callout .sequence {
+  font-family: var(--font-ui);
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+  line-height: 1.7;
+  word-spacing: 2px;
+}
+
+.math-table-wrap {
+  overflow-x: auto;
+  margin-bottom: 8px;
+}
+
+.math-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--font-ui);
+  font-size: 0.82rem;
+}
+
+.math-table th,
+.math-table td {
+  padding: 6px 10px;
+  text-align: center;
+  border-bottom: 1px solid var(--color-border);
+  white-space: nowrap;
+}
+
+.math-table th {
+  color: var(--color-text-muted);
+  font-weight: 600;
+  font-size: 0.7rem;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.math-table td.diff-col {
+  color: var(--color-gold-light);
+}
+
+.math-table td.sum-col {
+  color: var(--color-magenta);
+}
+
 .colophon {
   font-style: italic;
   color: var(--color-text-muted);
