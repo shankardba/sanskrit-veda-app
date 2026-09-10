@@ -55,6 +55,7 @@ function buildSquaresMathNote() {
     tableRows += `<tr><td>R<sub>${n + 1}</sub></td><td>${n}</td><td>${sq}</td><td class="diff-col">${diffCell}</td></tr>`;
   }
 
+  const diffLines = oddDiffs.map((diff, i) => `${(i + 1) * (i + 1)} − ${i * i} = ${diff}`).join('<br>');
   const sumLines = fourSums
     .map((sum, i) => `${oddDiffs[i]} + ${oddDiffs[i + 1]} = ${sum}`)
     .join('<br>');
@@ -68,7 +69,7 @@ function buildSquaresMathNote() {
         <div class="math-callout">
           <h4>First sequence — differences</h4>
           <div class="formula">N² − (N−1)² = 2N − 1</div>
-          <div class="sequence">${oddDiffs.join(', ')}</div>
+          <div class="sequence">${diffLines}</div>
         </div>
         <div class="math-callout">
           <h4>Second sequence — sums</h4>
