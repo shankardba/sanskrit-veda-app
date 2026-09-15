@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Grammar — Sanskrit Language — Vedavani</title>
-<meta name="description" content="Vedavani — case endings, verb conjugation, and sandhi, taught against real lines from the chants on this site.">
+<meta name="description" content="Vedavani — sandhi, vowel gradation, the case and conjugation systems, and compounding: the generative logic of Classical Sanskrit.">
 <link rel="icon" href="assets/logo.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@400;500;600&family=Noto+Sans+Devanagari:wght@400;500;600&family=Gentium+Plus:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
@@ -29,20 +29,270 @@
 <main id="top">
   <div class="lang-hero container">
     <h1 class="glow-gold">Grammar</h1>
-    <p>Case endings, verb conjugation, and sandhi — coming soon.</p>
+    <p>The generative rules behind Classical Sanskrit's word-shapes — sandhi, declension, conjugation, and compounding.</p>
   </div>
 
   <nav class="lang-subnav">
     <a href="characters.html">Characters</a>
     <a href="numerals.html">Numerals</a>
     <a href="grammar.html" class="active">Grammar</a>
+    <a href="vedic-grammar.html">Vedic Grammar</a>
   </nav>
 
   <div class="lang-body container">
 
     <p class="lang-breadcrumb"><a href="language.html">Sanskrit Language</a> / Grammar</p>
 
-    <p class="lang-placeholder">Coming soon — case endings, verb conjugation, and sandhi rules, taught against real lines from the chants on this site.</p>
+    <p class="lang-block-intro">
+      Sanskrit grammar (<em>vyākaraṇa</em>, one of the six traditional Vedāṅga disciplines) was studied and
+      codified from the later Vedic period onward, culminating in Pāṇini's <em>Aṣṭādhyāyī</em> ("eight chapters"),
+      around the 4th century BCE — a complete, algebraic, rule-based description of the language so compact it
+      can be recited in about two hours. Kātyāyana and Patañjali added commentary a few centuries later (together
+      the three are called the <em>Trimuni Vyākaraṇa</em>, "grammar of the three sages"), and the tradition
+      continued through Bhaṭṭoji Dīkṣita's 17th-century <em>Siddhānta Kaumudī</em> into 19th-century European
+      Sanskrit scholarship. This page covers Classical Sanskrit — the language Pāṇini standardized. The older
+      Vedic language behind the chants on this site differs in several specific ways; see
+      <a href="vedic-grammar.html">Vedic Grammar</a> for those, rather than repeating this page there.
+    </p>
+
+    <div class="char-group">
+      <h3 class="char-group-title">Sandhi</h3>
+      <p class="char-group-note">
+        Sanskrit words change shape at their edges depending on what they touch — the same mechanism already
+        seen shaping numerals (ṣaṣ → ṣaḍviṃśati) and the alphabet's own place/manner grid on the Characters page.
+        Two flavors:
+      </p>
+      <div class="math-callouts">
+        <div class="math-callout">
+          <h4>External sandhi</h4>
+          <div class="formula">between two separate words</div>
+          <div class="sequence">
+            Similar vowels merge into one long vowel (a + a → ā); dissimilar ones glide or diphthongize (i + a →
+            ya, a + i → e). Voiced consonants pull a following or preceding voiceless one into voicing to match —
+            regressive assimilation, for ease of pronunciation across the word boundary.
+          </div>
+        </div>
+        <div class="math-callout">
+          <h4>Internal sandhi</h4>
+          <div class="formula">inside a single word, at a root/suffix seam</div>
+          <div class="sequence">
+            More tightly constrained by the root's own structure — the same place-of-articulation and
+            voicing/aspiration logic, but applied where a suffix meets a root rather than where two words meet.
+          </div>
+        </div>
+      </div>
+      <p class="lang-footnote">
+        Vedic external sandhi is noticeably more variable/less fixed than the standardized Classical rules — one
+        of several differences covered on the <a href="vedic-grammar.html">Vedic Grammar</a> page.
+      </p>
+    </div>
+
+    <div class="char-group">
+      <h3 class="char-group-title">Vowel gradation — guṇa &amp; vṛddhi</h3>
+      <p class="char-group-note">
+        Inherited from Proto-Indo-European ablaut (the same mechanism behind English <em>sing/sang/sung/song</em>),
+        this is the single most load-bearing pattern in Sanskrit word-formation: a root's vowel systematically
+        strengthens or weakens depending on what's being built from it. Three grades, keyed to the same five
+        vowel-places already catalogued on the Characters and Numerals pages:
+      </p>
+      <div class="consonant-table-wrap">
+        <table class="consonant-table">
+          <thead>
+            <tr><th class="row-head">&nbsp;</th><th>a</th><th>i / ī</th><th>u / ū</th><th>ṛ</th><th>ḷ</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th class="row-head">Zero grade</th>
+              <td>—</td><td>i / ī</td><td>u / ū</td><td>ṛ</td><td>ḷ</td>
+            </tr>
+            <tr>
+              <th class="row-head">Guṇa (1st)</th>
+              <td>a</td><td>e</td><td>o</td><td>ar</td><td>al</td>
+            </tr>
+            <tr>
+              <th class="row-head">Vṛddhi (2nd)</th>
+              <td>ā</td><td>ai</td><td>au</td><td>ār</td><td>āl</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="char-group-note">
+        As a rule of thumb: an <strong>accented</strong> root syllable takes guṇa or vṛddhi; an unaccented one
+        reduces to zero grade. भू (bhū, "become") shows all three: <strong>bhū-</strong> (zero) → <strong>bho-</strong>
+        (guṇa, seen in <em>bhavati</em>, "he becomes") → <strong>bhāu-</strong>-type vṛddhi forms in further
+        derivatives. This one alternation underlies a huge share of both verb-stem formation and noun/adjective
+        derivation.
+      </p>
+      <p class="lang-footnote">
+        Sanskrit's pitch accent (udātta/anudātta/svarita — the same marks already rendered on this site's chant
+        pages and catalogued on the Characters page) governed which grade a root took. It was still alive in
+        Pāṇini's time but had disappeared from popular speech within a few centuries of the Classical standard
+        being set — see <a href="vedic-grammar.html">Vedic Grammar</a>.
+      </p>
+    </div>
+
+    <div class="char-group">
+      <h3 class="char-group-title">Nominal declension</h3>
+      <p class="char-group-note">
+        Every noun and adjective is declined across three axes — 3 numbers (singular, dual, plural) × 3 genders
+        (masculine, feminine, neuter) × 8 cases — with adjectives simply taking on whatever gender/number/case
+        the noun they describe has. The 8 cases each mark a distinct grammatical role:
+      </p>
+      <div class="consonant-table-wrap">
+        <table class="consonant-table word-table">
+          <tbody>
+            <tr>
+              <td><div class="char-value">Nom.</div><div class="char-label">subject</div></td>
+              <td><div class="char-value">Acc.</div><div class="char-label">direct object</div></td>
+              <td><div class="char-value">Instr.</div><div class="char-label">by / with</div></td>
+              <td><div class="char-value">Dat.</div><div class="char-label">indirect object</div></td>
+              <td><div class="char-value">Abl.</div><div class="char-label">away from</div></td>
+              <td><div class="char-value">Gen.</div><div class="char-label">possession</div></td>
+              <td><div class="char-value">Loc.</div><div class="char-label">in / on / at</div></td>
+              <td><div class="char-value">Voc.</div><div class="char-label">addressing</div></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="char-group-note">
+        One model paradigm carries the pattern: देव (deva, "god"), the most common noun class — a masculine
+        stem ending in short -a. Every other stem class (i-/u-stems, ā-/ī-stems, consonant-final roots) inflects
+        for the same 8 cases × 3 numbers with different endings, following the same logic.
+      </p>
+      <div class="consonant-table-wrap">
+        <table class="consonant-table word-table">
+          <thead>
+            <tr><th>&nbsp;</th><th>Singular</th><th>Dual</th><th>Plural</th></tr>
+          </thead>
+          <tbody>
+            <tr><th class="row-head">Nominative</th><td><div class="char-deva">देवः</div><div class="char-iast">devaḥ</div></td><td rowspan="3"><div class="char-deva">देवौ</div><div class="char-iast">devau</div></td><td><div class="char-deva">देवाः</div><div class="char-iast">devāḥ</div></td></tr>
+            <tr><th class="row-head">Accusative</th><td><div class="char-deva">देवम्</div><div class="char-iast">devam</div></td><td><div class="char-deva">देवान्</div><div class="char-iast">devān</div></td></tr>
+            <tr><th class="row-head">Vocative</th><td><div class="char-deva">देव</div><div class="char-iast">deva</div></td><td><div class="char-deva">देवाः</div><div class="char-iast">devāḥ</div></td></tr>
+            <tr><th class="row-head">Instrumental</th><td><div class="char-deva">देवेन</div><div class="char-iast">devena</div></td><td rowspan="3"><div class="char-deva">देवाभ्याम्</div><div class="char-iast">devābhyām</div></td><td><div class="char-deva">देवैः</div><div class="char-iast">devaiḥ</div></td></tr>
+            <tr><th class="row-head">Dative</th><td><div class="char-deva">देवाय</div><div class="char-iast">devāya</div></td><td rowspan="2"><div class="char-deva">देवेभ्यः</div><div class="char-iast">devebhyaḥ</div></td></tr>
+            <tr><th class="row-head">Ablative</th><td><div class="char-deva">देवात्</div><div class="char-iast">devāt</div></td></tr>
+            <tr><th class="row-head">Genitive</th><td><div class="char-deva">देवस्य</div><div class="char-iast">devasya</div></td><td rowspan="2"><div class="char-deva">देवयोः</div><div class="char-iast">devayoḥ</div></td><td><div class="char-deva">देवानाम्</div><div class="char-iast">devānām</div></td></tr>
+            <tr><th class="row-head">Locative</th><td><div class="char-deva">देवे</div><div class="char-iast">deve</div></td><td><div class="char-deva">देवेषु</div><div class="char-iast">deveṣu</div></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="lang-footnote">
+        The dual and several plural cells repeat on purpose — syncretism (one form covering several
+        case/number slots) is a real feature of the paradigm, not a gap. 24 case×number slots, only 15 distinct
+        surface forms.
+      </p>
+    </div>
+
+    <div class="char-group">
+      <h3 class="char-group-title">Verb conjugation</h3>
+      <p class="char-group-note">
+        A finite verb form is the product of five independent axes — 3 persons × 3 numbers × 3 voices
+        (active/middle/passive) × 4 moods (indicative/optative/imperative/conditional) × 6 tenses
+        (present/imperfect/perfect/aorist/future/periphrastic future) — the same "dimensional grid" logic already
+        seen driving the numeral and declension systems, just with more axes.
+      </p>
+      <p class="char-group-note">
+        Every root builds its present-tense stem by one of ten traditional treatments (the "ten classes") —
+        there's no single unifying principle behind which root gets which class, but the treatments themselves
+        fall into two families:
+      </p>
+      <div class="consonant-table-wrap">
+        <table class="consonant-table word-table">
+          <thead>
+            <tr><th>Class</th><th>Root</th><th>Treatment</th><th>Stem</th><th>Sample (3rd sg.)</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>1st</td><td><div class="char-iast">√bhū-</div></td><td>root accent, guṇated</td><td><div class="char-iast">bháv-</div></td><td><div class="char-iast">bhávati</div></td></tr>
+            <tr><td>6th</td><td><div class="char-iast">√tud-</div></td><td>none (ending accented)</td><td><div class="char-iast">tud-</div></td><td><div class="char-iast">tudáti</div></td></tr>
+            <tr><td>4th</td><td><div class="char-iast">√div-</div></td><td>-ya- suffix</td><td><div class="char-iast">dī́vya-</div></td><td><div class="char-iast">dī́vyati</div></td></tr>
+            <tr><td>10th</td><td><div class="char-iast">√cur-</div></td><td>-aya- + root gradation</td><td><div class="char-iast">córaya-</div></td><td><div class="char-iast">córayati</div></td></tr>
+            <tr><td>2nd</td><td><div class="char-iast">√ad-</div></td><td>none (athematic)</td><td><div class="char-iast">ad-</div></td><td><div class="char-iast">átti</div></td></tr>
+            <tr><td>3rd</td><td><div class="char-iast">√hu-</div></td><td>reduplication</td><td><div class="char-iast">juhó-</div></td><td><div class="char-iast">juhóti</div></td></tr>
+            <tr><td>5th</td><td><div class="char-iast">√su-</div></td><td>-no- suffix</td><td><div class="char-iast">sunó-</div></td><td><div class="char-iast">sunóti</div></td></tr>
+            <tr><td>8th</td><td><div class="char-iast">√tan-</div></td><td>-o- suffix</td><td><div class="char-iast">tanó-</div></td><td><div class="char-iast">tanóti</div></td></tr>
+            <tr><td>9th</td><td><div class="char-iast">√krī-</div></td><td>-nā- suffix</td><td><div class="char-iast">krīṇā́-</div></td><td><div class="char-iast">krīṇā́ti</div></td></tr>
+            <tr><td>7th</td><td><div class="char-iast">√rudh-</div></td><td>nasal infix</td><td><div class="char-iast">ruṇádh-</div></td><td><div class="char-iast">ruṇáddhi</div></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="char-group-note">
+        Once a stem exists, the same set of personal endings attaches across every class. First-class active
+        (<em>parasmaipada</em>) present-tense endings, shown conjugating भू (bhū → bhav-, "become") — nearly half
+        the roots in the language belong to this single class:
+      </p>
+      <div class="consonant-table-wrap">
+        <table class="consonant-table word-table">
+          <thead>
+            <tr><th>&nbsp;</th><th>Singular</th><th>Dual</th><th>Plural</th></tr>
+          </thead>
+          <tbody>
+            <tr><th class="row-head">1st person</th><td><div class="char-iast">bhavāmi</div></td><td><div class="char-iast">bhavāvaḥ</div></td><td><div class="char-iast">bhavāmaḥ</div></td></tr>
+            <tr><th class="row-head">2nd person</th><td><div class="char-iast">bhavasi</div></td><td><div class="char-iast">bhavathaḥ</div></td><td><div class="char-iast">bhavatha</div></td></tr>
+            <tr><th class="row-head">3rd person</th><td><div class="char-iast">bhavati</div></td><td><div class="char-iast">bhavataḥ</div></td><td><div class="char-iast">bhavanti</div></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="lang-footnote">
+        A parallel middle-voice (<em>ātmanepada</em>) ending set exists alongside this active one, used when the
+        action's fruit reverts to the subject. Beyond the finite forms above: five "secondary conjugations"
+        (passive, intensive, desiderative, causative, denominative) each rebuild a new stem from the root with
+        its own sense, and three non-finite forms exist — participles, a single infinitive, and the gerund.
+      </p>
+    </div>
+
+    <div class="char-group">
+      <h3 class="char-group-title">Compounds (samāsa)</h3>
+      <p class="char-group-note">
+        Fusing multiple words into one is a defining Sanskrit habit, inherited from Proto-Indo-European but
+        expanded far beyond it — later literary Sanskrit builds compounds of a dozen or more members. Four
+        relationships cover almost every compound:
+      </p>
+      <div class="math-callouts">
+        <div class="math-callout">
+          <h4>Dvandva — "and"</h4>
+          <div class="formula">coordinative: X and Y</div>
+          <div class="sequence">rāma-lakṣmaṇau — "Rama and Lakshmana"</div>
+        </div>
+        <div class="math-callout">
+          <h4>Tatpuruṣa — "of/for/in X"</h4>
+          <div class="formula">determinative: first member modifies second by an implied case relation</div>
+          <div class="sequence">
+            rāja-puruṣaḥ — "the king's man" (genitive)<br>
+            A descriptive subtype, karmadhāraya, fuses an adjective straight onto its noun:
+            nīla-utpalam → nīlotpalam, "blue lotus."
+          </div>
+        </div>
+        <div class="math-callout">
+          <h4>Bahuvrīhi — "having X"</h4>
+          <div class="formula">possessive: the whole compound describes something outside itself</div>
+          <div class="sequence">pīta-ambaraḥ — "yellow-garmented", i.e. Kṛṣṇa (not the garment itself)</div>
+        </div>
+        <div class="math-callout">
+          <h4>Avyayībhāva — "in the manner of X"</h4>
+          <div class="formula">adverbial: the whole compound becomes an indeclinable</div>
+          <div class="sequence">yathā-śakti — "according to (one's) ability"</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="char-group">
+      <h3 class="char-group-title">Indeclinables &amp; syntax</h3>
+      <p class="char-group-note">
+        Prepositions, adverbs, particles, conjunctions, and interjections never decline — no case, number, or
+        gender to track, which is part of why they're easy to underestimate: a handful of particles (sma, a-/an-)
+        quietly carry grammatical weight, like turning a present-tense verb into a past one.
+      </p>
+      <p class="char-group-note">
+        Because case endings — not word order — carry the grammatical relationships, Sanskrit word order is
+        largely free; Pāṇini deliberately left syntax unfixed in the Aṣṭādhyāyī. In practice there's a strong
+        default tendency toward subject–object–verb.
+      </p>
+      <p class="lang-footnote">
+        Sanskrit's vocabulary and construction options run famously deep: Sanskritist Daniel Ingalls found roughly
+        fifteen distinct ways to say "you must fetch the horse" — mixing active/passive, imperative/optative, an
+        auxiliary verb, or any of three gerundive forms, each giving a different metrical shape.
+      </p>
+    </div>
 
   </div>
 </main>
