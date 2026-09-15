@@ -705,6 +705,77 @@ body.hide-transliteration .iast-line {
   color: var(--color-gold-light);
 }
 
+.lang-subnav a.active {
+  border-color: var(--color-gold);
+  background: rgba(240, 168, 60, 0.16);
+  color: var(--color-gold-light);
+  box-shadow: 0 0 10px rgba(240, 168, 60, 0.25);
+}
+
+.lang-breadcrumb {
+  font-family: var(--font-ui);
+  font-size: 0.78rem;
+  color: var(--color-text-muted);
+  margin-bottom: 14px;
+}
+
+.lang-breadcrumb a {
+  color: var(--color-text-muted);
+  border-bottom: 1px dotted var(--color-border);
+}
+
+.lang-breadcrumb a:hover {
+  color: var(--color-gold-light);
+}
+
+/* Hub landing page: big link tiles to each Sanskrit Language subpage. */
+.lang-hub-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+  margin-top: 8px;
+}
+
+.lang-hub-card {
+  display: block;
+  background: var(--color-panel);
+  border: 1px solid var(--color-border);
+  border-radius: 14px;
+  padding: 30px 26px;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease, transform 0.15s ease;
+}
+
+.lang-hub-card:hover {
+  border-color: var(--color-gold);
+  box-shadow: 0 0 18px rgba(240, 168, 60, 0.18);
+  transform: translateY(-2px);
+}
+
+.lang-hub-card-glyph {
+  font-family: var(--font-sanskrit);
+  font-size: 2.2rem;
+  color: var(--color-gold-light);
+  margin-bottom: 16px;
+}
+
+.lang-hub-card h2 {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  color: var(--color-text);
+  margin-bottom: 8px;
+}
+
+.lang-hub-card p {
+  font-family: var(--font-body);
+  color: var(--color-text-muted);
+  font-size: 0.98rem;
+  line-height: 1.5;
+}
+
+.lang-hub-card.is-placeholder {
+  opacity: 0.6;
+}
+
 .lang-body {
   padding: 44px 24px 110px;
   max-width: 1140px;
