@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Āryabhaṭa Numeration — Mathematics — Vedavani</title>
+<meta name="description" content="Vedavani — how Āryabhaṭa's 6th-century numeral system turns Sanskrit syllables into numbers.">
+<link rel="icon" href="assets/logo.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@400;500;600&family=Noto+Sans+Devanagari:wght@400;500;600&family=Gentium+Plus:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<header class="site-header">
+  <nav class="navbar">
+    <a href="index.html" class="logo-group">
+      <img src="assets/logo.svg" alt="Vedavani" class="logo-mark">
+      <span class="logo-word glow-gold">Vedavani</span>
+    </a>
+    <div class="nav-links">
+      <a href="index.html" class="nav-link">Chants</a>
+      <a href="language.html" class="nav-link">Sanskrit Language</a>
+      <a href="mathematics.html" class="nav-link active">Mathematics</a>
+    </div>
+  </nav>
+</header>
+
+<main id="top">
+  <div class="lang-hero container">
+    <h1 class="glow-gold">Āryabhaṭa Numeration</h1>
+    <p>How a 6th-century astronomer packed numbers into verse, one Sanskrit syllable at a time.</p>
+  </div>
+
+  <div class="lang-body container">
+
+    <p class="lang-breadcrumb"><a href="mathematics.html">Mathematics</a> / Āryabhaṭa Numeration</p>
+
+    <p class="lang-block-intro">
+      Āryabhaṭa (b. 476 CE) opens his <em>Āryabhaṭīya</em> — the foundational Sanskrit astronomy and mathematics
+      text, written around 499 CE — with a chapter called the <em>Gītikāpada</em>, "the verse of song." Its second
+      stanza doesn't teach astronomy yet; it teaches a code. Sanskrit consonants and vowels, combined the same
+      way they combine into any ordinary syllable, stand in for digits and decimal places — so an entire number,
+      however large, can be spelled as a pronounceable word and dropped straight into a metrical verse. Āryabhaṭa
+      used it to encode the astronomical constants throughout the rest of the book, from small counts up into the
+      billions.
+    </p>
+
+    <div class="char-group">
+      <h3 class="char-group-title">The core rule</h3>
+      <p class="char-group-note">Every syllable is a consonant plus a vowel — and each half does a different job:</p>
+      <div class="math-callouts">
+        <div class="math-callout">
+          <h4>Consonant → the digit (1–100)</h4>
+          <div class="formula">33 consonants, valued 1 through 100</div>
+          <div class="sequence">
+            The 25 "class" (varga) consonants — the same five-by-five stop grid from the Characters page — count
+            1 to 25 in reading order.<br>
+            The 8 "non-class" (avarga) consonants — य र ल व श ष स ह — count by tens, 30 to 100.
+          </div>
+        </div>
+        <div class="math-callout">
+          <h4>Vowel → the place (a power of 100)</h4>
+          <div class="formula">9 vowels, each 100× the last</div>
+          <div class="sequence">
+            अ इ उ ऋ ऌ ए ऐ ओ औ step through 100⁰, 100¹, 100²… up to 100⁸ — so each vowel shifts a value two
+            decimal digits higher than the one before it, the same nine vowels already catalogued on the
+            Characters page.
+          </div>
+        </div>
+      </div>
+      <p class="char-group-note">Put together: <strong>value(consonant + vowel) = consonant's number × 100<sup>(vowel's position, 0–8)</sup></strong>. ख (kha=2) alone is 2; खि (khi) — kha with the second vowel, i — is 2 × 100¹ = 200; खु (khu) is 2 × 100² = 20,000, and so on through खौ (khau) = 2 × 10¹⁶.</p>
+    </div>
+
+    <div class="char-group">
+      <h3 class="char-group-title">Consonant values</h3>
+      <p class="char-group-note">The 25 varga consonants — identical grid to the Characters page, now carrying a number instead of just a sound:</p>
+      <div class="consonant-table-wrap">
+        <table class="consonant-table">
+          <thead>
+            <tr>
+              <th class="row-head">&nbsp;</th>
+              <th>Velar</th>
+              <th>Palatal</th>
+              <th>Retroflex</th>
+              <th>Dental</th>
+              <th>Labial</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th class="row-head">Unaspirated&nbsp;voiceless</th>
+              <td><div class="char-deva">क</div><div class="char-iast">ka</div><div class="char-value">1</div></td>
+              <td><div class="char-deva">च</div><div class="char-iast">ca</div><div class="char-value">6</div></td>
+              <td><div class="char-deva">ट</div><div class="char-iast">ṭa</div><div class="char-value">11</div></td>
+              <td><div class="char-deva">त</div><div class="char-iast">ta</div><div class="char-value">16</div></td>
+              <td><div class="char-deva">प</div><div class="char-iast">pa</div><div class="char-value">21</div></td>
+            </tr>
+            <tr>
+              <th class="row-head">Aspirated&nbsp;voiceless</th>
+              <td><div class="char-deva">ख</div><div class="char-iast">kha</div><div class="char-value">2</div></td>
+              <td><div class="char-deva">छ</div><div class="char-iast">cha</div><div class="char-value">7</div></td>
+              <td><div class="char-deva">ठ</div><div class="char-iast">ṭha</div><div class="char-value">12</div></td>
+              <td><div class="char-deva">थ</div><div class="char-iast">tha</div><div class="char-value">17</div></td>
+              <td><div class="char-deva">फ</div><div class="char-iast">pha</div><div class="char-value">22</div></td>
+            </tr>
+            <tr>
+              <th class="row-head">Unaspirated&nbsp;voiced</th>
+              <td><div class="char-deva">ग</div><div class="char-iast">ga</div><div class="char-value">3</div></td>
+              <td><div class="char-deva">ज</div><div class="char-iast">ja</div><div class="char-value">8</div></td>
+              <td><div class="char-deva">ड</div><div class="char-iast">ḍa</div><div class="char-value">13</div></td>
+              <td><div class="char-deva">द</div><div class="char-iast">da</div><div class="char-value">18</div></td>
+              <td><div class="char-deva">ब</div><div class="char-iast">ba</div><div class="char-value">23</div></td>
+            </tr>
+            <tr>
+              <th class="row-head">Aspirated&nbsp;voiced</th>
+              <td><div class="char-deva">घ</div><div class="char-iast">gha</div><div class="char-value">4</div></td>
+              <td><div class="char-deva">झ</div><div class="char-iast">jha</div><div class="char-value">9</div></td>
+              <td><div class="char-deva">ढ</div><div class="char-iast">ḍha</div><div class="char-value">14</div></td>
+              <td><div class="char-deva">ध</div><div class="char-iast">dha</div><div class="char-value">19</div></td>
+              <td><div class="char-deva">भ</div><div class="char-iast">bha</div><div class="char-value">24</div></td>
+            </tr>
+            <tr>
+              <th class="row-head">Nasal</th>
+              <td><div class="char-deva">ङ</div><div class="char-iast">ṅa</div><div class="char-value">5</div></td>
+              <td><div class="char-deva">ञ</div><div class="char-iast">ña</div><div class="char-value">10</div></td>
+              <td><div class="char-deva">ण</div><div class="char-iast">ṇa</div><div class="char-value">15</div></td>
+              <td><div class="char-deva">न</div><div class="char-iast">na</div><div class="char-value">20</div></td>
+              <td><div class="char-deva">म</div><div class="char-iast">ma</div><div class="char-value">25</div></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="char-group-note" style="margin-top:16px;">The 8 avarga consonants, counting on by tens to 100 — the same semivowel and sibilant sounds from the Characters page, with ह moved to the very end as the highest single-consonant value:</p>
+      <div class="consonant-table-wrap">
+        <table class="consonant-table"><tbody><tr>
+          <td><div class="char-deva">य</div><div class="char-iast">ya</div><div class="char-value">30</div></td>
+          <td><div class="char-deva">र</div><div class="char-iast">ra</div><div class="char-value">40</div></td>
+          <td><div class="char-deva">ल</div><div class="char-iast">la</div><div class="char-value">50</div></td>
+          <td><div class="char-deva">व</div><div class="char-iast">va</div><div class="char-value">60</div></td>
+          <td><div class="char-deva">श</div><div class="char-iast">śa</div><div class="char-value">70</div></td>
+          <td><div class="char-deva">ष</div><div class="char-iast">ṣa</div><div class="char-value">80</div></td>
+          <td><div class="char-deva">स</div><div class="char-iast">sa</div><div class="char-value">90</div></td>
+          <td><div class="char-deva">ह</div><div class="char-iast">ha</div><div class="char-value">100</div></td>
+        </tr></tbody></table>
+      </div>
+    </div>
+
+    <div class="char-group">
+      <h3 class="char-group-title">Vowel places</h3>
+      <p class="char-group-note">The same nine vowels from the Characters page (monophthongs, syllabic liquids, and diphthongs), reused here as a base-100 place-value ladder:</p>
+      <div class="consonant-table-wrap">
+        <table class="consonant-table word-table"><tbody><tr>
+          <td><div class="char-deva">अ</div><div class="char-iast">a</div><div class="char-value">100⁰</div><div class="char-label">1</div></td>
+          <td><div class="char-deva">इ</div><div class="char-iast">i</div><div class="char-value">100¹</div><div class="char-label">100</div></td>
+          <td><div class="char-deva">उ</div><div class="char-iast">u</div><div class="char-value">100²</div><div class="char-label">10,000</div></td>
+          <td><div class="char-deva">ऋ</div><div class="char-iast">ṛ</div><div class="char-value">100³</div><div class="char-label">10⁶</div></td>
+          <td><div class="char-deva">ऌ</div><div class="char-iast">ḷ</div><div class="char-value">100⁴</div><div class="char-label">10⁸</div></td>
+          <td><div class="char-deva">ए</div><div class="char-iast">e</div><div class="char-value">100⁵</div><div class="char-label">10¹⁰</div></td>
+          <td><div class="char-deva">ऐ</div><div class="char-iast">ai</div><div class="char-value">100⁶</div><div class="char-label">10¹²</div></td>
+          <td><div class="char-deva">ओ</div><div class="char-iast">o</div><div class="char-value">100⁷</div><div class="char-label">10¹⁴</div></td>
+          <td><div class="char-deva">औ</div><div class="char-iast">au</div><div class="char-value">100⁸</div><div class="char-label">10¹⁶</div></td>
+        </tr></tbody></table>
+      </div>
+      <p class="lang-footnote">
+        The Āryabhaṭa system doesn't distinguish long from short vowels — आ counts as अ, ई as इ, and so on — so only
+        the short forms are needed here. (Sanskrit has no separate long ऌ̄ in ordinary use, which is why this
+        ladder stops needing that distinction at all.)
+      </p>
+    </div>
+
+    <div class="char-group">
+      <h3 class="char-group-title">Building a two-digit value</h3>
+      <p class="char-group-note">
+        A single place (one vowel) can hold any value from 0 to 99 — bigger than the 25-cap of a lone varga
+        consonant — because more than one consonant can share the same vowel, with their values simply added
+        together. ग (3) alone covers "3"; but "58" needs two syllables at once: ल (50, avarga) plus ज (8, varga),
+        both spoken with the vowel अ — <strong>ja-la</strong>. Since a value like 24 sits inside a single varga
+        consonant's own 1–25 range, it could be written as one syllable (भ, bha=24) or split into two summed ones
+        (घ 4 + न 20) — both are valid, and which one a real verse uses often comes down to the meter, not a fixed rule.
+      </p>
+    </div>
+
+    <div class="char-group">
+      <h3 class="char-group-title">Reading order</h3>
+      <p class="char-group-note">
+        The one habit to unlearn: Āryabhaṭa writes the <strong>smallest</strong> place first. A number is spelled
+        ones-pair, then hundreds-pair, then myriads-pair — ascending, left to right — the reverse of the modern
+        convention of writing the largest digit first. Reading any example on this page as ordinary left-to-right
+        place value will get the number backwards.
+      </p>
+    </div>
+
+    <div class="char-group">
+      <h3 class="char-group-title">Worked example</h3>
+      <p class="char-group-note">
+        299,792,458 — the speed of light in metres per second, chosen here purely because it's a familiar number,
+        not something from the original text — split into base-100 pairs from the ones end, each pair one shared
+        vowel, read in Āryabhaṭa's own ascending order:
+      </p>
+      <div class="consonant-table-wrap">
+        <table class="consonant-table word-table">
+          <thead>
+            <tr><th>Digits</th><th>Place</th><th>Syllables</th><th>Value</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>58</td>
+              <td>100⁰</td>
+              <td><div class="char-deva">जल</div><div class="char-iast">ja-la</div></td>
+              <td>8 + 50 = 58</td>
+            </tr>
+            <tr>
+              <td>24</td>
+              <td>100¹</td>
+              <td><div class="char-deva">घिनि</div><div class="char-iast">ghi-ni</div></td>
+              <td>4 + 20 = 24, ×100</td>
+            </tr>
+            <tr>
+              <td>79</td>
+              <td>100²</td>
+              <td><div class="char-deva">झुशु</div><div class="char-iast">jhu-śu</div></td>
+              <td>9 + 70 = 79, ×100²</td>
+            </tr>
+            <tr>
+              <td>99</td>
+              <td>100³</td>
+              <td><div class="char-deva">झृसृ</div><div class="char-iast">jhṛ-sṛ</div></td>
+              <td>9 + 90 = 99, ×100³</td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>100⁴</td>
+              <td><div class="char-deva">खॢ</div><div class="char-iast">khḷ</div></td>
+              <td>2, ×100⁴</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="char-group-note">
+        Strung together in that same ascending order: <strong>जल घिनि झुशु झृसृ खॢ</strong> (ja-la ghi-ni jhu-śu
+        jhṛ-sṛ khḷ) — a five-syllable word encoding a nine-digit number.
+      </p>
+      <p class="lang-footnote">
+        A genuine example survives too: ङिशिबुणॢष्खृ (ṅiśibuṇḷṣkhṛ) encodes 1,582,237,500 in a real historical
+        source, though its 100⁶ and 100⁸ syllables are swapped and merged into a ligature for reasons that aren't
+        fully understood. The Āryabhaṭīya's own verse for a table of sines is a genuine, if far more intricate,
+        use of the system by Āryabhaṭa himself. The system may also have been able to express fractions and mixed
+        fractions in specific contexts — Wikipedia's own account of this is incomplete, so it isn't reproduced
+        here as settled.
+      </p>
+    </div>
+
+    <p class="lang-footnote">
+      Two related but distinct Sanskrit numeral-encoding systems exist: the <strong>kaṭapayādi</strong> system (a
+      later cipher mapping consonants to digits 0–9 for cyclic, calendar, and mnemonic use) and the
+      <strong>bhūtasaṃkhya</strong> system (numbers expressed as ordinary words for things conventionally
+      associated with that count, like "eyes" for two). Neither is Āryabhaṭa's alphasyllabic system, and both are
+      candidates for future pages here.
+    </p>
+
+  </div>
+</main>
+
+</body>
+</html>

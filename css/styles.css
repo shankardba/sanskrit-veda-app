@@ -907,6 +907,17 @@ body.hide-transliteration .iast-line {
   margin-top: 4px;
 }
 
+/* A prominent number attached to a syllable/character cell — used on the
+   Āryabhaṭa numeration page to show each consonant's or vowel's assigned
+   value, bolder and more legible than the muted .char-label captions. */
+.char-value {
+  font-family: var(--font-ui);
+  font-weight: 700;
+  font-size: 0.85rem;
+  color: var(--color-gold-light);
+  margin-top: 4px;
+}
+
 .lang-footnote {
   font-family: var(--font-ui);
   font-size: 0.82rem;
