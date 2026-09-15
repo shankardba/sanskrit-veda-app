@@ -821,26 +821,6 @@ body.hide-transliteration .iast-line {
   max-width: 700px;
 }
 
-.char-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-  gap: 12px;
-}
-
-.char-card {
-  background: var(--color-panel);
-  border: 1px solid var(--color-border);
-  border-radius: 10px;
-  padding: 14px 8px 12px;
-  text-align: center;
-  transition: border-color 0.15s ease, box-shadow 0.15s ease;
-}
-
-.char-card:hover {
-  border-color: var(--color-gold);
-  box-shadow: 0 0 10px rgba(240, 168, 60, 0.18);
-}
-
 .char-deva {
   font-family: var(--font-sanskrit);
   font-size: 1.9rem;
@@ -864,29 +844,10 @@ body.hide-transliteration .iast-line {
   margin-top: 6px;
 }
 
-.char-note {
-  font-family: var(--font-ui);
-  font-size: 0.72rem;
-  color: var(--color-text-muted);
-  margin-top: 6px;
-  line-height: 1.4;
-}
-
-/* Numeral cards carry a whole word (chatvāriṃśat...) rather than a single
-   glyph, so they need a wider column and a smaller Devanagari size than the
-   Characters page's single-letter cards. */
-.char-grid.num-grid {
-  grid-template-columns: repeat(auto-fill, minmax(128px, 1fr));
-}
-
 .char-digit {
   font-family: var(--font-sanskrit);
   font-size: 0.95rem;
   color: var(--color-text-muted);
-}
-
-.num-grid .char-deva {
-  font-size: 1.3rem;
 }
 
 .consonant-table-wrap {
@@ -929,6 +890,21 @@ body.hide-transliteration .iast-line {
 .consonant-table td .char-iast {
   font-size: 0.85rem;
   margin-top: 2px;
+}
+
+/* Numeral tables carry a whole word (catvāriṃśat...) rather than a single
+   glyph, so they need a smaller Devanagari size than the single-letter
+   Characters tables. */
+.consonant-table.word-table td .char-deva {
+  font-size: 1.2rem;
+}
+
+.consonant-table td .char-digit {
+  margin-bottom: 2px;
+}
+
+.consonant-table td .char-label {
+  margin-top: 4px;
 }
 
 .lang-footnote {
