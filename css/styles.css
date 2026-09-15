@@ -801,6 +801,23 @@ body.hide-transliteration .iast-line {
   line-height: 1.4;
 }
 
+/* Numeral cards carry a whole word (chatvāriṃśat...) rather than a single
+   glyph, so they need a wider column and a smaller Devanagari size than the
+   Characters page's single-letter cards. */
+.char-grid.num-grid {
+  grid-template-columns: repeat(auto-fill, minmax(128px, 1fr));
+}
+
+.char-digit {
+  font-family: var(--font-sanskrit);
+  font-size: 0.95rem;
+  color: var(--color-text-muted);
+}
+
+.num-grid .char-deva {
+  font-size: 1.3rem;
+}
+
 .consonant-table-wrap {
   overflow-x: auto;
   margin-bottom: 16px;
