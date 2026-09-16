@@ -1,0 +1,1910 @@
+<!DOCTYPE html>
+<!--
+  Yantra Construction — embeddable widget
+  ----------------------------------------
+  Copyright (c) 2026 Shankar Srinivasan. All rights reserved.
+  See LICENSE in the repository root.
+
+  Animates the compass-and-straightedge construction of Hindu yantras,
+  starting with the Sri Yantra. The geometry is not a stylized approximation:
+  the nine-triangle mesh satisfies the concurrency conditions described in
+  Alessandro Chiodo, "On the construction of the Śrī Yantra", Comptes Rendus
+  Mathématique 359 (2021), building on Gérard Huet, "Śrī Yantra Geometry",
+  Theor. Comput. Sci. 281 (2002), and A. P. Kulaichev, "Śrīyantra and its
+  Mathematical Properties", Indian J. Hist. Sci. 19 (1984). The nine base/apex
+  positions and half-widths are solved numerically from those concurrency
+  constraints, using Huet's calibrated free parameters, rather than any of
+  the traditional grid methods that are known to leave small gaps at the
+  center.
+
+  Same conventions as this repo's sibling widgets (spirograph-studio,
+  fractal-widget, violin-scales): self-contained single-file, no build step,
+  Space Grotesk + IBM Plex Mono via Google Fonts CDN, dark/light theme via
+  CSS variables, a gear-icon settings panel, a "the math" (Σ) panel, and a
+  postMessage hook for optional Boy-game integration.
+
+  To embed:
+    1) Easiest / safest: <iframe src="index.html" style="width:100%;height:600px;border:0;"></iframe>
+    2) Inline: paste this whole file's body into a page (it sizes itself to
+       its parent container, so wrap it in a div with a fixed height if you
+       don't want it filling the viewport).
+-->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Yantra Construction</title>
+<!-- Favicon: the real Sri Yantra hexagram (9 triangles solved from the
+     concurrency equations, same SRI_YANTRA_TRIANGLES data as the app itself)
+     inscribed in its own true circumcircle — no petals/bhūpura, just the
+     circle (purple) and the mesh (thin yellow), colors keyed to the
+     shankFiddle site's own palette (--color-gold-light for the mesh; a
+     jewel-tone purple at the same saturation/lightness as the site's
+     magenta/crimson, since the palette itself has no purple token). -->
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20100%20100'%3E%3Ccircle%20cx='50'%20cy='50'%20r='45'%20fill='none'%20stroke='%23c947f5'%20stroke-width='3'/%3E%3Cg%20fill='none'%20stroke='%23ffd27a'%20stroke-linejoin='round'%20stroke-linecap='round'%20stroke-width='2.2'%3E%3Cpath%20d='M50%2025.77%2035.61%2053.33%2064.39%2053.33Z'/%3E%3Cpath%20d='M50%205%205.95%2059.18%2094.05%2059.18Z'/%3E%3Cpath%20d='M50%2015.17%2017.87%2071.16%2082.13%2071.16Z'/%3E%3Cpath%20d='M50%2034.88%2029.03%2080.15%2070.97%2080.15Z'/%3E%3Cpath%20d='M50%2053.33%2026.61%2015.17%2073.39%2015.17Z'/%3E%3Cpath%20d='M50%2080.15%2020.82%2025.77%2079.18%2025.77Z'/%3E%3Cpath%20d='M50%2095%207.62%2034.88%2092.38%2034.88Z'/%3E%3Cpath%20d='M50%2071.16%2035.38%2040.65%2064.62%2040.65Z'/%3E%3Cpath%20d='M50%2059.18%2039.75%2045.39%2060.25%2045.39Z'/%3E%3C/g%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0A0E16;
+    --surface:#121822;
+    --surface-2:#1A2230;
+    --border:#232D3B;
+    --text:#E7ECF2;
+    --text-muted:#8A97A8;
+    --warm:#F2A65A;
+    --cool:#57D9C4;
+    --error:#FF8A8A;
+    --chip-bg:rgba(18,24,34,0.72);
+    --panel-bg:rgba(15,20,29,0.94);
+    --mathpanel-bg:rgba(10,14,22,0.97);
+    --hint-bg:rgba(10,14,22,0.6);
+    --pencil:var(--text);
+    color-scheme:dark;
+  }
+  :root[data-theme="light"]{
+    --bg:#FFFFFF;
+    --surface:#F1F3F6;
+    --surface-2:#E5E9EE;
+    --border:#D4D9E0;
+    --text:#14181F;
+    --text-muted:#5B6472;
+    --warm:#B45309;
+    --cool:#0F766E;
+    --error:#B3261E;
+    --chip-bg:rgba(255,255,255,0.82);
+    --panel-bg:rgba(255,255,255,0.96);
+    --mathpanel-bg:rgba(248,249,251,0.98);
+    --hint-bg:rgba(255,255,255,0.8);
+    color-scheme:light;
+  }
+  *{box-sizing:border-box;}
+  html,body{height:100%;margin:0;}
+  body{
+    font-family:'Space Grotesk',sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    overflow:hidden;
+  }
+  #wrap{position:relative;width:100%;height:100vh;min-height:360px;background:var(--bg);}
+  canvas{display:block;width:100%;height:100%;touch-action:none;}
+
+  /* ---- top toolbar chips (shared look with sibling apps) ---- */
+  .gear-btn, .download-btn, .explain-btn, .theme-btn, .guide-btn{
+    position:absolute;top:14px;z-index:2;
+    width:36px;height:36px;border-radius:4px;
+    background:var(--chip-bg);
+    border:1px solid var(--border);
+    color:var(--text);
+    display:flex;align-items:center;justify-content:center;
+    cursor:pointer;
+    transition:background 0.15s, border-color 0.15s;
+  }
+  .gear-btn{right:14px;}
+  .download-btn{left:14px;}
+  .explain-btn{left:58px;font-family:'IBM Plex Mono',monospace;font-size:16px;font-weight:600;}
+  .theme-btn{left:102px;}
+  .guide-btn{left:146px;font-family:'IBM Plex Mono',monospace;font-size:15px;}
+  .gear-btn:hover, .download-btn:hover, .explain-btn:hover, .theme-btn:hover, .guide-btn:hover{
+    background:var(--surface-2);border-color:var(--cool);
+  }
+  .gear-btn:focus-visible, .download-btn:focus-visible, .explain-btn:focus-visible,
+  .theme-btn:focus-visible, .guide-btn:focus-visible{outline:2px solid var(--cool);outline-offset:2px;}
+  .gear-btn.open, .explain-btn.open, .guide-btn.on{border-color:var(--warm);color:var(--warm);}
+  .gear-btn svg, .download-btn svg, .theme-btn svg{width:17px;height:17px;stroke:var(--text);transition:transform 0.4s ease;}
+  .gear-btn.open svg{transform:rotate(75deg);}
+
+  .panel{
+    position:absolute;top:0;right:0;height:100%;width:300px;z-index:1;
+    background:var(--panel-bg);
+    border-left:1px solid var(--border);
+    padding:60px 18px 18px;
+    transform:translateX(100%);
+    transition:transform 0.25s ease;
+    overflow-y:auto;
+  }
+  .panel.open{transform:translateX(0);}
+
+  .math-panel{
+    position:absolute;top:0;left:0;height:100%;width:360px;max-width:88vw;z-index:1;
+    background:var(--mathpanel-bg);
+    border-right:1px solid var(--border);
+    padding:60px 22px 24px;
+    transform:translateX(-100%);
+    transition:transform 0.25s ease;
+    overflow-y:auto;
+  }
+  .math-panel.open{transform:translateX(0);}
+  .math-title{font-size:15px;font-weight:600;margin-bottom:4px;color:var(--text);}
+  .math-subtitle{font-size:11px;color:var(--text-muted);margin-bottom:20px;line-height:1.5;}
+  .math-section{margin-bottom:22px;}
+  .math-section + .math-section{border-top:1px solid var(--border);padding-top:18px;}
+  .math-sub{font-size:10.5px;letter-spacing:0.06em;text-transform:uppercase;color:var(--cool);margin-bottom:10px;}
+  .math-prose{font-size:12.5px;line-height:1.75;color:var(--text-muted);margin:0;}
+  .math-prose + .math-prose{margin-top:10px;}
+  .math-prose p{margin:0 0 10px;}
+  .math-prose p:last-child{margin-bottom:0;}
+  .math-caption{
+    font-size:10px;letter-spacing:0.06em;text-transform:uppercase;
+    color:var(--text-muted);margin:0 0 8px;
+  }
+  .credit{font-size:10px;line-height:1.6;color:var(--text-muted);opacity:0.75;}
+  .credit a{color:var(--cool);}
+
+  .section{margin-bottom:22px;}
+  .section + .section{border-top:1px solid var(--border);padding-top:20px;}
+  .label{font-size:11px;letter-spacing:0.02em;color:var(--text-muted);margin-bottom:9px;}
+
+  .preset-select{
+    width:100%;padding:9px 10px;background:var(--surface);color:var(--text);
+    border:1px solid var(--border);border-radius:4px;font-family:'IBM Plex Mono',monospace;
+    font-size:12px;cursor:pointer;
+  }
+  .preset-select:hover{border-color:var(--warm);}
+  .preset-select:focus-visible{outline:2px solid var(--cool);outline-offset:1px;}
+
+  .swatches{display:flex;gap:8px;margin-bottom:4px;flex-wrap:wrap;}
+  .swatch{width:34px;height:34px;border-radius:4px;cursor:pointer;border:2px solid transparent;}
+  .swatch.active{border-color:var(--cool);}
+  .swatch:focus-visible{outline:2px solid var(--cool);outline-offset:2px;}
+  .swatch-label{font-size:10px;color:var(--text-muted);margin:6px 0 16px;}
+
+  .slider-row{display:flex;align-items:center;gap:10px;}
+  .slider-row + .slider-row{margin-top:12px;}
+  .slider-label{display:flex;justify-content:space-between;font-size:11px;color:var(--text-muted);margin-bottom:4px;}
+  input[type=range]{flex:1;accent-color:var(--warm);height:4px;}
+  .val{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--cool);min-width:44px;text-align:right;}
+
+  .toggle-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;}
+  .toggle-row.disabled{opacity:0.4;pointer-events:none;}
+  .toggle-row .label{margin:0;}
+  .switch{
+    position:relative;width:36px;height:20px;background:var(--surface-2);
+    border:1px solid var(--border);border-radius:10px;cursor:pointer;flex-shrink:0;
+  }
+  .switch::after{
+    content:'';position:absolute;top:2px;left:2px;width:14px;height:14px;
+    background:var(--text-muted);border-radius:50%;transition:transform 0.15s, background 0.15s;
+  }
+  .switch.on{border-color:var(--cool);}
+  .switch.on::after{transform:translateX(16px);background:var(--cool);}
+
+  /* ---- compact HSV color picker (bindu color) ---- */
+  .color-wheel-panel{
+    display:none;align-items:center;gap:12px;
+    margin:2px 0 14px;padding:12px;
+    background:linear-gradient(180deg,var(--surface-2),var(--surface));
+    border:1px solid var(--border);border-radius:10px;
+    box-shadow:inset 0 1px 0 rgba(255,255,255,0.03), 0 8px 16px rgba(0,0,0,0.22);
+  }
+  .color-wheel-panel.open{display:flex;}
+  .color-wheel-panel .bar-wrap,.color-wheel-panel .wheel-wrap{position:relative;flex-shrink:0;}
+  .picker-bar{
+    border-radius:7px;cursor:pointer;display:block;
+    box-shadow:0 0 0 1px rgba(0,0,0,0.4), 0 2px 5px rgba(0,0,0,0.3);
+  }
+  .picker-wheel{
+    border-radius:50%;cursor:crosshair;display:block;
+    box-shadow:0 0 0 1px rgba(0,0,0,0.3), 0 4px 14px rgba(0,0,0,0.35);
+  }
+  .picker-cursor{
+    position:absolute;width:12px;height:12px;margin:-6px 0 0 -6px;
+    border:2px solid #fff;border-radius:50%;
+    box-shadow:0 0 0 1px rgba(0,0,0,0.55), 0 0 5px rgba(0,0,0,0.4);
+    pointer-events:none;
+  }
+  .bar-cursor{
+    position:absolute;left:-3px;right:-3px;height:4px;margin-top:-2px;
+    background:#fff;border-radius:3px;
+    box-shadow:0 0 0 1px rgba(0,0,0,0.55), 0 0 4px rgba(0,0,0,0.4);
+    pointer-events:none;
+  }
+  .color-wheel-panel .hex-readout{
+    align-self:center;font-family:'IBM Plex Mono',monospace;font-size:11px;
+    color:var(--cool);letter-spacing:0.02em;
+    background:rgba(0,0,0,0.2);border:1px solid var(--border);
+    border-radius:6px;padding:4px 7px;
+  }
+
+  .btn{
+    width:100%;padding:9px;background:var(--surface);color:var(--text);
+    border:1px solid var(--border);border-radius:4px;font-family:inherit;
+    font-size:12px;cursor:pointer;margin-top:8px;
+  }
+  .btn:hover{border-color:var(--warm);color:var(--warm);}
+
+  /* ---- playback bar ---- */
+  .playbar{
+    position:absolute;left:50%;bottom:16px;transform:translateX(-50%);z-index:2;
+    display:flex;align-items:center;gap:10px;
+    background:var(--chip-bg);border:1px solid var(--border);border-radius:8px;
+    padding:8px 14px;backdrop-filter:blur(2px);
+    max-width:calc(100% - 28px);
+  }
+  .playbar button{
+    width:30px;height:30px;border-radius:4px;background:transparent;
+    border:1px solid var(--border);color:var(--text);cursor:pointer;
+    display:flex;align-items:center;justify-content:center;flex-shrink:0;
+  }
+  .playbar button:hover{border-color:var(--cool);background:var(--surface-2);}
+  .playbar button svg{width:14px;height:14px;stroke:var(--text);fill:var(--text);}
+  .playbar input[type=range]{width:min(38vw,320px);}
+  .playbar .stage-label{
+    font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:var(--text-muted);
+    min-width:120px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+  }
+  .speed-select{
+    background:var(--surface);color:var(--text);border:1px solid var(--border);
+    border-radius:4px;font-family:'IBM Plex Mono',monospace;font-size:10.5px;padding:4px 4px;
+  }
+
+  .instruction-banner{
+    position:absolute;left:50%;bottom:64px;transform:translateX(-50%);z-index:2;
+    max-width:min(560px,calc(100% - 28px));
+    background:var(--chip-bg);border:1px solid var(--border);border-radius:8px;
+    padding:10px 16px;backdrop-filter:blur(2px);
+    font-size:12.5px;line-height:1.55;color:var(--text);text-align:center;
+    transition:opacity 0.15s ease;
+  }
+  .instruction-banner .instr-step{
+    display:block;font-family:'IBM Plex Mono',monospace;font-size:10px;
+    letter-spacing:0.04em;text-transform:uppercase;color:var(--cool);margin-bottom:4px;
+  }
+  @media (max-width:640px){
+    .instruction-banner{font-size:11.5px;bottom:60px;}
+  }
+
+  .hint{
+    position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+    font-size:13px;color:var(--text-muted);
+    background:var(--hint-bg);padding:10px 16px;border-radius:4px;
+    pointer-events:none;transition:opacity 0.6s ease;text-align:center;line-height:1.5;
+  }
+  @media (prefers-reduced-motion:reduce){
+    .panel,.math-panel{transition:none;}
+    .gear-btn svg{transition:none;}
+  }
+  @media (max-width:640px){
+    .panel{width:86vw;}
+    .playbar .stage-label{display:none;}
+  }
+</style>
+</head>
+<body>
+<div id="wrap">
+  <canvas id="cv"></canvas>
+
+  <button class="download-btn" id="downloadBtn" aria-label="Download image">
+    <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M12 3v12"></path>
+      <path d="M7 10l5 5 5-5"></path>
+      <path d="M5 21h14"></path>
+    </svg>
+  </button>
+
+  <button class="explain-btn" id="explainBtn" aria-label="Explain the math" aria-expanded="false" title="Explain the math">&Sigma;</button>
+
+  <button class="theme-btn" id="themeBtn" aria-label="Switch to light mode" aria-pressed="false" title="Switch to light mode">
+    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+    </svg>
+    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none">
+      <circle cx="12" cy="12" r="4"></circle>
+      <path d="M12 2v2"></path><path d="M12 20v2"></path>
+      <path d="M4.93 4.93l1.41 1.41"></path><path d="M17.66 17.66l1.41 1.41"></path>
+      <path d="M2 12h2"></path><path d="M20 12h2"></path>
+      <path d="M6.34 17.66l-1.41 1.41"></path><path d="M19.07 4.93l-1.41 1.41"></path>
+    </svg>
+  </button>
+
+  <button class="guide-btn" id="guideBtn" aria-label="Toggle construction guide marks" aria-pressed="false" title="Restore full construction guide marks">&#9651;</button>
+
+  <button class="gear-btn" id="gearBtn" aria-label="Toggle settings" aria-expanded="false">
+    <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="3"></circle>
+      <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.6a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+    </svg>
+  </button>
+
+  <div class="instruction-banner" id="instructionBanner">
+    <span class="instr-step" id="instrStepLabel">Ready</span>
+    <span id="instrText">Press play, or step forward, to begin the construction.</span>
+  </div>
+
+  <div class="playbar" id="playbar">
+    <button id="stepBackBtn" aria-label="Step back">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 20 9 12l10-8v16Z"></path><path d="M5 19V5"></path></svg>
+    </button>
+    <button id="playBtn" aria-label="Play">
+      <svg id="playIcon" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M8 5v14l11-7z"></path></svg>
+      <svg id="pauseIcon" viewBox="0 0 24 24" fill="currentColor" stroke="none" style="display:none"><path d="M6 5h4v14H6zM14 5h4v14h-4z"></path></svg>
+    </button>
+    <button id="stepFwdBtn" aria-label="Step forward">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4l10 8-10 8V4Z"></path><path d="M19 5v14"></path></svg>
+    </button>
+    <input type="range" id="scrubber" min="0" max="1000" step="1" value="0">
+    <span class="stage-label" id="stageLabel">Ready</span>
+    <select class="speed-select" id="speedSelect">
+      <option value="0.5">0.5&times;</option>
+      <option value="1" selected>1&times;</option>
+      <option value="2">2&times;</option>
+      <option value="4">4&times;</option>
+    </select>
+  </div>
+
+  <div class="math-panel" id="mathPanel">
+    <div class="math-title" id="mathTitle">The Sri Yantra</div>
+    <p class="math-subtitle" id="mathSubtitle">What this shape means, and why the construction is geometrically accurate rather than a hand-drawn approximation.</p>
+
+    <div class="math-section">
+      <div class="math-sub">The deity &amp; meaning</div>
+      <div class="math-prose" id="mathMeaning"></div>
+    </div>
+
+    <div class="math-section">
+      <div class="math-sub">The geometry</div>
+      <div class="math-prose" id="mathGeometry"></div>
+    </div>
+
+    <div class="math-section" id="mathExtraSection" style="display:none;">
+      <div class="math-sub" id="mathExtraTitle"></div>
+      <div class="math-prose" id="mathExtraProse"></div>
+    </div>
+
+    <div class="math-section">
+      <div class="math-sub">Sources</div>
+      <div class="math-prose credit" id="mathSources"></div>
+    </div>
+  </div>
+
+  <div class="panel" id="panel">
+    <div class="section">
+      <div class="label">Yantra</div>
+      <select class="preset-select" id="presetSelect"></select>
+    </div>
+
+    <div class="section">
+      <div class="toggle-row">
+        <div class="label">Show all guide marks</div>
+        <div class="switch" id="guideToggle"></div>
+      </div>
+      <div class="toggle-row" id="bhupuraRow">
+        <div class="label">Show bhupura (outer gate)</div>
+        <div class="switch" id="bhupuraToggle"></div>
+      </div>
+      <div class="toggle-row">
+        <div class="label">Show bindu (center point)</div>
+        <div class="switch" id="binduToggle"></div>
+      </div>
+      <div class="color-wheel-panel" id="binduColorPanel">
+        <div class="bar-wrap">
+          <canvas class="picker-bar" id="binduBar" width="14" height="100"></canvas>
+          <div class="bar-cursor" id="binduBarCursor"></div>
+        </div>
+        <div class="wheel-wrap">
+          <canvas class="picker-wheel" id="binduWheel" width="100" height="100"></canvas>
+          <div class="picker-cursor" id="binduWheelCursor"></div>
+        </div>
+        <span class="hex-readout" id="binduHexReadout">#e5615a</span>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="label">Palette</div>
+      <div class="swatches" id="paletteSwatches"></div>
+      <div class="swatch-label" id="paletteLabel">&nbsp;</div>
+    </div>
+
+    <div class="section">
+      <div class="slider-row">
+        <div style="flex:1;">
+          <div class="slider-label"><span>Line width</span><span class="val" id="strokeWidthVal">2.0</span></div>
+          <input type="range" id="strokeWidthSlider" min="0.75" max="4" step="0.25" value="2">
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <button class="btn" id="restartBtn">&#8635; Restart construction</button>
+    </div>
+
+    <div class="section">
+      <p class="credit">
+        Geometry follows Chiodo (2021) and Huet (2002); see the &Sigma; panel
+        for full sources.
+      </p>
+    </div>
+  </div>
+
+  <div class="hint" id="hint">Loading&hellip;</div>
+</div>
+
+<script>
+(function(){
+  'use strict';
+
+  // ---------- theme ----------
+  var root = document.documentElement;
+  var themeBtn = document.getElementById('themeBtn');
+  function applyTheme(t){
+    if(t === 'light'){ root.setAttribute('data-theme','light'); }
+    else { root.removeAttribute('data-theme'); }
+    themeBtn.querySelector('.icon-moon').style.display = t === 'light' ? 'none' : 'block';
+    themeBtn.querySelector('.icon-sun').style.display = t === 'light' ? 'block' : 'none';
+    themeBtn.setAttribute('aria-pressed', t === 'light' ? 'true' : 'false');
+    themeBtn.title = t === 'light' ? 'Switch to dark mode' : 'Switch to light mode';
+    try{ localStorage.setItem('yantra-theme', t); }catch(e){}
+  }
+  var savedTheme = 'dark';
+  try{ savedTheme = localStorage.getItem('yantra-theme') || (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark'); }catch(e){}
+  applyTheme(savedTheme);
+  themeBtn.addEventListener('click', function(){
+    applyTheme(root.getAttribute('data-theme') === 'light' ? 'dark' : 'light');
+  });
+
+  // ---------- panel toggles ----------
+  var gearBtn = document.getElementById('gearBtn');
+  var panel = document.getElementById('panel');
+  var explainBtn = document.getElementById('explainBtn');
+  var mathPanel = document.getElementById('mathPanel');
+  function toggle(btn, el, cls){
+    var open = !el.classList.contains('open');
+    el.classList.toggle('open', open);
+    btn.classList.toggle(cls || 'open', open);
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  }
+  gearBtn.addEventListener('click', function(){ toggle(gearBtn, panel); });
+  explainBtn.addEventListener('click', function(){ toggle(explainBtn, mathPanel); });
+
+  // ---------- guide-marks toggle (top chip + panel switch, kept in sync) ----------
+  var guideBtn = document.getElementById('guideBtn');
+  var guideToggle = document.getElementById('guideToggle');
+  var showGuides = true;
+  function setGuides(v){
+    showGuides = v;
+    guideBtn.classList.toggle('on', v);
+    guideBtn.setAttribute('aria-pressed', v ? 'true' : 'false');
+    guideToggle.classList.toggle('on', v);
+    window.dispatchEvent(new CustomEvent('yantra:guides', { detail: v }));
+  }
+  guideBtn.addEventListener('click', function(){ setGuides(!showGuides); });
+  guideToggle.addEventListener('click', function(){ setGuides(!showGuides); });
+  setGuides(false);
+
+  // ---------- bhupura toggle ----------
+  // Only Sri Yantra (a full worship yantra) traditionally has a bhūpura —
+  // the chakra symbols don't. currentPresetHasBhupura gates both the toggle
+  // and whether resize() reserves margin for it.
+  var bhupuraToggle = document.getElementById('bhupuraToggle');
+  var bhupuraRow = document.getElementById('bhupuraRow');
+  var showBhupura = false;
+  var currentPresetHasBhupura = true;
+  bhupuraToggle.addEventListener('click', function(){
+    if(!currentPresetHasBhupura) return;
+    showBhupura = !showBhupura;
+    bhupuraToggle.classList.toggle('on', showBhupura);
+    resize();
+  });
+  function setBhupuraAvailable(available){
+    currentPresetHasBhupura = available;
+    if(!available && showBhupura){ showBhupura = false; bhupuraToggle.classList.remove('on'); }
+    if(bhupuraRow) bhupuraRow.classList.toggle('disabled', !available);
+    resize();
+  }
+
+  // ---------- bindu toggle + color ----------
+  // The bindu (the dimensionless point at the center every yantra expands
+  // from) is universal — unlike the bhūpura it's not gated by preset — and
+  // its color is a free choice, not part of the construction, so it's a
+  // simple always-available overlay drawn last, on top of everything else.
+  function hsvToHex(h, s, v){
+    h = ((h % 360) + 360) % 360;
+    var c = v * s, x = c * (1 - Math.abs((h / 60) % 2 - 1)), m = v - c;
+    var r, g, b;
+    if(h < 60){ r = c; g = x; b = 0; }
+    else if(h < 120){ r = x; g = c; b = 0; }
+    else if(h < 180){ r = 0; g = c; b = x; }
+    else if(h < 240){ r = 0; g = x; b = c; }
+    else if(h < 300){ r = x; g = 0; b = c; }
+    else { r = c; g = 0; b = x; }
+    function toHex(n){ return Math.round((n + m) * 255).toString(16).padStart(2, '0'); }
+    return '#' + toHex(r) + toHex(g) + toHex(b);
+  }
+  function hexToHsv(hex){
+    var r = parseInt(hex.slice(1, 3), 16) / 255, g = parseInt(hex.slice(3, 5), 16) / 255, b = parseInt(hex.slice(5, 7), 16) / 255;
+    var max = Math.max(r, g, b), min = Math.min(r, g, b), d = max - min;
+    var h = 0;
+    if(d !== 0){
+      if(max === r) h = 60 * (((g - b) / d) % 6);
+      else if(max === g) h = 60 * ((b - r) / d + 2);
+      else h = 60 * ((r - g) / d + 4);
+    }
+    if(h < 0) h += 360;
+    return { h: h, s: max === 0 ? 0 : d / max, v: max };
+  }
+
+  var binduToggle = document.getElementById('binduToggle');
+  var binduColorPanel = document.getElementById('binduColorPanel');
+  var showBindu = false;
+  var binduColor = '#e5615a';
+  binduToggle.addEventListener('click', function(){
+    showBindu = !showBindu;
+    binduToggle.classList.toggle('on', showBindu);
+    binduColorPanel.classList.toggle('open', showBindu);
+    draw();
+  });
+
+  (function initBinduColorPicker(){
+    var wheel = document.getElementById('binduWheel'), wctx = wheel.getContext('2d');
+    var wheelCursor = document.getElementById('binduWheelCursor');
+    var bar = document.getElementById('binduBar'), bctx = bar.getContext('2d');
+    var barCursor = document.getElementById('binduBarCursor');
+    var hexReadout = document.getElementById('binduHexReadout');
+
+    var dpr = window.devicePixelRatio || 1;
+    var CSS_WHEEL = wheel.width, CSS_BAR_W = bar.width, CSS_BAR_H = bar.height;
+    var cssR = CSS_WHEEL / 2;
+    wheel.width = Math.round(CSS_WHEEL * dpr); wheel.height = Math.round(CSS_WHEEL * dpr);
+    wheel.style.width = CSS_WHEEL + 'px'; wheel.style.height = CSS_WHEEL + 'px';
+    bar.width = Math.round(CSS_BAR_W * dpr); bar.height = Math.round(CSS_BAR_H * dpr);
+    bar.style.width = CSS_BAR_W + 'px'; bar.style.height = CSS_BAR_H + 'px';
+    var bufR = wheel.width / 2;
+
+    var baseWheelImage = null;
+    function buildBaseWheelImage(){
+      var size = wheel.width;
+      var img = wctx.createImageData(size, size);
+      var feather = Math.max(1, dpr);
+      for(var y = 0; y < size; y++){
+        for(var x = 0; x < size; x++){
+          var dx = x - bufR, dy = y - bufR;
+          var dist = Math.sqrt(dx * dx + dy * dy);
+          var idx = (y * size + x) * 4;
+          var edge = bufR - dist;
+          if(edge <= 0){ img.data[idx + 3] = 0; continue; }
+          var hue = (Math.atan2(dy, dx) * 180 / Math.PI + 360) % 360;
+          var sat = Math.min(1, dist / bufR);
+          var hex = hsvToHex(hue, sat, 1);
+          img.data[idx] = parseInt(hex.slice(1, 3), 16);
+          img.data[idx + 1] = parseInt(hex.slice(3, 5), 16);
+          img.data[idx + 2] = parseInt(hex.slice(5, 7), 16);
+          img.data[idx + 3] = edge >= feather ? 255 : Math.round((edge / feather) * 255);
+        }
+      }
+      return img;
+    }
+
+    var curH = 0, curS = 1, curV = 1;
+    function drawWheel(){
+      if(!baseWheelImage) baseWheelImage = buildBaseWheelImage();
+      wctx.putImageData(baseWheelImage, 0, 0);
+      if(curV < 1){
+        wctx.save();
+        wctx.beginPath(); wctx.arc(bufR, bufR, bufR, 0, 2 * Math.PI); wctx.clip();
+        wctx.fillStyle = '#000'; wctx.globalAlpha = 1 - curV;
+        wctx.fillRect(0, 0, wheel.width, wheel.height);
+        wctx.restore();
+      }
+    }
+    function drawBar(){
+      var grad = bctx.createLinearGradient(0, 0, 0, bar.height);
+      grad.addColorStop(0, hsvToHex(curH, curS, 1));
+      grad.addColorStop(1, '#000');
+      bctx.fillStyle = grad;
+      bctx.fillRect(0, 0, bar.width, bar.height);
+    }
+    function refreshPicker(){
+      drawWheel(); drawBar();
+      var angle = curH * Math.PI / 180, dist = curS * cssR;
+      wheelCursor.style.left = (cssR + dist * Math.cos(angle)) + 'px';
+      wheelCursor.style.top = (cssR + dist * Math.sin(angle)) + 'px';
+      barCursor.style.top = ((1 - curV) * CSS_BAR_H) + 'px';
+    }
+    function commitColor(){
+      binduColor = hsvToHex(curH, curS, curV);
+      hexReadout.textContent = binduColor;
+      draw();
+    }
+    function setFromHex(hex){
+      var hsv = hexToHsv(hex);
+      curH = hsv.h; curS = hsv.s; curV = hsv.v;
+      hexReadout.textContent = hex;
+      refreshPicker();
+    }
+
+    function pointFromEvent(el, evt){
+      var rect = el.getBoundingClientRect();
+      var t = evt.touches && evt.touches[0];
+      return [(t ? t.clientX : evt.clientX) - rect.left, (t ? t.clientY : evt.clientY) - rect.top];
+    }
+    function trackDrag(onMove){
+      function move(e){ e.preventDefault(); onMove(e); }
+      function up(){
+        window.removeEventListener('mousemove', move);
+        window.removeEventListener('mouseup', up);
+        window.removeEventListener('touchmove', move);
+        window.removeEventListener('touchend', up);
+      }
+      window.addEventListener('mousemove', move);
+      window.addEventListener('mouseup', up);
+      window.addEventListener('touchmove', move, { passive: false });
+      window.addEventListener('touchend', up);
+    }
+
+    function downOnWheel(evt){
+      evt.preventDefault();
+      function update(e){
+        var p = pointFromEvent(wheel, e || evt), x = p[0], y = p[1];
+        var dx = x - cssR, dy = y - cssR;
+        var dist = Math.min(Math.sqrt(dx * dx + dy * dy), cssR);
+        curH = (Math.atan2(dy, dx) * 180 / Math.PI + 360) % 360;
+        curS = dist / cssR;
+        refreshPicker(); commitColor();
+      }
+      update(evt); trackDrag(update);
+    }
+    function downOnBar(evt){
+      evt.preventDefault();
+      function update(e){
+        var p = pointFromEvent(bar, e || evt);
+        curV = 1 - clamp(p[1] / CSS_BAR_H, 0, 1);
+        refreshPicker(); commitColor();
+      }
+      update(evt); trackDrag(update);
+    }
+    wheel.addEventListener('mousedown', downOnWheel);
+    wheel.addEventListener('touchstart', downOnWheel, { passive: false });
+    bar.addEventListener('mousedown', downOnBar);
+    bar.addEventListener('touchstart', downOnBar, { passive: false });
+
+    setFromHex(binduColor);
+  })();
+
+  // Sri Yantra's own triangle mesh is the tightest fit of any preset: its
+  // triangle 1 has a leg passing just 0.0193 of the diameter from the exact
+  // center (verified directly from SRI_YANTRA_TRIANGLES — apex/base/half-
+  // width give a leg-to-center distance of that, the closest of all nine).
+  // Every other preset's single, larger inscribed triangle clears by more,
+  // so capping the bindu to a safety-margined fraction of that one worst
+  // case keeps it clear of every preset's lines, not just Sri Yantra's.
+  var BINDU_SAFE_FRAC = 0.0193 * 0.6;
+  function drawBindu(){
+    if(!showBindu || !geo) return;
+    var r = Math.min(strokeWidth, geo.scale * BINDU_SAFE_FRAC);
+    ctx.beginPath();
+    ctx.arc(geo.cx, geo.cy, r, 0, Math.PI * 2);
+    ctx.fillStyle = binduColor;
+    ctx.fill();
+  }
+
+  // ==================================================================
+  // Geometry: Sri Yantra
+  //
+  // The nine triangles are symmetric about a single vertical axis. Each is
+  // stored as { A, B, W } = apex position, base position, base half-width,
+  // all as fractions of the circle's diameter along a 0..1 axis where 0 is
+  // the top pole (apex of t7) and 1 is the bottom pole (apex of t3).
+  // Positions/widths below are the numeric solution to the concurrency
+  // conditions (i)-(iii) of Chiodo (2021) / Huet (2002) — see the Σ panel —
+  // solved from Huet's calibrated base positions P,Q,R,S = 0.332, 0.537,
+  // 0.602, 0.835 (residual < 1e-12 on all twelve concurrency equations).
+  // Triangles 1-5 point down (Shakti), 6-9 point up (Shiva).
+  // ==================================================================
+  var SRI_YANTRA_TRIANGLES = {
+    1: { A: 0.537,              B: 0.11304332432381367, W: 0.25984795938488225 },
+    2: { A: 0.835,              B: 0.2308072496541623,  W: 0.3242566555339067  },
+    3: { A: 1,                  B: 0.332,               W: 0.47093099282166595 },
+    4: { A: 0.7351531570559878, B: 0.3961210639038879,  W: 0.16244233435917554 },
+    5: { A: 0.602,              B: 0.44876737147332496, W: 0.11384443112737835 },
+    6: { A: 0.2308072496541623, B: 0.537,               W: 0.15992989537497698 },
+    7: { A: 0,                  B: 0.602,               W: 0.4894854441145314  },
+    8: { A: 0.11304332432381367,B: 0.7351531570559878,  W: 0.35699371348164105 },
+    9: { A: 0.332,              B: 0.835,               W: 0.23295580174064046 }
+  };
+  var DOWNWARD = [1,2,3,4,5], UPWARD = [6,7,8,9];
+
+  // A single equilateral triangle inscribed in a circle of radius fraction
+  // rFrac (relative to the main circle), apex on the vertical axis pointing
+  // toward the top ('up') or bottom ('down') pole. Used by the simpler
+  // chakra yantras — a plain inscribed triangle, or two of these overlapped
+  // for a hexagram (Anahata), rather than Sri Yantra's nine-triangle solve.
+  var EQUILATERAL_HALF_WIDTH = Math.sqrt(3) / 4; // at rFrac = 1
+  function equilateralTriangle(pointing, rFrac){
+    rFrac = rFrac === undefined ? 1 : rFrac;
+    var half = 0.5 * rFrac;
+    if(pointing === 'up'){
+      return { A: 0.5 - half, B: 0.5 + 0.5 * half, W: EQUILATERAL_HALF_WIDTH * rFrac };
+    }
+    return { A: 0.5 + half, B: 0.5 - 0.5 * half, W: EQUILATERAL_HALF_WIDTH * rFrac };
+  }
+
+  var PALETTES = {
+    mono:   { name: 'Monochrome', down: 'var(--text)', up: 'var(--text)', lotus8: 'var(--text)', lotus16: 'var(--text)', triple: 'var(--text)', bhupura: 'var(--text)' },
+    duo:    { name: 'Shiva / Shakti', down: 'var(--warm)', up: 'var(--cool)', lotus8: 'var(--text)', lotus16: 'var(--text)', triple: 'var(--text)', bhupura: 'var(--text)' },
+    full:   { name: 'Full', down: 'var(--warm)', up: 'var(--cool)', lotus8: '#D67AB1', lotus16: '#8E7CC3', triple: 'var(--text-muted)', bhupura: 'var(--text-muted)' }
+  };
+  var currentPalette = 'duo';
+  var strokeWidth = 2;
+
+  function resolveColor(v){
+    if(v.indexOf('var(') === 0){
+      var name = v.slice(4, -1);
+      return getComputedStyle(root).getPropertyValue(name).trim();
+    }
+    return v;
+  }
+
+  // ---------- canvas ----------
+  var canvas = document.getElementById('cv');
+  var ctx = canvas.getContext('2d');
+  var geo = null; // { cx, cy, R, scale } — recomputed on resize
+
+  function resize(){
+    var dpr = window.devicePixelRatio || 1;
+    var w = canvas.clientWidth, h = canvas.clientHeight;
+    canvas.width = Math.round(w * dpr);
+    canvas.height = Math.round(h * dpr);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    var cx = w / 2, cy = h / 2;
+    // leave enough margin for the bhupura frame's worst case (Ajna's tall
+    // petals need the largest frame of any preset, see yantraExtent/
+    // bhupuraScaleFor) when it's shown
+    var R = Math.min(w, h) * ((currentPresetHasBhupura && showBhupura) ? 0.15 : 0.34);
+    geo = { cx: cx, cy: cy, R: R, scale: R * 2 };
+    draw();
+  }
+  function px(v){ return geo.cx + v * geo.scale; }
+  function py(v){ return geo.cy + (v - 0.5) * geo.scale; }
+
+  function polar(cx, cy, r, ang){ return [cx + r * Math.cos(ang), cy + r * Math.sin(ang)]; }
+
+  // Bhupura frame: traced directly from the user's reference image — both
+  // lines independently pixel-extracted (contour-detected, simplified to
+  // their rectilinear corners), not one derived from the other by an
+  // offset. That's deliberate: an algorithmic offset can get a concave
+  // corner's direction wrong and let two "parallel" lines touch or cross;
+  // measuring both from the actual reference guarantees the same spacing
+  // the image itself has, everywhere, including at the gates. Coordinates
+  // are fractions of the frame's own half-width. A third concentric line
+  // is a planned follow-up, not included yet.
+  var BHUPURA_LINE1 = [[0.43482, 1.00429], [-0.43482, 1.00429], [-0.43482, 0.86707], [-0.18396, 0.86707], [-0.18396, 0.84541], [-0.83641, 0.84541], [-0.83641, 0.19082], [-0.86106, 0.19082], [-0.86106, 0.43053], [-1.0, 0.43053], [-1.0, -0.43053], [-0.86106, -0.43053], [-0.86106, -0.18997], [-0.83641, -0.18997], [-0.83641, -0.84455], [-0.18396, -0.84455], [-0.18396, -0.86707], [-0.43482, -0.86707], [-0.43482, -1.00429], [0.43482, -1.00429], [0.43482, -0.86707], [0.18439, -0.86707], [0.18439, -0.84455], [0.83684, -0.84455], [0.83684, -0.18997], [0.86106, -0.18997], [0.86106, -0.43053], [1.0, -0.43053], [1.0, 0.43053], [0.86106, 0.43053], [0.86106, 0.19082], [0.83684, 0.19082], [0.83684, 0.84541], [0.18439, 0.84541], [0.18439, 0.86707], [0.43482, 0.86707], [0.43482, 1.00429]];
+  var BHUPURA_LINE2 = [[0.40292, 0.97341], [-0.40094, 0.97341], [-0.40094, 0.89966], [-0.15223, 0.89966], [-0.15223, 0.81411], [-0.80425, 0.81411], [-0.80425, 0.15909], [-0.89365, 0.15909], [-0.89365, 0.39794], [-0.96913, 0.39794], [-0.96913, -0.39794], [-0.89365, -0.39794], [-0.89365, -0.15909], [-0.80425, -0.15909], [-0.80425, -0.81325], [-0.15223, -0.81325], [-0.15223, -0.89966], [-0.40094, -0.89966], [-0.40094, -0.97256], [0.40292, -0.97256], [0.40292, -0.89966], [0.1518, -0.89966], [0.1518, -0.81325], [0.80467, -0.81325], [0.80467, -0.15909], [0.89365, -0.15909], [0.89365, -0.39794], [0.96913, -0.39794], [0.96913, 0.39794], [0.89365, 0.39794], [0.89365, 0.15909], [0.80467, 0.15909], [0.80467, 0.81411], [0.1518, 0.81411], [0.1518, 0.89966], [0.40292, 0.89966], [0.40292, 0.97341]];
+
+  // The frame's own closest approach to its center (the inner corner of
+  // each gate notch, not the flat sides) — measured once from LINE2, the
+  // same way for every preset. A preset's yantra never gets closer to the
+  // frame than BHUPURA_GAP (in R units) because the frame is scaled so
+  // this closest point sits exactly yantraExtent + BHUPURA_GAP out.
+  var BHUPURA_MIN_APPROACH = 0.8198;
+  var BHUPURA_GAP = 0.15;
+
+  function bhupuraScaleFor(yantraExtent){
+    return ((yantraExtent || 1.5) + BHUPURA_GAP) / BHUPURA_MIN_APPROACH;
+  }
+
+  function drawBhupura(color, width, yantraExtent){
+    ctx.strokeStyle = color; ctx.lineWidth = width; ctx.lineJoin = 'miter';
+    var s = geo.R * bhupuraScaleFor(yantraExtent);
+    [BHUPURA_LINE1, BHUPURA_LINE2].forEach(function(path){
+      ctx.beginPath();
+      path.forEach(function(p, idx){
+        var X = geo.cx + p[0] * s, Y = geo.cy + p[1] * s;
+        if(idx === 0) ctx.moveTo(X, Y); else ctx.lineTo(X, Y);
+      });
+      ctx.stroke();
+    });
+  }
+
+  // ---------- guide-mark primitives (fixed "pencil" style, theme-locked) ----------
+  function pencilColor(){ return getComputedStyle(root).getPropertyValue('--text').trim(); }
+  function strokeGuide(alpha, width){
+    ctx.strokeStyle = pencilColor();
+    ctx.globalAlpha = alpha === undefined ? 0.55 : alpha;
+    ctx.lineWidth = width || 0.75;
+  }
+  function resetAlpha(){ ctx.globalAlpha = 1; }
+
+  function guideLineSeg(x1, y1, x2, y2, alpha, width){
+    strokeGuide(alpha, width);
+    ctx.beginPath(); ctx.moveTo(x1, y1); ctx.lineTo(x2, y2); ctx.stroke();
+    resetAlpha();
+  }
+  function guideTick(x, y, size, alpha){
+    strokeGuide(alpha, 0.75);
+    ctx.beginPath(); ctx.moveTo(x - size, y); ctx.lineTo(x + size, y); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(x, y - size); ctx.lineTo(x, y + size); ctx.stroke();
+    resetAlpha();
+  }
+  function guideDot(x, y, r, alpha){
+    strokeGuide(alpha, 0.75);
+    ctx.beginPath(); ctx.arc(x, y, r, 0, Math.PI * 2); ctx.stroke();
+    resetAlpha();
+  }
+  function sampleArcPath(cx, cy, r, a0, a1){
+    // Native circular arc — perfectly smooth at any radius, unlike the
+    // straight-segment polyline this used to be (which faceted visibly on
+    // full-circle sweeps at larger radii).
+    ctx.arc(cx, cy, r, a0, a1, a1 < a0);
+  }
+  function guideArc(cx, cy, r, a0, a1, alpha){
+    strokeGuide(alpha, 0.75);
+    ctx.beginPath();
+    sampleArcPath(cx, cy, r, a0, a1);
+    ctx.stroke();
+    resetAlpha();
+  }
+
+  // ---------- per-triangle construction geometry ----------
+  // Every triangle (Sri Yantra's nine, or a chakra's single inscribed
+  // triangle/hexagram half) is just an {A,B,W} triple — apex position, base
+  // position, base half-width, all as fractions of the main circle's
+  // diameter — so this whole section is preset-agnostic.
+  function triangleMeta(tri){
+    var dir = (tri.B - tri.A) >= 0 ? 1 : -1; // +1: base below apex (upward tri), -1: base above apex (downward tri)
+    return {
+      A: tri.A, B: tri.B, W: tri.W,
+      apexN: [0, tri.A],
+      legLenN: Math.hypot(tri.W, tri.B - tri.A),
+      startAngle: dir * Math.PI / 2,
+      endAngleR: Math.atan2(tri.B - tri.A, tri.W),
+      endAngleL: Math.atan2(tri.B - tri.A, -tri.W)
+    };
+  }
+
+  function ease(t){ return t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2; }
+
+  // Draws a triangle's construction at local progress t (0..1). 'circleMethod'
+  // triangles get their corners from an already-drawn circle (the main one,
+  // or a smaller concentric one for an inner-circle-inscribed triangle); the
+  // rest get them by compass arc (radius = true leg length, centered at the
+  // true apex — an honest, not fudged, compass technique, since the arc
+  // necessarily meets the base line exactly at the real corner).
+  function drawTriangleStep(tri, t, circleMethod, color){
+    var m = triangleMeta(tri);
+    var apex = [px(m.apexN[0]), py(m.apexN[1])];
+    var baseY = py(m.B);
+    var full = geo.scale * 0.62;
+
+    if(t < 0.999 || showGuides){
+      var a = t < 0.999 ? Math.min(1, t / 0.35) : 1; // apex-highlight phase
+      guideDot(apex[0], apex[1], 5, 0.6 * Math.min(1, a + 0.3));
+    }
+
+    var lineT = clamp((t - 0.15) / 0.35, 0, 1);
+    if(lineT > 0 && (t < 0.999 || showGuides)){
+      guideLineSeg(apex[0] - full * lineT, baseY, apex[0] + full * lineT, baseY, 0.45);
+    }
+
+    var cornerT = clamp((t - 0.35) / 0.5, 0, 1);
+    var eT = ease(cornerT);
+    var rightX, leftX;
+    if(circleMethod){
+      rightX = px(m.W * eT);
+      leftX = px(-m.W * eT);
+      if(cornerT > 0 && cornerT < 1 && (t < 0.999 || showGuides)){
+        guideDot(rightX, baseY, 4, 0.6);
+        guideDot(leftX, baseY, 4, 0.6);
+      }
+    } else {
+      var rPx = m.legLenN * geo.scale;
+      var angR = lerp(m.startAngle, m.endAngleR, eT);
+      var angL = lerp(m.startAngle, m.endAngleL, eT);
+      if(cornerT > 0 && (t < 0.999 || showGuides)){
+        guideArc(apex[0], apex[1], rPx, Math.min(m.startAngle, angR), Math.max(m.startAngle, angR), 0.55);
+        guideArc(apex[0], apex[1], rPx, Math.min(m.startAngle, angL), Math.max(m.startAngle, angL), 0.55);
+      }
+      rightX = apex[0] + rPx * Math.cos(angR);
+      leftX = apex[0] + rPx * Math.cos(angL);
+    }
+
+    var strokeT = clamp((t - 0.55) / 0.45, 0, 1);
+    if(strokeT > 0){
+      var rightPt = [lerp(apex[0], rightX, 1), lerp(apex[1], baseY, strokeT)];
+      var leftPt = [lerp(apex[0], leftX, 1), lerp(apex[1], baseY, strokeT)];
+      // draw partial legs growing from apex, then the base closing in at the end
+      ctx.strokeStyle = color; ctx.lineWidth = strokeWidth; ctx.lineJoin = 'round';
+      ctx.beginPath();
+      ctx.moveTo(apex[0], apex[1]);
+      ctx.lineTo(lerp(apex[0], rightX, strokeT), lerp(apex[1], baseY, strokeT));
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.moveTo(apex[0], apex[1]);
+      ctx.lineTo(lerp(apex[0], leftX, strokeT), lerp(apex[1], baseY, strokeT));
+      ctx.stroke();
+      if(strokeT > 0.98){
+        ctx.beginPath();
+        ctx.moveTo(leftX, baseY);
+        ctx.lineTo(rightX, baseY);
+        ctx.stroke();
+      }
+    }
+  }
+
+  function lerp(a, b, t){ return a + (b - a) * t; }
+  function clamp(v, lo, hi){ return Math.max(lo, Math.min(hi, v)); }
+
+  // Three small outward "gate" ticks at the midpoints of a triangle's three
+  // sides (e.g. Manipura's fire-gates / svastika marks) — a simplified,
+  // clean stand-in for the traditional swastika glyph: a short perpendicular
+  // line with a small crossbar cap, pointing away from the triangle's center.
+  function drawTriangleGates(tri, t, color){
+    var m = triangleMeta(tri);
+    var apex = [px(m.apexN[0]), py(m.apexN[1])];
+    var right = [px(m.W), py(m.B)];
+    var left = [px(-m.W), py(m.B)];
+    var centroid = [(apex[0] + right[0] + left[0]) / 3, (apex[1] + right[1] + left[1]) / 3];
+    var sides = [[apex, right], [apex, left], [right, left]];
+    var tickLen = geo.scale * 0.045 * ease(t);
+    if(tickLen <= 0) return;
+    ctx.strokeStyle = color; ctx.lineWidth = strokeWidth * 0.85;
+    sides.forEach(function(side){
+      var mx = (side[0][0] + side[1][0]) / 2, my = (side[0][1] + side[1][1]) / 2;
+      var dx = mx - centroid[0], dy = my - centroid[1];
+      var len = Math.hypot(dx, dy) || 1;
+      var ux = dx / len, uy = dy / len;
+      var tipX = mx + ux * tickLen, tipY = my + uy * tickLen;
+      ctx.beginPath(); ctx.moveTo(mx, my); ctx.lineTo(tipX, tipY); ctx.stroke();
+      var capLen = tickLen * 0.5, perpX = -uy, perpY = ux;
+      ctx.beginPath();
+      ctx.moveTo(tipX - perpX * capLen, tipY - perpY * capLen);
+      ctx.lineTo(tipX + perpX * capLen, tipY + perpY * capLen);
+      ctx.stroke();
+    });
+  }
+
+  // ---------- construction timeline: generic stage-builder library ----------
+  // Every stage (circle, axis, a triangle, a lotus ring...) is one continuous
+  // 0..1 drawing function (see drawTriangleStep etc.) whose internal visual
+  // phases already land at fixed t thresholds. Sub-steps below just carve
+  // that 0..1 range into named, individually-steppable, individually-
+  // instructed pieces — stepping through them plays the *same* animation as
+  // "Play" does, just one physical action (set the compass, draw the guide
+  // line, strike the arc, connect the lines) at a time, each with real
+  // teaching text. These builders are preset-agnostic; each preset (below)
+  // just composes them differently.
+  function pct(v){ return Math.round(v * 100); }
+
+  function circleStageDef(name, instruction){
+    return { kind: 'circle', name: name || 'The circle', radiusFrac: 1, subphases: [
+      { phase: 'setup', end: 0.3, duration: 600, instruction: 'Choose the center point of your yantra and set your compass to the radius you want the whole diagram to be.' },
+      { phase: 'sweep', end: 1.0, duration: 900, instruction: instruction || 'Keeping the center fixed, swing the compass a full turn to draw the circle.' }
+    ] };
+  }
+
+  function innerCircleStageDef(name, radiusFrac, instruction){
+    return { kind: 'circle', name: name || 'Inner circle', radiusFrac: radiusFrac, subphases: [
+      { phase: 'setup', end: 0.3, duration: 500, instruction: 'Keeping the same center, set the compass to a smaller radius — ' + pct(radiusFrac) + '% of the outer circle.' },
+      { phase: 'sweep', end: 1.0, duration: 800, instruction: instruction || 'Swing a full turn to draw this inner circle.' }
+    ] };
+  }
+
+  function axisStageDef(){
+    return { kind: 'axis', name: 'Center & axis', subphases: [
+      { phase: 'vert', end: 0.6, duration: 500, instruction: 'Through the center, draw a straight line from the top of the circle to the bottom — the vertical axis.' },
+      { phase: 'horiz', end: 0.9, duration: 450, instruction: 'Through the same center point, draw a second line at a right angle to the first, from one side of the circle to the other — the horizontal axis.' },
+      { phase: 'tick', end: 1.0, duration: 400, instruction: 'Confirm the right angle: swing two short equal arcs near where the lines cross, close to the top and bottom of the circle — the classic perpendicular check.' }
+    ] };
+  }
+
+  function triangleInstructions(tri, circleMethod, circleLabel){
+    var apexPct = pct(tri.A), basePct = pct(tri.B);
+    var apexText = (tri.A === 0)
+      ? 'This triangle’s apex is the top pole of the circle — already marked.'
+      : (tri.A === 1)
+      ? 'This triangle’s apex is the bottom pole of the circle — already marked.'
+      : 'Mark this triangle’s apex on the vertical axis, ' + apexPct + '% of the way down from the top pole.';
+    var guideText = 'Measure ' + basePct + '% of the diameter down from the top pole along the axis and mark that point. Draw a horizontal guide line through it, all the way across.';
+    var cornersText = circleMethod
+      ? 'Where that guide line crosses ' + (circleLabel || 'the outer circle') + ' — those two crossing points are this triangle’s base corners.'
+      : 'Set your compass point on the apex and open it out until it reaches the guide line. Swing an arc down to the line on the right, then strike the same arc on the left without changing the compass width.';
+    var strokeText = 'Connect the apex to each base corner with a straightedge, then join the two corners along the guide line — the triangle is complete.';
+    return { apex: apexText, guide: guideText, corners: cornersText, stroke: strokeText };
+  }
+
+  function triangleStageDef(tri, circleMethod, name, colorKey, circleLabel){
+    var instr = triangleInstructions(tri, circleMethod, circleLabel);
+    return {
+      kind: 'triangle', tri: tri, circleMethod: circleMethod, colorKey: colorKey || 'down', name: name,
+      subphases: [
+        { phase: 'apex', end: 0.35, duration: 400, instruction: instr.apex },
+        { phase: 'guide', end: 0.50, duration: 500, instruction: instr.guide },
+        { phase: 'corners', end: 0.85, duration: 650, instruction: instr.corners },
+        { phase: 'stroke', end: 1.00, duration: 500, instruction: instr.stroke }
+      ]
+    };
+  }
+
+  function lotusStageDef(count, name, innerRFrac, tipRFrac, colorKey, startAngle){
+    return {
+      kind: 'lotus', name: name || (count + '-petal lotus'), count: count,
+      innerRFrac: innerRFrac, tipRFrac: tipRFrac,
+      startAngle: startAngle === undefined ? -Math.PI / 2 : startAngle,
+      colorKey: colorKey || 'lotus8',
+      subphases: [
+        { phase: 'draw', end: 1.0, duration: 900 + count * 25,
+          instruction: 'Divide the circle into ' + count + ' equal arcs (step your compass around it, or use a protractor). At each mark, draw a petal pointing outward, each touching the next — the ' + count + '-petal lotus.' }
+      ]
+    };
+  }
+
+  // Three small "gate" ticks at the midpoints of a triangle's sides, pointing
+  // outward — used by yantras whose inner triangle has doors/gates on each
+  // face (e.g. Manipura's three fire-gates / svastika marks).
+  function triangleGatesStageDef(tri, name, instruction){
+    return { kind: 'triangleGates', tri: tri, name: name || 'The three gates', subphases: [
+      { phase: 'draw', end: 1.0, duration: 900,
+        instruction: instruction || 'At the midpoint of each of the triangle’s three sides, mark a short outward tick — the traditional three gates.' }
+    ] };
+  }
+
+  // A square centered on the main axis, corners on the main circle. Corner
+  // pixel offset from center is (halfSideFrac * scale) on each axis, and
+  // scale = diameter (2R) — so for the true corner distance from center to
+  // be R at 45°, halfSideFrac = (R/sqrt(2)) / (2R) = 1/(2*sqrt(2)) =
+  // sqrt(2)/4 (NOT 1/sqrt(2), which would put the corners a full R past
+  // the circle on each axis). Used by Muladhara, whose earth-element
+  // square encloses the inverted triangle.
+  function squareStageDef(name, halfSideFrac){
+    return { kind: 'square', name: name || 'The square', halfSideFrac: halfSideFrac === undefined ? Math.SQRT2 / 4 : halfSideFrac, subphases: [
+      { phase: 'corners', end: 0.4, duration: 600,
+        instruction: 'Bisect each right angle between the vertical and horizontal axis (equal compass arcs from the center, then from where they cross) to find the four 45° diagonals. Mark where each crosses the circle — the square’s four corners.' },
+      { phase: 'draw', end: 1.0, duration: 800, instruction: 'Connect the four corners in order with a straightedge — the square.' }
+    ] };
+  }
+
+  // A crescent (lune): two equal-radius guide circles, offset so they
+  // intersect; the crescent is circleA's far arc (away from circleB)
+  // joined to circleB's near arc (toward circleA) through the same two
+  // intersection points — the standard compass construction for a moon
+  // sliver. Both full guide circles fade once traced (like any other
+  // construction guide); only the crescent's own two arcs are permanent.
+  // Used by Swadhisthana, whose crescent represents the water element.
+  // Opens upward (bulges down) by default, like a bowl/smile.
+  function crescentStageDef(name, radiusFrac, offsetFrac){
+    return {
+      kind: 'crescent', name: name || 'The crescent moon',
+      radiusFrac: radiusFrac === undefined ? 0.55 : radiusFrac,
+      offsetFrac: offsetFrac === undefined ? 0.8 : offsetFrac,
+      subphases: [
+        { phase: 'first-circle', end: 0.35, duration: 600,
+          instruction: 'Set the compass to a smaller radius and draw a circle — this will become the crescent’s outer edge.' },
+        { phase: 'second-circle', end: 0.65, duration: 600,
+          instruction: 'Keeping the same compass width, move the center straight up by about four-fifths of that radius, and draw a second circle of the same size — it will cross the first at two points.' },
+        { phase: 'trace', end: 1.0, duration: 700,
+          instruction: 'Trace the crescent: the lower circle’s far (bottom) arc between the two crossing points, joined to the upper circle’s near (bottom) arc between the same two points. Erase both full guide circles, keeping only this outline.' }
+      ]
+    };
+  }
+
+  function tripleCircleStageDef(){
+    return { kind: 'triple', name: 'Triple circle', subphases: [
+      { phase: 'draw', end: 1.0, duration: 900, instruction: 'Draw two more circles just outside the lotus rings, evenly spaced apart — the traditional triple boundary.' }
+    ] };
+  }
+
+  // ---------- Sri Yantra ----------
+  function buildSriYantraStages(){
+    var BUILD_ORDER = [8, 2, 1, 9, 4, 6, 5]; // remaining 7 triangles, largest-to-smallest by half-width
+    function sriTri(i, circleMethod){
+      var tri = SRI_YANTRA_TRIANGLES[i];
+      return triangleStageDef(tri, circleMethod, 'Triangle ' + i, i <= 5 ? 'down' : 'up');
+    }
+    return [
+      circleStageDef('The circle'),
+      axisStageDef(),
+      sriTri(7, true),
+      sriTri(3, true)
+    ].concat(BUILD_ORDER.map(function(i){ return sriTri(i, false); })).concat([
+      lotusStageDef(8, 'Eight-petal lotus', 1.00, 1.15, 'lotus8'),
+      lotusStageDef(16, 'Sixteen-petal lotus', 1.16, 1.32, 'lotus16'),
+      tripleCircleStageDef()
+    ]);
+  }
+
+  // ---------- Anahata (Heart Chakra) ----------
+  // Twelve-petal lotus around a hexagram — an upward triangle (Shiva) and a
+  // downward triangle (Shakti) overlapped, each simply inscribed in the main
+  // circle (unlike Sri Yantra, there's no concurrency system to solve: two
+  // ordinary equilateral triangles sharing the same circumcircle already
+  // form a valid hexagram).
+  function buildAnahataStages(){
+    var up = equilateralTriangle('up', 1);
+    var down = equilateralTriangle('down', 1);
+    return [
+      circleStageDef('The circle'),
+      axisStageDef(),
+      triangleStageDef(up, true, 'Upward triangle (Shiva)', 'up'),
+      triangleStageDef(down, true, 'Downward triangle (Shakti)', 'down'),
+      lotusStageDef(12, 'Twelve-petal lotus', 1.00, 1.16)
+    ];
+  }
+
+  // ---------- Manipura (Solar Plexus Chakra) ----------
+  // Ten-petal lotus around a single downward triangle (fire/Agni), with the
+  // traditional three gates (svastika marks) on its three sides.
+  function buildManipuraStages(){
+    var tri = equilateralTriangle('down', 1);
+    return [
+      circleStageDef('The circle'),
+      axisStageDef(),
+      triangleStageDef(tri, true, 'The fire triangle', 'down'),
+      triangleGatesStageDef(tri, 'The three fire-gates'),
+      lotusStageDef(10, 'Ten-petal lotus', 1.00, 1.16)
+    ];
+  }
+
+  // ---------- Vishuddhi (Throat Chakra) ----------
+  // Sixteen-petal lotus around a smaller inner circle (the full moon /
+  // ether), itself enclosing a downward triangle sized to that inner circle.
+  function buildVishuddhiStages(){
+    var innerRFrac = 0.55;
+    var tri = equilateralTriangle('down', innerRFrac);
+    return [
+      circleStageDef('The outer circle'),
+      axisStageDef(),
+      lotusStageDef(16, 'Sixteen-petal lotus', 1.00, 1.16),
+      innerCircleStageDef('The inner circle (ether)', innerRFrac,
+        'Swing a full turn to draw the smaller inner circle — the moon disc of the ether element.'),
+      triangleStageDef(tri, true, 'The inner triangle', 'down', 'the inner circle')
+    ];
+  }
+
+  // ---------- Muladhara (Root Chakra) ----------
+  // Four-petal lotus around a square (earth), enclosing a downward
+  // triangle inscribed in that square rather than the outer circle.
+  function buildMuladharaStages(){
+    var sq = Math.SQRT2 / 4; // square inscribed in the main circle (see squareStageDef)
+    var tri = { A: 0.5 + sq, B: 0.5 - sq, W: sq }; // base = square's top edge, apex = its bottom edge
+    return [
+      circleStageDef('The circle'),
+      axisStageDef(),
+      lotusStageDef(4, 'Four-petal lotus', 1.00, 1.26),
+      squareStageDef('The square (earth)'),
+      triangleStageDef(tri, true, 'The inner triangle', 'down', 'the square')
+    ];
+  }
+
+  // ---------- Swadhisthana (Sacral Chakra) ----------
+  // Six-petal lotus around a crescent moon (water).
+  function buildSwadhisthanaStages(){
+    return [
+      circleStageDef('The circle'),
+      axisStageDef(),
+      lotusStageDef(6, 'Six-petal lotus', 1.00, 1.26),
+      crescentStageDef('The crescent moon (water)', 0.55, 0.8)
+    ];
+  }
+
+  // ---------- Ajna (Third Eye Chakra) ----------
+  // Two-petal lotus around a downward triangle — the simplest of the
+  // chakra yantras, structurally identical to Manipura minus the gates.
+  function buildAjnaStages(){
+    var tri = equilateralTriangle('down', 1);
+    return [
+      circleStageDef('The circle'),
+      axisStageDef(),
+      lotusStageDef(2, 'Two-petal lotus', 1.00, 1.87, undefined, 0),
+      triangleStageDef(tri, true, 'The inner triangle', 'down')
+    ];
+  }
+
+  // Flatten a preset's STAGE_DEFS into STEPS (progress/scrubber granularity);
+  // each entry keeps a back-reference to its parent stage plus its own
+  // [tStart,tEnd] sub-range. Mutates each stage with firstFlat/lastFlat —
+  // safe since every preset builds fresh stage objects on each load.
+  function flattenStages(stageDefs){
+    var steps = [];
+    stageDefs.forEach(function(stage, stageIdx){
+      var start = 0;
+      stage.firstFlat = steps.length;
+      stage.subphases.forEach(function(sub){
+        steps.push({
+          stageIdx: stageIdx,
+          tStart: start,
+          tEnd: sub.end,
+          duration: sub.duration,
+          label: stage.name + (stage.subphases.length > 1 ? ' — ' + sub.phase : ''),
+          instruction: sub.instruction
+        });
+        start = sub.end;
+      });
+      stage.lastFlat = steps.length - 1;
+    });
+    return steps;
+  }
+
+  var STAGE_DEFS = buildSriYantraStages();
+  var STEPS = flattenStages(STAGE_DEFS);
+  var totalSteps = STEPS.length;
+
+  var progress = 0; // 0..totalSteps
+  var playing = false;
+  var speed = 1;
+  var constructionCompleteFired = false;
+
+  function drawAxisStep(t){
+    var topY = py(0), botY = py(1);
+    var lineT = clamp(t / 0.6, 0, 1);
+    var midY = geo.cy;
+    guideLineSeg(geo.cx, midY - (midY - topY) * lineT, geo.cx, midY + (botY - midY) * lineT, 0.6, 1);
+    var hT = clamp((t - 0.3) / 0.6, 0, 1);
+    if(hT > 0){
+      guideLineSeg(geo.cx - geo.R * 0.5 * hT, geo.cy, geo.cx + geo.R * 0.5 * hT, geo.cy, 0.6, 1);
+    }
+    var tickT = clamp((t - 0.6) / 0.4, 0, 1);
+    if(tickT > 0 && (t < 0.999 || showGuides)){
+      guideArc(geo.cx, topY + geo.R * 0.18, geo.R * 0.22, 0.6 * Math.PI, 1.4 * Math.PI, 0.5 * tickT);
+      guideArc(geo.cx, botY - geo.R * 0.18, geo.R * 0.22, -0.4 * Math.PI, 0.4 * Math.PI, 0.5 * tickT);
+    }
+  }
+
+  // Any circle (the main boundary, or a smaller concentric one like
+  // Vishuddhi's inner "moon disc") is a permanent part of the finished
+  // yantra — like the petals it enframes — not a guide to erase, so it's
+  // drawn solid in the same color/weight as the lotus rings from the start,
+  // never pencil-gray. radiusFrac scales it relative to the main circle.
+  function drawCirclePhase(t, radiusFrac){
+    var r = geo.R * (radiusFrac === undefined ? 1 : radiusFrac);
+    var setupT = clamp(t / 0.3, 0, 1);
+    if(t < 0.999 || showGuides){
+      guideDot(geo.cx, geo.cy, 4, 0.6);
+      guideLineSeg(geo.cx, geo.cy, geo.cx + r * setupT, geo.cy, 0.5, 1);
+    }
+    var sweepT = clamp((t - 0.3) / 0.7, 0, 1);
+    if(sweepT > 0){
+      ctx.strokeStyle = resolveColor(PALETTES[currentPalette].lotus8);
+      ctx.globalAlpha = 1;
+      ctx.lineWidth = strokeWidth * 0.9;
+      ctx.beginPath();
+      sampleArcPath(geo.cx, geo.cy, r, -Math.PI / 2, -Math.PI / 2 + Math.PI * 2 * ease(sweepT));
+      ctx.stroke();
+    }
+  }
+
+  // Each petal edge (base corner -> tip) is one cubic curve, not a quadratic
+  // bulge: control points are base+u and tip-u for a single shared offset u,
+  // so it bulges convex near the base and pulls concave near the tip in one
+  // continuous stroke (a cubic can't have a corner). By Bezier symmetry —
+  // B(0.5) = (P0+3P1+3P2+P3)/8 with P1=P0+u, P2=P3-u collapses to (P0+P3)/2 —
+  // the curve crosses the base-tip chord at exactly its midpoint for any u,
+  // and computing both sides the same way (base->tip) keeps the petal a true
+  // mirror image of itself about its own centerline.
+  var PETAL_AMP_FRAC = 0.16, PETAL_REACH_FRAC = 0.38;
+  function petalSCurve(basePt, tipPt, ampFrac, reachFrac){
+    var dx = tipPt[0] - basePt[0], dy = tipPt[1] - basePt[1];
+    var len = Math.hypot(dx, dy);
+    var dirX = dx / len, dirY = dy / len;
+    var perpX = -dirY, perpY = dirX;
+    var midX = (basePt[0] + tipPt[0]) / 2, midY = (basePt[1] + tipPt[1]) / 2;
+    if(perpX * (midX - geo.cx) + perpY * (midY - geo.cy) < 0){ perpX = -perpX; perpY = -perpY; }
+    var ux = dirX * len * reachFrac + perpX * len * ampFrac;
+    var uy = dirY * len * reachFrac + perpY * len * ampFrac;
+    return {
+      convex: [basePt[0] + ux, basePt[1] + uy],
+      concave: [tipPt[0] - ux, tipPt[1] - uy]
+    };
+  }
+  // petalSCurve's chord-relative bulge/pull stays outside its base circle
+  // only up to about this angular half-width — beyond it, the straight
+  // base-to-tip chord itself already passes inside the circle (verified
+  // numerically: true regardless of amplitude, since it's the chord, not
+  // the curve's tuning, that fails), so no re-tuning fixes it. Every normal
+  // preset's hw is already <= 45°, so this is a no-op for them — same
+  // curve, same control points. Only Ajna's 2-petal case (hw = 90°)
+  // exceeds it, and still needs the same convex-near-base,
+  // concave-near-tip character as every other preset — just anchored to
+  // absolute radii instead of the chord, wide enough to clear the circle at
+  // a full quarter-turn (verified numerically down to the exact live canvas
+  // geometry, not just this offline model).
+  var SAFE_HW = Math.PI / 4;
+  var WIDE_BULGE_MULT = 1.15, WIDE_PULL_MULT = 0.5;
+  var WIDE_BULGE_FRAC = 0.7, WIDE_PULL_FRAC = 0.12;
+  function petalSCurveWide(ang, hw, side, innerR, tipR){
+    var bulgeR = innerR + (tipR - innerR) * WIDE_BULGE_MULT;
+    var pullR = innerR + (tipR - innerR) * WIDE_PULL_MULT;
+    return {
+      convex: polar(geo.cx, geo.cy, bulgeR, ang + side * hw * WIDE_BULGE_FRAC),
+      concave: polar(geo.cx, geo.cy, pullR, ang + side * hw * WIDE_PULL_FRAC)
+    };
+  }
+  function drawLotusStep(count, innerR, tipR, color, t, startAngle){
+    var visibleCount = Math.max(0, Math.floor(count * ease(t) + 0.0001));
+    var step = (Math.PI * 2) / count;
+    var hw = step / 2; // touching: this petal's base corner is the next one's too
+    var startAng = startAngle === undefined ? -Math.PI / 2 : startAngle;
+    var wide = hw > SAFE_HW;
+    for(var k = 0; k < visibleCount; k++){
+      var ang = startAng + k * step;
+      var base1 = polar(geo.cx, geo.cy, innerR, ang - hw);
+      var base2 = polar(geo.cx, geo.cy, innerR, ang + hw);
+      var tip = polar(geo.cx, geo.cy, tipR, ang);
+      var left = wide ? petalSCurveWide(ang, hw, -1, innerR, tipR) : petalSCurve(base1, tip, PETAL_AMP_FRAC, PETAL_REACH_FRAC);
+      var right = wide ? petalSCurveWide(ang, hw, 1, innerR, tipR) : petalSCurve(base2, tip, PETAL_AMP_FRAC, PETAL_REACH_FRAC);
+      ctx.strokeStyle = color; ctx.lineWidth = strokeWidth * 0.85;
+      ctx.beginPath();
+      ctx.moveTo(base1[0], base1[1]);
+      ctx.bezierCurveTo(left.convex[0], left.convex[1], left.concave[0], left.concave[1], tip[0], tip[1]);
+      ctx.bezierCurveTo(right.concave[0], right.concave[1], right.convex[0], right.convex[1], base2[0], base2[1]);
+      ctx.stroke();
+    }
+  }
+
+  function drawTripleStep(t){
+    var radii = [geo.R * 1.40, geo.R * 1.45, geo.R * 1.50];
+    var n = clamp(t / (1 / 3), 0, 3);
+    for(var k = 0; k < radii.length; k++){
+      var local = clamp(n - k, 0, 1);
+      if(local <= 0) continue;
+      strokeGuide(1, strokeWidth * 0.75);
+      ctx.strokeStyle = resolveColor(PALETTES[currentPalette].triple);
+      ctx.globalAlpha = 1;
+      ctx.beginPath();
+      sampleArcPath(geo.cx, geo.cy, radii[k], -Math.PI / 2, -Math.PI / 2 + Math.PI * 2 * ease(local));
+      ctx.stroke();
+    }
+  }
+
+  // Square inscribed in the main circle (or a scaled-down circle), corners
+  // at ±45°/±135°. Guide phase pulses the four corner points; draw phase
+  // connects them clockwise from top-left, one side at a time.
+  function drawSquareStep(t, halfSideFrac){
+    var s = halfSideFrac;
+    var cornersN = [[-s, 0.5 - s], [s, 0.5 - s], [s, 0.5 + s], [-s, 0.5 + s]];
+    var corners = cornersN.map(function(p){ return [px(p[0]), py(p[1])]; });
+    var cornerT = clamp(t / 0.4, 0, 1);
+    if(cornerT > 0 && (t < 0.999 || showGuides)){
+      corners.forEach(function(c){ guideDot(c[0], c[1], 4, 0.6 * cornerT); });
+    }
+    var drawT = clamp((t - 0.4) / 0.6, 0, 1);
+    if(drawT > 0){
+      var segT = drawT * 4;
+      ctx.strokeStyle = resolveColor(PALETTES[currentPalette].lotus8);
+      ctx.lineWidth = strokeWidth;
+      for(var i = 0; i < 4; i++){
+        var lt = clamp(segT - i, 0, 1);
+        if(lt <= 0) break;
+        var p0 = corners[i], p1 = corners[(i + 1) % 4];
+        ctx.beginPath();
+        ctx.moveTo(p0[0], p0[1]);
+        ctx.lineTo(lerp(p0[0], p1[0], lt), lerp(p0[1], p1[1], lt));
+        ctx.stroke();
+      }
+    }
+  }
+
+  // Crescent (lune): circleA (radius r, center at the main center O) and
+  // circleB (radius r, center distance d straight up from O). Using canvas
+  // angle convention (0 = right, increasing clockwise, so -PI/2 = up and
+  // +PI/2 = down): from A, the line to B points at -PI/2; the two
+  // intersection points sit at ±theta from that line, where
+  // theta = acos(d/2r) (the standard equal-circles-intersection formula).
+  // So from A they're at angles (-PI/2 - theta) and (-PI/2 + theta); from
+  // B (whose "toward A" direction is +PI/2, the mirror image) they're at
+  // (PI/2 - theta) and (PI/2 + theta). The crescent outline is circleA's
+  // major arc through its bottom (away from B) joined, at the same two
+  // physical points, to circleB's minor arc through its bottom (toward A).
+  function drawCrescentStep(t, radiusFrac, offsetFrac){
+    var r = geo.R * radiusFrac;
+    var d = r * offsetFrac;
+    var oy = geo.cy - d; // circleB's center, above circleA's
+    var showingGuides = t < 0.999 || showGuides;
+
+    // Phase 1 (0..0.35): sweep circleA in; phases 2-3: it's a full guide.
+    var aGuideT = clamp(t / 0.35, 0, 1);
+    if(aGuideT > 0 && showingGuides){
+      guideDot(geo.cx, geo.cy, 4, 0.5);
+      guideArc(geo.cx, geo.cy, r, -Math.PI / 2, -Math.PI / 2 + Math.PI * 2 * aGuideT, 0.4);
+    }
+    // Phase 2 (0.35..0.65): sweep circleB in; phase 3: it's a full guide.
+    var bGuideT = clamp((t - 0.35) / 0.30, 0, 1);
+    if(bGuideT > 0 && showingGuides){
+      guideDot(geo.cx, oy, 4, 0.5);
+      guideArc(geo.cx, oy, r, -Math.PI / 2, -Math.PI / 2 + Math.PI * 2 * bGuideT, 0.4);
+    }
+
+    var traceT = clamp((t - 0.65) / 0.35, 0, 1);
+    if(traceT <= 0) return;
+    var theta = Math.acos(clamp(d / (2 * r), -1, 1));
+    var color = resolveColor(PALETTES[currentPalette].lotus8);
+    ctx.strokeStyle = color; ctx.lineWidth = strokeWidth;
+
+    // circleA's major (far/bottom) arc: right intersection -> around the
+    // bottom -> left intersection, the long way (sweep = 2*PI - 2*theta).
+    var aStart = -Math.PI / 2 + theta;
+    var aSweep = 2 * Math.PI - 2 * theta;
+    var t1 = clamp(traceT / 0.55, 0, 1);
+    ctx.beginPath();
+    sampleArcPath(geo.cx, geo.cy, r, aStart, aStart + aSweep * ease(t1));
+    ctx.stroke();
+
+    // circleB's minor (near/bottom) arc, continuing from the same left
+    // intersection point (angle PI/2 + theta from B) back to the right
+    // intersection point (PI/2 - theta from B), the short way through B's
+    // bottom (sweep = -2*theta).
+    var t2 = clamp((traceT - 0.55) / 0.45, 0, 1);
+    if(t2 > 0){
+      var bStart = Math.PI / 2 + theta;
+      var bSweep = -2 * theta;
+      ctx.beginPath();
+      sampleArcPath(geo.cx, oy, r, bStart, bStart + bSweep * ease(t2));
+      ctx.stroke();
+    }
+  }
+
+  function draw(){
+    if(!geo) return;
+    var w = canvas.clientWidth, h = canvas.clientHeight;
+    var style = getComputedStyle(root);
+    ctx.clearRect(0, 0, w, h);
+    ctx.fillStyle = style.getPropertyValue('--bg').trim();
+    ctx.fillRect(0, 0, w, h);
+
+    var pal = PALETTES[currentPalette];
+    var R = geo.R;
+    var stageLabel = document.getElementById('stageLabel');
+    var instrStepLabel = document.getElementById('instrStepLabel');
+    var instrText = document.getElementById('instrText');
+
+    // Landing exactly on an integer (stepping, or a scrubber tick) means
+    // "the step that just finished," not "the next one, freshly begun" —
+    // otherwise every click of Step Forward would show a sub-step barely
+    // started instead of the completed action it just advanced past.
+    var idxFloor, localT;
+    if(progress <= 0){
+      idxFloor = 0; localT = 0;
+    } else if(progress >= totalSteps){
+      idxFloor = totalSteps - 1; localT = 1;
+    } else {
+      var flo = Math.floor(progress), frac = progress - flo;
+      if(frac < 1e-9){ idxFloor = flo - 1; localT = 1; }
+      else { idxFloor = flo; localT = frac; }
+    }
+
+    // Each stage is one continuous drawing function called AT MOST once per
+    // frame with a single effective t — never once per sub-step — so guide
+    // marks drawn with partial alpha don't double up while a multi-substep
+    // stage (e.g. a triangle's apex/guide/corners/stroke) is mid-progress.
+    if(progress > 0){
+      STAGE_DEFS.forEach(function(stage){
+        if(idxFloor < stage.firstFlat) return; // not reached yet
+        var effT;
+        if(idxFloor > stage.lastFlat){
+          effT = 1;
+        } else {
+          var sub = STEPS[idxFloor];
+          var doneHere = (idxFloor === stage.lastFlat && localT >= 0.999);
+          effT = doneHere ? 1 : lerp(sub.tStart, sub.tEnd, localT);
+        }
+        if(stage.kind === 'circle'){
+          drawCirclePhase(effT, stage.radiusFrac);
+        } else if(stage.kind === 'axis'){
+          drawAxisStep(effT);
+        } else if(stage.kind === 'triangle'){
+          drawTriangleStep(stage.tri, effT, stage.circleMethod, resolveColor(stage.colorKey === 'up' ? pal.up : pal.down));
+        } else if(stage.kind === 'triangleGates'){
+          drawTriangleGates(stage.tri, effT, resolveColor(pal.down));
+        } else if(stage.kind === 'lotus'){
+          var lotusColor = resolveColor(stage.colorKey === 'lotus16' ? pal.lotus16 : pal.lotus8);
+          drawLotusStep(stage.count, R * stage.innerRFrac, R * stage.tipRFrac, lotusColor, effT, stage.startAngle);
+        } else if(stage.kind === 'triple'){
+          drawTripleStep(effT);
+        } else if(stage.kind === 'square'){
+          drawSquareStep(effT, stage.halfSideFrac);
+        } else if(stage.kind === 'crescent'){
+          drawCrescentStep(effT, stage.radiusFrac, stage.offsetFrac);
+        }
+      });
+    }
+
+    if(currentPresetHasBhupura && showBhupura){
+      drawBhupura(resolveColor(pal.bhupura), strokeWidth * 0.85, PRESETS[currentPresetKey].yantraExtent);
+    }
+
+    drawBindu();
+
+    if(progress <= 0){
+      if(stageLabel) stageLabel.textContent = 'Ready';
+      if(instrStepLabel) instrStepLabel.textContent = 'Ready';
+      if(instrText) instrText.textContent = 'Press play, or step forward, to begin the construction.';
+    } else if(progress >= totalSteps){
+      if(stageLabel) stageLabel.textContent = 'Complete';
+      if(instrStepLabel) instrStepLabel.textContent = 'Complete';
+      if(instrText) instrText.textContent = 'The construction is complete.';
+    } else {
+      var curStep = STEPS[idxFloor];
+      var curStage = STAGE_DEFS[curStep.stageIdx];
+      var stageLen = curStage.lastFlat - curStage.firstFlat + 1;
+      if(stageLabel) stageLabel.textContent = curStep.label;
+      if(instrStepLabel){
+        instrStepLabel.textContent = curStage.name + (stageLen > 1 ? ' (' + (idxFloor - curStage.firstFlat + 1) + '/' + stageLen + ')' : '');
+      }
+      if(instrText) instrText.textContent = curStep.instruction;
+    }
+    var scrubber = document.getElementById('scrubber');
+    if(scrubber && document.activeElement !== scrubber){
+      scrubber.value = Math.round((progress / totalSteps) * 1000);
+    }
+    updatePlayButtonState();
+    if(progress >= totalSteps){
+      if(playing) setPlaying(false);
+      if(!constructionCompleteFired){
+        constructionCompleteFired = true;
+        emitBoyEvent('constructionComplete', currentPresetKey);
+      }
+    } else {
+      constructionCompleteFired = false;
+    }
+  }
+
+  // ---------- playback engine ----------
+  var lastFrameTime = null;
+  function tick(now){
+    if(lastFrameTime === null) lastFrameTime = now;
+    // clamp dt: a backgrounded/hidden tab throttles or suspends rAF, so the
+    // first frame after regaining focus can report a multi-second gap —
+    // without this cap that single frame would jump the construction
+    // straight to completion instead of resuming smoothly.
+    var dt = Math.min(100, now - lastFrameTime);
+    lastFrameTime = now;
+    if(playing){
+      var step = STEPS[Math.min(totalSteps - 1, Math.floor(progress))];
+      var durMs = (step ? step.duration : 1000) / speed;
+      progress = Math.min(totalSteps, progress + dt / durMs);
+      draw();
+    }
+    requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+
+  function setPlaying(v){
+    playing = v;
+    if(v && progress >= totalSteps) progress = 0;
+    document.getElementById('playIcon').style.display = v ? 'none' : 'block';
+    document.getElementById('pauseIcon').style.display = v ? 'block' : 'none';
+    document.getElementById('playBtn').setAttribute('aria-label', v ? 'Pause' : 'Play');
+  }
+  function updatePlayButtonState(){ /* icon kept in sync by setPlaying; no-op placeholder for future badges */ }
+
+  document.getElementById('playBtn').addEventListener('click', function(){ setPlaying(!playing); });
+  document.getElementById('stepBackBtn').addEventListener('click', function(){
+    setPlaying(false);
+    var atBoundary = Math.abs(progress - Math.round(progress)) < 1e-6;
+    progress = Math.max(0, atBoundary ? progress - 1 : Math.floor(progress));
+    draw();
+  });
+  document.getElementById('stepFwdBtn').addEventListener('click', function(){
+    setPlaying(false);
+    progress = Math.min(totalSteps, Math.floor(progress) + 1);
+    draw();
+  });
+  var scrubberEl = document.getElementById('scrubber');
+  scrubberEl.addEventListener('input', function(){
+    setPlaying(false);
+    progress = (parseFloat(scrubberEl.value) / 1000) * totalSteps;
+    draw();
+  });
+  document.getElementById('speedSelect').addEventListener('change', function(e){
+    speed = parseFloat(e.target.value);
+  });
+  document.getElementById('restartBtn').addEventListener('click', function(){
+    setPlaying(false);
+    progress = 0;
+    draw();
+  });
+
+  window.addEventListener('resize', resize);
+  window.addEventListener('yantra:guides', draw);
+  themeBtn.addEventListener('click', function(){ setTimeout(draw, 0); });
+  resize();
+
+  // ---------- palette swatches ----------
+  var paletteGrid = document.getElementById('paletteSwatches');
+  var paletteLabel = document.getElementById('paletteLabel');
+  var swatchGradients = {
+    mono: 'linear-gradient(135deg,#888,#ccc)',
+    duo: 'linear-gradient(135deg,#F2A65A,#57D9C4)',
+    full: 'linear-gradient(135deg,#F2A65A 0%,#57D9C4 40%,#D67AB1 70%,#8E7CC3 100%)'
+  };
+  Object.keys(PALETTES).forEach(function(key){
+    var el = document.createElement('div');
+    el.className = 'swatch' + (key === currentPalette ? ' active' : '');
+    el.style.background = swatchGradients[key];
+    el.title = PALETTES[key].name;
+    el.dataset.p = key;
+    el.tabIndex = 0;
+    el.addEventListener('click', function(){
+      currentPalette = key;
+      Array.prototype.forEach.call(paletteGrid.children, function(c){ c.classList.toggle('active', c.dataset.p === key); });
+      paletteLabel.textContent = PALETTES[key].name;
+      draw();
+    });
+    paletteGrid.appendChild(el);
+  });
+  paletteLabel.textContent = PALETTES[currentPalette].name;
+
+  // ---------- stroke width ----------
+  var strokeWidthSlider = document.getElementById('strokeWidthSlider');
+  var strokeWidthVal = document.getElementById('strokeWidthVal');
+  strokeWidthSlider.addEventListener('input', function(){
+    strokeWidth = parseFloat(strokeWidthSlider.value);
+    strokeWidthVal.textContent = strokeWidth.toFixed(2);
+    draw();
+  });
+  strokeWidthVal.textContent = strokeWidth.toFixed(2);
+
+  // ---------- Boy-game integration hook (no-op unless embedded) ----------
+  function emitBoyEvent(goal, detail){
+    try{
+      window.parent.postMessage({ source: 'boy-tool', tool: 'yantraConstruction', goal: goal, detail: detail || null }, '*');
+    }catch(e){}
+  }
+
+  // ---------- preset registry ----------
+  var PRESETS = {
+    sriYantra: {
+      name: 'Sri Yantra', hasBhupura: true, yantraExtent: 1.50, build: buildSriYantraStages,
+      math: {
+        title: 'The Sri Yantra', subtitle: 'What this shape means, and why the construction is geometrically accurate rather than a hand-drawn approximation.',
+        meaning:
+          '<p>The Sri Yantra (Śrī Yantra, also Śrī Cakra) is the principal diagram of Sri Vidya ' +
+          'worship, centered on the goddess Tripura Sundari / Lalita — the "beautiful one of ' +
+          'the three worlds." The five downward-pointing triangles (Shakti) and four ' +
+          'upward-pointing triangles (Shiva) interlock around the bindu, the dimensionless ' +
+          'point at the center: the goddess and the divine union of consciousness (Shiva) ' +
+          'and energy (Shakti) from which the whole figure — read as the cosmos itself — ' +
+          'is said to expand outward.</p>' +
+          '<p>Placeholder text — Shankar is adding the fuller account of the deity and the ' +
+          'ritual (pūjā) significance of each ring next.</p>',
+        geometry:
+          '<p>From the outside in: the <b style="color:var(--warm);">bhūpura</b> (the toggleable ' +
+          'square gate frame — a temple with doors on all four sides), a triple circle, a ' +
+          '16-petal lotus, an 8-petal lotus, and the nine-triangle mesh around the bindu.</p>' +
+          '<p>The nine triangles are the mathematically hard part. For all nine to interlock ' +
+          'correctly, dozens of triangle legs and bases have to pass through exactly the ' +
+          'same points simultaneously — a real constraint-satisfaction problem, not ' +
+          'artistic license. The classical hand-drawn methods (attributed to the ' +
+          'commentators Kaivalyāśrama and Lakṣmīdhara) each get most of the way there but ' +
+          'provably miss at least one of those coincidences by a small, visible amount.</p>' +
+          '<p>This app’s mesh instead uses the numeric solution to those constraints — ' +
+          'four free base positions plus twelve concurrency equations, solved to a ' +
+          'residual under 10<sup>-12</sup> — so the two largest triangles land exactly on ' +
+          'the outer circle and every other triangle’s corners land exactly where three ' +
+          'different lines are supposed to cross. The construction animation shows one ' +
+          'honest way to physically draw each triangle with compass and straightedge once ' +
+          'those positions are known: an arc struck from the true apex, at the true leg ' +
+          'length, necessarily meets the base line at the true corner.</p>',
+        extraTitle: 'Precision, and why the numbers don’t simplify',
+        extraProse:
+          '<p>A 1984 survey of surviving Śrī Yantra diagrams (Kulaichev, below) sorted them ' +
+          'by how many of the twelve concurrency conditions they actually satisfy: roughly ' +
+          '70% solve only two or three, leaving the mesh free to deform slightly; another ' +
+          '20% do better but still approximate; only about 10% — mostly older metal and ' +
+          'stone examples — satisfy the full system, with no slack left to redraw ' +
+          'differently. This app targets that last, fully-determined tier.</p>' +
+          '<p>It’s tempting to look for a golden ratio or some other tidy constant behind ' +
+          'Huet’s four base positions (0.332, 0.537, 0.602, 0.835) — searches for one have ' +
+          'come up empty. They’re a numeric solution to the concurrency system, not a ' +
+          'designed proportion. The finished mesh is also less symmetric than it looks: ' +
+          'every triangle mirrors left-right about the vertical axis, but the figure has ' +
+          'no rotational symmetry at all — the same asymmetry a correctly hand-drawn ' +
+          'version would have.</p>',
+        sources:
+          'Alessandro Chiodo, <a href="https://doi.org/10.5802/crmath.163" target="_blank" rel="noopener">' +
+          '"On the construction of the Śrī Yantra"</a>, Comptes Rendus Mathématique 359 (2021) — ' +
+          'straightedge-and-compass constructibility proof and the concurrency conditions this ' +
+          'app’s geometry satisfies.<br><br>' +
+          'Gérard Huet, "Śrī Yantra Geometry", Theor. Comput. Sci. 281 (2002) — the calibrated ' +
+          'free parameters (base positions 0.332, 0.537, 0.602, 0.835) used here.<br><br>' +
+          'A. P. Kulaichev, "Śrīyantra and its Mathematical Properties", Indian J. Hist. Sci. 19 (1984).'
+      }
+    },
+    anahata: {
+      name: 'Anahata', hasBhupura: true, yantraExtent: 1.16, build: buildAnahataStages,
+      math: {
+        title: 'Anahata — Heart Chakra', subtitle: 'The fourth chakra: air, the heart, and the union of Shiva and Shakti.',
+        meaning:
+          '<p>Anahata ("unstruck") is the heart chakra, associated with the element air ' +
+          '(vāyu), the bīja mantra <b style="color:var(--warm);">Yaṃ</b>, and the presiding ' +
+          'deities Īśa (a form of Shiva) and the goddess Kākinī. It sits at the midpoint of ' +
+          'the seven chakras — three below concerned with survival and identity, three ' +
+          'above with expression and insight — and is traditionally where love, compassion ' +
+          'and connection are said to arise.</p>' +
+          '<p>The twelve petals are conventionally read as twelve qualities of the open ' +
+          'heart: peace, bliss, love, harmony, empathy, understanding, purity, clarity, ' +
+          'compassion, unity, forgiveness, and kindness.</p>',
+        geometry:
+          '<p>A hexagram (ṣaṭkoṇa) at the center: two overlapped equilateral triangles, one ' +
+          'pointing up (Shiva, consciousness) and one pointing down (Shakti, energy), their ' +
+          'union symbolizing the integration this chakra governs. Unlike the Sri Yantra, ' +
+          'this is not a constraint-satisfaction problem — any two equilateral triangles ' +
+          'inscribed in the same circle, one apex at each pole, already form a valid ' +
+          'hexagram, so each is constructed independently by the same circle-intersection ' +
+          'method used for Sri Yantra’s outermost pair.</p>',
+        sources: 'Arthur Avalon (Sir John Woodroffe), <i>The Serpent Power</i> (1919) — the classical source for the chakra iconography used across these presets.'
+      }
+    },
+    manipura: {
+      name: 'Manipura', hasBhupura: true, yantraExtent: 1.16, build: buildManipuraStages,
+      math: {
+        title: 'Manipura — Solar Plexus Chakra', subtitle: 'The third chakra: fire, willpower, and the triangle with three gates.',
+        meaning:
+          '<p>Manipura ("city of jewels") is the navel/solar-plexus chakra, associated with ' +
+          'the element fire (agni), the bīja mantra <b style="color:var(--warm);">Raṃ</b>, ' +
+          'and the presiding deities Rudra (a fierce form of Shiva) and the goddess Lākinī. ' +
+          'It governs willpower, confidence, and personal transformation.</p>' +
+          '<p>The ten petals are conventionally read as the ten prāṇas (vital energies) ' +
+          'that move through the body.</p>',
+        geometry:
+          '<p>A single downward-pointing triangle at the center represents fire rising to ' +
+          'meet consciousness. On each of its three sides sits a small gate (svastika) — ' +
+          'traditionally read as the sun’s rotation, and as what disciplines the triangle’s ' +
+          'otherwise-unruly fire. This app marks each gate as a short outward tick at the ' +
+          'midpoint of a side, a simplified stand-in for the full svastika glyph.</p>',
+        sources: 'Arthur Avalon (Sir John Woodroffe), <i>The Serpent Power</i> (1919) — the classical source for the chakra iconography used across these presets.'
+      }
+    },
+    vishuddhi: {
+      name: 'Vishuddhi', hasBhupura: true, yantraExtent: 1.16, build: buildVishuddhiStages,
+      math: {
+        title: 'Vishuddhi — Throat Chakra', subtitle: 'The fifth chakra: ether, purification, and the moon disc.',
+        meaning:
+          '<p>Vishuddhi ("especially pure") is the throat chakra, associated with the ' +
+          'element ether/space (ākāśa), the bīja mantra <b style="color:var(--warm);">Haṃ</b>, ' +
+          'and the presiding deities Sadāśiva and the goddess Śākinī. It governs speech, ' +
+          'truthfulness, and expression.</p>' +
+          '<p>The sixteen petals are conventionally read as the sixteen Sanskrit vowels, the ' +
+          'raw sounds from which all speech is built.</p>',
+        geometry:
+          '<p>Inside the sixteen petals sits a smaller circle — the full moon, reflecting a ' +
+          'purified mind — and inside that, a downward-pointing triangle sized to match. ' +
+          'This app builds that inner triangle with the exact same equilateral-inscribed-' +
+          'in-a-circle construction as the outer figures, just scaled to the smaller ' +
+          'circle’s radius, so it lands on that circle exactly rather than approximately.</p>',
+        sources: 'Arthur Avalon (Sir John Woodroffe), <i>The Serpent Power</i> (1919) — the classical source for the chakra iconography used across these presets.'
+      }
+    },
+    muladhara: {
+      name: 'Muladhara', hasBhupura: true, yantraExtent: 1.26, build: buildMuladharaStages,
+      math: {
+        title: 'Muladhara — Root Chakra', subtitle: 'The first chakra: earth, stability, and the square that grounds everything above it.',
+        meaning:
+          '<p>Mūlādhāra ("root support") is the base chakra, associated with the element ' +
+          'earth (pṛthvī), the bīja mantra <b style="color:var(--warm);">Laṃ</b>, and the ' +
+          'presiding deities Brahmā and the goddess Ḍākinī. It is the foundation the other ' +
+          'six chakras are traditionally described as resting on.</p>' +
+          '<p>The four petals are conventionally read as the four vṛttis (mental modes) of ' +
+          'this base state: dharma, artha, kāma and mokṣa — or, in another reading, the four ' +
+          'functions of mind (manas), intellect (buddhi), consciousness (citta) and ego ' +
+          '(ahaṃkāra) said to originate here.</p>',
+        geometry:
+          '<p>A square — the geometric sign of the earth element, stable and four-square by ' +
+          'nature — encloses a downward-pointing triangle. Unlike the other presets’ inner ' +
+          'triangles, this one is inscribed in the <i>square</i> rather than the outer ' +
+          'circle: its base runs along the square’s top edge and its apex sits on the ' +
+          'square’s bottom edge, so the same "guide line meets a known boundary" construction ' +
+          'used everywhere else in this app applies here too, just against a straight edge ' +
+          'instead of an arc.</p>',
+        sources: 'Arthur Avalon (Sir John Woodroffe), <i>The Serpent Power</i> (1919) — the classical source for the chakra iconography used across these presets.'
+      }
+    },
+    swadhisthana: {
+      name: 'Swadhisthana', hasBhupura: true, yantraExtent: 1.26, build: buildSwadhisthanaStages,
+      math: {
+        title: 'Swadhisthana — Sacral Chakra', subtitle: 'The second chakra: water, feeling, and the crescent moon.',
+        meaning:
+          '<p>Svādhiṣṭhāna ("one’s own abode") is the sacral chakra, associated with the ' +
+          'element water (ap), the bīja mantra <b style="color:var(--warm);">Vaṃ</b>, and the ' +
+          'presiding deities Viṣṇu and the goddess Rākinī. It governs the fluid, changeable ' +
+          'aspects of experience — emotion, desire, and creativity.</p>' +
+          '<p>The six petals are conventionally read as six vṛttis that cloud clear feeling: ' +
+          'affection, pitilessness, a sense of destructiveness, delusion, disdain and ' +
+          'suspicion — the emotional currents this chakra’s practice works to move through ' +
+          'rather than be ruled by.</p>',
+        geometry:
+          '<p>A crescent moon — water’s traditional sign, always changing shape while ' +
+          'remaining itself — sits at the center. It is built the way a crescent is always ' +
+          'constructed with compass and straightedge: draw one circle, then a second ' +
+          'identical circle with its center shifted so the two overlap; the crescent is one ' +
+          'circle’s far arc joined to the other’s near arc through their two crossing ' +
+          'points, with both full guide circles erased once that outline is traced.</p>',
+        sources: 'Arthur Avalon (Sir John Woodroffe), <i>The Serpent Power</i> (1919) — the classical source for the chakra iconography used across these presets.'
+      }
+    },
+    ajna: {
+      name: 'Ajna', hasBhupura: true, yantraExtent: 1.87, build: buildAjnaStages,
+      math: {
+        title: 'Ajna — Third Eye Chakra', subtitle: 'The sixth chakra: insight, the two channels, and the triangle of light.',
+        meaning:
+          '<p>Ājñā ("command") is the third-eye chakra, seated between the eyebrows, ' +
+          'associated with the mind (manas) rather than one of the five elements, the bīja ' +
+          'mantra <b style="color:var(--warm);">Oṃ</b>, and the presiding deities Śiva ' +
+          '(as Ardhanārīśvara/Itara Liṅga) and the goddess Hākinī. It is traditionally where ' +
+          'the two main energy channels, iḍā and piṅgalā, are said to terminate and merge ' +
+          'into the central suṣumṇā.</p>' +
+          '<p>Its two petals represent exactly that pair — iḍā and piṅgalā, the lunar and ' +
+          'solar, feeling and intellect — brought into a single point of unified sight.</p>',
+        geometry:
+          '<p>The simplest of these constructions: a downward-pointing triangle inscribed in ' +
+          'the main circle, with just two petals rather than a full lotus ring. Traditional ' +
+          'depictions often add a small Oṃ glyph and/or a bindu at the triangle’s center; ' +
+          'this app draws the geometric frame those symbols sit inside, not the script ' +
+          'itself.</p>',
+        sources: 'Arthur Avalon (Sir John Woodroffe), <i>The Serpent Power</i> (1919) — the classical source for the chakra iconography used across these presets.'
+      }
+    }
+  };
+  var PRESET_ORDER = ['sriYantra', 'muladhara', 'swadhisthana', 'manipura', 'anahata', 'vishuddhi', 'ajna'];
+  var currentPresetKey = null;
+
+  function applyPresetMath(key){
+    var m = PRESETS[key].math;
+    document.getElementById('mathTitle').textContent = m.title;
+    document.getElementById('mathSubtitle').textContent = m.subtitle;
+    document.getElementById('mathMeaning').innerHTML = m.meaning;
+    document.getElementById('mathGeometry').innerHTML = m.geometry;
+    document.getElementById('mathSources').innerHTML = m.sources;
+    var extraSection = document.getElementById('mathExtraSection');
+    if(m.extraTitle){
+      document.getElementById('mathExtraTitle').textContent = m.extraTitle;
+      document.getElementById('mathExtraProse').innerHTML = m.extraProse;
+      extraSection.style.display = '';
+    } else {
+      extraSection.style.display = 'none';
+    }
+  }
+
+  function loadPreset(key){
+    currentPresetKey = key;
+    STAGE_DEFS = PRESETS[key].build();
+    STEPS = flattenStages(STAGE_DEFS);
+    totalSteps = STEPS.length;
+    progress = 0;
+    setPlaying(false);
+    constructionCompleteFired = false;
+    setBhupuraAvailable(PRESETS[key].hasBhupura);
+    applyPresetMath(key);
+    draw();
+    emitBoyEvent('yantraSelected', key);
+  }
+
+  // ---------- preset dropdown ----------
+  var presetSelect = document.getElementById('presetSelect');
+  PRESET_ORDER.forEach(function(key){
+    var opt = document.createElement('option');
+    opt.value = key;
+    opt.textContent = PRESETS[key].name;
+    presetSelect.appendChild(opt);
+  });
+  presetSelect.value = 'sriYantra';
+  presetSelect.addEventListener('change', function(){ loadPreset(presetSelect.value); });
+  loadPreset('sriYantra'); // sets currentPresetKey correctly; STAGE_DEFS was already built once above so this just re-confirms state
+
+  document.getElementById('hint').textContent = 'Yantra geometry online.';
+  setTimeout(function(){
+    document.getElementById('hint').style.opacity = '0';
+  }, 1400);
+
+})();
+</script>
+</body>
+</html>
