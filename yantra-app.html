@@ -90,7 +90,7 @@
   canvas{display:block;width:100%;height:100%;touch-action:none;}
 
   /* ---- top toolbar chips (shared look with sibling apps) ---- */
-  .gear-btn, .download-btn, .explain-btn, .theme-btn, .guide-btn{
+  .gear-btn, .download-btn, .explain-btn, .theme-btn, .guide-btn, .xsect-btn{
     position:absolute;top:14px;z-index:2;
     width:36px;height:36px;border-radius:4px;
     background:var(--chip-bg);
@@ -105,12 +105,13 @@
   .explain-btn{left:58px;font-family:'IBM Plex Mono',monospace;font-size:16px;font-weight:600;}
   .theme-btn{left:102px;}
   .guide-btn{left:146px;font-family:'IBM Plex Mono',monospace;font-size:15px;}
-  .gear-btn:hover, .download-btn:hover, .explain-btn:hover, .theme-btn:hover, .guide-btn:hover{
+  .xsect-btn{left:190px;font-family:'IBM Plex Mono',monospace;font-size:15px;}
+  .gear-btn:hover, .download-btn:hover, .explain-btn:hover, .theme-btn:hover, .guide-btn:hover, .xsect-btn:hover{
     background:var(--surface-2);border-color:var(--cool);
   }
   .gear-btn:focus-visible, .download-btn:focus-visible, .explain-btn:focus-visible,
-  .theme-btn:focus-visible, .guide-btn:focus-visible{outline:2px solid var(--cool);outline-offset:2px;}
-  .gear-btn.open, .explain-btn.open, .guide-btn.on{border-color:var(--warm);color:var(--warm);}
+  .theme-btn:focus-visible, .guide-btn:focus-visible, .xsect-btn:focus-visible{outline:2px solid var(--cool);outline-offset:2px;}
+  .gear-btn.open, .explain-btn.open, .guide-btn.on, .xsect-btn.on{border-color:var(--warm);color:var(--warm);}
   .gear-btn svg, .download-btn svg, .theme-btn svg{width:17px;height:17px;stroke:var(--text);transition:transform 0.4s ease;}
   .gear-btn.open svg{transform:rotate(75deg);}
 
@@ -280,6 +281,17 @@
     background:var(--hint-bg);padding:10px 16px;border-radius:4px;
     pointer-events:none;transition:opacity 0.6s ease;text-align:center;line-height:1.5;
   }
+
+  .xsect-info{
+    position:absolute;top:58px;left:14px;z-index:2;
+    max-width:min(320px,calc(100% - 28px));
+    background:var(--chip-bg);border:1px solid var(--border);border-radius:4px;
+    padding:7px 11px;font-family:'IBM Plex Mono',monospace;font-size:11px;line-height:1.5;
+    color:var(--text-muted);pointer-events:none;
+    opacity:0;transition:opacity 0.15s ease;
+  }
+  .xsect-info.on{opacity:1;}
+  .xsect-info b{color:var(--warm);font-weight:600;}
   @media (prefers-reduced-motion:reduce){
     .panel,.math-panel{transition:none;}
     .gear-btn svg{transition:none;}
@@ -318,6 +330,10 @@
   </button>
 
   <button class="guide-btn" id="guideBtn" aria-label="Toggle construction guide marks" aria-pressed="false" title="Restore full construction guide marks">&#9651;</button>
+
+  <button class="xsect-btn" id="xsectBtn" aria-label="Toggle line intersections" aria-pressed="false" title="Find &amp; highlight where the construction lines cross">&times;</button>
+
+  <div class="xsect-info" id="xsectInfo"></div>
 
   <button class="gear-btn" id="gearBtn" aria-label="Toggle settings" aria-expanded="false">
     <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -406,6 +422,10 @@
           <div class="picker-cursor" id="binduWheelCursor"></div>
         </div>
         <span class="hex-readout" id="binduHexReadout">#e5615a</span>
+      </div>
+      <div class="toggle-row">
+        <div class="label">Show line intersections</div>
+        <div class="switch" id="xsectToggle"></div>
       </div>
     </div>
 
@@ -680,6 +700,23 @@
     setFromHex(binduColor);
   })();
 
+  // ---------- construction-line intersections toggle ----------
+  var xsectBtn = document.getElementById('xsectBtn');
+  var xsectToggle = document.getElementById('xsectToggle');
+  var xsectInfo = document.getElementById('xsectInfo');
+  var showXsect = false;
+  function setXsect(v){
+    showXsect = v;
+    xsectBtn.classList.toggle('on', v);
+    xsectBtn.setAttribute('aria-pressed', v ? 'true' : 'false');
+    xsectToggle.classList.toggle('on', v);
+    xsectInfo.classList.toggle('on', v);
+    if(!v) xsectInfo.innerHTML = '';
+    draw();
+  }
+  xsectBtn.addEventListener('click', function(){ setXsect(!showXsect); });
+  xsectToggle.addEventListener('click', function(){ setXsect(!showXsect); });
+
   // Sri Yantra's own triangle mesh is the tightest fit of any preset: its
   // triangle 1 has a leg passing just 0.0193 of the diameter from the exact
   // center (verified directly from SRI_YANTRA_TRIANGLES — apex/base/half-
@@ -695,6 +732,114 @@
     ctx.arc(geo.cx, geo.cy, r, 0, Math.PI * 2);
     ctx.fillStyle = binduColor;
     ctx.fill();
+  }
+
+  // ==================================================================
+  // Construction-line intersections — reusable geometry primitives, ported
+  // from the TikZ Explorer applet's diagonal-crossing feature (segment-
+  // intersection-and-clustering-toolkit / circle-graph-C(n,4)-intersection-
+  // counting): bounded segment-segment intersection plus multiplicity-aware
+  // clustering. Generic — not specific to triangles or to Sri Yantra — so any
+  // future preset or shape here can reuse the same two functions.
+  // ==================================================================
+
+  // Returns the crossing point only if it lies within BOTH finite segments
+  // (never their infinite-line extension) — the key difference from a plain
+  // line-intersection formula, which would report false crossings for
+  // segments that would only meet if extended.
+  function segmentIntersect(p1, p2, p3, p4){
+    var x1 = p1[0], y1 = p1[1], x2 = p2[0], y2 = p2[1];
+    var x3 = p3[0], y3 = p3[1], x4 = p4[0], y4 = p4[1];
+    var d = (x2 - x1) * (y4 - y3) - (y2 - y1) * (x4 - x3);
+    if(Math.abs(d) < 1e-9) return null; // parallel (or nearly so)
+    var t = ((x3 - x1) * (y4 - y3) - (y3 - y1) * (x4 - x3)) / d;
+    var u = ((x3 - x1) * (y2 - y1) - (y3 - y1) * (x2 - x1)) / d;
+    if(t < 0 || t > 1 || u < 0 || u > 1) return null;
+    return [x1 + t * (x2 - x1), y1 + t * (y2 - y1)];
+  }
+
+  // Merges near-duplicate hits into one point while counting how many raw
+  // hits landed there — that count is what reveals concurrency (several
+  // lines meeting at exactly one point) rather than silently collapsing it
+  // to an indistinguishable ordinary crossing.
+  function clusterPoints(rawPoints, epsSq){
+    var clusters = [];
+    rawPoints.forEach(function(p){
+      for(var c = 0; c < clusters.length; c++){
+        var cc = clusters[c];
+        var dx = cc[0] - p[0], dy = cc[1] - p[1];
+        if(dx * dx + dy * dy < epsSq){ cc[2]++; return; }
+      }
+      clusters.push([p[0], p[1], 1]);
+    });
+    return clusters; // each entry: [x, y, multiplicity]
+  }
+
+  // k truly concurrent lines contribute C(k,2) pairwise hits to the same
+  // clustered point (3 lines -> 3 hits, 4 lines -> 6, ...) — the same
+  // combinatorics behind counting a regular polygon's diagonal crossings.
+  // Invert C(k,2)=m to recover how many lines actually meet there.
+  function linesAtCluster(m){ return Math.round((1 + Math.sqrt(1 + 8 * m)) / 2); }
+
+  // Every triangle edge (both legs + base) currently defined for the active
+  // preset, in pixel space — all of STAGE_DEFS's 'triangle' stages regardless
+  // of animation progress, since this analyzes the finished geometry, not a
+  // per-frame construction overlay. Each edge is tagged with its own
+  // triangle's index so intersection-testing can skip a triangle's own three
+  // edges (they trivially share a corner, which isn't a real crossing).
+  function currentTriangleEdgesPx(){
+    var edges = [];
+    STAGE_DEFS.forEach(function(stage, idx){
+      if(stage.kind !== 'triangle') return;
+      var tri = stage.tri;
+      var apex = [px(0), py(tri.A)];
+      var baseY = py(tri.B);
+      var left = [px(-tri.W), baseY];
+      var right = [px(tri.W), baseY];
+      edges.push({ a: apex, b: left, tri: idx });
+      edges.push({ a: apex, b: right, tri: idx });
+      edges.push({ a: left, b: right, tri: idx });
+    });
+    return edges;
+  }
+
+  function computeIntersections(){
+    var edges = currentTriangleEdgesPx();
+    var raw = [];
+    for(var i = 0; i < edges.length; i++){
+      for(var j = i + 1; j < edges.length; j++){
+        if(edges[i].tri === edges[j].tri) continue;
+        var hit = segmentIntersect(edges[i].a, edges[i].b, edges[j].a, edges[j].b);
+        if(hit) raw.push(hit);
+      }
+    }
+    // Tight merge tolerance: this geometry is exact to a 1e-12 residual
+    // (Chiodo's concurrency solve, see the Σ panel), so distinct crossings
+    // are never actually this close together — this only absorbs pixel-
+    // space floating-point noise, not real positional slop.
+    return clusterPoints(raw, 4); // 2px radius
+  }
+
+  function drawIntersections(){
+    if(!showXsect || !geo) return;
+    var clusters = computeIntersections();
+    var concurrent = 0, maxLines = 0;
+    clusters.forEach(function(c){
+      var k = linesAtCluster(c[2]);
+      var isConcurrency = k >= 3;
+      if(isConcurrency){ concurrent++; if(k > maxLines) maxLines = k; }
+      ctx.beginPath();
+      ctx.arc(c[0], c[1], isConcurrency ? Math.min(7, 2.5 + k) : 2.5, 0, Math.PI * 2);
+      ctx.fillStyle = resolveColor(isConcurrency ? 'var(--warm)' : 'var(--cool)');
+      ctx.globalAlpha = isConcurrency ? 0.95 : 0.55;
+      ctx.fill();
+    });
+    resetAlpha();
+    if(xsectInfo){
+      xsectInfo.innerHTML = '<b>' + clusters.length + '</b> crossing point' + (clusters.length === 1 ? '' : 's') +
+        ' &middot; <b>' + concurrent + '</b> exact concurrence' + (concurrent === 1 ? '' : 's') + ' (3+ lines)' +
+        (maxLines > 3 ? ' &middot; up to ' + maxLines + ' lines at one point' : '');
+    }
   }
 
   // ==================================================================
@@ -1521,6 +1666,7 @@
     }
 
     drawBindu();
+    drawIntersections();
 
     if(progress <= 0){
       if(stageLabel) stageLabel.textContent = 'Ready';
