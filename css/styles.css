@@ -14,6 +14,7 @@
   --font-body: 'Cormorant Garamond', serif;
   --font-ui: 'Inter', sans-serif;
   --font-sanskrit: 'Noto Sans Devanagari', sans-serif;
+  --font-tamil: 'Noto Sans Tamil', sans-serif;
 
   --max-width: 900px;
 }
@@ -543,6 +544,16 @@ a {
   padding-top: 5px;
   padding-bottom: 2px;
   transition: opacity 0.15s ease;
+}
+
+/* Tamil chants (see js/app.js renderChant) use the same .deva-line/
+   .chant-title-deva markup as Devanagari ones, just with the script font
+   swapped — Tamil text has no Vedic accent marks, so the .iast-line
+   transliteration column needs no equivalent override. */
+body.chant-lang-tamil .chant-title-deva,
+body.chant-lang-tamil .deva-line,
+body.chant-lang-tamil .colophon .deva-line {
+  font-family: var(--font-tamil);
 }
 
 body.hide-transliteration .iast-line {

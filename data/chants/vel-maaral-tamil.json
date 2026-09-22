@@ -1,0 +1,1700 @@
+{
+  "id": "vel-maaral-tamil",
+  "language": "tamil",
+  "title": {
+    "devanagari": "வேல் மாறல்",
+    "iast": "Vēl Māṟal"
+  },
+  "source": {
+    "site": "vignanam.org",
+    "devanagari_url": "https://vignanam.org/tamil/vel-maaral-tamil.html",
+    "iast_url": "https://vignanam.org/english/vel-maaral-tamil.html"
+  },
+  "colophon": {
+    "devanagari": "வள்ளிமலை ஸ்ரீ சச்சிதானந்த சுவாமிகள் தொகுத்தருளிய 'வேல் மாறல்'\n... வேலும் மயிலும் துணை ...",
+    "iast": "vaḻḻimalai srī chachchitānanta chuvāmikaḻ tokuttaruḻiya 'vēl māRal'\n... vēluṃ mayiluṃ tuṇai ..."
+  },
+  "sectionUnit": "Verse",
+  "sections": [
+    {
+      "label": "Refrain (×12)",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "( ... இந்த அடியை முதலில் 12 முறை ஓதவும் ... )",
+          "iast": "( ... inta aṭiyai mutalil 12 muRai ōtavum ... )"
+        },
+        {
+          "n": 2,
+          "devanagari": "திருத்தணியில் உதித்(து)அருளும் ஒருத்தன்மலை\nவிருத்தனென(து) உளத்திலுறை\nகருத்தன்மயில் நடத்துகுகன் வேலே.",
+          "iast": "tiruttaṇiyil utit(tu)aruḻum oruttanmalai\nviruttanena(tu) uḻattiluRai\nkaruttanmayil naṭattukukan vēlē."
+        },
+        {
+          "n": 3,
+          "devanagari": "( ... பின்வரும் ஒவ்வோரடியின் முடிவிலும் \"திரு\" என்ற இடத்தில்\nமேற்கண்ட முழு அடியையும் கூறவேண்டும் ... )",
+          "iast": "( ... pinvarum ovvōraṭiyin muṭivilum \"tiru\" enRa iṭattil\nmēRkaṇṭa muzhu aṭiyaiyuṃ kūRavēṇṭum ... )"
+        }
+      ]
+    },
+    {
+      "label": "1",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "பருத்தமுலை சிருத்திடை வெளுத்தனகை",
+          "iast": "paruttamulai chiṛttiṭai veḻuttanakai"
+        },
+        {
+          "n": 2,
+          "devanagari": "கருத்தகுழல் சிவத்திதழ் மறச்சிருமி",
+          "iast": "kaṛttakuzhal chivattitazh maRachchiṛmi"
+        },
+        {
+          "n": 3,
+          "devanagari": "விழிக்குனிகர் ஆகும்",
+          "iast": "vizhikkunikar ākum"
+        },
+        {
+          "n": 4,
+          "devanagari": "( ... திரு ... )",
+          "iast": "( ... tiru ... )"
+        }
+      ]
+    },
+    {
+      "label": "2",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "திருத்தணியில் உதித்(து)அருளும் ஒருத்தன்மலை",
+          "iast": "tiruttaṇiyil utit(tu)aruḻum oruttanmalai"
+        },
+        {
+          "n": 2,
+          "devanagari": "விருத்தனென(து) உளத்திலுறை",
+          "iast": "viruttanena(tu) uḻattiluRai"
+        },
+        {
+          "n": 3,
+          "devanagari": "கருத்தன்மயில் நடத்துகுகன் வேலே",
+          "iast": "karuttanmayil naṭattukukan vēlē"
+        },
+        {
+          "n": 4,
+          "devanagari": "( ... திரு ... )",
+          "iast": "( ... tiru ... )"
+        }
+      ]
+    },
+    {
+      "label": "3",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "சொலற்(கு)அரிய திருப்புகழை உரைத்தவரை",
+          "iast": "cholaR(ku)ariya tiruppukazhai uraittavarai"
+        },
+        {
+          "n": 2,
+          "devanagari": "அடுத்தபகை அருத்(து)எறிய",
+          "iast": "aṭuttapakai aṛt(tu)eRiya"
+        },
+        {
+          "n": 3,
+          "devanagari": "உருக்கிஎழும் அறத்தைனிலை காணும்",
+          "iast": "uṛkkiezhuṃ aRattainilai kāṇum"
+        },
+        {
+          "n": 4,
+          "devanagari": "( ... திரு ... )",
+          "iast": "( ... tiru ... )"
+        }
+      ]
+    },
+    {
+      "label": "4",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "தருக்கினமன் முருக்கவரின் எருக்குமதி",
+          "iast": "tarukkinaman murukkavarin erukkumati"
+        },
+        {
+          "n": 2,
+          "devanagari": "தரித்தமுடி படைத்தவிறல் படைத்திறை",
+          "iast": "tarittamuṭi paṭaittaviRal paṭaittiRai"
+        },
+        {
+          "n": 3,
+          "devanagari": "கழற்குனிகர் ஆகும்",
+          "iast": "kazhaRkunikar ākum"
+        },
+        {
+          "n": 4,
+          "devanagari": "( ... திரு ... )",
+          "iast": "( ... tiru ... )"
+        }
+      ]
+    },
+    {
+      "label": "5",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "பனைக்கைமுக படக்கரட மதத்தவள",
+          "iast": "panaikkaimuka paṭakkaraṭa matattavaḻa"
+        },
+        {
+          "n": 2,
+          "devanagari": "கஜக்கடவுள் பதத்(து)இடு(ம்)னி",
+          "iast": "kajakkaṭavuḻ patat(tu)iṭu(m)ni"
+        },
+        {
+          "n": 3,
+          "devanagari": "களத்துமுளை தெறிக்கவரம் ஆகும்",
+          "iast": "kaḻattumuḻai teRikkavaraṃ ākum"
+        },
+        {
+          "n": 4,
+          "devanagari": "( ... திரு ... )",
+          "iast": "( ... tiru ... )"
+        }
+      ]
+    },
+    {
+      "label": "6",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "சினத்(து)அவுணர் எதிர்த்தரண களத்தில்வெகு",
+          "iast": "chinat(tu)avuṇar etirttaraṇa kaḻattilveku"
+        },
+        {
+          "n": 2,
+          "devanagari": "குறைத்தலைகள் சிரித்(து)எயிரு",
+          "iast": "kuRaittalaikaḻ chirit(tu)eyiṛ"
+        },
+        {
+          "n": 3,
+          "devanagari": "கடித்துவிழி விழித்(து)அலற மோதும்",
+          "iast": "kaṭittuvizhi vizhit(tu)alaRa mōtum"
+        },
+        {
+          "n": 4,
+          "devanagari": "( ... திரு ... )",
+          "iast": "( ... tiru ... )"
+        }
+      ]
+    },
+    {
+      "label": "7",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "துதிக்குமடி யவர்க்(கு)ஒருவர் கெடுக்கிடர்",
+          "iast": "tutikkumaṭi yavark(ku)oruvar keṭukkiṭar"
+        },
+        {
+          "n": 2,
+          "devanagari": "நினைக்கினவர் குலத்தைமுதல் அறக்களையும்",
+          "iast": "ninaikkinavar kulattaimutal aRakkaḻaiyum"
+        },
+        {
+          "n": 3,
+          "devanagari": "எனக்(கு)ஓர் துணை ஆகும்",
+          "iast": "enak(ku)ōr tuṇai ākum"
+        },
+        {
+          "n": 4,
+          "devanagari": "( ... திரு ... )",
+          "iast": "( ... tiru ... )"
+        }
+      ]
+    },
+    {
+      "label": "8",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "தலத்திலுள கணத்தொகுதி களிப்பினுண",
+          "iast": "talattiluḻa kaṇattokuti kaḻippinuṇa"
+        },
+        {
+          "n": 2,
+          "devanagari": "வழைப்ப(து) என மலர்க்கமல கரத்தின்முனை",
+          "iast": "vazhaippa(tu) ena malarkkamala karattinmunai"
+        },
+        {
+          "n": 3,
+          "devanagari": "விதிர்க்கவளை(வு) ஆகும்",
+          "iast": "vitirkkavaḻai(vu) ākum"
+        },
+        {
+          "n": 4,
+          "devanagari": "( ... திரு ... )",
+          "iast": "( ... tiru ... )"
+        }
+      ]
+    },
+    {
+      "label": "9",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "பழுத்தமுது தமிழ்ப்பலகை இருக்குமொரு",
+          "iast": "pazhuttamutu tamizhppalakai irukkumoru"
+        },
+        {
+          "n": 2,
+          "devanagari": "கவிப்புலவன் இசைக்(கு)உருகி",
+          "iast": "kavippulavan ichaik(ku)uruki"
+        },
+        {
+          "n": 3,
+          "devanagari": "வரைக்குகையை இடித்துவழி காணும்",
+          "iast": "varaikkukaiyai iṭittuvazhi kāṇum"
+        },
+        {
+          "n": 4,
+          "devanagari": "( ... திரு ... )",
+          "iast": "( ... tiru ... )"
+        }
+      ]
+    },
+    {
+      "label": "10",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "திசைக்கிரியை முதற்குலிசன் அருத்தசிறை",
+          "iast": "tichaikkiriyai mutaRkulichan aṛttachiRai"
+        },
+        {
+          "n": 2,
+          "devanagari": "முளைத்த(து)என முகட்டினிடை",
+          "iast": "muḻaitta(tu)ena mukaṭṭiniṭai"
+        },
+        {
+          "n": 3,
+          "devanagari": "பறக்கற விசைத்(து) அதிர ஓடும்",
+          "iast": "paRakkaRa vichait(tu) atira ōṭum"
+        },
+        {
+          "n": 4,
+          "devanagari": "( ... திரு ... )",
+          "iast": "( ... tiru ... )"
+        }
+      ]
+    },
+    {
+      "label": "11",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "சுடர்ப்பரிதி ஒளிப்பனில(வு) ஒழுக்கு(ம்)மதி",
+          "iast": "chuṭarppariti oḻippanila(vu) ozhukku(m)mati"
+        },
+        {
+          "n": 2,
+          "devanagari": "ஒளிப்பலை அடக்குதழல் ஒளிப்பொளிர்",
+          "iast": "oḻippalai aṭakkutazhal oḻippoḻir"
+        },
+        {
+          "n": 3,
+          "devanagari": "ஒளிப்பிரபை வீசும்",
+          "iast": "oḻippirapai vīchum"
+        },
+        {
+          "n": 4,
+          "devanagari": "( ... திரு ... )",
+          "iast": "( ... tiru ... )"
+        }
+      ]
+    },
+    {
+      "label": "12",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "தனித்துவழி நடக்குமென(து) இடத்துமொரு",
+          "iast": "tanittuvazhi naṭakkumena(tu) iṭattumoru"
+        },
+        {
+          "n": 2,
+          "devanagari": "வலத்துமிரு புறத்துமரு(கு)",
+          "iast": "valattumiru puRattumaru(ku)"
+        },
+        {
+          "n": 3,
+          "devanagari": "அடுத்(து)இரவு பகற்றுணைய(து) ஆகும்",
+          "iast": "aṭut(tu)iravu pakarruṇaiya(tu) ākum"
+        },
+        {
+          "n": 4,
+          "devanagari": "( ... திரு ... )",
+          "iast": "( ... tiru ... )"
+        }
+      ]
+    },
+    {
+      "label": "13",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "பசித்(து)அலகை முசித்(து)அழுது முறைப்படுதல்",
+          "iast": "pachit(tu)alakai muchit(tu)azhutu muRaippaṭutal"
+        },
+        {
+          "n": 2,
+          "devanagari": "ஒழித்(து)அவுணர் உரத்(து)உதிர",
+          "iast": "ozhit(tu)avuṇar urat(tu)utira"
+        },
+        {
+          "n": 3,
+          "devanagari": "நிணத்தசைகள் புசிக்கருள் நேரும்",
+          "iast": "niṇattachaikaḻ puchikkaruḻ nērum"
+        },
+        {
+          "n": 4,
+          "devanagari": "( ... திரு ... )",
+          "iast": "( ... tiru ... )"
+        }
+      ]
+    },
+    {
+      "label": "14",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "திரைக்கடலை உடைத்துனிறை புனற்கடிது",
+          "iast": "tiraikkaṭalai uṭaittuniRai punaRkaṭitu"
+        },
+        {
+          "n": 2,
+          "devanagari": "குடித்(து)உடையும் உடைப்(பு) அடைய",
+          "iast": "kuṭit(tu)uṭaiyuṃ uṭaip(pu) aṭaiya"
+        },
+        {
+          "n": 3,
+          "devanagari": "அடைத்(து)உதிரம் நிறைத்துவிளை யாடும்",
+          "iast": "aṭait(tu)utiraṃ niRaittuviḻai yāṭum"
+        },
+        {
+          "n": 4,
+          "devanagari": "( ... திரு ... )",
+          "iast": "( ... tiru ... )"
+        }
+      ]
+    },
+    {
+      "label": "15",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "சுரர்க்கு(ம்)முனி வரர்க்கு(ம்)மக பதிக்கும்விதி",
+          "iast": "churarkku(m)muni vararkku(m)maka patikkumviti"
+        },
+        {
+          "n": 2,
+          "devanagari": "தனக்கு(ம்)அரி தனக்கு(ம்)னரர் தமக்குமுரும்",
+          "iast": "tanakku(m)ari tanakku(m)narar tamakkumuṛm"
+        },
+        {
+          "n": 3,
+          "devanagari": "இடுக்கண்வினை சாடும்",
+          "iast": "iṭukkaṇvinai chāṭum"
+        },
+        {
+          "n": 4,
+          "devanagari": "( ... திரு ... )",
+          "iast": "( ... tiru ... )"
+        }
+      ]
+    },
+    {
+      "label": "16",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "சலத்துவரும் அரக்கருடல் கொழுத்துவளர்",
+          "iast": "chalattuvaruṃ arakkaruṭal kozhuttuvaḻar"
+        },
+        {
+          "n": 2,
+          "devanagari": "பெருத்தகுடர் சிவத்ததொடை",
+          "iast": "peruttakuṭar chivattatoṭai"
+        },
+        {
+          "n": 3,
+          "devanagari": "எனச்சிகையில் விருப்பமொடு சூடும்",
+          "iast": "enachchikaiyil viruppamoṭu chūṭum"
+        },
+        {
+          "n": 4,
+          "devanagari": "( ... திரு ... )",
+          "iast": "( ... tiru ... )"
+        }
+      ]
+    },
+    {
+      "label": "17",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "சுரர்க்கு(ம்)முனி வரர்க்கு(ம்)மக பதிக்கும்விதி",
+          "iast": "churarkku(m)muni vararkku(m)maka patikkumviti"
+        },
+        {
+          "n": 2,
+          "devanagari": "தனக்கு(ம்)அரி தனக்கு(ம்)னரர் தமக்குமுரும்",
+          "iast": "tanakku(m)ari tanakku(m)narar tamakkumuṛm"
+        },
+        {
+          "n": 3,
+          "devanagari": "இடுக்கண்வினை சாடும்",
+          "iast": "iṭukkaṇvinai chāṭum"
+        },
+        {
+          "n": 4,
+          "devanagari": "( ... திரு ... )",
+          "iast": "( ... tiru ... )"
+        }
+      ]
+    },
+    {
+      "label": "18",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "சலத்துவரும் அரக்கருடல் கொழுத்துவளர்",
+          "iast": "chalattuvaruṃ arakkaruṭal kozhuttuvaḻar"
+        },
+        {
+          "n": 2,
+          "devanagari": "பெருத்தகுடர் சிவத்ததொடை",
+          "iast": "peruttakuṭar chivattatoṭai"
+        },
+        {
+          "n": 3,
+          "devanagari": "எனச்சிகையில் விருப்பமொடு சூடும்",
+          "iast": "enachchikaiyil viruppamoṭu chūṭum"
+        },
+        {
+          "n": 4,
+          "devanagari": "( ... திரு ... )",
+          "iast": "( ... tiru ... )"
+        }
+      ]
+    },
+    {
+      "label": "19",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "பசித்(து)அலகை முசித்(து)அழுது முறைப்படுதல்",
+          "iast": "pachit(tu)alakai muchit(tu)azhutu muRaippaṭutal"
+        },
+        {
+          "n": 2,
+          "devanagari": "ஒழித்(து)அவுணர் உரத்(து)உதிர",
+          "iast": "ozhit(tu)avuṇar urat(tu)utira"
+        },
+        {
+          "n": 3,
+          "devanagari": "நிணத்தசைகள் புசிக்கருள் நேரும்",
+          "iast": "niṇattachaikaḻ puchikkaruḻ nērum"
+        },
+        {
+          "n": 4,
+          "devanagari": "( ... திரு ... )",
+          "iast": "( ... tiru ... )"
+        }
+      ]
+    },
+    {
+      "label": "20",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "திரைக்கடலை உடைத்துனிறை புனற்கடிது",
+          "iast": "tiraikkaṭalai uṭaittuniRai punaRkaṭitu"
+        },
+        {
+          "n": 2,
+          "devanagari": "குடித்(து)உடையும் உடைப்(பு) அடைய",
+          "iast": "kuṭit(tu)uṭaiyuṃ uṭaip(pu) aṭaiya"
+        },
+        {
+          "n": 3,
+          "devanagari": "அடைத்(து)உதிரம் நிறைத்துவிளை யாடும்",
+          "iast": "aṭait(tu)utiraṃ niRaittuviḻai yāṭum"
+        },
+        {
+          "n": 4,
+          "devanagari": "( ... திரு ... )",
+          "iast": "( ... tiru ... )"
+        }
+      ]
+    },
+    {
+      "label": "21",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "சுடர்ப்பரிதி ஒளிப்பனில(வு) ஒழுக்கு(ம்)மதி",
+          "iast": "chuṭarppariti oḻippanila(vu) ozhukku(m)mati"
+        },
+        {
+          "n": 2,
+          "devanagari": "ஒளிப்பலை அடக்குதழல் ஒளிப்பொளிர்",
+          "iast": "oḻippalai aṭakkutazhal oḻippoḻir"
+        },
+        {
+          "n": 3,
+          "devanagari": "ஒளிப்பிரபை வீசும்",
+          "iast": "oḻippirapai vīchum"
+        },
+        {
+          "n": 4,
+          "devanagari": "( ... திரு ... )",
+          "iast": "( ... tiru ... )"
+        }
+      ]
+    },
+    {
+      "label": "22",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "தனித்துவழி நடக்குமென(து) இடத்துமொரு",
+          "iast": "tanittuvazhi naṭakkumena(tu) iṭattumoru"
+        },
+        {
+          "n": 2,
+          "devanagari": "வலத்துமிரு புறத்துமரு(கு)",
+          "iast": "valattumiru puRattumaru(ku)"
+        },
+        {
+          "n": 3,
+          "devanagari": "அடுத்(து)இரவு பகற்றுணைய(து) ஆகும்",
+          "iast": "aṭut(tu)iravu pakarruṇaiya(tu) ākum"
+        },
+        {
+          "n": 4,
+          "devanagari": "( ... திரு ... )",
+          "iast": "( ... tiru ... )"
+        }
+      ]
+    },
+    {
+      "label": "23",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "பழுத்தமுது தமிழ்ப்பலகை இருக்குமொரு",
+          "iast": "pazhuttamutu tamizhppalakai irukkumoru"
+        },
+        {
+          "n": 2,
+          "devanagari": "கவிப்புலவன் இசைக்(கு)உருகி",
+          "iast": "kavippulavan ichaik(ku)uruki"
+        },
+        {
+          "n": 3,
+          "devanagari": "வரைக்குகையை இடித்துவழி காணும்",
+          "iast": "varaikkukaiyai iṭittuvazhi kāṇum"
+        },
+        {
+          "n": 4,
+          "devanagari": "( ... திரு ... )",
+          "iast": "( ... tiru ... )"
+        }
+      ]
+    },
+    {
+      "label": "24",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "திசைக்கிரியை முதற்குலிசன் அருத்தசிறை",
+          "iast": "tichaikkiriyai mutaRkulichan aṛttachiRai"
+        },
+        {
+          "n": 2,
+          "devanagari": "முளைத்த(து)என முகட்டினிடை",
+          "iast": "muḻaitta(tu)ena mukaṭṭiniṭai"
+        },
+        {
+          "n": 3,
+          "devanagari": "பறக்கற விசைத்(து) அதிர ஓடும்",
+          "iast": "paRakkaRa vichait(tu) atira ōṭum"
+        },
+        {
+          "n": 4,
+          "devanagari": "( ... திரு ... )",
+          "iast": "( ... tiru ... )"
+        }
+      ]
+    },
+    {
+      "label": "25",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "துதிக்குமடி யவர்க்(கு)ஒருவர் கெடுக்கிடர்",
+          "iast": "tutikkumaṭi yavark(ku)oruvar keṭukkiṭar"
+        },
+        {
+          "n": 2,
+          "devanagari": "நினைக்கினவர் குலத்தைமுதல் அறக்களையும்",
+          "iast": "ninaikkinavar kulattaimutal aRakkaḻaiyum"
+        },
+        {
+          "n": 3,
+          "devanagari": "எனக்(கு)ஓர் துணை ஆகும்",
+          "iast": "enak(ku)ōr tuṇai ākum"
+        },
+        {
+          "n": 4,
+          "devanagari": "( ... திரு ... )",
+          "iast": "( ... tiru ... )"
+        }
+      ]
+    },
+    {
+      "label": "26",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "தலத்திலுள கணத்தொகுதி களிப்பினுண",
+          "iast": "talattiluḻa kaṇattokuti kaḻippinuṇa"
+        },
+        {
+          "n": 2,
+          "devanagari": "வழைப்ப(து) என மலர்க்கமல கரத்தின்முனை",
+          "iast": "vazhaippa(tu) ena malarkkamala karattinmunai"
+        },
+        {
+          "n": 3,
+          "devanagari": "விதிர்க்கவளை(வு) ஆகும்",
+          "iast": "vitirkkavaḻai(vu) ākum"
+        },
+        {
+          "n": 4,
+          "devanagari": "( ... திரு ... )",
+          "iast": "( ... tiru ... )"
+        }
+      ]
+    },
+    {
+      "label": "27",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "பனைக்கைமுக படக்கரட மதத்தவள",
+          "iast": "panaikkaimuka paṭakkaraṭa matattavaḻa"
+        },
+        {
+          "n": 2,
+          "devanagari": "கஜக்கடவுள் பதத்(து)இடு(ம்)னி",
+          "iast": "kajakkaṭavuḻ patat(tu)iṭu(m)ni"
+        },
+        {
+          "n": 3,
+          "devanagari": "களத்துமுளை தெறிக்கவரம் ஆகும்",
+          "iast": "kaḻattumuḻai teRikkavaraṃ ākum"
+        },
+        {
+          "n": 4,
+          "devanagari": "( ... திரு ... )",
+          "iast": "( ... tiru ... )"
+        }
+      ]
+    },
+    {
+      "label": "28",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "சினத்(து)அவுணர் எதிர்த்தரண களத்தில்வெகு",
+          "iast": "chinat(tu)avuṇar etirttaraṇa kaḻattilveku"
+        },
+        {
+          "n": 2,
+          "devanagari": "குறைத்தலைகள் சிரித்(து)எயிரு",
+          "iast": "kuRaittalaikaḻ chirit(tu)eyiṛ"
+        },
+        {
+          "n": 3,
+          "devanagari": "கடித்துவிழி விழித்(து)அலற மோதும்",
+          "iast": "kaṭittuvizhi vizhit(tu)alaRa mōtum"
+        },
+        {
+          "n": 4,
+          "devanagari": "( ... திரு ... )",
+          "iast": "( ... tiru ... )"
+        }
+      ]
+    },
+    {
+      "label": "29",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "சொலற்(கு)அரிய திருப்புகழை உரைத்தவரை",
+          "iast": "cholaR(ku)ariya tiruppukazhai uraittavarai"
+        },
+        {
+          "n": 2,
+          "devanagari": "அடுத்தபகை அருத்(து)எறிய",
+          "iast": "aṭuttapakai aṛt(tu)eRiya"
+        },
+        {
+          "n": 3,
+          "devanagari": "உருக்கிஎழும் அறத்தைனிலை காணும்",
+          "iast": "uṛkkiezhuṃ aRattainilai kāṇum"
+        },
+        {
+          "n": 4,
+          "devanagari": "( ... திரு ... )",
+          "iast": "( ... tiru ... )"
+        }
+      ]
+    },
+    {
+      "label": "30",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "தருக்கினமன் முருக்கவரின் எருக்குமதி",
+          "iast": "tarukkinaman murukkavarin erukkumati"
+        },
+        {
+          "n": 2,
+          "devanagari": "தரித்தமுடி படைத்தவிறல் படைத்திறை",
+          "iast": "tarittamuṭi paṭaittaviRal paṭaittiRai"
+        },
+        {
+          "n": 3,
+          "devanagari": "கழற்குனிகர் ஆகும்",
+          "iast": "kazhaRkunikar ākum"
+        },
+        {
+          "n": 4,
+          "devanagari": "( ... திரு ... )",
+          "iast": "( ... tiru ... )"
+        }
+      ]
+    },
+    {
+      "label": "31",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "பருத்தமுலை சிருத்திடை வெளுத்தனகை",
+          "iast": "paruttamulai chiṛttiṭai veḻuttanakai"
+        },
+        {
+          "n": 2,
+          "devanagari": "கருத்தகுழல் சிவத்திதழ் மறச்சிருமி",
+          "iast": "kaṛttakuzhal chivattitazh maRachchiṛmi"
+        },
+        {
+          "n": 3,
+          "devanagari": "விழிக்குனிகர் ஆகும்",
+          "iast": "vizhikkunikar ākum"
+        },
+        {
+          "n": 4,
+          "devanagari": "( ... திரு ... )",
+          "iast": "( ... tiru ... )"
+        }
+      ]
+    },
+    {
+      "label": "32",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "திருத்தணியில் உதித்(து)அருளும் ஒருத்தன்மலை",
+          "iast": "tiruttaṇiyil utit(tu)aruḻum oruttanmalai"
+        },
+        {
+          "n": 2,
+          "devanagari": "விருத்தனென(து) உளத்திலுறை",
+          "iast": "viruttanena(tu) uḻattiluRai"
+        },
+        {
+          "n": 3,
+          "devanagari": "கருத்தன்மயில் நடத்துகுகன் வேலே",
+          "iast": "karuttanmayil naṭattukukan vēlē"
+        },
+        {
+          "n": 4,
+          "devanagari": "( ... திரு ... )",
+          "iast": "( ... tiru ... )"
+        }
+      ]
+    },
+    {
+      "label": "33",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "தருக்கினமன் முருக்கவரின் எருக்குமதி",
+          "iast": "tarukkinaman murukkavarin erukkumati"
+        },
+        {
+          "n": 2,
+          "devanagari": "தரித்தமுடி படைத்தவிறல் படைத்திறை",
+          "iast": "tarittamuṭi paṭaittaviRal paṭaittiRai"
+        },
+        {
+          "n": 3,
+          "devanagari": "கழற்குனிகர் ஆகும்",
+          "iast": "kazhaRkunikar ākum"
+        },
+        {
+          "n": 4,
+          "devanagari": "( ... திரு ... )",
+          "iast": "( ... tiru ... )"
+        }
+      ]
+    },
+    {
+      "label": "34",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "சொலற்(கு)அரிய திருப்புகழை உரைத்தவரை",
+          "iast": "cholaR(ku)ariya tiruppukazhai uraittavarai"
+        },
+        {
+          "n": 2,
+          "devanagari": "அடுத்தபகை அருத்(து)எறிய",
+          "iast": "aṭuttapakai aṛt(tu)eRiya"
+        },
+        {
+          "n": 3,
+          "devanagari": "உருக்கிஎழும் அறத்தைனிலை காணும்",
+          "iast": "uṛkkiezhuṃ aRattainilai kāṇum"
+        },
+        {
+          "n": 4,
+          "devanagari": "( ... திரு ... )",
+          "iast": "( ... tiru ... )"
+        }
+      ]
+    },
+    {
+      "label": "35",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "திருத்தணியில் உதித்(து)அருளும் ஒருத்தன்மலை",
+          "iast": "tiruttaṇiyil utit(tu)aruḻum oruttanmalai"
+        },
+        {
+          "n": 2,
+          "devanagari": "விருத்தனென(து) உளத்திலுறை",
+          "iast": "viruttanena(tu) uḻattiluRai"
+        },
+        {
+          "n": 3,
+          "devanagari": "கருத்தன்மயில் நடத்துகுகன் வேலே",
+          "iast": "karuttanmayil naṭattukukan vēlē"
+        },
+        {
+          "n": 4,
+          "devanagari": "( ... திரு ... )",
+          "iast": "( ... tiru ... )"
+        }
+      ]
+    },
+    {
+      "label": "36",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "பருத்தமுலை சிருத்திடை வெளுத்தனகை",
+          "iast": "paruttamulai chiṛttiṭai veḻuttanakai"
+        },
+        {
+          "n": 2,
+          "devanagari": "கருத்தகுழல் சிவத்திதழ் மறச்சிருமி",
+          "iast": "kaṛttakuzhal chivattitazh maRachchiṛmi"
+        },
+        {
+          "n": 3,
+          "devanagari": "விழிக்குனிகர் ஆகும்",
+          "iast": "vizhikkunikar ākum"
+        },
+        {
+          "n": 4,
+          "devanagari": "( ... திரு ... )",
+          "iast": "( ... tiru ... )"
+        }
+      ]
+    },
+    {
+      "label": "37",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "தலத்திலுள கணத்தொகுதி களிப்பினுண",
+          "iast": "talattiluḻa kaṇattokuti kaḻippinuṇa"
+        },
+        {
+          "n": 2,
+          "devanagari": "வழைப்ப(து) என மலர்க்கமல கரத்தின்முனை",
+          "iast": "vazhaippa(tu) ena malarkkamala karattinmunai"
+        },
+        {
+          "n": 3,
+          "devanagari": "விதிர்க்கவளை(வு) ஆகும்",
+          "iast": "vitirkkavaḻai(vu) ākum"
+        },
+        {
+          "n": 4,
+          "devanagari": "( ... திரு ... )",
+          "iast": "( ... tiru ... )"
+        }
+      ]
+    },
+    {
+      "label": "38",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "துதிக்குமடி யவர்க்(கு)ஒருவர் கெடுக்கிடர்",
+          "iast": "tutikkumaṭi yavark(ku)oruvar keṭukkiṭar"
+        },
+        {
+          "n": 2,
+          "devanagari": "நினைக்கினவர் குலத்தைமுதல் அறக்களையும்",
+          "iast": "ninaikkinavar kulattaimutal aRakkaḻaiyum"
+        },
+        {
+          "n": 3,
+          "devanagari": "எனக்(கு)ஓர் துணை ஆகும்",
+          "iast": "enak(ku)ōr tuṇai ākum"
+        },
+        {
+          "n": 4,
+          "devanagari": "( ... திரு ... )",
+          "iast": "( ... tiru ... )"
+        }
+      ]
+    },
+    {
+      "label": "39",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "சினத்(து)அவுணர் எதிர்த்தரண களத்தில்வெகு",
+          "iast": "chinat(tu)avuṇar etirttaraṇa kaḻattilveku"
+        },
+        {
+          "n": 2,
+          "devanagari": "குறைத்தலைகள் சிரித்(து)எயிரு",
+          "iast": "kuRaittalaikaḻ chirit(tu)eyiṛ"
+        },
+        {
+          "n": 3,
+          "devanagari": "கடித்துவிழி விழித்(து)அலற மோதும்",
+          "iast": "kaṭittuvizhi vizhit(tu)alaRa mōtum"
+        },
+        {
+          "n": 4,
+          "devanagari": "( ... திரு ... )",
+          "iast": "( ... tiru ... )"
+        }
+      ]
+    },
+    {
+      "label": "40",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "பனைக்கைமுக படக்கரட மதத்தவள",
+          "iast": "panaikkaimuka paṭakkaraṭa matattavaḻa"
+        },
+        {
+          "n": 2,
+          "devanagari": "கஜக்கடவுள் பதத்(து)இடு(ம்)னி",
+          "iast": "kajakkaṭavuḻ patat(tu)iṭu(m)ni"
+        },
+        {
+          "n": 3,
+          "devanagari": "களத்துமுளை தெறிக்கவரம் ஆகும்",
+          "iast": "kaḻattumuḻai teRikkavaraṃ ākum"
+        },
+        {
+          "n": 4,
+          "devanagari": "( ... திரு ... )",
+          "iast": "( ... tiru ... )"
+        }
+      ]
+    },
+    {
+      "label": "41",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "தனித்துவழி நடக்குமென(து) இடத்துமொரு",
+          "iast": "tanittuvazhi naṭakkumena(tu) iṭattumoru"
+        },
+        {
+          "n": 2,
+          "devanagari": "வலத்துமிரு புறத்துமரு(கு)",
+          "iast": "valattumiru puRattumaru(ku)"
+        },
+        {
+          "n": 3,
+          "devanagari": "அடுத்(து)இரவு பகற்றுணைய(து) ஆகும்",
+          "iast": "aṭut(tu)iravu pakarruṇaiya(tu) ākum"
+        },
+        {
+          "n": 4,
+          "devanagari": "( ... திரு ... )",
+          "iast": "( ... tiru ... )"
+        }
+      ]
+    },
+    {
+      "label": "42",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "சுடர்ப்பரிதி ஒளிப்பனில(வு) ஒழுக்கு(ம்)மதி",
+          "iast": "chuṭarppariti oḻippanila(vu) ozhukku(m)mati"
+        },
+        {
+          "n": 2,
+          "devanagari": "ஒளிப்பலை அடக்குதழல் ஒளிப்பொளிர்",
+          "iast": "oḻippalai aṭakkutazhal oḻippoḻir"
+        },
+        {
+          "n": 3,
+          "devanagari": "ஒளிப்பிரபை வீசும்",
+          "iast": "oḻippirapai vīchum"
+        },
+        {
+          "n": 4,
+          "devanagari": "( ... திரு ... )",
+          "iast": "( ... tiru ... )"
+        }
+      ]
+    },
+    {
+      "label": "43",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "திசைக்கிரியை முதற்குலிசன் அருத்தசிறை",
+          "iast": "tichaikkiriyai mutaRkulichan aṛttachiRai"
+        },
+        {
+          "n": 2,
+          "devanagari": "முளைத்த(து)என முகட்டினிடை",
+          "iast": "muḻaitta(tu)ena mukaṭṭiniṭai"
+        },
+        {
+          "n": 3,
+          "devanagari": "பறக்கற விசைத்(து) அதிர ஓடும்",
+          "iast": "paRakkaRa vichait(tu) atira ōṭum"
+        },
+        {
+          "n": 4,
+          "devanagari": "( ... திரு ... )",
+          "iast": "( ... tiru ... )"
+        }
+      ]
+    },
+    {
+      "label": "44",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "பழுத்தமுது தமிழ்ப்பலகை இருக்குமொரு",
+          "iast": "pazhuttamutu tamizhppalakai irukkumoru"
+        },
+        {
+          "n": 2,
+          "devanagari": "கவிப்புலவன் இசைக்(கு)உருகி",
+          "iast": "kavippulavan ichaik(ku)uruki"
+        },
+        {
+          "n": 3,
+          "devanagari": "வரைக்குகையை இடித்துவழி காணும்",
+          "iast": "varaikkukaiyai iṭittuvazhi kāṇum"
+        },
+        {
+          "n": 4,
+          "devanagari": "( ... திரு ... )",
+          "iast": "( ... tiru ... )"
+        }
+      ]
+    },
+    {
+      "label": "45",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "சலத்துவரும் அரக்கருடல் கொழுத்துவளர்",
+          "iast": "chalattuvaruṃ arakkaruṭal kozhuttuvaḻar"
+        },
+        {
+          "n": 2,
+          "devanagari": "பெருத்தகுடர் சிவத்ததொடை",
+          "iast": "peruttakuṭar chivattatoṭai"
+        },
+        {
+          "n": 3,
+          "devanagari": "எனச்சிகையில் விருப்பமொடு சூடும்",
+          "iast": "enachchikaiyil viruppamoṭu chūṭum"
+        },
+        {
+          "n": 4,
+          "devanagari": "( ... திரு ... )",
+          "iast": "( ... tiru ... )"
+        }
+      ]
+    },
+    {
+      "label": "46",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "சுரர்க்கு(ம்)முனி வரர்க்கு(ம்)மக பதிக்கும்விதி",
+          "iast": "churarkku(m)muni vararkku(m)maka patikkumviti"
+        },
+        {
+          "n": 2,
+          "devanagari": "தனக்கு(ம்)அரி தனக்கு(ம்)னரர் தமக்குமுரும்",
+          "iast": "tanakku(m)ari tanakku(m)narar tamakkumuṛm"
+        },
+        {
+          "n": 3,
+          "devanagari": "இடுக்கண்வினை சாடும்",
+          "iast": "iṭukkaṇvinai chāṭum"
+        },
+        {
+          "n": 4,
+          "devanagari": "( ... திரு ... )",
+          "iast": "( ... tiru ... )"
+        }
+      ]
+    },
+    {
+      "label": "47",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "திரைக்கடலை உடைத்துனிறை புனற்கடிது",
+          "iast": "tiraikkaṭalai uṭaittuniRai punaRkaṭitu"
+        },
+        {
+          "n": 2,
+          "devanagari": "குடித்(து)உடையும் உடைப்(பு) அடைய",
+          "iast": "kuṭit(tu)uṭaiyuṃ uṭaip(pu) aṭaiya"
+        },
+        {
+          "n": 3,
+          "devanagari": "அடைத்(து)உதிரம் நிறைத்துவிளை யாடும்",
+          "iast": "aṭait(tu)utiraṃ niRaittuviḻai yāṭum"
+        },
+        {
+          "n": 4,
+          "devanagari": "( ... திரு ... )",
+          "iast": "( ... tiru ... )"
+        }
+      ]
+    },
+    {
+      "label": "48",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "பசித்(து)அலகை முசித்(து)அழுது முறைப்படுதல்",
+          "iast": "pachit(tu)alakai muchit(tu)azhutu muRaippaṭutal"
+        },
+        {
+          "n": 2,
+          "devanagari": "ஒழித்(து)அவுணர் உரத்(து)உதிர",
+          "iast": "ozhit(tu)avuṇar urat(tu)utira"
+        },
+        {
+          "n": 3,
+          "devanagari": "நிணத்தசைகள் புசிக்கருள் நேரும்",
+          "iast": "niṇattachaikaḻ puchikkaruḻ nērum"
+        },
+        {
+          "n": 4,
+          "devanagari": "( ... திரு ... )",
+          "iast": "( ... tiru ... )"
+        }
+      ]
+    },
+    {
+      "label": "49",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "திரைக்கடலை உடைத்துனிறை புனற்கடிது",
+          "iast": "tiraikkaṭalai uṭaittuniRai punaRkaṭitu"
+        },
+        {
+          "n": 2,
+          "devanagari": "குடித்(து)உடையும் உடைப்(பு) அடைய",
+          "iast": "kuṭit(tu)uṭaiyuṃ uṭaip(pu) aṭaiya"
+        },
+        {
+          "n": 3,
+          "devanagari": "அடைத்(து)உதிரம் நிறைத்துவிளை யாடும்",
+          "iast": "aṭait(tu)utiraṃ niRaittuviḻai yāṭum"
+        },
+        {
+          "n": 4,
+          "devanagari": "( ... திரு ... )",
+          "iast": "( ... tiru ... )"
+        }
+      ]
+    },
+    {
+      "label": "50",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "பசித்(து)அலகை முசித்(து)அழுது முறைப்படுதல்",
+          "iast": "pachit(tu)alakai muchit(tu)azhutu muRaippaṭutal"
+        },
+        {
+          "n": 2,
+          "devanagari": "ஒழித்(து)அவுணர் உரத்(து)உதிர",
+          "iast": "ozhit(tu)avuṇar urat(tu)utira"
+        },
+        {
+          "n": 3,
+          "devanagari": "நிணத்தசைகள் புசிக்கருள் நேரும்",
+          "iast": "niṇattachaikaḻ puchikkaruḻ nērum"
+        },
+        {
+          "n": 4,
+          "devanagari": "( ... திரு ... )",
+          "iast": "( ... tiru ... )"
+        }
+      ]
+    },
+    {
+      "label": "51",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "சலத்துவரும் அரக்கருடல் கொழுத்துவளர்",
+          "iast": "chalattuvaruṃ arakkaruṭal kozhuttuvaḻar"
+        },
+        {
+          "n": 2,
+          "devanagari": "பெருத்தகுடர் சிவத்ததொடை",
+          "iast": "peruttakuṭar chivattatoṭai"
+        },
+        {
+          "n": 3,
+          "devanagari": "எனச்சிகையில் விருப்பமொடு சூடும்",
+          "iast": "enachchikaiyil viruppamoṭu chūṭum"
+        },
+        {
+          "n": 4,
+          "devanagari": "( ... திரு ... )",
+          "iast": "( ... tiru ... )"
+        }
+      ]
+    },
+    {
+      "label": "52",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "சுரர்க்கு(ம்)முனி வரர்க்கு(ம்)மக பதிக்கும்விதி",
+          "iast": "churarkku(m)muni vararkku(m)maka patikkumviti"
+        },
+        {
+          "n": 2,
+          "devanagari": "தனக்கு(ம்)அரி தனக்கு(ம்)னரர் தமக்குமுரும்",
+          "iast": "tanakku(m)ari tanakku(m)narar tamakkumuṛm"
+        },
+        {
+          "n": 3,
+          "devanagari": "இடுக்கண்வினை சாடும்",
+          "iast": "iṭukkaṇvinai chāṭum"
+        },
+        {
+          "n": 4,
+          "devanagari": "( ... திரு ... )",
+          "iast": "( ... tiru ... )"
+        }
+      ]
+    },
+    {
+      "label": "53",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "திசைக்கிரியை முதற்குலிசன் அருத்தசிறை",
+          "iast": "tichaikkiriyai mutaRkulichan aṛttachiRai"
+        },
+        {
+          "n": 2,
+          "devanagari": "முளைத்த(து)என முகட்டினிடை",
+          "iast": "muḻaitta(tu)ena mukaṭṭiniṭai"
+        },
+        {
+          "n": 3,
+          "devanagari": "பறக்கற விசைத்(து) அதிர ஓடும்",
+          "iast": "paRakkaRa vichait(tu) atira ōṭum"
+        },
+        {
+          "n": 4,
+          "devanagari": "( ... திரு ... )",
+          "iast": "( ... tiru ... )"
+        }
+      ]
+    },
+    {
+      "label": "54",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "பழுத்தமுது தமிழ்ப்பலகை இருக்குமொரு",
+          "iast": "pazhuttamutu tamizhppalakai irukkumoru"
+        },
+        {
+          "n": 2,
+          "devanagari": "கவிப்புலவன் இசைக்(கு)உருகி",
+          "iast": "kavippulavan ichaik(ku)uruki"
+        },
+        {
+          "n": 3,
+          "devanagari": "வரைக்குகையை இடித்துவழி காணும்",
+          "iast": "varaikkukaiyai iṭittuvazhi kāṇum"
+        },
+        {
+          "n": 4,
+          "devanagari": "( ... திரு ... )",
+          "iast": "( ... tiru ... )"
+        }
+      ]
+    },
+    {
+      "label": "55",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "தனித்துவழி நடக்குமென(து) இடத்துமொரு",
+          "iast": "tanittuvazhi naṭakkumena(tu) iṭattumoru"
+        },
+        {
+          "n": 2,
+          "devanagari": "வலத்துமிரு புறத்துமரு(கு)",
+          "iast": "valattumiru puRattumaru(ku)"
+        },
+        {
+          "n": 3,
+          "devanagari": "அடுத்(து)இரவு பகற்றுணைய(து) ஆகும்",
+          "iast": "aṭut(tu)iravu pakarruṇaiya(tu) ākum"
+        },
+        {
+          "n": 4,
+          "devanagari": "( ... திரு ... )",
+          "iast": "( ... tiru ... )"
+        }
+      ]
+    },
+    {
+      "label": "56",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "சுடர்ப்பரிதி ஒளிப்பனில(வு) ஒழுக்கு(ம்)மதி",
+          "iast": "chuṭarppariti oḻippanila(vu) ozhukku(m)mati"
+        },
+        {
+          "n": 2,
+          "devanagari": "ஒளிப்பலை அடக்குதழல் ஒளிப்பொளிர்",
+          "iast": "oḻippalai aṭakkutazhal oḻippoḻir"
+        },
+        {
+          "n": 3,
+          "devanagari": "ஒளிப்பிரபை வீசும்",
+          "iast": "oḻippirapai vīchum"
+        },
+        {
+          "n": 4,
+          "devanagari": "( ... திரு ... )",
+          "iast": "( ... tiru ... )"
+        }
+      ]
+    },
+    {
+      "label": "57",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "சினத்(து)அவுணர் எதிர்த்தரண களத்தில்வெகு",
+          "iast": "chinat(tu)avuṇar etirttaraṇa kaḻattilveku"
+        },
+        {
+          "n": 2,
+          "devanagari": "குறைத்தலைகள் சிரித்(து)எயிரு",
+          "iast": "kuRaittalaikaḻ chirit(tu)eyiṛ"
+        },
+        {
+          "n": 3,
+          "devanagari": "கடித்துவிழி விழித்(து)அலற மோதும்",
+          "iast": "kaṭittuvizhi vizhit(tu)alaRa mōtum"
+        },
+        {
+          "n": 4,
+          "devanagari": "( ... திரு ... )",
+          "iast": "( ... tiru ... )"
+        }
+      ]
+    },
+    {
+      "label": "58",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "பனைக்கைமுக படக்கரட மதத்தவள",
+          "iast": "panaikkaimuka paṭakkaraṭa matattavaḻa"
+        },
+        {
+          "n": 2,
+          "devanagari": "கஜக்கடவுள் பதத்(து)இடு(ம்)னி",
+          "iast": "kajakkaṭavuḻ patat(tu)iṭu(m)ni"
+        },
+        {
+          "n": 3,
+          "devanagari": "களத்துமுளை தெறிக்கவரம் ஆகும்",
+          "iast": "kaḻattumuḻai teRikkavaraṃ ākum"
+        },
+        {
+          "n": 4,
+          "devanagari": "( ... திரு ... )",
+          "iast": "( ... tiru ... )"
+        }
+      ]
+    },
+    {
+      "label": "59",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "தலத்திலுள கணத்தொகுதி களிப்பினுண",
+          "iast": "talattiluḻa kaṇattokuti kaḻippinuṇa"
+        },
+        {
+          "n": 2,
+          "devanagari": "வழைப்ப(து) என மலர்க்கமல கரத்தின்முனை",
+          "iast": "vazhaippa(tu) ena malarkkamala karattinmunai"
+        },
+        {
+          "n": 3,
+          "devanagari": "விதிர்க்கவளை(வு) ஆகும்",
+          "iast": "vitirkkavaḻai(vu) ākum"
+        },
+        {
+          "n": 4,
+          "devanagari": "( ... திரு ... )",
+          "iast": "( ... tiru ... )"
+        }
+      ]
+    },
+    {
+      "label": "60",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "துதிக்குமடி யவர்க்(கு)ஒருவர் கெடுக்கிடர்",
+          "iast": "tutikkumaṭi yavark(ku)oruvar keṭukkiṭar"
+        },
+        {
+          "n": 2,
+          "devanagari": "நினைக்கினவர் குலத்தைமுதல் அறக்களையும்",
+          "iast": "ninaikkinavar kulattaimutal aRakkaḻaiyum"
+        },
+        {
+          "n": 3,
+          "devanagari": "எனக்(கு)ஓர் துணை ஆகும்",
+          "iast": "enak(ku)ōr tuṇai ākum"
+        },
+        {
+          "n": 4,
+          "devanagari": "( ... திரு ... )",
+          "iast": "( ... tiru ... )"
+        }
+      ]
+    },
+    {
+      "label": "61",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "திருத்தணியில் உதித்(து)அருளும் ஒருத்தன்மலை",
+          "iast": "tiruttaṇiyil utit(tu)aruḻum oruttanmalai"
+        },
+        {
+          "n": 2,
+          "devanagari": "விருத்தனென(து) உளத்திலுறை",
+          "iast": "viruttanena(tu) uḻattiluRai"
+        },
+        {
+          "n": 3,
+          "devanagari": "கருத்தன்மயில் நடத்துகுகன் வேலே",
+          "iast": "karuttanmayil naṭattukukan vēlē"
+        },
+        {
+          "n": 4,
+          "devanagari": "( ... திரு ... )",
+          "iast": "( ... tiru ... )"
+        }
+      ]
+    },
+    {
+      "label": "62",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "பருத்தமுலை சிருத்திடை வெளுத்தனகை",
+          "iast": "paruttamulai chiṛttiṭai veḻuttanakai"
+        },
+        {
+          "n": 2,
+          "devanagari": "கருத்தகுழல் சிவத்திதழ் மறச்சிருமி",
+          "iast": "kaṛttakuzhal chivattitazh maRachchiṛmi"
+        },
+        {
+          "n": 3,
+          "devanagari": "விழிக்குனிகர் ஆகும்",
+          "iast": "vizhikkunikar ākum"
+        },
+        {
+          "n": 4,
+          "devanagari": "( ... திரு ... )",
+          "iast": "( ... tiru ... )"
+        }
+      ]
+    },
+    {
+      "label": "63",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "தருக்கினமன் முருக்கவரின் எருக்குமதி",
+          "iast": "tarukkinaman murukkavarin erukkumati"
+        },
+        {
+          "n": 2,
+          "devanagari": "தரித்தமுடி படைத்தவிறல் படைத்திறை",
+          "iast": "tarittamuṭi paṭaittaviRal paṭaittiRai"
+        },
+        {
+          "n": 3,
+          "devanagari": "கழற்குனிகர் ஆகும்",
+          "iast": "kazhaRkunikar ākum"
+        },
+        {
+          "n": 4,
+          "devanagari": "( ... திரு ... )",
+          "iast": "( ... tiru ... )"
+        }
+      ]
+    },
+    {
+      "label": "64",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "சொலற்(கு)அரிய திருப்புகழை உரைத்தவரை",
+          "iast": "cholaR(ku)ariya tiruppukazhai uraittavarai"
+        },
+        {
+          "n": 2,
+          "devanagari": "அடுத்தபகை அருத்(து)எறிய",
+          "iast": "aṭuttapakai aṛt(tu)eRiya"
+        },
+        {
+          "n": 3,
+          "devanagari": "உருக்கிஎழும் அறத்தைனிலை காணும்",
+          "iast": "uṛkkiezhuṃ aRattainilai kāṇum"
+        },
+        {
+          "n": 4,
+          "devanagari": "( ... திரு ... )",
+          "iast": "( ... tiru ... )"
+        }
+      ]
+    },
+    {
+      "label": "65",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "திருத்தணியில் உதித்(து)அருளும் ஒருத்தன்மலை",
+          "iast": "tiruttaṇiyil utit(tu)aruḻum oruttanmalai"
+        },
+        {
+          "n": 2,
+          "devanagari": "விருத்தனென(து) உளத்திலுறை",
+          "iast": "viruttanena(tu) uḻattiluRai"
+        },
+        {
+          "n": 3,
+          "devanagari": "கருத்தன்மயில் நடத்துகுகன் வேலே",
+          "iast": "karuttanmayil naṭattukukan vēlē"
+        },
+        {
+          "n": 4,
+          "devanagari": "( ... திரு ... )",
+          "iast": "( ... tiru ... )"
+        }
+      ]
+    },
+    {
+      "label": "Refrain (×12), reprise",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "( ... முடிவிலும் இந்த அடியை 12 முறை ஓதவும் ... )",
+          "iast": "( ... muṭiviluṃ inta aṭiyai 12 muRai ōtavum ... )"
+        }
+      ]
+    },
+    {
+      "label": "Closing I",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "தேரணி யிட்டுப் புரம் எரித் தான்மகன் செங்கையில்வேற்\nகூரணி யிட்டணு வாகிக் கிரௌஞ்சங் குலைந்தரக்கர்\nநேரணி யிட்டு வளைந்த கடகம் நெளிந்து சூர்ப்\nபேரணி கெட்டது தேவேந்த்ர லோகம் பிழைத்ததுவே.",
+          "iast": "tēraṇi yiṭṭup puram erit tānmakan cheṅkaiyilvēR\nkūraṇi yiṭṭaṇu vākik kirauñchaṅ kulaintarakkar\nnēraṇi yiṭṭu vaḻainta kaṭakaṃ neḻintu chūrp\npēraṇi keṭṭatu tēvēntra lōkaṃ pizhaittatuvē."
+        }
+      ]
+    },
+    {
+      "label": "Closing II",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "வீரவேல் தாரைவேல் விண்ணோர் சிறை மீட்ட\nதீரவேல் செவ்வேள் திருக்கைவேல் - வாரி\nகுளித்தவேல் கொற்றவேல் சூர்மார்பும் குன்ரும்\nதொளைத்தவேல் உண்டே துணை.",
+          "iast": "vīravēl tāraivēl viṇṇōr chiRai mīṭṭa\ntīravēl chevvēḻ tirukkaivēl - vāri\nkuḻittavēl korravēl chūrmārpuṃ kunṛm\ntoḻaittavēl uṇṭē tuṇai."
+        },
+        {
+          "n": 2,
+          "devanagari": "... ... ... வேலும் மயிலும் துணை ... ... ...",
+          "iast": "... ... ... vēluṃ mayiluṃ tuṇai ... ... ..."
+        }
+      ]
+    }
+  ]
+}

@@ -18,6 +18,7 @@ const CHANTS = [
   { id: 'sri-rudram-namakam', label: 'Sri Rudram Namakam' },
   { id: 'sri-rudram-chamakam', label: 'Sri Rudram Chamakam' },
   { id: 'soundarya-lahari', label: 'Soundarya Lahari' },
+  { id: 'vel-maaral-tamil', label: 'Vel Maaral (Tamil)' },
 ];
 
 // Optional per-section popup notes, keyed by chant id then section label —
@@ -27,6 +28,9 @@ const CHANTS = [
 const SECTION_NOTES = {
   'sri-rudram-chamakam': {
     11: () => buildSquaresMathNote(),
+  },
+  'vel-maaral-tamil': {
+    'Refrain (×12)': () => buildVelMaaralStructureNote(),
   },
 };
 
@@ -84,6 +88,41 @@ function buildSquaresMathNote() {
           <tbody>${tableRows}</tbody>
         </table>
       </div>
+    `,
+  };
+}
+
+// Vel Maaral's 65 numbered verses are only 16 verses that are textually
+// unique — every other verse is a literal repeat of one of those 16 (see
+// scripts/build_vel_maaral.py's SEQUENCE). Grouped into 8 consecutive pairs
+// (1-2, 3-4, ... 15-16), the 65-verse order is that set of 8 pairs recited
+// forward, then backward, then forward again with each pair's own two
+// verses swapped, then backward again — a nested mirror, not a random
+// shuffle. This builds that explanation, reusing the same clickable-note
+// mechanism as Chamakam's anuvāka 11 (see buildSquaresMathNote/openMathModal).
+function buildVelMaaralStructureNote() {
+  const pairRows = [
+    ['1–16', 'straight through, pairs 1→8'],
+    ['17–32', 'reversed, pairs 8→1 (each pair still forward)'],
+    ['33–48', 'straight through again, but every pair itself reversed'],
+    ['49–64', 'reversed again, pairs still individually reversed'],
+    ['65', 'verse 2 once more — the refrain-verse itself, closing the frame'],
+  ];
+  const tableRows = pairRows
+    .map(([range, desc]) => `<tr><td>${range}</td><td>${desc}</td></tr>`)
+    .join('');
+
+  return {
+    title: 'The Structure of Vel Maaral',
+    subtitle: 'Vēl Māṟal · verses 1–65',
+    bodyHtml: `
+      <p>Two patterns run underneath the 65 numbered verses.</p>
+      <p><strong>The refrain is a macro, not a repeat.</strong> "( ... tiru ... )" after every verse is an instruction, not chant text: at that word, recite the full four-line opening verse again in full. Printed once and expanded 65 times, this chant is really 65 short verses interleaved with 65 recitations of one refrain.</p>
+      <p><strong>The 65 verses are 16 verses in a mirrored order.</strong> Grouped into 8 pairs by the order they first appear, the recitation moves through those pairs and back again, twice — the second pass with each pair's own two verses swapped:</p>
+      <div class="consonant-table-wrap">
+        <table class="consonant-table math-table"><tbody>${tableRows}</tbody></table>
+      </div>
+      <p>Nothing in the second half (33–64) lands in the same verse-pair position as its counterpart in the first half (1–32) — every verse returns, but never the same way twice. Also: verses 15–16 recur immediately as 17–18 before the mirroring proper begins, on both the Tamil and English source pages — likely deliberate emphasis rather than a transcription slip, but flagged here since it's the one place the otherwise-exact symmetry above doesn't hold.</p>
     `,
   };
 }
@@ -529,6 +568,14 @@ function renderTranslationText(text, conceptIds, lineKey) {
 }
 
 function renderChant(chant, translation) {
+  // Drives which script font .deva-line/.chant-title-deva render in — see
+  // the body.chant-lang-tamil rules in styles.css. Devanagari and Tamil are
+  // both stored under the same "devanagari" JSON key (see build_vel_maaral.py
+  // for why: renaming that key everywhere it's read/written was a much
+  // larger, riskier change than this app.js/CSS is worth for a label that's
+  // never shown to the user).
+  document.body.classList.toggle('chant-lang-tamil', chant.language === 'tamil');
+
   chantTitleDeva.textContent = chant.title.devanagari;
   chantTitleIast.textContent = chant.title.iast;
   chantSource.innerHTML = `Source: <a href="${chant.source.devanagari_url}" target="_blank" rel="noopener">${chant.source.site}</a>`;
