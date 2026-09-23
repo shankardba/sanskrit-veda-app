@@ -553,8 +553,7 @@ function renderScriptLine(rawText, script, counts, lineKey) {
   return frag;
 }
 
-function renderLine(line, devaCounts, iastCounts) {
-  const lineKey = String(line.n);
+function renderLine(line, devaCounts, iastCounts, lineKey) {
   const wrapper = el('div', 'verse-line');
   wrapper.dataset.line = lineKey;
   const devaPara = el('p', 'deva-line');
@@ -708,6 +707,13 @@ function renderChant(chant, translation) {
     );
   }
 
+  // Keys translation/data-line lookups on a running position counter rather
+  // than each line's own "n" field: Namakam/Chamakam/Soundarya Lahari number
+  // "n" as a running count across the whole chant already (so this is a
+  // no-op for them), but the Tamil antatis restart "n" at 1 for every
+  // 4-line verse — keying on raw "n" there would collide every verse's
+  // lines onto the same 4 keys and show verse 1's translation everywhere.
+  let lineIndex = 0;
   for (const section of chant.sections) {
     const devaCounts = buildRepeatCounts(section.lines.map((l) => l.devanagari), 'deva');
     const iastCounts = buildRepeatCounts(section.lines.map((l) => l.iast), 'iast');
@@ -725,12 +731,10 @@ function renderChant(chant, translation) {
     }
     block.appendChild(labelEl);
     for (const line of section.lines) {
-      block.appendChild(renderLine(line, devaCounts, iastCounts));
-      appendTranslationLine(
-        String(line.n),
-        translationLines[String(line.n)],
-        conceptsInLine(line.devanagari, line.iast)
-      );
+      lineIndex += 1;
+      const lineKey = String(lineIndex);
+      block.appendChild(renderLine(line, devaCounts, iastCounts, lineKey));
+      appendTranslationLine(lineKey, translationLines[lineKey], conceptsInLine(line.devanagari, line.iast));
     }
     chantTextEl.appendChild(block);
   }
