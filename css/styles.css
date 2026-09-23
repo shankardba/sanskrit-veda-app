@@ -889,7 +889,9 @@ body.hide-transliteration .iast-line {
 /* tamil-characters.html reuses .char-deva/.char-iast (see characters.html)
    for Tamil script + its own romanization rather than Devanagari + IAST —
    same key-reuse tradeoff as the chant reader's body.chant-lang-tamil. */
-body.tamil-page .char-deva {
+body.tamil-page .char-deva,
+body.tamil-page .char-digit,
+body.tamil-page .lang-hub-card-glyph {
   font-family: var(--font-tamil);
 }
 
