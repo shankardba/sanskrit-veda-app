@@ -1,0 +1,2520 @@
+{
+  "id": "irandam-tiruvantati",
+  "language": "tamil",
+  "title": {
+    "devanagari": "iraNdAm thiruvandhAdhi",
+    "iast": ""
+  },
+  "source": {
+    "site": "divyaprabandham.koyil.org",
+    "devanagari_url": "https://divyaprabandham.koyil.org/index.php/category/iyarpa/irandam-thiruvandhadhi/",
+    "iast_url": "https://divyaprabandham.koyil.org/index.php/category/iyarpa/irandam-thiruvandhadhi/"
+  },
+  "colophon": {
+    "devanagari": "",
+    "iast": "Composed by Bhoothath Alvar, one of the three Mudhalazhwars (\"first Alvars\") whose Tiruvantatis open the Iyaṟpā section of the Naalayira Divya Prabandham. No Tamil-script source found yet — English romanization only for now."
+  },
+  "sectionUnit": "",
+  "sections": [
+    {
+      "label": "1",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "",
+          "iast": "anbE thagaLiyA ArvamE neyyAga"
+        },
+        {
+          "n": 2,
+          "devanagari": "",
+          "iast": "inburugu sindhai idu thiriyA nanburugi"
+        },
+        {
+          "n": 3,
+          "devanagari": "",
+          "iast": "gyAnach chudar viLakku ERRinEn nAraNaRku"
+        },
+        {
+          "n": 4,
+          "devanagari": "",
+          "iast": "gyAnath thamizh purindha nAn"
+        }
+      ]
+    },
+    {
+      "label": "2",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "",
+          "iast": "gyAnaththAl nanguNarndhu nAraNan than nAmangaL"
+        },
+        {
+          "n": 2,
+          "devanagari": "",
+          "iast": "dhAnaththAl maRRu avan pEr sARRinAl vAnaththu"
+        },
+        {
+          "n": 3,
+          "devanagari": "",
+          "iast": "aNi amarar Akkuvikkum ahdhanRE nangaL"
+        },
+        {
+          "n": 4,
+          "devanagari": "",
+          "iast": "paNiyamarar kOmAn parisu"
+        }
+      ]
+    },
+    {
+      "label": "3",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "",
+          "iast": "parisu naRumalarAl pARkadalAn pAdham"
+        },
+        {
+          "n": 2,
+          "devanagari": "",
+          "iast": "purivAr pugappeRuvar pOlAm purivArgaL"
+        },
+        {
+          "n": 3,
+          "devanagari": "",
+          "iast": "thollamar kELvith thulangoLisEr thORRaththu"
+        },
+        {
+          "n": 4,
+          "devanagari": "",
+          "iast": "nallamarar kOmAn nagar"
+        }
+      ]
+    },
+    {
+      "label": "4",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "",
+          "iast": "nagarizhaiththu niththilaththu nANmalar koNdu AngE"
+        },
+        {
+          "n": 2,
+          "devanagari": "",
+          "iast": "thigazhumaNi vayiram sErththu nigarillAp"
+        },
+        {
+          "n": 3,
+          "devanagari": "",
+          "iast": "paingamalam Endhip paNindhEn panimalarAL"
+        },
+        {
+          "n": 4,
+          "devanagari": "",
+          "iast": "angam valam koNdAnadi"
+        }
+      ]
+    },
+    {
+      "label": "5",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "",
+          "iast": "adi mUnRil ivvulagam anRu aLandhAy pOlum"
+        },
+        {
+          "n": 2,
+          "devanagari": "",
+          "iast": "adi mUnRu irandhu avani koNdAy padi ninRa"
+        },
+        {
+          "n": 3,
+          "devanagari": "",
+          "iast": "nIr Odha mEni nedumAlE nin adiyai"
+        },
+        {
+          "n": 4,
+          "devanagari": "",
+          "iast": "yAr Odha vallAr aRindhu"
+        }
+      ]
+    },
+    {
+      "label": "6",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "",
+          "iast": "aRindhaindhum uLLadakki Aymalar koNdu Arvam"
+        },
+        {
+          "n": 2,
+          "devanagari": "",
+          "iast": "seRindha manaththarAych chevvE – aRindhu avan than"
+        },
+        {
+          "n": 3,
+          "devanagari": "",
+          "iast": "pEr Odhi Eththum perum thavaththOr kANbarE"
+        },
+        {
+          "n": 4,
+          "devanagari": "",
+          "iast": "kAr Odha vaNNan kazhal"
+        }
+      ]
+    },
+    {
+      "label": "7",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "",
+          "iast": "kazhal eduththu vAy madiththuk kaN suzhanRu mARRAr"
+        },
+        {
+          "n": 2,
+          "devanagari": "",
+          "iast": "azhal eduththa sindhaiyarAy anja thazhal eduththa"
+        },
+        {
+          "n": 3,
+          "devanagari": "",
+          "iast": "pOr Azhi EndhinAn pon malarch chEvadiyE"
+        },
+        {
+          "n": 4,
+          "devanagari": "",
+          "iast": "Or Azhi nenjE ugandhu"
+        }
+      ]
+    },
+    {
+      "label": "8",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "",
+          "iast": "ugandhu unnai vAngi oLi niRangoL kongai"
+        },
+        {
+          "n": 2,
+          "devanagari": "",
+          "iast": "agam kuLira  uN enRAL Avi  ugandhu"
+        },
+        {
+          "n": 3,
+          "devanagari": "",
+          "iast": "mulai uNbAy pOlE munindhu uNdAy nIyum"
+        },
+        {
+          "n": 4,
+          "devanagari": "",
+          "iast": "alai paNbAl AnamaiyAl anRu"
+        }
+      ]
+    },
+    {
+      "label": "9",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "",
+          "iast": "anRadhu kaNdanjAdha Aychchi unakkirangi"
+        },
+        {
+          "n": 2,
+          "devanagari": "",
+          "iast": "ninRu mulai thandha innIrmaikku anRu"
+        },
+        {
+          "n": 3,
+          "devanagari": "",
+          "iast": "varan muRaiyAl nIyaLandha mAkadal sUzh gyAlam"
+        },
+        {
+          "n": 4,
+          "devanagari": "",
+          "iast": "perumuRaiyAl eydhumO pErththu"
+        }
+      ]
+    },
+    {
+      "label": "10",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "",
+          "iast": "pErththanai mAsagadam piLLaiyAy maNNirandhu"
+        },
+        {
+          "n": 2,
+          "devanagari": "",
+          "iast": "kAththanai palluyirum kAvalanE Eththiya"
+        },
+        {
+          "n": 3,
+          "devanagari": "",
+          "iast": "nAvudaiyEn pUvudaiyEn ninuLLi ninRamaiyAl"
+        },
+        {
+          "n": 4,
+          "devanagari": "",
+          "iast": "kAvadiyEn patta kadai"
+        }
+      ]
+    },
+    {
+      "label": "11",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "",
+          "iast": "kadai ninRu amarar kazhal thozhudhu nALum"
+        },
+        {
+          "n": 2,
+          "devanagari": "",
+          "iast": "idai ninRa inbaththarAvar pudai ninRa"
+        },
+        {
+          "n": 3,
+          "devanagari": "",
+          "iast": "nIrOdha mEni nedumAlE nin adiyai"
+        },
+        {
+          "n": 4,
+          "devanagari": "",
+          "iast": "yArOdha vallAr avar"
+        }
+      ]
+    },
+    {
+      "label": "12",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "",
+          "iast": "avar ivar enRillai aravaNaiyAN pAdham"
+        },
+        {
+          "n": 2,
+          "devanagari": "",
+          "iast": "evar vaNangi EththAdhAr eNNil pavarum"
+        },
+        {
+          "n": 3,
+          "devanagari": "",
+          "iast": "sezhum kadhirOn oNmalarOn kaNNudhalOn enRE"
+        },
+        {
+          "n": 4,
+          "devanagari": "",
+          "iast": "thozhum thagaiyAr nALum thodarndhu"
+        }
+      ]
+    },
+    {
+      "label": "13",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "",
+          "iast": "thodar eduththa mAl yAnai sUzhkayam pukku anji"
+        },
+        {
+          "n": 2,
+          "devanagari": "",
+          "iast": "padar eduththa paim kamalam koNdu anRu idaradukka"
+        },
+        {
+          "n": 3,
+          "devanagari": "",
+          "iast": "AzhiyAn pAdham paNindhanrE vAnavar kOn"
+        },
+        {
+          "n": 4,
+          "devanagari": "",
+          "iast": "pAzhidhAn eydhiRRu paNdu"
+        }
+      ]
+    },
+    {
+      "label": "14",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "",
+          "iast": "paNdip perum padhiyai Akkip pazhipAvam"
+        },
+        {
+          "n": 2,
+          "devanagari": "",
+          "iast": "koNdingu vAzhvAraik kURAdhE eNdhisaiyum"
+        },
+        {
+          "n": 3,
+          "devanagari": "",
+          "iast": "pErththa karam nAngudaiyAn pErOdhip pEdhaigAL"
+        },
+        {
+          "n": 4,
+          "devanagari": "",
+          "iast": "thIrththa kararAmin thirindhu"
+        }
+      ]
+    },
+    {
+      "label": "15",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "",
+          "iast": "thirindhadhu venjamaththuth thEr kadavi anRu"
+        },
+        {
+          "n": 2,
+          "devanagari": "",
+          "iast": "pirindhadhu sIthaiyai mAn pin pOy purindhadhuvum"
+        },
+        {
+          "n": 3,
+          "devanagari": "",
+          "iast": "kaN paLLi koLLa azhagiyadhE nAgaththin"
+        },
+        {
+          "n": 4,
+          "devanagari": "",
+          "iast": "thaNpaLLi koLvAn thanakku"
+        }
+      ]
+    },
+    {
+      "label": "16",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "",
+          "iast": "thanakkadimai pattadhu thAnaRiyAnElum"
+        },
+        {
+          "n": 2,
+          "devanagari": "",
+          "iast": "manaththadaiya vaippadhAm mAlai vanaththidarai"
+        },
+        {
+          "n": 3,
+          "devanagari": "",
+          "iast": "EriyAm vaNNam iyaRRum idhuvallAl"
+        },
+        {
+          "n": 4,
+          "devanagari": "",
+          "iast": "mAri yAr peygiRpAr maRRu"
+        }
+      ]
+    },
+    {
+      "label": "17",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "",
+          "iast": "maRRAr iyalAvAr vAnavarkOn mAmalarOn"
+        },
+        {
+          "n": 2,
+          "devanagari": "",
+          "iast": "suRRum vaNangum thozhilAnai oRRaip"
+        },
+        {
+          "n": 3,
+          "devanagari": "",
+          "iast": "piRaiyirundha senjadaiyAn pin senRu mAlaik"
+        },
+        {
+          "n": 4,
+          "devanagari": "",
+          "iast": "kuRai irundhu thAn mudiththAn koNdu"
+        }
+      ]
+    },
+    {
+      "label": "18",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "",
+          "iast": "koNdadhu ulagam kuRaL uruvAyk kOL ariyAy"
+        },
+        {
+          "n": 2,
+          "devanagari": "",
+          "iast": "oNdiRalOn mArvaththu ugir vaiththadhu uNdadhuvum"
+        },
+        {
+          "n": 3,
+          "devanagari": "",
+          "iast": "thAn kadandha EzhulagE thAmaraikkaN mAl orunAL"
+        },
+        {
+          "n": 4,
+          "devanagari": "",
+          "iast": "vAn kadandhAn seydha vazhakku"
+        }
+      ]
+    },
+    {
+      "label": "19",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "",
+          "iast": "vazhakkanRu kaNdAy vali sagadam seRRAy"
+        },
+        {
+          "n": 2,
+          "devanagari": "",
+          "iast": "vazhakkenRu nI madhikka vENdA kuzhakkanRu"
+        },
+        {
+          "n": 3,
+          "devanagari": "",
+          "iast": "thIviLavin kAykkeRindha thImai thirumAlE"
+        },
+        {
+          "n": 4,
+          "devanagari": "",
+          "iast": "pAr viLangach cheydhAy pazhi"
+        }
+      ]
+    },
+    {
+      "label": "20",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "",
+          "iast": "pazhi pAvam kaiyagaRRi pal kAlum ninnai"
+        },
+        {
+          "n": 2,
+          "devanagari": "",
+          "iast": "vazhi vAzhvAr vAzhvarAm mAdho – vazhuvinRi"
+        },
+        {
+          "n": 3,
+          "devanagari": "",
+          "iast": "nAraNan than nAmAngaL nanguNarndhu nangEththum"
+        },
+        {
+          "n": 4,
+          "devanagari": "",
+          "iast": "kAraNangam thAm udaiyar thAm"
+        }
+      ]
+    },
+    {
+      "label": "21",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "",
+          "iast": "thAmuLarE tham uLLam uLLuLadhE thAmaraiyin"
+        },
+        {
+          "n": 2,
+          "devanagari": "",
+          "iast": "pUvuLadhE Eththum pozhudhuNdE vAman"
+        },
+        {
+          "n": 3,
+          "devanagari": "",
+          "iast": "thirumaruvu thAL maruvu senniyarE sevvE"
+        },
+        {
+          "n": 4,
+          "devanagari": "",
+          "iast": "arunaragam sErvadharidhu"
+        }
+      ]
+    },
+    {
+      "label": "22",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "",
+          "iast": "ariyadhu eLidhAgum ARRalAl mARRip"
+        },
+        {
+          "n": 2,
+          "devanagari": "",
+          "iast": "peruga muyalvAraip peRRAl kariyadhOr"
+        },
+        {
+          "n": 3,
+          "devanagari": "",
+          "iast": "veNkOttu mAl yAnai venRi mudiththanRE"
+        },
+        {
+          "n": 4,
+          "devanagari": "",
+          "iast": "thaNkOttu mAmalarAl thAzhndhu"
+        }
+      ]
+    },
+    {
+      "label": "23",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "",
+          "iast": "thAzhndhu varam koNdu thakka vagaigaLAl"
+        },
+        {
+          "n": 2,
+          "devanagari": "",
+          "iast": "vAzhndhu kazhivArai vAzhvikkum thAzhndha"
+        },
+        {
+          "n": 3,
+          "devanagari": "",
+          "iast": "viLanganikkuk kanReRindhu vERRuruvAy gyAlam"
+        },
+        {
+          "n": 4,
+          "devanagari": "",
+          "iast": "aLandhu adikkIzh koNda avan"
+        }
+      ]
+    },
+    {
+      "label": "24",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "",
+          "iast": "avan kaNdAy nannenjE AraruLum kEdum"
+        },
+        {
+          "n": 2,
+          "devanagari": "",
+          "iast": "avan kaNdAy aimpulanAy ninRAn avan kaNdAy"
+        },
+        {
+          "n": 3,
+          "devanagari": "",
+          "iast": "kARRuththInIrvAn karuvarai maN kArOdha"
+        },
+        {
+          "n": 4,
+          "devanagari": "",
+          "iast": "sIRRaththIyAvAnum senRu"
+        }
+      ]
+    },
+    {
+      "label": "25",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "",
+          "iast": "senRadhu ilangai mEl sevvE than sIRRaththAl"
+        },
+        {
+          "n": 2,
+          "devanagari": "",
+          "iast": "konRadhu irAvaNananik kURungAl ninRadhuvum"
+        },
+        {
+          "n": 3,
+          "devanagari": "",
+          "iast": "vEyOngu thaN sAral vEngadamE viNNavar tham"
+        },
+        {
+          "n": 4,
+          "devanagari": "",
+          "iast": "vAyOngu thol pugazhAn vandhu"
+        }
+      ]
+    },
+    {
+      "label": "26",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "",
+          "iast": "vandhiththavanai vazhi ninRa aim bhUtham"
+        },
+        {
+          "n": 2,
+          "devanagari": "",
+          "iast": "aindhum agaththadakki ArvamAy undhip"
+        },
+        {
+          "n": 3,
+          "devanagari": "",
+          "iast": "padiyamarar vElaiyAn paNdu amararkkIndha"
+        },
+        {
+          "n": 4,
+          "devanagari": "",
+          "iast": "padiyamarar vAzhum padhi"
+        }
+      ]
+    },
+    {
+      "label": "27",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "",
+          "iast": "padhi amaindhu nAdip paruththezhundha sindhai"
+        },
+        {
+          "n": 2,
+          "devanagari": "",
+          "iast": "madhiyurinji  vAn mugadu nOkki gadhi miguththu"
+        },
+        {
+          "n": 3,
+          "devanagari": "",
+          "iast": "angOl thEdiyOdum kozhundhadhE pOnRadhE"
+        },
+        {
+          "n": 4,
+          "devanagari": "",
+          "iast": "mAl thediyOdum manam"
+        }
+      ]
+    },
+    {
+      "label": "28",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "",
+          "iast": "manaththuLLAn vEngadaththAn mAkadalAn maRRum"
+        },
+        {
+          "n": 2,
+          "devanagari": "",
+          "iast": "ninaippariya nILarangaththuLLAn enaippalarum"
+        },
+        {
+          "n": 3,
+          "devanagari": "",
+          "iast": "dhEvAdhi dhEvan enappaduvAn munnorunAL"
+        },
+        {
+          "n": 4,
+          "devanagari": "",
+          "iast": "mAvAy piLandha magan"
+        }
+      ]
+    },
+    {
+      "label": "29",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "",
+          "iast": "maganAgak koNdu eduththAL mANbAya kongai"
+        },
+        {
+          "n": 2,
+          "devanagari": "",
+          "iast": "aganAra uNban enRu uNdu maganaith thAy"
+        },
+        {
+          "n": 3,
+          "devanagari": "",
+          "iast": "thERAdha vaNNam thiruththinAy thennilangai"
+        },
+        {
+          "n": 4,
+          "devanagari": "",
+          "iast": "nIRAga eydhu azhiththaAy nI"
+        }
+      ]
+    },
+    {
+      "label": "30",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "",
+          "iast": "nIyanRu ulagaLandhAy nINda thirumAlE"
+        },
+        {
+          "n": 2,
+          "devanagari": "",
+          "iast": "nIyanRu ulagidandhAy enbarAl nIyanRu"
+        },
+        {
+          "n": 3,
+          "devanagari": "",
+          "iast": "kArOdham mun kadaindhu pin adaiththAy mAkadalai"
+        },
+        {
+          "n": 4,
+          "devanagari": "",
+          "iast": "pErodha mEnip pirAn"
+        }
+      ]
+    },
+    {
+      "label": "31",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "",
+          "iast": "pirAn enRu nALum perum pulari enRum"
+        },
+        {
+          "n": 2,
+          "devanagari": "",
+          "iast": "kurA naRsezhum pOdhu koNdu varAgaththu"
+        },
+        {
+          "n": 3,
+          "devanagari": "",
+          "iast": "aNiyuruvan pAdham paNiyum avar kaNdIr"
+        },
+        {
+          "n": 4,
+          "devanagari": "",
+          "iast": "maNi uruvam kANbAr magizhndhu"
+        }
+      ]
+    },
+    {
+      "label": "32",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "",
+          "iast": "magizhndhadhu sindhai thirumAlE maRRum"
+        },
+        {
+          "n": 2,
+          "devanagari": "",
+          "iast": "magizhndhadhu nin pAdhamE pORRi magizhndhadhu"
+        },
+        {
+          "n": 3,
+          "devanagari": "",
+          "iast": "azhal Azhi sangam avai pAdiyAdum"
+        },
+        {
+          "n": 4,
+          "devanagari": "",
+          "iast": "thozhil Agam sUzhndhu thuNindhu"
+        }
+      ]
+    },
+    {
+      "label": "33",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "",
+          "iast": "thuNindhadhu sindhai thuzhAy alangal angam"
+        },
+        {
+          "n": 2,
+          "devanagari": "",
+          "iast": "aNindhavan pEr uLLaththup palgAl paNindhadhuvum"
+        },
+        {
+          "n": 3,
+          "devanagari": "",
+          "iast": "vEypiRangu sAral viRal vEngadavanaiyE"
+        },
+        {
+          "n": 4,
+          "devanagari": "",
+          "iast": "vAy thiRanaL sollum vagai"
+        }
+      ]
+    },
+    {
+      "label": "34",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "",
+          "iast": "vagaiyAl avani irandhaLandhAy pAdham"
+        },
+        {
+          "n": 2,
+          "devanagari": "",
+          "iast": "pugaiyAL naRumalarAl munnE migavAyndha"
+        },
+        {
+          "n": 3,
+          "devanagari": "",
+          "iast": "anbAkki Eththi adimaippattEn unakku"
+        },
+        {
+          "n": 4,
+          "devanagari": "",
+          "iast": "en bAkkiyaththAl ini"
+        }
+      ]
+    },
+    {
+      "label": "35",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "",
+          "iast": "inidhenbar kAmam adhanilum ARRa"
+        },
+        {
+          "n": 2,
+          "devanagari": "",
+          "iast": "inidhenbar thaNNIrum endhAy – inidhenRu"
+        },
+        {
+          "n": 3,
+          "devanagari": "",
+          "iast": "kAmanIr vELAdhu nin perumai vEtparEl"
+        },
+        {
+          "n": 4,
+          "devanagari": "",
+          "iast": "sEmanIrAgum siRidhu"
+        }
+      ]
+    },
+    {
+      "label": "36",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "",
+          "iast": "siRiyAr perumai siRidhin kaN eydhum"
+        },
+        {
+          "n": 2,
+          "devanagari": "",
+          "iast": "aRiyArum thAm aRiyAr AvAr aRiyAmai"
+        },
+        {
+          "n": 3,
+          "devanagari": "",
+          "iast": "maN koNdu maN uNdu maN umizhndha mAyan enRu"
+        },
+        {
+          "n": 4,
+          "devanagari": "",
+          "iast": "eN koNdu en nenjE iru"
+        }
+      ]
+    },
+    {
+      "label": "37",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "",
+          "iast": "irundhaN kamalaththu irumalarin uLLE"
+        },
+        {
+          "n": 2,
+          "devanagari": "",
+          "iast": "thirundhum thisaimugainaith thandhAy porundhiya nin"
+        },
+        {
+          "n": 3,
+          "devanagari": "",
+          "iast": "pAdhangaL Eththip paNiyAvEl pal piRappum"
+        },
+        {
+          "n": 4,
+          "devanagari": "",
+          "iast": "EdhangaL ellAm emakku"
+        }
+      ]
+    },
+    {
+      "label": "38",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "",
+          "iast": "emakkenRu irunidhiyam EmAndhirAdhE"
+        },
+        {
+          "n": 2,
+          "devanagari": "",
+          "iast": "thamakkenRum sArvam aRindhu namakkenRum"
+        },
+        {
+          "n": 3,
+          "devanagari": "",
+          "iast": "mAdhavanE ennum manam padaiththu maRRavan pEr"
+        },
+        {
+          "n": 4,
+          "devanagari": "",
+          "iast": "OdhuvadhE nAvinAl Oththu"
+        }
+      ]
+    },
+    {
+      "label": "39",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "",
+          "iast": "Oththin poruL modivum iththanaiyE uththaman pEr"
+        },
+        {
+          "n": 2,
+          "devanagari": "",
+          "iast": "Eththum thiRam aRImin EzhigAL Oththadhnai"
+        },
+        {
+          "n": 3,
+          "devanagari": "",
+          "iast": "valleerEl nanRu adhanai mAttIrEl mAdhavan pEr"
+        },
+        {
+          "n": 4,
+          "devanagari": "",
+          "iast": "solluvadhE Oththin surukku"
+        }
+      ]
+    },
+    {
+      "label": "40",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "",
+          "iast": "surukkAga vAngi sulAvi ninRu aiyAr"
+        },
+        {
+          "n": 2,
+          "devanagari": "",
+          "iast": "nerukkAmun nIr ninaimin kaNdIr thiruppolindha"
+        },
+        {
+          "n": 3,
+          "devanagari": "",
+          "iast": "AgaththAn pAdham aRindhum aRiyAdha"
+        },
+        {
+          "n": 4,
+          "devanagari": "",
+          "iast": "bOgaththAl illai poruL"
+        }
+      ]
+    },
+    {
+      "label": "41",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "",
+          "iast": "poruLAl amarulagam pukkiyal AgAdhu"
+        },
+        {
+          "n": 2,
+          "devanagari": "",
+          "iast": "aruLAl aRam aruLum anRE aruLAlE"
+        },
+        {
+          "n": 3,
+          "devanagari": "",
+          "iast": "mAmaRaiyOrkkIndha maNivaNNan pAdhamE"
+        },
+        {
+          "n": 4,
+          "devanagari": "",
+          "iast": "nI maRavEl nenjE ninai"
+        }
+      ]
+    },
+    {
+      "label": "42",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "",
+          "iast": "ninaippan thirumAlai nINda thOL kANa"
+        },
+        {
+          "n": 2,
+          "devanagari": "",
+          "iast": "ninaippAr piRapponRum nErAr manaippAl"
+        },
+        {
+          "n": 3,
+          "devanagari": "",
+          "iast": "piRandhAr pirAndhu eydhum pErinbam ellAm"
+        },
+        {
+          "n": 4,
+          "devanagari": "",
+          "iast": "thuRandhAr thozhudhArath thOL"
+        }
+      ]
+    },
+    {
+      "label": "43",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "",
+          "iast": "thOL iraNdu ettu Ezhum mUnRum mudi anaiththum"
+        },
+        {
+          "n": 2,
+          "devanagari": "",
+          "iast": "thALiraNdum vIzhach charam thurandhAn thAL iraNdum"
+        },
+        {
+          "n": 3,
+          "devanagari": "",
+          "iast": "Ar thozhuvAr pAdham avai thozhuvadhu anRE en"
+        },
+        {
+          "n": 4,
+          "devanagari": "",
+          "iast": "sIr kezhu thOL seyyum siRappu"
+        }
+      ]
+    },
+    {
+      "label": "44",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "",
+          "iast": "siRandhArkkezhu thuNaiyAm sengaNmAl nAmam"
+        },
+        {
+          "n": 2,
+          "devanagari": "",
+          "iast": "maRandhArai mAnidamA vaiyEn – aRandhAngum"
+        },
+        {
+          "n": 3,
+          "devanagari": "",
+          "iast": "mAdhavanE ennum manam padaiththu maRRavan pEr"
+        },
+        {
+          "n": 4,
+          "devanagari": "",
+          "iast": "OdhuvadhE nAvinAl uLLu"
+        }
+      ]
+    },
+    {
+      "label": "45",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "",
+          "iast": "uLadhenRu iRumAvAr uNdillaiyenRu"
+        },
+        {
+          "n": 2,
+          "devanagari": "",
+          "iast": "thaLardhal adhanarugum sArAr aLavariya"
+        },
+        {
+          "n": 3,
+          "devanagari": "",
+          "iast": "vEdhaththAn vEngadaththAn viNNOr mudi thOyum"
+        },
+        {
+          "n": 4,
+          "devanagari": "",
+          "iast": "pAdhaththAl pAdham payinRu"
+        }
+      ]
+    },
+    {
+      "label": "46",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "",
+          "iast": "payinRadhu arangam thirukkOtti pannAL"
+        },
+        {
+          "n": 2,
+          "devanagari": "",
+          "iast": "payinRadhuvum vEngadamE pannAL payinRadhu"
+        },
+        {
+          "n": 3,
+          "devanagari": "",
+          "iast": "aNi thigazhum sOlai aNi nIrmalaiyE"
+        },
+        {
+          "n": 4,
+          "devanagari": "",
+          "iast": "maNi thigazhum vaN thadakkai mAl"
+        }
+      ]
+    },
+    {
+      "label": "47",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "",
+          "iast": "mAlai ariyuruvan pAdhamalar aNindhu"
+        },
+        {
+          "n": 2,
+          "devanagari": "",
+          "iast": "kAlai thozhudhezhumin kaikOli gyAlam"
+        },
+        {
+          "n": 3,
+          "devanagari": "",
+          "iast": "aLandhu idandhu uNdu umizhndha aNNalai maRRallAl"
+        },
+        {
+          "n": 4,
+          "devanagari": "",
+          "iast": "uLam kidandhavARRAl uNarndhu"
+        }
+      ]
+    },
+    {
+      "label": "48",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "",
+          "iast": "uNarndhAy maRai nAngum OdhinAy nIdhi"
+        },
+        {
+          "n": 2,
+          "devanagari": "",
+          "iast": "maNandhAy malarmagaL thOL mAlE maNandhAy pOy"
+        },
+        {
+          "n": 3,
+          "devanagari": "",
+          "iast": "vEyirumsAral viyaliru gyAlam sUzh"
+        },
+        {
+          "n": 4,
+          "devanagari": "",
+          "iast": "mAyirum sOlai malai"
+        }
+      ]
+    },
+    {
+      "label": "49",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "",
+          "iast": "malai Ezhum mAnilangal Ezhum adhira"
+        },
+        {
+          "n": 2,
+          "devanagari": "",
+          "iast": "kulaisUzh kuraikadalgaL Ezhum mulai sUzhndha"
+        },
+        {
+          "n": 3,
+          "devanagari": "",
+          "iast": "nanjuraththup peNNai navinRu uNda nAvan enRu"
+        },
+        {
+          "n": 4,
+          "devanagari": "",
+          "iast": "anjAdhu en nenjE azhai"
+        }
+      ]
+    },
+    {
+      "label": "50",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "",
+          "iast": "azhaippan thirumAlai Angu avargaL sonna"
+        },
+        {
+          "n": 2,
+          "devanagari": "",
+          "iast": "pizhaippil perum peyarE pEsi izhaippariya"
+        },
+        {
+          "n": 3,
+          "devanagari": "",
+          "iast": "AyavanE yAdhavanE enRu avanai yAr mugappum"
+        },
+        {
+          "n": 4,
+          "devanagari": "",
+          "iast": "mAyavanE enRu madhiththu"
+        }
+      ]
+    },
+    {
+      "label": "51",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "",
+          "iast": "madhikkaNdAy nenjE maNivaNNan pAdham"
+        },
+        {
+          "n": 2,
+          "devanagari": "",
+          "iast": "madhikkaNdAy maRRavan pEr thannai madhikkandAy"
+        },
+        {
+          "n": 3,
+          "devanagari": "",
+          "iast": "pErAzhi ninRu peyarndhu kadal kadaindha"
+        },
+        {
+          "n": 4,
+          "devanagari": "",
+          "iast": "nIrAzhi vaNNan niRam"
+        }
+      ]
+    },
+    {
+      "label": "52",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "",
+          "iast": "niRam kariyan seyya nedumalrAL mArvan"
+        },
+        {
+          "n": 2,
+          "devanagari": "",
+          "iast": "aRam periyan Ar adhu aRivAr maRam purindha"
+        },
+        {
+          "n": 3,
+          "devanagari": "",
+          "iast": "vALarakkan pOlvAnai vAnavarkOn thAnaththu"
+        },
+        {
+          "n": 4,
+          "devanagari": "",
+          "iast": "nIL irukkaikkuyththAn neRi"
+        }
+      ]
+    },
+    {
+      "label": "53",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "",
+          "iast": "neRiyAr kuzhaRkaRRai munninRu pin thAzhndhu"
+        },
+        {
+          "n": 2,
+          "devanagari": "",
+          "iast": "aRiyAdhu iLam giri enRu eNNi piriyAdhu"
+        },
+        {
+          "n": 3,
+          "devanagari": "",
+          "iast": "pUm kodikkaL vaigum porupunal kunRu ennum"
+        },
+        {
+          "n": 4,
+          "devanagari": "",
+          "iast": "vEngadamE yAm virumbum veRpu"
+        }
+      ]
+    },
+    {
+      "label": "54",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "",
+          "iast": "veRpenRu irum sOlai vEngadam enRu ivviraNdum"
+        },
+        {
+          "n": 2,
+          "devanagari": "",
+          "iast": "niRpu enRu nI ninaikkum nIrmaipOl niRpu enRu"
+        },
+        {
+          "n": 3,
+          "devanagari": "",
+          "iast": "uLam kOyil uLLam vaiththu uLLinEn veLLaththu"
+        },
+        {
+          "n": 4,
+          "devanagari": "",
+          "iast": "iLam kOyil kaividEl enRu"
+        }
+      ]
+    },
+    {
+      "label": "55",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "",
+          "iast": "enRu maRandhaRiyEn Ezh piRappum eppozhudhum"
+        },
+        {
+          "n": 2,
+          "devanagari": "",
+          "iast": "ninRu ninaippu ozhiyA nIrmaiyAl venRi"
+        },
+        {
+          "n": 3,
+          "devanagari": "",
+          "iast": "adal Azhi koNda aRivanE inbak"
+        },
+        {
+          "n": 4,
+          "devanagari": "",
+          "iast": "kadal Azhi nI aruLik kAN"
+        }
+      ]
+    },
+    {
+      "label": "56",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "",
+          "iast": "kANak kazhi kAdhal kaimikkuk kAttinAl"
+        },
+        {
+          "n": 2,
+          "devanagari": "",
+          "iast": "nANap padum enRAl nANumE pENik"
+        },
+        {
+          "n": 3,
+          "devanagari": "",
+          "iast": "karumAlaip ponmEni kAttAmun kAttum"
+        },
+        {
+          "n": 4,
+          "devanagari": "",
+          "iast": "thirumAlai  nangaL thiru"
+        }
+      ]
+    },
+    {
+      "label": "57",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "",
+          "iast": "thirumangai ninRaLum dheyvam nA vAzhththum"
+        },
+        {
+          "n": 2,
+          "devanagari": "",
+          "iast": "karumam kadaippidimin kaNdIr urimaiyAl"
+        },
+        {
+          "n": 3,
+          "devanagari": "",
+          "iast": "EththinOm pAdham irum thadakkai endhai pEr"
+        },
+        {
+          "n": 4,
+          "devanagari": "",
+          "iast": "nAl dhisaiyum kEttIrE nAm"
+        }
+      ]
+    },
+    {
+      "label": "58",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "",
+          "iast": "nAm peRRa nanmaiyum nAmangai nannenjaththu"
+        },
+        {
+          "n": 2,
+          "devanagari": "",
+          "iast": "Ombiyirundhu emmai Odhuviththu vEmbin"
+        },
+        {
+          "n": 3,
+          "devanagari": "",
+          "iast": "poruL nIrmaiyAyinum ponnAzhi pAdenRu"
+        },
+        {
+          "n": 4,
+          "devanagari": "",
+          "iast": "aruL nIrmai thandha aruL"
+        }
+      ]
+    },
+    {
+      "label": "59",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "",
+          "iast": "aruL purindha sindhai adiyAr mEl vaiththu"
+        },
+        {
+          "n": 2,
+          "devanagari": "",
+          "iast": "poruL therindhu kANguRRa appOdhu iruL thirindhu"
+        },
+        {
+          "n": 3,
+          "devanagari": "",
+          "iast": "nOkkinEn nOkki ninaindhEn adhoNkamalam"
+        },
+        {
+          "n": 4,
+          "devanagari": "",
+          "iast": "OkkinEn ennaiyum angu Orndhu"
+        }
+      ]
+    },
+    {
+      "label": "60",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "",
+          "iast": "Oruruvan allai oLi uruvam nin uruvam"
+        },
+        {
+          "n": 2,
+          "devanagari": "",
+          "iast": "Iruruvan enbar irunilaththOr Oruruvam"
+        },
+        {
+          "n": 3,
+          "devanagari": "",
+          "iast": "AdhiyAm vaNNam aRindhAr avar kaNdIr"
+        },
+        {
+          "n": 4,
+          "devanagari": "",
+          "iast": "nIdhiyAl maN kAppAr ninRu"
+        }
+      ]
+    },
+    {
+      "label": "61",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "",
+          "iast": "ninRadhOr pAdham nilam pudhaippa nINda thOL"
+        },
+        {
+          "n": 2,
+          "devanagari": "",
+          "iast": "senRu aLandhadhenbar dhisaiyellAm anRu"
+        },
+        {
+          "n": 3,
+          "devanagari": "",
+          "iast": "karumANiyAy irandha kaLvanE unnaip"
+        },
+        {
+          "n": 4,
+          "devanagari": "",
+          "iast": "piramANiththAr peRRa pERu"
+        }
+      ]
+    },
+    {
+      "label": "62",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "",
+          "iast": "pERonRum munnaRiyEn peRRaRiyEn pEdhaimaiyAl"
+        },
+        {
+          "n": 2,
+          "devanagari": "",
+          "iast": "mARenRu solli vaNanginEn ERin"
+        },
+        {
+          "n": 3,
+          "devanagari": "",
+          "iast": "peruththeruththam kOdu osiyap peNNasaiyin pin pOy"
+        },
+        {
+          "n": 4,
+          "devanagari": "",
+          "iast": "eruththiRuththa nal Ayar ERu"
+        }
+      ]
+    },
+    {
+      "label": "63",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "",
+          "iast": "EREzhum venRadarththa endhai eri uruvaththu"
+        },
+        {
+          "n": 2,
+          "devanagari": "",
+          "iast": "EREri patta vidu sAbam pARERi"
+        },
+        {
+          "n": 3,
+          "devanagari": "",
+          "iast": "uNdathalai vAy niRaiyak kOttangai oNkurudhi"
+        },
+        {
+          "n": 4,
+          "devanagari": "",
+          "iast": "kaNda poruL sollil kadhai"
+        }
+      ]
+    },
+    {
+      "label": "64",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "",
+          "iast": "kadhaiyin perum poruLum kaNNA nin pErE"
+        },
+        {
+          "n": 2,
+          "devanagari": "",
+          "iast": "idhayam iruandhavaiyE Eththil kadhaiyin"
+        },
+        {
+          "n": 3,
+          "devanagari": "",
+          "iast": "thirumozhiyAy ninRa thirumAlE unnaip"
+        },
+        {
+          "n": 4,
+          "devanagari": "",
+          "iast": "parumozhiyAl kANap paNi"
+        }
+      ]
+    },
+    {
+      "label": "65",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "",
+          "iast": "paNindhEn thirumEni paingamalam kaiyAl"
+        },
+        {
+          "n": 2,
+          "devanagari": "",
+          "iast": "aNindhEn un sEvadi mEl anbAy thuNindhEn"
+        },
+        {
+          "n": 3,
+          "devanagari": "",
+          "iast": "purindhEththi unnaip pugalidam pArththu AngE"
+        },
+        {
+          "n": 4,
+          "devanagari": "",
+          "iast": "irundhEththi vAzhum idhu"
+        }
+      ]
+    },
+    {
+      "label": "66",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "",
+          "iast": "idhu kaNdAy nannenjE ippiRaviyAvadhu"
+        },
+        {
+          "n": 2,
+          "devanagari": "",
+          "iast": "idhu kaNdAy ellAm nAmuRRadhu idhu kaNdAy"
+        },
+        {
+          "n": 3,
+          "devanagari": "",
+          "iast": "nAraNan pEr Odhi naragaththarugaNaiyA"
+        },
+        {
+          "n": 4,
+          "devanagari": "",
+          "iast": "kAraNamum vallaiyE kAN"
+        }
+      ]
+    },
+    {
+      "label": "67",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "",
+          "iast": "kaNdEn thirumEni yAn kanavil Angu avankaik"
+        },
+        {
+          "n": 2,
+          "devanagari": "",
+          "iast": "kaNdEn kanalum sudar Azhi kaNdEn"
+        },
+        {
+          "n": 3,
+          "devanagari": "",
+          "iast": "uRunOy vinai iraNdum Ottuviththup pinnum"
+        },
+        {
+          "n": 4,
+          "devanagari": "",
+          "iast": "maRu nOy seRuvAn vali"
+        }
+      ]
+    },
+    {
+      "label": "68",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "",
+          "iast": "vali mikka vAL eyiRRu vALavuNar mALa"
+        },
+        {
+          "n": 2,
+          "devanagari": "",
+          "iast": "vali mikka vAL varai maththAga valimikka"
+        },
+        {
+          "n": 3,
+          "devanagari": "",
+          "iast": "vANAgam suRRi maRugak kadal kadaindhAn"
+        },
+        {
+          "n": 4,
+          "devanagari": "",
+          "iast": "kONAgam kombu osiththa kO"
+        }
+      ]
+    },
+    {
+      "label": "69",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "",
+          "iast": "kOvAgi mAnilam kAththu nangaN mugappE"
+        },
+        {
+          "n": 2,
+          "devanagari": "",
+          "iast": "mAvEgich chelginRa mannavarum pUmEvum"
+        },
+        {
+          "n": 3,
+          "devanagari": "",
+          "iast": "sengalanAbiyAn sEvadikkE EzhpiRappum"
+        },
+        {
+          "n": 4,
+          "devanagari": "",
+          "iast": "thaN kamalam EyndhAr thamar"
+        }
+      ]
+    },
+    {
+      "label": "70",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "",
+          "iast": "thamaruLLam thanjai thalaiyarangam thaNkAl"
+        },
+        {
+          "n": 2,
+          "devanagari": "",
+          "iast": "thamaruLLum thaN poruppu vElai thamaruLLum"
+        },
+        {
+          "n": 3,
+          "devanagari": "",
+          "iast": "mAmallai kOval madhiL kudandhai enbarE"
+        },
+        {
+          "n": 4,
+          "devanagari": "",
+          "iast": "Evalla endhaikku idam"
+        }
+      ]
+    },
+    {
+      "label": "71",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "",
+          "iast": "idangai valampuri ninRArppa erigAnRu"
+        },
+        {
+          "n": 2,
+          "devanagari": "",
+          "iast": "adangAr odunguviththadhu Azhi vidangAlum"
+        },
+        {
+          "n": 3,
+          "devanagari": "",
+          "iast": "thIvAy aravaNaimEl thOnRal dhisaiyaLappAn"
+        },
+        {
+          "n": 4,
+          "devanagari": "",
+          "iast": "pUvAr adi nimirththa pOdhu"
+        }
+      ]
+    },
+    {
+      "label": "72",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "",
+          "iast": "pOdhaRindhu vAnarangaL pUnjunai pukku Angalarndha"
+        },
+        {
+          "n": 2,
+          "devanagari": "",
+          "iast": "pOdharindhu koNdu EththumbOdhu uLLam pOdhu"
+        },
+        {
+          "n": 3,
+          "devanagari": "",
+          "iast": "maNivEngadavan malar adikkE sella"
+        },
+        {
+          "n": 4,
+          "devanagari": "",
+          "iast": "aNivEngadavan pEr Ayndhu"
+        }
+      ]
+    },
+    {
+      "label": "73",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "",
+          "iast": "Ayndhuraippan Ayiram pEr Adhi nadu andhivAy"
+        },
+        {
+          "n": 2,
+          "devanagari": "",
+          "iast": "vAyndha malar thUvi vaigalum  Eyndha"
+        },
+        {
+          "n": 3,
+          "devanagari": "",
+          "iast": "piRaikkOttuch chengaN kari viduththa pemmAn"
+        },
+        {
+          "n": 4,
+          "devanagari": "",
+          "iast": "iRakkAdpadath thuNindha yAn"
+        }
+      ]
+    },
+    {
+      "label": "74",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "",
+          "iast": "yAnE thavam seydhEn EzhpiRappum eppozhudhum"
+        },
+        {
+          "n": 2,
+          "devanagari": "",
+          "iast": "yAnE thavam udaiyEn emperumAn yAnE"
+        },
+        {
+          "n": 3,
+          "devanagari": "",
+          "iast": "irum thamizh nanmAlai iNaiyadikkE sonnEn"
+        },
+        {
+          "n": 4,
+          "devanagari": "",
+          "iast": "perum thamizhan nallEn peridhu"
+        }
+      ]
+    },
+    {
+      "label": "75",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "",
+          "iast": "perugu madha vEzham mAppidikku mun ninRu"
+        },
+        {
+          "n": 2,
+          "devanagari": "",
+          "iast": "iru kaN iLa mUngil vAngi arugirundha"
+        },
+        {
+          "n": 3,
+          "devanagari": "",
+          "iast": "thEn kalandhu nIttum thiruvEngadam kaNdIr"
+        },
+        {
+          "n": 4,
+          "devanagari": "",
+          "iast": "vAn kalandha vaNNan varai"
+        }
+      ]
+    },
+    {
+      "label": "76",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "",
+          "iast": "varaich chandhanak kuzhambum vAn kalanum pattum"
+        },
+        {
+          "n": 2,
+          "devanagari": "",
+          "iast": "viraippolindha veN malligaiyum niraiththukkoNdu"
+        },
+        {
+          "n": 3,
+          "devanagari": "",
+          "iast": "AdhikkaN ninRa aRivan adiyiNaiyE"
+        },
+        {
+          "n": 4,
+          "devanagari": "",
+          "iast": "Odhip paNivadhu uRum"
+        }
+      ]
+    },
+    {
+      "label": "77",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "",
+          "iast": "uRum kaNdAy nannenjE uththaman naRpAdham"
+        },
+        {
+          "n": 2,
+          "devanagari": "",
+          "iast": "uRum kaNdAy oNkamalam thannAl uRum kaNdAy"
+        },
+        {
+          "n": 3,
+          "devanagari": "",
+          "iast": "Eththip paNindhavan pEr IraigyURu eppozhudhum"
+        },
+        {
+          "n": 4,
+          "devanagari": "",
+          "iast": "sARRi uraiththal thavam"
+        }
+      ]
+    },
+    {
+      "label": "78",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "",
+          "iast": "thavam seydhu nAnmuganE peRRAn tharaNi"
+        },
+        {
+          "n": 2,
+          "devanagari": "",
+          "iast": "nivandhaLippa nIttiya poRpAdham sivandha than"
+        },
+        {
+          "n": 3,
+          "devanagari": "",
+          "iast": "kai anaiththum Arak kazhuvinAn gangai nIr"
+        },
+        {
+          "n": 4,
+          "devanagari": "",
+          "iast": "peydhu anaiththup pEr mozhindha pin"
+        }
+      ]
+    },
+    {
+      "label": "79",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "",
+          "iast": "pinninRu thAyirappak kELAn perumbaNaiththOL"
+        },
+        {
+          "n": 2,
+          "devanagari": "",
+          "iast": "munninRu thAnirappAL moymmalarAl sol ninRa"
+        },
+        {
+          "n": 3,
+          "devanagari": "",
+          "iast": "thOL nalandhAn nEr illAth thOnRal avan aLandha"
+        },
+        {
+          "n": 4,
+          "devanagari": "",
+          "iast": "nIL nalandhAn aththanaikkum nEr"
+        }
+      ]
+    },
+    {
+      "label": "80",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "",
+          "iast": "nErndhEn adimai ninaindhEn adhu oN kamalam"
+        },
+        {
+          "n": 2,
+          "devanagari": "",
+          "iast": "ArndhEn un sEvadimEl anbAy Arndha"
+        },
+        {
+          "n": 3,
+          "devanagari": "",
+          "iast": "adikkOlam kaNdavarkku enkolO munnaip"
+        },
+        {
+          "n": 4,
+          "devanagari": "",
+          "iast": "padikkOlam kaNda pagal"
+        }
+      ]
+    },
+    {
+      "label": "81",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "",
+          "iast": "pagal kaNdEn nAraNanaik kaNdEn kanavil"
+        },
+        {
+          "n": 2,
+          "devanagari": "",
+          "iast": "migak kaNdEn mINdavanai meyyE migak kaNdEn"
+        },
+        {
+          "n": 3,
+          "devanagari": "",
+          "iast": "Un thigazhum nEmi oLi thigazhum sEvadiyAn"
+        },
+        {
+          "n": 4,
+          "devanagari": "",
+          "iast": "vAn thigazhum sOdhi vadivu"
+        }
+      ]
+    },
+    {
+      "label": "82",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "",
+          "iast": "vadikkOla vAL nedungaN mAmalarAL sevvip"
+        },
+        {
+          "n": 2,
+          "devanagari": "",
+          "iast": "padikkOlam kaNdagalAL pannAL adikkOli"
+        },
+        {
+          "n": 3,
+          "devanagari": "",
+          "iast": "gyAlaththAL pinnum nalam purindhadhu enkolO"
+        },
+        {
+          "n": 4,
+          "devanagari": "",
+          "iast": "kOlaththAl illai kuRai"
+        }
+      ]
+    },
+    {
+      "label": "83",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "",
+          "iast": "kuRaiyAga venjoRkaL kURinEn kURi"
+        },
+        {
+          "n": 2,
+          "devanagari": "",
+          "iast": "maRaiyAngena uraiththa mAlai iRaiyEnum"
+        },
+        {
+          "n": 3,
+          "devanagari": "",
+          "iast": "eeyungolenRE irundhEn enaippagalum"
+        },
+        {
+          "n": 4,
+          "devanagari": "",
+          "iast": "mAyan kaN senRa varam"
+        }
+      ]
+    },
+    {
+      "label": "84",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "",
+          "iast": "varam karudhith thannai vaNangAdha vanmai"
+        },
+        {
+          "n": 2,
+          "devanagari": "",
+          "iast": "uram karudhi mUrkkaththavanai naram kalandha"
+        },
+        {
+          "n": 3,
+          "devanagari": "",
+          "iast": "singamAyk kINda thiruvan adiyiNaiyE"
+        },
+        {
+          "n": 4,
+          "devanagari": "",
+          "iast": "angaNmA gyAlaththu amudhu"
+        }
+      ]
+    },
+    {
+      "label": "85",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "",
+          "iast": "amudhenRum thEnenRum AzhiyAnenRum"
+        },
+        {
+          "n": 2,
+          "devanagari": "",
+          "iast": "amudhanRu koNdugandhAn enRum amudhanna"
+        },
+        {
+          "n": 3,
+          "devanagari": "",
+          "iast": "sonmAlai Eththith thozhudhEn solappatta"
+        },
+        {
+          "n": 4,
+          "devanagari": "",
+          "iast": "nanmAlai Eththi navinRu"
+        }
+      ]
+    },
+    {
+      "label": "86",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "",
+          "iast": "navinRuraiththa nAvalargaL nANmalar koNdu AngE"
+        },
+        {
+          "n": 2,
+          "devanagari": "",
+          "iast": "payinRadhanAl peRRa payan enkol payinRAr tham"
+        },
+        {
+          "n": 3,
+          "devanagari": "",
+          "iast": "meyththavaththAl kANbariya mEgamaNivaNNanai yAn"
+        },
+        {
+          "n": 4,
+          "devanagari": "",
+          "iast": "eththvaththAl kANbankol inRu"
+        }
+      ]
+    },
+    {
+      "label": "87",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "",
+          "iast": "inRAvaRiginREn allEn iru nilaththaich"
+        },
+        {
+          "n": 2,
+          "devanagari": "",
+          "iast": "chenRAngu adippaduththa sEvadiyai anRu"
+        },
+        {
+          "n": 3,
+          "devanagari": "",
+          "iast": "karukkOttiyuL kidandhu kai thozhudhEn kaNdEn"
+        },
+        {
+          "n": 4,
+          "devanagari": "",
+          "iast": "thirukkOtti endhai thiRam"
+        }
+      ]
+    },
+    {
+      "label": "88",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "",
+          "iast": "thiRambiRRu iniyaRindhEn thennarangaththu endhai"
+        },
+        {
+          "n": 2,
+          "devanagari": "",
+          "iast": "thiRambA vazhi senRArkku allAl thiRambAch"
+        },
+        {
+          "n": 3,
+          "devanagari": "",
+          "iast": "chedinaragai nIkkith thAm selvadhan mun vAnOr"
+        },
+        {
+          "n": 4,
+          "devanagari": "",
+          "iast": "kadi nagara vAsal kadhavu"
+        }
+      ]
+    },
+    {
+      "label": "89",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "",
+          "iast": "kadhavikkadham siRandha kanjanai mun kAyndhu"
+        },
+        {
+          "n": 2,
+          "devanagari": "",
+          "iast": "Adhavip pOr yAnai osiththu padhaviyAy"
+        },
+        {
+          "n": 3,
+          "devanagari": "",
+          "iast": "pANiyAl nIrERRup paNdorukAl mAvaliyai"
+        },
+        {
+          "n": 4,
+          "devanagari": "",
+          "iast": "mANiyAy koNdilaiyE maN"
+        }
+      ]
+    },
+    {
+      "label": "90",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "",
+          "iast": "maNNulagam ALEnE vAnavarkkum vAnavanAy"
+        },
+        {
+          "n": 2,
+          "devanagari": "",
+          "iast": "viNNulagam thannagaththu mEvEnE naNNith"
+        },
+        {
+          "n": 3,
+          "devanagari": "",
+          "iast": "thirumAlaich chengaN adiyAnai engaL"
+        },
+        {
+          "n": 4,
+          "devanagari": "",
+          "iast": "perumAnaik kai thozhudha pin"
+        }
+      ]
+    },
+    {
+      "label": "91",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "",
+          "iast": "pinnAl arunaragam sErAmal pEdhuRuvIr"
+        },
+        {
+          "n": 2,
+          "devanagari": "",
+          "iast": "munnAl vaNanga muyalminO pannUl"
+        },
+        {
+          "n": 3,
+          "devanagari": "",
+          "iast": "aLandhAnaik kArkkadal sUzh gyAlaththai ellAm"
+        },
+        {
+          "n": 4,
+          "devanagari": "",
+          "iast": "aLandhAn avan sEvadi"
+        }
+      ]
+    },
+    {
+      "label": "92",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "",
+          "iast": "adiyAl mun kanjanaich cheRRu amarar Eththum"
+        },
+        {
+          "n": 2,
+          "devanagari": "",
+          "iast": "padiyAn kodi mEl puL koNdAn nediyAn than"
+        },
+        {
+          "n": 3,
+          "devanagari": "",
+          "iast": "nAmamE EththumingaL EththinAl thAm vEndum"
+        },
+        {
+          "n": 4,
+          "devanagari": "",
+          "iast": "kAmamE kAttum kadidhu"
+        }
+      ]
+    },
+    {
+      "label": "93",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "",
+          "iast": "kadidhu kodunaragam piRkAlum seygai"
+        },
+        {
+          "n": 2,
+          "devanagari": "",
+          "iast": "kodidhenRadhu kUdA munnam vadisangam"
+        },
+        {
+          "n": 3,
+          "devanagari": "",
+          "iast": "koNdAnaik kUndhal vAy kINdAnaik kongai nanju"
+        },
+        {
+          "n": 4,
+          "devanagari": "",
+          "iast": "uNdAnai EththuminO uRRu"
+        }
+      ]
+    },
+    {
+      "label": "94",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "",
+          "iast": "uRRu vaNangith thozhumin ulagEzhum"
+        },
+        {
+          "n": 2,
+          "devanagari": "",
+          "iast": "muRRum vizhungum mugilvaNNan paRRip"
+        },
+        {
+          "n": 3,
+          "devanagari": "",
+          "iast": "porundhAdhAn mArvidandhu pUmpAdagaththuL"
+        },
+        {
+          "n": 4,
+          "devanagari": "",
+          "iast": "irundhAnai Eththumen nenju"
+        }
+      ]
+    },
+    {
+      "label": "95",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "",
+          "iast": "ennenjamEyAn en senniyAn dhAnavanai"
+        },
+        {
+          "n": 2,
+          "devanagari": "",
+          "iast": "vannenjam kINda maNivaNNan munnam sEy"
+        },
+        {
+          "n": 3,
+          "devanagari": "",
+          "iast": "UzhiyAn Uzhi peyarththAn ulagEththum"
+        },
+        {
+          "n": 4,
+          "devanagari": "",
+          "iast": "AzhiyAn aththiyUrAn"
+        }
+      ]
+    },
+    {
+      "label": "96",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "",
+          "iast": "aththiyUrAn puLLai UrvAn aNimaNiyin"
+        },
+        {
+          "n": 2,
+          "devanagari": "",
+          "iast": "thuththi sEr nAgaththin mEl thuyilvAn muththI"
+        },
+        {
+          "n": 3,
+          "devanagari": "",
+          "iast": "maRaiyAvAn makadal nanjuNdAn thanakkum"
+        },
+        {
+          "n": 4,
+          "devanagari": "",
+          "iast": "iRaiyAvAn engaL pirAn"
+        }
+      ]
+    },
+    {
+      "label": "97",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "",
+          "iast": "engaL perumAn imaiyOr thalaimagan nI"
+        },
+        {
+          "n": 2,
+          "devanagari": "",
+          "iast": "sengaN nedumAL thirumArbA pongu"
+        },
+        {
+          "n": 3,
+          "devanagari": "",
+          "iast": "padamUkkil AyiravAyp pAmbaNaimEl sErndhAy"
+        },
+        {
+          "n": 4,
+          "devanagari": "",
+          "iast": "kudamUkkil kOyilAyk koNdu"
+        }
+      ]
+    },
+    {
+      "label": "98",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "",
+          "iast": "koNdu vaLarkkak kuzhaviyAyth thAn vaLarndhadhu"
+        },
+        {
+          "n": 2,
+          "devanagari": "",
+          "iast": "uNdadhu ulagEzhum uLLodunga koNdu"
+        },
+        {
+          "n": 3,
+          "devanagari": "",
+          "iast": "kudamAdik kOvalanAy mEvi ennenjam"
+        },
+        {
+          "n": 4,
+          "devanagari": "",
+          "iast": "idamAgak koNda iRai"
+        }
+      ]
+    },
+    {
+      "label": "99",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "",
+          "iast": "iRai emperumAn aruLenRu imaiyOr"
+        },
+        {
+          "n": 2,
+          "devanagari": "",
+          "iast": "muRai ninRu moymmalargaL thUva aRaikazhala"
+        },
+        {
+          "n": 3,
+          "devanagari": "",
+          "iast": "sEvadiyAn sengaNediyAn kuRaLuruvAy"
+        },
+        {
+          "n": 4,
+          "devanagari": "",
+          "iast": "mAvadivil maN koNdAn mAl"
+        }
+      ]
+    },
+    {
+      "label": "100",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "",
+          "iast": "mAlE nediyOnE kaNNanE  viNNavarkku"
+        },
+        {
+          "n": 2,
+          "devanagari": "",
+          "iast": "mElA viyan thuzhAyk kaNNiyanE  mElAl [mEnAL]"
+        },
+        {
+          "n": 3,
+          "devanagari": "",
+          "iast": "viLavinkAy kanRinAl vIzhththavanE enRan"
+        },
+        {
+          "n": 4,
+          "devanagari": "",
+          "iast": "aLavanRAl yAnudaiya anbu"
+        }
+      ]
+    }
+  ]
+}

@@ -14,15 +14,27 @@
 // line rather than assuming one, so wrapped lines don't need special
 // handling elsewhere.
 
+// language here (not just each chant JSON's own "language" field) is what
+// populateChantSelect groups the dropdown by — see CHANT_GROUPS below.
 const CHANTS = [
-  { id: 'abirami-antati', label: 'Abirami Antati (Tamil)' },
-  { id: 'kanninun-cirutampu', label: 'Kanninun Cirutampu (Tamil)' },
-  { id: 'arpudha-tiruvantati', label: 'Arpudha Tiruvantati (Tamil)' },
-  { id: 'saraswati-antati', label: 'Saraswati Antati (Tamil)' },
-  { id: 'sri-rudram-namakam', label: 'Sri Rudram Namakam' },
-  { id: 'sri-rudram-chamakam', label: 'Sri Rudram Chamakam' },
-  { id: 'soundarya-lahari', label: 'Soundarya Lahari' },
-  { id: 'vel-maaral-tamil', label: 'Vel Maaral (Tamil)' },
+  { id: 'abirami-antati', label: 'Abirami Antati', language: 'tamil' },
+  { id: 'kanninun-cirutampu', label: 'Kanninun Cirutampu', language: 'tamil' },
+  { id: 'arpudha-tiruvantati', label: 'Arpudha Tiruvantati', language: 'tamil' },
+  { id: 'saraswati-antati', label: 'Saraswati Antati', language: 'tamil' },
+  { id: 'mudhal-tiruvantati', label: 'Mudhal Tiruvantati', language: 'tamil' },
+  { id: 'irandam-tiruvantati', label: 'Irandam Tiruvantati', language: 'tamil' },
+  { id: 'munram-tiruvantati', label: 'Munram Tiruvantati', language: 'tamil' },
+  { id: 'vel-maaral-tamil', label: 'Vel Maaral', language: 'tamil' },
+  { id: 'sri-rudram-namakam', label: 'Sri Rudram Namakam', language: 'sanskrit' },
+  { id: 'sri-rudram-chamakam', label: 'Sri Rudram Chamakam', language: 'sanskrit' },
+  { id: 'soundarya-lahari', label: 'Soundarya Lahari', language: 'sanskrit' },
+];
+
+// Dropdown group order/labels — Tamil first so Abirami Antati (CHANTS[0],
+// also the default chant on a first visit) stays the first option overall.
+const CHANT_GROUPS = [
+  { language: 'tamil', label: 'Tamil' },
+  { language: 'sanskrit', label: 'Sanskrit' },
 ];
 
 // Optional per-section popup notes, keyed by chant id then section label —
@@ -188,11 +200,16 @@ let networkRail = null;
 let networkSvg = null;
 
 function populateChantSelect() {
-  for (const chant of CHANTS) {
-    const option = document.createElement('option');
-    option.value = chant.id;
-    option.textContent = chant.label;
-    chantSelect.appendChild(option);
+  for (const group of CHANT_GROUPS) {
+    const optgroup = document.createElement('optgroup');
+    optgroup.label = group.label;
+    for (const chant of CHANTS.filter((c) => c.language === group.language)) {
+      const option = document.createElement('option');
+      option.value = chant.id;
+      option.textContent = chant.label;
+      optgroup.appendChild(option);
+    }
+    chantSelect.appendChild(optgroup);
   }
 }
 
