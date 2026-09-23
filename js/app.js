@@ -18,6 +18,7 @@ const CHANTS = [
   { id: 'abirami-antati', label: 'Abirami Antati (Tamil)' },
   { id: 'kanninun-cirutampu', label: 'Kanninun Cirutampu (Tamil)' },
   { id: 'arpudha-tiruvantati', label: 'Arpudha Tiruvantati (Tamil)' },
+  { id: 'saraswati-antati', label: 'Saraswati Antati (Tamil)' },
   { id: 'sri-rudram-namakam', label: 'Sri Rudram Namakam' },
   { id: 'sri-rudram-chamakam', label: 'Sri Rudram Chamakam' },
   { id: 'soundarya-lahari', label: 'Soundarya Lahari' },

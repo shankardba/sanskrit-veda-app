@@ -1,0 +1,820 @@
+{
+  "id": "saraswati-antati",
+  "language": "tamil",
+  "title": {
+    "devanagari": "சரஸ்வதி அந்தாதி",
+    "iast": "Sarasvati Antāti"
+  },
+  "source": {
+    "site": "aanmeegam.org",
+    "devanagari_url": "https://aanmeegam.org/slogas/saraswathi-anthathi/",
+    "iast_url": "https://aanmeegam.org/en/slokas/saraswathi-anthathi-lyrics/"
+  },
+  "colophon": {
+    "devanagari": "கம்பர் அருளிய சரஸ்வதி அந்தாதி",
+    "iast": "Composed by Kambar (Kavichakravarthy, 12th century CE), best known for the Kambaramayanam — one of nine works attributed to him. A hymn to Saraswati, goddess of learning."
+  },
+  "sectionUnit": "",
+  "sections": [
+    {
+      "label": "Kaṭavuḷ Vāḻttu 1",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "ஆய கலைகள் அறுபத்து நான்கினையும்",
+          "iast": "Aaya Kalaikal Arupaththu Nhaankinaiyum"
+        },
+        {
+          "n": 2,
+          "devanagari": "ஏய வுணர்விக்கு மென்னம்மை – தூய",
+          "iast": "Aeya Unarvikkum Ennammai –thuuya"
+        },
+        {
+          "n": 3,
+          "devanagari": "வுருப் பளிங்கு போல் வாளென் உள்ளத்தின் உள்ளே",
+          "iast": "Uruppalingku Poalvaal En Ullaththin Ullae"
+        },
+        {
+          "n": 4,
+          "devanagari": "யிருப்பளிங்கு வாரா திடர்.",
+          "iast": "Iruppalingku Vaaraa(Thu) Itar."
+        }
+      ]
+    },
+    {
+      "label": "Kaṭavuḷ Vāḻttu 2",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "படிக நிறமும் பவளச் செவ்வாயும்",
+          "iast": "Patikanhiramum Pavalach Chev Vaayum"
+        },
+        {
+          "n": 2,
+          "devanagari": "கடிகமழ்பூந் தாமரை போற் கையுந் – துடியிடையும்",
+          "iast": "Kati Kamalzhpuunh Thaamaraipoar Kaiyum – Thutiyitaiyum"
+        },
+        {
+          "n": 3,
+          "devanagari": "அல்லும் பகலும் அனவரத முந்துதித்தால்",
+          "iast": "Allum Pakalum Anavarathamum Thuthiththaal"
+        },
+        {
+          "n": 4,
+          "devanagari": "கல்லுஞ்சொல் லாதோ கவி.",
+          "iast": "Kallumchoal Laathoa Kavi."
+        }
+      ]
+    },
+    {
+      "label": "1",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "சீர்தந்த வெள்ளிதழ்ப் பூங்கமலா சனத்தேவி செஞ்சொற்",
+          "iast": "Cheerthanhtha Vellithalzhp Puungkama Laachanath Thaevichegnchoal"
+        },
+        {
+          "n": 2,
+          "devanagari": "றார்தந்த வென்மனத் தாமரையாட்டி சரோருக மேற்",
+          "iast": "Thaarthanhtha Enmanath Thaamarai Yaatti Charoarukamael"
+        },
+        {
+          "n": 3,
+          "devanagari": "பார்தந்த நாத னிசைதந்த வாரணப் பங்கயத்தாள்",
+          "iast": "Paarthanhtha Nhaathan Ichaithanhtha Vaaranap Pangkayaththaal"
+        },
+        {
+          "n": 4,
+          "devanagari": "வார்தந்த சோதி யம்போருகத் தாளை வணங்குதுமே.",
+          "iast": "Vaarthanhtha Choothiyum Poarukath Thaalai Vanangkuthumae"
+        }
+      ]
+    },
+    {
+      "label": "2",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "வணங்குஞ் சிலைநுதலுங் கழைத்தோளும் வனமுலை மேற்",
+          "iast": "Vanangkum Chilainhutha Lumkalzaith Thoalum Vanamulaimael"
+        },
+        {
+          "n": 2,
+          "devanagari": "சுணங்கும் புதிய நிலவெழு மேனியுந் தோட்டுடனே",
+          "iast": "Chunangkum Puthiya Nhilavelzhu Maeniyum Thoattutanae"
+        },
+        {
+          "n": 3,
+          "devanagari": "பிணங்குங் கருந்தடங் கண்களு நோக்கிப் பிரமனன்பால்",
+          "iast": "Pinangkum Karunhthatang Kankalum Nhoakkip Piramananpaal"
+        },
+        {
+          "n": 4,
+          "devanagari": "உணங்குந் திருமுன் றிலாய் மறைநான்கும் உரைப்பவளே.",
+          "iast": "Unangkum Thirumunri Laaymarai Nhaankum Uraippavalae"
+        }
+      ]
+    },
+    {
+      "label": "3",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "உரைப்பா ருரைக்குங் கலைகளெல்லாம் எண்ணில் உன்னையன்றித்",
+          "iast": "Uraippaar Uraikkum Kalaikalel Laamennil Unnaiyanrith"
+        },
+        {
+          "n": 2,
+          "devanagari": "தரைப்பா லொருவர் தரவல்ல ரோதண் டரளமுலை",
+          "iast": "Tharaippaal Oruvar Tharaval Laroathan Tharalamulai"
+        },
+        {
+          "n": 3,
+          "devanagari": "வரைப்பா லமுதுதந் திங்கெனை வாழ்வித்த மாமயிலே",
+          "iast": "Varaippaal Amuthuthanh Thingkenai Vaalzhviththa Maamayilae"
+        },
+        {
+          "n": 4,
+          "devanagari": "விரைப்பா சடைமலர் வெண்டா மரைப்பதி மெல்லியலே.",
+          "iast": "Viraippaa Chataimalar Ventaa Maraippathi Melliyalae"
+        }
+      ]
+    },
+    {
+      "label": "4",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "இயலானதுகொண்டு நின்றிரு நாமங்க ளேத்துதற்கு",
+          "iast": "Iyalaa Nathukontu Nhinthiru Nhaamangkal Aeththutharku"
+        },
+        {
+          "n": 2,
+          "devanagari": "முயலா மையாற்றடு மாறுகின்றே னிந்த மூவுலகும்",
+          "iast": "Muyalaamai Yaalthatu Maarukin Raeninhtha Muuvulakum"
+        },
+        {
+          "n": 3,
+          "devanagari": "செயலால் அமைத்த கலைமகளே நின் திருவருளுக்கு",
+          "iast": "Cheyalaal Amaiththa Kalaimaka Laenhin Thiruvaruluk(Ku)"
+        },
+        {
+          "n": 4,
+          "devanagari": "அயலா விடாம லடியேனையும் உவந்து ஆண்டருளே.",
+          "iast": "Ayalaa Vitaamal Atiyaenai Yumuvanh(Thu) Aantarulae"
+        }
+      ]
+    },
+    {
+      "label": "5",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "அருக்கோ தயத்தினும் சந்திரோ தயமொத் தழகெறிக்கும்",
+          "iast": "Arukkoa Thayaththinum Chanhthiroa Thayamoth(Thu) Alzhakerikkum"
+        },
+        {
+          "n": 2,
+          "devanagari": "திருக்கோல நாயகி செந்தமிழ்ப் பாவை திசைமுகத்தான்",
+          "iast": "Thirukkoala Nhaayaki Chenhthamilzhp Paavai Thichaimukaththaan"
+        },
+        {
+          "n": 3,
+          "devanagari": "இருக்கோ துநாதனுந் தானுமெப் போதுமினி திருக்கு",
+          "iast": "Irukkoathu Nhaathanum Thaanumep Poathum Inithirukkum"
+        },
+        {
+          "n": 4,
+          "devanagari": "மருக்கோல நாண்மல ராள் என்னை யாளு மடமயிலே.",
+          "iast": "Marukkoala Nhaanmala Raalennai Yaalum Matamayilae"
+        }
+      ]
+    },
+    {
+      "label": "6",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "மயிலே மடப்பிடியே கொடியே இளமான் பிணையே",
+          "iast": "Mayilae Matappiti Yaekoti Yaeyila Maanpinaiyae"
+        },
+        {
+          "n": 2,
+          "devanagari": "குயிலே பசுங்கிளியே அன்னமே மனக்கூ ரிருட்கோர்",
+          "iast": "Kuyilae Pachungkili Yaean Namaemanak Kuurirutkoar"
+        },
+        {
+          "n": 3,
+          "devanagari": "வெயிலே நிலவெழு மேனிமின் னேயினி வேறுதவம்",
+          "iast": "Veyilae Nhilavelzhu Maenimin Naeyini Vaeruthavam"
+        },
+        {
+          "n": 4,
+          "devanagari": "பயிலேன் மகிழ்ந்து பணிவேன் உனதுபொற் பாதங்களே.",
+          "iast": "Payilaen Makilzhnhthu Panivaen Unathupor Paathangkalae"
+        }
+      ]
+    },
+    {
+      "label": "7",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "பாதாம் புயத்திற் பணிவார் தமக்குப் பலகலையும்",
+          "iast": "Paathaam Puyaththil Panivaar Thamakkup Palakalaiyum"
+        },
+        {
+          "n": 2,
+          "devanagari": "வேதாந்த முத்தியுந் தந்தருள் பாரதிவெள் ளிதழ்ப்பூஞ்",
+          "iast": "Vaethaanhtha Muththiyum Thanhtharul Paarathi Vellithalzhppuugn"
+        },
+        {
+          "n": 3,
+          "devanagari": "சீதாம் புயத்தி லிருப்பா ளிருப்பவென் சிந்தையுள்ளே",
+          "iast": "Cheethaam Puyaththil Iruppaay Iruppaen Chinhthaiyullae"
+        },
+        {
+          "n": 4,
+          "devanagari": "ஏதாம் புவியிற் பெறலரி தாவதெனக் கினியே.",
+          "iast": "Aethaam Puviyil Peralari Thaava(Thu) Enakkiniyae"
+        }
+      ]
+    },
+    {
+      "label": "8",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "இனிநான் உணர்வ தெண்ணெண் கலையாளை இலகுதொண்டைக்",
+          "iast": "Ininhaan Unarvathen Nenkalaiyaalai Ilakuthontaik"
+        },
+        {
+          "n": 2,
+          "devanagari": "கனிநாணுஞ் செவ்விதழ் வெண்ணிறத் தாளைக் கமலவயன்",
+          "iast": "Kaninhaanum Chevvithalzh Venniraththaalai Kamalaayan"
+        },
+        {
+          "n": 3,
+          "devanagari": "றனிநாயகியை அகிலாண்ட மும்பெற்ற தாயைமணப்",
+          "iast": "Thaninhaa Yakiyai Akilaan Tamumperra Thaayaimanap"
+        },
+        {
+          "n": 4,
+          "devanagari": "பனிநாண் மலர் உறை பூவையை யாரணப் பாவையையே.",
+          "iast": "Paninhaan Malarurai Puuvaiyai Aaranap Paavaiyaiyae"
+        }
+      ]
+    },
+    {
+      "label": "9",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "பாவுந் தொடையும் பதங்களும் சீரும் பலவிதமா",
+          "iast": "Paavum Thotaiyum Pathangkalum Cheerum Palavithamaa"
+        },
+        {
+          "n": 2,
+          "devanagari": "மேவுங் கலைகள் விதிப்பா ளிடம்விதியின் முதிய",
+          "iast": "Maevum Kalaikal Vithippaa Litamvithi Yinmuthiya"
+        },
+        {
+          "n": 3,
+          "devanagari": "நாவும் பகர்ந்ததொல் வேதங்கள் நான்கு நறுங்கமலப்",
+          "iast": "Nhaavum Pakarnhthathol Vaethangkal Nhaankum Nharungkamalap"
+        },
+        {
+          "n": 4,
+          "devanagari": "பூவுந் திருப்பதம் பூவா லணிபவர் புந்தியுமே.",
+          "iast": "Puuvum Thiruppatham Puuvaal Anipavar Punhthiyumae"
+        }
+      ]
+    },
+    {
+      "label": "10",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "புந்தியிற் கூரிரு ணீக்கும்புதிய மதிய மென்கோ",
+          "iast": "Punhthiyil Kuurirul Nheekkum Puthiya Mathiyamenkoa"
+        },
+        {
+          "n": 2,
+          "devanagari": "வந்தியிற் றோன்றிய தீபமென்கோ நல்லரு மறையோர்",
+          "iast": "Anhthiyil Thoanriya Theepamen Koanhal Arumaraiyoar"
+        },
+        {
+          "n": 3,
+          "devanagari": "சந்தியிற் றோன்றுந் தபனனென் கோமணித்தா மமென்கோ",
+          "iast": "Chanhthiyil Thoanrum Thapananen Koamanith Thaamamenkoa"
+        },
+        {
+          "n": 4,
+          "devanagari": "உந்தியிற் றோன்றும் பிரான்புயந் தோயு மொருத்தியையே.",
+          "iast": "Unhthiyil Thoanrum Piraanpuyam Thoayum Oruththiyaiyae"
+        }
+      ]
+    },
+    {
+      "label": "11",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "ஒருத்தியை யொன்றுமி லாவென் மனத்தினு வந்துதன்னை",
+          "iast": "Oruththiyai Onrum Ilaaen Manaththin Uvanhthuthannai"
+        },
+        {
+          "n": 2,
+          "devanagari": "இருத்தியை வெண்கமலத் திப்பாளை யெண்ணெண் கலைதோய்",
+          "iast": "Iruththiyai Venkama Laththirup Paalaiyen Nenkalaithoay"
+        },
+        {
+          "n": 3,
+          "devanagari": "கருத்தியை யைம்புலனுங் கலங்காமற் கருத்தை யெல்லாம்",
+          "iast": "Karuththiyai Aimpula Nungkalang Kaamal Karuththai Yellaam"
+        },
+        {
+          "n": 4,
+          "devanagari": "திருத்தியை யான்மற வேன்றிசை நான்முகன் தேவியையே.",
+          "iast": "Thiruththiyai Yaanmara Vaenthichai Nhaanmukan Thaeviyaiyae"
+        }
+      ]
+    },
+    {
+      "label": "12",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "தேவருந் தெய்வப் பெருமானு நான்மறை செப்புகின்ற",
+          "iast": "Thaevarum Theyvap Perumaanum Nhaanmarai Cheppukinra"
+        },
+        {
+          "n": 2,
+          "devanagari": "மூவருந் தானவரா கியுள் ளோருமுனி வரரும்",
+          "iast": "Muuvarum Thaanavar Aakiyul Loarum Munivararum"
+        },
+        {
+          "n": 3,
+          "devanagari": "யாவரு மேனையவெல் லாவுயிரு மிதழ் வெளுத்த",
+          "iast": "Yaavarum Aenaiya Ellaa Uyirum Ithalzhveluththa"
+        },
+        {
+          "n": 4,
+          "devanagari": "பூவரு மாதினருள் கொண்டுஞா னம்புரி கின்றதே.",
+          "iast": "Puuvarum Maathin Arulkontu Gnaanam Purikinrathae"
+        }
+      ]
+    },
+    {
+      "label": "13",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "புரிகின்ற சிந்தையி னூடே புகுந்துபுகுந் திருளை",
+          "iast": "Purikinra Chinhthaiyin Uutae Pukunhthu Pukunhthirulai"
+        },
+        {
+          "n": 2,
+          "devanagari": "அரிகின்ற தாய்கின்ற வெல்லா வறிவினரும் பொருளைத்",
+          "iast": "Arikinra(Thu) Aaykinra Ellaa Arivin Arumporulaith"
+        },
+        {
+          "n": 3,
+          "devanagari": "தெரிகின்ற வின்பங் கனிந்தூறி நெஞ்சந்தெ ளிந்துமுற்ற",
+          "iast": "Therikinra Inpam Kaninhthuuri Nhegncham Thelinhthumurra"
+        },
+        {
+          "n": 4,
+          "devanagari": "விரிகின்ற தெண்ணெண் கலைமானுணர்த்திய வேதமுமே.",
+          "iast": "Virikinra(Thu) Ennen Kalaimaan Unarththiya Vaethamumae"
+        }
+      ]
+    },
+    {
+      "label": "14",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "வேதமும் வேதத்தி னந்தமு மந்தத்தின் மெய்ப்பொருளாம்",
+          "iast": "Vaethamum Vaethaththin Anhthamum Anhthaththin Meypporulaam"
+        },
+        {
+          "n": 2,
+          "devanagari": "பேதமும் பேதத்தின் மார்க்கமு மார்க்கப் பிணக்கறுக்கும்",
+          "iast": "Paethamum Paethaththin Maarkkamum Maarkkap Pinakkarukkum"
+        },
+        {
+          "n": 3,
+          "devanagari": "போதமும் போதவுரு வாகியெங் கும்பொதிந் தவிந்து",
+          "iast": "Poathamum Poatha Uruvaaki Engkum Pothinhthavinhthu"
+        },
+        {
+          "n": 4,
+          "devanagari": "நாதமு நாதவண் டார்க்கும்வெண் டாமரை நாயகியே.",
+          "iast": "Nhaathamum Nhaathavan Taarkkum Ventaamarai Nhaayakiyae"
+        }
+      ]
+    },
+    {
+      "label": "15",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "நாயக மான மலரக மாவதுஞான வின்பச்",
+          "iast": "Nhaayakam Aana Malarakam Aavathum Gnaanainpach"
+        },
+        {
+          "n": 2,
+          "devanagari": "சேயக மான மலரக மாவதுந் தீவினையா",
+          "iast": "Chaeyakam Aana Malarakam Aavathum Theevinaiyaa"
+        },
+        {
+          "n": 3,
+          "devanagari": "லேயக மாறி விடுமக மாவது மெவ்வுயிர்க்குந்",
+          "iast": "Laeakam Maari Vitumakam Aavathum Evvuyirkkum"
+        },
+        {
+          "n": 4,
+          "devanagari": "தாயக மாவதுந் தாதார்சு வேதச ரோருகமே.",
+          "iast": "Thaayakam Aavathum Thaathaar Chuvaetha Charoarukamae"
+        }
+      ]
+    },
+    {
+      "label": "16",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "சரோருக மேதிருக் கோயிலுங் கைகளுந் தாளிணையும்",
+          "iast": "Charoaruka Maethiruk Koayilum Kaikalum Thaalinaiyum"
+        },
+        {
+          "n": 2,
+          "devanagari": "உரோரு கமுந்திரு வல்குலு நாபியுமோங் கிருள்போற்",
+          "iast": "Uroaruka Mumthiru Alkulum Nhaapiyum Oangkirulpoal"
+        },
+        {
+          "n": 3,
+          "devanagari": "சிரோருகஞ் சூழ்ந்த வதனமு நாட்டமுஞ் சேயிதழும்",
+          "iast": "Chiroarukam Chuulzhnhtha Vathanamum Nhaattamum Chaeyithalzhum"
+        },
+        {
+          "n": 4,
+          "devanagari": "ஒரோருக மீரரை மாத்திரை யானவுரை மகட்கே.",
+          "iast": "Oroarukam Eerarai Maaththirai Yaana Uraimakatkae"
+        }
+      ]
+    },
+    {
+      "label": "17",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "கருந்தா மரைமலர் கட்டாமரை மலர்கா மருதாள்",
+          "iast": "Karunhthaa Maraimalar Kanthaa Maraimalar Kaamaruthaal"
+        },
+        {
+          "n": 2,
+          "devanagari": "அருந்தா மரைமலர் செந்தாமரை மலரா லயமாத்",
+          "iast": "Arunhthaa Maraimalar Chenhthaa Maraimalar Aalayamaath"
+        },
+        {
+          "n": 3,
+          "devanagari": "தருந்தா மரைமலர் வெண்டாமரை மலர்தாவி லெழிற்",
+          "iast": "Tharunhthaa Maraimalar Ventaa Maraimalar Thaavilelzhil"
+        },
+        {
+          "n": 4,
+          "devanagari": "பெருந்தா மரைமணக்குங் கலைக்கூட்டப் பிணைதனக்கே.",
+          "iast": "Perunhthaa Maraimanak Kungkalaik Kuuttap Pinaithanakkae"
+        }
+      ]
+    },
+    {
+      "label": "18",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "தனக்கே துணிபொரு ளென்னுந் தொல்வேதஞ் சதுர்முகத்தோன்",
+          "iast": "Thanakkae Thuniporul Ennumthol Vaetham Chathurmukaththoan"
+        },
+        {
+          "n": 2,
+          "devanagari": "எனக்கே சமைந்த வபிடேக மென்னு மிமையவர்தா",
+          "iast": "Enakkae Chamainhtha Apitaekam Ennum Imaiyavarthaam"
+        },
+        {
+          "n": 3,
+          "devanagari": "மனக்கேத மாற்றுமருந் தென்ப சூடுமலரென் பன்யான்",
+          "iast": "Manakaetham Maarrum Marunhthenpa Chuutumalar Enpanyaan"
+        },
+        {
+          "n": 4,
+          "devanagari": "கனக்கேச பந்திக் கலைமங்கை பாத கமலங்களே.",
+          "iast": "Kanakkaecha Panhthik Kalaimangkai Paatha Kamalangkalae"
+        }
+      ]
+    },
+    {
+      "label": "19",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "கமலந்தனி லிருப்பாள் விருப்போ டங்கரங் குவித்துக்",
+          "iast": "Kamalanh Thanilirup Paalvirup Poatang Karangkuviththuk"
+        },
+        {
+          "n": 2,
+          "devanagari": "கமலங்கடவுளர் போற்றுமென் பூவை கண்ணிற் கருணைக்",
+          "iast": "Kamalang Katavular Poarrumen Puuvaikan Nirkarunaik"
+        },
+        {
+          "n": 3,
+          "devanagari": "கமலந்தனைக் கொண்டுகண் டொருகாற் றங்கருத்துள் வைப்பார்",
+          "iast": "Kamalanh Thanaikkontu Kantorukaaltham Karuththulvaippaar"
+        },
+        {
+          "n": 4,
+          "devanagari": "கமலங் கழிக்குங் கலைமங்கை யாரணி காரணியே.",
+          "iast": "Kamalang Kalzhikkum Kalaimangkai Aarani Kaaraniyae"
+        }
+      ]
+    },
+    {
+      "label": "20",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "காரணன் பாகமுஞ் சென்னியுஞ் சேர்தரு கன்னியரும்",
+          "iast": "Kaaranan Paakamum Chenniyum Chaertharu Kanniyarum"
+        },
+        {
+          "n": 2,
+          "devanagari": "நாரண னாக மகலாத் திருவுமொர் நான்மருப்பு",
+          "iast": "Nhaaranan Aakam Akalaath Thiruvumoar Nhaanmaruppu"
+        },
+        {
+          "n": 3,
+          "devanagari": "வாரணன் தேவியு மற்றுள்ள தெயவ மடந்தையரும்",
+          "iast": "Vaaranan Thaeviyum Marrulla Theyva Matanhthaiyarum"
+        },
+        {
+          "n": 4,
+          "devanagari": "ஆரணப் பாவை பணித்தகுற் றேவ லடியவரே.",
+          "iast": "Aaranap Paavai Paniththakur Raeval Atiyavarae"
+        }
+      ]
+    },
+    {
+      "label": "21",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "அடிவேத நாறுஞ் சிறப்பார்ந்த வேத மனைத்தினுக்கு",
+          "iast": "Ativaetham Nhaarum Chirappaarnhtha Vaetham Anaiththinukkum"
+        },
+        {
+          "n": 2,
+          "devanagari": "முடிவே தவளமுளரி மின்னே முடியா விரத்தின",
+          "iast": "Mutivae Thavala Mulariminnae Mutiyaa Iraththina"
+        },
+        {
+          "n": 3,
+          "devanagari": "வடிவே மகிழ்ந்து பணிவார் தமது மயலிரவின்",
+          "iast": "Vativae Makilzhnhthu Panivaar Thamathu Mayal Iravin"
+        },
+        {
+          "n": 4,
+          "devanagari": "விடிவே யறிந்தென்னை யாள்வார் தலந்தனில் வேறிலையே.",
+          "iast": "Vitivae Arinhthennai Aalvaar Thalanhthanil Vaerilaiyae"
+        }
+      ]
+    },
+    {
+      "label": "22",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "வேறிலை யென்று னடியாரிற் கூடி விளங்குநின்பேர்",
+          "iast": "Vaerilai Yenrun Atiyaarir Kuuti Vilangkunhinpaer"
+        },
+        {
+          "n": 2,
+          "devanagari": "கூறிலை யானுங் குறித்துநின்றே னைம்புலக் குறும்பர்",
+          "iast": "Kuurilai Yaanum Kuriththunhin Raenaim Pulakkurumpar"
+        },
+        {
+          "n": 3,
+          "devanagari": "மாறிலை கள்வர் மயக்காம னின்மலர்த்தா ணெறியிற்",
+          "iast": "Maarilai Kalvar Mayakkaamal Nhinmalarththaal Nheriyil"
+        },
+        {
+          "n": 4,
+          "devanagari": "சேறிலை யீந்தருள் வெண்டா மரைமலர்ச் சேயிழையே.",
+          "iast": "Chaerilai Eenhtharul Ventaa Maraimalarch Chaeyilzaiyae"
+        }
+      ]
+    },
+    {
+      "label": "23",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "சேதிக்க லாந்தர்க்க மார்க்கங்க ளெவ்வெவர் சிந்தனையும்",
+          "iast": "Chaethikka Laamtharkka Maarkkangkal Evvevar Chinhthanaiyum"
+        },
+        {
+          "n": 2,
+          "devanagari": "சோதிக்க லாமுறப் போதிக்க லாம்சொன்ன தேதுணிந்து",
+          "iast": "Choothikka Laamurap Poathikka Laamchoanna Thaethuninhthu"
+        },
+        {
+          "n": 3,
+          "devanagari": "சாதிக்க லாமிகப் பேதிக்க லாமுத்திதா னெய்தலா",
+          "iast": "Chaathikka Laamikap Paethikka Laammuththi Thaaneythalaam"
+        },
+        {
+          "n": 4,
+          "devanagari": "மாதிக்க லாமயில் வல்லிபொற் றாளை யடைந்தவரே.",
+          "iast": "Aathik Kalaamayil Vallipor Raalai Atainhthavarae"
+        }
+      ]
+    },
+    {
+      "label": "24",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "அடையாள நாண்மல ரங்கையி லேடு மணிவடமும்",
+          "iast": "Ataiyaala Nhaanmalar Angkaiyil Aetum Manivatamum"
+        },
+        {
+          "n": 2,
+          "devanagari": "உடையாளை நுண்ணிடை யொன்று மிலாளை யுபநிடதப்",
+          "iast": "Utaiyaalai Nhunnitai Yonrumilaalai Upanhitathap"
+        },
+        {
+          "n": 3,
+          "devanagari": "படையாளை யெவ்வுயிரும் படைப்பாளைப் பதுமநறும்",
+          "iast": "Pataiyaalai Evvuyi Rumpataip Paalaip Pathumanharum"
+        },
+        {
+          "n": 4,
+          "devanagari": "தொடையாளை யல்லது மற்றினி யாரைத் தொழுவதுவே.",
+          "iast": "Thotaiyaalai Allathu Marrini Yaaraith Tholzhuvathuvae"
+        }
+      ]
+    },
+    {
+      "label": "25",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "தொழுவார் வலம்வருவார் துதிப்பார் தந்தொழின் மறந்து",
+          "iast": "Tholzhuvaar Valamvaru Vaarthuthip Paartham Tholzhilmaranhthu"
+        },
+        {
+          "n": 2,
+          "devanagari": "விழுவார் அருமறைமெய் தெரிவா ரின்பமெய் புளகித்",
+          "iast": "Vilzhuvaar Arumarai Meytheri Vaarinpa Meypulakith(Thu)"
+        },
+        {
+          "n": 3,
+          "devanagari": "தழுவா ரினுங்கண்ணீர் மல்குவா ரென்கணாவ தென்னை",
+          "iast": "Alzhuvaar Inungkanneer Malkuvaar Enkannin Aavathennai"
+        },
+        {
+          "n": 4,
+          "devanagari": "வழுவாத செஞ்சொற் கலைமங்கை பாலன்பு வத்தவரே.",
+          "iast": "Valzhuvaatha Chegnchoar Kalaimangkai Paalanpu Vaiththavarae"
+        }
+      ]
+    },
+    {
+      "label": "26",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "வைக்கும் பொருளு மில்வாழ்க்கைப் பொருளுமற் றெப்பொருளும்",
+          "iast": "Vaikkum Porulumil Vaalzhkkaip Porulumar Repporulum"
+        },
+        {
+          "n": 2,
+          "devanagari": "பொய்க்கும் பொருளன்றி நீடும் பொருளல்ல பூதலத்தின்",
+          "iast": "Poykkum Porulanri Nheetum Porulalla Puuthalaththin"
+        },
+        {
+          "n": 3,
+          "devanagari": "மெய்க்கும் பொருளு மழியாப் பொருளும் விழுப்பொருளும்",
+          "iast": "Meykkum Porulum Alzhiyaap Porulum Vilzhupporulum"
+        },
+        {
+          "n": 4,
+          "devanagari": "உய்க்கும் பொருளுங் கலைமா னுணர்த்து முரைப்பொருளே.",
+          "iast": "Uykkum Porulum Kalaimaa(Thu) Unarththum Uraipporulae"
+        }
+      ]
+    },
+    {
+      "label": "27",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "பொருளா லிரண்டும் பெறலாகு மென்றபொருள் பொருளோ",
+          "iast": "Porulaal Irantum Peralaakum Enra Porulporuloa"
+        },
+        {
+          "n": 2,
+          "devanagari": "மருளாத சொற்கலை வான்பொருளோ பொருள் வந்துவந்தித்",
+          "iast": "Marulaatha Choarkalai Vaanporu Loaporul Vanhthuvanhthith(Thu)"
+        },
+        {
+          "n": 3,
+          "devanagari": "தருளாய் விளங்கு மவர்க் கொளியா யறியாதவருக்",
+          "iast": "Arulaay Vilangku Mavarkkoli Yaayari Yaathavaruk(Ku)"
+        },
+        {
+          "n": 4,
+          "devanagari": "கிருளாய் விளங்கு நலங்கிளர் மேனியிலங் கிழையே.",
+          "iast": "Irulaay Vilangku Nhalangkilar Maeni Ilangkilzaiyae"
+        }
+      ]
+    },
+    {
+      "label": "28",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "இலங்குந் திருமுக மெய்யிற் புளகமெழுங் கண்கணீர்",
+          "iast": "Ilangkum Thirumukam Meyyir Pulakam Elzhumvilzhinheer"
+        },
+        {
+          "n": 2,
+          "devanagari": "மலங்கும் பழுதற்ற வாக்கும் பலிக்கு மனமிகவே",
+          "iast": "Malangkum Palzhutharra Vaakkum Palikkum Manamikavae"
+        },
+        {
+          "n": 3,
+          "devanagari": "துலங்கு முறுவல் செயக் களிகூருஞ் சுழல்புனல்போல்",
+          "iast": "Thulangkum Muruval Cheyakkali Kuurum Chulzhalpunalpoal"
+        },
+        {
+          "n": 4,
+          "devanagari": "கலங்கும் பொழுது தெளியுஞ் சொன்மானைக் கருதினர்க்கே.",
+          "iast": "Kalangkum Polzhuthu Theliyugnchoal Maanaik Karuthinarkkae"
+        }
+      ]
+    },
+    {
+      "label": "29",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "கரியா ரளகமுங் கண்ணுங் கதிர்முலைக் கண்ணுஞ்செய்ய",
+          "iast": "Kariyaar Alakamum Kannum Kathirmulaik Kannugncheyya"
+        },
+        {
+          "n": 2,
+          "devanagari": "சரியார் கரமும் பதமு மிதழுந்தவள நறும்",
+          "iast": "Chariyaar Karamum Pathamum Ithalzhum Thavalanharum"
+        },
+        {
+          "n": 3,
+          "devanagari": "புரியார்ந்த தாமரையுந் திருமேனி யும்பூண் பனவும்",
+          "iast": "Puriyaarnhtha Thaamarai Yumthiru Maeniyum Puunpanavum"
+        },
+        {
+          "n": 4,
+          "devanagari": "பிரியா தென்னெஞ்சினு நாவினு நிற்கும் பெருந்திருவே.",
+          "iast": "Piriyaavenh Nhegnchinum Nhaavinum Nhirkum Perunhthiruvae"
+        }
+      ]
+    },
+    {
+      "label": "30",
+      "lines": [
+        {
+          "n": 1,
+          "devanagari": "பெருந்திருவுஞ் சயமங் கையுமாகி யென்பேதை நெஞ்சில்",
+          "iast": "Perunhthiru Vumchaya Mangkaiyum Aakiyen Paethai Nhegnchil"
+        },
+        {
+          "n": 2,
+          "devanagari": "இருந்தருளுஞ் செஞ்சொல் வஞ்சியைப் போற்றில் எல்லாவுயிர்க்கும்",
+          "iast": "Irunhtharu Lumchegnchoal Vagnchiyaip Poarrilel Laavuyirkkum"
+        },
+        {
+          "n": 3,
+          "devanagari": "பொருந்திய ஞானந்தரு மின்பவேதப் பொருளுந் தருந்",
+          "iast": "Porunhthiya Gnaanam Tharuminpa Vaethap Porularulum"
+        },
+        {
+          "n": 4,
+          "devanagari": "திருந்திய செல்வந்தரு மழியாப் பெருஞ் சீர்தருமே.",
+          "iast": "Thirunhthiya Chelvam Tharum Alzhiyaapperum Cheertharumae"
+        }
+      ]
+    }
+  ]
+}
