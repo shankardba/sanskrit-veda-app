@@ -880,6 +880,29 @@ body.hide-transliteration .iast-line {
   margin-top: 6px;
 }
 
+/* rosetta-stone.html mixes Devanagari and Tamil script in the same table,
+   unlike every other Characters-style page (which has exactly one native
+   script and can rely on body.tamil-page to pick its font) — these two
+   classes pin the font per cell instead of per page. */
+.rosetta-tamil,
+.rosetta-sanskrit {
+  font-size: 1.9rem;
+  line-height: 1.2;
+}
+
+.rosetta-tamil {
+  font-family: var(--font-tamil);
+}
+
+.rosetta-sanskrit {
+  font-family: var(--font-sanskrit);
+}
+
+.consonant-table td .rosetta-tamil,
+.consonant-table td .rosetta-sanskrit {
+  font-size: 1.5rem;
+}
+
 .char-digit {
   font-family: var(--font-sanskrit);
   font-size: 0.95rem;
