@@ -861,6 +861,13 @@ body.hide-transliteration .iast-line {
   color: var(--color-text-muted);
 }
 
+/* tamil-characters.html reuses .char-deva/.char-iast (see characters.html)
+   for Tamil script + its own romanization rather than Devanagari + IAST —
+   same key-reuse tradeoff as the chant reader's body.chant-lang-tamil. */
+body.tamil-page .char-deva {
+  font-family: var(--font-tamil);
+}
+
 .consonant-table-wrap {
   overflow-x: auto;
   margin-bottom: 16px;
