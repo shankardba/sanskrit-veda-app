@@ -279,7 +279,21 @@ const MEANING_CONCEPTS = [
   // Known imprecise: "and" also translates other Sanskrit connectives (e.g.
   // uta), so this will box some "and"s that aren't actually cha — kept in
   // deliberately for manual review/correction rather than left out.
-  { id: 'cha', deva: ['च'], iast: ['cha'], english: ['and'] },
+  //
+  // ञ्च/ñcha (visible here as its own surface form) covers the cases the
+  // source data already writes with a hyphen before it (श्रोत्र-ञ्च,
+  // "śrōtra-ñcha" — segmentLine already splits on the hyphen, so this
+  // isolates cleanly as its own token like any other word). श्च/च्च
+  // (ścha/chcha) are never hyphenated in the source — cha sandhi-fused
+  // onto the END of a bigger word (वाजश्च from vājaḥ+cha via visarga
+  // sandhi; जगच्च from jagat+cha, the -t assimilating before cha) — those
+  // two never appear as their own token at all, so they're registered
+  // here only so FUSED_CHA_SUFFIXES' matches (see matchFusedChaSuffix)
+  // resolve to this same concept for cross-script highlighting; the
+  // rendering/detection logic that actually finds and boxes them lives in
+  // renderScriptLine and conceptsInLine, not in the ordinary word lookup
+  // this array otherwise drives.
+  { id: 'cha', deva: ['च', 'ञ्च', 'श्च', 'च्च'], iast: ['cha', 'ñcha', 'ścha', 'chcha'], english: ['and'] },
   // मधु also means "honey" as a plain offering noun elsewhere (Chamakam's
   // ghee-and-honey line) rather than "sweet" as here — harmless in
   // practice since repeat-counting is scoped per section and that line
@@ -324,10 +338,21 @@ const MEANING_CONCEPTS = [
   // that's the fixed two-word unit that appears in the translation every
   // single time (verified: all 342 occurrences of "mine" across this
   // chant's translation are immediately preceded by "be").
+  //
+  // ञ्च मे / ñcha mē (and their elided ...म/...ma forms) round out the
+  // same unit for the one fused-cha spelling that's already its own token
+  // after hyphen-splitting (see the 'cha' entry above) — an ordinary
+  // 2-word phrase match, no different from "च मे" itself. श्च/च्च मे
+  // don't get their own phrase entries here: those never form a clean
+  // "word word" pair to register since cha is glued inside the FIRST
+  // word rather than being one — matchFusedChaSuffix + the fused-match
+  // branches in renderScriptLine/conceptsInLine reconstruct "च मे" as the
+  // lookup key on the fly instead, so this same phrase entry still
+  // catches them without needing a literal entry per fused spelling.
   {
     id: 'cha-me',
-    deva: ['च मे', 'च म'],
-    iast: ['cha mē', 'cha ma'],
+    deva: ['च मे', 'च म', 'ञ्च मे', 'ञ्च म'],
+    iast: ['cha mē', 'cha ma', 'ñcha mē', 'ñcha ma'],
     english: ['be mine'],
   },
 ];
@@ -359,7 +384,26 @@ function conceptsInLine(devanagari, iast) {
         }
       }
       const id = lookup.get(words[i]);
-      if (id) ids.add(id);
+      if (id) {
+        ids.add(id);
+        continue;
+      }
+      // No exact match — check for "cha" sandhi-fused onto this word's
+      // tail (see matchFusedChaSuffix) so the translation panel still
+      // boxes "be mine"/"and" on these lines the same as it would if the
+      // source spelled cha as its own word.
+      const fusedSuffix = matchFusedChaSuffix(words[i], script);
+      if (fusedSuffix) {
+        const chaKey = script === 'deva' ? 'च' : 'cha';
+        const pairId = words[i + 1] ? lookup.get(`${chaKey} ${words[i + 1]}`) : null;
+        if (pairId) {
+          ids.add(pairId);
+          i += 1;
+        } else {
+          const chaId = lookup.get(fusedSuffix);
+          if (chaId) ids.add(chaId);
+        }
+      }
     }
   };
   scan(devanagari, 'deva', CONCEPT_BY_DEVA);
@@ -383,6 +427,52 @@ function normalizeToken(raw, script) {
   const stripped = (script === 'deva' ? raw.replace(DEVA_ACCENT_RE, '') : raw.replace(IAST_ACCENT_RE, '')).trim();
   if (!stripped || PUNCT_ONLY_RE.test(stripped) || /^\d+$/.test(stripped)) return '';
   return stripped.toLowerCase();
+}
+
+// "cha" written fused onto the tail of a bigger word via a conjunct,
+// rather than as its own space/hyphen-separated token — e.g. Chamakam's
+// number litany writes वाजश्च (vājaścha, from vājaḥ + cha via visarga
+// sandhi) and जगच्च (jagachcha, from jagat + cha, the -t assimilating
+// before cha) as one fused word, never split out the way ञ्च/ñcha
+// already is (see the 'cha' MEANING_CONCEPTS entry — that one's always
+// hyphenated in the source, so segmentLine's own hyphen-splitting already
+// isolates it as an ordinary token and needs no special handling here).
+// Longest suffix first so च्च doesn't shadow a match that's actually the
+// longer श्च.
+const FUSED_CHA_SUFFIXES = {
+  deva: ['श्च', 'च्च'],
+  iast: ['ścha', 'chcha'],
+};
+
+function matchFusedChaSuffix(norm, script) {
+  if (!norm) return null;
+  const suffixes = [...FUSED_CHA_SUFFIXES[script]].sort((a, b) => b.length - a.length);
+  for (const suffix of suffixes) {
+    if (norm.length > suffix.length && norm.endsWith(suffix)) return suffix;
+  }
+  return null;
+}
+
+// Maps a suffix length measured on the accent-stripped normalized form
+// (what matchFusedChaSuffix matches against) back to a raw-text split
+// length, so a fused-cha match still carries along whichever side any
+// interleaved Vedic accent mark actually decorates in the ORIGINAL text
+// — e.g. धीतिश्च॑'s trailing udātta stays with the श्च suffix it marks,
+// while वाज॑श्च's accent (sitting between the prefix and the suffix)
+// stays with the वाज prefix it marks — rather than a naive
+// rawText.endsWith(suffix) either missing the match (blocked by a
+// trailing accent) or silently dropping/misplacing one mid-conjunct.
+function rawSuffixLength(rawText, script, normSuffixLength) {
+  const accentRe = script === 'deva' ? DEVA_ACCENT_RE : IAST_ACCENT_RE;
+  let normSeen = 0;
+  for (let i = rawText.length - 1; i >= 0; i--) {
+    accentRe.lastIndex = 0;
+    if (!accentRe.test(rawText[i])) {
+      normSeen += 1;
+      if (normSeen === normSuffixLength) return rawText.length - i;
+    }
+  }
+  return normSuffixLength;
 }
 
 // Splits a line into ordered segments, each tagged 'word' (counts toward
@@ -523,6 +613,59 @@ function renderScriptLine(rawText, script, counts, lineKey) {
     }
 
     if (matchedN === 0) {
+      // Still no match — check whether "cha" is sandhi-fused onto the tail
+      // of THIS word (वाजश्च/vājaścha, जगच्च/jagachcha — see
+      // matchFusedChaSuffix) rather than sitting as its own token, which is
+      // why neither check above could have found it. When it is, split off
+      // just that fused tail as its own box — merged with a following
+      // mē/ma into the same cha-me box the unfused "च मे" case gets (so
+      // this reads as the same pattern either way the source happened to
+      // spell it), or boxed alone as plain "cha" otherwise.
+      const fusedSuffix = matchFusedChaSuffix(normsAhead[0], script);
+      if (fusedSuffix) {
+        const rawLen = rawSuffixLength(seg.text, script, fusedSuffix.length);
+        const splitAt = seg.text.length - rawLen;
+        const prefixRaw = seg.text.slice(0, splitAt);
+        const suffixRaw = seg.text.slice(splitAt);
+        if (prefixRaw) {
+          frag.appendChild(script === 'iast' ? renderIastChars(prefixRaw) : document.createTextNode(prefixRaw));
+        }
+
+        const chaKey = script === 'deva' ? 'च' : 'cha';
+        const phraseKey = normsAhead[1] ? `${chaKey} ${normsAhead[1]}` : null;
+        const mergeWithNext = phraseKey && conceptLookup.has(phraseKey);
+
+        const fusedSpan = document.createElement('span');
+        fusedSpan.className = 'token-repeat';
+        fusedSpan.dataset.script = script;
+        fusedSpan.dataset.line = lineKey;
+        fusedSpan.dataset.slot = String(slot);
+        slot += 1;
+        fusedSpan.appendChild(script === 'iast' ? renderIastChars(suffixRaw) : document.createTextNode(suffixRaw));
+
+        if (mergeWithNext) {
+          fusedSpan.dataset.key = phraseKey;
+          let p = i + 1;
+          while (p < segments.length && segments[p].kind === 'space') {
+            fusedSpan.appendChild(document.createTextNode(segments[p].text));
+            p += 1;
+          }
+          if (p < segments.length && segments[p].kind === 'word') {
+            fusedSpan.appendChild(
+              script === 'iast' ? renderIastChars(segments[p].text) : document.createTextNode(segments[p].text)
+            );
+            p += 1;
+          }
+          frag.appendChild(fusedSpan);
+          i = p;
+        } else {
+          fusedSpan.dataset.key = fusedSuffix;
+          frag.appendChild(fusedSpan);
+          i += 1;
+        }
+        continue;
+      }
+
       frag.appendChild(script === 'iast' ? renderIastChars(seg.text) : document.createTextNode(seg.text));
       i += 1;
       continue;
