@@ -316,6 +316,17 @@ a {
   color: var(--color-text-muted);
 }
 
+/* Sits at the same vertical offset as its "Anuvāka N" label (see
+   ANUVAKA_TAGLINES in app.js) — a caption for the label, not a verse
+   translation, so it reads as a heading rather than body copy. */
+.anuvaka-tagline {
+  font-family: var(--font-ui);
+  font-style: italic;
+  font-size: 0.85rem;
+  color: var(--color-gold-light);
+  line-height: 1.5;
+}
+
 @media (max-width: 900px) {
   .chant-rail,
   .chant-translation {

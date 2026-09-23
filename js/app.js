@@ -50,6 +50,41 @@ const SECTION_NOTES = {
   },
 };
 
+// One-line summaries of what each anuvāka is actually doing, shown next to
+// its "Anuvāka N" label in the translation column — read top to bottom,
+// each chant's sequence traces a single arc. First pass; expect these to
+// get edited.
+const ANUVAKA_TAGLINES = {
+  'sri-rudram-namakam': {
+    1: 'Rudra as a power beyond us — his weapons turned aside',
+    2: 'Rudra as lord of every place, creature, and calling',
+    3: 'Rudra among outcasts and wanderers, and every bodily stance',
+    4: 'Rudra as lord of every craft, army, and hunt',
+    5: 'Rudra in every extreme — the great and the small, the swift and the slow',
+    6: 'Rudra in every age of life and every terrain',
+    7: 'Rudra in the weather — cloud, storm, river, and well',
+    8: 'Rudra gentled — river-crossings, and his most auspicious names',
+    9: 'Rudra reaching into the home — and into affliction itself',
+    10: 'A turn to plea — protect this family, this village, this body',
+    11: 'Rudra everywhere at once — on earth, in the sky, in heaven',
+    12: "Rudra found within — “this hand of mine is divine”",
+  },
+  'sri-rudram-chamakam': {
+    1: "A child's first needs — breath, body, and the senses",
+    2: 'Learning to grow — understanding, truth, and resolve',
+    3: 'A settled life — security, peace, and freedom from harm',
+    4: 'Running a household — grain, milk, and the harvest',
+    5: "A household's wealth — land, metal, herds, and home",
+    6: "A prince's allies — the gods invoked, one by one",
+    7: "A prince's craft — mastering the sacrifice's rites",
+    8: "A king's court — every vessel and altar of the rite",
+    9: "A king's dominion — the horse-sacrifice, and the Vedas",
+    10: "A king's herds — cattle by generation, offered whole",
+    11: 'Secrets of the Universe — the numbers beneath all things',
+    12: 'Becoming one with the gods — their favor, and peace',
+  },
+};
+
 // Chamakam anuvāka 11 recites two number sequences — 1, 3, 5, ... 33 (Ēkāṃ
 // cha mē tisraścha mē, ...) and then 4, 8, 12, ... 48 (Dvādaśa cha mē
 // ṣōḍaśa cha mē, ...) — that are exactly the first- and second-order
@@ -872,6 +907,14 @@ function renderChant(chant, translation) {
     if (buildNote) {
       labelEl.addEventListener('click', () => openMathModal(buildNote()));
     }
+    const tagline = ANUVAKA_TAGLINES[chant.id] && ANUVAKA_TAGLINES[chant.id][section.label];
+    if (tagline) {
+      const sectionKey = `section-${section.label}`;
+      labelEl.dataset.line = sectionKey;
+      const taglineEl = el('p', 'translation-line anuvaka-tagline', tagline);
+      taglineEl.dataset.line = sectionKey;
+      chantTranslationEl.appendChild(taglineEl);
+    }
     block.appendChild(labelEl);
     for (const line of section.lines) {
       lineIndex += 1;
@@ -903,7 +946,7 @@ function alignTranslationLines() {
 
   for (const para of chantTranslationEl.querySelectorAll('.translation-line')) {
     const target = chantTextEl.querySelector(
-      `.verse-line[data-line="${para.dataset.line}"], .colophon[data-line="${para.dataset.line}"]`
+      `.verse-line[data-line="${para.dataset.line}"], .colophon[data-line="${para.dataset.line}"], .section-label[data-line="${para.dataset.line}"]`
     );
     if (!target) continue;
     const top = target.getBoundingClientRect().top - containerRect.top;
