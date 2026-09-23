@@ -194,6 +194,31 @@ a {
   font-size: 0.85rem;
 }
 
+/* Only present on chants.html, whose control-bar has two children (this +
+   the transliteration toggle) rather than one — space-between keeps the
+   toggle from shifting off-center of the two-button layout the way it
+   would if this were just centered alongside it. */
+.control-bar:has(.control-bar-back) {
+  justify-content: space-between;
+}
+
+.control-bar-back {
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  padding: 7px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--color-border);
+  color: var(--color-text-muted);
+  white-space: nowrap;
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+
+.control-bar-back:hover {
+  border-color: var(--color-gold);
+  color: var(--color-gold-light);
+}
+
 .translit-bubble {
   font-family: var(--font-ui);
   font-size: 0.8rem;

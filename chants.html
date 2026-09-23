@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Vedavani — Sanskrit &amp; Tamil Chant Learner</title>
+<title>Chants — Vedavani</title>
 <meta name="description" content="Vedavani — learn Sanskrit and Tamil chants line by line, native script alongside transliteration.">
 <link rel="icon" href="assets/logo.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -14,7 +14,7 @@
 
 <header class="site-header">
   <nav class="navbar">
-    <a href="#top" class="logo-group">
+    <a href="index.html" class="logo-group">
       <img src="assets/logo.svg" alt="Vedavani" class="logo-mark">
       <span class="logo-word glow-gold">Vedavani</span>
     </a>
@@ -25,30 +25,27 @@
       <a href="mathematics.html" class="nav-link">Mathematics</a>
       <a href="yantras.html" class="nav-link">Yantras</a>
     </div>
+    <select class="chant-select" id="chantSelect" aria-label="Choose a chant"></select>
   </nav>
 </header>
 
+<div class="control-bar">
+  <a href="index.html" class="control-bar-back">&larr; Chants</a>
+  <button type="button" class="translit-bubble active" id="transliterationToggle" aria-pressed="true">Transliteration</button>
+</div>
+
 <main id="top">
-  <div class="lang-hero container">
-    <h1 class="glow-gold">Chants</h1>
-    <p>Two languages, two scripts — pick one to start reading line by line.</p>
+  <div class="chant-header container">
+    <h1 class="chant-title-deva" id="chantTitleDeva">&nbsp;</h1>
+    <p class="chant-title-iast" id="chantTitleIast"></p>
+    <p class="chant-source" id="chantSource"></p>
   </div>
 
-  <div class="lang-body container">
-    <div class="lang-hub-grid">
-      <a class="lang-hub-card" href="chants.html?lang=sanskrit">
-        <div class="lang-hub-card-glyph">श्री रुद्रं</div>
-        <h2>Sanskrit Chants</h2>
-        <p>Sri Rudram Namakam and Chamakam, Soundarya Lahari — Devanagari alongside IAST transliteration.</p>
-      </a>
-      <a class="lang-hub-card" href="chants.html?lang=tamil">
-        <div class="lang-hub-card-glyph">அபிராமி</div>
-        <h2>Tamil Chants</h2>
-        <p>Abirami Antati, the Iyaṟpā Tiruvantatis, Vel Maaral, and more — Tamil script alongside transliteration.</p>
-      </a>
-    </div>
+  <div class="chant-body container" id="chantBody">
+    <p class="loading">Loading chant…</p>
   </div>
 </main>
 
+<script src="js/app.js"></script>
 </body>
 </html>

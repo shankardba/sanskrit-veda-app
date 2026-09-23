@@ -199,17 +199,24 @@ let networkLayout = null;
 let networkRail = null;
 let networkSvg = null;
 
-function populateChantSelect() {
-  for (const group of CHANT_GROUPS) {
-    const optgroup = document.createElement('optgroup');
-    optgroup.label = group.label;
+// languageFilter (from chants.html's own ?lang= query param — see the
+// Chants hub's two cards on index.html) restricts the dropdown to a single
+// group, dropping the optgroup wrapper entirely since a label is redundant
+// when there's nothing to distinguish it from. Falls back to every chant,
+// grouped as usual, when absent/unrecognized (e.g. chants.html visited
+// directly, no query param) — segregation is an entry point, not a lock.
+function populateChantSelect(languageFilter) {
+  const groups = CHANT_GROUPS.filter((g) => !languageFilter || g.language === languageFilter);
+  for (const group of groups) {
+    const parent = languageFilter ? chantSelect : document.createElement('optgroup');
+    if (!languageFilter) parent.label = group.label;
     for (const chant of CHANTS.filter((c) => c.language === group.language)) {
       const option = document.createElement('option');
       option.value = chant.id;
       option.textContent = chant.label;
-      optgroup.appendChild(option);
+      parent.appendChild(option);
     }
-    chantSelect.appendChild(optgroup);
+    if (!languageFilter) chantSelect.appendChild(parent);
   }
 }
 
@@ -1059,7 +1066,9 @@ function initRepeatClickHandling() {
 }
 
 function init() {
-  populateChantSelect();
+  const requestedLang = new URLSearchParams(window.location.search).get('lang');
+  const languageFilter = CHANT_GROUPS.some((g) => g.language === requestedLang) ? requestedLang : null;
+  populateChantSelect(languageFilter);
   initRepeatClickHandling();
 
   const savedShow = localStorage.getItem('vedavani:showTransliteration');
@@ -1082,8 +1091,12 @@ function init() {
     updateNetworkOverlay();
   });
 
+  // Within a language-filtered dropdown, a remembered chant from the other
+  // language isn't one of its options — fall back to that language's own
+  // first chant instead of the site-wide default.
+  const eligible = languageFilter ? CHANTS.filter((c) => c.language === languageFilter) : CHANTS;
   const lastChant = localStorage.getItem('vedavani:lastChant');
-  const initialId = CHANTS.some((c) => c.id === lastChant) ? lastChant : CHANTS[0].id;
+  const initialId = eligible.some((c) => c.id === lastChant) ? lastChant : eligible[0].id;
   chantSelect.value = initialId;
   loadChant(initialId);
 
