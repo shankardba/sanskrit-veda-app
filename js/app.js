@@ -189,6 +189,7 @@ const chantTitleDeva = document.getElementById('chantTitleDeva');
 const chantTitleIast = document.getElementById('chantTitleIast');
 const chantSource = document.getElementById('chantSource');
 const transliterationToggle = document.getElementById('transliterationToggle');
+const translationToggle = document.getElementById('translationToggle');
 
 // The current chant's layout (text column + rail + translation column) and
 // its network SVG, rebuilt on every renderChant() call — see
@@ -1003,6 +1004,12 @@ function applyTransliterationPref(show) {
   transliterationToggle.setAttribute('aria-pressed', String(show));
 }
 
+function applyTranslationPref(show) {
+  document.body.classList.toggle('hide-translation', !show);
+  translationToggle.classList.toggle('active', show);
+  translationToggle.setAttribute('aria-pressed', String(show));
+}
+
 // Links a click across all three columns. Two mechanisms, both additive:
 //
 // 1. Cross-script bridge (deva <-> iast): activating a word also activates
@@ -1075,12 +1082,27 @@ function init() {
   let showTransliteration = savedShow === null ? true : savedShow === 'true';
   applyTransliterationPref(showTransliteration);
 
+  const savedShowTranslation = localStorage.getItem('vedavani:showTranslation');
+  let showTranslation = savedShowTranslation === null ? true : savedShowTranslation === 'true';
+  applyTranslationPref(showTranslation);
+
   transliterationToggle.addEventListener('click', () => {
     showTransliteration = !showTransliteration;
     applyTransliterationPref(showTransliteration);
     localStorage.setItem('vedavani:showTransliteration', String(showTransliteration));
     // Rows reflow when transliteration is shown/hidden, so both the
     // translation column's positions and the network need recomputing even
+    // though the active selection itself didn't change.
+    alignTranslationLines();
+    updateNetworkOverlay();
+  });
+
+  translationToggle.addEventListener('click', () => {
+    showTranslation = !showTranslation;
+    applyTranslationPref(showTranslation);
+    localStorage.setItem('vedavani:showTranslation', String(showTranslation));
+    // chant-text's width changes (640px cap dropped/restored) when the
+    // translation column is hidden/shown, so both need recomputing even
     // though the active selection itself didn't change.
     alignTranslationLines();
     updateNetworkOverlay();

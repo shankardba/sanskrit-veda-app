@@ -195,11 +195,16 @@ a {
 }
 
 /* Only present on chants.html, whose control-bar has two children (this +
-   the transliteration toggle) rather than one — space-between keeps the
-   toggle from shifting off-center of the two-button layout the way it
-   would if this were just centered alongside it. */
+   the toggle group) rather than one — space-between keeps the toggles from
+   shifting off-center of the two-button layout the way it would if this
+   were just centered alongside it. */
 .control-bar:has(.control-bar-back) {
   justify-content: space-between;
+}
+
+.control-bar-toggles {
+  display: flex;
+  gap: 10px;
 }
 
 .control-bar-back {
@@ -316,6 +321,20 @@ a {
   .chant-translation {
     display: none;
   }
+}
+
+/* Translation toggled off via the control bar — same hidden columns as the
+   narrow-viewport case above, but chant-text also drops its 640px cap so
+   the reading column actually uses the freed-up width instead of leaving
+   it empty next to two now-hidden columns. */
+body.hide-translation .chant-rail,
+body.hide-translation .chant-translation {
+  display: none;
+}
+
+body.hide-translation .chant-text {
+  flex: 1 1 auto;
+  max-width: none;
 }
 
 .section-block {
