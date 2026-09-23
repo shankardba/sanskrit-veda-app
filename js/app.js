@@ -62,7 +62,7 @@ const ANUVAKA_TAGLINES = {
     4: 'Rudra as lord of every craft, army, and hunt',
     5: 'Rudra in every extreme — the great and the small, the swift and the slow',
     6: 'Rudra in every age of life and every terrain',
-    7: 'Rudra in the weather — cloud, storm, river, and well',
+    7: 'Rudra in Nature — cloud, storm, river, and well',
     8: 'Rudra gentled — river-crossings, and his most auspicious names',
     9: 'Rudra reaching into the home — and into affliction itself',
     10: 'A turn to plea — protect this family, this village, this body',
@@ -79,7 +79,7 @@ const ANUVAKA_TAGLINES = {
     7: "A prince's craft — mastering the sacrifice's rites",
     8: "A king's court — every vessel and altar of the rite",
     9: "A king's dominion — the horse-sacrifice, and the Vedas",
-    10: "A king's herds — cattle by generation, offered whole",
+    10: "A king's herds — and the sacrifice that fashions the self",
     11: 'Secrets of the Universe — the numbers beneath all things',
     12: 'Becoming one with the gods — their favor, and peace',
   },
@@ -338,11 +338,51 @@ const MEANING_CONCEPTS = [
   // instrumental refrain (Chamakam's "may X be fashioned through the
   // sacrifice" lines, sections 5/9/10); यज्ञो "the sacrifice itself"
   // (nominative, Chamakam 150) and यज्ञस्य "of the sacrifice" (genitive,
-  // Namakam 207) are catalogued too, though neither currently repeats
-  // enough within its own section to get its own box yet. Doesn't include
-  // यज्ञनी (Chamakam 168), a different word — an epithet ("leading the
-  // sacrifices"), not this noun.
+  // Namakam 207) are catalogued too. Doesn't include यज्ञनी (Chamakam
+  // 168), a different word — an epithet ("leading the sacrifices"), not
+  // this noun.
   { id: 'yajna', deva: ['यज्ञेन', 'यज्ञो', 'यज्ञस्य'], iast: ['yajñēna', 'yajñō', 'yajñasya'], english: ['sacrifice'] },
+  // सहस्र (thousand): a different case/compound form at almost every
+  // occurrence (dative सहस्राक्षाय, plural सहस्राणि, adverbial सहस्रधा/
+  // सहस्रशः, locative-compound सहस्रयोजने, the सहस्र+अयुत compound
+  // सहस्रमयुत-), catalogued individually the same way yajna's case-forms
+  // are above rather than attempting stem-matching. सहस्राक्षाय and
+  // सहस्रशो each have a doubled-स् variant (स्सहस्राक्षाय/स्सहस्रशो)
+  // because vignanam.org's own Devanagari and IAST pages don't always
+  // agree on whether the preceding visarga's sandhi (namaḥ + sahasra- ->
+  // namas-sahasra-) gets written into the Devanagari or only into the
+  // IAST — both spellings are kept rather than picking one as
+  // "correct" (see the similar cha mē discrepancy noted in
+  // sanskrit-into-tamil-script-transliteration-rules on Claude Hub).
+  // Concentrated in Namakam anuvākas 1, 5, 10, 11, and 12.
+  {
+    id: 'sahasra',
+    deva: [
+      'सहस्राक्ष',
+      'सहस्राक्षाय',
+      'स्सहस्राक्षाय',
+      'सहस्राणि',
+      'सहस्रग्ं',
+      'सहस्रधा',
+      'सहस्रयोजने',
+      'सहस्रशो',
+      'स्सहस्रशो',
+      'सहस्रमयुत',
+    ],
+    iast: [
+      'sahasrākṣa',
+      'sahasrākṣāya',
+      'ssahasrākṣāya',
+      'sahasrāṇi',
+      'sahasragṃ',
+      'sahasradhā',
+      'sahasrayōjanē',
+      'sahasraśō',
+      'ssahasraśō',
+      'sahasramayuta',
+    ],
+    english: ['thousand', 'thousands'],
+  },
   // कल्प- "may/would be fashioned/made" (optative of kḷp): कल्पतां/कल्पताम्
   // is singular, कल्पन्तां plural (Chamakam 78 — only appears once in its
   // own section, so not yet its own box there), कल्पेताम् dual (Chamakam
@@ -635,11 +675,21 @@ function renderScriptLine(rawText, script, counts, lineKey) {
     // practice tends to split an old joint phrase-box into two adjacent
     // concept boxes instead (e.g. yajñēna and kalpatāṃ each standing
     // alone), which is what lets each link separately.
+    //
+    // A single word (n===1) that's itself a registered MEANING_CONCEPTS
+    // form always matches too, same as a 2-word concept phrase does above
+    // — it's a curated entry, not a coincidental repeat, so it shouldn't
+    // need to ALSO happen to repeat twice in its own section just to get
+    // its box (सहस्र/sahasra is a different case-form at nearly every
+    // occurrence, so almost none of them would otherwise ever reach 2;
+    // conceptsInLine already boxes these words' English counterparts
+    // unconditionally — this just brings the Sanskrit/IAST side in line
+    // with that instead of leaving it under-gated).
     if (matchedN === 0) {
       for (let n = normsAhead.length; n >= 1; n--) {
         if (n > 1 && (conceptLookup.has(normsAhead[n - 1]) || conceptLookup.has(normsAhead[0]))) continue;
         const key = normsAhead.slice(0, n).join(' ');
-        if ((counts.get(key) || 0) >= 2) {
+        if ((counts.get(key) || 0) >= 2 || (n === 1 && conceptLookup.has(key))) {
           matchedN = n;
           matchedKey = key;
           break;
