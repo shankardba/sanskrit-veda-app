@@ -39,25 +39,22 @@ const CHANT_GROUPS = [
 
 // Optional per-section popup notes, keyed by chant id then section label —
 // a section-label only becomes clickable (see renderChant) when an entry
-// exists here. `kind` picks the icon (see .has-note-math/.has-note-culture
-// in styles.css — 'math' for a hard mathematical structure like Chamakam
-// 11's number sequences, 'culture' for a historical/religious reference
-// worth unpacking); `build` is called lazily, only once the user actually
-// clicks, since most visitors never will.
+// exists here. Content is built lazily (each value a function, not the
+// note itself) since it's only ever needed once the user actually clicks.
 const SECTION_NOTES = {
   'sri-rudram-namakam': {
-    3: { kind: 'culture', build: () => buildRudraOutcastsNote() },
-    11: { kind: 'culture', build: () => buildRudraGanasNote() },
-    12: { kind: 'culture', build: () => buildRudraVishnuDeathNote() },
+    3: () => buildRudraOutcastsNote(),
+    11: () => buildRudraGanasNote(),
+    12: () => buildRudraVishnuDeathNote(),
   },
   'sri-rudram-chamakam': {
-    6: { kind: 'culture', build: () => buildChamakamPantheonNote() },
-    7: { kind: 'culture', build: () => buildSomaRitualNote() },
-    9: { kind: 'culture', build: () => buildAshvamedhaNote() },
-    11: { kind: 'math', build: () => buildSquaresMathNote() },
+    6: () => buildChamakamPantheonNote(),
+    7: () => buildSomaRitualNote(),
+    9: () => buildAshvamedhaNote(),
+    11: () => buildSquaresMathNote(),
   },
   'vel-maaral-tamil': {
-    'Refrain (×12)': { kind: 'math', build: () => buildVelMaaralStructureNote() },
+    'Refrain (×12)': () => buildVelMaaralStructureNote(),
   },
 };
 
@@ -1066,10 +1063,10 @@ function renderChant(chant, translation) {
     // fall through to the 'Anuvāka' default the way undefined does.
     const sectionUnit = chant.sectionUnit ?? 'Anuvāka';
     const labelText = sectionUnit ? `${sectionUnit} ${section.label}` : section.label;
-    const noteEntry = SECTION_NOTES[chant.id] && SECTION_NOTES[chant.id][section.label];
-    const labelEl = el('div', noteEntry ? `section-label has-note has-note-${noteEntry.kind}` : 'section-label', labelText);
-    if (noteEntry) {
-      labelEl.addEventListener('click', () => openMathModal(noteEntry.build()));
+    const buildNote = SECTION_NOTES[chant.id] && SECTION_NOTES[chant.id][section.label];
+    const labelEl = el('div', buildNote ? 'section-label has-note' : 'section-label', labelText);
+    if (buildNote) {
+      labelEl.addEventListener('click', () => openMathModal(buildNote()));
     }
     const tagline = ANUVAKA_TAGLINES[chant.id] && ANUVAKA_TAGLINES[chant.id][section.label];
     if (tagline) {

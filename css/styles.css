@@ -379,6 +379,7 @@ body.hide-translation .chant-text {
 }
 
 .section-label.has-note::after {
+  content: '∑';
   font-family: var(--font-display);
   font-size: 0.95rem;
   letter-spacing: 0;
@@ -393,18 +394,6 @@ body.hide-translation .chant-text {
   justify-content: center;
   line-height: 1;
   flex-shrink: 0;
-}
-
-/* 'math' = a hard structural/numeric pattern (Chamakam 11's number
-   sequences, Vel Maaral's mirrored verse order); 'culture' = a
-   historical/religious reference worth unpacking (e.g. the horse-sacrifice
-   being a king's rite) — see SECTION_NOTES in app.js. */
-.section-label.has-note-math::after {
-  content: '∑';
-}
-
-.section-label.has-note-culture::after {
-  content: '†';
 }
 
 .section-label.has-note:hover::after {
