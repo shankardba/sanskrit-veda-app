@@ -39,14 +39,25 @@ const CHANT_GROUPS = [
 
 // Optional per-section popup notes, keyed by chant id then section label —
 // a section-label only becomes clickable (see renderChant) when an entry
-// exists here. Content is built lazily (each value a function, not the
-// note itself) since it's only ever needed once the user actually clicks.
+// exists here. `kind` picks the icon (see .has-note-math/.has-note-culture
+// in styles.css — 'math' for a hard mathematical structure like Chamakam
+// 11's number sequences, 'culture' for a historical/religious reference
+// worth unpacking); `build` is called lazily, only once the user actually
+// clicks, since most visitors never will.
 const SECTION_NOTES = {
+  'sri-rudram-namakam': {
+    3: { kind: 'culture', build: () => buildRudraOutcastsNote() },
+    11: { kind: 'culture', build: () => buildRudraGanasNote() },
+    12: { kind: 'culture', build: () => buildRudraVishnuDeathNote() },
+  },
   'sri-rudram-chamakam': {
-    11: () => buildSquaresMathNote(),
+    6: { kind: 'culture', build: () => buildChamakamPantheonNote() },
+    7: { kind: 'culture', build: () => buildSomaRitualNote() },
+    9: { kind: 'culture', build: () => buildAshvamedhaNote() },
+    11: { kind: 'math', build: () => buildSquaresMathNote() },
   },
   'vel-maaral-tamil': {
-    'Refrain (×12)': () => buildVelMaaralStructureNote(),
+    'Refrain (×12)': { kind: 'math', build: () => buildVelMaaralStructureNote() },
   },
 };
 
@@ -174,6 +185,109 @@ function buildVelMaaralStructureNote() {
         <table class="consonant-table math-table"><tbody>${tableRows}</tbody></table>
       </div>
       <p>Nothing in the second half (33–64) lands in the same verse-pair position as its counterpart in the first half (1–32) — every verse returns, but never the same way twice. Also: verses 15–16 recur immediately as 17–18 before the mirroring proper begins, on both the Tamil and English source pages — likely deliberate emphasis rather than a transcription slip, but flagged here since it's the one place the otherwise-exact symmetry above doesn't hold.</p>
+    `,
+  };
+}
+
+// Namakam anuvāka 3's litany explicitly salutes Rudra as lord of thieves,
+// robbers, plunderers, and cutthroats, alongside soldiers and hunters —
+// one of the most-discussed features of this hymn, so worth unpacking
+// rather than letting it read as a stray oddity in the translation column.
+function buildRudraOutcastsNote() {
+  return {
+    title: 'Rudra as Patron of Outcasts and Thieves',
+    subtitle: 'Śrī Rudram Namakam · Anuvāka 3',
+    bodyHtml: `
+      <p>Most of this anuvāka's "salutation to X, and to the lord of Y" pairs are unremarkable — archers, riders, assemblies, horses. A few aren't: <em>lord of thieves</em>, <em>lord of robbers</em>, <em>lord of thieves-in-hiding</em>, <em>lord of marauders</em>, <em>lord of cutthroats</em>. Rudra is being named, explicitly, as the patron of society's outcasts and its criminals — not in spite of his fearsomeness but because of it.</p>
+      <p>Many readers of this hymn take that as an early, Vedic-period glimpse of the same character later Purāṇic mythology develops fully in Rudra's successor Śiva: a god who stands outside the ordinary social order rather than presiding over it from within — at home in the cremation ground, in the company of ghosts and ascetics, on the margins rather than at the center. That later mythology is centuries removed from this text, so treat the connection as a thread worth noticing rather than a settled equivalence — but the impulse to place Rudra among the excluded, right here in one of the oldest layers of the hymn, is genuinely striking on its own terms.</p>
+    `,
+  };
+}
+
+// Namakam anuvāka 11 repeats "thousands of Rudras" — on earth, in the
+// mid-region, in heaven — rather than treating Rudra as a single deity.
+function buildRudraGanasNote() {
+  return {
+    title: 'Many Rudras — the Seed of Śiva’s Gaṇas',
+    subtitle: 'Śrī Rudram Namakam · Anuvāka 11',
+    bodyHtml: `
+      <p>This anuvāka doesn't address one Rudra — it counts them: "thousands, by the thousands," dwelling on earth, in the ocean and sky, and in heaven. That's a plural, a whole class of beings, the same grammatical move the Veda makes with troops like the Maruts or the Vasus — not "a god," but "a host."</p>
+      <p>This plurality is generally read as the historical root of something the later Śaiva tradition names outright: Śiva's <em>gaṇas</em>, his retinue of attendant beings (Gaṇapati/Ganesha is literally "lord of the gaṇas"). The word gaṇa itself never appears in this text — the connection is a matter of tracing a theme back to its earliest visible form, not a direct citation — but the idea that Rudra comes as a multitude, not a singular figure, is already fully present right here.</p>
+    `,
+  };
+}
+
+// Namakam anuvāka 12 pairs Rudra with Vishnu as one invoked figure, and
+// addresses Death directly with the same ritual exclamation (svāhā) used
+// when making an offering to a god.
+function buildRudraVishnuDeathNote() {
+  return {
+    title: 'Rudra-Vishnu, and an Offering to Death Itself',
+    subtitle: 'Śrī Rudram Namakam · Anuvāka 12',
+    bodyHtml: `
+      <p>Two things in this closing anuvāka are easy to read past. First: "Om, salutation to the blessed Rudra-Vishnu" addresses the two as one compound figure, not two gods invoked in sequence. The sectarian lines that later separate Śaiva and Vaiṣṇava worship hadn't hardened yet when this layer of the Veda took shape — a deity could be named jointly with another, or identified with another, without that being a contradiction the way it would become in much later, more partisan theology.</p>
+      <p>Second: "Svāhā to Death! Svāhā to Death!" — svāhā is the standard exclamation said <em>while pouring an oblation into the sacrificial fire</em>, the ritual formula for giving something to a god. Aiming it at Death (Mṛtyu) treats Death as a power to be ritually addressed and rendered harmless, the same way any other deity would be approached — not simply feared, denied, or left unnamed.</p>
+    `,
+  };
+}
+
+// Chamakam anuvāka 6 invokes eleven named deities plus "all the gods" and
+// the cosmic regions, each one paired with "and Indra be mine" — a
+// snapshot of the Vedic pantheon at a point before several of these names
+// receded from everyday worship.
+function buildChamakamPantheonNote() {
+  const deities = [
+    ['Agni', 'Fire itself, and the officiant who carries every offering to the other gods.'],
+    ['Soma', 'The sacred pressed drink of the ritual, and the god identified with it.'],
+    ['Savitr', 'The sun specifically in its impelling, rousing aspect — the one who sets things in motion.'],
+    ['Sarasvati', 'Goddess of a river and of speech; her association with learning and the arts develops later.'],
+    ['Pushan', 'Guardian of roads, herds, and safe journeys — a pastoral, path-watching god.'],
+    ['Brihaspati', 'Priest and preceptor of the gods, lord of sacred speech and counsel.'],
+    ['Mitra', 'God of contracts, alliances, and the bonds friendship and oath-taking depend on.'],
+    ['Varuna', 'Guardian of cosmic and moral order (ṛta), sovereign over the waters and the oceans.'],
+    ['Tvashtr', 'The divine craftsman — shaper of forms, including Indra’s own weapon.'],
+    ['Dhatr', 'The establisher — the one who sets things in their place, close in role to a creator.'],
+    ['the Aśvins', 'Twin horse-headed gods of healing, dawn, and rescue.'],
+    ['the Maruts', 'Storm-gods riding with Indra, his retinue in battle and in the tempest.'],
+  ];
+  const items = deities
+    .map(([name, desc]) => `<dt>${name}</dt><dd>${desc}</dd>`)
+    .join('');
+  return {
+    title: 'Who’s Who in the Pantheon Invoked Here',
+    subtitle: 'Śrī Rudram Chamakam · Anuvāka 6',
+    bodyHtml: `
+      <p>Every single item in this anuvāka is paired with "and Indra be mine" — Indra is the one constant partner across eleven other names, reflecting his standing as the pre-eminent king-god of the Vedic pantheon, a rank later classical Hinduism largely transfers to Vishnu and Shiva. Several of the names beside him are far less familiar today than they'd have been to the hymn's original audience:</p>
+      <dl class="modal-glossary">${items}</dl>
+      <p>The anuvāka closes by widening from named deities to the cosmic regions themselves — earth, mid-region, sky, the directions, "the summit" — and finally to Prajapati, "lord of creatures," a figure whose role as an overarching creator is later folded into Brahma.</p>
+    `,
+  };
+}
+
+// Chamakam anuvāka 7's items are the named cups (graha) and offerings of a
+// full Soma sacrifice, in something close to their ritual order.
+function buildSomaRitualNote() {
+  return {
+    title: 'The Soma Sacrifice’s Own Inventory',
+    subtitle: 'Śrī Rudram Chamakam · Anuvāka 7',
+    bodyHtml: `
+      <p>Soma is both a plant and the drink pressed from it — offered to the gods and, in the ritual itself, drunk by the officiating priests — and one of the oldest and most elaborate rites in the whole Vedic corpus is built entirely around pressing and offering it in a fixed sequence of named cups (<em>graha</em>), each one dedicated to a particular deity or pair: a cup for Indra-Vāyu, one for Mitra-Varuna, one for the Aśvins, and so on. This anuvāka is close to a checklist of that sequence.</p>
+      <p>A few of its terms name specific, technical moments in the rite rather than generic offerings: the "silently-pressed soma" (<em>upāṃśu-graha</em>) is pressed and offered in near-silence, without the chanting that normally accompanies a pressing — a deliberately quiet exception inside an otherwise loudly recited ceremony. The exact botanical identity of the original Soma plant is itself debated among scholars and was likely already uncertain within the Vedic period's own later centuries; what this anuvāka preserves is the ritual's structure, not a specimen.</p>
+    `,
+  };
+}
+
+// Chamakam anuvāka 9 names the horse-sacrifice (aśvamedha) directly,
+// immediately before the hymn moves into cattle by generation and then
+// the "through the sacrifice, may it be fashioned" refrain that closes
+// anuvāka 10 on the sacrifice itself.
+function buildAshvamedhaNote() {
+  return {
+    title: 'The Horse-Sacrifice, and the Three Vedas',
+    subtitle: 'Śrī Rudram Chamakam · Anuvāka 9',
+    bodyHtml: `
+      <p>"The horse-sacrifice be mine" names the <em>aśvamedha</em>, traditionally among the most prestigious and costly rites in the Vedic world — and one reserved for a king, specifically a sovereign asserting supremacy over other rulers. In its classical form a consecrated horse is released to wander for a year, escorted by the king's men; whatever territory it crosses unopposed is thereby claimed, and its return is marked by a grand sacrifice. Naming it here, as this Anuvāka's list turns from ritual apparatus toward cattle, breath, and eventually the self, reads as a marker of scale — the offering a king alone could make.</p>
+      <p>The same lines name the Rik, Sāman, and Yajus formulas together — the three genres of Vedic recitation this whole corpus is organized around: verses meant to be recited (Ṛgveda), set to melody (Sāmaveda), and murmured or spoken to accompany a specific ritual action (Yajurveda, the very text this hymn belongs to). A fourth, the Atharvaveda, wasn't always counted alongside these three in the earliest reckonings — so "the three Vedas" named here is itself a genuinely old way of dividing the tradition, not a later simplification.</p>
     `,
   };
 }
@@ -952,10 +1066,10 @@ function renderChant(chant, translation) {
     // fall through to the 'Anuvāka' default the way undefined does.
     const sectionUnit = chant.sectionUnit ?? 'Anuvāka';
     const labelText = sectionUnit ? `${sectionUnit} ${section.label}` : section.label;
-    const buildNote = SECTION_NOTES[chant.id] && SECTION_NOTES[chant.id][section.label];
-    const labelEl = el('div', buildNote ? 'section-label has-note' : 'section-label', labelText);
-    if (buildNote) {
-      labelEl.addEventListener('click', () => openMathModal(buildNote()));
+    const noteEntry = SECTION_NOTES[chant.id] && SECTION_NOTES[chant.id][section.label];
+    const labelEl = el('div', noteEntry ? `section-label has-note has-note-${noteEntry.kind}` : 'section-label', labelText);
+    if (noteEntry) {
+      labelEl.addEventListener('click', () => openMathModal(noteEntry.build()));
     }
     const tagline = ANUVAKA_TAGLINES[chant.id] && ANUVAKA_TAGLINES[chant.id][section.label];
     if (tagline) {
