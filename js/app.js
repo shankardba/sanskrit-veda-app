@@ -15,6 +15,7 @@
 // handling elsewhere.
 
 const CHANTS = [
+  { id: 'abirami-antati', label: 'Abirami Antati (Tamil)' },
   { id: 'sri-rudram-namakam', label: 'Sri Rudram Namakam' },
   { id: 'sri-rudram-chamakam', label: 'Sri Rudram Chamakam' },
   { id: 'soundarya-lahari', label: 'Soundarya Lahari' },
@@ -683,7 +684,12 @@ function renderChant(chant, translation) {
     const devaCounts = buildRepeatCounts(section.lines.map((l) => l.devanagari), 'deva');
     const iastCounts = buildRepeatCounts(section.lines.map((l) => l.iast), 'iast');
     const block = el('div', 'section-block');
-    const labelText = `${chant.sectionUnit || 'Anuvāka'} ${section.label}`;
+    // '' explicitly means "no unit word, just the label" (e.g. Abirami
+    // Antati's "Kāppu"/"1"/"Payan" labels, which already say what they are)
+    // — nullish-coalescing rather than `||` so that empty string doesn't
+    // fall through to the 'Anuvāka' default the way undefined does.
+    const sectionUnit = chant.sectionUnit ?? 'Anuvāka';
+    const labelText = sectionUnit ? `${sectionUnit} ${section.label}` : section.label;
     const buildNote = SECTION_NOTES[chant.id] && SECTION_NOTES[chant.id][section.label];
     const labelEl = el('div', buildNote ? 'section-label has-note' : 'section-label', labelText);
     if (buildNote) {
