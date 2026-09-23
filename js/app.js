@@ -281,6 +281,26 @@ const MEANING_CONCEPTS = [
     iast: ['kalpatāṃ', 'kalpatām', 'kalpantāṃ', 'kalpētām', 'kalpatāg'],
     english: ['may it be fashioned'],
   },
+  // च मे / च म ("cha mē" / "cha ma") is Chamakam's real recurring unit, not
+  // two independent words that happen to sit next to each other: it closes
+  // nearly every single item in every anuvāka's enumeration ("X be mine,
+  // and Y be mine, ..."), मे regularly eliding to म by the ordinary sandhi
+  // rule before a vowel-initial word (confirmed against the chant data:
+  // 49x "च मे", 14x "च म", no other variant). Registered as one two-word
+  // concept — rather than 'cha' and 'me' individually, as they otherwise
+  // would be — so it boxes and highlights as a single unit end to end: see
+  // the multi-word branch in renderScriptLine/conceptsInLine, which checks
+  // a concept lookup for an adjacent word-pair before falling back to
+  // single-word matching. english is "be mine" (not just "mine") since
+  // that's the fixed two-word unit that appears in the translation every
+  // single time (verified: all 342 occurrences of "mine" across this
+  // chant's translation are immediately preceded by "be").
+  {
+    id: 'cha-me',
+    deva: ['च मे', 'च म'],
+    iast: ['cha mē', 'cha ma'],
+    english: ['be mine'],
+  },
 ];
 
 const MEANING_CONCEPTS_BY_ID = new Map(MEANING_CONCEPTS.map((c) => [c.id, c]));
@@ -291,16 +311,30 @@ const CONCEPT_BY_ENGLISH = new Map(MEANING_CONCEPTS.flatMap((c) => c.english.map
 // Which concepts actually occur in this specific verse-line, so an English
 // word only gets boxed on lines where its Sanskrit counterpart genuinely
 // appears — not everywhere that English word happens to occur in the text.
+//
+// Checks adjacent word-pairs before single words (e.g. "cha mē" as one
+// concept, not 'cha' and 'me' independently) — see the matching MEANING_CONCEPTS
+// entries and the equivalent two-word-first check in renderScriptLine.
 function conceptsInLine(devanagari, iast) {
   const ids = new Set();
-  for (const word of devanagari.split(/\s+/)) {
-    const id = CONCEPT_BY_DEVA.get(normalizeToken(word, 'deva'));
-    if (id) ids.add(id);
-  }
-  for (const word of iast.split(/\s+/)) {
-    const id = CONCEPT_BY_IAST.get(normalizeToken(word, 'iast'));
-    if (id) ids.add(id);
-  }
+  const scan = (text, script, lookup) => {
+    const words = text.split(/\s+/).map((w) => normalizeToken(w, script));
+    for (let i = 0; i < words.length; i++) {
+      if (!words[i]) continue;
+      if (words[i + 1]) {
+        const phraseId = lookup.get(`${words[i]} ${words[i + 1]}`);
+        if (phraseId) {
+          ids.add(phraseId);
+          i += 1;
+          continue;
+        }
+      }
+      const id = lookup.get(words[i]);
+      if (id) ids.add(id);
+    }
+  };
+  scan(devanagari, 'deva', CONCEPT_BY_DEVA);
+  scan(iast, 'iast', CONCEPT_BY_IAST);
   return ids;
 }
 
@@ -418,28 +452,44 @@ function renderScriptLine(rawText, script, counts, lineKey) {
       }
     }
 
-    // A multi-word candidate is skipped if it would start or end on a word
-    // that has its own meaning mapping (MEANING_CONCEPTS) — otherwise a
-    // short, near-universal collocation like "cha mē" ("and mine", repeated
-    // after every single item in a list) greedily swallows मे every time
-    // it's a separate token, so it never surfaces as its own box and never
-    // links to the "mine" concept — likewise "yajñēna kalpatāṃ" swallowing
-    // yajñēna so it never links to "sacrifice" on its own. A concept word
-    // always gets to be its own unit, on either end; longer genuine phrases
-    // (e.g. a repeated invocation line) still match as long as neither end
-    // is one — which in practice tends to split an old joint phrase-box
-    // into two adjacent concept boxes instead (e.g. yajñēna and kalpatāṃ
-    // each standing alone), which is what lets each link separately.
     const conceptLookup = script === 'deva' ? CONCEPT_BY_DEVA : CONCEPT_BY_IAST;
     let matchedN = 0;
     let matchedKey = '';
-    for (let n = normsAhead.length; n >= 1; n--) {
-      if (n > 1 && (conceptLookup.has(normsAhead[n - 1]) || conceptLookup.has(normsAhead[0]))) continue;
-      const key = normsAhead.slice(0, n).join(' ');
-      if ((counts.get(key) || 0) >= 2) {
-        matchedN = n;
-        matchedKey = key;
-        break;
+
+    // An explicitly registered two-word concept (e.g. "cha mē") always wins,
+    // regardless of repeat count — it's not a coincidental repeated phrase,
+    // it's the actual grammatical/idiomatic unit, so it should box and link
+    // as one even the first time it's seen. Checked before the general
+    // repeat-phrase loop below so it isn't shadowed by that loop's own
+    // single-word-concept guard (next comment).
+    if (normsAhead.length >= 2) {
+      const phraseKey = `${normsAhead[0]} ${normsAhead[1]}`;
+      if (conceptLookup.has(phraseKey)) {
+        matchedN = 2;
+        matchedKey = phraseKey;
+      }
+    }
+
+    // Otherwise, a multi-word candidate is skipped if it would start or end
+    // on a word that has its own meaning mapping (MEANING_CONCEPTS) —
+    // without this, a short, near-universal collocation would greedily
+    // swallow a concept word every time it's adjacent to one (e.g.
+    // "yajñēna kalpatāṃ" swallowing yajñēna so it never links to
+    // "sacrifice" on its own). A concept word always gets to be its own
+    // unit, on either end; longer genuine phrases (e.g. a repeated
+    // invocation line) still match as long as neither end is one — which in
+    // practice tends to split an old joint phrase-box into two adjacent
+    // concept boxes instead (e.g. yajñēna and kalpatāṃ each standing
+    // alone), which is what lets each link separately.
+    if (matchedN === 0) {
+      for (let n = normsAhead.length; n >= 1; n--) {
+        if (n > 1 && (conceptLookup.has(normsAhead[n - 1]) || conceptLookup.has(normsAhead[0]))) continue;
+        const key = normsAhead.slice(0, n).join(' ');
+        if ((counts.get(key) || 0) >= 2) {
+          matchedN = n;
+          matchedKey = key;
+          break;
+        }
       }
     }
 
