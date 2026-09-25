@@ -31,6 +31,7 @@ const CHANTS = [
   { id: 'sri-rudram-namakam', label: 'Sri Rudram Namakam', language: 'sanskrit' },
   { id: 'sri-rudram-chamakam', label: 'Sri Rudram Chamakam', language: 'sanskrit' },
   { id: 'soundarya-lahari', label: 'Soundarya Lahari', language: 'sanskrit' },
+  { id: 'shivananda-lahari', label: 'Shivananda Lahari', language: 'sanskrit' },
 ];
 
 // Dropdown group order/labels — Tamil first so Abirami Antati (CHANTS[0],
