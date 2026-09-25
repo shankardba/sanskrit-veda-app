@@ -61,6 +61,33 @@ const SECTION_NOTES = {
   },
 };
 
+// Optional intermediate grouping between a chant and its sections, keyed by
+// chant id — a topic-navigator block (see buildTopicNav) only renders when
+// an entry exists here. Each group is a contiguous run of section labels
+// (numeric, inclusive `from`/`to`); Thirukkural's three books use this for
+// their traditional 13 iyal ("part") groupings over the 133 adhikārams.
+const SECTION_GROUPS = {
+  'thirukkural-arathuppal': [
+    { label: 'Prologue', from: 1, to: 4 },
+    { label: 'Domestic Virtue', from: 5, to: 24 },
+    { label: 'Ascetic Virtue', from: 25, to: 37 },
+    { label: 'Fate', from: 38, to: 38 },
+  ],
+  'thirukkural-porutpal': [
+    { label: 'Royalty', from: 39, to: 63 },
+    { label: 'Ministers of State', from: 64, to: 73 },
+    { label: 'The Essentials of a State', from: 74, to: 75 },
+    { label: 'Way of Making Wealth', from: 76, to: 76 },
+    { label: 'The Excellence of an Army', from: 77, to: 78 },
+    { label: 'Friendship', from: 79, to: 95 },
+    { label: 'Miscellaneous', from: 96, to: 108 },
+  ],
+  'thirukkural-kaamathuppal': [
+    { label: 'The Pre-marital love', from: 109, to: 115 },
+    { label: 'The Post-marital love', from: 116, to: 133 },
+  ],
+};
+
 // One-line summaries of what each anuvāka is actually doing, shown next to
 // its "Anuvāka N" label in the translation column — read top to bottom,
 // each chant's sequence traces a single arc. First pass; expect these to
@@ -1126,6 +1153,42 @@ function renderTranslationText(text, conceptIds, lineKey) {
   return frag;
 }
 
+// Collapsed-by-default topic map for a chant with a SECTION_GROUPS entry —
+// one <details> per group (e.g. Thirukkural's 13 traditional iyals), each
+// holding a chip per section that jumps straight to it (href="#topic-N"
+// against the id renderChant gives every .section-block). Chip text pairs
+// the section's own number with its ANUVAKA_TAGLINES gloss when one exists,
+// so a reader can find a topic by name instead of scrolling past everything
+// before it. Returns null (render nothing) for a chant with no groups
+// registered — most chants are short enough not to need this at all.
+function buildTopicNav(chant) {
+  const groups = SECTION_GROUPS[chant.id];
+  if (!groups) return null;
+  const taglines = ANUVAKA_TAGLINES[chant.id] || {};
+  const sectionUnit = chant.sectionUnit ?? 'Anuvāka';
+
+  const nav = el('nav', 'topic-nav');
+  nav.appendChild(el('div', 'topic-nav-heading', 'Topics'));
+  for (const group of groups) {
+    const details = document.createElement('details');
+    details.className = 'topic-group';
+    const rangeText = group.to > group.from ? `${group.from}–${group.to}` : `${group.from}`;
+    details.appendChild(el('summary', null, `${group.label} (${rangeText})`));
+    const grid = el('div', 'topic-chip-grid');
+    for (let n = group.from; n <= group.to; n += 1) {
+      const chip = document.createElement('a');
+      chip.className = 'topic-chip';
+      chip.href = `#topic-${n}`;
+      const tagline = taglines[n];
+      chip.textContent = tagline ? `${n}. ${tagline}` : `${sectionUnit} ${n}`;
+      grid.appendChild(chip);
+    }
+    details.appendChild(grid);
+    nav.appendChild(details);
+  }
+  return nav;
+}
+
 function renderChant(chant, translation) {
   // Drives which script font .deva-line/.chant-title-deva render in — see
   // the body.chant-lang-tamil rules in styles.css. Devanagari and Tamil are
@@ -1140,6 +1203,8 @@ function renderChant(chant, translation) {
   chantSource.innerHTML = `Source: <a href="${chant.source.devanagari_url}" target="_blank" rel="noopener">${chant.source.site}</a>`;
 
   chantBody.innerHTML = '';
+  const topicNav = buildTopicNav(chant);
+  if (topicNav) chantBody.appendChild(topicNav);
   networkLayout = el('div', 'chant-layout');
   chantTextEl = el('div', 'chant-text');
   networkRail = el('div', 'chant-rail');
@@ -1199,6 +1264,10 @@ function renderChant(chant, translation) {
     const devaCounts = buildRepeatCounts(section.lines.map((l) => l.devanagari), 'deva');
     const iastCounts = buildRepeatCounts(section.lines.map((l) => l.iast), 'iast');
     const block = el('div', 'section-block');
+    // Jump target for buildTopicNav's chips (and any other future in-page
+    // link) — whitespace stripped since an id can't contain it, e.g.
+    // "Refrain (×12)" becomes "topic-Refrain-(×12)".
+    block.id = `topic-${String(section.label).replace(/\s+/g, '-')}`;
     // '' explicitly means "no unit word, just the label" (e.g. Abirami
     // Antati's "Kāppu"/"1"/"Payan" labels, which already say what they are)
     // — nullish-coalescing rather than `||` so that empty string doesn't
