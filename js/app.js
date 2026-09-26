@@ -711,6 +711,88 @@ const MEANING_CONCEPTS = [
     iast: ['cha mē', 'cha ma', 'ñcha mē', 'ñcha ma'],
     english: ['be mine'],
   },
+
+  // --- Thirukkural (Tamil) ------------------------------------------
+  //
+  // Thirukkural is 1330 independent couplets, not one continuous hymn, so
+  // there's no litany-style refrain the way Namakam/Chamakam have "cha mē" —
+  // instead these are each book's own recurring thematic vocabulary,
+  // registered so clicking one instance connects every other occurrence
+  // (via the network-svg curves) to its English gloss in the translation
+  // column, the same cross-column linking Namakam/Chamakam already have.
+  // Every entry below was checked occurrence-by-occurrence against its
+  // translation line for a single, consistent sense — see the deliberate
+  // omission of பொருள்/poruḷ just below this list for why that check
+  // matters and what it rules out.
+  {
+    id: 'thirukkural-aram',
+    deva: ['அறம்', 'அறம்பெருகும்', 'அறம்பார்க்கும்', 'அறம்பிற'],
+    iast: ['aram', 'aramperukum', 'arampaarkkum', 'arampira'],
+    english: ['virtue'],
+  },
+  {
+    id: 'thirukkural-kaamam',
+    deva: ['காமம்', 'காமம்போல்', 'இவைகாமம்'],
+    iast: ['kaamam', 'kaamampol', 'ivaikaamam'],
+    english: ['love', 'desire', 'lust'],
+  },
+  {
+    id: 'thirukkural-inbam',
+    deva: ['இன்பம்', 'இன்பம்போல்'],
+    iast: ['inpam', 'inpampol'],
+    english: ['pleasure'],
+  },
+  // Only 3 occurrences, all in Araththuppāl's Adhikāram 1 — already boxed
+  // there by plain repeat-detection (it repeats within that one section),
+  // but registering it as a concept is what additionally links it to
+  // "God" in the translation column.
+  { id: 'thirukkural-iraivan', deva: ['இறைவன்'], iast: ['iraivan'], english: ['god'] },
+  {
+    id: 'thirukkural-king',
+    deva: ['மன்னவன்', 'வேந்தன்', 'வேந்தன்கண்'],
+    iast: ['mannavan', 'vendhan', 'vendhankan'],
+    english: ['king'],
+  },
+  {
+    id: 'thirukkural-friendship',
+    deva: [
+      'நட்பு', 'நட்பும்',
+      'கேண்மை', 'கேண்மைவே', 'கேண்மையும்', 'கேண்மையொன்', 'கேண்மையார்',
+      'புன்கேண்மை', 'பவர்கேண்மை',
+    ],
+    iast: [
+      'natpu', 'natpum',
+      'kenmai', 'kenmaive', 'kenmaiyum', 'kenmaion', 'kenmaiyaar',
+      'punkenmai', 'pavarkenmai',
+    ],
+    english: ['friendship'],
+  },
+  // செல்வம் (wealth/riches) — not பொருள் (see note below): செல்வம் means
+  // "wealth" consistently everywhere it appears, unlike பொருள். Chelvam
+  // and Selvam are the source site's own two inconsistent spellings of the
+  // same word (kept both rather than picking one, same policy as the
+  // sahasra/cha mē spelling variants above).
+  {
+    id: 'thirukkural-wealth',
+    deva: [
+      'செல்வம்', 'பெருஞ்செல்வம்', 'பொருட்செல்வம்', 'விழுச்செல்வம்',
+      'செவிச்செல்வம்', 'நெடுஞ்செல்வம்', 'உடைசெல்வம்',
+    ],
+    iast: [
+      'chelvam', 'selvam', 'perunjelvam', 'porutchelvam', 'vizhuchchelvam',
+      'chevichchelvam', 'netunjelvam', 'utaiselvam',
+    ],
+    english: ['wealth', 'riches'],
+  },
+  // பொருள் (poruḷ) is deliberately NOT registered as a concept, despite
+  // being one of Thirukkural's most frequent words and literally the title
+  // of its second book: checked occurrence-by-occurrence, it shifts sense
+  // constantly — "wealth"/"property" in some lines, but "meaning" (சொற்பொருள்),
+  // "the true thing/reality" (மெய்ப்பொருள்), "subject matter" (நுண்பொருள்),
+  // "advantage" (அதுபொருள்), and more elsewhere. A single english gloss
+  // would box several of these wrongly and connect them to unrelated
+  // translation words. Left out rather than forced — same judgment call
+  // as the sanskrit-in-tamil-script Math-domain KB decision earlier.
 ];
 
 const MEANING_CONCEPTS_BY_ID = new Map(MEANING_CONCEPTS.map((c) => [c.id, c]));
