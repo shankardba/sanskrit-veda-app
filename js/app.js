@@ -47,7 +47,10 @@ const CHANT_GROUPS = [
 // note itself) since it's only ever needed once the user actually clicks.
 const SECTION_NOTES = {
   'sri-rudram-namakam': {
+    1: () => buildWeaponsPacifiedNote(),
+    2: () => buildPatayeLitanyNote(),
     3: () => buildRudraOutcastsNote(),
+    10: () => buildProtectiveRefrainNote(),
     11: () => buildRudraGanasNote(),
     12: () => buildRudraVishnuDeathNote(),
   },
@@ -357,6 +360,34 @@ function buildVelMaaralStructureNote() {
 }
 
 // Namakam anuvāka 3's litany explicitly salutes Rudra as lord of thieves,
+// Namakam anuvāka 1 individually addresses Rudra's weapons — bow, arrow,
+// quiver, hand — asking each one by name to become auspicious, rather than
+// asking for protection in the abstract.
+function buildWeaponsPacifiedNote() {
+  return {
+    title: 'Naming the Weapon to Disarm It',
+    subtitle: 'Śrī Rudram Namakam · Anuvāka 1',
+    bodyHtml: `
+      <p>This anuvāka's real subject is disarmament, done one item at a time: the bow (<em>dhanuḥ</em>), the arrow (<em>iṣu</em>), the quiver (<em>iṣudhi</em>), and Rudra's own hand (<em>hasta</em>) are each separately named and separately asked to become auspicious — not "protect us" as one general request, but a sequence of specific objects, addressed and negotiated with individually.</p>
+      <p>That's a distinct ritual logic from simply asking a feared power to go away or stay away: a thing that's dangerous gets approached directly, named precisely, and asked to change its nature, rather than being denied, suppressed, or left unmentioned. The same instinct — enumerate the specific thing, then ask it to be well-disposed — reappears at a much larger scale in the anuvākas just ahead, where it's entire trades and social classes being named one after another rather than a god's weapons.</p>
+    `,
+  };
+}
+
+// Namakam anuvāka 2 opens the "-pataye namaḥ" litany that structures most
+// of anuvākas 2-4: dozens of lines, each built by taking a domain, adding
+// "lord of" in the dative, and closing with "namaḥ."
+function buildPatayeLitanyNote() {
+  return {
+    title: 'One Suffix, Built Fresh a Dozen Times',
+    subtitle: 'Śrī Rudram Namakam · Anuvāka 2',
+    bodyHtml: `
+      <p>Nearly every line here follows the same small grammatical machine: a noun naming some domain, <em>-pati</em> ("lord, master") attached to it, the dative case ending <em>-ye</em> ("to"), and the hymn's recurring <em>namaḥ</em> ("salutation") — "salutation to the lord of ___." This anuvāka runs it against animals, foods, trees, thickets, forests, foot-soldiers, and more; the litany continues into anuvāka 3 (see its own note on where the list turns pointedly toward outcasts) and anuvāka 4's crafts and professions.</p>
+      <p>The device itself is a genre feature, not unique to this hymn — Vedic praise-poetry often works by accumulation rather than by a single perfect description, piling up named instances of a quality (here, lordship) until the sheer comprehensiveness becomes the point. No one domain is more important than the others; the exhaustiveness is what does the praising.</p>
+    `,
+  };
+}
+
 // robbers, plunderers, and cutthroats, alongside soldiers and hunters —
 // one of the most-discussed features of this hymn, so worth unpacking
 // rather than letting it read as a stray oddity in the translation column.
@@ -384,9 +415,24 @@ function buildRudraGanasNote() {
   };
 }
 
+// Namakam anuvāka 10 is largely a compilation of separately well-known
+// verses built on the same protective refrain, "mā naḥ" — the prohibitive
+// mood, not ordinary negation.
+function buildProtectiveRefrainNote() {
+  return {
+    title: '"Let It Not" — a Different Grammar of "No"',
+    subtitle: 'Śrī Rudram Namakam · Anuvāka 10',
+    bodyHtml: `
+      <p>This anuvāka's recurring <em>mā naḥ</em> / <em>mā naḥ</em> ("let it not [harm] us") isn't built from <em>na</em>, the ordinary Sanskrit word for "not." Sanskrit keeps a separate negative particle, <em>mā</em>, reserved specifically for the prohibitive — used with the injunctive mood to forbid or ward something off, closer to "don't let X happen" than to a flat statement that X isn't the case. English collapses both into one word, "not"; Sanskrit doesn't.</p>
+      <p>The anuvāka itself reads as a chain of these prohibitions rather than one continuous composition — harm to neither great nor small, neither growing nor grown, neither father nor mother, neither children nor cattle nor horses — each clause a separate plea built on the identical grammatical template. Verses in exactly this mold are among the most independently recited fragments of the whole Rudram, valued and chanted on their own well outside a full recitation of the hymn.</p>
+    `,
+  };
+}
+
 // Namakam anuvāka 12 pairs Rudra with Vishnu as one invoked figure, and
 // addresses Death directly with the same ritual exclamation (svāhā) used
-// when making an offering to a god.
+// when making an offering to a god. It also embeds the Mahāmṛtyuñjaya
+// mantra and the "this hand of mine is divine" gesture-affirmation.
 function buildRudraVishnuDeathNote() {
   return {
     title: 'Rudra-Vishnu, and an Offering to Death Itself',
@@ -394,6 +440,7 @@ function buildRudraVishnuDeathNote() {
     bodyHtml: `
       <p>Two things in this closing anuvāka are easy to read past. First: "Om, salutation to the blessed Rudra-Vishnu" addresses the two as one compound figure, not two gods invoked in sequence. The sectarian lines that later separate Śaiva and Vaiṣṇava worship hadn't hardened yet when this layer of the Veda took shape — a deity could be named jointly with another, or identified with another, without that being a contradiction the way it would become in much later, more partisan theology.</p>
       <p>Second: "Svāhā to Death! Svāhā to Death!" — svāhā is the standard exclamation said <em>while pouring an oblation into the sacrificial fire</em>, the ritual formula for giving something to a god. Aiming it at Death (Mṛtyu) treats Death as a power to be ritually addressed and rendered harmless, the same way any other deity would be approached — not simply feared, denied, or left unnamed.</p>
+      <p>This anuvāka also opens with <em>tryambakaṃ yajāmahe...</em> — the Mahāmṛtyuñjaya ("great death-conquering") mantra, almost certainly the single most independently recited verse in this entire hymn, chanted on its own far more often than the full Rudram ever is. And a few lines later, "this hand of mine is divine, this other hand of mine is even more divine" treats the reciter's own body as something to be actively affirmed as sacred, not just a vessel offering praise to something external to it.</p>
     `,
   };
 }
@@ -427,6 +474,7 @@ function buildChamakamPantheonNote() {
       <p>Every single item in this anuvāka is paired with "and Indra be mine" — Indra is the one constant partner across eleven other names, reflecting his standing as the pre-eminent king-god of the Vedic pantheon, a rank later classical Hinduism largely transfers to Vishnu and Shiva. Several of the names beside him are far less familiar today than they'd have been to the hymn's original audience:</p>
       <dl class="modal-glossary">${items}</dl>
       <p>The anuvāka closes by widening from named deities to the cosmic regions themselves — earth, mid-region, sky, the directions, "the summit" — and finally to Prajapati, "lord of creatures," a figure whose role as an overarching creator is later folded into Brahma.</p>
+      <p>Worth noticing linguistically: every "X be mine" is literally "X-<em>cha</em> me," with <em>cha</em> ("and") glued onto the end of the word it follows rather than standing on its own the way English "and" does. Sanskrit's <em>cha</em> is an enclitic — it leans backward onto whatever precedes it and can never open a clause — much like Latin's <em>-que</em> ("Senatus Populusque Romanus," not "et Senatus Populus Romanus"). That's why so many of the deity names here end up spelled fused to it (<em>indraścha</em>, <em>agniścha</em>, <em>varuṇaścha</em>) rather than as two separate words — see the site's own <a href="grammar.html">Sanskrit Grammar</a> page on indeclinables for the broader family this belongs to.</p>
     `,
   };
 }
@@ -628,6 +676,48 @@ const MEANING_CONCEPTS = [
   // line (20 occurrences), all as this same fused compound, never
   // appearing unfused.
   { id: 'indra', deva: ['इन्द्र'], iast: ['indra'], english: ['indra'] },
+  // धनुः/hand — Namakam anuvāka 1's recurring weapon vocabulary (see
+  // buildWeaponsPacifiedNote). Cataloged forms include the stranded-nasal
+  // hyphenation ("विज्य-न्धनुः" splits to न्धनुः, same phenomenon as
+  // म्पतये/म्मे above) and the tvam-enclitic fusion धनुस्त्वग्ं — both still
+  // just "bow" underneath, not a different word. Excludes "धन्वनस्त्वमुभयोरार्त्नि"
+  // (anuvāka 1 line 21) — too much else fused into that one token
+  // (you/both-ends/bowstring all mashed in) to safely box as plain "bow."
+  {
+    id: 'namakam-bow',
+    deva: ['धनुः', 'धन्वने', 'धन्वनो', 'न्धनुः', 'धनुस्त्वग्ं'],
+    iast: ['dhanuḥ', 'dhanvanē', 'dhanvanō', 'ndhanuḥ', 'dhanustvagṃ'],
+    english: ['bow'],
+  },
+  { id: 'namakam-hand', deva: ['हस्ते', 'हस्त'], iast: ['hastē', 'hasta'], english: ['hand'] },
+  // Chamakam anuvāka 6's invoked pantheon (see buildChamakamPantheonNote) —
+  // each deity named once, paired with Indra via the fused-cha mechanism
+  // above (e.g. वरुणश्च splits to वरुण + श्च the same way इन्द्रश्च does).
+  // Three of the twelve (Savitr, Sarasvati, Pushan, Tvashtr, Dhatr, and the
+  // Aśvins) appear unfused — cha is a separate word after them rather than
+  // sandhi-glued on — so they need no fused-prefix handling at all, just
+  // plain registration. देवा ("gods," from "विश्वे च मे देवा") is the
+  // anuvāka's one collective (non-individually-named) entry.
+  { id: 'chamakam-agni', deva: ['अग्नि'], iast: ['agni'], english: ['agni'] },
+  { id: 'chamakam-soma', deva: ['सोम'], iast: ['sōma'], english: ['soma'] },
+  { id: 'chamakam-savitr', deva: ['सविता'], iast: ['savitā'], english: ['savitr'] },
+  { id: 'chamakam-sarasvati', deva: ['सरस्वती'], iast: ['sarasvatī'], english: ['sarasvati'] },
+  { id: 'chamakam-pushan', deva: ['पूषा'], iast: ['pūṣā'], english: ['pushan'] },
+  { id: 'chamakam-brihaspati', deva: ['बृहस्पति'], iast: ['bṛhaspati'], english: ['brihaspati'] },
+  { id: 'chamakam-mitra', deva: ['मित्र'], iast: ['mitra'], english: ['mitra'] },
+  { id: 'chamakam-varuna', deva: ['वरुण'], iast: ['varuṇa'], english: ['varuna'] },
+  { id: 'chamakam-tvashtr', deva: ['त्वष्ठा'], iast: ['tvaṣṭhā'], english: ['tvashtr'] },
+  { id: 'chamakam-dhatr', deva: ['धाता'], iast: ['dhātā'], english: ['dhatr'] },
+  { id: 'chamakam-vishnu', deva: ['विष्णु'], iast: ['viṣṇu'], english: ['vishnu'] },
+  // The avagraha (ऽ) is part of the actual surface form here, not
+  // decorative — "मे-ऽश्विनौ" elides मे's final vowel into अश्विनौ's
+  // initial अ, and vignanam.org marks that elision explicitly rather than
+  // writing अश्विनौ plain. Registering the elided form since that's the
+  // only way it ever appears in this corpus.
+  { id: 'chamakam-ashvins', deva: ['ऽश्विनौ'], iast: ["'śvinau"], english: ['ashvins'] },
+  { id: 'chamakam-maruts', deva: ['मरुत'], iast: ['maruta'], english: ['maruts'] },
+  { id: 'chamakam-prajapati', deva: ['प्रजापति'], iast: ['prajāpati'], english: ['prajapati'] },
+  { id: 'chamakam-gods', deva: ['देवा'], iast: ['dēvā'], english: ['gods'] },
   // Known imprecise: "and" also translates other Sanskrit connectives (e.g.
   // uta), so this will box some "and"s that aren't actually cha — kept in
   // deliberately for manual review/correction rather than left out.
