@@ -63,6 +63,12 @@ const SECTION_NOTES = {
   'vel-maaral-tamil': {
     'Refrain (×12)': () => buildVelMaaralStructureNote(),
   },
+  'thirukkural-arathuppal': {
+    30: () => buildNegativeNominalizerNote(),
+  },
+  'thirukkural-porutpal': {
+    49: () => buildConditionalSuffixNote(),
+  },
 };
 
 // Optional intermediate grouping between a chant and its sections, keyed by
@@ -359,7 +365,6 @@ function buildVelMaaralStructureNote() {
   };
 }
 
-// Namakam anuvāka 3's litany explicitly salutes Rudra as lord of thieves,
 // Namakam anuvāka 1 individually addresses Rudra's weapons — bow, arrow,
 // quiver, hand — asking each one by name to become auspicious, rather than
 // asking for protection in the abstract.
@@ -388,6 +393,7 @@ function buildPatayeLitanyNote() {
   };
 }
 
+// Namakam anuvāka 3's litany explicitly salutes Rudra as lord of thieves,
 // robbers, plunderers, and cutthroats, alongside soldiers and hunters —
 // one of the most-discussed features of this hymn, so worth unpacking
 // rather than letting it read as a stray oddity in the translation column.
@@ -503,6 +509,34 @@ function buildAshvamedhaNote() {
     bodyHtml: `
       <p>"The horse-sacrifice be mine" names the <em>aśvamedha</em>, traditionally among the most prestigious and costly rites in the Vedic world — and one reserved for a king, specifically a sovereign asserting supremacy over other rulers. In its classical form a consecrated horse is released to wander for a year, escorted by the king's men; whatever territory it crosses unopposed is thereby claimed, and its return is marked by a grand sacrifice. Naming it here, as this Anuvāka's list turns from ritual apparatus toward cattle, breath, and eventually the self, reads as a marker of scale — the offering a king alone could make.</p>
       <p>The same lines name the Rik, Sāman, and Yajus formulas together — the three genres of Vedic recitation this whole corpus is organized around: verses meant to be recited (Ṛgveda), set to melody (Sāmaveda), and murmured or spoken to accompany a specific ritual action (Yajurveda, the very text this hymn belongs to). A fourth, the Atharvaveda, wasn't always counted alongside these three in the earliest reckonings — so "the three Vedas" named here is itself a genuinely old way of dividing the tradition, not a later simplification.</p>
+    `,
+  };
+}
+
+// Thirukkural Araththuppāl Adhikāram 30 (Veracity) turns the -ஆமை
+// negative-nominalizer suffix into its central rhetorical device — most
+// visibly in its own 6th kural, which doubles two different verbs onto it
+// in the same line.
+function buildNegativeNominalizerNote() {
+  return {
+    title: '"Not-Doing-Ness": Turning a Verb into a Noun by Negating It',
+    subtitle: 'Thirukkural · Adhikāram 30, Veracity',
+    bodyHtml: `
+      <p>Tamil builds an abstract noun out of a verb root by adding <em>-ஆமை</em> (or its shorter cousin <em>-மை</em>) directly onto it — not "not lying" as an action, but "not-lying-ness" as a thing, a quality a person can be said to possess. பொய் ("lie," the root) becomes பொய்யாமை ("truthfulness," literally "the not-telling-lies"); செய் ("do") becomes செய்யாமை ("the not-doing"). English has no single equivalent suffix — it has to reach for a whole phrase ("abstaining from," "the practice of not—") to say what Tamil does by just gluing four letters onto a verb.</p>
+      <p>This adhikāram's sixth couplet puts the device on display outright: <em>poyyāmai poyyāmai āṟṟin aramp̱ira seyyāmai seyyāmai naṉṟu</em> — "if a man has the strength for truthfulness, truthfulness [alone], not-doing other virtues, not-doing, is good [enough]." Each of the two negated verbs is said twice in a row for rhetorical weight, a repetition (Tamil poetics calls this figure <em>maṭakku</em>) that a plain word-for-word translation flattens out, since English can't easily double a noun for emphasis the way Tamil can double this one. Compare <a href="tamil-grammar.html">Tamil Grammar</a>'s own note on agglutination — this suffix is exactly that principle applied to negation specifically.</p>
+    `,
+  };
+}
+
+// Thirukkural Porutpāl Adhikāram 49 (Knowing the Fitting Time) leans hard on
+// the -இன் conditional-participle suffix, Tamil's own way of saying "if."
+function buildConditionalSuffixNote() {
+  return {
+    title: '"If" Without a Word for "If"',
+    subtitle: 'Thirukkural · Adhikāram 49, Knowing the Fitting Time',
+    bodyHtml: `
+      <p>Tamil has no separate word standing in for English "if." Instead, a suffix — <em>-இன்</em> (or, after some stems, <em>-ஆயின்</em>) — attaches straight onto a verb to make it conditional on its own: செய் ("do") becomes செயின் ("if [one] does"), காண் ("see") becomes காணின் ("if [one] sees"). The whole clause "if he acts, with the right instruments, at the right time" needs no separate conditional particle at all — the single verb form <em>seyin</em> already carries "if...acts" packed into it.</p>
+      <p>This adhikāram uses the pattern repeatedly and back to back — <em>kālam aṟindu seyin</em> ("if [one] acts, having known the time"), <em>iṭaththāl seyin</em> ("if [one] acts, by [the right] place"), <em>kāṇin</em> twice more a few couplets on — because its whole subject is contingency: action's success depends on timing, and Tamil's own conditional grammar is doing real rhetorical work here, not just decorating the point.</p>
     `,
   };
 }
@@ -910,6 +944,20 @@ const MEANING_CONCEPTS = [
     ],
     english: ['wealth', 'riches'],
   },
+  // பேதை (fool/folly/ignorant) — checked occurrence-by-occurrence across
+  // all three books; unlike பொருள், its sense never shifts. Bare stem only
+  // (பேதை) — its many case/compound forms (பேதைமை, பேதையார், பேதைக்கு...)
+  // are each a different grammatical form of the same word, not a
+  // different word, but stem-matching isn't how this site catalogs
+  // inflections (see yajña/sahasra), so left uncataloged here rather than
+  // guessed at; the bare stem alone already covers 10 of the ~30 total
+  // occurrences across the three books.
+  { id: 'thirukkural-pedhai', deva: ['பேதை'], iast: ['pedhai'], english: ['fool', 'fools', 'folly', 'foolish', 'ignorant'] },
+  // நெஞ்சு (mind/heart/soul) — the seat of feeling and thought, rendered
+  // differently by register rather than by a real change in sense:
+  // Araththuppāl mostly renders it "mind," Kaamaththuppāl's love poetry
+  // mostly "heart"/"soul." All three glosses point at the same word.
+  { id: 'thirukkural-nenju', deva: ['நெஞ்சு'], iast: ['nenju'], english: ['mind', 'heart', 'soul'] },
   // பொருள் (poruḷ) is deliberately NOT registered as a concept, despite
   // being one of Thirukkural's most frequent words and literally the title
   // of its second book: checked occurrence-by-occurrence, it shifts sense
