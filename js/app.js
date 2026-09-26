@@ -30,7 +30,14 @@ const CHANTS = [
   { id: 'thirukkural-kaamathuppal', label: 'Thirukkural — Kaamathuppal', language: 'tamil' },
   { id: 'sri-rudram-namakam', label: 'Sri Rudram Namakam', language: 'sanskrit' },
   { id: 'sri-rudram-chamakam', label: 'Sri Rudram Chamakam', language: 'sanskrit' },
-  { id: 'soundarya-lahari', label: 'Soundarya Lahari', language: 'sanskrit' },
+  // linkScope: 'local' — Soundarya Lahari is a continuous 100-verse poem, not
+  // a litany like Namakam/Chamakam where the same refrain deliberately spans
+  // the whole text. A concept word here (e.g. bhūmi/"earth") recurring in two
+  // unrelated verses 90 verses apart is just ordinary vocabulary reuse, not a
+  // meaningful structural echo — so clicking it should only connect its
+  // occurrences within the same verse or an adjacent one, not the whole
+  // chant (see the section-proximity check in initRepeatClickHandling).
+  { id: 'soundarya-lahari', label: 'Soundarya Lahari', language: 'sanskrit', linkScope: 'local' },
   { id: 'shivananda-lahari', label: 'Shivananda Lahari', language: 'sanskrit' },
 ];
 
@@ -68,6 +75,9 @@ const SECTION_NOTES = {
   },
   'thirukkural-porutpal': {
     49: () => buildConditionalSuffixNote(),
+  },
+  'soundarya-lahari': {
+    1: () => buildEarthAndYouDeclensionNote(),
   },
 };
 
@@ -541,6 +551,20 @@ function buildConditionalSuffixNote() {
   };
 }
 
+function buildEarthAndYouDeclensionNote() {
+  return {
+    title: 'One Word, Many Cases',
+    subtitle: 'Soundarya Lahari · Verse 1',
+    bodyHtml: `
+      <p>Sanskrit nouns and pronouns change their ending depending on their grammatical role (case), not their word order the way English does — this opening verse gives two clean examples back to back.</p>
+      <p><em>bhūmau</em> ("on the earth") and <em>bhūmi</em> ("the earth," inside <em>bhūmi-rē-vāvalambanam</em>, itself <em>bhūmiḥ + eva + avalambanam</em>, "the earth itself becomes the support") are the same noun, भूमि/bhūmi, in two different cases — locative and nominative. English keeps one word, "earth," and moves a preposition around it ("on the earth" / "the earth itself"); Sanskrit keeps the reference to case-endings and lets the ending itself carry that job.</p>
+      <p>The same thing happens with the pronoun addressing the Goddess: <em>tvayi</em> ("against you," locative) and <em>tvam-eva</em> ("you alone," nominative + the enclitic <em>eva</em>, "indeed/alone") are both त्वम्/tvam, "you," declined two ways in the same line. See the site's own <a href="grammar.html">Sanskrit Grammar</a> page for the full 8-case pattern this follows.</p>
+      <p>Worth watching for as you read on: <em>śivaḥ</em> (line 3) is unambiguously the god Śiva. <em>śivē</em> (line 2) looks like a one-letter case-shift of the same word, but it's usually the vocative of the <em>feminine</em> शिवा/Śivā — "O auspicious one," addressing the Goddess herself — a different word that happens to share a root, not a different case of this one. (Rarely, later in the poem, <em>śivē</em> resurfaces as the locative of this masculine word instead, meaning "toward Shiva" — same three letters, three possible readings, depending on gender and context.)</p>
+      <p>And one thread that isn't a grammatical pattern but is worth noticing anyway: this verse invokes Hari, Hara, and Viriñca (Vishnu, Shiva, and Brahma) together as those who must worship the Goddess — and the very next verse turns immediately to Viriñca alone, showing him gathering dust from her feet to build the world with. The trio introduced here gets picked up one at a time as the poem continues.</p>
+    `,
+  };
+}
+
 let mathModalOverlay = null;
 
 function ensureMathModal() {
@@ -597,6 +621,14 @@ let chantTranslationEl = null;
 let networkLayout = null;
 let networkRail = null;
 let networkSvg = null;
+
+// The currently rendered chant, and a lineKey -> section-label lookup for it
+// — both rebuilt on every renderChant() call. Used only by
+// initRepeatClickHandling's local-scope proximity check (see linkScope on
+// the CHANTS entries above); a global click handler has no other way to know
+// which chant/section a clicked .token-repeat span belongs to.
+let currentChant = null;
+let lineSectionMap = new Map();
 
 // languageFilter (from chants.html's own ?lang= query param — see the
 // Chants hub's two cards on index.html) restricts the dropdown to a single
@@ -967,6 +999,55 @@ const MEANING_CONCEPTS = [
   // would box several of these wrongly and connect them to unrelated
   // translation words. Left out rather than forced — same judgment call
   // as the sanskrit-in-tamil-script Math-domain KB decision earlier.
+
+  // --- Soundarya Lahari (see linkScope: 'local' on the CHANTS entry — these
+  // still catalog every attested case-form of a word across the whole poem,
+  // same discipline as Namakam/Chamakam above, but a click only lights up
+  // occurrences within the same verse or an adjacent one; the point here is
+  // recognizing the SAME word wearing a different case-ending, not building
+  // a hymn-wide word cloud.) ---
+  //
+  // भूमि/bhūmi ("earth") — v.1's भूमौ (locative, "on the earth") and भूमि
+  // (from भूमि-रे-वावलम्बनम्, itself भूमिः+एव+अवलम्बनम् sandhi-fused but
+  // already hyphen-split by the source into its own clean token) are the
+  // same noun in two cases. भूमिस्त्वयि (v.35, "त्वं भूमिः" + त्वयि sandhi-
+  // fused with no source hyphen this time) is added as one more literal
+  // whole-token form, same trick as धनुस्त्वग्ं above — the त्वयि/"in you"
+  // riding along inside that fused token isn't separately boxed. Excludes
+  // भूमिं (v.11, "अवाप्य स्वां भूमिं") — checked in context, that line is
+  // the kuṇḍalinī-cakra visualization and भूमिं there means "level/plane,"
+  // not "earth," a real sense-shift rather than just a different case.
+  {
+    id: 'sl-earth',
+    deva: ['भूमौ', 'भूमि', 'भूमिस्त्वयि'],
+    iast: ['bhūmau', 'bhūmi', 'bhūmistvayi'],
+    english: ['earth'],
+  },
+  // त्वम्/tvam ("you," addressing the Goddess) — v.1's त्वयि (locative,
+  // "against you") and त्वमेव (त्वम्+एव, "you alone/yourself") are the same
+  // pronoun in different cases, the second carrying एव ("indeed/alone") as
+  // an enclitic the way च/cha does elsewhere on this site. Excludes त्वाम्
+  // (v.1 line 5, "अतस्त्वामाराध्यां") — its final म् sandhi-merges directly
+  // into the vowel of the next word (आ) with no halant or hyphen left to
+  // split on, unlike म्पतये/धनुस्त्वग्ं's cleaner boundaries, so it can't be
+  // safely extracted as its own token.
+  {
+    id: 'sl-you',
+    deva: ['त्वयि', 'त्वमेव'],
+    iast: ['tvayi', 'tvamēva'],
+    english: ['you', 'you alone'],
+  },
+  // शिवः/śivaḥ — unambiguously the god Śiva, nominative masculine, every
+  // time it occurs (v.1, v.32, v.92 all translate it as the proper name).
+  // Deliberately does NOT include शिवे despite looking like a one-letter
+  // case-shift of the same word: शिवे is usually the VOCATIVE of the
+  // feminine शिवा ("O auspicious one," addressing the Goddess — see
+  // buildEarthAndYouDeclensionNote) but once (v.51, "शिवे शृङ्गारार्द्रा")
+  // is instead the LOCATIVE of this masculine शिवः ("melting toward Shiva").
+  // Same spelling, two different words depending on gender/case/context —
+  // exactly the polysemy trap catalogued for பொருள் above, so it's
+  // explained in the verse-1 note rather than mapped to either gloss.
+  { id: 'sl-shiva', deva: ['शिवः'], iast: ['śivaḥ'], english: ['shiva'] },
 ];
 
 const MEANING_CONCEPTS_BY_ID = new Map(MEANING_CONCEPTS.map((c) => [c.id, c]));
@@ -1505,6 +1586,14 @@ function buildTopicNav(chant) {
 }
 
 function renderChant(chant, translation) {
+  // chant itself comes straight from data/chants/<id>.json and has no
+  // linkScope field — that's site-behavior config, not chant content, so it
+  // only lives on the CHANTS registry entry above. Merged in here rather
+  // than duplicated into every chant JSON file.
+  const chantMeta = CHANTS.find((c) => c.id === chant.id);
+  currentChant = { ...chant, linkScope: chantMeta && chantMeta.linkScope };
+  lineSectionMap = new Map();
+
   // Drives which script font .deva-line/.chant-title-deva render in — see
   // the body.chant-lang-tamil rules in styles.css. Devanagari and Tamil are
   // both stored under the same "devanagari" JSON key (see build_vel_maaral.py
@@ -1606,6 +1695,7 @@ function renderChant(chant, translation) {
     for (const line of section.lines) {
       lineIndex += 1;
       const lineKey = String(lineIndex);
+      lineSectionMap.set(lineKey, section.label);
       block.appendChild(renderLine(line, devaCounts, iastCounts, lineKey));
       appendTranslationLine(lineKey, translationLines[lineKey], conceptsInLine(line.devanagari, line.iast));
     }
@@ -1901,6 +1991,23 @@ function applyTranslationPref(show) {
 //
 // Each side tracks a Set (not a single key) since a concept can span
 // multiple surface forms in the same script.
+//
+// For a chant with linkScope: 'local' (see the CHANTS registry), a key match
+// alone isn't enough to light two spans up together — they also need to be
+// in the same verse or an adjacent one. lineSectionMap resolves each span's
+// data-line back to its verse/section label so that distance can be
+// measured; a non-numeric or unresolvable label (colophon, or any chant
+// that never sets linkScope) falls back to unrestricted, which reproduces
+// the old whole-chant behavior exactly.
+function inLocalScope(clickedLine, nodeLine) {
+  if (!currentChant || currentChant.linkScope !== 'local') return true;
+  if (clickedLine === nodeLine) return true;
+  const clickedSection = Number(lineSectionMap.get(clickedLine));
+  const nodeSection = Number(lineSectionMap.get(nodeLine));
+  if (!Number.isFinite(clickedSection) || !Number.isFinite(nodeSection)) return true;
+  return Math.abs(clickedSection - nodeSection) <= 1;
+}
+
 function initRepeatClickHandling() {
   chantBody.addEventListener('click', (e) => {
     const span = e.target.closest('.token-repeat');
@@ -1944,7 +2051,8 @@ function initRepeatClickHandling() {
     }
 
     document.querySelectorAll('.token-repeat').forEach((node) => {
-      node.classList.toggle('active', activeKeys[node.dataset.script].has(node.dataset.key));
+      const isMatch = activeKeys[node.dataset.script].has(node.dataset.key);
+      node.classList.toggle('active', isMatch && inLocalScope(line, node.dataset.line));
     });
     updateNetworkOverlay();
   });
