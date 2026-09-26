@@ -587,11 +587,47 @@ function renderIastChars(text) {
 // it would box far more English words than actually correspond to "cha".
 const MEANING_CONCEPTS = [
   { id: 'namah', deva: ['नमः', 'नमो', 'नमस्ते'], iast: ['namaḥ', 'namastē'], english: ['salutation'] },
-  { id: 'rudra', deva: ['रुद्र'], iast: ['rudra'], english: ['rudra'] },
+  // Catalogued individually the same way yajña/sahasra are — a different
+  // case-form at nearly every occurrence, not stem-matched. रुद्रोत is
+  // रुद्र + उत ("Rudra, and") fused by sandhi, its own token. Deliberately
+  // excludes bigger compound epithets that merely happen to contain रुद्र
+  // as one member (कालाग्निरुद्राय "Rudra as the fire of time",
+  // रुद्रायातताविने "Rudra of the unstrung bow") — boxing those whole
+  // tokens as plain "Rudra" would misrepresent them as the bare name
+  // rather than the fuller epithet they actually are.
+  {
+    id: 'rudra',
+    deva: ['रुद्र', 'रुद्राय', 'रुद्रा', 'रुद्रो', 'रुद्रस्य', 'रुद्रेभ्यो', 'रुद्रोत'],
+    iast: ['rudra', 'rudrāya', 'rudrā', 'rudrō', 'rudrasya', 'rudrēbhyō', 'rudrōta'],
+    english: ['rudra'],
+  },
   { id: 'shiva', deva: ['शिवा'], iast: ['śivā'], english: ['auspicious'] },
+  // -पतये/-patayē ("to the lord of") — the recurring second half of
+  // Namakam anuvākas 2-4's "salutation to X, and LORD OF Y, salutation"
+  // structure (dozens of lines each). म्पतये is the same word with a
+  // stranded nasal from the preceding compound's sandhi split (vignanam.org
+  // hyphenates e.g. "पशूना-म्पतये" splitting mid-join) — same word, not a
+  // different one, exactly like मे/म below. Deliberately excludes
+  // स्थपतये/sthapatayē ("architect" — sthapati, an unrelated word that
+  // only happens to contain इ"पतये" as a substring) and पशुपतये/
+  // paśupatayē ("Pashupati", translated as the proper name itself rather
+  // than decomposed to "lord" in context) — checked occurrence-by-
+  // occurrence before adding, per the polysemy-cataloging habit.
+  { id: 'lord', deva: ['पतये', 'म्पतये'], iast: ['patayē', 'mpatayē'], english: ['lord'] },
   // 'म'/'ma' is the regular sandhi elision of मे before a vowel-initial
   // word (e.g. मे + एकादश -> म एकादश) — same word, not a different one.
-  { id: 'me', deva: ['मे', 'म'], iast: ['mē', 'ma'], english: ['mine', 'me'] },
+  // म्मे carries the same stranded-nasal doubling as म्पतये above (e.g.
+  // "अय-म्मे" from "अयम्" + "मे" split mid-join) — still मे, not a distinct
+  // word. (म्म, the equivalent doubling of the elided म form, doesn't
+  // actually occur anywhere in either chant — checked, not just assumed —
+  // so it's not listed.)
+  { id: 'me', deva: ['मे', 'म', 'म्मे'], iast: ['mē', 'ma', 'mmē'], english: ['mine', 'me'] },
+  // इन्द्र/indra: registered so the fused-cha prefix-boxing added to
+  // conceptsInLine/renderScriptLine picks it out of इन्द्रश्च/indraścha —
+  // Chamakam anuvāka 6 pairs Indra with a different deity in nearly every
+  // line (20 occurrences), all as this same fused compound, never
+  // appearing unfused.
+  { id: 'indra', deva: ['इन्द्र'], iast: ['indra'], english: ['indra'] },
   // Known imprecise: "and" also translates other Sanskrit connectives (e.g.
   // uta), so this will box some "and"s that aren't actually cha — kept in
   // deliberately for manual review/correction rather than left out.
@@ -810,7 +846,18 @@ const CONCEPT_BY_ENGLISH = new Map(MEANING_CONCEPTS.flatMap((c) => c.english.map
 function conceptsInLine(devanagari, iast) {
   const ids = new Set();
   const scan = (text, script, lookup) => {
-    const words = text.split(/\s+/).map((w) => normalizeToken(w, script));
+    // Tokenized with segmentLine (the same hyphen-aware splitter renderScriptLine
+    // uses for the Sanskrit/IAST side), not a naive whitespace split — vignanam.org
+    // hyphenates plenty of sandhi joins with no surrounding space ("अय-म्मे",
+    // "पशूना-म्पतये"), and a plain text.split(/\s+/) would leave "म्मे"/"म्पतये"
+    // fused inside a bigger "अय-म्मे"-shaped token that never matches anything
+    // in CONCEPT_BY_DEVA/IAST — silently breaking the translation-side box even
+    // though the Sanskrit/IAST side (which already used segmentLine) boxed it
+    // correctly. `null` marks a punctuation/break boundary so word-adjacency
+    // checks below still only fire on two words with nothing between them.
+    const words = segmentLine(text, script)
+      .filter((s) => s.kind !== 'space')
+      .map((s) => (s.kind === 'word' ? s.norm : null));
     for (let i = 0; i < words.length; i++) {
       if (!words[i]) continue;
       if (words[i + 1]) {
@@ -832,6 +879,18 @@ function conceptsInLine(devanagari, iast) {
       // source spelled cha as its own word.
       const fusedSuffix = matchFusedChaSuffix(words[i], script);
       if (fusedSuffix) {
+        // The word's own stem, minus the fused cha suffix — e.g. "indra" out
+        // of "indraścha" — checked as its own concept independently of
+        // whichever cha/cha-mē match follows, so a concept-registered prefix
+        // (इन्द्र/indra) still links to its translation word even though the
+        // whole token never appears unfused (see the matching prefix-boxing
+        // branch in renderScriptLine, and fusedPrefixConceptId's use in
+        // initRepeatClickHandling for the case — इन्द्रश्च itself, which
+        // repeats as a whole token — where the Sanskrit side never gets
+        // split into two boxes in the first place).
+        const prefixId = fusedPrefixConceptId(words[i], script);
+        if (prefixId) ids.add(prefixId);
+
         const chaKey = script === 'deva' ? 'च' : 'cha';
         const pairId = words[i + 1] ? lookup.get(`${chaKey} ${words[i + 1]}`) : null;
         if (pairId) {
@@ -889,6 +948,23 @@ function matchFusedChaSuffix(norm, script) {
     if (norm.length > suffix.length && norm.endsWith(suffix)) return suffix;
   }
   return null;
+}
+
+// A registered concept's stem hiding as the prefix of a normalized token
+// that's fused with "cha" onto its tail (इन्द्रश्च/indraścha → इन्द्र/indra) —
+// used wherever a whole fused token has already been boxed some other way
+// (e.g. as a plain repeated word, इन्द्रश्च itself repeats 20x in Chamakam 6)
+// so its own literal key was never split into prefix+suffix at render time,
+// but a click still needs to resolve the concept that's really sitting
+// inside it. Shared by conceptsInLine and initRepeatClickHandling rather
+// than each re-deriving it.
+function fusedPrefixConceptId(norm, script) {
+  const fusedSuffix = matchFusedChaSuffix(norm, script);
+  if (!fusedSuffix) return null;
+  const prefix = norm.slice(0, norm.length - fusedSuffix.length);
+  if (!prefix) return null;
+  const lookup = script === 'deva' ? CONCEPT_BY_DEVA : CONCEPT_BY_IAST;
+  return lookup.get(prefix) || null;
 }
 
 // Maps a suffix length measured on the accent-stripped normalized form
@@ -1076,7 +1152,25 @@ function renderScriptLine(rawText, script, counts, lineKey) {
         const prefixRaw = seg.text.slice(0, splitAt);
         const suffixRaw = seg.text.slice(splitAt);
         if (prefixRaw) {
-          frag.appendChild(script === 'iast' ? renderIastChars(prefixRaw) : document.createTextNode(prefixRaw));
+          // Box the prefix too when it's itself a registered concept (e.g.
+          // इन्द्र/indra out of इन्द्रश्च/indraścha) — mirrors the prefix
+          // handling added to conceptsInLine, so the Sanskrit/IAST side
+          // links to its translation word the same way the ordinary
+          // matched-word branch below does.
+          const prefixConceptId = conceptLookup.get(normalizeToken(prefixRaw, script));
+          if (prefixConceptId) {
+            const prefixSpan = document.createElement('span');
+            prefixSpan.className = 'token-repeat';
+            prefixSpan.dataset.script = script;
+            prefixSpan.dataset.key = normalizeToken(prefixRaw, script);
+            prefixSpan.dataset.line = lineKey;
+            prefixSpan.dataset.slot = String(slot);
+            slot += 1;
+            prefixSpan.appendChild(script === 'iast' ? renderIastChars(prefixRaw) : document.createTextNode(prefixRaw));
+            frag.appendChild(prefixSpan);
+          } else {
+            frag.appendChild(script === 'iast' ? renderIastChars(prefixRaw) : document.createTextNode(prefixRaw));
+          }
         }
 
         const chaKey = script === 'deva' ? 'च' : 'cha';
@@ -1706,7 +1800,8 @@ function initRepeatClickHandling() {
           `.token-repeat[data-script="${otherScript}"][data-line="${line}"][data-slot="${slot}"]`
         );
         if (sibling) activeKeys[otherScript].add(sibling.dataset.key);
-        addConcept((script === 'deva' ? CONCEPT_BY_DEVA : CONCEPT_BY_IAST).get(key));
+        const lookup = script === 'deva' ? CONCEPT_BY_DEVA : CONCEPT_BY_IAST;
+        addConcept(lookup.get(key) || fusedPrefixConceptId(key, script));
       }
     }
 
