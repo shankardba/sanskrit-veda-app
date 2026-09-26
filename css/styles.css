@@ -995,6 +995,34 @@ body.hide-transliteration .iast-line {
   margin-bottom: 6px;
 }
 
+/* A smaller heading than .char-group-title, for a named subset within one
+   char-group's chart rather than the group itself — e.g. one syllabary
+   grid's "vallinam & mellinam" rows vs. its "idaiyinam" rows, or one
+   conjunct-consonants table's "regular half-forms" vs. "special ligatures". */
+.chart-subgroup-title {
+  font-family: var(--font-ui);
+  font-size: 0.7rem;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  margin: 20px 0 8px;
+}
+
+/* A large combination grid (syllabary/mātrā charts, conjunct tables) packs
+   more columns into the same row height than this site's usual 4-6-column
+   tables — shrunk further than .word-table's already-reduced size so a
+   dozen-plus columns stays legible instead of forcing an oversized
+   horizontal scroll. */
+.chart-grid-table td .char-deva {
+  font-size: 1.15rem;
+}
+
+.chart-grid-table th.row-head {
+  font-family: var(--font-body);
+  font-style: italic;
+  color: var(--color-gold-light);
+}
+
 .char-group-note {
   font-family: var(--font-ui);
   font-size: 0.82rem;
