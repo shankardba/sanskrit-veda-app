@@ -71,6 +71,7 @@ const SECTION_NOTES = {
     'Refrain (×12)': () => buildVelMaaralStructureNote(),
   },
   'thirukkural-arathuppal': {
+    1: () => buildRegisterVarianceNote(),
     30: () => buildNegativeNominalizerNote(),
   },
   'thirukkural-porutpal': {
@@ -519,6 +520,17 @@ function buildAshvamedhaNote() {
     bodyHtml: `
       <p>"The horse-sacrifice be mine" names the <em>aśvamedha</em>, traditionally among the most prestigious and costly rites in the Vedic world — and one reserved for a king, specifically a sovereign asserting supremacy over other rulers. In its classical form a consecrated horse is released to wander for a year, escorted by the king's men; whatever territory it crosses unopposed is thereby claimed, and its return is marked by a grand sacrifice. Naming it here, as this Anuvāka's list turns from ritual apparatus toward cattle, breath, and eventually the self, reads as a marker of scale — the offering a king alone could make.</p>
       <p>The same lines name the Rik, Sāman, and Yajus formulas together — the three genres of Vedic recitation this whole corpus is organized around: verses meant to be recited (Ṛgveda), set to melody (Sāmaveda), and murmured or spoken to accompany a specific ritual action (Yajurveda, the very text this hymn belongs to). A fourth, the Atharvaveda, wasn't always counted alongside these three in the earliest reckonings — so "the three Vedas" named here is itself a genuinely old way of dividing the tradition, not a later simplification.</p>
+    `,
+  };
+}
+
+function buildRegisterVarianceNote() {
+  return {
+    title: 'One Tamil Word, Several English Words',
+    subtitle: 'Thirukkural · Araththuppāl, Adhikāram 1',
+    bodyHtml: `
+      <p>As you read on, several boxed Tamil words connect to more than one English word depending on where they show up — not because the Tamil word means something different each time, but because a single translator's word choice shifts with genre and register. நெஞ்சு is "mind" in Araththuppāl's ethics and "heart"/"soul" in Kaamaththuppāl's love poetry; நோய் ("sickness") is metaphorical "evil" in the ethical books and literal "malady"/"disease" for lovesickness in the romantic ones; படை ("army") becomes "weapon" once Kaamaththuppāl needs an image for whatever wounds a longing heart — a flute's sound, a lover's words. சான்றோர் and துணை get whichever of "the wise/learned/great" or "aid/help/support/friend/companion" fits a given line's specific claim about a person of worth or a source of steadiness. Click any of these and every occurrence lights up together, whichever English word each happens to be wearing.</p>
+      <p>A few equally frequent words were deliberately left <em>unboxed</em>, for the opposite reason: they aren't one word wearing different clothes, they're genuinely two different words (or two different jobs) sharing one spelling. கண் is usually "eye," but the same syllable also does duty as a locative postposition ("at/in") with no eye in sight — the same kind of trap பொருள் sets throughout this text, one of Thirukkural's most frequent words and literally the title of its second book, yet shifting so freely between "wealth," "meaning," and "reality" that no single English gloss could follow it without misconnecting some of its occurrences. Forcing a gloss onto a genuine homograph would connect lines that don't actually share a word, so these stay unlinked here rather than guessed at.</p>
     `,
   };
 }
@@ -977,19 +989,102 @@ const MEANING_CONCEPTS = [
     english: ['wealth', 'riches'],
   },
   // பேதை (fool/folly/ignorant) — checked occurrence-by-occurrence across
-  // all three books; unlike பொருள், its sense never shifts. Bare stem only
-  // (பேதை) — its many case/compound forms (பேதைமை, பேதையார், பேதைக்கு...)
-  // are each a different grammatical form of the same word, not a
-  // different word, but stem-matching isn't how this site catalogs
-  // inflections (see yajña/sahasra), so left uncataloged here rather than
-  // guessed at; the bare stem alone already covers 10 of the ~30 total
-  // occurrences across the three books.
-  { id: 'thirukkural-pedhai', deva: ['பேதை'], iast: ['pedhai'], english: ['fool', 'fools', 'folly', 'foolish', 'ignorant'] },
+  // all three books; unlike பொருள், its sense never shifts. Now includes
+  // பேதைமை (pedhaimai, "foolishness" — the "-மை" abstract-noun derivation of
+  // the same word, 9 occurrences, glossed "folly"/"foolishness" everywhere,
+  // already covered by this concept's existing english list), catalogued
+  // the same way Soundarya Lahari catalogs a word's different case-forms
+  // under one concept rather than guessing at a stem match. Still excludes
+  // பேதையார்/பேதைக்கு (plural/dative) — not yet checked occurrence-by-
+  // occurrence, unlike பேதை/பேதைமை above.
+  {
+    id: 'thirukkural-pedhai',
+    deva: ['பேதை', 'பேதைமை'],
+    iast: ['pedhai', 'pedhaimai'],
+    english: ['fool', 'fools', 'folly', 'foolish', 'ignorant', 'foolishness'],
+  },
   // நெஞ்சு (mind/heart/soul) — the seat of feeling and thought, rendered
   // differently by register rather than by a real change in sense:
   // Araththuppāl mostly renders it "mind," Kaamaththuppāl's love poetry
   // mostly "heart"/"soul." All three glosses point at the same word.
   { id: 'thirukkural-nenju', deva: ['நெஞ்சு'], iast: ['nenju'], english: ['mind', 'heart', 'soul'] },
+  // --- 2026-09-26 deepening pass: corpus-wide frequency scan across all
+  // three books surfaced these as consistent, checkable content words (see
+  // buildRegisterVarianceNote at Araththuppāl 1 for why several of them
+  // carry more than one english gloss — same "one word, several registers"
+  // phenomenon as நெஞ்சு above, not a sense-shift). Words considered and
+  // rejected this same pass, with reasons, are listed further below, right
+  // before பொருள்.
+  { id: 'thirukkural-perumai', deva: ['பெருமை'], iast: ['perumai'], english: ['greatness', 'great'] },
+  { id: 'thirukkural-ulaku', deva: ['உலகு'], iast: ['ulaku'], english: ['world'] },
+  { id: 'thirukkural-naatu', deva: ['நாடு'], iast: ['naatu'], english: ['kingdom', 'country'] },
+  { id: 'thirukkural-nandri', deva: ['நன்றி'], iast: ['nandri'], english: ['benefit', 'benefits'] },
+  // துணை (aid/support/help/friend/companion) — one word for whatever
+  // steadies a person: a virtue that outlasts you (4.36), a spouse who
+  // shares a household's means (6.51), a listening ear in adversity
+  // (42.416), a companion through a sleepless night (117.1163). The
+  // English gloss tracks what kind of support is meant, not a change in
+  // the underlying word.
+  { id: 'thirukkural-thunai', deva: ['துணை'], iast: ['thunai'], english: ['aid', 'help', 'support', 'friend', 'companion'] },
+  // சான்றோர் (the wise/learned/great/perfect) — Thirukkural's recurring
+  // honorific for people of proven worth; which English word a translator
+  // reaches for varies, the class of person it names doesn't.
+  { id: 'thirukkural-saandror', deva: ['சான்றோர்'], iast: ['saandror'], english: ['wise', 'learned', 'great', 'perfect'] },
+  // நோய் (evil/disease/malady/suffering) — literally "sickness," used two
+  // ways depending on register: Araththuppāl/Porutpāl's ethical maxims
+  // extend it metaphorically to "evil(s)"/moral affliction, while
+  // Kaamaththuppāl's love poetry uses it closer to its literal sense for
+  // lovesickness ("malady," "disease"). Same word as நெஞ்சு's mind/heart
+  // split — register, not polysemy.
+  { id: 'thirukkural-noi', deva: ['நோய்'], iast: ['noi'], english: ['evil', 'evils', 'disease', 'malady', 'suffering'] },
+  { id: 'thirukkural-itumpai', deva: ['இடும்பை'], iast: ['itumpai'], english: ['sorrow', 'sorrows', 'trouble', 'troubles', 'distress'] },
+  // படை — literally "army," but Kaamaththuppāl's love poetry repurposes it
+  // as "weapon" for whatever wounds the speaker (a flute's sound, a
+  // lover's words, a memory) — an army is a massed instrument of attack, a
+  // weapon is a single one; the same underlying image, extended by genre
+  // rather than genuinely renamed.
+  { id: 'thirukkural-patai', deva: ['படை'], iast: ['patai'], english: ['army', 'weapon'] },
+  { id: 'thirukkural-kaadhalar', deva: ['காதலர்'], iast: ['kaadhalar'], english: ['lover', 'beloved'] },
+  // இன்னா (painful/disagreeable/unpleasant) — the negative counterpart of
+  // இனிது ("sweet/pleasant"); the two form the title pair of Araththuppāl's
+  // adhikārams 12/13, "இனியவை கூறல்" (Speaking Sweetly) and "இன்னாசெய்யாமை"
+  // (Not Causing Pain). Registered conservatively — several of its ~17
+  // occurrences are paraphrased loosely enough that no single English word
+  // matches, so this only boxes where the translation happens to use one
+  // of the three glosses below; the rest stay unboxed on the Tamil side
+  // rather than risk a wrong connection.
+  { id: 'thirukkural-innaa', deva: ['இன்னா'], iast: ['innaa'], english: ['painful', 'disagreeable', 'unpleasant'] },
+  // Considered and deliberately excluded this same pass (checked
+  // occurrence-by-occurrence, not just assumed):
+  // - ஆக்கம் (gain/growth) — no stable single gloss; renders as "source of
+  //   happiness," "glory," "advantage," "wealth," and "property" across its
+  //   12 occurrences with no consistent pattern to the variation, unlike
+  //   நோய்/படை's clean register split above.
+  // - இன்மை ("-மை" on இல், "the absence of X") — structural, not lexical:
+  //   like Tamil's -ஆமை negative-nominalizer suffix (see
+  //   buildNegativeNominalizerNote, Araththuppāl 30) or Sanskrit's a-
+  //   privative, its English rendering is whatever "X" is negated (poverty,
+  //   disgrace, want, freedom-from-bias), not one fixed word.
+  // - வாழ்க்கை (life/living) — too loosely paraphrased in this translation
+  //   to reliably match; several occurrences render it as "prosperity" with
+  //   no literal "life"/"living" substring at all.
+  // - கண் — genuine polysemy, not register variance: usually "eye" (very
+  //   consistent in Kaamaththuppāl's love poetry), but at least one
+  //   occurrence (Araththuppāl 15) is instead the unrelated locative
+  //   postposition ("at/in," cognate with இடம்) with no "eye" in sight —
+  //   the same trap as பொருள், just less famous.
+  // - சொல் — noun ("word/speech") and verb root ("to say") both attested,
+  //   with no reliable way to tell which from the surface form alone.
+  // - தலை — heavy polysemy (head / chief / first / highest), needs
+  //   individual-occurrence disambiguation this pass didn't do.
+  // - நன்று, அரிது — common adjectives ("good," "rare") whose gloss floats
+  //   too freely in this translation's loose paraphrasing to attribute
+  //   reliably to this specific word rather than incidental phrasing
+  //   elsewhere in the same line.
+  // - வினை (deed/action/work) — real sense, but scattered across too many
+  //   English words (evils/actions/acts/deeds/work/undertaking) with too
+  //   little repetition in any one of them to be worth registering.
+  //
   // பொருள் (poruḷ) is deliberately NOT registered as a concept, despite
   // being one of Thirukkural's most frequent words and literally the title
   // of its second book: checked occurrence-by-occurrence, it shifts sense
