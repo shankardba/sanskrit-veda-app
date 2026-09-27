@@ -1222,11 +1222,15 @@ const MEANING_CONCEPTS = [
   // ordinary anusvāra sandhi applies instead of the vowel-merge that made
   // त्वाम् unextractable. Since linkScope: 'local' only lets adjacent
   // verses connect, त्वमेका (v.4) and त्वां (v.5) light up together, but
-  // neither reaches back to v.1's forms three verses away.
+  // neither reaches back to v.1's forms three verses away. v.15 adds त्वा/
+  // tvā — an unaccented enclitic accusative, a lighter alternative to
+  // त्वाम्/त्वां still current in classical (not just Vedic) Sanskrit, same
+  // case and meaning as v.5's त्वां, just a different, shorter surface form
+  // of it ("सकृन्न त्वा नत्वा," "without bowing to you even once").
   {
     id: 'sl-you',
-    deva: ['त्वयि', 'त्वमेव', 'त्वमेका', 'त्वां'],
-    iast: ['tvayi', 'tvamēva', 'tvamēkā', 'tvāṃ'],
+    deva: ['त्वयि', 'त्वमेव', 'त्वमेका', 'त्वां', 'त्वा'],
+    iast: ['tvayi', 'tvamēva', 'tvamēkā', 'tvāṃ', 'tvā'],
     english: ['you', 'you alone'],
   },
   // शिवः/śivaḥ — unambiguously the god Śiva, nominative masculine, every
@@ -1240,6 +1244,27 @@ const MEANING_CONCEPTS = [
   // exactly the polysemy trap catalogued for பொருள் above, so it's
   // explained in the verse-1 note rather than mapped to either gloss.
   { id: 'sl-shiva', deva: ['शिवः'], iast: ['śivaḥ'], english: ['shiva'] },
+  // सत्/sat ("the good/wise [people]," used substantively) — सतां (genitive
+  // plural) in v.15 twice and v.16 once, सन्तः (nominative plural) in v.16
+  // once: same word, two cases, three clean occurrences across two adjacent
+  // verses. Spelled सतां with an anusvāra (ं, U+0902) every time in this
+  // source, not the equivalent-sounding सताम् with an explicit म्+virāma —
+  // caught only because the IAST side (which does spell it satāṃ either
+  // way) boxed correctly while the Devanagari side silently didn't, since
+  // CONCEPT_BY_DEVA is an exact-string lookup with no normalization between
+  // an anusvāra and the nasal consonant it stands in for. Worth checking
+  // for on any future word ending in a nasal before adding it here. Both
+  // वाग्भिः (v.16) and वाचाम् (v.17) mean "speech" and share a root too, but
+  // neither is a clean token — both are sandhi-fused with no space or
+  // hyphen to split on ("गभीराभिर्वाग्भिर्विदधति," "सवित्रीभिर्वाचां"), unlike
+  // सतां/सन्तः which sit as their own space-separated words every time — so
+  // "speech" isn't registered here.
+  {
+    id: 'sl-satam',
+    deva: ['सतां', 'सन्तः'],
+    iast: ['satāṃ', 'santaḥ'],
+    english: ['the wise', 'wise', 'good souls'],
+  },
 ];
 
 const MEANING_CONCEPTS_BY_ID = new Map(MEANING_CONCEPTS.map((c) => [c.id, c]));
