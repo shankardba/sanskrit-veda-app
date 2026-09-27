@@ -80,6 +80,7 @@ const SECTION_NOTES = {
   'soundarya-lahari': {
     1: () => buildEarthAndYouDeclensionNote(),
     3: () => buildGenitivePluralAnaphoraNote(),
+    9: () => buildKundaliniChakraNote(),
     11: () => buildSriChakraGeometryNote(),
   },
 };
@@ -586,6 +587,19 @@ function buildGenitivePluralAnaphoraNote() {
     bodyHtml: `
       <p>Verse 1 promised that Hari, Hara, and Viriñca — introduced together as a trio — would each get picked up by name as the poem continued; verse 2 delivers on it immediately: Viriñca (Brahma) gathers the dust explicitly, Śauriḥ ("descendant of Śūra," an epithet of Vishnu) bears it on his thousand heads, and Haraḥ (Shiva) grinds it into the ash he wears — the same three gods, one line each, now doing something with what the dust means rather than just praising it.</p>
       <p>Verse 3 turns that dust into a showcase of its own: four different kinds of people, each getting one line and one metaphor for what the dust does for them — अविद्यानाम् ("for the ignorant"), जडानाम् ("for the inert"), दरिद्राणाम् ("for the poor"), निमग्नानाम् ("for those sinking" in the ocean of rebirth). All four end in <em>-ānām</em>, Sanskrit's genitive plural ending — "of/belonging to [a class of] X" — attached to four completely unrelated stems in a row, the grammatical equivalent of a drumbeat. English has to reach for a fresh preposition each time ("for the ignorant," "for the inert"...); Sanskrit just repeats one ending and lets the parallelism do the work. See the site's own <a href="grammar.html">Sanskrit Grammar</a> page for where this ending sits among the other seven cases.</p>
+    `,
+  };
+}
+
+function buildKundaliniChakraNote() {
+  return {
+    title: 'Six Centers, One Ascent',
+    subtitle: 'Soundarya Lahari · Verse 9',
+    bodyHtml: `
+      <p>This verse walks straight up the body's six energy centers (<em>cakras</em>) and the crown beyond them, one per phrase: <em>mūlādhāre</em> (root, base of the spine), <em>maṇipūre</em> (navel), <em>svādhiṣṭhāne</em> (sacral), <em>hṛdi</em> (heart), <em>ākāśam upari</em> ("space, above that" — the throat), <em>bhrūmadhye</em> (between the brows), and finally <em>sahasrāre padmē</em>, the thousand-petaled lotus at the crown. Each of the first six is traditionally paired with one of the five elements plus mind, in a fixed order: mūlādhāra-earth, svādhiṣṭhāna-water, maṇipūra-fire, anāhata (heart)-air, viśuddhi (throat)-space, ājñā (brow)-mind.</p>
+      <p>Worth reading closely rather than skimming past: this verse's own word order doesn't quite match that standard list. <em>Hutavahaṃ sthitaṃ svādhiṣṭhāne</em> — "fire, situated in svādhiṣṭhāna" — reads fire into the sacral center, while the navel center gets only <em>kam api</em>, "a certain something," left unnamed. <em>Kam</em> is an old poetic word for water (it survives in a handful of Vedic riddle-verses); read that way, the verse quietly swaps water and fire from where tantric texts like the Lalitā Sahasranāma usually put them. Commentators have argued about this for centuries — whether it's a deliberate variant, a copying slip inherited from an early manuscript, or a discretion (water/generative fluid at the navel being a more sensitive thing to name outright than fire is) — and most reciters simply substitute the standard pairing by ear regardless of what the words literally say. Either way, it's a real crux in the text, not a translation smoothing it over.</p>
+      <p><em>Kulapathaṃ</em>, "the path of the lineage" (line 37), is this tradition's name for the <em>suṣumṇā nāḍī</em> — the central channel the verse's whole ascent moves through, piercing each center in turn (<em>bhitvā</em>, "having pierced") rather than passing beside them.</p>
+      <p>The verse ends where verse 1 began, only now enacted rather than stated: verse 1 opened by declaring that Śiva can only create when united with Śakti (<em>śivaḥ śaktyā yuktō... bhavati śaktaḥ prabhavituṃ</em>); here, at the top of that same ascent, she reaches the crown and sports <em>rahasi patyā</em> — "in secret, with her lord" — the union verse 1 stated as a general principle, now happening in one specific place.</p>
     `,
   };
 }
