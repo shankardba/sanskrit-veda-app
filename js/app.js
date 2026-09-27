@@ -1054,6 +1054,40 @@ const MEANING_CONCEPTS = [
   // of the three glosses below; the rest stay unboxed on the Tamil side
   // rather than risk a wrong connection.
   { id: 'thirukkural-innaa', deva: ['இன்னா'], iast: ['innaa'], english: ['painful', 'disagreeable', 'unpleasant'] },
+  // ஒழுக்கம்/ozhukkam ("propriety of conduct") is Adhikāram 14's own subject
+  // (its title, ஒழுக்கமுடைமை, literally means "the possession of ozhukkam")
+  // and recurs there in several case/compound forms, all glossed the same
+  // "propriety"/"conduct" pair: bare ஒழுக்கம் (131), the pre-compound stem
+  // ஒழுக்க (6, 133, 135, 139 — a genuine sandhi vowel/consonant drop before
+  // the next word, not a typo), the assimilated ஒழுக்கந் (ம்->ந் before a
+  // following த-, 132), the locative ஒழுக்கத்து (21), and ஒழுக்காறாக் (161,
+  // from the related noun ஒழுக்காறு). ஒழுக்கத்தின் (dative/locative) shows a
+  // real Tamil-specific wrinkle: at 136/137 its final ன் migrates onto the
+  // FOLLOWING vowel-initial word when they're on the same source line
+  // (ஒழுக்கத்தின் ஒல்கார் -> ஒழுக்கத்தி னொல்கார்), so the Devanagari-column
+  // token is the truncated ஒழுக்கத்தி while the IAST column (tokenized
+  // differently, no migration) keeps the full ozhukkaththin — both are
+  // catalogued below rather than picking one. Excludes ஒழுக்கி (48) — a verb
+  // form ("conducting oneself"), not this noun, and its translation doesn't
+  // contain "conduct"/"propriety" either.
+  {
+    id: 'thirukkural-ozhukkam',
+    deva: ['ஒழுக்கம்', 'ஒழுக்க', 'ஒழுக்கந்', 'ஒழுக்கத்து', 'ஒழுக்கத்தி', 'ஒழுக்காறாக்'],
+    iast: ['ozhukkam', 'ozhukka', 'ozhukkaththu', 'ozhukkaththin', 'ozhukkaaraak'],
+    english: ['propriety', 'conduct'],
+  },
+  // இழுக்கம்/izhukkam ("impropriety") — ஒழுக்கம்'s direct antonym, same
+  // adhikāram (133, 136, 137) plus the related noun இழுக்காற்றின் (164,
+  // "from transgression"). Excludes இழுக்கா (35, 48) — the negative verb
+  // participle ("not deviating"), not this noun; its translations don't
+  // contain "impropriety"/"transgression" either, same reasoning as
+  // ஒழுக்கி above.
+  {
+    id: 'thirukkural-izhukkam',
+    deva: ['இழுக்கம்', 'இழுக்கத்தின்', 'இழுக்காற்றின்'],
+    iast: ['izhukkam', 'izhukkaththin', 'izhukkaatrin'],
+    english: ['impropriety', 'transgression'],
+  },
   // Considered and deliberately excluded this same pass (checked
   // occurrence-by-occurrence, not just assumed):
   // - ஆக்கம் (gain/growth) — no stable single gloss; renders as "source of
