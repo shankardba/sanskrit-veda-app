@@ -80,6 +80,7 @@ const SECTION_NOTES = {
   'soundarya-lahari': {
     1: () => buildEarthAndYouDeclensionNote(),
     3: () => buildGenitivePluralAnaphoraNote(),
+    11: () => buildSriChakraGeometryNote(),
   },
 };
 
@@ -589,6 +590,17 @@ function buildGenitivePluralAnaphoraNote() {
   };
 }
 
+function buildSriChakraGeometryNote() {
+  return {
+    title: 'The Geometry Behind the Verse',
+    subtitle: 'Soundarya Lahari · Verse 11',
+    bodyHtml: `
+      <p>This verse is a construction manual in miniature. It counts out the Śrī Chakra piece by piece: four upward triangles (<em>śrīkaṇṭhaiḥ</em>, "Shiva's") and five downward ones (<em>śivayuvatibhiḥ</em>, "Shakti's") — nine in all, <em>navabhiḥ mūlaprakṛtibhiḥ</em>, "the nine root-natures" — interlocking to form forty-four corners (<em>chatuśchatvāriṃśat</em>), then wrapped in two lotus rings, three encircling lines, and three circles. The verse calls the whole structure your <em>śaraṇa</em>, "citadel" or "refuge" — the same root as verse 1's <em>śaraṇaṃ</em>, "the refuge," now spelled out as an actual floor plan.</p>
+      <p>The site's own <a href="yantras.html">Yantras</a> page builds this exact nine-triangle mesh step by step from its underlying circles and triangles, if you want to see in a diagram what this verse is describing in words.</p>
+    `,
+  };
+}
+
 let mathModalOverlay = null;
 
 function ensureMathModal() {
@@ -856,6 +868,10 @@ const MEANING_CONCEPTS = [
   // "vahatyēnaṃ śauriḥ ... sahasrēṇa śirasāṃ" (Vishnu bearing the dust
   // "upon his thousand heads") — same word, a chant-agnostic concept, one
   // more case-form catalogued the same way as the rest of this entry.
+  // सहस्रारे (verse 9, "सहस्रारे पद्मे," the thousand-petaled crown-chakra
+  // lotus) is सहस्र+अर compounded into its own noun rather than सहस्र
+  // simply declined — added as one more literal whole-token form, same
+  // "catalog the compound as-is" trick as भूमिस्त्वयि/धनुस्त्वग्ं elsewhere.
   {
     id: 'sahasra',
     deva: [
@@ -870,6 +886,7 @@ const MEANING_CONCEPTS = [
       'स्सहस्रशो',
       'सहस्रमयुत',
       'सहस्रेण',
+      'सहस्रारे',
     ],
     iast: [
       'sahasrākṣa',
@@ -883,6 +900,7 @@ const MEANING_CONCEPTS = [
       'ssahasraśō',
       'sahasramayuta',
       'sahasrēṇa',
+      'sahasrārē',
     ],
     english: ['thousand', 'thousands'],
   },
@@ -1161,7 +1179,7 @@ const MEANING_CONCEPTS = [
   // fused with no source hyphen this time) is added as one more literal
   // whole-token form, same trick as धनुस्त्वग्ं above — the त्वयि/"in you"
   // riding along inside that fused token isn't separately boxed. Excludes
-  // भूमिं (v.11, "अवाप्य स्वां भूमिं") — checked in context, that line is
+  // भूमिं (v.10, "अवाप्य स्वां भूमिं") — checked in context, that line is
   // the kuṇḍalinī-cakra visualization and भूमिं there means "level/plane,"
   // not "earth," a real sense-shift rather than just a different case.
   {
