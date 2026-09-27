@@ -1137,9 +1137,10 @@
   }
 
   function innerCircleStageDef(name, radiusFrac, instruction){
+    var relSize = radiusFrac < 1 ? 'smaller' : 'larger';
     return { kind: 'circle', name: name || 'Inner circle', radiusFrac: radiusFrac, subphases: [
-      { phase: 'setup', end: 0.3, duration: 500, instruction: 'Keeping the same center, set the compass to a smaller radius — ' + pct(radiusFrac) + '% of the outer circle.' },
-      { phase: 'sweep', end: 1.0, duration: 800, instruction: instruction || 'Swing a full turn to draw this inner circle.' }
+      { phase: 'setup', end: 0.3, duration: 500, instruction: 'Keeping the same center, set the compass to a ' + relSize + ' radius — ' + pct(radiusFrac) + '% of the outer circle.' },
+      { phase: 'sweep', end: 1.0, duration: 800, instruction: instruction || 'Swing a full turn to draw this circle.' }
     ] };
   }
 
@@ -1248,6 +1249,16 @@
   }
 
   // ---------- Sri Yantra ----------
+  // The 8-petal ring's tips and the 16-petal ring's bases were previously
+  // two independent constants (1.15 and 1.16) that just happened to sit
+  // almost — but not exactly — back to back. Unifying them into one shared
+  // radius makes that boundary exact instead of an unexplained 0.01 gap,
+  // and gives the new ring-boundary circle below a real, provably-touching
+  // (not eyeballed) radius: it's tangent to both the inner ring's petal
+  // tips and the outer ring's petal bases because they're now the same
+  // circle by construction.
+  var LOTUS_BOUNDARY_FRAC = 1.155;
+
   function buildSriYantraStages(){
     var BUILD_ORDER = [8, 2, 1, 9, 4, 6, 5]; // remaining 7 triangles, largest-to-smallest by half-width
     function sriTri(i, circleMethod){
@@ -1260,8 +1271,10 @@
       sriTri(7, true),
       sriTri(3, true)
     ].concat(BUILD_ORDER.map(function(i){ return sriTri(i, false); })).concat([
-      lotusStageDef(8, 'Eight-petal lotus', 1.00, 1.15, 'lotus8'),
-      lotusStageDef(16, 'Sixteen-petal lotus', 1.16, 1.32, 'lotus16'),
+      lotusStageDef(8, 'Eight-petal lotus', 1.00, LOTUS_BOUNDARY_FRAC, 'lotus8'),
+      innerCircleStageDef('The ring boundary', LOTUS_BOUNDARY_FRAC,
+        'Swing a full turn at this same radius — it touches both the inner lotus’s petal tips and the outer lotus’s petal bases, since they now share this one circle.'),
+      lotusStageDef(16, 'Sixteen-petal lotus', LOTUS_BOUNDARY_FRAC, 1.32, 'lotus16'),
       tripleCircleStageDef()
     ]);
   }
@@ -1824,7 +1837,10 @@
         geometry:
           '<p>From the outside in: the <b style="color:var(--warm);">bhūpura</b> (the toggleable ' +
           'square gate frame — a temple with doors on all four sides), a triple circle, a ' +
-          '16-petal lotus, an 8-petal lotus, and the nine-triangle mesh around the bindu.</p>' +
+          '16-petal lotus, a circle marking the exact boundary between the two lotus rings ' +
+          '(tangent to both the 8-petal ring’s tips and the 16-petal ring’s bases, since they ' +
+          'now share one radius), an 8-petal lotus, and the nine-triangle mesh around the ' +
+          'bindu.</p>' +
           '<p>The nine triangles are the mathematically hard part. For all nine to interlock ' +
           'correctly, dozens of triangle legs and bases have to pass through exactly the ' +
           'same points simultaneously — a real constraint-satisfaction problem, not ' +
