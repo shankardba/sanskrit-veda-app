@@ -764,8 +764,14 @@ const MEANING_CONCEPTS = [
   // rather than the fuller epithet they actually are.
   {
     id: 'rudra',
-    deva: ['रुद्र', 'रुद्राय', 'रुद्रा', 'रुद्रो', 'रुद्रस्य', 'रुद्रेभ्यो', 'रुद्रोत'],
-    iast: ['rudra', 'rudrāya', 'rudrā', 'rudrō', 'rudrasya', 'rudrēbhyō', 'rudrōta'],
+    // रुद्रः/rudraḥ (Soundarya Lahari v.24, "रुद्रः क्षपयते," "Rudra
+    // dissolves [the world]") is रुद्रो's own un-sandhied nominative — रुद्रो
+    // is what रुद्रः becomes before a voiced sound, but here it precedes
+    // the voiceless क्, so visarga stays visarga rather than shifting to
+    // ओ. Same case, different sandhi environment, another chant-agnostic
+    // form catalogued the same way as सहस्र's.
+    deva: ['रुद्र', 'रुद्राय', 'रुद्रा', 'रुद्रो', 'रुद्रस्य', 'रुद्रेभ्यो', 'रुद्रोत', 'रुद्रः'],
+    iast: ['rudra', 'rudrāya', 'rudrā', 'rudrō', 'rudrasya', 'rudrēbhyō', 'rudrōta', 'rudraḥ'],
     english: ['rudra'],
   },
   { id: 'shiva', deva: ['शिवा'], iast: ['śivā'], english: ['auspicious'] },
@@ -1226,13 +1232,29 @@ const MEANING_CONCEPTS = [
   // tvā — an unaccented enclitic accusative, a lighter alternative to
   // त्वाम्/त्वां still current in classical (not just Vedic) Sanskrit, same
   // case and meaning as v.5's त्वां, just a different, shorter surface form
-  // of it ("सकृन्न त्वा नत्वा," "without bowing to you even once").
+  // of it ("सकृन्न त्वा नत्वा," "without bowing to you even once"). v.22
+  // adds त्वं — the bare nominative this time ("भवानि त्वं दासे मयि,"
+  // "Bhavani, you [cast your glance] on me, your servant"), spelled with
+  // an anusvāra like सतां/सन्तः rather than an explicit म्+virāma; verified
+  // against the source's exact codepoints this time rather than assumed,
+  // after the सताम्/सतां mixup documented on सत् below.
   {
     id: 'sl-you',
-    deva: ['त्वयि', 'त्वमेव', 'त्वमेका', 'त्वां', 'त्वा'],
-    iast: ['tvayi', 'tvamēva', 'tvamēkā', 'tvāṃ', 'tvā'],
+    deva: ['त्वयि', 'त्वमेव', 'त्वमेका', 'त्वां', 'त्वा', 'त्वं'],
+    iast: ['tvayi', 'tvamēva', 'tvamēkā', 'tvāṃ', 'tvā', 'tvaṃ'],
     english: ['you', 'you alone'],
   },
+  // भवानि/bhavāni ("O Bhavani," vocative — an epithet of the Goddess)
+  // repeats twice in v.22, describing a devotee who tries and fails to
+  // finish a prayer: "Bhavani, [have mercy]..." trails into just
+  // "Bhavani, you..." before the words give out. Same spelling both
+  // times, no case variation to catalog, but still worth registering
+  // since a plain repeated proper name doesn't automatically link to its
+  // English translation the way a MEANING_CONCEPTS entry does — the
+  // generic same-section repeat-detection would box both occurrences on
+  // the Sanskrit/IAST side regardless, but never bridge to "Bhavani" in
+  // the English column without this.
+  { id: 'sl-bhavani', deva: ['भवानि'], iast: ['bhavāni'], english: ['bhavani'] },
   // शिवः/śivaḥ — unambiguously the god Śiva, nominative masculine, every
   // time it occurs (v.1, v.32, v.92 all translate it as the proper name).
   // Deliberately does NOT include शिवे despite looking like a one-letter
@@ -1700,8 +1722,16 @@ function renderLine(line, devaCounts, iastCounts, lineKey) {
 function renderTranslationText(text, conceptIds, lineKey) {
   const frag = document.createDocumentFragment();
   const hasConcepts = conceptIds && conceptIds.size > 0;
-  const parts = text.match(/[A-Za-z']+|\n|[^A-Za-z'\n]+/g) || [text];
-  const isWord = (p) => /^[A-Za-z']+$/.test(p);
+  // A word run can contain an apostrophe mid-word (isn't, Goddess's) but
+  // must not START with one — some translations open a quoted line with a
+  // '-mark glued straight onto the first word ("'Bhavani, cast..."), and
+  // the older [A-Za-z']+ pattern let that leading quote get sucked into
+  // the word token itself ("'Bhavani"), which then never matched a
+  // registered concept's lowercase english gloss ("bhavani") no matter how
+  // correctly it was registered. A lone leading/trailing quote mark now
+  // falls into the punctuation alternative instead.
+  const parts = text.match(/[A-Za-z]+(?:'[A-Za-z]+)*|\n|[^A-Za-z\n]+/g) || [text];
+  const isWord = (p) => /^[A-Za-z]+(?:'[A-Za-z]+)*$/.test(p);
   const isSpace = (p) => /^\s+$/.test(p);
 
   let i = 0;
