@@ -1993,3 +1993,423 @@ body.tamil-page .lang-hub-card-glyph {
     padding: 5px 12px;
   }
 }
+
+/* --- Sound-Law Machine (sound-laws.html) --------------------------------- */
+
+.slm-words {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.slm-group {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.slm-group .sl-control-label,
+.slm-custom .sl-control-label {
+  min-width: 150px;
+}
+
+.slm-chip-pie {
+  font-family: 'Gentium Plus', var(--font-body);
+  font-style: italic;
+  font-size: 0.86rem;
+  margin-right: 6px;
+}
+
+.slm-chip-gloss {
+  font-size: 0.7rem;
+  opacity: 0.8;
+}
+
+.slm-custom {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.slm-custom-body {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+  flex: 1;
+}
+
+.slm-custom-row {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.slm-input {
+  font-family: 'Gentium Plus', var(--font-body);
+  font-size: 1.05rem;
+  background: var(--color-panel);
+  color: var(--color-text);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  padding: 6px 12px;
+  width: 260px;
+  max-width: 100%;
+}
+
+.slm-input:focus-visible {
+  outline: 2px solid var(--color-gold-light);
+  outline-offset: 1px;
+}
+
+.slm-palette {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.slm-key {
+  font-family: 'Gentium Plus', var(--font-body);
+  font-size: 0.95rem;
+  min-width: 34px;
+  padding: 2px 8px;
+  border-radius: 6px;
+  border: 1px solid var(--color-border);
+  background: transparent;
+  color: var(--color-gold-light);
+  cursor: pointer;
+}
+
+.slm-key:hover,
+.slm-key:focus-visible {
+  border-color: var(--color-gold);
+  outline: none;
+}
+
+.slm-stepper {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 10px;
+  padding: 12px 0;
+  border-top: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+  margin-bottom: 16px;
+}
+
+.slm-stepper .sl-chip:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.slm-counter {
+  font-family: var(--font-ui);
+  font-size: 0.78rem;
+  color: var(--color-text-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.slm-toggle {
+  margin-left: auto;
+  font-family: var(--font-ui);
+  font-size: 0.78rem;
+  color: #ff8fb3;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+}
+
+.slm-toggle input {
+  accent-color: var(--color-crimson);
+}
+
+.slm-note {
+  border-left: 2px solid var(--color-magenta);
+  padding: 4px 0 4px 14px;
+  margin-bottom: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.slm-note p {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: var(--color-text);
+  max-width: 760px;
+}
+
+.slm-columns {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 16px;
+  margin-bottom: 64px;
+}
+
+.slm-col {
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+  background: var(--color-panel);
+  padding: 16px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-width: 0;
+}
+
+.slm-col-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  border-bottom: 1px solid var(--color-border);
+  padding-bottom: 10px;
+}
+
+.slm-col-title {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  color: var(--color-gold-light);
+}
+
+.slm-current-form {
+  font-family: 'Gentium Plus', var(--font-body);
+  font-style: italic;
+  font-size: 1.6rem;
+  color: var(--color-text);
+}
+
+.slm-rules {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.slm-rule {
+  border-radius: 8px;
+  padding: 7px 10px;
+  border: 1px solid transparent;
+  transition: opacity 0.2s ease, border-color 0.2s ease;
+}
+
+.slm-rule.is-fired {
+  border-color: var(--color-border);
+  background: rgba(240, 168, 60, 0.05);
+}
+
+.slm-rule.is-idle {
+  opacity: 0.5;
+}
+
+.slm-rule.is-pending {
+  opacity: 0.28;
+}
+
+.slm-rule.is-current {
+  border-color: var(--color-gold);
+  box-shadow: 0 0 12px rgba(240, 168, 60, 0.15);
+}
+
+.slm-rule.is-moved {
+  border-style: dashed;
+  border-color: var(--color-crimson);
+}
+
+.slm-rule-top {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 4px 8px;
+}
+
+.slm-rule-num {
+  font-family: var(--font-ui);
+  font-size: 0.68rem;
+  color: var(--color-text-muted);
+  font-variant-numeric: tabular-nums;
+  min-width: 16px;
+}
+
+.slm-rule-name {
+  font-family: var(--font-ui);
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.slm-rule-pattern {
+  font-family: 'Gentium Plus', var(--font-body);
+  font-size: 0.75rem;
+  padding: 0 8px;
+  border-radius: 999px;
+  border: 1px solid var(--color-magenta);
+  color: #ffc2e4;
+}
+
+.slm-rule-pattern:hover {
+  background: rgba(255, 46, 166, 0.14);
+}
+
+.slm-rule-idle {
+  font-family: var(--font-ui);
+  font-size: 0.68rem;
+  color: var(--color-text-muted);
+  margin-left: auto;
+}
+
+.slm-change {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 4px 8px;
+  margin: 4px 0 2px 24px;
+  font-family: 'Gentium Plus', var(--font-body);
+  font-size: 1.05rem;
+}
+
+.slm-before {
+  color: var(--color-text-muted);
+}
+
+.slm-arrow {
+  color: var(--color-text-muted);
+  font-size: 0.85rem;
+}
+
+.slm-after {
+  color: var(--color-text);
+}
+
+.slm-after mark {
+  background: rgba(255, 46, 166, 0.22);
+  color: #ffd6ec;
+  border-radius: 3px;
+  padding: 0 1px;
+}
+
+.slm-after mark.is-deletion {
+  display: inline-block;
+  width: 3px;
+  height: 1em;
+  vertical-align: -2px;
+  background: var(--color-magenta);
+  padding: 0;
+}
+
+.slm-rule-desc {
+  font-family: var(--font-ui);
+  font-size: 0.74rem;
+  color: var(--color-text-muted);
+  margin-left: 24px;
+  line-height: 1.55;
+}
+
+.slm-result {
+  border-top: 1px solid var(--color-border);
+  padding-top: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.slm-result-label,
+.slm-result-wait {
+  font-family: var(--font-ui);
+  font-size: 0.7rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+.slm-result.is-match .slm-result-label {
+  color: var(--color-gold-light);
+}
+
+.slm-result.is-miss .slm-result-label {
+  color: #ff8fb3;
+}
+
+.slm-result-form {
+  font-family: 'Gentium Plus', var(--font-body);
+  font-size: 1.25rem;
+  color: var(--color-text);
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+
+.slm-result-form.is-predicted {
+  color: #ff8fb3;
+  text-decoration: line-through;
+  text-decoration-thickness: 1px;
+}
+
+.slm-result-tag {
+  font-family: var(--font-ui);
+  font-size: 0.62rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  min-width: 64px;
+  display: inline-block;
+  text-decoration: none;
+}
+
+.slm-deva {
+  font-family: var(--font-sanskrit);
+  font-size: 1.35rem;
+  color: var(--color-gold-light);
+}
+
+.slm-modern,
+.slm-result-note {
+  font-family: var(--font-ui);
+  font-size: 0.76rem;
+  color: var(--color-text-muted);
+}
+
+.slm-modern b {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  color: var(--color-text);
+  font-weight: 600;
+}
+
+.slm-demo-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 56px;
+}
+
+.slm-inline-btn {
+  font-family: var(--font-ui);
+  font-size: 0.72rem;
+  margin-left: 6px;
+  padding: 1px 10px;
+  border-radius: 999px;
+  border: 1px solid var(--color-gold);
+  background: transparent;
+  color: var(--color-gold-light);
+  cursor: pointer;
+}
+
+@media (max-width: 600px) {
+  .slm-group,
+  .slm-custom {
+    flex-direction: column;
+    gap: 6px;
+  }
+  .slm-toggle {
+    margin-left: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .slm-rule { transition: none; }
+}

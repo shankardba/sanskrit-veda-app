@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sound-Law Machine — Vedavani</title>
+<meta name="description" content="Vedavani — one Proto-Indo-European word, two ordered rulebooks: watch it become Sanskrit and Slavic one sound law at a time.">
+<link rel="icon" href="assets/logo.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@400;500;600&family=Noto+Sans+Devanagari:wght@400;500;600&family=Noto+Sans+Tamil:wght@400;500;600&family=Gentium+Plus:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<header class="site-header">
+  <nav class="navbar">
+    <a href="index.html" class="logo-group">
+      <img src="assets/logo.svg" alt="Vedavani" class="logo-mark">
+      <span class="logo-word glow-gold">Vedavani</span>
+    </a>
+    <div class="nav-links">
+      <a href="index.html" class="nav-link">Chants</a>
+      <a href="language.html" class="nav-link active">Sanskrit</a>
+      <a href="tamil.html" class="nav-link">Tamil</a>
+      <a href="mathematics.html" class="nav-link">Mathematics</a>
+      <a href="yantras.html" class="nav-link">Yantras</a>
+    </div>
+  </nav>
+</header>
+
+<main id="top">
+  <div class="lang-hero container">
+    <h1 class="glow-gold">Sound-Law Machine</h1>
+    <p>One ancestor word, two rulebooks. Watch a Proto-Indo-European word turn into Sanskrit and into Slavic, one sound law at a time.</p>
+  </div>
+
+  <nav class="lang-subnav">
+    <a href="#machine">Machine</a>
+    <a href="#order">Why order matters</a>
+    <a href="#limits">Where it breaks</a>
+  </nav>
+
+  <div class="lang-body container">
+
+    <p class="lang-breadcrumb"><a href="language.html">Sanskrit</a> / <a href="slavic.html">Sanskrit ↔ Slavic</a> / Sound-Law Machine</p>
+
+    <h2 id="machine" class="lang-block-title">The machine</h2>
+    <p class="lang-block-intro">
+      Every sound law is a rule of the form "this sound becomes that sound, in this setting". RUKI, for example, is
+      <em>s → ṣ after r, u, k or i</em>. Run one branch's rules over a reconstructed ancestor word, in historical
+      order, and out comes that branch's word. Sanskrit and Slavic start from the same word. They differ only in which
+      rules they ran, and when. The coloured tags are the same patterns as the
+      <a href="slavic.html#explorer">Cognate Explorer</a>.
+    </p>
+
+    <div class="slm-words" id="slmWords"></div>
+
+    <form class="slm-custom" id="slmForm" autocomplete="off">
+      <label class="sl-control-label" for="slmInput">Your own</label>
+      <div class="slm-custom-body">
+        <div class="slm-custom-row">
+          <input id="slmInput" class="slm-input" type="text" placeholder="*h₂ówis" spellcheck="false">
+          <button type="submit" class="sl-chip active">Run</button>
+        </div>
+        <div class="slm-palette" id="slmPalette" aria-label="Insert a special letter"></div>
+      </div>
+    </form>
+
+    <div class="slm-stepper">
+      <button type="button" class="sl-chip" id="slmReset">Start over</button>
+      <button type="button" class="sl-chip" id="slmStep">Next rule</button>
+      <button type="button" class="sl-chip" id="slmPlay">Play</button>
+      <button type="button" class="sl-chip" id="slmAll">Show all</button>
+      <span class="slm-counter" id="slmCounter" aria-live="polite"></span>
+      <label class="slm-toggle"><input type="checkbox" id="slmReorder"> Break the order</label>
+    </div>
+
+    <div class="slm-note" id="slmNote" hidden></div>
+
+    <div class="slm-columns">
+      <section class="slm-col" id="slm-skt" aria-label="Sanskrit rulebook"></section>
+      <section class="slm-col" id="slm-slavic" aria-label="Slavic rulebook"></section>
+    </div>
+
+    <h2 id="order" class="lang-block-title">Why order matters</h2>
+    <p class="lang-block-intro">
+      A rulebook is a list, not a set. Take "in the wolf", PIE <i>*wĺ̥kʷoy</i>. Both branches soften k before a front
+      vowel, and both later shrink the diphthong <i>oy</i> into a front vowel (Sanskrit <i>e</i>, Slavic <i>ě</i>). If
+      the softening came first, the k was still in front of an <i>o</i> and survives: Sanskrit <i>vṛke</i>, Slavic
+      <i>vьlcě</i>. Run the same rules in the other order and the k softens by mistake: <i>vṛce</i>, <i>vьlčě</i>.
+      Neither is real. This is how linguists work out the relative order of changes nobody wrote down.
+    </p>
+    <p class="lang-block-intro">
+      Slavic even shows both orders at once. Its <em>second</em> palatalization came after the diphthongs shrank,
+      so it does soften that k, but to <i>c</i>, not <i>č</i>, which is why the Old Church Slavonic form is
+      <i>vьlcě</i>.
+    </p>
+    <div class="slm-demo-row">
+      <button type="button" class="sl-chip" data-slm-demo="wolf-loc">Show "in the wolf" in order</button>
+      <button type="button" class="sl-chip kind-proof" data-slm-demo="wolf-loc:reordered">Show it out of order</button>
+    </div>
+
+    <h2 id="limits" class="lang-block-title">Where the machine breaks</h2>
+    <div class="math-callouts sl-callout-pair">
+      <div class="math-callout">
+        <h4>Speakers level their paradigms</h4>
+        <div class="formula">predicted vṛca · attested vṛka "O wolf!"</div>
+        <div class="sequence">
+          The Law of Palatals should turn the vocative's k into c. Sanskrit says <i>vṛka</i> anyway, because every other
+          form of the word has k and speakers restored it. Sound laws are regular, but analogy reaches in afterwards.
+          <button type="button" class="slm-inline-btn" data-slm-demo="wolf-voc">Run it</button>
+        </div>
+      </div>
+      <div class="math-callout">
+        <h4>Not every law is settled</h4>
+        <div class="formula">*h₂ówis → predicted āvi- · attested avi- "sheep"</div>
+        <div class="sequence">
+          Brugmann's law is what gives <i>vāhayati</i> its long ā, but words like "sheep" don't follow it. Linguists
+          still argue about its exact conditions. Type <i>h₂ówis</i> into "Your own" to watch it misfire.
+        </div>
+      </div>
+      <div class="math-callout">
+        <h4>A simplified rulebook</h4>
+        <div class="sequence">
+          The real histories have dozens more steps: accent, sandhi between words, later vowel changes. The machine
+          stops at Sanskrit and Proto-Slavic. The Russian and Serbian/Croatian forms are shown as they are today,
+          not derived. Your own words come out as predictions, not facts.
+        </div>
+      </div>
+      <div class="math-callout">
+        <h4>The same idea as an L-system</h4>
+        <div class="sequence">
+          An L-system grows a plant by rewriting a string with a fixed rule list. Sound change is the same kind of
+          machine with two differences. Each rule runs once per historical stage instead of over and over, and the
+          rules look at neighbouring sounds: RUKI fires only after r, u, k or i.
+        </div>
+      </div>
+    </div>
+
+    <p class="lang-footnote">
+      Every preset word derives to its attested Sanskrit and Proto-Slavic form under these rules, except the vocative
+      noted above. Reconstructions follow Wiktionary's Proto-Slavic entries (<i>*buditi, *voziti, *vьlkъ</i>) and
+      standard handbooks. Slavic forms are Proto-Slavic in the usual scholarly spelling, with ъ and ь for the short
+      "jer" vowels and y for the vowel of Russian ы.
+    </p>
+
+  </div>
+</main>
+
+<script src="js/sound-laws.js"></script>
+</body>
+</html>
