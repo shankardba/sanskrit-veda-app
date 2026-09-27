@@ -57,6 +57,7 @@
     --error:#FF8A8A;
     --xsect-ordinary:#6FA8FF;
     --xsect-concurrent:#D88CFF;
+    --xsect-vertex:#4ADE80;
     --chip-bg:rgba(18,24,34,0.72);
     --panel-bg:rgba(15,20,29,0.94);
     --mathpanel-bg:rgba(10,14,22,0.97);
@@ -76,6 +77,7 @@
     --error:#B3261E;
     --xsect-ordinary:#1D4ED8;
     --xsect-concurrent:#9333EA;
+    --xsect-vertex:#15803D;
     --chip-bg:rgba(255,255,255,0.82);
     --panel-bg:rgba(255,255,255,0.96);
     --mathpanel-bg:rgba(248,249,251,0.98);
@@ -824,30 +826,85 @@
     return clusterPoints(raw, 4); // 2px radius
   }
 
+  function pointNearSegment(p, a, b, tol){
+    var abx = b[0] - a[0], aby = b[1] - a[1];
+    var lenSq = abx * abx + aby * aby;
+    var t = lenSq === 0 ? 0 : ((p[0] - a[0]) * abx + (p[1] - a[1]) * aby) / lenSq;
+    t = Math.max(0, Math.min(1, t));
+    var dx = p[0] - (a[0] + t * abx), dy = p[1] - (a[1] + t * aby);
+    return (dx * dx + dy * dy) < tol * tol;
+  }
+
+  // Every triangle's own 3 vertices (apex + both base corners), in pixel
+  // space — unlike currentTriangleEdgesPx's cross-triangle CROSSINGS, these
+  // are single-triangle points, so two edges of the SAME triangle really do
+  // meet there. Kept only when "exposed": no OTHER triangle's edge passes
+  // through that point at all (not even the interior of an edge, not just
+  // another vertex). That's a strictly geometric test, not a hardcoded
+  // triangle index — it happens to catch two different kinds of point in
+  // Sri Yantra's mesh: the two largest triangles' 6 corners (which lie on
+  // the main circle, since nothing is bigger than them to reach out to)
+  // AND 8 more corners belonging to the next-largest triangles (1, 2 near
+  // the top pole; 8, 9 near the bottom), which aren't on the main circle
+  // but are equally untouched by any other triangle's line — both are
+  // exposed corners of the mesh's outline, just at different radii, so
+  // they're one and the same "outer point" category rather than two.
+  function computeOuterVertices(){
+    if(!geo) return [];
+    var tris = [];
+    STAGE_DEFS.forEach(function(stage, idx){
+      if(stage.kind !== 'triangle') return;
+      var tri = stage.tri;
+      var apex = [px(0), py(tri.A)], left = [px(-tri.W), py(tri.B)], right = [px(tri.W), py(tri.B)];
+      tris.push({ idx: idx, pts: [apex, left, right], edges: [[apex, left], [apex, right], [left, right]] });
+    });
+    var raw = [];
+    tris.forEach(function(t){
+      t.pts.forEach(function(p){
+        var touched = false;
+        for(var j = 0; j < tris.length && !touched; j++){
+          if(tris[j].idx === t.idx) continue;
+          for(var e = 0; e < 3; e++){
+            if(pointNearSegment(p, tris[j].edges[e][0], tris[j].edges[e][1], 2)){ touched = true; break; }
+          }
+        }
+        if(!touched) raw.push(p);
+      });
+    });
+    return clusterPoints(raw, 4);
+  }
+
+  function drawXsectDot(pt, r, colorVar, alpha, bgColor){
+    ctx.beginPath();
+    ctx.arc(pt[0], pt[1], r, 0, Math.PI * 2);
+    ctx.fillStyle = resolveColor(colorVar);
+    ctx.globalAlpha = alpha;
+    ctx.fill();
+    ctx.lineWidth = 0.6;
+    ctx.strokeStyle = bgColor;
+    ctx.globalAlpha = 1;
+    ctx.stroke();
+  }
+
   function drawIntersections(){
     if(!showXsect || !geo) return;
     var clusters = computeIntersections();
+    var outerVertices = computeOuterVertices();
     var concurrent = 0, maxLines = 0;
     var bgColor = resolveColor('var(--bg)');
     clusters.forEach(function(c){
       var k = linesAtCluster(c[2]);
       var isConcurrency = k >= 3;
       if(isConcurrency){ concurrent++; if(k > maxLines) maxLines = k; }
-      // Kept deliberately small — a thin bg-colored outline gives every dot
-      // contrast against whatever line color it happens to sit on (dot hues
-      // are dedicated --xsect-* vars, never reused from the triangle
-      // palette, so they can't blend into a same-colored line underneath),
-      // rather than relying on size/opacity to fight for visibility.
-      var r = isConcurrency ? Math.min(3.2, 1.8 + (k - 3) * 0.35) : 1.4;
-      ctx.beginPath();
-      ctx.arc(c[0], c[1], r, 0, Math.PI * 2);
-      ctx.fillStyle = resolveColor(isConcurrency ? 'var(--xsect-concurrent)' : 'var(--xsect-ordinary)');
-      ctx.globalAlpha = isConcurrency ? 1 : 0.85;
-      ctx.fill();
-      ctx.lineWidth = 0.6;
-      ctx.strokeStyle = bgColor;
-      ctx.globalAlpha = 1;
-      ctx.stroke();
+      // Dot hues are dedicated --xsect-* vars, never reused from the
+      // triangle palette, so a dot can't blend into a same-colored line
+      // underneath; the thin bg-colored outline adds contrast on top of
+      // that regardless of what's behind it.
+      var r = isConcurrency ? Math.min(5, 3.6 + (k - 3) * 0.5) : 2;
+      drawXsectDot(c, r, isConcurrency ? 'var(--xsect-concurrent)' : 'var(--xsect-ordinary)', isConcurrency ? 1 : 0.85, bgColor);
+    });
+    outerVertices.forEach(function(v){
+      drawXsectDot(v, 2, 'var(--xsect-vertex)', 0.9, bgColor);
     });
     resetAlpha();
     if(xsectInfo){
@@ -855,7 +912,8 @@
       xsectInfo.innerHTML = '<b style="color:var(--xsect-ordinary);">' + ordinary + '</b> ordinary crossing' + (ordinary === 1 ? '' : 's') + ' (2 lines)' +
         ' &middot; <b style="color:var(--xsect-concurrent);">' + concurrent + '</b> exact concurrence' + (concurrent === 1 ? '' : 's') + ' (3+ lines)' +
         ' &middot; <b>' + clusters.length + '</b> total' +
-        (maxLines > 3 ? ' &middot; up to ' + maxLines + ' lines at one point' : '');
+        (maxLines > 3 ? ' &middot; up to ' + maxLines + ' lines at one point' : '') +
+        ' &middot; <b style="color:var(--xsect-vertex);">' + outerVertices.length + '</b> outer triangle point' + (outerVertices.length === 1 ? '' : 's');
     }
   }
 
