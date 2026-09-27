@@ -55,6 +55,8 @@
     --warm:#F2A65A;
     --cool:#57D9C4;
     --error:#FF8A8A;
+    --xsect-ordinary:#6FA8FF;
+    --xsect-concurrent:#D88CFF;
     --chip-bg:rgba(18,24,34,0.72);
     --panel-bg:rgba(15,20,29,0.94);
     --mathpanel-bg:rgba(10,14,22,0.97);
@@ -72,6 +74,8 @@
     --warm:#B45309;
     --cool:#0F766E;
     --error:#B3261E;
+    --xsect-ordinary:#1D4ED8;
+    --xsect-concurrent:#9333EA;
     --chip-bg:rgba(255,255,255,0.82);
     --panel-bg:rgba(255,255,255,0.96);
     --mathpanel-bg:rgba(248,249,251,0.98);
@@ -291,7 +295,7 @@
     opacity:0;transition:opacity 0.15s ease;
   }
   .xsect-info.on{opacity:1;}
-  .xsect-info b{color:var(--warm);font-weight:600;}
+  .xsect-info b{font-weight:600;}
   @media (prefers-reduced-motion:reduce){
     .panel,.math-panel{transition:none;}
     .gear-btn svg{transition:none;}
@@ -824,20 +828,33 @@
     if(!showXsect || !geo) return;
     var clusters = computeIntersections();
     var concurrent = 0, maxLines = 0;
+    var bgColor = resolveColor('var(--bg)');
     clusters.forEach(function(c){
       var k = linesAtCluster(c[2]);
       var isConcurrency = k >= 3;
       if(isConcurrency){ concurrent++; if(k > maxLines) maxLines = k; }
+      // Kept deliberately small — a thin bg-colored outline gives every dot
+      // contrast against whatever line color it happens to sit on (dot hues
+      // are dedicated --xsect-* vars, never reused from the triangle
+      // palette, so they can't blend into a same-colored line underneath),
+      // rather than relying on size/opacity to fight for visibility.
+      var r = isConcurrency ? Math.min(3.2, 1.8 + (k - 3) * 0.35) : 1.4;
       ctx.beginPath();
-      ctx.arc(c[0], c[1], isConcurrency ? Math.min(7, 2.5 + k) : 2.5, 0, Math.PI * 2);
-      ctx.fillStyle = resolveColor(isConcurrency ? 'var(--warm)' : 'var(--cool)');
-      ctx.globalAlpha = isConcurrency ? 0.95 : 0.55;
+      ctx.arc(c[0], c[1], r, 0, Math.PI * 2);
+      ctx.fillStyle = resolveColor(isConcurrency ? 'var(--xsect-concurrent)' : 'var(--xsect-ordinary)');
+      ctx.globalAlpha = isConcurrency ? 1 : 0.85;
       ctx.fill();
+      ctx.lineWidth = 0.6;
+      ctx.strokeStyle = bgColor;
+      ctx.globalAlpha = 1;
+      ctx.stroke();
     });
     resetAlpha();
     if(xsectInfo){
-      xsectInfo.innerHTML = '<b>' + clusters.length + '</b> crossing point' + (clusters.length === 1 ? '' : 's') +
-        ' &middot; <b>' + concurrent + '</b> exact concurrence' + (concurrent === 1 ? '' : 's') + ' (3+ lines)' +
+      var ordinary = clusters.length - concurrent;
+      xsectInfo.innerHTML = '<b style="color:var(--xsect-ordinary);">' + ordinary + '</b> ordinary crossing' + (ordinary === 1 ? '' : 's') + ' (2 lines)' +
+        ' &middot; <b style="color:var(--xsect-concurrent);">' + concurrent + '</b> exact concurrence' + (concurrent === 1 ? '' : 's') + ' (3+ lines)' +
+        ' &middot; <b>' + clusters.length + '</b> total' +
         (maxLines > 3 ? ' &middot; up to ' + maxLines + ' lines at one point' : '');
     }
   }
