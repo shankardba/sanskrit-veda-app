@@ -1255,6 +1255,19 @@ const MEANING_CONCEPTS = [
   // the Sanskrit/IAST side regardless, but never bridge to "Bhavani" in
   // the English column without this.
   { id: 'sl-bhavani', deva: ['भवानि'], iast: ['bhavāni'], english: ['bhavani'] },
+  // पूजा/pūjā ("worship") — doubled for emphasis in v.25 line 100 itself
+  // ("भवेत् पूजा पूजा," roughly "becomes worship, [very] worship") the same
+  // way Thirukkural doubles a negated verb for its own rhetorical weight
+  // (see buildNegativeNominalizerNote) — a Sanskrit माटक्कु-style repeat
+  // rather than a scribal accident.
+  { id: 'sl-puja', deva: ['पूजा'], iast: ['pūjā'], english: ['worship'] },
+  // विरिञ्चिः/viriñchiḥ (Brahma) — v.1 mentions him only deep inside a
+  // compound ("हरिहरविरिञ्चादिभिः," not boxable, see the v.1 note) and v.12's
+  // "विरिञ्चिप्रभृतयः" is likewise fused; v.26 is his first CLEAN standalone
+  // occurrence ("विरिञ्चिः पञ्चत्वं व्रजति," "Brahma himself passes away," in
+  // the great-dissolution verse) — registered now so it's ready to connect
+  // the next time he appears unfused nearby.
+  { id: 'sl-virinchi', deva: ['विरिञ्चिः'], iast: ['viriñchiḥ'], english: ['brahma'] },
   // शिवः/śivaḥ — unambiguously the god Śiva, nominative masculine, every
   // time it occurs (v.1, v.32, v.92 all translate it as the proper name).
   // Deliberately does NOT include शिवे despite looking like a one-letter
