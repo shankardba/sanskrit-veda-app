@@ -1268,6 +1268,14 @@ const MEANING_CONCEPTS = [
   // the great-dissolution verse) — registered now so it's ready to connect
   // the next time he appears unfused nearby.
   { id: 'sl-virinchi', deva: ['विरिञ्चिः'], iast: ['viriñchiḥ'], english: ['brahma'] },
+  // शम्भु/śambhu ("the benevolent one," an epithet of Shiva distinct from
+  // the bare name शिव) — शम्भोः (genitive, v.34, "शरीरं त्वं शम्भोः," "you are
+  // the very body of Shambhu") and शम्भुं (accusative, v.36, "परं शम्भुं
+  // वन्दे," "I bow to the supreme Shambhu"). Two verses apart, outside
+  // linkScope's adjacent-verse window, so these connect to their own lines
+  // but not yet to each other — registered anyway so a future unfused
+  // mention nearby has a concept ready to join.
+  { id: 'sl-shambhu', deva: ['शम्भोः', 'शम्भुं'], iast: ['śambhōḥ', 'śambhuṃ'], english: ['shambhu'] },
   // शिवः/śivaḥ — unambiguously the god Śiva, nominative masculine, every
   // time it occurs (v.1, v.32, v.92 all translate it as the proper name).
   // Deliberately does NOT include शिवे despite looking like a one-letter
