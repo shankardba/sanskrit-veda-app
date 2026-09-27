@@ -79,6 +79,7 @@ const SECTION_NOTES = {
   },
   'soundarya-lahari': {
     1: () => buildEarthAndYouDeclensionNote(),
+    3: () => buildGenitivePluralAnaphoraNote(),
   },
 };
 
@@ -577,6 +578,17 @@ function buildEarthAndYouDeclensionNote() {
   };
 }
 
+function buildGenitivePluralAnaphoraNote() {
+  return {
+    title: 'One Ending, Four Classes of People',
+    subtitle: 'Soundarya Lahari · Verse 3',
+    bodyHtml: `
+      <p>Verse 1 promised that Hari, Hara, and Viriñca — introduced together as a trio — would each get picked up by name as the poem continued; verse 2 delivers on it immediately: Viriñca (Brahma) gathers the dust explicitly, Śauriḥ ("descendant of Śūra," an epithet of Vishnu) bears it on his thousand heads, and Haraḥ (Shiva) grinds it into the ash he wears — the same three gods, one line each, now doing something with what the dust means rather than just praising it.</p>
+      <p>Verse 3 turns that dust into a showcase of its own: four different kinds of people, each getting one line and one metaphor for what the dust does for them — अविद्यानाम् ("for the ignorant"), जडानाम् ("for the inert"), दरिद्राणाम् ("for the poor"), निमग्नानाम् ("for those sinking" in the ocean of rebirth). All four end in <em>-ānām</em>, Sanskrit's genitive plural ending — "of/belonging to [a class of] X" — attached to four completely unrelated stems in a row, the grammatical equivalent of a drumbeat. English has to reach for a fresh preposition each time ("for the ignorant," "for the inert"...); Sanskrit just repeats one ending and lets the parallelism do the work. See the site's own <a href="grammar.html">Sanskrit Grammar</a> page for where this ending sits among the other seven cases.</p>
+    `,
+  };
+}
+
 let mathModalOverlay = null;
 
 function ensureMathModal() {
@@ -839,7 +851,11 @@ const MEANING_CONCEPTS = [
   // IAST — both spellings are kept rather than picking one as
   // "correct" (see the similar cha mē discrepancy noted in
   // sanskrit-into-tamil-script-transliteration-rules on Claude Hub).
-  // Concentrated in Namakam anuvākas 1, 5, 10, 11, and 12.
+  // Concentrated in Namakam anuvākas 1, 5, 10, 11, and 12. सहस्रेण
+  // (instrumental, "with a thousand") added for Soundarya Lahari verse 2's
+  // "vahatyēnaṃ śauriḥ ... sahasrēṇa śirasāṃ" (Vishnu bearing the dust
+  // "upon his thousand heads") — same word, a chant-agnostic concept, one
+  // more case-form catalogued the same way as the rest of this entry.
   {
     id: 'sahasra',
     deva: [
@@ -853,6 +869,7 @@ const MEANING_CONCEPTS = [
       'सहस्रशो',
       'स्सहस्रशो',
       'सहस्रमयुत',
+      'सहस्रेण',
     ],
     iast: [
       'sahasrākṣa',
@@ -865,6 +882,7 @@ const MEANING_CONCEPTS = [
       'sahasraśō',
       'ssahasraśō',
       'sahasramayuta',
+      'sahasrēṇa',
     ],
     english: ['thousand', 'thousands'],
   },
@@ -1159,11 +1177,21 @@ const MEANING_CONCEPTS = [
   // (v.1 line 5, "अतस्त्वामाराध्यां") — its final म् sandhi-merges directly
   // into the vowel of the next word (आ) with no halant or hyphen left to
   // split on, unlike म्पतये/धनुस्त्वग्ं's cleaner boundaries, so it can't be
-  // safely extracted as its own token.
+  // safely extracted as its own token. v.4 adds त्वमेका (त्वम्+एका, "you
+  // alone" again but with एका — feminine "one," agreeing with the Goddess —
+  // rather than एव's enclitic "indeed"; different word, same gloss, so
+  // folded into this concept's existing "you alone" rather than a new
+  // one). v.5 adds त्वां/tvāṃ, the accusative — cleanly its own token this
+  // time ("स्मरः...त्वां नत्वा," "bowing to you"), unlike v.1's त्वाम् above,
+  // because it's followed by a consonant (नत्वा) rather than a vowel, so
+  // ordinary anusvāra sandhi applies instead of the vowel-merge that made
+  // त्वाम् unextractable. Since linkScope: 'local' only lets adjacent
+  // verses connect, त्वमेका (v.4) and त्वां (v.5) light up together, but
+  // neither reaches back to v.1's forms three verses away.
   {
     id: 'sl-you',
-    deva: ['त्वयि', 'त्वमेव'],
-    iast: ['tvayi', 'tvamēva'],
+    deva: ['त्वयि', 'त्वमेव', 'त्वमेका', 'त्वां'],
+    iast: ['tvayi', 'tvamēva', 'tvamēkā', 'tvāṃ'],
     english: ['you', 'you alone'],
   },
   // शिवः/śivaḥ — unambiguously the god Śiva, nominative masculine, every
