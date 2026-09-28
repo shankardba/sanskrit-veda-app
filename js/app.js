@@ -83,6 +83,8 @@ const SECTION_NOTES = {
     9: () => buildKundaliniChakraNote(),
     11: () => buildSriChakraGeometryNote(),
     42: () => buildTwoPartStructureNote(),
+    101: () => buildColophonAndAppendixNote(),
+    103: () => buildNiAlliterationNote(),
   },
 };
 
@@ -625,6 +627,28 @@ function buildTwoPartStructureNote() {
     subtitle: 'Soundarya Lahari · Verse 42',
     bodyHtml: `
       <p>The line just before this verse — <em>dvitīya bhāgaḥ, saundaryalaharī</em>, "Second Part, the Wave of Beauty" — marks a real seam in the text, not just a label. Everything up to verse 41 (its own traditional name is <em>Ānanda Laharī</em>, "the Wave of Bliss") has been about the Goddess's subtle form: the chakras and kuṇḍalinī of verse 9, the Śrī Chakra's geometry of verse 11, mantra and tantra. From here through verse 100, the poem describes her physical form instead — and does it in a fixed order, a genre convention called <em>nakha-śikha-varṇana</em> ("toe-to-crown description," though this poem in fact works crown-to-toe): hair, forehead, eyebrows, eyes, and ears in the verses immediately ahead, then cheeks, lips, neck, arms, breasts, waist, and on down. Nothing about the Sanskrit changes at this seam — same meter, same grammar to untangle — but it's worth knowing you've crossed from one kind of poem into another.</p>
+    `,
+  };
+}
+
+function buildColophonAndAppendixNote() {
+  return {
+    title: 'The Poem Ends Here — Then Keeps Going',
+    subtitle: 'Soundarya Lahari · Verse 100 / Appendix',
+    bodyHtml: `
+      <p>Verse 100 closes with its own final line comparing the hymn itself to waving a lamp at the sun or offering the ocean water drawn from the ocean — any praise of the Goddess, even hers, can only give back what already came from her. Right after it, the text includes its own colophon: <em>iti śrīmat-paramahaṃsa-parivrājakāchāryasya śrī-gōvinda-bhagavat-pūjyapāda-śiṣyasya śrīmach-chhaṅkara-bhagavataḥ kṛtau saundaryalaharī sampūrṇā</em> — "thus, in the work of the venerable Śaṅkara Bhagavatpāda, disciple of the worshipful Govinda Bhagavatpāda, the Saundarya Laharī is complete." Traditionally the poem is exactly 100 verses, and this line marks that count as finished.</p>
+      <p>And then three more verses follow anyway, under their own heading: <em>anubandhaḥ</em>, "appendix." Most printed editions include them, but they're understood as a later addition rather than part of the original 100 — worth knowing as you read on, since the poem has already formally ended. They also carry something the first 100 verses don't: explicit <em>pāṭhabhēda</em> notes ("variant reading") recording places where manuscripts disagree on the exact wording, a small window into how differently this text has been transmitted over the centuries.</p>
+    `,
+  };
+}
+
+function buildNiAlliterationNote() {
+  return {
+    title: 'Ten Words, One Syllable',
+    subtitle: 'Soundarya Lahari · Verse 103',
+    bodyHtml: `
+      <p>Read this verse's first three lines aloud and the pattern is hard to miss: <em>nidhē nityasmērē niravadhiguṇē nītinipuṇē nirāghātajñānē niyamaparachittaikanilayē niyatyā nirmuktē nikhilanigamāntastutipadē nirātaṅkē nityē</em> — ten words in a row, every one of them starting with <em>ni-</em>, before the verse finally relaxes into ordinary phrasing for its closing request (<em>nigamaya mamāpi stutim imām</em>, "accept this hymn of mine too"). This is alliteration used as structure, not just ornament — a display of the same virtuosity Sanskrit poets prized in devices like the maṭakku-style repetition seen elsewhere on this site (see Thirukkural's Adhikāram 30 note), just built from a shared initial sound instead of a repeated word.</p>
+      <p>Most of these <em>ni-</em> words are the negating prefix <em>nir-/nis-</em> ("without, free from") fused onto a noun — <em>nirāghāta</em>, "without disturbance"; <em>nirātaṅka</em>, "without affliction." Sanskrit has more than one way to negate a word this way — verse 1's <em>akṛtapuṇyaḥ</em> ("one without merit") uses the other common prefix, <em>a-/an-</em>, just once in passing; here, a whole verse is built by leaning on <em>nir-</em> instead, turning a grammatical tool into the verse's entire sound.</p>
     `,
   };
 }
@@ -1340,6 +1364,13 @@ const MEANING_CONCEPTS = [
   // चरणे"), the last two adjacent verses so this pair also cross-links
   // under linkScope: 'local', unlike the wider-spaced repeats above.
   { id: 'sl-charana', deva: ['चरणौ', 'चरणे'], iast: ['charaṇau', 'charaṇē'], english: ['feet', 'foot'] },
+  // वाच्/vāch ("speech/words") — वाचां, genitive plural, in the poem's own
+  // closing verse (v.100, "tava janani vāchāṃ stutiriyam," "this hymn of
+  // praise to your powers of speech"). Every earlier candidate for this
+  // word (v.16's वाग्भिः, v.17's वाचाम्) was sandhi-fused into its neighbor
+  // with no space to split on — this is the first (and, in this poem,
+  // only) occurrence clean enough to box.
+  { id: 'sl-vach', deva: ['वाचां'], iast: ['vāchāṃ'], english: ['speech'] },
   // शिवः/śivaḥ — unambiguously the god Śiva, nominative masculine, every
   // time it occurs (v.1, v.32, v.92 all translate it as the proper name).
   // Deliberately does NOT include शिवे despite looking like a one-letter
