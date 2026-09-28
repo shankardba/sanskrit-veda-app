@@ -1314,6 +1314,10 @@ const MEANING_CONCEPTS = [
   // its own line. One more vocative epithet for the Goddess alongside
   // भवानि, rotating in as the poem's other addresses do.
   { id: 'sl-janani', deva: ['जननि'], iast: ['janani'], english: ['mother'] },
+  // देवि/dēvi ("O goddess," vocative) — v.72, "समं देवि स्कन्द...". A third
+  // rotating vocative epithet for the Goddess alongside भवानि/जननि; this
+  // poem rarely addresses her the same way twice in a row.
+  { id: 'sl-devi', deva: ['देवि'], iast: ['dēvi'], english: ['goddess'] },
   // शिवः/śivaḥ — unambiguously the god Śiva, nominative masculine, every
   // time it occurs (v.1, v.32, v.92 all translate it as the proper name).
   // Deliberately does NOT include शिवे despite looking like a one-letter
