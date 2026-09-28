@@ -82,6 +82,7 @@ const SECTION_NOTES = {
     3: () => buildGenitivePluralAnaphoraNote(),
     9: () => buildKundaliniChakraNote(),
     11: () => buildSriChakraGeometryNote(),
+    42: () => buildTwoPartStructureNote(),
   },
 };
 
@@ -614,6 +615,16 @@ function buildSriChakraGeometryNote() {
       <p>Later Śrī Vidya tradition organizes everything this verse lists into nine concentric enclosures (<em>āvaraṇas</em>), each with its own presiding form of the Goddess, read from the outside in: three encircling lines forming a walled square (<em>trailōkya-mōhana</em>), the sixteen-petaled lotus, the eight-petaled lotus, then four rings of triangles built from the nine-triangle mesh's forty-three corners — fourteen, ten, ten, and eight of them — and finally the single central triangle holding the bindu itself, where Lalitā Tripurasundarī, the "beautiful one of the three cities" this whole poem praises, is said to dwell. The verse itself only gives the raw count; this nine-tier reading of what that count means is the tradition built up around it afterward.</p>
       <p>Some commentators go a step further and read the forty-three triangles as a body: the same number as the thirty-six <em>tattvas</em> (the building blocks of manifest reality in this tradition's cosmology) plus the seven <em>dhātus</em> (the traditional bodily constituents — the tissues a body is said to be made of). On that reading the Śrī Chakra isn't just a diagram of the cosmos out there; it's a diagram of the person looking at it, which is very much in keeping with verse 9's route through the body's own chakras a few verses earlier.</p>
       <p>The site's own <a href="yantras.html">Yantras</a> page builds this exact nine-triangle mesh step by step from its underlying circles and triangles, if you want to see in a diagram what this verse is describing in words.</p>
+    `,
+  };
+}
+
+function buildTwoPartStructureNote() {
+  return {
+    title: 'A New Poem Begins Here',
+    subtitle: 'Soundarya Lahari · Verse 42',
+    bodyHtml: `
+      <p>The line just before this verse — <em>dvitīya bhāgaḥ, saundaryalaharī</em>, "Second Part, the Wave of Beauty" — marks a real seam in the text, not just a label. Everything up to verse 41 (its own traditional name is <em>Ānanda Laharī</em>, "the Wave of Bliss") has been about the Goddess's subtle form: the chakras and kuṇḍalinī of verse 9, the Śrī Chakra's geometry of verse 11, mantra and tantra. From here through verse 100, the poem describes her physical form instead — and does it in a fixed order, a genre convention called <em>nakha-śikha-varṇana</em> ("toe-to-crown description," though this poem in fact works crown-to-toe): hair, forehead, eyebrows, eyes, and ears in the verses immediately ahead, then cheeks, lips, neck, arms, breasts, waist, and on down. Nothing about the Sanskrit changes at this seam — same meter, same grammar to untangle — but it's worth knowing you've crossed from one kind of poem into another.</p>
     `,
   };
 }
