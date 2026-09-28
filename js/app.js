@@ -1484,7 +1484,11 @@ const MEANING_CONCEPTS = [
   // गिरिश/giriśa ("Lord of the mountain," an epithet distinct from
   // गिरिसुता/girisutā, Soundarya Lahari's "daughter of the mountain," for
   // the parallel form) — v.26 and v.27, adjacent verses.
-  { id: 'shl-girisha', deva: ['गिरिश'], iast: ['giriśa'], english: ['lord of the mountain'] },
+  // गिरिशो/giriśō (v.44, "गिरिशो विशदाकृतिश्च," "the mountain Lord, of
+  // pure and shining form") is the nominative — गिरिशः sandhi-realized as
+  // -o before the voiced विशदाकृतिः that follows — one more case-form
+  // alongside v.43's vocative गिरिश.
+  { id: 'shl-girisha', deva: ['गिरिश', 'गिरिशो'], iast: ['giriśa', 'giriśō'], english: ['lord of the mountain'] },
   // देव/deva ("God"), vocative — v.33, "सकृदेव देव भवतः," "O God, is not
   // even a single [deed]..." — सकृदेव (sakṛt+eva, "even once") is the
   // fused word right before it; देव itself sits clean and separate.
