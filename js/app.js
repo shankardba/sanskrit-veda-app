@@ -1449,6 +1449,35 @@ const MEANING_CONCEPTS = [
   // दीनानां," "closest kinsman of the distressed"). v.13's दीनः is
   // sandhi-fused ("दीनस्तव"), not boxable.
   { id: 'shl-dina', deva: ['दीनानां'], iast: ['dīnānāṃ'], english: ['distressed'] },
+  // विभु/vibhu ("all-pervading," a standing epithet this poem reaches for
+  // constantly) — विभो, vocative, already clean in v.21/22/23/29 within
+  // this one batch alone; expect it throughout. Glossed "pervading," not
+  // the hyphenated "all-pervading" the translation actually uses — the
+  // English-side tokenizer splits on hyphens (see the leading-apostrophe
+  // gotcha fixed earlier for the same class of issue), so a hyphenated
+  // multi-word gloss can never match; "all" and "pervading" end up as two
+  // separate word-runs at render time, and only the second one is usable.
+  { id: 'shl-vibhu', deva: ['विभो'], iast: ['vibhō'], english: ['pervading'] },
+  // शङ्कर/śaṅkara ("Shankara," a name of Shiva — also, unrelatedly, the
+  // author's own name) — the closing words of v.22 and v.23 are identical
+  // ("कथमिह सहे शङ्कर विभो," "how could I bear it here, O Shankara, O
+  // all-pervading one"), a real refrain spanning two adjacent verses, not
+  // a coincidence. Since buildRepeatCounts only scans repeats within a
+  // single section, a cross-verse refrain like this NEEDS a MEANING_CONCEPTS
+  // entry to connect at all — the generic repeat-boxing alone would treat
+  // v.22 and v.23 as unrelated.
+  { id: 'shl-shankara', deva: ['शङ्कर'], iast: ['śaṅkara'], english: ['shankara'] },
+  // स्वामिन्/svāmin ("Master") — clean once, v.21 ("जय स्वामिन् शक्त्या
+  // सह," "reign there in triumph, O Master, together with Shakti"). Its
+  // v.24 and v.30 siblings are both broken by the source's own mid-word
+  // hyphenation (स्वामि-न्परमशिव, stranding the final न् with the next
+  // word — the same phenomenon as म्पतये/म्मे in Namakam) or sandhi-fused
+  // (स्वामिंस्त्रिलोकीगुरो), so only this one is boxable for now.
+  { id: 'shl-svamin', deva: ['स्वामिन्'], iast: ['svāmin'], english: ['master'] },
+  // गिरिश/giriśa ("Lord of the mountain," an epithet distinct from
+  // गिरिसुता/girisutā, Soundarya Lahari's "daughter of the mountain," for
+  // the parallel form) — v.26 and v.27, adjacent verses.
+  { id: 'shl-girisha', deva: ['गिरिश'], iast: ['giriśa'], english: ['lord of the mountain'] },
 ];
 
 const MEANING_CONCEPTS_BY_ID = new Map(MEANING_CONCEPTS.map((c) => [c.id, c]));
