@@ -1308,6 +1308,12 @@ const MEANING_CONCEPTS = [
   // दृष्टि and दृश् above, each grammatically its own noun rather than a
   // shared root's case-forms.
   { id: 'sl-netra', deva: ['नेत्रे'], iast: ['nētrē'], english: ['eyes'] },
+  // जननि/janani ("O mother," vocative) — v.28 and v.64, identical spelling
+  // both times, far enough apart (36 verses) that linkScope keeps them
+  // from cross-connecting, but each still boxes and links to "mother" on
+  // its own line. One more vocative epithet for the Goddess alongside
+  // भवानि, rotating in as the poem's other addresses do.
+  { id: 'sl-janani', deva: ['जननि'], iast: ['janani'], english: ['mother'] },
   // शिवः/śivaḥ — unambiguously the god Śiva, nominative masculine, every
   // time it occurs (v.1, v.32, v.92 all translate it as the proper name).
   // Deliberately does NOT include शिवे despite looking like a one-letter
