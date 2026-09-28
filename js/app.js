@@ -1318,6 +1318,14 @@ const MEANING_CONCEPTS = [
   // rotating vocative epithet for the Goddess alongside भवानि/जननि; this
   // poem rarely addresses her the same way twice in a row.
   { id: 'sl-devi', deva: ['देवि'], iast: ['dēvi'], english: ['goddess'] },
+  // गिरिसुता/girisutā ("daughter of the mountain") — गिरिसुते, vocative,
+  // clean in v.67 and v.82 (its v.78 sibling, "नाभिर्गिरिसुते," is sandhi-
+  // fused and not boxable). Far enough apart not to cross-link under
+  // linkScope: 'local', but the same recurring epithet either way.
+  { id: 'sl-girisuta', deva: ['गिरिसुते'], iast: ['girisutē'], english: ['daughter of the mountain'] },
+  // पार्वति/pārvati — her own name used as a vocative, v.81, distinct from
+  // the epithets (भवानि/जननि/देवि/गिरिसुता) that surround it elsewhere.
+  { id: 'sl-parvati', deva: ['पार्वति'], iast: ['pārvati'], english: ['parvati'] },
   // शिवः/śivaḥ — unambiguously the god Śiva, nominative masculine, every
   // time it occurs (v.1, v.32, v.92 all translate it as the proper name).
   // Deliberately does NOT include शिवे despite looking like a one-letter
