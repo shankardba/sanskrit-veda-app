@@ -1445,6 +1445,10 @@ const MEANING_CONCEPTS = [
     iast: ['paśupatiṃ', 'paśupatē'],
     english: ['lord of bound souls', 'lord of creatures'],
   },
+  // दीन ("poor/distressed") — दीनानां (genitive plural, v.14, "परमबन्धुः
+  // दीनानां," "closest kinsman of the distressed"). v.13's दीनः is
+  // sandhi-fused ("दीनस्तव"), not boxable.
+  { id: 'shl-dina', deva: ['दीनानां'], iast: ['dīnānāṃ'], english: ['distressed'] },
 ];
 
 const MEANING_CONCEPTS_BY_ID = new Map(MEANING_CONCEPTS.map((c) => [c.id, c]));
