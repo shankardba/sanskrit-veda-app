@@ -38,7 +38,11 @@ const CHANTS = [
   // occurrences within the same verse or an adjacent one, not the whole
   // chant (see the section-proximity check in initRepeatClickHandling).
   { id: 'soundarya-lahari', label: 'Soundarya Lahari', language: 'sanskrit', linkScope: 'local' },
-  { id: 'shivananda-lahari', label: 'Shivananda Lahari', language: 'sanskrit' },
+  // linkScope: 'local' — same reasoning as Soundarya Lahari above: a
+  // continuous 100-verse devotional poem (also Śaṅkara's), not a litany,
+  // so word recurrence across distant verses is ordinary vocabulary reuse
+  // rather than a deliberate refrain.
+  { id: 'shivananda-lahari', label: 'Shivananda Lahari', language: 'sanskrit', linkScope: 'local' },
 ];
 
 // Dropdown group order/labels — Tamil first so Abirami Antati (CHANTS[0],
@@ -85,6 +89,9 @@ const SECTION_NOTES = {
     42: () => buildTwoPartStructureNote(),
     101: () => buildColophonAndAppendixNote(),
     103: () => buildNiAlliterationNote(),
+  },
+  'shivananda-lahari': {
+    1: () => buildDualEndingAndParticipleChainNote(),
   },
 };
 
@@ -649,6 +656,17 @@ function buildNiAlliterationNote() {
     bodyHtml: `
       <p>Read this verse's first three lines aloud and the pattern is hard to miss: <em>nidhē nityasmērē niravadhiguṇē nītinipuṇē nirāghātajñānē niyamaparachittaikanilayē niyatyā nirmuktē nikhilanigamāntastutipadē nirātaṅkē nityē</em> — ten words in a row, every one of them starting with <em>ni-</em>, before the verse finally relaxes into ordinary phrasing for its closing request (<em>nigamaya mamāpi stutim imām</em>, "accept this hymn of mine too"). This is alliteration used as structure, not just ornament — a display of the same virtuosity Sanskrit poets prized in devices like the maṭakku-style repetition seen elsewhere on this site (see Thirukkural's Adhikāram 30 note), just built from a shared initial sound instead of a repeated word.</p>
       <p>Most of these <em>ni-</em> words are the negating prefix <em>nir-/nis-</em> ("without, free from") fused onto a noun — <em>nirāghāta</em>, "without disturbance"; <em>nirātaṅka</em>, "without affliction." Sanskrit has more than one way to negate a word this way — verse 1's <em>akṛtapuṇyaḥ</em> ("one without merit") uses the other common prefix, <em>a-/an-</em>, just once in passing; here, a whole verse is built by leaning on <em>nir-</em> instead, turning a grammatical tool into the verse's entire sound.</p>
+    `,
+  };
+}
+
+function buildDualEndingAndParticipleChainNote() {
+  return {
+    title: 'A Pair, Praised as One',
+    subtitle: 'Shivananda Lahari · Verses 1-2',
+    bodyHtml: `
+      <p>This poem opens by bowing not to Shiva alone but to Shiva-and-Pārvatī together, and its grammar says so before its meaning does: <em>kaḻābhyāṃ ... śaśikaḻābhyāṃ ... phalābhyāṃ ... phalābhyāṃ ... śivābhyāṃ ... śivābhyāṃ ... bhavābhyāṃ ... anubhavābhyāṃ</em> — eight words in four lines, every one of them ending in <em>-ābhyām</em>, the dual instrumental/dative ending Sanskrit reserves specifically for "the two of them." English has to keep repeating "the pair" or "both of them" to say what Sanskrit says once, structurally, by choosing this one ending and never letting go of it. <em>śivābhyām</em> itself appears twice — first the bare dual of शिव, then again as the last member of a compound (अस्तोकत्रिभुवनशिवाभ्यां, "abundant source of auspiciousness for all three worlds") — the same grammatical shape doing double duty.</p>
+      <p>Verse 2 shifts to a different device for the same effect: <em>gaḻantī ... daḻantī ... patantī ... diśantī ... vasantī</em> — five feminine present participles in a row (flowing, breaking, falling, bestowing, dwelling), each one describing the wave of bliss the verse is building toward, which turns out at the very last word to be the poem's own name: <em>śivānandalaharī</em>, "the wave of Shiva-bliss" — the same phrase the whole book is titled after, woven into its own second verse. Naming a work inside itself like this is a real convention in Sanskrit devotional poetry, not a coincidence; it functions a bit like a composer's signature.</p>
     `,
   };
 }
@@ -1305,13 +1323,20 @@ const MEANING_CONCEPTS = [
   // the next time he appears unfused nearby.
   { id: 'sl-virinchi', deva: ['विरिञ्चिः'], iast: ['viriñchiḥ'], english: ['brahma'] },
   // शम्भु/śambhu ("the benevolent one," an epithet of Shiva distinct from
-  // the bare name शिव) — शम्भोः (genitive, v.34, "शरीरं त्वं शम्भोः," "you are
-  // the very body of Shambhu") and शम्भुं (accusative, v.36, "परं शम्भुं
-  // वन्दे," "I bow to the supreme Shambhu"). Two verses apart, outside
-  // linkScope's adjacent-verse window, so these connect to their own lines
-  // but not yet to each other — registered anyway so a future unfused
-  // mention nearby has a concept ready to join.
-  { id: 'sl-shambhu', deva: ['शम्भोः', 'शम्भुं'], iast: ['śambhōḥ', 'śambhuṃ'], english: ['shambhu'] },
+  // the bare name शिव) — शम्भोः (genitive, Soundarya Lahari v.34, "शरीरं
+  // त्वं शम्भोः," "you are the very body of Shambhu") and शम्भुं
+  // (accusative, v.36, "परं शम्भुं वन्दे," "I bow to the supreme Shambhu").
+  // Chant-agnostic like rudra/sahasra above — id keeps its "sl-" prefix
+  // from where it was first registered, but शम्भो (vocative) was added for
+  // Shivananda Lahari verses 2 and 4 ("गलन्ती शम्भो," "चिरं याचे शम्भो"),
+  // a different poem entirely; v.6's शम्भोः ("पदाम्भोजं शम्भोर्भज") is
+  // sandhi-fused there, not boxable.
+  {
+    id: 'sl-shambhu',
+    deva: ['शम्भोः', 'शम्भुं', 'शम्भो'],
+    iast: ['śambhōḥ', 'śambhuṃ', 'śambhō'],
+    english: ['shambhu'],
+  },
   // दृष्टि/dṛṣṭi ("glance") — v.51's "जननी दृष्टिः सकरुणा," "mother, let
   // that glance turn compassionate," a clean nominative. Kept separate
   // from दृश्/dṛś below despite the near-identical meaning and shared root
@@ -1381,7 +1406,11 @@ const MEANING_CONCEPTS = [
   // Same spelling, two different words depending on gender/case/context —
   // exactly the polysemy trap catalogued for பொருள் above, so it's
   // explained in the verse-1 note rather than mapped to either gloss.
-  { id: 'sl-shiva', deva: ['शिवः'], iast: ['śivaḥ'], english: ['shiva'] },
+  // शिव (vocative, "O Shiva") added for Shivananda Lahari v.4, "याचे शम्भो
+  // शिव तव पदाम्भोज-भजनम्" — chant-agnostic like rudra/sahasra/sl-shambhu,
+  // unambiguous here (unlike शिवे above, this bare vocative masculine form
+  // has no feminine-word homograph to worry about).
+  { id: 'sl-shiva', deva: ['शिवः', 'शिव'], iast: ['śivaḥ', 'śiva'], english: ['shiva'] },
   // सत्/sat ("the good/wise [people]," used substantively) — सतां (genitive
   // plural) in v.15 twice and v.16 once, सन्तः (nominative plural) in v.16
   // once: same word, two cases, three clean occurrences across two adjacent
@@ -1402,6 +1431,19 @@ const MEANING_CONCEPTS = [
     deva: ['सतां', 'सन्तः'],
     iast: ['satāṃ', 'santaḥ'],
     english: ['the wise', 'wise', 'good souls'],
+  },
+
+  // --- Shivananda Lahari (also linkScope: 'local' — see the CHANTS entry
+  // above; another continuous 100-verse Śaṅkara poem, not a litany) ---
+  //
+  // पशुपति/paśupati ("Lord of bound souls/creatures," one of this poem's
+  // most frequent epithets for Shiva) — पशुपतिं (accusative, v.3) and
+  // पशुपते (vocative, v.5 and v.8).
+  {
+    id: 'shl-pashupati',
+    deva: ['पशुपतिं', 'पशुपते'],
+    iast: ['paśupatiṃ', 'paśupatē'],
+    english: ['lord of bound souls', 'lord of creatures'],
   },
 ];
 
