@@ -1441,8 +1441,15 @@ const MEANING_CONCEPTS = [
   // पशुपते (vocative, v.5 and v.8).
   {
     id: 'shl-pashupati',
-    deva: ['पशुपतिं', 'पशुपते'],
-    iast: ['paśupatiṃ', 'paśupatē'],
+    // पशूनां पते (v.31, "त्वेकं पशूनां पते," "O Lord of bound souls, is
+    // this one [deed] alone...") says the same thing analytically — पशु
+    // ("bound souls") genitive plural + पते ("lord") vocative, two words —
+    // rather than as one compound. Same two-word-phrase mechanism as
+    // Namakam/Chamakam's cha mē (see phrase-level-meaning-concepts-vs-
+    // single-word on Claude Hub): registered as its own literal phrase
+    // form on this concept rather than a different one.
+    deva: ['पशुपतिं', 'पशुपते', 'पशूनां पते'],
+    iast: ['paśupatiṃ', 'paśupatē', 'paśūnāṃ patē'],
     english: ['lord of bound souls', 'lord of creatures'],
   },
   // दीन ("poor/distressed") — दीनानां (genitive plural, v.14, "परमबन्धुः
@@ -1478,6 +1485,10 @@ const MEANING_CONCEPTS = [
   // गिरिसुता/girisutā, Soundarya Lahari's "daughter of the mountain," for
   // the parallel form) — v.26 and v.27, adjacent verses.
   { id: 'shl-girisha', deva: ['गिरिश'], iast: ['giriśa'], english: ['lord of the mountain'] },
+  // देव/deva ("God"), vocative — v.33, "सकृदेव देव भवतः," "O God, is not
+  // even a single [deed]..." — सकृदेव (sakṛt+eva, "even once") is the
+  // fused word right before it; देव itself sits clean and separate.
+  { id: 'shl-deva', deva: ['देव'], iast: ['dēva'], english: ['god'] },
 ];
 
 const MEANING_CONCEPTS_BY_ID = new Map(MEANING_CONCEPTS.map((c) => [c.id, c]));
