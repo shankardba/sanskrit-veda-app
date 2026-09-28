@@ -780,9 +780,10 @@ const MEANING_CONCEPTS = [
     // is what रुद्रः becomes before a voiced sound, but here it precedes
     // the voiceless क्, so visarga stays visarga rather than shifting to
     // ओ. Same case, different sandhi environment, another chant-agnostic
-    // form catalogued the same way as सहस्र's.
-    deva: ['रुद्र', 'रुद्राय', 'रुद्रा', 'रुद्रो', 'रुद्रस्य', 'रुद्रेभ्यो', 'रुद्रोत', 'रुद्रः'],
-    iast: ['rudra', 'rudrāya', 'rudrā', 'rudrō', 'rudrasya', 'rudrēbhyō', 'rudrōta', 'rudraḥ'],
+    // form catalogued the same way as सहस्र's. रुद्रं/rudraṃ (v.83,
+    // accusative, "पराजेतुं रुद्रं," "to conquer Rudra") is one more.
+    deva: ['रुद्र', 'रुद्राय', 'रुद्रा', 'रुद्रो', 'रुद्रस्य', 'रुद्रेभ्यो', 'रुद्रोत', 'रुद्रः', 'रुद्रं'],
+    iast: ['rudra', 'rudrāya', 'rudrā', 'rudrō', 'rudrasya', 'rudrēbhyō', 'rudrōta', 'rudraḥ', 'rudraṃ'],
     english: ['rudra'],
   },
   { id: 'shiva', deva: ['शिवा'], iast: ['śivā'], english: ['auspicious'] },
@@ -1326,6 +1327,19 @@ const MEANING_CONCEPTS = [
   // पार्वति/pārvati — her own name used as a vocative, v.81, distinct from
   // the epithets (भवानि/जननि/देवि/गिरिसुता) that surround it elsewhere.
   { id: 'sl-parvati', deva: ['पार्वति'], iast: ['pārvati'], english: ['parvati'] },
+  // मातृ/mātṛ ("mother") — मातः, vocative, v.84 ("ममाप्येतौ मातः शिरसि
+  // दयया," "place these two [feet] on my head too, O mother"). A
+  // different word from जननि/sl-janani despite the identical gloss — the
+  // CONCEPT_BY_ENGLISH fix above is exactly what lets both safely share
+  // "mother" now. v.65's मातः ("विलीयन्ते मातस्तव") is sandhi-fused
+  // (मातः+तव), not boxable.
+  { id: 'sl-matar', deva: ['मातः'], iast: ['mātaḥ'], english: ['mother'] },
+  // चरण/charaṇa ("foot") — the recurring subject of verses 83-90, the
+  // poem's closing stretch on the Goddess's feet. चरणौ (dual, v.84 and
+  // v.89 — "धेहि चरणौ"/"ते चण्डि चरणौ") and चरणे (locative, v.90 — "यातु
+  // चरणे"), the last two adjacent verses so this pair also cross-links
+  // under linkScope: 'local', unlike the wider-spaced repeats above.
+  { id: 'sl-charana', deva: ['चरणौ', 'चरणे'], iast: ['charaṇau', 'charaṇē'], english: ['feet', 'foot'] },
   // शिवः/śivaḥ — unambiguously the god Śiva, nominative masculine, every
   // time it occurs (v.1, v.32, v.92 all translate it as the proper name).
   // Deliberately does NOT include शिवे despite looking like a one-letter
