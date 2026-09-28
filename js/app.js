@@ -1287,6 +1287,27 @@ const MEANING_CONCEPTS = [
   // but not yet to each other — registered anyway so a future unfused
   // mention nearby has a concept ready to join.
   { id: 'sl-shambhu', deva: ['शम्भोः', 'शम्भुं'], iast: ['śambhōḥ', 'śambhuṃ'], english: ['shambhu'] },
+  // दृष्टि/dṛṣṭi ("glance") — v.51's "जननी दृष्टिः सकरुणा," "mother, let
+  // that glance turn compassionate," a clean nominative. Kept separate
+  // from दृश्/dṛś below despite the near-identical meaning and shared root
+  // (√dṛś, "to see") — दृष्टि is its own -ति-suffixed noun, not a case-form
+  // of the root-noun दृश् itself, so folding them into one concept would
+  // misrepresent two different (if closely related) words as one.
+  { id: 'sl-drishti', deva: ['दृष्टिः'], iast: ['dṛṣṭiḥ'], english: ['glance'] },
+  // दृश्/dṛś ("eye/glance," an irregular root-noun declined directly off
+  // √dṛś rather than through a derived stem) — दृशः (v.55, ablative/
+  // genitive, "your eyes/glances") and दृशा (v.57, instrumental, "by your
+  // glance"). Two verses apart, outside linkScope's adjacent window, but
+  // still the same word in two cases.
+  { id: 'sl-drsh', deva: ['दृशः', 'दृशा'], iast: ['dṛśaḥ', 'dṛśā'], english: ['eyes', 'glance'] },
+  // नेत्र/nētra ("eye") — v.52's "इमे नेत्रे," "these two eyes," a clean
+  // dual. v.53's नेत्रत्रितयम् and v.54's नेत्रैः are both sandhi-fused into
+  // a bigger compound in this source ("त्वन्नेत्रत्रितयम्,"
+  // "दयामित्रैर्नेत्रैररुण..."), so only this one occurrence is boxable for
+  // now — a third word for "eye" in this stretch of the poem, alongside
+  // दृष्टि and दृश् above, each grammatically its own noun rather than a
+  // shared root's case-forms.
+  { id: 'sl-netra', deva: ['नेत्रे'], iast: ['nētrē'], english: ['eyes'] },
   // शिवः/śivaḥ — unambiguously the god Śiva, nominative masculine, every
   // time it occurs (v.1, v.32, v.92 all translate it as the proper name).
   // Deliberately does NOT include शिवे despite looking like a one-letter
@@ -1324,7 +1345,24 @@ const MEANING_CONCEPTS = [
 const MEANING_CONCEPTS_BY_ID = new Map(MEANING_CONCEPTS.map((c) => [c.id, c]));
 const CONCEPT_BY_DEVA = new Map(MEANING_CONCEPTS.flatMap((c) => c.deva.map((form) => [form, c.id])));
 const CONCEPT_BY_IAST = new Map(MEANING_CONCEPTS.flatMap((c) => c.iast.map((form) => [form, c.id])));
-const CONCEPT_BY_ENGLISH = new Map(MEANING_CONCEPTS.flatMap((c) => c.english.map((word) => [word, c.id])));
+// Maps to an ARRAY of concept ids, not a single id — unlike deva/iast forms
+// (which are naturally distinct per word), two different Sanskrit words can
+// easily share an English gloss (सल-drishti, sl-drsh, and sl-netra are all
+// "eye"/"glance" near-synonyms). A single-id map silently let the
+// last-registered concept win a collision, breaking the per-line gating the
+// comment above promises: whichever concept SHOULD have boxed a line
+// (found via conceptsInLine on the Sanskrit side) would fail to match here
+// because CONCEPT_BY_ENGLISH.get(word) returned a different concept's id.
+// See renderTranslationText's matching loop below for the fix on the read
+// side — it now checks every id sharing that word against the line's own
+// active set, not just the first/last one registered.
+const CONCEPT_BY_ENGLISH = new Map();
+for (const c of MEANING_CONCEPTS) {
+  for (const word of c.english) {
+    if (!CONCEPT_BY_ENGLISH.has(word)) CONCEPT_BY_ENGLISH.set(word, []);
+    CONCEPT_BY_ENGLISH.get(word).push(c.id);
+  }
+}
 
 // Which concepts actually occur in this specific verse-line, so an English
 // word only gets boxed on lines where its Sanskrit counterpart genuinely
@@ -1802,8 +1840,9 @@ function renderTranslationText(text, conceptIds, lineKey) {
         .slice(0, n)
         .map((idx) => parts[idx].toLowerCase())
         .join(' ');
-      const conceptId = hasConcepts ? CONCEPT_BY_ENGLISH.get(key) : null;
-      if (conceptId && conceptIds.has(conceptId)) {
+      const candidateIds = hasConcepts ? CONCEPT_BY_ENGLISH.get(key) : null;
+      const conceptId = candidateIds ? candidateIds.find((id) => conceptIds.has(id)) : null;
+      if (conceptId) {
         matchedConceptId = conceptId;
         matchedEndIdx = wordIdxAhead[n - 1];
         break;
