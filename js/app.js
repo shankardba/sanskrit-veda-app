@@ -43,13 +43,22 @@ const CHANTS = [
   // so word recurrence across distant verses is ordinary vocabulary reuse
   // rather than a deliberate refrain.
   { id: 'shivananda-lahari', label: 'Shivananda Lahari', language: 'sanskrit', linkScope: 'local' },
+  // category: 'raksha-stotram' — see CHANT_GROUPS below: a Raksha Stotram
+  // sub-section under Sanskrit, for short protective-hymn stotrams (as
+  // opposed to the long continuous lahari poems or the Rudram litanies).
+  { id: 'bala-raksha-stotram', label: 'Sri Bala Raksha Stotram', language: 'sanskrit', category: 'raksha-stotram' },
 ];
 
 // Dropdown group order/labels — Tamil first so Abirami Antati (CHANTS[0],
 // also the default chant on a first visit) stays the first option overall.
+// A group with a `category` is a sub-section within its language: only
+// chants whose own `category` matches are listed there, while the plain
+// language group (no `category`) picks up everything else — see the
+// filter in populateChantSelect below.
 const CHANT_GROUPS = [
   { language: 'tamil', label: 'Tamil' },
   { language: 'sanskrit', label: 'Sanskrit' },
+  { language: 'sanskrit', category: 'raksha-stotram', label: 'Raksha Stotrams' },
 ];
 
 // Optional per-section popup notes, keyed by chant id then section label —
@@ -747,7 +756,9 @@ function populateChantSelect(languageFilter) {
   for (const group of groups) {
     const parent = languageFilter ? chantSelect : document.createElement('optgroup');
     if (!languageFilter) parent.label = group.label;
-    for (const chant of CHANTS.filter((c) => c.language === group.language)) {
+    for (const chant of CHANTS.filter(
+      (c) => c.language === group.language && (group.category ? c.category === group.category : !c.category)
+    )) {
       const option = document.createElement('option');
       option.value = chant.id;
       option.textContent = chant.label;
@@ -1493,6 +1504,48 @@ const MEANING_CONCEPTS = [
   // even a single [deed]..." — सकृदेव (sakṛt+eva, "even once") is the
   // fused word right before it; देव itself sits clean and separate.
   { id: 'shl-deva', deva: ['देव'], iast: ['dēva'], english: ['god'] },
+
+  // --- Sri Bala Raksha Stotram (first entry in the new "Raksha Stotrams"
+  // sub-section under Sanskrit — see CHANT_GROUPS/CHANTS above). A litany
+  // of short protective imperatives to the goddess, not a continuous poem,
+  // so no linkScope: 'local' — whole-chant linking is correct here, same
+  // as Namakam/Chamakam. ---
+  // देहि मे/dēhi mē, "grant me" — the stotra's structural refrain, closing
+  // six of its eighteen verses' second line (v.7-10, 15, 17): a two-word
+  // phrase like Namakam's "cha mē," so it's registered whole rather than
+  // relying on the standalone "me" concept above, which would otherwise
+  // catch every one of these "मे" tokens on its own. v.10's देहि is
+  // sandhi-fused to the previous word (यत्तद्देहि, यत्तत्+देहि with no
+  // word-space) so it doesn't register there — same sandhi-fusion
+  // exclusion as elsewhere.
+  { id: 'brs-dehi-me', deva: ['देहि मे'], iast: ['dēhi mē'], english: ['grant me'] },
+  // रक्ष/rakṣa, the bare imperative "protect" — the verb the whole genre
+  // (and this stotra's own title) is named for. v.1, v.2, v.11 (doubled,
+  // "रक्ष रक्ष माम्"), v.13. परिरक्ष (v.12) is the same root under a
+  // prefix, a different surface token, so left unboxed here.
+  { id: 'brs-raksha', deva: ['रक्ष'], iast: ['rakṣa'], english: ['protect'] },
+  // पाहि मां/pāhi māṃ, "protect me" — a synonymous refrain built on a
+  // different root (√pā, not √rakṣ), alternating with rakṣa's imperative
+  // through the stotra: v.3, v.5, v.14 read "पाहि मां," while v.4 reverses
+  // the word order ("मां पाहि"), so both orders are registered.
+  {
+    id: 'brs-pahi-mam',
+    deva: ['पाहि मां', 'मां पाहि'],
+    iast: ['pāhi māṃ', 'māṃ pāhi'],
+    english: ['protect me'],
+  },
+  // कृपया/kṛpayā, "with compassion" — v.3 (कृपयाऽनिशम्, avagraha-separated,
+  // so still a clean token), v.11, v.18. v.17's कृपयेश्वरि is sandhi-fused
+  // (kṛpayā+īśvari → kṛpayē-), so excluded.
+  { id: 'brs-kripaya', deva: ['कृपया'], iast: ['kṛpayā'], english: ['compassion'] },
+  // Four distinct goddess-vocatives, each addressed to her under a
+  // different aspect — kept as separate concepts rather than merged,
+  // matching how Soundarya/Shivananda Lahari keep देवि, जननि, मातः etc.
+  // distinct even though all gloss roughly "goddess/mother" in English.
+  { id: 'brs-devesi', deva: ['देवेशि'], iast: ['dēvēśi'], english: ['queen of the gods'] },
+  { id: 'brs-parameshvari', deva: ['परमेश्वरि'], iast: ['paramēśvari'], english: ['supreme goddess'] },
+  { id: 'brs-jagadishvari', deva: ['जगदीश्वरि'], iast: ['jagadīśvari'], english: ['ruler of the world'] },
+  { id: 'brs-paradevate', deva: ['परदेवते'], iast: ['paradēvatē'], english: ['supreme deity'] },
 ];
 
 const MEANING_CONCEPTS_BY_ID = new Map(MEANING_CONCEPTS.map((c) => [c.id, c]));
