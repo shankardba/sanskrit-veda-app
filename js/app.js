@@ -28,10 +28,10 @@ const CHANTS = [
   { id: 'mudhal-tiruvantati', label: 'Mudhal Tiruvantati', language: 'tamil', collection: 'antati' },
   { id: 'irandam-tiruvantati', label: 'Irandam Tiruvantati', language: 'tamil', collection: 'antati' },
   { id: 'munram-tiruvantati', label: 'Munram Tiruvantati', language: 'tamil', collection: 'antati' },
+  { id: 'kanninun-cirutampu', label: 'Kanninun Cirutampu', language: 'tamil', collection: 'antati' },
   { id: 'thirukkural-arathuppal', label: 'Aratthuppal (Virtue)', language: 'tamil', collection: 'thirukkural' },
   { id: 'thirukkural-porutpal', label: 'Porutpal (Wealth)', language: 'tamil', collection: 'thirukkural' },
   { id: 'thirukkural-kaamathuppal', label: 'Kaamathuppal (Love)', language: 'tamil', collection: 'thirukkural' },
-  { id: 'kanninun-cirutampu', label: 'Kanninun Cirutampu', language: 'tamil', collection: 'tamil-hymns' },
   { id: 'vel-maaral-tamil', label: 'Vel Maaral', language: 'tamil', collection: 'tamil-hymns' },
   { id: 'sri-rudram-namakam', label: 'Namakam', language: 'sanskrit', collection: 'rudram' },
   { id: 'sri-rudram-chamakam', label: 'Chamakam', language: 'sanskrit', collection: 'rudram' },
@@ -170,6 +170,28 @@ const SECTION_NOTES = {
   'devi-kavacham': {
     Viniyoga: () => buildDeviKavachamSignificanceNote(),
     'Verse 21': () => buildDeviKavachamWholePersonNote(),
+  },
+  'abirami-antati': {
+    Kāppu: () => buildAbiramiAntatiSignificanceNote(),
+    79: () => buildAbiramiMoonNote(),
+  },
+  'arpudha-tiruvantati': {
+    1: () => buildArpudhaTiruvantatiSignificanceNote(),
+  },
+  'saraswati-antati': {
+    'Kaṭavuḷ Vāḻttu 1': () => buildSaraswatiAntatiSignificanceNote(),
+  },
+  'mudhal-tiruvantati': {
+    1: () => buildThreeLampsNote('mudhal'),
+  },
+  'irandam-tiruvantati': {
+    1: () => buildThreeLampsNote('irandam'),
+  },
+  'munram-tiruvantati': {
+    1: () => buildThreeLampsNote('munram'),
+  },
+  'kanninun-cirutampu': {
+    1: () => buildKanninunSignificanceNote(),
   },
 };
 
@@ -1067,6 +1089,97 @@ function buildDeviKavachamWholePersonNote() {
         <li><strong>A life</strong> (vv.39-41): life span, dharma, fame, fortune, wealth, learning, family line, cattle, sons, wife, the path one walks, the road, the king's gate.</li>
       </ul>
       <p>And then, in verse 42, the catch-all every thorough kavacham ends with: "whatever place is left without protection, not covered by the armor, protect all of it for me." Read in order, it is almost a map of how Indian thought describes a human being, from the outermost hair to the three guṇas at the root of nature and back out into a household and a kingdom, with a goddess stationed at every layer.</p>
+    `,
+  };
+}
+
+const ANTATI_FORM_LINK = '<a href="antati-form.html">Antāti form page</a>';
+
+function buildAbiramiAntatiSignificanceNote() {
+  return {
+    title: 'A Hundred Verses Sung Over a Fire',
+    subtitle: 'Abirami Antati · Spiritual Significance',
+    bodyHtml: `
+      <p><strong>The poet and the goddess.</strong> The Abirami Antati was composed in the eighteenth century by Subramaniya Iyer, a temple priest at Thirukkadaiyur in the Kaveri delta, who became known as Abirami Bhattar. He was devoted to Abirami, the goddess of that temple, consort of Shiva as Amritaghateshvara ("lord of the pot of nectar"). His devotion was so absorbed that the townspeople took him for a madman.</p>
+      <p><strong>The story told about it.</strong> The tradition is that the Maratha king of Thanjavur, visiting the temple, asked him the date. Lost in the vision of the goddess's moonlike face, Bhattar answered that it was the full moon, on what was in fact the new-moon night. Challenged to make good on it or die, he had a fire lit beneath a hanging platform and began to sing, cutting one rope for each verse. As he reached the 79th verse, the story says, the goddess appeared and flung her earring into the sky, where it shone as the full moon. (See the Σ note on verse 79.) He went on to complete the hundred.</p>
+      <p><strong>How it is used.</strong> The hundred verses are sung as a whole in Tamil Shakta households and temples, and single verses are widely recited for specific blessings, with the closing <em>nūl payan</em> ("fruit of the text") promising that "no harm whatsoever can ever come to those who worship her." The opening verse sets the tone: it piles image on image for her radiant red form (the rising sun, the forehead mark, a ruby, a pomegranate bud, a lotus, lightning, kumkum) and ends on the single word that matters, <em>vizhut-tuṇaiyē</em>, "my true refuge."</p>
+      <p><strong>The chain.</strong> As an antāti, each verse begins with the last word of the one before: verse 1 ends <em>…tuṇaiyē</em>, and verse 2 opens <em>tuṇaiyum…</em>. The whole hymn is a single garland, and its hundredth verse links back to the first. See the ${ANTATI_FORM_LINK} for how the form works.</p>
+    `,
+  };
+}
+
+function buildAbiramiMoonNote() {
+  return {
+    title: 'The Verse That Raised the Moon',
+    subtitle: 'Abirami Antati · Verse 79',
+    bodyHtml: `
+      <p>This is the verse at which, according to the story told about the Abirami Antati, the goddess answered her poet. Abirami Bhattar had declared a new-moon night to be the full moon; to save him, she threw her earring into the sky and it shone as the moon.</p>
+      <p>The verse itself does not mention the moon. It is about grace and the choice of a path: "Even in her mere glance there is grace, for Abirama Valli; and we too have hearts willing to walk the path the Vedas have shown." Its point is that the goddess's grace is already given, in her glance alone; the only question is whether the devotee turns toward it. That the tradition places the miracle here, on a verse about grace being already present in a look, rather than on one that asks for a sign, fits the whole hymn's devotional logic.</p>
+    `,
+  };
+}
+
+function buildArpudhaTiruvantatiSignificanceNote() {
+  return {
+    title: 'The First Antāti, by the "Ghoul" of Kāraikkāl',
+    subtitle: 'Arpudha Tiruvantati · Spiritual Significance',
+    bodyHtml: `
+      <p><strong>Where Tamil bhakti begins.</strong> Kāraikkāl Ammaiyār, "the Mother of Kāraikkāl," lived around the sixth century and is one of the three women among the sixty-three Nāyanmār, the Tamil Shaiva saints. Her <em>Arpudat Tiruvantāti</em>, "the Sacred Antāti of Wonder," is among the earliest works of Tamil devotional poetry, and tradition credits her with inventing the antāti form itself. It is preserved in the eleventh book of the Shaiva canon, the <em>Tirumurai</em>.</p>
+      <p><strong>Her story.</strong> Born Punitavati, a merchant's wife, she once offered a mango meant for her husband to a Shaiva ascetic; when her husband asked for it, she prayed, and a second mango appeared in her hand. Frightened of a wife who could work miracles, he left her. She then asked Shiva to take away her beauty, now useless to her, and give her the form of a <em>pēy</em>, a gaunt, ghoul-like being of the cremation grounds, so that she could devote herself entirely to him. The tradition says she climbed Mount Kailāsa on her hands, and that Shiva greeted her as <em>Ammai</em>, "Mother."</p>
+      <p><strong>A signature in the last verse.</strong> Verse 101 names the poet as <em>Kāraikkāl pēy</em>, "the ghoul of Kāraikkāl," and promises that those who recite "this garland of antāti verses" will be born into "a love that never departs." Like Shankara naming his Shivananda Lahari inside its own second verse, she signs her work inside it, and signs it with the name of the form she chose.</p>
+      <p><strong>The poem's first words</strong> set the terms of everything after: "Ever since I was born and learned to speak, my whole love has turned... to reach your radiant red feet alone." It is love as a whole life, not an episode. See the ${ANTATI_FORM_LINK} for the word-chain that links each verse to the next.</p>
+    `,
+  };
+}
+
+function buildSaraswatiAntatiSignificanceNote() {
+  return {
+    title: 'The Scholar’s Prayer',
+    subtitle: 'Saraswati Antati · Spiritual Significance',
+    bodyHtml: `
+      <p><strong>Who it is for.</strong> Sarasvatī is the goddess of learning, speech, music, and the arts, and this antāti is traditionally attributed to Kambar, the twelfth-century poet of the Tamil Rāmāyaṇa (the <em>Kamba Rāmāyaṇam</em>). A great poet's prayer to the goddess of poetry: it is recited above all by students and scholars, and especially at Sarasvatī Pūjā, the day in the Navarātri festival when books, instruments, and tools are placed before her and not used.</p>
+      <p><strong>The opening invocation</strong> is one of the best-known verses in Tamil devotion: <em>āya kalaigaḷ aṟupattu nāṉkiṉaiyum ēya uṇarvikkum eṉ ammai</em>, "my Mother, who grants fitting understanding of all the sixty-four arts." The <em>sixty-four arts</em> (Sanskrit <em>catuḥṣaṣṭi kalāḥ</em>) is the classical Indian list of every accomplishment, from music, dance, and painting to perfumery, riddles, and architecture. Its promise is simple: if her bright, crystal-clear form dwells in the heart, "no misfortune will ever come near it."</p>
+      <p><strong>Speech as her gift.</strong> The first verse of the hymn proper asks a rhetorical question that is really the hymn's whole theology: if one praises her night and day without ceasing, "will not even a stone break into song?" Eloquence is not the poet's own; it is Sarasvatī's, lent. The closing verse lists what she gives in return for praise: wisdom, the essence of the Vedas, refined wealth, and "imperishable, great glory." See the ${ANTATI_FORM_LINK} for the form.</p>
+    `,
+  };
+}
+
+function buildThreeLampsNote(which) {
+  const place = {
+    mudhal: 'the first of the three',
+    irandam: 'the second of the three',
+    munram: 'the third of the three',
+  }[which];
+  return {
+    title: 'Three Poets, Three Lamps, One Night',
+    subtitle: {
+      mudhal: 'Mudhal Tiruvantati · Spiritual Significance',
+      irandam: 'Irandam Tiruvantati · Spiritual Significance',
+      munram: 'Munram Tiruvantati · Spiritual Significance',
+    }[which],
+    bodyHtml: `
+      <p><strong>The story behind all three.</strong> The Mudhal, Irandam, and Munram Tiruvantātis ("First," "Second," and "Third" Sacred Antātis) are by the three earliest Āzhvārs, the Tamil Vaishnava poet-saints: Poygai Āzhvār, Bhūtattāzhvār, and Pēyāzhvār. This one is ${place}. The tradition tells how the three, who had never met, were caught one stormy night at Tirukkōvalūr and took shelter in the same tiny covered porch, a space "where one could lie, two could sit, three could stand." As they stood pressed together in the dark, they felt a fourth presence crowding in among them. It was Vishnu, who is worshipped at Tirukkōvalūr as Trivikrama. Each poet then sang a hundred verses.</p>
+      <p><strong>The first verse of each is one step of a single vision:</strong></p>
+      <ul>
+        <li><em>Poygai Āzhvār</em> (Mudhal Tiruvantāti): "With the <em>earth</em> as the lamp's saucer, the vast <em>ocean</em> as its ghee, and the fierce-rayed <em>sun</em> as its flame." An outer lamp, made of the whole world, to see God by.</li>
+        <li><em>Bhūtattāzhvār</em> (Irandam Tiruvantāti): "With <em>love</em> as the lamp's saucer, <em>ardor</em> as the ghee, and a melting <em>heart</em> as the wick, I have lit a lamp of wisdom." An inner lamp, made of devotion.</li>
+        <li><em>Pēyāzhvār</em> (Munram Tiruvantāti): "<em>Tiru kaṇḍēṉ</em>, I have seen Śrī; I have seen his golden form... the discus, the conch, today." By the light of both lamps, the vision itself.</li>
+      </ul>
+      <p>Read together, the three opening verses move from the cosmos to the heart to direct sight: outer lamp, inner lamp, vision. Together these three hymns open the <em>Iyaṟpā</em> section of the <em>Nālāyira Divya Prabandham</em>, the four-thousand-verse Tamil Vaishnava canon.</p>
+      <p>All three are antātis: see the ${ANTATI_FORM_LINK} for how each verse is chained to the next.</p>
+    `,
+  };
+}
+
+function buildKanninunSignificanceNote() {
+  return {
+    title: 'The Disciple Who Sang Only of His Guru',
+    subtitle: 'Kanninun Cirutampu · Spiritual Significance',
+    bodyHtml: `
+      <p><strong>A hymn to a person, not a god.</strong> Madhurakavi Āzhvār's eleven verses are unique in the Divya Prabandham: they praise not Vishnu but Madhurakavi's own teacher, the poet-saint Nammāzhvār ("Nampi of southern Kurukūr"). The first verse says it outright. Even the Lord who "let himself be bound with a fine, slender rope" (the child Krishna, tied to a mortar by his mother Yaśodā, which is why he is called <em>Dāmodara</em>, "rope-bellied") is less sweet on Madhurakavi's tongue than the name of his guru. The title comes from that rope: <em>kaṇṇi nuṇ ciṟut tāmpu</em>, "the knotted, fine, small cord."</p>
+      <p><strong>The story of the meeting.</strong> The tradition says Madhurakavi, travelling in the north, saw a light in the southern sky and followed it for days, to a tamarind tree at Kurukūr where a young man sat in unbroken silence. To test him, Madhurakavi asked a riddle: "If the small one is born in the body of the dead, what will it eat, and where will it lie?" (How does a soul, in an inert body, live?) The silent one spoke for the first time: "That it will eat, and there it will lie." Madhurakavi became his disciple and served him for the rest of his life.</p>
+      <p><strong>The key to the canon.</strong> In the Śrīvaiṣṇava tradition this small hymn has a large role. Nāthamuni, who assembled the Divya Prabandham in the tenth century, is said to have recovered Nammāzhvār's lost verses by reciting <em>Kaṇṇinuṇ Ciṟuttāmpu</em> twelve thousand times, until Nammāzhvār appeared and gave him all four thousand. So it is recited before Nammāzhvār's great <em>Tiruvāymozhi</em>, as the way in. Its last verse promises Vaikuṇṭha to "those who trust these words." Devotion to the guru is the door to devotion to God.</p>
+      <p>Like the others in this collection it is an antāti; see the ${ANTATI_FORM_LINK}.</p>
     `,
   };
 }

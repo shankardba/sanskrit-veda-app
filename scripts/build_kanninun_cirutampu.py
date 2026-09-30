@@ -91,7 +91,7 @@ def build() -> dict:
     return {
         "id": "kanninun-cirutampu",
         "language": "tamil",
-        "title": {"devanagari": "கண்ணிநுண் சிறுத்தாம்பு", "iast": "kaNNinuN chiRuththAmbu"},
+        "title": {"devanagari": "கண்ணிநுண் சிறுத்தாம்பு", "iast": "Kaṇṇinuṇ Ciṟuttāmpu"},
         "source": {
             "site": "divyaprabandham.koyil.org",
             "devanagari_url": "https://divyaprabandham.koyil.org/index.php/2020/03/kanninun-chiruth-thambu-tamil-simple/",

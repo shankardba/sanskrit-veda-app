@@ -36,19 +36,22 @@ WORKS = [
     {
         "id": "mudhal-tiruvantati",
         "slug_prefix": "mudhal-thiruvandhadhi",
-        "title": "mudhal thiruvandhAdhi",
+        "title": "முதல் திருவந்தாதி",
+        "title_iast": "Mutal Tiruvantāti",
         "author": "Poigai Alvar",
     },
     {
         "id": "irandam-tiruvantati",
         "slug_prefix": "irandam-thiruvandhadhi",
-        "title": "iraNdAm thiruvandhAdhi",
+        "title": "இரண்டாம் திருவந்தாதி",
+        "title_iast": "Iraṇṭām Tiruvantāti",
         "author": "Bhoothath Alvar",
     },
     {
         "id": "munram-tiruvantati",
         "slug_prefix": "munram-thiruvandhadhi",
-        "title": "mUnRAm thiruvandhAdhi",
+        "title": "மூன்றாம் திருவந்தாதி",
+        "title_iast": "Mūṉṟām Tiruvantāti",
         "author": "Peyalvar",
     },
 ]
@@ -128,7 +131,7 @@ def build_work(work: dict) -> dict:
     return {
         "id": work["id"],
         "language": "tamil",
-        "title": {"devanagari": work["title"], "iast": ""},
+        "title": {"devanagari": work["title"], "iast": work["title_iast"]},
         "source": {
             "site": "divyaprabandham.koyil.org",
             "devanagari_url": f"https://divyaprabandham.koyil.org/index.php/category/iyarpa/{work['slug_prefix']}/",
