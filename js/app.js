@@ -59,6 +59,9 @@ const CHANTS = [
   { id: 'narasimha-kavacham', label: 'Sri Narasimha Kavacham', language: 'sanskrit', category: 'kavacham' },
   { id: 'bala-krishna-raksha-kavacham', label: 'Bala Krishna Raksha Kavacham (Nandagopa)', language: 'sanskrit', category: 'kavacham' },
   { id: 'vakratunda-ganesha-kavacham', label: 'Vakratunda Ganesha Kavacham', language: 'sanskrit', category: 'kavacham' },
+  { id: 'raghavendra-raksha-kavacham', label: 'Sri Raghavendra Raksha Kavacham', language: 'sanskrit', category: 'kavacham' },
+  { id: 'pancharaksha-devi-stotrani', label: 'Pancharaksha Devi Stotrani (Buddhist)', language: 'sanskrit', category: 'raksha-stotram' },
+  { id: 'raksha-kala-kara-stava', label: 'Raksha Kala Kara Stava (Buddhist)', language: 'sanskrit', category: 'raksha-stotram' },
 ];
 
 // Dropdown group order/labels — Tamil first so Abirami Antati (CHANTS[0],
@@ -149,6 +152,15 @@ const SECTION_NOTES = {
   },
   'vakratunda-ganesha-kavacham': {
     1: () => buildVakratundaKavachamSignificanceNote(),
+  },
+  'raghavendra-raksha-kavacham': {
+    1: () => buildRaghavendraKavachamSignificanceNote(),
+  },
+  'pancharaksha-devi-stotrani': {
+    'Mahāpratisarā': () => buildPancharakshaSignificanceNote(),
+  },
+  'raksha-kala-kara-stava': {
+    Invocation: () => buildRakshaKalaKaraSignificanceNote(),
   },
 };
 
@@ -965,6 +977,53 @@ function buildVakratundaKavachamSignificanceNote() {
       </ul>
       <p>Then the directions (front, behind, sides, everywhere between), and then, as in the gopīs' Krishna Raksha, the activities of a day: "walking or standing, waking, sleeping, or eating." Protection covers space and time together.</p>
       <p><strong>A number written in words.</strong> Verse 11 prescribes chanting the mantra <em>rasa-lakṣam</em> times. <em>Lakṣa</em> is 100,000; <em>rasa</em>, "taste," stands for 6, because Indian thought counts six tastes. So "taste-lakh" means 600,000. This is <em>bhūtasaṅkhyā</em>, the Sanskrit custom of writing numbers in verse with object-words ("eyes" = 2, "Vedas" = 4, "tastes" = 6). It is a different system from Āryabhaṭa's syllable-based numerals on the site's Āryabhaṭa numeration page, but it serves the same purpose: making numbers fit a meter. The verse also names Gaṇeśa's day: <em>chaturthī</em>, the fourth day of the lunar fortnight, on which this kavacham is to be recited.</p>
+    `,
+  };
+}
+
+function buildRaghavendraKavachamSignificanceNote() {
+  return {
+    title: 'Protected by a Saint',
+    subtitle: 'Sri Raghavendra Raksha Kavacham · Spiritual Significance',
+    bodyHtml: `
+      <p><strong>A human protector.</strong> Every other kavacham here calls on a god. This one calls on a guru: Rāghavendra Tīrtha (1595-1671), the Mādhva saint and scholar who, in 1671, entered his <em>vṛndāvana</em>, his tomb-shrine at Mantrālayam on the Tuṅgabhadrā river, while still alive. His devotees hold that he remains present there, and this is the key to the text. Verse 2 says the kavacham "brings about his presence" (<em>sannidhi</em>), and verse 22 ends by asking protection from "the guru whose presence I have invoked." For his devotees, the saint is a living presence, and the kavacham is how he is called.</p>
+      <p><strong>Back to Narasimha.</strong> Verse 10 gives the throat to "the foremost devotee of <em>kaṇṭhīrava</em>," a poetic word for the lion ("the one who roars from the throat"), meaning Narasimha. There is a pun (the <em>throat</em> is guarded by the devotee of the <em>throat</em>-roarer), and there is a deeper link. Rāghavendra's devotees hold that in an earlier life he was Prahlāda, the child Narasimha came to save and the speaker of the Narasimha Kavacham in the Kavachams section.</p>
+      <p><strong>The most thorough body map here.</strong> Where most kavachams name 15 or 20 body parts, this one names more than 30: topknot, head, forehead, brows, beard, eyes, ears, cheeks, lips, nose, tongue, teeth, chin, face, throat, shoulders, arms, hands, fingers, chest, belly, sides, back, hips, thighs, knees, shins, ankles, feet. Then it adds a catch-all (v.14): "whatever part of me I have not named here, may the compassionate one guard all of it." The epithets echo his reputation as a healer. The giver of sight guards the eyes, the remover of deafness the ears, the giver of speech the tongue, the giver of food the teeth.</p>
+      <p><strong>Protection through relics.</strong> Verses 16-17 name the saint's physical traces as protectors: his staff (<em>daṇḍa</em>), the dust of his feet, the water that has washed his feet, and "that clay" (<em>mṛttikā</em>), the sacred earth from his shrine that pilgrims carry home from Mantrālayam to this day. A god protects through his names and forms; a saint protects, as well, through the things he touched.</p>
+      <p><strong>A living genre.</strong> The author, Kṛṣṇāvadhūta Paṇḍita, is modern, and he names himself in verse 2 as the guru's "beloved son." The kavacham form (seer, meter, meditation, directions, body, family, dangers, blessings, phala-śruti) is still being written, and still used to bring a living tradition's protector close.</p>
+    `,
+  };
+}
+
+function buildPancharakshaSignificanceNote() {
+  return {
+    title: 'Five Protective Goddesses',
+    subtitle: 'Pancharaksha Devi Stotrani (Buddhist) · Spiritual Significance',
+    bodyHtml: `
+      <p><strong>The genre crosses traditions.</strong> Protection-literature is not only Hindu. Mahāyāna Buddhism has its own great rakṣā collection, the <em>Pañcarakṣā</em>, "the Five Protections": five <em>dhāraṇī</em> scriptures, each centered on a protective spell taught by or connected to the Buddha. Over time each spell was personified as a goddess. In Nepal's Newar Buddhist tradition the Pañcarakṣā became one of the most frequently copied of all manuscripts, kept in homes and recited for protection. The word <em>dhāraṇī</em> means "that which holds," from √dhṛ, the same root as <em>dhārayet</em>, "should wear," in the Rama Raksha's "whoever wears it at the throat."</p>
+      <p><strong>Every verse tells a story.</strong> Each of these five short hymns alludes, verse by verse, to episodes told in its goddess's scripture:</p>
+      <ul>
+        <li><em>Mahāpratisarā</em>, "the great amulet" (a <em>pratisara</em> is a protective cord tied on the body): Indra winning his war with her spell on his banner, King Brahmadatta gaining his kingdom, a condemned criminal saved and raised to rule, merchants who remembered her brought safely back from the sea with their jewels.</li>
+        <li><em>Mahāmantrānusāriṇī</em>, "she who follows the great mantra": protection from the six <em>ītis</em>, the classic agricultural calamities of flood, drought, locusts, rats, birds, and invading armies.</li>
+        <li><em>Mahāmāyūrī</em>, "the great peahen": safety even beside a black serpent (her scripture's frame story is a monk saved from a snakebite by her spell), and the golden peacock who chanted her spell and could not be caught by any snare.</li>
+        <li><em>Mahāśītavatī</em>, "she of the cool grove," which is a euphemism for the charnel ground: the Buddha's own son Rāhula, harassed by spirits, protected by her spell; knotted threads worn as amulets.</li>
+        <li><em>Mahāsāhasrapramardinī</em>, "crusher of the great thousand [worlds]": the city of Vaiśālī delivered from plague, the Buddha himself shielded from poison.</li>
+      </ul>
+      <p><strong>Familiar shapes.</strong> Side by side with the Hindu texts in this section, the parallels stand out: spells worn as knotted threads or written amulets (compare the Narasimha Kavacham's birch-bark amulet), lists of seizing spirits and epidemics, and a protection that ends in liberation. Mahāmāyūrī, verse 5, calls the goddess "giver of awakening to the Buddhas": the final protection, here as elsewhere, is from ignorance itself.</p>
+    `,
+  };
+}
+
+function buildRakshaKalaKaraSignificanceNote() {
+  return {
+    title: 'The Lord Who Looks Down',
+    subtitle: 'Raksha Kala Kara Stava (Buddhist) · Spiritual Significance',
+    bodyHtml: `
+      <p><strong>Avalokiteśvara.</strong> This hymn is addressed to the bodhisattva of compassion, Avalokiteśvara, "the lord who looks down" on the suffering of the world. He is called here by the names he is known by in Nepal: <em>Lokanātha</em> and <em>Lokanāyaka</em>, "lord" and "guide of the world." Thirteen of its fifteen verses close on the same refrain, <em>rakṣa māṃ lokanāyaka</em>, "protect me, O guide of the world."</p>
+      <p><strong>A story from the Kathmandu Valley.</strong> Verse 2 anchors the hymn in a specific place and legend: "in Nepal, for twelve years, the rains failed." The story Newar Buddhists tell is that a great drought struck the valley, and King Narendradeva, with the priest Bandhudatta, journeyed to Kāmarūpa (in Assam) and brought back Avalokiteśvara in the form of Karuṇāmaya, "made of compassion," after which the rains returned. The event is still re-enacted every year in the chariot festival of Bunga-dyaḥ, also called Rato Machindranāth, in Patan. It is the longest-running chariot procession in Nepal, and Hindus and Buddhists alike worship the same deity at its center. Verse 6's "you are made of all the gods, and of all the Buddhas" reflects that shared devotion.</p>
+      <p><strong>A bodhisattva's promise.</strong> Verse 9 turns the plea into something larger: "until every being has reached Sukhāvatī" (the Pure Land of bliss), "so long, in this pit of rebirth, protect me." This echoes the bodhisattva's own vow to remain in the world until all beings are freed. The protection asked for lasts as long as his compassion does.</p>
+      <p><strong>Ending on his name.</strong> The last verse, as best it can be read (its first half is damaged in the source), asks that his <em>glance</em> fall on the devotee always. That is the meaning of his name: <em>avalokita</em>, "looked upon." The hymn closes by asking the Lord Who Looks Down to do exactly that.</p>
+      <p><em>A note on the language:</em> this is Nepalese Buddhist Sanskrit, which freely uses forms that classical grammar would not (the <em>-ka</em> endings of <em>śatrukaḥ</em>, "enemy," and <em>sarvasattvakam</em>, "all beings," for instance). These are features of the tradition, not errors, and they are kept as they stand. Verse 12's opening words are obscure and are translated by their evident sense.</p>
     `,
   };
 }
@@ -1848,28 +1907,43 @@ const MEANING_CONCEPTS = [
   // Raghava protect my head"). A different root (√pā) from रक्ष (√rakṣ),
   // which is why the two stay separate concepts even though both gloss
   // "protect" in English.
-  { id: 'patu', deva: ['पातु'], iast: ['pātu'], english: ['protect'] },
+  // पायात्/pāyāt — the optative of the same root (Raghavendra Raksha Kavacham).
+  { id: 'patu', deva: ['पातु', 'पायात्'], iast: ['pātu', 'pāyāt'], english: ['protect'] },
+  // नमामि/प्रणमामि, "I bow" — the closing act of Rama Raksha v.29,
+  // Narasimha v.31, Ashtamurti v.9, and the Pañcarakṣā refrains; also links
+  // Shivananda Lahari's "शिरसा चैव सदाशिवं नमामि" (v.90).
+  { id: 'namami', deva: ['नमामि', 'प्रणमामि'], iast: ['namāmi', 'praṇamāmi'], english: ['bow'] },
   // The kavacham head-to-foot body map. Registered once, chant-agnostic,
   // since every kavacham walks the same body in the same order — any
   // future kavacham gets these connections with no new registration.
   // Case-forms vary by text (Rama Raksha's कटी vs. Narasimha's कटिम्, ऊरू
   // vs. ऊरु), so each attested surface form is catalogued individually.
   { id: 'body-head', deva: ['शिरो', 'शिरः', 'शिरसा', 'शिरसि', 'शीर्षं'], iast: ['śirō', 'śiraḥ', 'śirasā', 'śirasi', 'śīrṣaṃ'], english: ['head'] },
+  { id: 'body-topknot', deva: ['शिखां'], iast: ['śikhāṃ'], english: ['topknot'] },
   { id: 'body-crown', deva: ['मौलिं'], iast: ['mauliṃ'], english: ['crown'] },
+  { id: 'body-brows', deva: ['भ्रुवौ'], iast: ['bhruvau'], english: ['brows'] },
+  { id: 'body-beard', deva: ['कूर्चं'], iast: ['kūrchaṃ'], english: ['beard'] },
+  { id: 'body-cheeks', deva: ['गण्डौ'], iast: ['gaṇḍau'], english: ['cheeks'] },
+  { id: 'body-lips', deva: ['ओष्ठाधरौ'], iast: ['ōṣṭhādharau'], english: ['lips'] },
+  { id: 'body-teeth', deva: ['दन्तान्'], iast: ['dantān'], english: ['teeth'] },
+  { id: 'body-chin', deva: ['चिबुकं'], iast: ['chibukaṃ'], english: ['chin'] },
   { id: 'body-forehead', deva: ['भालं'], iast: ['bhālaṃ'], english: ['forehead'] },
   { id: 'body-ears', deva: ['श्रुती', 'कर्णौ'], iast: ['śrutī', 'karṇau'], english: ['ears'] },
-  { id: 'body-nose', deva: ['घ्राणं', 'नासं'], iast: ['ghrāṇaṃ', 'nāsaṃ'], english: ['nose'] },
+  { id: 'body-nose', deva: ['घ्राणं', 'नासं', 'नासां'], iast: ['ghrāṇaṃ', 'nāsaṃ', 'nāsāṃ'], english: ['nose'] },
   { id: 'body-mouth', deva: ['मुखं', 'मुखे'], iast: ['mukhaṃ', 'mukhē'], english: ['mouth'] },
   { id: 'body-neck', deva: ['कंधरां'], iast: ['kaṃdharāṃ'], english: ['neck'] },
   { id: 'body-tongue', deva: ['जिह्वां', 'रसनां'], iast: ['jihvāṃ', 'rasanāṃ'], english: ['tongue'] },
-  { id: 'body-face', deva: ['वक्त्रं'], iast: ['vaktraṃ'], english: ['face'] },
+  { id: 'body-face', deva: ['वक्त्रं', 'वदनं'], iast: ['vaktraṃ', 'vadanaṃ'], english: ['face'] },
   { id: 'body-throat', deva: ['कण्ठं', 'कण्ठे'], iast: ['kaṇṭhaṃ', 'kaṇṭhē'], english: ['throat'] },
   { id: 'body-shoulders', deva: ['स्कन्धौ'], iast: ['skandhau'], english: ['shoulders'] },
   { id: 'body-arms', deva: ['भुजौ', 'बाहू'], iast: ['bhujau', 'bāhū'], english: ['arms'] },
-  { id: 'body-chest', deva: ['स्तनौ'], iast: ['stanau'], english: ['chest'] },
+  { id: 'body-chest', deva: ['स्तनौ', 'वक्षो'], iast: ['stanau', 'vakṣō'], english: ['chest'] },
+  { id: 'body-fingers', deva: ['हस्ताङ्गुलीन्'], iast: ['hastāṅgulīn'], english: ['fingers'] },
+  { id: 'body-sides', deva: ['पार्श्वे'], iast: ['pārśvē'], english: ['sides'] },
+  { id: 'body-back', deva: ['पृष्ठं'], iast: ['pṛṣṭhaṃ'], english: ['back'] },
   { id: 'body-hands', deva: ['करौ'], iast: ['karau'], english: ['hands'] },
   { id: 'body-heart', deva: ['हृदयं', 'हृदि'], iast: ['hṛdayaṃ', 'hṛdi'], english: ['heart'] },
-  { id: 'body-belly', deva: ['जठरं'], iast: ['jaṭharaṃ'], english: ['belly'] },
+  { id: 'body-belly', deva: ['जठरं', 'कुक्षिं'], iast: ['jaṭharaṃ', 'kukṣiṃ'], english: ['belly'] },
   { id: 'body-waist', deva: ['मध्यं'], iast: ['madhyaṃ'], english: ['waist'] },
   { id: 'body-navel', deva: ['नाभिं'], iast: ['nābhiṃ'], english: ['navel'] },
   { id: 'body-hips', deva: ['कटी', 'कटिम्', 'कटिं', 'जघनं'], iast: ['kaṭī', 'kaṭim', 'kaṭiṃ', 'jaghanaṃ'], english: ['hips'] },
@@ -1918,6 +1992,17 @@ const MEANING_CONCEPTS = [
   // "man lion" without a hyphen since a hyphenated gloss can never match
   // (the translation tokenizer splits on hyphens).
   { id: 'nrkesari', deva: ['नृकेसरी', 'नृहरिः'], iast: ['nṛkēsarī', 'nṛhariḥ'], english: ['man lion'] },
+
+  // --- Pañcarakṣā Devī Stotrāṇi (Buddhist) — each of the five hymns closes
+  // every verse on its own goddess's name, so each name is its refrain. ---
+  { id: 'pr-pratisara', deva: ['प्रतिसरां'], iast: ['pratisarāṃ'], english: ['pratisara'] },
+  { id: 'pr-mantranusarini', deva: ['मन्त्रानुसारिणीम्'], iast: ['mantrānusāriṇīm'], english: ['mantranusarini'] },
+  { id: 'pr-mayuri', deva: ['मायूरीं'], iast: ['māyūrīṃ'], english: ['mayuri'] },
+  { id: 'pr-shitavati', deva: ['शीतवतीं'], iast: ['śītavatīṃ'], english: ['shitavati'] },
+  { id: 'pr-sahasramardini', deva: ['साहस्रमर्दिनीम्'], iast: ['sāhasramardinīm'], english: ['sahasramardini'] },
+  // --- Rakṣā Kāla Kara Stava (Buddhist) — "रक्ष मां लोकनायक" closes 13 of
+  // its 15 verses; रक्ष already connects via brs-raksha. ---
+  { id: 'lokanayaka', deva: ['लोकनायक'], iast: ['lōkanāyaka'], english: ['lokanayaka'] },
 ];
 
 const MEANING_CONCEPTS_BY_ID = new Map(MEANING_CONCEPTS.map((c) => [c.id, c]));
