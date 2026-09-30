@@ -67,8 +67,12 @@ const CHANTS = [
   { id: 'hanumad-raksha-stotram', label: 'Sri Hanumad Raksha Stotram', language: 'sanskrit', collection: 'raksha' },
   { id: 'shani-raksha-stava', label: 'Sri Shani Raksha Stava', language: 'sanskrit', collection: 'raksha' },
   { id: 'ashtamurti-raksha-stotram', label: 'Ashtamurti Raksha Stotram', language: 'sanskrit', collection: 'raksha' },
+  { id: 'garbha-raksha-stotram', label: 'Garbha Raksha Stotram', language: 'sanskrit', collection: 'raksha' },
+  { id: 'bala-graha-raksha-stotram', label: 'Bala Graha Raksha Stotram', language: 'sanskrit', collection: 'raksha' },
+  { id: 'narasimha-raksha-mantra', label: 'Sri Narasimha Raksha Mantra', language: 'sanskrit', collection: 'raksha' },
   { id: 'narasimha-kavacham', label: 'Sri Narasimha Kavacham', language: 'sanskrit', collection: 'kavacham' },
   { id: 'devi-kavacham', label: 'Sri Durga Kavacham (Devi Kavacham)', language: 'sanskrit', collection: 'kavacham' },
+  { id: 'tantrokta-durga-kavacham', label: 'Tantrokta Durga Kavacham', language: 'sanskrit', collection: 'kavacham' },
   { id: 'bala-krishna-raksha-kavacham', label: 'Bala Krishna Raksha Kavacham (Nandagopa)', language: 'sanskrit', collection: 'kavacham' },
   { id: 'vakratunda-ganesha-kavacham', label: 'Vakratunda Ganesha Kavacham', language: 'sanskrit', collection: 'kavacham' },
   { id: 'raghavendra-raksha-kavacham', label: 'Sri Raghavendra Raksha Kavacham', language: 'sanskrit', collection: 'kavacham' },
@@ -187,6 +191,18 @@ const SECTION_NOTES = {
   'devi-kavacham': {
     Viniyoga: () => buildDeviKavachamSignificanceNote(),
     'Verse 21': () => buildDeviKavachamWholePersonNote(),
+  },
+  'tantrokta-durga-kavacham': {
+    Viniyoga: () => buildTantroktaDurgaKavachamSignificanceNote(),
+  },
+  'garbha-raksha-stotram': {
+    1: () => buildGarbhaRakshaSignificanceNote(),
+  },
+  'bala-graha-raksha-stotram': {
+    12: () => buildBalaGrahaRakshaSignificanceNote(),
+  },
+  'narasimha-raksha-mantra': {
+    Mantra: () => buildNarasimhaRakshaMantraSignificanceNote(),
   },
   'abirami-antati': {
     Kāppu: () => buildAbiramiAntatiSignificanceNote(),
@@ -1026,7 +1042,80 @@ function buildBalaKrishnaKavachamSignificanceNote() {
       <p><strong>The same night, told twice.</strong> This is the Viṣṇu Purāṇa's telling (5.5) of the moment the Bhāgavata Purāṇa tells in the gopīs' Krishna Raksha (see the Raksha Stotrams section): the demoness Pūtanā has died at the infant's mouth, and the family shields the child. In the Bhāgavata, the protection is spoken by the mothers of Vraja. Here, Yaśodā waves a cow's tail over him and Nanda the cowherd, his foster-father, places a little cow-dung on his head and speaks this kavacham. Two Purāṇas, two parents, one gesture.</p>
       <p><strong>Protected by his own deeds.</strong> Nanda's first four verses don't name body parts. They call on four great acts of Viṣṇu: the lotus rising from his navel from which the world was made; the Boar lifting the earth on its tusk; the Man-Lion tearing open the demon's chest; the dwarf Vāmana becoming Trivikrama and crossing the three worlds in three strides. Each was a moment when Viṣṇu saved the world. Nanda, not knowing, invokes them over a baby who is Viṣṇu. The child is guarded by his own past (and, as avatars, future) rescues: the same paradox as in the gopīs' text, where Viṣṇu's names protect Viṣṇu.</p>
       <p><strong>From the body outward.</strong> Then comes the kavacham proper: head, throat, belly, shins and feet (v.18), face, arms, mind, and senses (v.19), the conch-blast that scatters every hostile spirit (v.20), and finally the directions (v.21): the four quarters, the four in-between, the sky above, and the earth below. The last guardian is <em>Mahīdhara</em>, "bearer of the earth," the Boar again, placed at the ground beneath the child, returning to verse 15's image.</p>
-      <p>(sanskritdocuments.org also carries this same passage, with the Purāṇa's narrative verses around it, as the <em>Bālagraharakṣāstotram</em>; that copy is too scan-damaged to use, so this clean one stands for both.)</p>
+      <p>The same passage, with the Purāṇa's story verses around it, is also recited as the <em>Bala Graha Raksha Stotram</em> (in the Raksha Stotrams section), a protection for infants against the "seizers."</p>
+    `,
+  };
+}
+
+function buildGarbhaRakshaSignificanceNote() {
+  return {
+    title: 'An Offering for Every Month',
+    subtitle: 'Garbha Raksha Stotram · Spiritual Significance',
+    bodyHtml: `
+      <p><strong>A prayer for a safe pregnancy.</strong> <em>Garbha</em> means "womb" or "unborn child," and this short stotram, ascribed to the sage Śaunaka, asks the gods to protect a pregnant woman and her child. Every verse has the same shape: call a god or a group of gods, ask them to "accept this offering" (<em>baliṃ</em>), and ask them to "protect the pregnant woman." The refrain's word <em>sāpatyaṃ</em>, "together with her child," keeps both lives in view.</p>
+      <p><strong>Who is called, and why.</strong> The list moves through the powers that matter at a birth:</p>
+      <ul>
+        <li><em>Brahmā</em>, "maker of beings, lord of creatures" (v.1): the creator himself.</li>
+        <li><em>The two Aśvins</em> (v.2): the physicians of the gods.</li>
+        <li><em>The eleven Rudras, the twelve Ādityas, the eight Vasus</em> (vv.3, 4, 7): the three Vedic groups of gods, 31 in all.</li>
+        <li><em>Gaṇeśa</em> (v.5): the remover of obstacles, and <em>Skanda</em> (v.6), "who makes the love of children grow." In the older tradition Skanda is closely tied to childbirth and to the spirits that threaten newborns.</li>
+        <li><em>A goddess of the ancestors</em> (v.8), "mother of many children," "dear to Śaunaka." The text does not name her.</li>
+        <li>It ends with <em>Govinda</em>, Viṣṇu riding the eagle Garuḍa (v.9), the preserver.</li>
+      </ul>
+      <p><strong>One verse per month.</strong> There are nine verses, one for each month of pregnancy. A widely circulated practice (given with P. R. Ramachander's translation on celextel.org) has the mother recite, from the second month, as many verses as the month's number, 108 times a day: the first two in the second month, the first three in the third, and all nine in the ninth. The prayer grows with the child.</p>
+      <p><strong>An edited text.</strong> The only Devanagari copy found is badly garbled, so this text was reconstructed by comparing it with an independent romanized copy and checking each change against the meter. Every change is listed in the source note. The least certain line is v.7's list of the eight Vasus, which does not match the usual Purāṇic list.</p>
+    `,
+  };
+}
+
+function buildBalaGrahaRakshaSignificanceNote() {
+  return {
+    title: 'Against the Seizers',
+    subtitle: 'Bala Graha Raksha Stotram · Spiritual Significance',
+    bodyHtml: `
+      <p><strong>What a "graha" is.</strong> <em>Graha</em> means "seizer." Besides the planets, the word names the spirits believed to seize and sicken young children. Āyurveda's <em>Suśruta Saṃhitā</em> lists nine of these <em>bāla-grahas</em>, and one of them is called Pūtanā: the same name as the demoness in this story, who came to kill the infant Kṛṣṇa by nursing him with poisoned milk and died at his mouth instead. A "protection against the child-seizers" built on the Pūtanā story is therefore very fitting.</p>
+      <p><strong>The kavacham with its story.</strong> This is the same Viṣṇu Purāṇa passage as the Bala Krishna Raksha Kavacham (Nandagopa) in the Kavachams section, but with the narrative verses around it, told by the sage Parāśara to his disciple Maitreya ("O best of the twice-born," v.12). Verse 12: the frightened Yaśodā waves a cow's tail over the child. Verse 13: Nanda puts a little cow-dung on his head. Verses 14-21: Nanda's kavacham. Verse 22: the child, now protected, is laid to sleep under the cart. Waving something over a child to lift the "evil eye" is still a household practice in India, and the cow, whose products purify, is its natural tool. Recited this way, the stotram re-enacts a rite, not only a prayer.</p>
+      <p><strong>The five weapons.</strong> The closing verse is not from the Viṣṇu Purāṇa. It is the last verse of the <em>Viṣṇu Sahasranāma</em>, added here as a seal. It names Viṣṇu with his forest garland and his five weapons: the mace, the bow Śārṅga, the conch, the discus, and the sword Nandaka. Verse 20 has already sounded that conch, whose blast destroys the spirits that mean the child harm.</p>
+      <p>For the kavacham's own structure (four saving deeds, then the body, then the directions), see the note on the Bala Krishna Raksha Kavacham.</p>
+    `,
+  };
+}
+
+function buildNarasimhaRakshaMantraSignificanceNote() {
+  return {
+    title: 'A Mantra That Commands',
+    subtitle: 'Narasimha Raksha Mantra · Spiritual Significance',
+    bodyHtml: `
+      <p><strong>Not a hymn but a mālā-mantra.</strong> Everything else in this section is verse. This is a <em>mālā-mantra</em>, a "garland" mantra: prose, strung together from fixed parts. A kavacham <em>asks</em> a god to stand guard over each part of the body. A mantra like this one <em>commands</em>, in the god's name.</p>
+      <p><strong>How it is built.</strong> It moves in four steps:</p>
+      <ul>
+        <li><em>Salutation and identity</em>: "Om, salutation to Narasimha," named by his defining deed, "who tore open the chest of Hiraṇyakaśipu."</li>
+        <li><em>Scope and function</em>: "who pervades the three worlds, who destroys the affliction of bhūtas, pretas, piśācas, and śākinīs" (the classes of harmful spirits).</li>
+        <li><em>Commands</em>, each doubled for force: <em>hana hana</em> "strike, strike," <em>sara sara</em> "drive off," <em>cala cala</em> "move," <em>kampa kampa</em> "shake," <em>matha matha</em> "crush."</li>
+        <li><em>Seed syllables and seal</em>: <em>huṃ phaṭ</em>, the syllables of a weapon or a warding-off; <em>ṭhaḥ ṭhaḥ</em>, which in mantra shorthand ("the two ṭha's") is a code name for <em>svāhā</em>; and finally <em>svāhā</em> itself, the word said as an offering is poured into the fire.</li>
+      </ul>
+      <p><strong>Narasimha as protector.</strong> The Man-Lion is the fiercest of Viṣṇu's forms, and he appeared to save a child: Prahlāda, whose own father was trying to kill him. That is why so many protection texts turn to him. See the Narasimha Kavacham (spoken by Prahlāda) in the Kavachams section, which hides Narasimha's best-known mantra inside its list of guardians.</p>
+      <p><strong>An uncertain ending.</strong> Only one copy was found, and its last words are garbled. They are printed here as <em>mahārudra ājñāpayati svāhā</em>, "the Great Rudra commands: svāhā," following the stock closing "… commands: svāhā" of mantras of this kind. That phrase should be treated as a conjecture.</p>
+    `,
+  };
+}
+
+function buildTantroktaDurgaKavachamSignificanceNote() {
+  return {
+    title: 'The Short Armor',
+    subtitle: 'Tantrokta Durga Kavacham · Spiritual Significance',
+    bodyHtml: `
+      <p><strong>A Tantric kavacham.</strong> <em>Tantrokta</em> means "taught in a Tantra": the colophon places this text in the <em>Kubjikā Tantra</em>, where Īśvara (Śiva) teaches it to the Goddess. It is much shorter than the Devī Kavacham recited before the Durgā Saptaśatī (also in this section): ten verses instead of fifty-six. Many people recite it daily for exactly that reason.</p>
+      <p><strong>The armor comes first.</strong> Verse 2 makes a strong claim: whoever chants the Durgā mantra <em>without</em> knowing this kavacham gains nothing from it. The armor is not an optional extra but the protection that has to be in place before the mantra is used. Verse 10 says how to use it: "whoever places (<em>nyaset</em>) this armor on the body." That is <em>nyāsa</em>, the practice of touching each part of the body as the protecting name is spoken, so the text is placed on the body the way it names.</p>
+      <p><strong>A goddess for every part.</strong> From head to feet (vv.4-8) each part gets its own form of the Goddess, and many of the names fit the part they guard:</p>
+      <ul>
+        <li><em>Khecarī</em>, "she who moves through the sky," guards the eyes, which look up and out.</li>
+        <li><em>Sugandhā</em>, "the fragrant," guards the nose.</li>
+        <li><em>Mahāvāṇī</em>, "the great voice," guards the throat.</li>
+        <li><em>Jaganmātā</em>, "Mother of the World," guards the breasts.</li>
+        <li><em>Bhūtalavāsinī</em>, "she who dwells on the earth," guards the feet, the part that touches the ground.</li>
+      </ul>
+      <p>Then the text steps back: "So you stand, O Goddess, as the protector of the three worlds: protect me in all my limbs" (v.8). The same Goddess who guards the worlds is asked to guard one body. Compare the Devī Kavacham's verse 21 note, where the longer text goes past the body to the mind, the breaths, and the household.</p>
     `,
   };
 }
@@ -2114,7 +2203,9 @@ const MEANING_CONCEPTS = [
   // shared root's case-forms.
   // नयने/nayanē (Shiva Raksha v.3), the same dual "two eyes" with a
   // different noun, added to this concept rather than a new one.
-  { id: 'sl-netra', deva: ['नेत्रे', 'नयने'], iast: ['nētrē', 'nayanē'], english: ['eyes'] },
+  // चक्षुषी/chakṣuṣī, "the two eyes" (Tantrokta Durga Kavacham v.4) — a
+  // different stem, same dual and same sense.
+  { id: 'sl-netra', deva: ['नेत्रे', 'नयने', 'चक्षुषी'], iast: ['nētrē', 'nayanē', 'chakṣuṣī'], english: ['eyes'] },
   // जननि/janani ("O mother," vocative) — v.28 and v.64, identical spelling
   // both times, far enough apart (36 verses) that linkScope keeps them
   // from cross-connecting, but each still boxes and links to "mother" on
@@ -2273,7 +2364,10 @@ const MEANING_CONCEPTS = [
   // Kavacham v.8) — same root, added here rather than as a new concept.
   // रक्षेत्/रक्षेद् (optative) and रक्षसे ("you protect") — the Devi
   // Kavacham's verbs, nearly all from √rakṣ.
-  { id: 'brs-raksha', deva: ['रक्ष', 'रक्षतु', 'रक्षेत्', 'रक्षेद्', 'रक्षसे'], iast: ['rakṣa', 'rakṣatu', 'rakṣēt', 'rakṣēd', 'rakṣasē'], english: ['protect'] },
+  // रक्षतां (dual), रक्षन्तु and रक्षत (plural imperatives) — the Garbha
+  // Raksha Stotram addresses gods in ones, twos, and groups, so the verb
+  // changes number with the addressee.
+  { id: 'brs-raksha', deva: ['रक्ष', 'रक्षतु', 'रक्षेत्', 'रक्षेद्', 'रक्षसे', 'रक्षतां', 'रक्षन्तु', 'रक्षत'], iast: ['rakṣa', 'rakṣatu', 'rakṣēt', 'rakṣēd', 'rakṣasē', 'rakṣatāṃ', 'rakṣantu', 'rakṣata'], english: ['protect'] },
   // पाहि मां/pāhi māṃ, "protect me" — a synonymous refrain built on a
   // different root (√pā, not √rakṣ), alternating with rakṣa's imperative
   // through the stotra: v.3, v.5, v.14 read "पाहि मां," while v.4 reverses
@@ -2327,19 +2421,19 @@ const MEANING_CONCEPTS = [
   { id: 'body-ears', deva: ['श्रुती', 'कर्णौ'], iast: ['śrutī', 'karṇau'], english: ['ears'] },
   { id: 'body-nose', deva: ['घ्राणं', 'नासं', 'नासां', 'नासिके', 'नासिकायां'], iast: ['ghrāṇaṃ', 'nāsaṃ', 'nāsāṃ', 'nāsikē', 'nāsikāyāṃ'], english: ['nose'] },
   { id: 'body-mouth', deva: ['मुखं', 'मुखे'], iast: ['mukhaṃ', 'mukhē'], english: ['mouth'] },
-  { id: 'body-neck', deva: ['कंधरां', 'ग्रीवायां'], iast: ['kaṃdharāṃ', 'grīvāyāṃ'], english: ['neck'] },
+  { id: 'body-neck', deva: ['कंधरां', 'ग्रीवायां', 'ग्रीवां'], iast: ['kaṃdharāṃ', 'grīvāyāṃ', 'grīvāṃ'], english: ['neck'] },
   { id: 'body-tongue', deva: ['जिह्वां', 'रसनां', 'जिह्वायां'], iast: ['jihvāṃ', 'rasanāṃ', 'jihvāyāṃ'], english: ['tongue'] },
   { id: 'body-face', deva: ['वक्त्रं', 'वदनं'], iast: ['vaktraṃ', 'vadanaṃ'], english: ['face'] },
   { id: 'body-throat', deva: ['कण्ठं', 'कण्ठे'], iast: ['kaṇṭhaṃ', 'kaṇṭhē'], english: ['throat'] },
   { id: 'body-shoulders', deva: ['स्कन्धौ', 'स्कन्धयोः'], iast: ['skandhau', 'skandhayōḥ'], english: ['shoulders'] },
   { id: 'body-arms', deva: ['भुजौ', 'बाहू'], iast: ['bhujau', 'bāhū'], english: ['arms'] },
-  { id: 'body-chest', deva: ['स्तनौ', 'वक्षो'], iast: ['stanau', 'vakṣō'], english: ['chest', 'breasts'] },
+  { id: 'body-chest', deva: ['स्तनौ', 'वक्षो', 'स्तनद्वयम्'], iast: ['stanau', 'vakṣō', 'stanadvayam'], english: ['chest', 'breasts'] },
   { id: 'body-fingers', deva: ['हस्ताङ्गुलीन्'], iast: ['hastāṅgulīn'], english: ['fingers'] },
   { id: 'body-sides', deva: ['पार्श्वे'], iast: ['pārśvē'], english: ['sides'] },
   { id: 'body-back', deva: ['पृष्ठं'], iast: ['pṛṣṭhaṃ'], english: ['back'] },
   { id: 'body-hands', deva: ['करौ'], iast: ['karau'], english: ['hands'] },
   { id: 'body-heart', deva: ['हृदयं', 'हृदि', 'हृदये'], iast: ['hṛdayaṃ', 'hṛdi', 'hṛdayē'], english: ['heart'] },
-  { id: 'body-belly', deva: ['जठरं', 'कुक्षिं', 'कुक्षौ', 'उदरे'], iast: ['jaṭharaṃ', 'kukṣiṃ', 'kukṣau', 'udarē'], english: ['belly'] },
+  { id: 'body-belly', deva: ['जठरं', 'कुक्षिं', 'कुक्षौ', 'उदरे', 'उदरं'], iast: ['jaṭharaṃ', 'kukṣiṃ', 'kukṣau', 'udarē', 'udaraṃ'], english: ['belly'] },
   { id: 'body-waist', deva: ['मध्यं'], iast: ['madhyaṃ'], english: ['waist'] },
   { id: 'body-navel', deva: ['नाभिं', 'नाभौ'], iast: ['nābhiṃ', 'nābhau'], english: ['navel'] },
   { id: 'body-hips', deva: ['कटी', 'कटिम्', 'कटिं', 'जघनं', 'कट्यां'], iast: ['kaṭī', 'kaṭim', 'kaṭiṃ', 'jaghanaṃ', 'kaṭyāṃ'], english: ['hips'] },
@@ -2352,7 +2446,15 @@ const MEANING_CONCEPTS = [
   { id: 'body-feet', deva: ['पादौ'], iast: ['pādau'], english: ['feet'] },
   { id: 'body-whole', deva: ['वपुः', 'सर्वाङ्गे'], iast: ['vapuḥ', 'sarvāṅgē'], english: ['body'] },
   { id: 'body-skin', deva: ['त्वचं'], iast: ['tvachaṃ'], english: ['skin'] },
-  { id: 'body-limbs', deva: ['सर्वाङ्गानि'], iast: ['sarvāṅgāni'], english: ['limbs'] },
+  // सर्वगात्रेषु, "in all [my] limbs" (Tantrokta Durga Kavacham v.8).
+  { id: 'body-limbs', deva: ['सर्वाङ्गानि', 'सर्वगात्रेषु'], iast: ['sarvāṅgāni', 'sarvagātrēṣu'], english: ['limbs'] },
+  // कवचं/kavachaṃ, the "armor" itself — the Tantrokta Durga Kavacham names
+  // it in five of its ten verses.
+  { id: 'kavacha', deva: ['कवचं', 'कवचम्'], iast: ['kavachaṃ', 'kavacham'], english: ['armor'] },
+  // बलिं/baliṃ, "offering," and गर्भिणीम्/गर्भिणीं, "the pregnant woman" —
+  // the two fixed words of the Garbha Raksha Stotram's refrain.
+  { id: 'bali', deva: ['बलिं'], iast: ['baliṃ'], english: ['offering'] },
+  { id: 'garbhini', deva: ['गर्भिणीम्', 'गर्भिणीं'], iast: ['garbhiṇīm', 'garbhiṇīṃ'], english: ['pregnant'] },
   // भुक्तिं मुक्तिं, "worldly enjoyment and liberation" — the standard
   // phala-śruti pairing; Rama Raksha v.12 and Narasimha Kavacham v.26
   // close on the identical words ("भुक्तिं मुक्तिं च विन्दति").
