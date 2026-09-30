@@ -49,7 +49,7 @@ def block(text: str, name: str, stop: str) -> list[str]:
 
 
 def clean(line: str) -> str:
-    line = re.sub(r'\s*\.{3,}\s*\d+\s*$', '', line)
+    line = re.sub(r'\s*\.{3,}\s*\d+\.?\s*$', '', line)
     return re.sub(r'\s+', ' ', line).strip()
 
 

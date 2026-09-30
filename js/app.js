@@ -35,6 +35,7 @@ const CHANTS = [
   { id: 'nanmukan-tiruvantati', label: 'Nanmukan Tiruvantati', language: 'tamil', collection: 'antati', subgroup: 'vaishnava' },
   { id: 'periya-tiruvantati', label: 'Periya Tiruvantati', language: 'tamil', collection: 'antati', subgroup: 'vaishnava' },
   { id: 'ramanuja-nurrantati', label: 'Ramanuja Nurrantati', language: 'tamil', collection: 'antati', subgroup: 'vaishnava' },
+  { id: 'kantar-antati', label: 'Kantar Antati', language: 'tamil', collection: 'antati', subgroup: 'murugan' },
   { id: 'thirukkural-arathuppal', label: 'Aratthuppal (Virtue)', language: 'tamil', collection: 'thirukkural' },
   { id: 'thirukkural-porutpal', label: 'Porutpal (Wealth)', language: 'tamil', collection: 'thirukkural' },
   { id: 'thirukkural-kaamathuppal', label: 'Kaamathuppal (Love)', language: 'tamil', collection: 'thirukkural' },
@@ -226,6 +227,9 @@ const SECTION_NOTES = {
   },
   'ramanuja-nurrantati': {
     1: () => buildRamanujaNurrantatiSignificanceNote(),
+  },
+  'kantar-antati': {
+    1: () => buildKantarAntatiSignificanceNote(),
   },
 };
 
@@ -1296,6 +1300,28 @@ function buildRamanujaNurrantatiSignificanceNote() {
       <p><strong>The Āḻvārs, one by one.</strong> Verses 8-21 run through the poet-saints in order, each verse praising Rāmānuja as the one who holds that saint in his heart. Verse 8 is Poygai, who "twisted a wick and lit the holy lamp"; verse 9 is Bhūtam, who "lit the full lamp called wisdom"; verse 10 is Pēy, "who shows how he saw the wonder... at Kōvalūr." That is the Three Lamps story (see the note on the Mudhal Tiruvantati). Then come Tiruppāṇ (11), Tirumaḻisai (12, the poet of the Nanmukan Tiruvantati), Toṇṭaraṭippoṭi (13), Kulacēkara (14), Periyāḻvār (15), Āṇṭāḷ (16, "who wore and then gave the garland"), Tirumaṅkai (17), and Nammāḻvār (18-19), followed by the teachers Nāthamuni (20) and Yāmuna (21). The effect is a lineage: Rāmānuja as the place where the whole tradition comes together.</p>
       <p><strong>The teacher as the way.</strong> The poem's theology is that grace reaches the devotee through the teacher. In verse 69 the poet says the Lord of Srirangam gave him a mind and senses, but not his own feet; Rāmānuja "came and lifted me up today." In verse 104: even if you gave me Kṛṣṇa like a fruit in my hand, I want nothing but your glory. Verse 107 asks, whatever births may come, only to be the servant of Rāmānuja's devotees. Compare the Kanninun Cirutampu, Madhurakavi's eleven verses to his own teacher Nammāḻvār: this is the same devotion, a hundred and eight verses long.</p>
       <p><strong>A closed garland.</strong> Verse 1 opens with <em>pū maṉṉu mātu</em>, "the lady who dwells on the lotus," Lakṣmī on the Lord's chest. Verse 108 ends on the same Lakṣmī, and its last words, <em>pū maṉṉavē</em>, "may they abide as flowers" on our heads, echo the opening sound so the garland can be recited around again. See the ${ANTATI_FORM_LINK}.</p>
+    `,
+  };
+}
+
+function buildKantarAntatiSignificanceNote() {
+  return {
+    title: 'One Sound, Four Meanings',
+    subtitle: 'Kantar Antati · Spiritual Significance',
+    bodyHtml: `
+      <p><strong>The poet of the Tiruppukaḻ.</strong> Aruṇakirinātar, the fifteenth-century poet of Tiruvaṇṇāmalai, is best known for the <em>Tiruppukaḻ</em>, his thousands of rhythmic songs to Murugan (Kantan, Skanda). The tradition says he wasted his youth, tried to end his life by throwing himself from the temple tower, and was caught by Murugan himself, who gave him the first word of his first song. The <em>Kantar Antāti</em> is his virtuoso piece: a hundred verses to Kantan in which every line of each verse begins with <em>the same string of sounds</em>, which has to be divided into words differently each time.</p>
+      <p><strong>How the first verse works.</strong> This device is called <em>maṭakku</em> (Sanskrit <em>yamaka</em>). All four lines of verse 1 open with <em>tiruvāviṉaṉkuṭi</em>, and each time it means something different:</p>
+      <ul>
+        <li>Line 1: <em>tiru āvi naṉ kuṭi paṅkāḷar</em>, "Tirumāl, Lakṣmī's lord, and Shiva, who shares his side with the good goddess."</li>
+        <li>Line 2: joined to the last syllable of line 1, <em>ca-tir uvāviṉaṉ kuṭi</em>, "the skillful youth dwells."</li>
+        <li>Line 3: <em>Tiruvāviṉaṉkuṭi</em>, the shrine at Palani, as a place-name.</li>
+        <li>Line 4: again joined to the previous line, <em>a-tir uvā iṉaṉ kuṭikoṇṭa</em>, "where herds of elephants that shake the ground have their home."</li>
+      </ul>
+      <p>The translation here follows the word divisions and meanings of the Tamil commentary on kaumaram.com. A line of English can only give one of the readings the sound allows, so read these translations as a guide to the sense, not a match for the wordplay.</p>
+      <p><strong>The six abodes.</strong> The same first verse names Murugan's six sacred places, the <em>Āṟupaṭai Vīṭu</em>: Tirupparaṅkuṉṟam, Alaivāy (Tiruchendur), Tiruvāviṉaṉkuṭi (Palani), Ērakam (Swamimalai), "every hill where he plays" (Kuṉṟutōṟāṭal), and the cool cloud-wrapped hill of Paḻamutircōlai. It ends: "praise them all." Tiruchendur, "Chendur" in these verses, comes back again and again.</p>
+      <p><strong>Murugan as teacher.</strong> The verses keep coming back to one story: the child Murugan teaching the meaning of <em>Om</em> to his own father, Shiva, who "covered his mouth and gave ear" (vv.4, 19, 52, 64). Brahmā, who could not explain it, was imprisoned (vv.45, 51). This is why Murugan is called <em>Swaminatha</em>, "the father's teacher," at Swamimalai. Several verses also follow the Tamil Shaiva belief that Murugan was born as the child-saint Sambandar: he cured the Pandya king's fever and hunched back with sacred ash (vv.56, 65, 96), made male palm trees bear fruit (v.75), and defeated the Jains in debate (vv.27, 29, 89). The last verse sends the heart to worship at Kaḻumalam (Sirkazhi), Sambandar's birthplace.</p>
+      <p><strong>Love poetry and prayer together.</strong> Many verses are in the voice of a girl pining for Murugan: the moon burns her, the south wind torments her, sandal paste feels like fire (v.7), and her family sacrifices a goat to cure her lovesickness (v.24). Others are plain prayers, like v.97's advice to misers: "at least when you sneeze, say 'Kumara, refuge!' and be saved." At the end, when Death's messengers come, the refuge is "your holy feet with their anklets" (v.95).</p>
+      <p><strong>A verse in one letter.</strong> Verse 54 is built entirely from syllables of the letter <em>ta</em> (த, தா, தி, தீ, து, தே, தை, தொ) and still makes sense: it praises the Lord whom Shiva, Brahmā, and Vishnu worship, and asks that on the day the body burns, the mind that praised him may cling to him. The hundredth verse ends on <em>tiruvaṭiyē</em>, "the holy feet," and the first begins with <em>tiru</em>, so the garland closes. See the ${ANTATI_FORM_LINK}.</p>
     `,
   };
 }
