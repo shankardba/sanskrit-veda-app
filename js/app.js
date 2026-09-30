@@ -55,7 +55,10 @@ const CHANTS = [
   { id: 'vishnu-raksha-stotram', label: 'Sri Vishnu Raksha Stotram', language: 'sanskrit', category: 'raksha-stotram' },
   { id: 'hanumad-raksha-stotram', label: 'Sri Hanumad Raksha Stotram', language: 'sanskrit', category: 'raksha-stotram' },
   { id: 'shani-raksha-stava', label: 'Sri Shani Raksha Stava', language: 'sanskrit', category: 'raksha-stotram' },
+  { id: 'ashtamurti-raksha-stotram', label: 'Ashtamurti Raksha Stotram', language: 'sanskrit', category: 'raksha-stotram' },
   { id: 'narasimha-kavacham', label: 'Sri Narasimha Kavacham', language: 'sanskrit', category: 'kavacham' },
+  { id: 'bala-krishna-raksha-kavacham', label: 'Bala Krishna Raksha Kavacham (Nandagopa)', language: 'sanskrit', category: 'kavacham' },
+  { id: 'vakratunda-ganesha-kavacham', label: 'Vakratunda Ganesha Kavacham', language: 'sanskrit', category: 'kavacham' },
 ];
 
 // Dropdown group order/labels — Tamil first so Abirami Antati (CHANTS[0],
@@ -137,6 +140,15 @@ const SECTION_NOTES = {
   },
   'shani-raksha-stava': {
     'Pūrvapīṭhikā': () => buildShaniRakshaSignificanceNote(),
+  },
+  'ashtamurti-raksha-stotram': {
+    1: () => buildAshtamurtiSignificanceNote(),
+  },
+  'bala-krishna-raksha-kavacham': {
+    Nandagopa: () => buildBalaKrishnaKavachamSignificanceNote(),
+  },
+  'vakratunda-ganesha-kavacham': {
+    1: () => buildVakratundaKavachamSignificanceNote(),
   },
 };
 
@@ -902,6 +914,57 @@ function buildShaniRakshaSignificanceNote() {
       </ul>
       <p><strong>Built on the Rama Raksha.</strong> The body map follows the Rama Raksha almost part for part (head, forehead, eyes, ears, nose, mouth, shoulders, arms, heart, navel, hips, feet, and finally "the whole body," <em>akhilaṃ vapuḥ</em>), and the closing promise, <em>sukhī putrī chirāyuḥ</em>, "happy, blessed with children, long-lived," repeats Rama Raksha v.10 nearly word for word. The Rama Raksha served as a model that other rakṣā hymns were built on.</p>
       <p><strong>The body as the mantra's home.</strong> Before the hymn proper comes a short <em>ṛṣyādinyāsa</em>: the reciter touches the head while naming the seer (Sindhudvīpa), the mouth while naming the meter, and the heart while naming the deity. The mantra's lineage is placed on the body in a logical order: its origin at the head, its sound at the mouth, its god in the heart. Then the whole body is dedicated to the purpose.</p>
+    `,
+  };
+}
+
+function buildAshtamurtiSignificanceNote() {
+  return {
+    title: 'Up the Elements and Back Down',
+    subtitle: 'Ashtamurti Raksha Stotram · Spiritual Significance',
+    bodyHtml: `
+      <p><strong>Śiva's eight forms.</strong> The <em>aṣṭamūrti</em>, "eight forms," are the classical list of the ways Śiva is present in the visible world: the five elements (earth, water, fire, wind, space), the sun, the moon, and the <em>yajamāna</em>, the one who offers sacrifice, the conscious self. Kālidāsa opens his play <em>Śākuntalam</em> with a blessing that names exactly these eight as the Lord's eight visible bodies, and that blessing is itself a protection prayer: it ends <em>avatu vas tābhir aṣṭābhir īśaḥ</em>, "may the Lord protect you with these eight." To ask the Aṣṭamūrti for protection is to ask to be held by the whole universe, understood as the god's own body.</p>
+      <p><strong>The five element temples.</strong> The first five verses go further and place each element at one of the <em>Pañcabhūta Sthalas</em>, the five great Śiva temples of South India, four of them in Tamil Nadu, where Śiva is worshipped as that element:</p>
+      <ul>
+        <li><em>Earth</em>: Kāñcīpuram (v.1). The verse calls him <em>saugandhya</em>, "fragrant," because in Indian philosophy smell is the quality that belongs to earth alone.</li>
+        <li><em>Water</em>: Jambukeśvaram at Tiruvānaikkāval (v.2), "wet with compassion, forever bathed"; the liṅga there stands in a perpetual underground spring.</li>
+        <li><em>Fire</em>: Aruṇācala at Tiruvaṇṇāmalai (v.3), "the fire at the end of time," smeared with ash, who burned Kāma.</li>
+        <li><em>Wind</em>: Śrī Kāḷahasti (v.4), addressed by the old Vedic name of the wind-god, <em>Mātariśvan</em>.</li>
+        <li><em>Space</em>: Chidambaram (v.5), "lord of the Hall of Consciousness," whose body is "like the partless sky." His dwelling is the <em>dahara</em>, the Upaniṣads' "small space within the heart."</li>
+      </ul>
+      <p><strong>A ladder climbed, then descended.</strong> Notice the order. Verses 1-5 go from the grossest element to the subtlest (earth, water, fire, wind, space), the direction a meditator travels inward, dissolving each element into the next. Verse 9 then comes back down in the opposite direction, and in words taken almost straight from the Taittirīya Upaniṣad (2.1): "from the Self, space was born; from space, wind; from wind, fire; from fire, water; from water, earth." The hymn climbs up through the elements to the Self and then walks back down the way creation came. The last line calls all eight forms <em>saṃvinmaya</em>, "made of pure awareness": the world that protects the devotee is consciousness itself.</p>
+    `,
+  };
+}
+
+function buildBalaKrishnaKavachamSignificanceNote() {
+  return {
+    title: 'A Father’s Armor',
+    subtitle: 'Bala Krishna Raksha Kavacham · Spiritual Significance',
+    bodyHtml: `
+      <p><strong>The same night, told twice.</strong> This is the Viṣṇu Purāṇa's telling (5.5) of the moment the Bhāgavata Purāṇa tells in the gopīs' Krishna Raksha (see the Raksha Stotrams section): the demoness Pūtanā has died at the infant's mouth, and the family shields the child. In the Bhāgavata, the protection is spoken by the mothers of Vraja. Here, Yaśodā waves a cow's tail over him and Nanda the cowherd, his foster-father, places a little cow-dung on his head and speaks this kavacham. Two Purāṇas, two parents, one gesture.</p>
+      <p><strong>Protected by his own deeds.</strong> Nanda's first four verses don't name body parts. They call on four great acts of Viṣṇu: the lotus rising from his navel from which the world was made; the Boar lifting the earth on its tusk; the Man-Lion tearing open the demon's chest; the dwarf Vāmana becoming Trivikrama and crossing the three worlds in three strides. Each was a moment when Viṣṇu saved the world. Nanda, not knowing, invokes them over a baby who is Viṣṇu. The child is guarded by his own past (and, as avatars, future) rescues: the same paradox as in the gopīs' text, where Viṣṇu's names protect Viṣṇu.</p>
+      <p><strong>From the body outward.</strong> Then comes the kavacham proper: head, throat, belly, shins and feet (v.18), face, arms, mind, and senses (v.19), the conch-blast that scatters every hostile spirit (v.20), and finally the directions (v.21): the four quarters, the four in-between, the sky above, and the earth below. The last guardian is <em>Mahīdhara</em>, "bearer of the earth," the Boar again, placed at the ground beneath the child, returning to verse 15's image.</p>
+      <p>(sanskritdocuments.org also carries this same passage, with the Purāṇa's narrative verses around it, as the <em>Bālagraharakṣāstotram</em>; that copy is too scan-damaged to use, so this clean one stands for both.)</p>
+    `,
+  };
+}
+
+function buildVakratundaKavachamSignificanceNote() {
+  return {
+    title: 'The Lord of Obstacles, Head to Foot',
+    subtitle: 'Vakratunda Ganesha Kavacham · Spiritual Significance',
+    bodyHtml: `
+      <p><strong>Protection as the removal of obstacles.</strong> Gaṇeśa is <em>Vighneśvara</em>, lord of obstacles: the one who places them and the one who removes them, which is why he is worshipped before any undertaking begins. A Gaṇeśa kavacham therefore protects in a particular way: not by fighting enemies but by clearing the path. The name in the title, <em>Vakratuṇḍa</em>, "the one with the curving trunk," is the first of Gaṇeśa's eight incarnations in the Mudgala Purāṇa, the one who subdues the demon of envy. Several of the other seven (Ekadanta, Lambodara, Gajānana, Vighnarāja) also appear in this kavacham as guardians.</p>
+      <p><strong>His body guards yours.</strong> As in the Shiva Raksha, the epithets are chosen to fit the part they guard, often by Gaṇeśa's own anatomy:</p>
+      <ul>
+        <li>the <em>eyes</em>, by the three-eyed one; the <em>ears</em>, by <em>Śūrpakarṇa</em>, "winnowing-fan ears";</li>
+        <li>the <em>mouth</em>, by <em>Gajānana</em>, "elephant-faced";</li>
+        <li>the <em>waist</em>, by <em>Lambodara</em>, "pot-bellied";</li>
+        <li>the <em>shins</em>, by the rider of the mouse; the <em>feet</em>, by the one seated in lotus posture.</li>
+      </ul>
+      <p>Then the directions (front, behind, sides, everywhere between), and then, as in the gopīs' Krishna Raksha, the activities of a day: "walking or standing, waking, sleeping, or eating." Protection covers space and time together.</p>
+      <p><strong>A number written in words.</strong> Verse 11 prescribes chanting the mantra <em>rasa-lakṣam</em> times. <em>Lakṣa</em> is 100,000; <em>rasa</em>, "taste," stands for 6, because Indian thought counts six tastes. So "taste-lakh" means 600,000. This is <em>bhūtasaṅkhyā</em>, the Sanskrit custom of writing numbers in verse with object-words ("eyes" = 2, "Vedas" = 4, "tastes" = 6). It is a different system from Āryabhaṭa's syllable-based numerals on the site's Āryabhaṭa numeration page, but it serves the same purpose: making numbers fit a meter. The verse also names Gaṇeśa's day: <em>chaturthī</em>, the fourth day of the lunar fortnight, on which this kavacham is to be recited.</p>
     `,
   };
 }
@@ -1792,6 +1855,7 @@ const MEANING_CONCEPTS = [
   // Case-forms vary by text (Rama Raksha's कटी vs. Narasimha's कटिम्, ऊरू
   // vs. ऊरु), so each attested surface form is catalogued individually.
   { id: 'body-head', deva: ['शिरो', 'शिरः', 'शिरसा', 'शिरसि', 'शीर्षं'], iast: ['śirō', 'śiraḥ', 'śirasā', 'śirasi', 'śīrṣaṃ'], english: ['head'] },
+  { id: 'body-crown', deva: ['मौलिं'], iast: ['mauliṃ'], english: ['crown'] },
   { id: 'body-forehead', deva: ['भालं'], iast: ['bhālaṃ'], english: ['forehead'] },
   { id: 'body-ears', deva: ['श्रुती', 'कर्णौ'], iast: ['śrutī', 'karṇau'], english: ['ears'] },
   { id: 'body-nose', deva: ['घ्राणं', 'नासं'], iast: ['ghrāṇaṃ', 'nāsaṃ'], english: ['nose'] },
@@ -1801,14 +1865,14 @@ const MEANING_CONCEPTS = [
   { id: 'body-face', deva: ['वक्त्रं'], iast: ['vaktraṃ'], english: ['face'] },
   { id: 'body-throat', deva: ['कण्ठं', 'कण्ठे'], iast: ['kaṇṭhaṃ', 'kaṇṭhē'], english: ['throat'] },
   { id: 'body-shoulders', deva: ['स्कन्धौ'], iast: ['skandhau'], english: ['shoulders'] },
-  { id: 'body-arms', deva: ['भुजौ'], iast: ['bhujau'], english: ['arms'] },
+  { id: 'body-arms', deva: ['भुजौ', 'बाहू'], iast: ['bhujau', 'bāhū'], english: ['arms'] },
   { id: 'body-chest', deva: ['स्तनौ'], iast: ['stanau'], english: ['chest'] },
   { id: 'body-hands', deva: ['करौ'], iast: ['karau'], english: ['hands'] },
   { id: 'body-heart', deva: ['हृदयं', 'हृदि'], iast: ['hṛdayaṃ', 'hṛdi'], english: ['heart'] },
   { id: 'body-belly', deva: ['जठरं'], iast: ['jaṭharaṃ'], english: ['belly'] },
   { id: 'body-waist', deva: ['मध्यं'], iast: ['madhyaṃ'], english: ['waist'] },
   { id: 'body-navel', deva: ['नाभिं'], iast: ['nābhiṃ'], english: ['navel'] },
-  { id: 'body-hips', deva: ['कटी', 'कटिम्', 'कटिं'], iast: ['kaṭī', 'kaṭim', 'kaṭiṃ'], english: ['hips'] },
+  { id: 'body-hips', deva: ['कटी', 'कटिम्', 'कटिं', 'जघनं'], iast: ['kaṭī', 'kaṭim', 'kaṭiṃ', 'jaghanaṃ'], english: ['hips'] },
   { id: 'body-haunches', deva: ['सक्थिनी'], iast: ['sakthinī'], english: ['haunches'] },
   // उरू (Shiva Raksha v.7) is the source's own spelling of ऊरू, kept as-is.
   { id: 'body-thighs', deva: ['ऊरू', 'ऊरु', 'उरू'], iast: ['ūrū', 'ūru', 'urū'], english: ['thighs'] },
