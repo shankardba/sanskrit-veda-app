@@ -998,24 +998,51 @@
 
   function polar(cx, cy, r, ang){ return [cx + r * Math.cos(ang), cy + r * Math.sin(ang)]; }
 
-  // Bhupura frame: traced directly from the user's reference image — both
-  // lines independently pixel-extracted (contour-detected, simplified to
-  // their rectilinear corners), not one derived from the other by an
-  // offset. That's deliberate: an algorithmic offset can get a concave
-  // corner's direction wrong and let two "parallel" lines touch or cross;
-  // measuring both from the actual reference guarantees the same spacing
-  // the image itself has, everywhere, including at the gates. Coordinates
-  // are fractions of the frame's own half-width. A third concentric line
-  // is a planned follow-up, not included yet.
-  var BHUPURA_LINE1 = [[0.43482, 1.00429], [-0.43482, 1.00429], [-0.43482, 0.86707], [-0.18396, 0.86707], [-0.18396, 0.84541], [-0.83641, 0.84541], [-0.83641, 0.19082], [-0.86106, 0.19082], [-0.86106, 0.43053], [-1.0, 0.43053], [-1.0, -0.43053], [-0.86106, -0.43053], [-0.86106, -0.18997], [-0.83641, -0.18997], [-0.83641, -0.84455], [-0.18396, -0.84455], [-0.18396, -0.86707], [-0.43482, -0.86707], [-0.43482, -1.00429], [0.43482, -1.00429], [0.43482, -0.86707], [0.18439, -0.86707], [0.18439, -0.84455], [0.83684, -0.84455], [0.83684, -0.18997], [0.86106, -0.18997], [0.86106, -0.43053], [1.0, -0.43053], [1.0, 0.43053], [0.86106, 0.43053], [0.86106, 0.19082], [0.83684, 0.19082], [0.83684, 0.84541], [0.18439, 0.84541], [0.18439, 0.86707], [0.43482, 0.86707], [0.43482, 1.00429]];
-  var BHUPURA_LINE2 = [[0.40292, 0.97341], [-0.40094, 0.97341], [-0.40094, 0.89966], [-0.15223, 0.89966], [-0.15223, 0.81411], [-0.80425, 0.81411], [-0.80425, 0.15909], [-0.89365, 0.15909], [-0.89365, 0.39794], [-0.96913, 0.39794], [-0.96913, -0.39794], [-0.89365, -0.39794], [-0.89365, -0.15909], [-0.80425, -0.15909], [-0.80425, -0.81325], [-0.15223, -0.81325], [-0.15223, -0.89966], [-0.40094, -0.89966], [-0.40094, -0.97256], [0.40292, -0.97256], [0.40292, -0.89966], [0.1518, -0.89966], [0.1518, -0.81325], [0.80467, -0.81325], [0.80467, -0.15909], [0.89365, -0.15909], [0.89365, -0.39794], [0.96913, -0.39794], [0.96913, 0.39794], [0.89365, 0.39794], [0.89365, 0.15909], [0.80467, 0.15909], [0.80467, 0.81411], [0.1518, 0.81411], [0.1518, 0.89966], [0.40292, 0.89966], [0.40292, 0.97341]];
+  // Bhupura frame: three concentric, equally spaced outlines of one square-
+  // with-four-T-gates shape. Each line is built directly from its
+  // proportions — main square half-side S, gate neck half-width n, crossbar
+  // inner edge c, crossbar half-span h, crossbar outer edge o — rather than
+  // by a generic polygon-offset routine, so every edge's inward direction
+  // is explicit: line k is S-kd, n-kd, c+kd, h-kd, o-kd, an exact inward
+  // offset by kd, and no edge ever collapses. S, n and h are the original
+  // traced reference outline's, symmetrized (its x and y readings differed
+  // by ~1% from tracing). The gates are then placed so that every parallel
+  // gap through a gate is the same spacing d: the outer line's crossbar
+  // sits d beyond its own frame edge (c = S + d) and is 5d thick (o = c +
+  // 5d), so a line drawn outward through any gate crosses frame, crossbar
+  // and crossbar again at eight equal gaps, and the innermost crossbar is
+  // itself d thick.
+  var BHUPURA_PROPS = { S: 0.8390, n: 0.1869, h: 0.4318 };
+  var BHUPURA_SPACING = 0.02756;
+  function bhupuraLine(k){
+    var P = BHUPURA_PROPS, D = BHUPURA_SPACING, d = D * k;
+    var S = P.S - d, n = P.n - d, c = P.S + D + d, h = P.h - d, o = P.S + 6 * D - d;
+    var side = [[S, S], [n, S], [n, c], [h, c], [h, o], [-h, o], [-h, c], [-n, c], [-n, S]];
+    var pts = [];
+    for(var r = 0; r < 4; r++){
+      pts = pts.concat(side);
+      side = side.map(function(p){ return [-p[1], p[0]]; });
+    }
+    return pts;
+  }
+  var BHUPURA_LINES = [bhupuraLine(0), bhupuraLine(1), bhupuraLine(2)];
 
-  // The frame's own closest approach to its center (the inner corner of
-  // each gate notch, not the flat sides) — measured once from LINE2, the
-  // same way for every preset. A preset's yantra never gets closer to the
-  // frame than BHUPURA_GAP (in R units) because the frame is scaled so
-  // this closest point sits exactly yantraExtent + BHUPURA_GAP out.
-  var BHUPURA_MIN_APPROACH = 0.8198;
+  function distToSegment(p, a, b){
+    var abx = b[0] - a[0], aby = b[1] - a[1], lenSq = abx * abx + aby * aby;
+    var t = lenSq === 0 ? 0 : Math.max(0, Math.min(1, ((p[0] - a[0]) * abx + (p[1] - a[1]) * aby) / lenSq));
+    return Math.hypot(p[0] - (a[0] + t * abx), p[1] - (a[1] + t * aby));
+  }
+
+  // The frame's closest approach to its center (the innermost line's gate-
+  // neck corners), derived from the geometry rather than hand-measured. A
+  // preset's yantra never gets closer to the frame than BHUPURA_GAP (in R
+  // units) because the frame is scaled so this point sits exactly
+  // yantraExtent + BHUPURA_GAP out.
+  var BHUPURA_MIN_APPROACH = (function(){
+    var inner = BHUPURA_LINES[BHUPURA_LINES.length - 1], m = Infinity;
+    inner.forEach(function(a, i){ m = Math.min(m, distToSegment([0, 0], a, inner[(i + 1) % inner.length])); });
+    return m;
+  })();
   var BHUPURA_GAP = 0.15;
 
   function bhupuraScaleFor(yantraExtent){
@@ -1025,12 +1052,13 @@
   function drawBhupura(color, width, yantraExtent){
     ctx.strokeStyle = color; ctx.lineWidth = width; ctx.lineJoin = 'miter';
     var s = geo.R * bhupuraScaleFor(yantraExtent);
-    [BHUPURA_LINE1, BHUPURA_LINE2].forEach(function(path){
+    BHUPURA_LINES.forEach(function(path){
       ctx.beginPath();
       path.forEach(function(p, idx){
         var X = geo.cx + p[0] * s, Y = geo.cy + p[1] * s;
         if(idx === 0) ctx.moveTo(X, Y); else ctx.lineTo(X, Y);
       });
+      ctx.closePath();
       ctx.stroke();
     });
   }
