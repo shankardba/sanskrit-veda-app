@@ -14,22 +14,27 @@
 // line rather than assuming one, so wrapped lines don't need special
 // handling elsewhere.
 
-// language here (not just each chant JSON's own "language" field) is what
-// populateChantSelect groups the dropdown by — see CHANT_GROUPS below.
+// Every chant belongs to one `collection` (a form or corpus: Antāti,
+// Thirukkural, Laharī, Rakṣā & Kavacham...), and the chants page picks in two
+// steps, collection then chant (see populateCollectionSelect /
+// populateChantSelect), so no single dropdown grows unmanageably long.
+// `language` is still what chants.html's ?lang= filter and the Tamil script
+// font switch key off; `subgroup` optionally splits a collection's own
+// dropdown into headed sections (see COLLECTIONS below).
 const CHANTS = [
-  { id: 'abirami-antati', label: 'Abirami Antati', language: 'tamil' },
-  { id: 'kanninun-cirutampu', label: 'Kanninun Cirutampu', language: 'tamil' },
-  { id: 'arpudha-tiruvantati', label: 'Arpudha Tiruvantati', language: 'tamil' },
-  { id: 'saraswati-antati', label: 'Saraswati Antati', language: 'tamil' },
-  { id: 'mudhal-tiruvantati', label: 'Mudhal Tiruvantati', language: 'tamil' },
-  { id: 'irandam-tiruvantati', label: 'Irandam Tiruvantati', language: 'tamil' },
-  { id: 'munram-tiruvantati', label: 'Munram Tiruvantati', language: 'tamil' },
-  { id: 'vel-maaral-tamil', label: 'Vel Maaral', language: 'tamil' },
-  { id: 'thirukkural-arathuppal', label: 'Thirukkural — Aratthuppal', language: 'tamil' },
-  { id: 'thirukkural-porutpal', label: 'Thirukkural — Porutpal', language: 'tamil' },
-  { id: 'thirukkural-kaamathuppal', label: 'Thirukkural — Kaamathuppal', language: 'tamil' },
-  { id: 'sri-rudram-namakam', label: 'Sri Rudram Namakam', language: 'sanskrit' },
-  { id: 'sri-rudram-chamakam', label: 'Sri Rudram Chamakam', language: 'sanskrit' },
+  { id: 'abirami-antati', label: 'Abirami Antati', language: 'tamil', collection: 'antati' },
+  { id: 'arpudha-tiruvantati', label: 'Arpudha Tiruvantati', language: 'tamil', collection: 'antati' },
+  { id: 'saraswati-antati', label: 'Saraswati Antati', language: 'tamil', collection: 'antati' },
+  { id: 'mudhal-tiruvantati', label: 'Mudhal Tiruvantati', language: 'tamil', collection: 'antati' },
+  { id: 'irandam-tiruvantati', label: 'Irandam Tiruvantati', language: 'tamil', collection: 'antati' },
+  { id: 'munram-tiruvantati', label: 'Munram Tiruvantati', language: 'tamil', collection: 'antati' },
+  { id: 'thirukkural-arathuppal', label: 'Aratthuppal (Virtue)', language: 'tamil', collection: 'thirukkural' },
+  { id: 'thirukkural-porutpal', label: 'Porutpal (Wealth)', language: 'tamil', collection: 'thirukkural' },
+  { id: 'thirukkural-kaamathuppal', label: 'Kaamathuppal (Love)', language: 'tamil', collection: 'thirukkural' },
+  { id: 'kanninun-cirutampu', label: 'Kanninun Cirutampu', language: 'tamil', collection: 'tamil-hymns' },
+  { id: 'vel-maaral-tamil', label: 'Vel Maaral', language: 'tamil', collection: 'tamil-hymns' },
+  { id: 'sri-rudram-namakam', label: 'Namakam', language: 'sanskrit', collection: 'rudram' },
+  { id: 'sri-rudram-chamakam', label: 'Chamakam', language: 'sanskrit', collection: 'rudram' },
   // linkScope: 'local' — Soundarya Lahari is a continuous 100-verse poem, not
   // a litany like Namakam/Chamakam where the same refrain deliberately spans
   // the whole text. A concept word here (e.g. bhūmi/"earth") recurring in two
@@ -37,45 +42,52 @@ const CHANTS = [
   // meaningful structural echo — so clicking it should only connect its
   // occurrences within the same verse or an adjacent one, not the whole
   // chant (see the section-proximity check in initRepeatClickHandling).
-  { id: 'soundarya-lahari', label: 'Soundarya Lahari', language: 'sanskrit', linkScope: 'local' },
+  { id: 'soundarya-lahari', label: 'Soundarya Lahari', language: 'sanskrit', collection: 'lahari', linkScope: 'local' },
   // linkScope: 'local' — same reasoning as Soundarya Lahari above: a
   // continuous 100-verse devotional poem (also Śaṅkara's), not a litany,
   // so word recurrence across distant verses is ordinary vocabulary reuse
   // rather than a deliberate refrain.
-  { id: 'shivananda-lahari', label: 'Shivananda Lahari', language: 'sanskrit', linkScope: 'local' },
-  // category: 'raksha-stotram' — see CHANT_GROUPS below: a Raksha Stotram
-  // sub-section under Sanskrit, for short protective-hymn stotrams (as
-  // opposed to the long continuous lahari poems or the Rudram litanies).
-  { id: 'bala-raksha-stotram', label: 'Sri Bala Raksha Stotram', language: 'sanskrit', category: 'raksha-stotram' },
-  { id: 'rama-raksha-stotram', label: 'Sri Rama Raksha Stotram', language: 'sanskrit', category: 'raksha-stotram' },
-  // category: 'kavacham' — the sister genre ("armor"): same protective
-  // purpose, but structured as an explicit head-to-foot body map.
-  { id: 'krishna-raksha-stotram', label: 'Sri Krishna Raksha (Gopi Krta)', language: 'sanskrit', category: 'raksha-stotram' },
-  { id: 'shiva-raksha-stotram', label: 'Sri Shiva Raksha Stotram', language: 'sanskrit', category: 'raksha-stotram' },
-  { id: 'vishnu-raksha-stotram', label: 'Sri Vishnu Raksha Stotram', language: 'sanskrit', category: 'raksha-stotram' },
-  { id: 'hanumad-raksha-stotram', label: 'Sri Hanumad Raksha Stotram', language: 'sanskrit', category: 'raksha-stotram' },
-  { id: 'shani-raksha-stava', label: 'Sri Shani Raksha Stava', language: 'sanskrit', category: 'raksha-stotram' },
-  { id: 'ashtamurti-raksha-stotram', label: 'Ashtamurti Raksha Stotram', language: 'sanskrit', category: 'raksha-stotram' },
-  { id: 'narasimha-kavacham', label: 'Sri Narasimha Kavacham', language: 'sanskrit', category: 'kavacham' },
-  { id: 'bala-krishna-raksha-kavacham', label: 'Bala Krishna Raksha Kavacham (Nandagopa)', language: 'sanskrit', category: 'kavacham' },
-  { id: 'vakratunda-ganesha-kavacham', label: 'Vakratunda Ganesha Kavacham', language: 'sanskrit', category: 'kavacham' },
-  { id: 'devi-kavacham', label: 'Sri Durga Kavacham (Devi Kavacham)', language: 'sanskrit', category: 'kavacham' },
-  { id: 'raghavendra-raksha-kavacham', label: 'Sri Raghavendra Raksha Kavacham', language: 'sanskrit', category: 'kavacham' },
-  { id: 'pancharaksha-devi-stotrani', label: 'Pancharaksha Devi Stotrani (Buddhist)', language: 'sanskrit', category: 'raksha-stotram' },
-  { id: 'raksha-kala-kara-stava', label: 'Raksha Kala Kara Stava (Buddhist)', language: 'sanskrit', category: 'raksha-stotram' },
+  { id: 'shivananda-lahari', label: 'Shivananda Lahari', language: 'sanskrit', collection: 'lahari', linkScope: 'local' },
+  // Protection hymns: rakṣā stotrams, and their sister genre the kavacham
+  // ("armor"), which has the same purpose but is built as an explicit
+  // head-to-foot body map. The two Buddhist rakṣā texts get their own
+  // subgroup so their tradition is visible at a glance.
+  { id: 'bala-raksha-stotram', label: 'Sri Bala Raksha Stotram', language: 'sanskrit', collection: 'protection', subgroup: 'raksha' },
+  { id: 'rama-raksha-stotram', label: 'Sri Rama Raksha Stotram', language: 'sanskrit', collection: 'protection', subgroup: 'raksha' },
+  { id: 'krishna-raksha-stotram', label: 'Sri Krishna Raksha (Gopi Krta)', language: 'sanskrit', collection: 'protection', subgroup: 'raksha' },
+  { id: 'shiva-raksha-stotram', label: 'Sri Shiva Raksha Stotram', language: 'sanskrit', collection: 'protection', subgroup: 'raksha' },
+  { id: 'vishnu-raksha-stotram', label: 'Sri Vishnu Raksha Stotram', language: 'sanskrit', collection: 'protection', subgroup: 'raksha' },
+  { id: 'hanumad-raksha-stotram', label: 'Sri Hanumad Raksha Stotram', language: 'sanskrit', collection: 'protection', subgroup: 'raksha' },
+  { id: 'shani-raksha-stava', label: 'Sri Shani Raksha Stava', language: 'sanskrit', collection: 'protection', subgroup: 'raksha' },
+  { id: 'ashtamurti-raksha-stotram', label: 'Ashtamurti Raksha Stotram', language: 'sanskrit', collection: 'protection', subgroup: 'raksha' },
+  { id: 'narasimha-kavacham', label: 'Sri Narasimha Kavacham', language: 'sanskrit', collection: 'protection', subgroup: 'kavacham' },
+  { id: 'devi-kavacham', label: 'Sri Durga Kavacham (Devi Kavacham)', language: 'sanskrit', collection: 'protection', subgroup: 'kavacham' },
+  { id: 'bala-krishna-raksha-kavacham', label: 'Bala Krishna Raksha Kavacham (Nandagopa)', language: 'sanskrit', collection: 'protection', subgroup: 'kavacham' },
+  { id: 'vakratunda-ganesha-kavacham', label: 'Vakratunda Ganesha Kavacham', language: 'sanskrit', collection: 'protection', subgroup: 'kavacham' },
+  { id: 'raghavendra-raksha-kavacham', label: 'Sri Raghavendra Raksha Kavacham', language: 'sanskrit', collection: 'protection', subgroup: 'kavacham' },
+  { id: 'pancharaksha-devi-stotrani', label: 'Pancharaksha Devi Stotrani', language: 'sanskrit', collection: 'protection', subgroup: 'buddhist' },
+  { id: 'raksha-kala-kara-stava', label: 'Raksha Kala Kara Stava', language: 'sanskrit', collection: 'protection', subgroup: 'buddhist' },
 ];
 
-// Dropdown group order/labels — Tamil first so Abirami Antati (CHANTS[0],
-// also the default chant on a first visit) stays the first option overall.
-// A group with a `category` is a sub-section within its language: only
-// chants whose own `category` matches are listed there, while the plain
-// language group (no `category`) picks up everything else — see the
-// filter in populateChantSelect below.
-const CHANT_GROUPS = [
-  { language: 'tamil', label: 'Tamil' },
-  { language: 'sanskrit', label: 'Sanskrit' },
-  { language: 'sanskrit', category: 'raksha-stotram', label: 'Raksha Stotrams' },
-  { language: 'sanskrit', category: 'kavacham', label: 'Kavachams' },
+// Collection order/labels for the first picker. Tamil first so Abirami
+// Antati (CHANTS[0], also the default chant on a first visit) stays first.
+const LANGUAGE_LABELS = { tamil: 'Tamil', sanskrit: 'Sanskrit' };
+const COLLECTIONS = [
+  { id: 'antati', language: 'tamil', label: 'Antatis' },
+  { id: 'thirukkural', language: 'tamil', label: 'Thirukkural' },
+  { id: 'tamil-hymns', language: 'tamil', label: 'Other Hymns' },
+  { id: 'rudram', language: 'sanskrit', label: 'Sri Rudram' },
+  { id: 'lahari', language: 'sanskrit', label: 'Laharis of Shankara' },
+  {
+    id: 'protection',
+    language: 'sanskrit',
+    label: 'Raksha & Kavacham',
+    subgroups: [
+      { id: 'raksha', label: 'Raksha Stotrams' },
+      { id: 'kavacham', label: 'Kavachams' },
+      { id: 'buddhist', label: 'Buddhist' },
+    ],
+  },
 ];
 
 // Optional per-section popup notes, keyed by chant id then section label —
@@ -1107,6 +1119,7 @@ function openMathModal(note) {
   overlay.hidden = false;
 }
 
+const collectionSelect = document.getElementById('collectionSelect');
 const chantSelect = document.getElementById('chantSelect');
 const chantBody = document.getElementById('chantBody');
 const chantTitleDeva = document.getElementById('chantTitleDeva');
@@ -1133,25 +1146,50 @@ let currentChant = null;
 let lineSectionMap = new Map();
 
 // languageFilter (from chants.html's own ?lang= query param — see the
-// Chants hub's two cards on index.html) restricts the dropdown to a single
-// group, dropping the optgroup wrapper entirely since a label is redundant
-// when there's nothing to distinguish it from. Falls back to every chant,
-// grouped as usual, when absent/unrecognized (e.g. chants.html visited
-// directly, no query param) — segregation is an entry point, not a lock.
-function populateChantSelect(languageFilter) {
-  const groups = CHANT_GROUPS.filter((g) => !languageFilter || g.language === languageFilter);
-  for (const group of groups) {
-    const parent = languageFilter ? chantSelect : document.createElement('optgroup');
-    if (!languageFilter) parent.label = group.label;
-    for (const chant of CHANTS.filter(
-      (c) => c.language === group.language && (group.category ? c.category === group.category : !c.category)
-    )) {
+// Chants hub's two cards on index.html) restricts the collection picker to
+// one language, dropping the language optgroups since a heading is redundant
+// there. Falls back to every collection, grouped by language, when absent or
+// unrecognized — segregation is an entry point, not a lock.
+function populateCollectionSelect(languageFilter) {
+  collectionSelect.innerHTML = '';
+  const languages = [...new Set(COLLECTIONS.map((c) => c.language))].filter(
+    (lang) => !languageFilter || lang === languageFilter
+  );
+  for (const lang of languages) {
+    const parent = languageFilter ? collectionSelect : document.createElement('optgroup');
+    if (!languageFilter) parent.label = LANGUAGE_LABELS[lang];
+    for (const collection of COLLECTIONS.filter((c) => c.language === lang)) {
+      const count = CHANTS.filter((c) => c.collection === collection.id).length;
+      const option = document.createElement('option');
+      option.value = collection.id;
+      option.textContent = `${collection.label} (${count})`;
+      parent.appendChild(option);
+    }
+    if (!languageFilter) collectionSelect.appendChild(parent);
+  }
+}
+
+function populateChantSelect(collectionId) {
+  chantSelect.innerHTML = '';
+  const collection = COLLECTIONS.find((c) => c.id === collectionId);
+  const members = CHANTS.filter((c) => c.collection === collectionId);
+  const addOptions = (parent, chants) => {
+    for (const chant of chants) {
       const option = document.createElement('option');
       option.value = chant.id;
       option.textContent = chant.label;
       parent.appendChild(option);
     }
-    if (!languageFilter) chantSelect.appendChild(parent);
+  };
+  if (!collection.subgroups) {
+    addOptions(chantSelect, members);
+    return;
+  }
+  for (const subgroup of collection.subgroups) {
+    const optgroup = document.createElement('optgroup');
+    optgroup.label = subgroup.label;
+    addOptions(optgroup, members.filter((c) => c.subgroup === subgroup.id));
+    chantSelect.appendChild(optgroup);
   }
 }
 
@@ -1896,8 +1934,8 @@ const MEANING_CONCEPTS = [
   // fused word right before it; देव itself sits clean and separate.
   { id: 'shl-deva', deva: ['देव'], iast: ['dēva'], english: ['god'] },
 
-  // --- Sri Bala Raksha Stotram (first entry in the new "Raksha Stotrams"
-  // sub-section under Sanskrit — see CHANT_GROUPS/CHANTS above). A litany
+  // --- Sri Bala Raksha Stotram (first entry in the "Raksha & Kavacham"
+  // collection — see COLLECTIONS/CHANTS above). A litany
   // of short protective imperatives to the goddess, not a continuous poem,
   // so no linkScope: 'local' — whole-chant linking is correct here, same
   // as Namakam/Chamakam. ---
@@ -3092,8 +3130,8 @@ function initRepeatClickHandling() {
 
 function init() {
   const requestedLang = new URLSearchParams(window.location.search).get('lang');
-  const languageFilter = CHANT_GROUPS.some((g) => g.language === requestedLang) ? requestedLang : null;
-  populateChantSelect(languageFilter);
+  const languageFilter = COLLECTIONS.some((c) => c.language === requestedLang) ? requestedLang : null;
+  populateCollectionSelect(languageFilter);
   initRepeatClickHandling();
 
   const savedShow = localStorage.getItem('vedavani:showTransliteration');
@@ -3137,9 +3175,21 @@ function init() {
   const eligible = languageFilter ? CHANTS.filter((c) => c.language === languageFilter) : CHANTS;
   const lastChant = localStorage.getItem('vedavani:lastChant');
   const initialId = eligible.some((c) => c.id === lastChant) ? lastChant : eligible[0].id;
-  chantSelect.value = initialId;
+  const showCollectionOf = (id) => {
+    const { collection } = CHANTS.find((c) => c.id === id);
+    collectionSelect.value = collection;
+    populateChantSelect(collection);
+    chantSelect.value = id;
+  };
+  showCollectionOf(initialId);
   loadChant(initialId);
 
+  // Switching collection opens its first chant, so the page never shows a
+  // chant that isn't in the collection currently selected.
+  collectionSelect.addEventListener('change', () => {
+    populateChantSelect(collectionSelect.value);
+    loadChant(chantSelect.value);
+  });
   chantSelect.addEventListener('change', () => loadChant(chantSelect.value));
 }
 

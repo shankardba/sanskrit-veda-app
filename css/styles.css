@@ -130,7 +130,34 @@ a {
   }
 }
 
-/* Chant chooser */
+/* Chant chooser: collection picker, then chant picker */
+.chant-picker {
+  display: flex;
+  gap: 8px;
+  min-width: 0;
+}
+
+.chant-select-collection {
+  color: var(--color-gold);
+}
+
+.chant-picker .chant-select {
+  min-width: 0;
+  max-width: 250px;
+  text-overflow: ellipsis;
+}
+
+@media (max-width: 600px) {
+  .chant-picker {
+    width: 100%;
+  }
+
+  .chant-picker .chant-select {
+    flex: 1;
+    max-width: none;
+  }
+}
+
 .chant-select {
   background: var(--color-panel);
   color: var(--color-text);
