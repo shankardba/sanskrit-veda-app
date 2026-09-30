@@ -15,12 +15,12 @@
 // handling elsewhere.
 
 // Every chant belongs to one `collection` (a form or corpus: Antāti,
-// Thirukkural, Laharī, Rakṣā & Kavacham...), and the chants page picks in two
-// steps, collection then chant (see populateCollectionSelect /
-// populateChantSelect), so no single dropdown grows unmanageably long.
-// `language` is still what chants.html's ?lang= filter and the Tamil script
-// font switch key off; `subgroup` optionally splits a collection's own
-// dropdown into headed sections (see COLLECTIONS below).
+// Thirukkural, Laharī, Kavacham...). The chant menu (see buildChantMenu)
+// lists collections, each of which expands to show its own chants, so the
+// list never gets unmanageably long. `language` is still what chants.html's
+// ?lang= filter and the Tamil script font switch key off; `subgroup` puts a
+// chant under a subheading inside its collection (listed after the
+// ungrouped chants — see COLLECTIONS below).
 const CHANTS = [
   { id: 'abirami-antati', label: 'Abirami Antati', language: 'tamil', collection: 'antati' },
   { id: 'arpudha-tiruvantati', label: 'Arpudha Tiruvantati', language: 'tamil', collection: 'antati' },
@@ -50,26 +50,26 @@ const CHANTS = [
   { id: 'shivananda-lahari', label: 'Shivananda Lahari', language: 'sanskrit', collection: 'lahari', linkScope: 'local' },
   // Protection hymns: rakṣā stotrams, and their sister genre the kavacham
   // ("armor"), which has the same purpose but is built as an explicit
-  // head-to-foot body map. The two Buddhist rakṣā texts get their own
-  // subgroup so their tradition is visible at a glance.
-  { id: 'bala-raksha-stotram', label: 'Sri Bala Raksha Stotram', language: 'sanskrit', collection: 'protection', subgroup: 'raksha' },
-  { id: 'rama-raksha-stotram', label: 'Sri Rama Raksha Stotram', language: 'sanskrit', collection: 'protection', subgroup: 'raksha' },
-  { id: 'krishna-raksha-stotram', label: 'Sri Krishna Raksha (Gopi Krta)', language: 'sanskrit', collection: 'protection', subgroup: 'raksha' },
-  { id: 'shiva-raksha-stotram', label: 'Sri Shiva Raksha Stotram', language: 'sanskrit', collection: 'protection', subgroup: 'raksha' },
-  { id: 'vishnu-raksha-stotram', label: 'Sri Vishnu Raksha Stotram', language: 'sanskrit', collection: 'protection', subgroup: 'raksha' },
-  { id: 'hanumad-raksha-stotram', label: 'Sri Hanumad Raksha Stotram', language: 'sanskrit', collection: 'protection', subgroup: 'raksha' },
-  { id: 'shani-raksha-stava', label: 'Sri Shani Raksha Stava', language: 'sanskrit', collection: 'protection', subgroup: 'raksha' },
-  { id: 'ashtamurti-raksha-stotram', label: 'Ashtamurti Raksha Stotram', language: 'sanskrit', collection: 'protection', subgroup: 'raksha' },
-  { id: 'narasimha-kavacham', label: 'Sri Narasimha Kavacham', language: 'sanskrit', collection: 'protection', subgroup: 'kavacham' },
-  { id: 'devi-kavacham', label: 'Sri Durga Kavacham (Devi Kavacham)', language: 'sanskrit', collection: 'protection', subgroup: 'kavacham' },
-  { id: 'bala-krishna-raksha-kavacham', label: 'Bala Krishna Raksha Kavacham (Nandagopa)', language: 'sanskrit', collection: 'protection', subgroup: 'kavacham' },
-  { id: 'vakratunda-ganesha-kavacham', label: 'Vakratunda Ganesha Kavacham', language: 'sanskrit', collection: 'protection', subgroup: 'kavacham' },
-  { id: 'raghavendra-raksha-kavacham', label: 'Sri Raghavendra Raksha Kavacham', language: 'sanskrit', collection: 'protection', subgroup: 'kavacham' },
-  { id: 'pancharaksha-devi-stotrani', label: 'Pancharaksha Devi Stotrani', language: 'sanskrit', collection: 'protection', subgroup: 'buddhist' },
-  { id: 'raksha-kala-kara-stava', label: 'Raksha Kala Kara Stava', language: 'sanskrit', collection: 'protection', subgroup: 'buddhist' },
+  // head-to-foot body map. The two Buddhist rakṣā texts sit under their own
+  // "Buddhist" subheading so their tradition is visible at a glance.
+  { id: 'bala-raksha-stotram', label: 'Sri Bala Raksha Stotram', language: 'sanskrit', collection: 'raksha' },
+  { id: 'rama-raksha-stotram', label: 'Sri Rama Raksha Stotram', language: 'sanskrit', collection: 'raksha' },
+  { id: 'krishna-raksha-stotram', label: 'Sri Krishna Raksha (Gopi Krta)', language: 'sanskrit', collection: 'raksha' },
+  { id: 'shiva-raksha-stotram', label: 'Sri Shiva Raksha Stotram', language: 'sanskrit', collection: 'raksha' },
+  { id: 'vishnu-raksha-stotram', label: 'Sri Vishnu Raksha Stotram', language: 'sanskrit', collection: 'raksha' },
+  { id: 'hanumad-raksha-stotram', label: 'Sri Hanumad Raksha Stotram', language: 'sanskrit', collection: 'raksha' },
+  { id: 'shani-raksha-stava', label: 'Sri Shani Raksha Stava', language: 'sanskrit', collection: 'raksha' },
+  { id: 'ashtamurti-raksha-stotram', label: 'Ashtamurti Raksha Stotram', language: 'sanskrit', collection: 'raksha' },
+  { id: 'narasimha-kavacham', label: 'Sri Narasimha Kavacham', language: 'sanskrit', collection: 'kavacham' },
+  { id: 'devi-kavacham', label: 'Sri Durga Kavacham (Devi Kavacham)', language: 'sanskrit', collection: 'kavacham' },
+  { id: 'bala-krishna-raksha-kavacham', label: 'Bala Krishna Raksha Kavacham (Nandagopa)', language: 'sanskrit', collection: 'kavacham' },
+  { id: 'vakratunda-ganesha-kavacham', label: 'Vakratunda Ganesha Kavacham', language: 'sanskrit', collection: 'kavacham' },
+  { id: 'raghavendra-raksha-kavacham', label: 'Sri Raghavendra Raksha Kavacham', language: 'sanskrit', collection: 'kavacham' },
+  { id: 'pancharaksha-devi-stotrani', label: 'Pancharaksha Devi Stotrani', language: 'sanskrit', collection: 'raksha', subgroup: 'buddhist' },
+  { id: 'raksha-kala-kara-stava', label: 'Raksha Kala Kara Stava', language: 'sanskrit', collection: 'raksha', subgroup: 'buddhist' },
 ];
 
-// Collection order/labels for the first picker. Tamil first so Abirami
+// Collection order/labels for the chant menu. Tamil first so Abirami
 // Antati (CHANTS[0], also the default chant on a first visit) stays first.
 const LANGUAGE_LABELS = { tamil: 'Tamil', sanskrit: 'Sanskrit' };
 const COLLECTIONS = [
@@ -78,16 +78,8 @@ const COLLECTIONS = [
   { id: 'tamil-hymns', language: 'tamil', label: 'Other Hymns' },
   { id: 'rudram', language: 'sanskrit', label: 'Sri Rudram' },
   { id: 'lahari', language: 'sanskrit', label: 'Laharis of Shankara' },
-  {
-    id: 'protection',
-    language: 'sanskrit',
-    label: 'Raksha & Kavacham',
-    subgroups: [
-      { id: 'raksha', label: 'Raksha Stotrams' },
-      { id: 'kavacham', label: 'Kavachams' },
-      { id: 'buddhist', label: 'Buddhist' },
-    ],
-  },
+  { id: 'raksha', language: 'sanskrit', label: 'Raksha Stotrams', subgroups: [{ id: 'buddhist', label: 'Buddhist' }] },
+  { id: 'kavacham', language: 'sanskrit', label: 'Kavachams' },
 ];
 
 // Optional per-section popup notes, keyed by chant id then section label —
@@ -1119,8 +1111,10 @@ function openMathModal(note) {
   overlay.hidden = false;
 }
 
-const collectionSelect = document.getElementById('collectionSelect');
-const chantSelect = document.getElementById('chantSelect');
+const chantMenuButton = document.getElementById('chantMenuButton');
+const chantMenuCollection = document.getElementById('chantMenuCollection');
+const chantMenuCurrent = document.getElementById('chantMenuCurrent');
+const chantMenu = document.getElementById('chantMenu');
 const chantBody = document.getElementById('chantBody');
 const chantTitleDeva = document.getElementById('chantTitleDeva');
 const chantTitleIast = document.getElementById('chantTitleIast');
@@ -1145,52 +1139,110 @@ let networkSvg = null;
 let currentChant = null;
 let lineSectionMap = new Map();
 
+// The chant menu: one button in the header that opens a panel of
+// collections (grouped by language); clicking a collection expands it to
+// show its chants, one collection open at a time.
+//
 // languageFilter (from chants.html's own ?lang= query param — see the
-// Chants hub's two cards on index.html) restricts the collection picker to
-// one language, dropping the language optgroups since a heading is redundant
-// there. Falls back to every collection, grouped by language, when absent or
-// unrecognized — segregation is an entry point, not a lock.
-function populateCollectionSelect(languageFilter) {
-  collectionSelect.innerHTML = '';
+// Chants hub's two cards on index.html) restricts the menu to one language,
+// dropping the language headings since they'd be redundant. Falls back to
+// every collection when absent or unrecognized — segregation is an entry
+// point, not a lock.
+function buildChantMenu(languageFilter) {
+  chantMenu.innerHTML = '';
   const languages = [...new Set(COLLECTIONS.map((c) => c.language))].filter(
     (lang) => !languageFilter || lang === languageFilter
   );
   for (const lang of languages) {
-    const parent = languageFilter ? collectionSelect : document.createElement('optgroup');
-    if (!languageFilter) parent.label = LANGUAGE_LABELS[lang];
+    if (!languageFilter) chantMenu.appendChild(el('div', 'chant-menu-language', LANGUAGE_LABELS[lang]));
     for (const collection of COLLECTIONS.filter((c) => c.language === lang)) {
-      const count = CHANTS.filter((c) => c.collection === collection.id).length;
-      const option = document.createElement('option');
-      option.value = collection.id;
-      option.textContent = `${collection.label} (${count})`;
-      parent.appendChild(option);
+      const members = CHANTS.filter((c) => c.collection === collection.id);
+      const section = el('div', 'chant-menu-collection');
+      section.dataset.collection = collection.id;
+
+      const toggle = el('button', 'chant-menu-collection-toggle');
+      toggle.type = 'button';
+      toggle.setAttribute('aria-expanded', 'false');
+      toggle.append(el('span', 'chant-menu-collection-name', collection.label), el('span', 'chant-menu-count', String(members.length)));
+      toggle.addEventListener('click', () => {
+        setCollectionExpanded(collection.id, toggle.getAttribute('aria-expanded') !== 'true');
+      });
+
+      const list = el('div', 'chant-menu-list');
+      list.hidden = true;
+      const addItems = (chants) => {
+        for (const chant of chants) {
+          const item = el('button', 'chant-menu-item', chant.label);
+          item.type = 'button';
+          item.dataset.chant = chant.id;
+          list.appendChild(item);
+        }
+      };
+      addItems(members.filter((c) => !c.subgroup));
+      for (const subgroup of collection.subgroups || []) {
+        list.appendChild(el('div', 'chant-menu-subgroup', subgroup.label));
+        addItems(members.filter((c) => c.subgroup === subgroup.id));
+      }
+
+      section.append(toggle, list);
+      chantMenu.appendChild(section);
     }
-    if (!languageFilter) collectionSelect.appendChild(parent);
   }
 }
 
-function populateChantSelect(collectionId) {
-  chantSelect.innerHTML = '';
-  const collection = COLLECTIONS.find((c) => c.id === collectionId);
-  const members = CHANTS.filter((c) => c.collection === collectionId);
-  const addOptions = (parent, chants) => {
-    for (const chant of chants) {
-      const option = document.createElement('option');
-      option.value = chant.id;
-      option.textContent = chant.label;
-      parent.appendChild(option);
+function setCollectionExpanded(collectionId, expanded) {
+  for (const section of chantMenu.querySelectorAll('.chant-menu-collection')) {
+    const open = expanded && section.dataset.collection === collectionId;
+    section.querySelector('.chant-menu-collection-toggle').setAttribute('aria-expanded', String(open));
+    section.querySelector('.chant-menu-list').hidden = !open;
+  }
+}
+
+let activeChantId = null;
+
+function openChantMenu() {
+  const active = CHANTS.find((c) => c.id === activeChantId);
+  setCollectionExpanded(active && active.collection, true);
+  for (const item of chantMenu.querySelectorAll('.chant-menu-item')) {
+    item.classList.toggle('is-current', item.dataset.chant === activeChantId);
+  }
+  chantMenu.hidden = false;
+  chantMenuButton.setAttribute('aria-expanded', 'true');
+}
+
+function closeChantMenu() {
+  chantMenu.hidden = true;
+  chantMenuButton.setAttribute('aria-expanded', 'false');
+}
+
+function selectChant(id) {
+  activeChantId = id;
+  const chant = CHANTS.find((c) => c.id === id);
+  chantMenuCollection.textContent = COLLECTIONS.find((c) => c.id === chant.collection).label;
+  chantMenuCurrent.textContent = chant.label;
+  loadChant(id);
+}
+
+function initChantMenu() {
+  chantMenuButton.addEventListener('click', () => {
+    if (chantMenu.hidden) openChantMenu();
+    else closeChantMenu();
+  });
+  chantMenu.addEventListener('click', (e) => {
+    const item = e.target.closest('.chant-menu-item');
+    if (!item) return;
+    closeChantMenu();
+    selectChant(item.dataset.chant);
+  });
+  document.addEventListener('click', (e) => {
+    if (!chantMenu.hidden && !e.target.closest('.chant-menu-wrap')) closeChantMenu();
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && !chantMenu.hidden) {
+      closeChantMenu();
+      chantMenuButton.focus();
     }
-  };
-  if (!collection.subgroups) {
-    addOptions(chantSelect, members);
-    return;
-  }
-  for (const subgroup of collection.subgroups) {
-    const optgroup = document.createElement('optgroup');
-    optgroup.label = subgroup.label;
-    addOptions(optgroup, members.filter((c) => c.subgroup === subgroup.id));
-    chantSelect.appendChild(optgroup);
-  }
+  });
 }
 
 function el(tag, className, text) {
@@ -3131,7 +3183,8 @@ function initRepeatClickHandling() {
 function init() {
   const requestedLang = new URLSearchParams(window.location.search).get('lang');
   const languageFilter = COLLECTIONS.some((c) => c.language === requestedLang) ? requestedLang : null;
-  populateCollectionSelect(languageFilter);
+  buildChantMenu(languageFilter);
+  initChantMenu();
   initRepeatClickHandling();
 
   const savedShow = localStorage.getItem('vedavani:showTransliteration');
@@ -3175,22 +3228,7 @@ function init() {
   const eligible = languageFilter ? CHANTS.filter((c) => c.language === languageFilter) : CHANTS;
   const lastChant = localStorage.getItem('vedavani:lastChant');
   const initialId = eligible.some((c) => c.id === lastChant) ? lastChant : eligible[0].id;
-  const showCollectionOf = (id) => {
-    const { collection } = CHANTS.find((c) => c.id === id);
-    collectionSelect.value = collection;
-    populateChantSelect(collection);
-    chantSelect.value = id;
-  };
-  showCollectionOf(initialId);
-  loadChant(initialId);
-
-  // Switching collection opens its first chant, so the page never shows a
-  // chant that isn't in the collection currently selected.
-  collectionSelect.addEventListener('change', () => {
-    populateChantSelect(collectionSelect.value);
-    loadChant(chantSelect.value);
-  });
-  chantSelect.addEventListener('change', () => loadChant(chantSelect.value));
+  selectChant(initialId);
 }
 
 init();

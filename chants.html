@@ -25,9 +25,15 @@
       <a href="mathematics.html" class="nav-link">Mathematics</a>
       <a href="yantras.html" class="nav-link">Yantras</a>
     </div>
-    <div class="chant-picker">
-      <select class="chant-select chant-select-collection" id="collectionSelect" aria-label="Choose a collection"></select>
-      <select class="chant-select" id="chantSelect" aria-label="Choose a chant"></select>
+    <div class="chant-menu-wrap">
+      <button type="button" class="chant-menu-button" id="chantMenuButton" aria-haspopup="true" aria-expanded="false" aria-controls="chantMenu">
+        <span class="chant-menu-button-text">
+          <span class="chant-menu-button-collection" id="chantMenuCollection"></span>
+          <span class="chant-menu-button-chant" id="chantMenuCurrent">Choose a chant</span>
+        </span>
+        <span class="chant-menu-chevron" aria-hidden="true">&#9662;</span>
+      </button>
+      <div class="chant-menu" id="chantMenu" hidden></div>
     </div>
   </nav>
 </header>

@@ -130,42 +130,187 @@ a {
   }
 }
 
-/* Chant chooser: collection picker, then chant picker */
-.chant-picker {
+/* Chant menu: one button opening a panel of collections, each of which
+   expands (one at a time) to list its chants. */
+.chant-menu-wrap {
+  position: relative;
+  min-width: 0;
+}
+
+.chant-menu-button {
   display: flex;
-  gap: 8px;
-  min-width: 0;
-}
-
-.chant-select-collection {
-  color: var(--color-gold);
-}
-
-.chant-picker .chant-select {
-  min-width: 0;
-  max-width: 250px;
-  text-overflow: ellipsis;
-}
-
-@media (max-width: 600px) {
-  .chant-picker {
-    width: 100%;
-  }
-
-  .chant-picker .chant-select {
-    flex: 1;
-    max-width: none;
-  }
-}
-
-.chant-select {
+  align-items: center;
+  gap: 10px;
+  max-width: 290px;
+  padding: 6px 12px;
   background: var(--color-panel);
   color: var(--color-text);
   border: 1px solid var(--color-border);
   border-radius: 8px;
-  padding: 8px 12px;
   font-family: var(--font-ui);
+  text-align: left;
+  cursor: pointer;
+}
+
+.chant-menu-button:hover,
+.chant-menu-button[aria-expanded='true'] {
+  border-color: var(--color-gold);
+}
+
+.chant-menu-button-text {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.chant-menu-button-collection {
+  font-size: 0.62rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-gold);
+}
+
+.chant-menu-button-chant {
   font-size: 0.85rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.chant-menu-chevron {
+  color: var(--color-gold);
+  transition: transform 0.15s ease;
+}
+
+.chant-menu-button[aria-expanded='true'] .chant-menu-chevron {
+  transform: rotate(180deg);
+}
+
+.chant-menu {
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  z-index: 200;
+  width: 320px;
+  max-height: min(70vh, 560px);
+  overflow-y: auto;
+  padding: 6px;
+  background: var(--color-bg-alt);
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+  box-shadow: 0 14px 36px rgba(0, 0, 0, 0.55);
+  font-family: var(--font-ui);
+}
+
+.chant-menu[hidden] {
+  display: none;
+}
+
+.chant-menu-language {
+  padding: 10px 10px 4px;
+  font-size: 0.62rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+.chant-menu-collection-toggle {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 9px 10px;
+  background: none;
+  border: 0;
+  border-radius: 6px;
+  color: var(--color-text);
+  font: 500 0.9rem var(--font-ui);
+  text-align: left;
+  cursor: pointer;
+}
+
+.chant-menu-collection-toggle::before {
+  content: '\203A';
+  color: var(--color-gold);
+  transition: transform 0.15s ease;
+}
+
+.chant-menu-collection-toggle[aria-expanded='true']::before {
+  transform: rotate(90deg);
+}
+
+.chant-menu-collection-toggle:hover,
+.chant-menu-item:hover {
+  background: rgba(240, 168, 60, 0.09);
+}
+
+.chant-menu-collection-toggle[aria-expanded='true'] {
+  color: var(--color-gold);
+}
+
+.chant-menu-count {
+  margin-left: auto;
+  padding: 1px 8px;
+  border-radius: 999px;
+  background: rgba(240, 168, 60, 0.12);
+  color: var(--color-text-muted);
+  font-size: 0.72rem;
+}
+
+.chant-menu-list {
+  margin: 0 0 6px 16px;
+  padding-left: 8px;
+  border-left: 1px solid var(--color-border);
+}
+
+.chant-menu-list[hidden] {
+  display: none;
+}
+
+.chant-menu-subgroup {
+  padding: 8px 10px 2px;
+  font-size: 0.62rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+.chant-menu-item {
+  display: block;
+  width: 100%;
+  padding: 7px 10px;
+  background: none;
+  border: 0;
+  border-radius: 6px;
+  color: var(--color-text);
+  font: 0.85rem var(--font-ui);
+  text-align: left;
+  cursor: pointer;
+}
+
+.chant-menu-item.is-current {
+  color: var(--color-gold);
+  font-weight: 600;
+}
+
+@media (max-width: 600px) {
+  .chant-menu-wrap {
+    width: 100%;
+  }
+
+  .chant-menu-button {
+    width: 100%;
+    max-width: none;
+  }
+
+  .chant-menu-chevron {
+    margin-left: auto;
+  }
+
+  .chant-menu {
+    left: 0;
+    width: auto;
+  }
 }
 
 /* Hero-ish title block — kept compact (this sits above the sticky header +
