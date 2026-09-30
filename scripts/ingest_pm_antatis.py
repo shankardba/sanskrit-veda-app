@@ -43,20 +43,23 @@ WORKS = [
         'id': 'nanmukan-tiruvantati', 'file': 'pmuni0007', 'first': 2382, 'last': 2477,
         'title': 'நான்முகன் திருவந்தாதி', 'title_iast': 'Nāṉmukaṉ Tiruvantāti',
         'author': 'Tirumaḻicai Āḻvār', 'colophon': 'திருமழிசையாழ்வார் திருவடிகளே சரணம்',
+        # The edition's font drops the நு/நூ ligature, printing "_" instead.
+        'fixes': {'வில்_டங்க': 'வில்நுடங்க', '_ல்வலையில்': 'நூல்வலையில்', '_லாட்டி': 'நூலாட்டி'},
     },
     {
         'id': 'periya-tiruvantati', 'file': 'pmuni0007', 'first': 2585, 'last': 2671,
         'title': 'பெரிய திருவந்தாதி', 'title_iast': 'Periya Tiruvantāti',
         'author': 'Nammāḻvār', 'colophon': 'நம்மாழ்வார் திருவடிகளே சரணம்',
+        'fixes': {'_ண்புடையீர் _ம்மை _மக்கு': 'நுண்புடையீர் நும்மை நுமக்கு', '_மக்கடியோம்': 'நுமக்கடியோம்'},
     },
     {
         'id': 'ramanuja-nurrantati', 'file': 'pmuni0007', 'first': 2791, 'count': 108, 'trailing': True,
         'start_marker': 'இராமாநுச நூற்றந்தாதி',
         'title': 'இராமாநுச நூற்றந்தாதி', 'title_iast': 'Irāmānuca Nūṟṟantāti',
         'author': 'Tiruvaraṅkattu Amutaṉār', 'colophon': 'திருவரங்கத்தமுதனார் திருவடிகளே சரணம்',
-        # Edition typo in v.1: the saint's own name, இராமாநுசன், printed as
-        # "இராமாது சன்" (ந misread as த, and a stray space).
-        'fixes': {'தாம்மன்னவந்தவிராமாது சன்': 'தாம்மன்னவந்தவிராமாநுசன்'},
+        # Edition typos: the saint's own name misprinted twice (v.1, v.60),
+        # and a word printed twice in v.96.
+        'fixes': {'தாம்மன்னவந்தவிராமாது சன்': 'தாம்மன்னவந்தவிராமாநுசன்', 'இராமாநுகன்': 'இராமாநுசன்', 'முடைத்தலையூன் முடைத்தலயூன்': 'முடைத்தலையூன்'},
     },
     {
         'id': 'tiruvirattai-manimalai', 'file': 'pmuni0126', 'first': 24, 'last': 43,

@@ -32,6 +32,9 @@ const CHANTS = [
   { id: 'irandam-tiruvantati', label: 'Irandam Tiruvantati', language: 'tamil', collection: 'antati', subgroup: 'vaishnava' },
   { id: 'munram-tiruvantati', label: 'Munram Tiruvantati', language: 'tamil', collection: 'antati', subgroup: 'vaishnava' },
   { id: 'kanninun-cirutampu', label: 'Kanninun Cirutampu', language: 'tamil', collection: 'antati', subgroup: 'vaishnava' },
+  { id: 'nanmukan-tiruvantati', label: 'Nanmukan Tiruvantati', language: 'tamil', collection: 'antati', subgroup: 'vaishnava' },
+  { id: 'periya-tiruvantati', label: 'Periya Tiruvantati', language: 'tamil', collection: 'antati', subgroup: 'vaishnava' },
+  { id: 'ramanuja-nurrantati', label: 'Ramanuja Nurrantati', language: 'tamil', collection: 'antati', subgroup: 'vaishnava' },
   { id: 'thirukkural-arathuppal', label: 'Aratthuppal (Virtue)', language: 'tamil', collection: 'thirukkural' },
   { id: 'thirukkural-porutpal', label: 'Porutpal (Wealth)', language: 'tamil', collection: 'thirukkural' },
   { id: 'thirukkural-kaamathuppal', label: 'Kaamathuppal (Love)', language: 'tamil', collection: 'thirukkural' },
@@ -214,6 +217,15 @@ const SECTION_NOTES = {
   },
   'tiruttondar-tiruvantati': {
     1: () => buildTiruttondarSignificanceNote(),
+  },
+  'nanmukan-tiruvantati': {
+    1: () => buildNanmukanSignificanceNote(),
+  },
+  'periya-tiruvantati': {
+    1: () => buildPeriyaTiruvantatiSignificanceNote(),
+  },
+  'ramanuja-nurrantati': {
+    1: () => buildRamanujaNurrantatiSignificanceNote(),
   },
 };
 
@@ -1243,6 +1255,47 @@ function buildTiruttondarSignificanceNote() {
       <p><strong>Devotion without limit.</strong> Many of the deeds are extreme, and the text tells them without softening: a devotee who gives his wife to an ascetic who asks (v.4), a father who cooks his only son for a guest (v.44), a man who cuts off his wife's hand when she hesitates to serve a devotee (v.54), a Jain-defeating debate that ends in impalement (vv.27, 61). The hagiographic tradition presents these as tests where total surrender to Shiva outweighs every other duty, and in most of the stories Shiva restores what was given. Modern readers, including devout ones, often read them as a genre's extreme way of saying "hold nothing back," not as models to imitate.</p>
       <p><strong>Other poets in this collection appear here as saints.</strong> Verse 29 is Kāraikkāl Ammaiyār, poet of the Arpudha Tiruvantati and the Tiruvirattai Manimalai, walking up Kailāsa on her head rather than set her feet on Shiva's mountain, and called "my mother" by Shiva himself. Verses 45-46 and 87 are Cēramāṉ Perumāḷ, poet of the Ponvannattantati, who once bowed to a washerman because the fuller's earth on his body looked like sacred ash.</p>
       <p><strong>A book about a book.</strong> The closing verses turn to the source. Verse 88 counts the devotees: nine groups and sixty-three by name, seventy-two in all. Verse 89 quotes, in order, the opening words of each of the eleven verses of Sundarar's <em>Tiruttoṇṭattokai</em>. Verse 90 asks what penance the poet could ever have done to deserve to tell of them.</p>
+    `,
+  };
+}
+
+function buildNanmukanSignificanceNote() {
+  return {
+    title: 'Before the Four-Faced One',
+    subtitle: 'Nanmukan Tiruvantati · Spiritual Significance',
+    bodyHtml: `
+      <p><strong>The title is the first word.</strong> <em>Nāṉmukaṉ</em> means "the Four-Faced One," Brahmā, and the poem is named for the word it opens on. Verse 1 lays out the whole doctrine in four lines: Nārāyaṇa made Brahmā, and Brahmā in turn made Śaṅkara (Shiva) from his own face. "I have set out this deep truth in an antāti: take it without spilling it, having weighed it well." The poet is Tirumaḻisai Āḻvār, whom tradition calls <em>Bhaktisāra</em>, "the essence of devotion." He is said to have studied the Jain, Buddhist, and Shaiva paths one after another before settling on Vishnu. That history explains the tone of the poem.</p>
+      <p><strong>A poem that argues.</strong> This is the most openly sectarian work in the Divya Prabandham, and it is best read as what it is. Verse 6 dismisses Jains, Buddhists, and Shaivas by name. Verse 53 will have "no god but Kakutstha" (Rāma), and verse 66 refuses to place "the moon-wearer" or Brahmā beside Vishnu, or even to walk around them in reverence. Other verses make the same claim more gently. Verse 2 says there is one God, whose greatness no one knows. Verse 54 says those who do not see that "all who stand, whoever they are, are tall Mal" have learned nothing. Verse 96, the last, closes on the confession: "Now I know: the God of Īśa and of the Four-Faced One... you are the cause... Nārāyaṇa: I know it well." Compare the Shaiva antātis in this collection, which say the same things of Shiva; the two traditions grew up side by side in the same temples and the same language.</p>
+      <p><strong>"You are nothing without me."</strong> Under the polemic is one of the boldest lines in Tamil bhakti. Verse 7: "I am nothing without you, O Nārāyaṇa, and you are nothing without me." Śrīvaiṣṇava commentators read it as a statement of relation: a Lord needs someone to be Lord of, and God's own nature as protector is fulfilled only in the soul he protects.</p>
+      <p><strong>The hill of Venkaṭam.</strong> A long run of verses in the middle (roughly vv.34-48) turns to Tiruvēṅkaṭam, the hill of Tirupati: its waterfalls "sweeping jewels," its elephants and snakes, and the poet who "sang of Venkaṭam and made it my home" (v.40). Tirumaḻisai is also linked with Kumbakōṇam and with the temple at Tiruvekkā, where, the story goes, the Lord rolled up his serpent bed and followed the poet out of town when the poet was banished, and came back when he returned.</p>
+      <p>This is one of the <em>Iyaṟpā</em> antātis, which follow the Three Lamps (the Mudhal, Irandam, and Munram Tiruvantatis) in the canon. See the ${ANTATI_FORM_LINK}.</p>
+    `,
+  };
+}
+
+function buildPeriyaTiruvantatiSignificanceNote() {
+  return {
+    title: 'Talking to the Heart',
+    subtitle: 'Periya Tiruvantati · Spiritual Significance',
+    bodyHtml: `
+      <p><strong>The "great" antāti.</strong> These 87 verses are by Nammāḻvār, the greatest of the Āḻvārs, whose <em>Tiruvāymoḻi</em> is called the "Tamil Veda." Of his four works, this is the one in the Iyaṟpā. Tradition calls it <em>Periya</em>, "great," not for its length but for its theme: the greatness of the Lord, and the greater greatness of the one who holds him in his heart.</p>
+      <p><strong>A dialogue with the heart.</strong> The poem opens: "O heart, you who have risen up and gone on ahead, join with us" (v.1), and it keeps talking to that heart all the way through. It coaxes the heart, scolds it, is afraid for it, and sometimes gives up on it: "When I say, 'Bow your head and fold your two hands,' you will not fold them... even if you stay as you are, stay" (v.84). Verse 49 turns the other way: now the heart runs off on its own every time it sees anything dark, a rain cloud or a mountain or the sea, "saying, 'That is Kaṇṇaṉ's great form.'"</p>
+      <p><strong>Who is greater?</strong> Verse 75 is the poem's most famous paradox: "The earth and the vast sky are within you; you, entering by the path of my ear, are within me. So that I am great and you are great, who can know it?" If the Lord contains the world and the devotee contains the Lord, which one is larger? Verse 76 follows up: once the film over the heart breaks, will I too become as great as the world?</p>
+      <p><strong>What to ask for.</strong> Verse 58 is a key text for Śrīvaiṣṇava teaching on what a devotee should want. "Not freedom from birth, nor even service beneath your feet: what I want is never to forget you." Compare the Kavachams in this collection, which ask for protection. Here the whole request is memory.</p>
+      <p><strong>Everything dark is him.</strong> Verse 73 names four dark-blue flowers (the <em>kāyā</em>, the <em>pūvai</em>, the blue lily, and the <em>kāvi</em>): "every time I see them, my life and body swell with joy, saying all of them are the Lord's form." See the ${ANTATI_FORM_LINK}.</p>
+    `,
+  };
+}
+
+function buildRamanujaNurrantatiSignificanceNote() {
+  return {
+    title: 'A Hundred and Eight for a Teacher',
+    subtitle: 'Ramanuja Nurrantati · Spiritual Significance',
+    bodyHtml: `
+      <p><strong>A hymn to a human teacher.</strong> Every other antāti in this collection praises a god or a goddess. This one praises Rāmānuja (traditionally 1017-1137), the philosopher of Viśiṣṭādvaita and the great teacher of the Śrīvaiṣṇava community. The poet, Tiruvaraṅgattu Amudaṉār, was a Srirangam temple official who, the story goes, first opposed Rāmānuja, then became a disciple through Rāmānuja's disciple Kūrattāḻvāṉ (named in v.7). The hymn has 108 verses, the sacred number of Vishnu's temples. It is the only work in the Divya Prabandham not by an Āḻvār, and it was added to the canon, tradition says, because Rāmānuja himself approved it. Its other name is <em>Prapanna Gāyatrī</em>, "the Gāyatrī of those who have surrendered," because devotees recite it daily as others recite the Gāyatrī mantra.</p>
+      <p><strong>The Āḻvārs, one by one.</strong> Verses 8-21 run through the poet-saints in order, each verse praising Rāmānuja as the one who holds that saint in his heart. Verse 8 is Poygai, who "twisted a wick and lit the holy lamp"; verse 9 is Bhūtam, who "lit the full lamp called wisdom"; verse 10 is Pēy, "who shows how he saw the wonder... at Kōvalūr." That is the Three Lamps story (see the note on the Mudhal Tiruvantati). Then come Tiruppāṇ (11), Tirumaḻisai (12, the poet of the Nanmukan Tiruvantati), Toṇṭaraṭippoṭi (13), Kulacēkara (14), Periyāḻvār (15), Āṇṭāḷ (16, "who wore and then gave the garland"), Tirumaṅkai (17), and Nammāḻvār (18-19), followed by the teachers Nāthamuni (20) and Yāmuna (21). The effect is a lineage: Rāmānuja as the place where the whole tradition comes together.</p>
+      <p><strong>The teacher as the way.</strong> The poem's theology is that grace reaches the devotee through the teacher. In verse 69 the poet says the Lord of Srirangam gave him a mind and senses, but not his own feet; Rāmānuja "came and lifted me up today." In verse 104: even if you gave me Kṛṣṇa like a fruit in my hand, I want nothing but your glory. Verse 107 asks, whatever births may come, only to be the servant of Rāmānuja's devotees. Compare the Kanninun Cirutampu, Madhurakavi's eleven verses to his own teacher Nammāḻvār: this is the same devotion, a hundred and eight verses long.</p>
+      <p><strong>A closed garland.</strong> Verse 1 opens with <em>pū maṉṉu mātu</em>, "the lady who dwells on the lotus," Lakṣmī on the Lord's chest. Verse 108 ends on the same Lakṣmī, and its last words, <em>pū maṉṉavē</em>, "may they abide as flowers" on our heads, echo the opening sound so the garland can be recited around again. See the ${ANTATI_FORM_LINK}.</p>
     `,
   };
 }
