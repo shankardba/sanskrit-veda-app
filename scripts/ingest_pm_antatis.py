@@ -1,8 +1,10 @@
 #!/usr/bin/env python3
-"""Build data/chants/<id>.json for six antātis from Project Madurai's Tamil
+"""Build data/chants/<id>.json for nine antātis from Project Madurai's Tamil
 Unicode editions (projectmadurai.org/pm_etexts/utf8/):
 
-  pmuni0007     Nālāyira Divya Prabandham part 4: Nāṉmukaṉ Tiruvantāti
+  pmuni0007     Nālāyira Divya Prabandham part 4: the three Mutal Āḻvārs'
+                Tiruvantātis (Mutal 2082-2181, Iraṇṭām 2182-2281,
+                Mūṉṟām 2282-2381), Nāṉmukaṉ Tiruvantāti
                 (2382-2477), Periya Tiruvantāti (2585-2671), Irāmānuca
                 Nūṟṟantāti (2791 on)
   pmuni0126     11th Tirumurai part 1: Tiruvirattai Maṇimālai (24-43),
@@ -39,6 +41,42 @@ BASE = 'https://www.projectmadurai.org/pm_etexts/utf8/'
 DATA_DIR = Path(__file__).resolve().parent.parent / 'data' / 'chants'
 
 WORKS = [
+    {
+        'id': 'mudhal-tiruvantati', 'file': 'pmuni0007', 'first': 2082, 'last': 2181,
+        'title': 'முதல் திருவந்தாதி', 'title_iast': 'Mutal Tiruvantāti',
+        'author': 'Poykai Āḻvār', 'colophon': 'பொய்கையாழ்வார் திருவடிகளே சரணம்',
+        # The dropped நு/நூ ligature ("_"), plus misprints checked against the
+        # koyil.org text and the standard recitation: ே printed as ோ (v.8
+        # தேராழி "chariot wheel", v.20 பேர்ந்து, v.24 தேங்கி), a dropped
+        # syllable (v.23 தோய்ந்தவா மங்கை), and ி for ு (v.70 ஏத்துதிரேல்).
+        'fixes': {'உரை_ல்': 'உரைநூல்', '_ண்கேள்வி': 'நுண்கேள்வி', 'வெண்புரி_ல்': 'வெண்புரிநூல்',
+                  '_டங்கிடையை': 'நுடங்கிடையை', 'தோராழி': 'தேராழி', 'போர்ந்தோர்': 'பேர்ந்தோர்',
+                  'தோங்கி நினைந்த': 'தேங்கி நினைந்த', 'தோய்ந்த மங்கை': 'தோய்ந்தவா மங்கை',
+                  'ஏத்திதிரேல்': 'ஏத்துதிரேல்'},
+    },
+    {
+        'id': 'irandam-tiruvantati', 'file': 'pmuni0007', 'first': 2182, 'last': 2281,
+        'title': 'இரண்டாம் திருவந்தாதி', 'title_iast': 'Iraṇṭām Tiruvantāti',
+        'author': 'Pūtattāḻvār', 'colophon': 'பூதத்தாழ்வார் திருவடிகளே சரணம்',
+        # v.1's famous opening, அன்பே தகளியா ("love as the lamp's saucer"),
+        # printed without its க; v.12 ஒண்மலரோன் (Brahmā "on the bright
+        # flower"); v.73 ஆதி நடு அந்தி ("beginning, middle, end"); v.74
+        # இருந்தமிழ் ("great Tamil"); v.75 dative மாப்பிடிக்கு; v.88 திறம்பா
+        # வழி ("the unswerving path").
+        'fixes': {'ஈரைஞ்_': 'ஈரைஞ்ஞூ', 'அன்பே தளியா': 'அன்பே தகளியா', 'ரோ னெண்மலரோன்': 'ரோ னொண்மலரோன்',
+                  'ஆய்நடு': 'ஆதிநடு', 'இருந்ததமிழ்நன்': 'இருந்தமிழ்நன்', 'மாப்பிடிக்கி': 'மாப்பிடிக்கு',
+                  'வருசென்றார்க்': 'வழிசென்றார்க்'},
+    },
+    {
+        'id': 'munram-tiruvantati', 'file': 'pmuni0007', 'first': 2282, 'last': 2381,
+        'title': 'மூன்றாம் திருவந்தாதி', 'title_iast': 'Mūṉṟām Tiruvantāti',
+        'author': 'Pēyāḻvār', 'colophon': 'பேயாழ்வார் திருவடிகளே சரணம்',
+        # v.30 மறைப்பாடகம் (the shrine Tiruppāṭakam, printed மறையாடகம்);
+        # v.57 பொலிந்திருண்ட ("dark," printed இருகண்ட).
+        'fixes': {'_ற்கடலான் _ண்ணறிவி': 'நூற்கடலான் நுண்ணறிவி', '_ற்பால்': 'நூற்பால்',
+                  '_ற்கடலும் _ண்ணுல': 'நூற்கடலும் நுண்ணுல', 'ரைஞ்_': 'ரைஞ்ஞூ',
+                  'மறையா டகம்': 'மறைப்பா டகம்', 'பொலிந்திருகண்ட': 'பொலிந்திருண்ட'},
+    },
     {
         'id': 'nanmukan-tiruvantati', 'file': 'pmuni0007', 'first': 2382, 'last': 2477,
         'title': 'நான்முகன் திருவந்தாதி', 'title_iast': 'Nāṉmukaṉ Tiruvantāti',
