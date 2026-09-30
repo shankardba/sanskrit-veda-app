@@ -19,127 +19,271 @@
     {
       "label": "1",
       "lines": [
-        { "n": 1, "devanagari": "सर्वलोकैकजनके सर्वाभीष्टफलप्रदे ।", "iast": "sarvalōkaikajanakē sarvābhīṣṭaphalapradē ।" },
-        { "n": 2, "devanagari": "रक्ष मां क्षुद्रजालेभ्यः पातकेभ्यश्च सर्वदा ॥ १॥", "iast": "rakṣa māṃ kṣudrajālēbhyaḥ pātakēbhyaśca sarvadā ॥ 1॥" }
+        {
+          "n": 1,
+          "devanagari": "सर्वलोकैकजनके सर्वाभीष्टफलप्रदे ।",
+          "iast": "sarvalōkaikajanakē sarvābhīṣṭaphalapradē ।"
+        },
+        {
+          "n": 2,
+          "devanagari": "रक्ष मां क्षुद्रजालेभ्यः पातकेभ्यश्च सर्वदा ॥ १॥",
+          "iast": "rakṣa māṃ kṣudrajālēbhyaḥ pātakēbhyaścha sarvadā ॥ 1॥"
+        }
       ]
     },
     {
       "label": "2",
       "lines": [
-        { "n": 3, "devanagari": "जगद्धिते जगन्नेत्रि जगन्मातर्जगन्मये ।", "iast": "jagaddhitē jagannētri jaganmātarjaganmayē ।" },
-        { "n": 4, "devanagari": "जगद्दुरितजालेभ्यो रक्ष मामहितं हर ॥ २॥", "iast": "jagaddurita-jālēbhyō rakṣa māmahitaṃ hara ॥ 2॥" }
+        {
+          "n": 3,
+          "devanagari": "जगद्धिते जगन्नेत्रि जगन्मातर्जगन्मये ।",
+          "iast": "jagaddhitē jagannētri jaganmātarjaganmayē ।"
+        },
+        {
+          "n": 4,
+          "devanagari": "जगद्दुरितजालेभ्यो रक्ष मामहितं हर ॥ २॥",
+          "iast": "jagadduritajālēbhyō rakṣa māmahitaṃ hara ॥ 2॥"
+        }
       ]
     },
     {
       "label": "3",
       "lines": [
-        { "n": 5, "devanagari": "वाङ्मनः कायकरणैर्जन्मान्तरशतार्जितम् ।", "iast": "vāṅmanaḥ kāyakaraṇairjanmāntaraśatārjitam ।" },
-        { "n": 6, "devanagari": "पापं नाशय देवेशि पाहि मां कृपयाऽनिशम् ॥ ३॥", "iast": "pāpaṃ nāśaya dēvēśi pāhi māṃ kṛpayā'niśam ॥ 3॥" }
+        {
+          "n": 5,
+          "devanagari": "वाङ्मनः कायकरणैर्जन्मान्तरशतार्जितम् ।",
+          "iast": "vāṅmanaḥ kāyakaraṇairjanmāntaraśatārjitam ।"
+        },
+        {
+          "n": 6,
+          "devanagari": "पापं नाशय देवेशि पाहि मां कृपयाऽनिशम् ॥ ३॥",
+          "iast": "pāpaṃ nāśaya dēvēśi pāhi māṃ kṛpayā'niśam ॥ 3॥"
+        }
       ]
     },
     {
       "label": "4",
       "lines": [
-        { "n": 7, "devanagari": "जन्मान्तरसहस्रेषु यत्कृतं दुष्कृतं मया ।", "iast": "janmāntarasahasrēṣu yatkṛtaṃ duṣkṛtaṃ mayā ।" },
-        { "n": 8, "devanagari": "तन्निवारय मां पाहि शरण्ये भक्तवत्सले ॥ ४॥", "iast": "tannivāraya māṃ pāhi śaraṇyē bhaktavatsalē ॥ 4॥" }
+        {
+          "n": 7,
+          "devanagari": "जन्मान्तरसहस्रेषु यत्कृतं दुष्कृतं मया ।",
+          "iast": "janmāntarasahasrēṣu yatkṛtaṃ duṣkṛtaṃ mayā ।"
+        },
+        {
+          "n": 8,
+          "devanagari": "तन्निवारय मां पाहि शरण्ये भक्तवत्सले ॥ ४॥",
+          "iast": "tannivāraya māṃ pāhi śaraṇyē bhaktavatsalē ॥ 4॥"
+        }
       ]
     },
     {
       "label": "5",
       "lines": [
-        { "n": 9, "devanagari": "मया कृतान्यशेषाणि मदीयैश्च कृतानि च ।", "iast": "mayā kṛtānyaśēṣāṇi madīyaiśca kṛtāni ca ।" },
-        { "n": 10, "devanagari": "पापानि नाशयस्वाद्य पाहि मां परदेवते ॥ ५॥", "iast": "pāpāni nāśayasvādya pāhi māṃ paradēvatē ॥ 5॥" }
+        {
+          "n": 9,
+          "devanagari": "मया कृतान्यशेषाणि मदीयैश्च कृतानि च ।",
+          "iast": "mayā kṛtānyaśēṣāṇi madīyaiścha kṛtāni cha ।"
+        },
+        {
+          "n": 10,
+          "devanagari": "पापानि नाशयस्वाद्य पाहि मां परदेवते ॥ ५॥",
+          "iast": "pāpāni nāśayasvādya pāhi māṃ paradēvatē ॥ 5॥"
+        }
       ]
     },
     {
       "label": "6",
       "lines": [
-        { "n": 11, "devanagari": "ज्ञानाज्ञानकृतैः पापैः साम्प्राप्तं दुरितं क्षणात् ।", "iast": "jñānājñānakṛtaiḥ pāpaiḥ sāmprāptaṃ duritaṃ kṣaṇāt ।" },
-        { "n": 12, "devanagari": "निवारय जगन्मातरखिलैरनिवारितम् ॥ ६॥", "iast": "nivāraya jaganmātarakhilairanivāritam ॥ 6॥" }
+        {
+          "n": 11,
+          "devanagari": "ज्ञानाज्ञानकृतैः पापैः साम्प्राप्तं दुरितं क्षणात् ।",
+          "iast": "jñānājñānakṛtaiḥ pāpaiḥ sāmprāptaṃ duritaṃ kṣaṇāt ।"
+        },
+        {
+          "n": 12,
+          "devanagari": "निवारय जगन्मातरखिलैरनिवारितम् ॥ ६॥",
+          "iast": "nivāraya jaganmātarakhilairanivāritam ॥ 6॥"
+        }
       ]
     },
     {
       "label": "7",
       "lines": [
-        { "n": 13, "devanagari": "असत्कार्यनिवृत्तिं च सत्कायस्य प्रवर्तनम् ।", "iast": "asatkāryanivṛttiṃ ca satkāyasya pravartanam ।" },
-        { "n": 14, "devanagari": "देवतात्मानुसन्धानं देहि मे परमेश्वरि ॥ ७॥", "iast": "dēvatātmānusandhānaṃ dēhi mē paramēśvari ॥ 7॥" }
+        {
+          "n": 13,
+          "devanagari": "असत्कार्यनिवृत्तिं च सत्कायस्य प्रवर्तनम् ।",
+          "iast": "asatkāryanivṛttiṃ cha satkāyasya pravartanam ।"
+        },
+        {
+          "n": 14,
+          "devanagari": "देवतात्मानुसन्धानं देहि मे परमेश्वरि ॥ ७॥",
+          "iast": "dēvatātmānusandhānaṃ dēhi mē paramēśvari ॥ 7॥"
+        }
       ]
     },
     {
       "label": "8",
       "lines": [
-        { "n": 15, "devanagari": "सर्वावरणविद्यानां सन्धानेनानुचिन्तनम् ।", "iast": "sarvāvaraṇavidyānāṃ sandhānēnānucintanam ।" },
-        { "n": 16, "devanagari": "देशिकाङ्घ्रिस्मृतिं चैव देहि मे जगदीश्वरि ॥ ८॥", "iast": "dēśikāṅghrismṛtiṃ caiva dēhi mē jagadīśvari ॥ 8॥" }
+        {
+          "n": 15,
+          "devanagari": "सर्वावरणविद्यानां सन्धानेनानुचिन्तनम् ।",
+          "iast": "sarvāvaraṇavidyānāṃ sandhānēnānuchintanam ।"
+        },
+        {
+          "n": 16,
+          "devanagari": "देशिकाङ्घ्रिस्मृतिं चैव देहि मे जगदीश्वरि ॥ ८॥",
+          "iast": "dēśikāṅghrismṛtiṃ chaiva dēhi mē jagadīśvari ॥ 8॥"
+        }
       ]
     },
     {
       "label": "9",
       "lines": [
-        { "n": 17, "devanagari": "अनुस्यूतरपरब्रह्मानन्दामृतनिषेवणम् ।", "iast": "anusyūtaraparabrahmānandāmṛtaniṣēvaṇam ।" },
-        { "n": 18, "devanagari": "अत्यन्तनिश्चलं चित्तं देहि मे जगदीश्वरि ॥ ९॥", "iast": "atyantaniścalaṃ cittaṃ dēhi mē jagadīśvari ॥ 9॥" }
+        {
+          "n": 17,
+          "devanagari": "अनुस्यूतरपरब्रह्मानन्दामृतनिषेवणम् ।",
+          "iast": "anusyūtaraparabrahmānandāmṛtaniṣēvaṇam ।"
+        },
+        {
+          "n": 18,
+          "devanagari": "अत्यन्तनिश्चलं चित्तं देहि मे जगदीश्वरि ॥ ९॥",
+          "iast": "atyantaniśchalaṃ chittaṃ dēhi mē jagadīśvari ॥ 9॥"
+        }
       ]
     },
     {
       "label": "10",
       "lines": [
-        { "n": 19, "devanagari": "सदाशिवाद्यैर्धात्र्यन्तैः देवताभिर्मुनीश्वरैः ।", "iast": "sadāśivādyairdhātryantaiḥ dēvatābhirmunīśvaraiḥ ।" },
-        { "n": 20, "devanagari": "उपासितं पदं यत्तद्देहि मे परमेश्वरि ॥ १०॥", "iast": "upāsitaṃ padaṃ yattaddēhi mē paramēśvari ॥ 10॥" }
+        {
+          "n": 19,
+          "devanagari": "सदाशिवाद्यैर्धात्र्यन्तैः देवताभिर्मुनीश्वरैः ।",
+          "iast": "sadāśivādyairdhātryantaiḥ dēvatābhirmunīśvaraiḥ ।"
+        },
+        {
+          "n": 20,
+          "devanagari": "उपासितं पदं यत्तद्देहि मे परमेश्वरि ॥ १०॥",
+          "iast": "upāsitaṃ padaṃ yattaddēhi mē paramēśvari ॥ 10॥"
+        }
       ]
     },
     {
       "label": "11",
       "lines": [
-        { "n": 21, "devanagari": "इन्द्रादिभिरशेषैश्च देवैरसुरराक्षसैः ।", "iast": "indrādibhiraśēṣaiśca dēvairasurarākṣasaiḥ ।" },
-        { "n": 22, "devanagari": "कृतं विघ्नं निवार्याशु कृपया रक्ष रक्ष माम् ॥ ११॥", "iast": "kṛtaṃ vighnaṃ nivāryāśu kṛpayā rakṣa rakṣa mām ॥ 11॥" }
+        {
+          "n": 21,
+          "devanagari": "इन्द्रादिभिरशेषैश्च देवैरसुरराक्षसैः ।",
+          "iast": "indrādibhiraśēṣaiścha dēvairasurarākṣasaiḥ ।"
+        },
+        {
+          "n": 22,
+          "devanagari": "कृतं विघ्नं निवार्याशु कृपया रक्ष रक्ष माम् ॥ ११॥",
+          "iast": "kṛtaṃ vighnaṃ nivāryāśu kṛpayā rakṣa rakṣa mām ॥ 11॥"
+        }
       ]
     },
     {
       "label": "12",
       "lines": [
-        { "n": 23, "devanagari": "आत्मानमात्मनः स्निग्धमाश्रितं परिचारकम् ।", "iast": "ātmānamātmanaḥ snigdhamāśritaṃ paricārakam ।" },
-        { "n": 24, "devanagari": "द्रव्यदं बन्धुवर्गं च देवेशि परिरक्ष नः ॥ १२॥", "iast": "dravyadaṃ bandhuvargaṃ ca dēvēśi parirakṣa naḥ ॥ 12॥" }
+        {
+          "n": 23,
+          "devanagari": "आत्मानमात्मनः स्निग्धमाश्रितं परिचारकम् ।",
+          "iast": "ātmānamātmanaḥ snigdhamāśritaṃ parichārakam ।"
+        },
+        {
+          "n": 24,
+          "devanagari": "द्रव्यदं बन्धुवर्गं च देवेशि परिरक्ष नः ॥ १२॥",
+          "iast": "dravyadaṃ bandhuvargaṃ cha dēvēśi parirakṣa naḥ ॥ 12॥"
+        }
       ]
     },
     {
       "label": "13",
       "lines": [
-        { "n": 25, "devanagari": "उपासकस्य यो यो मे यथाशक्त्यनुकूलकृत् ।", "iast": "upāsakasya yō yō mē yathāśaktyanukūlakṛt ।" },
-        { "n": 26, "devanagari": "सुहृदं रक्ष तं नित्यं द्विषन्तमनुकूलय ॥ १३॥", "iast": "suhṛdaṃ rakṣa taṃ nityaṃ dviṣantamanukūlaya ॥ 13॥" }
+        {
+          "n": 25,
+          "devanagari": "उपासकस्य यो यो मे यथाशक्त्यनुकूलकृत् ।",
+          "iast": "upāsakasya yō yō mē yathāśaktyanukūlakṛt ।"
+        },
+        {
+          "n": 26,
+          "devanagari": "सुहृदं रक्ष तं नित्यं द्विषन्तमनुकूलय ॥ १३॥",
+          "iast": "suhṛdaṃ rakṣa taṃ nityaṃ dviṣantamanukūlaya ॥ 13॥"
+        }
       ]
     },
     {
       "label": "14",
       "lines": [
-        { "n": 27, "devanagari": "दैहिकादैहिकान्नानाहेतुकात्केवलद्भयात् ।", "iast": "daihikādaihikānnānāhētukātkēvaladbhayāt ।" },
-        { "n": 28, "devanagari": "पाहि मां प्रणतापत्तिभञ्जने विश्वलोचने ॥ १४॥", "iast": "pāhi māṃ praṇatāpattibhañjanē viśvalōcanē ॥ 14॥" }
+        {
+          "n": 27,
+          "devanagari": "दैहिकादैहिकान्नानाहेतुकात्केवलद्भयात् ।",
+          "iast": "daihikādaihikānnānāhētukātkēvaladbhayāt ।"
+        },
+        {
+          "n": 28,
+          "devanagari": "पाहि मां प्रणतापत्तिभञ्जने विश्वलोचने ॥ १४॥",
+          "iast": "pāhi māṃ praṇatāpattibhañjanē viśvalōchanē ॥ 14॥"
+        }
       ]
     },
     {
       "label": "15",
       "lines": [
-        { "n": 29, "devanagari": "नित्यानन्दमयं सौख्यं निर्मलं निरूपाधिकम् ।", "iast": "nityānandamayaṃ saukhyaṃ nirmalaṃ nirūpādhikam ।" },
-        { "n": 30, "devanagari": "देहि मे निश्चलां भक्तिं निखिलाभिष्टसिद्धिदे ॥ १५॥", "iast": "dēhi mē niścalāṃ bhaktiṃ nikhilābhiṣṭasiddhidē ॥ 15॥" }
+        {
+          "n": 29,
+          "devanagari": "नित्यानन्दमयं सौख्यं निर्मलं निरूपाधिकम् ।",
+          "iast": "nityānandamayaṃ saukhyaṃ nirmalaṃ nirūpādhikam ।"
+        },
+        {
+          "n": 30,
+          "devanagari": "देहि मे निश्चलां भक्तिं निखिलाभिष्टसिद्धिदे ॥ १५॥",
+          "iast": "dēhi mē niśchalāṃ bhaktiṃ nikhilābhiṣṭasiddhidē ॥ 15॥"
+        }
       ]
     },
     {
       "label": "16",
       "lines": [
-        { "n": 31, "devanagari": "यन्मया सकलोपायैः करणीयमितः परम् ।", "iast": "yanmayā sakalōpāyaiḥ karaṇīyamitaḥ param ।" },
-        { "n": 32, "devanagari": "तत्सर्वं बोधयस्वाम्ब सर्वलोकहिते रते ॥ १६॥", "iast": "tatsarvaṃ bōdhayasvāmba sarvalōkahitē ratē ॥ 16॥" }
+        {
+          "n": 31,
+          "devanagari": "यन्मया सकलोपायैः करणीयमितः परम् ।",
+          "iast": "yanmayā sakalōpāyaiḥ karaṇīyamitaḥ param ।"
+        },
+        {
+          "n": 32,
+          "devanagari": "तत्सर्वं बोधयस्वाम्ब सर्वलोकहिते रते ॥ १६॥",
+          "iast": "tatsarvaṃ bōdhayasvāmba sarvalōkahitē ratē ॥ 16॥"
+        }
       ]
     },
     {
       "label": "17",
       "lines": [
-        { "n": 33, "devanagari": "प्रदेहि बुद्धियोगं तं येन त्वामुपयाम्यहम् ।", "iast": "pradēhi buddhiyōgaṃ taṃ yēna tvāmupayāmyaham ।" },
-        { "n": 34, "devanagari": "कामानां हृद्यसंरोहं देहि मे कृपयेश्वरि ॥ १७॥", "iast": "kāmānāṃ hṛdyasaṃrōhaṃ dēhi mē kṛpayēśvari ॥ 17॥" }
+        {
+          "n": 33,
+          "devanagari": "प्रदेहि बुद्धियोगं तं येन त्वामुपयाम्यहम् ।",
+          "iast": "pradēhi buddhiyōgaṃ taṃ yēna tvāmupayāmyaham ।"
+        },
+        {
+          "n": 34,
+          "devanagari": "कामानां हृद्यसंरोहं देहि मे कृपयेश्वरि ॥ १७॥",
+          "iast": "kāmānāṃ hṛdyasaṃrōhaṃ dēhi mē kṛpayēśvari ॥ 17॥"
+        }
       ]
     },
     {
       "label": "18",
       "lines": [
-        { "n": 35, "devanagari": "भवाब्धौ पतितं भीतमनाथं दीनमानसम् ।", "iast": "bhavābdhau patitaṃ bhītamanāthaṃ dīnamānasam ।" },
-        { "n": 36, "devanagari": "उद्धृत्य कृपया देवि निधेहि चरणाम्बुजे ॥ १८॥", "iast": "uddhṛtya kṛpayā dēvi nidhēhi caraṇāmbujē ॥ 18॥" }
+        {
+          "n": 35,
+          "devanagari": "भवाब्धौ पतितं भीतमनाथं दीनमानसम् ।",
+          "iast": "bhavābdhau patitaṃ bhītamanāthaṃ dīnamānasam ।"
+        },
+        {
+          "n": 36,
+          "devanagari": "उद्धृत्य कृपया देवि निधेहि चरणाम्बुजे ॥ १८॥",
+          "iast": "uddhṛtya kṛpayā dēvi nidhēhi charaṇāmbujē ॥ 18॥"
+        }
       ]
     }
   ]

@@ -47,6 +47,10 @@ const CHANTS = [
   // sub-section under Sanskrit, for short protective-hymn stotrams (as
   // opposed to the long continuous lahari poems or the Rudram litanies).
   { id: 'bala-raksha-stotram', label: 'Sri Bala Raksha Stotram', language: 'sanskrit', category: 'raksha-stotram' },
+  { id: 'rama-raksha-stotram', label: 'Sri Rama Raksha Stotram', language: 'sanskrit', category: 'raksha-stotram' },
+  // category: 'kavacham' — the sister genre ("armor"): same protective
+  // purpose, but structured as an explicit head-to-foot body map.
+  { id: 'narasimha-kavacham', label: 'Sri Narasimha Kavacham', language: 'sanskrit', category: 'kavacham' },
 ];
 
 // Dropdown group order/labels — Tamil first so Abirami Antati (CHANTS[0],
@@ -59,6 +63,7 @@ const CHANT_GROUPS = [
   { language: 'tamil', label: 'Tamil' },
   { language: 'sanskrit', label: 'Sanskrit' },
   { language: 'sanskrit', category: 'raksha-stotram', label: 'Raksha Stotrams' },
+  { language: 'sanskrit', category: 'kavacham', label: 'Kavachams' },
 ];
 
 // Optional per-section popup notes, keyed by chant id then section label —
@@ -101,6 +106,17 @@ const SECTION_NOTES = {
   },
   'shivananda-lahari': {
     1: () => buildDualEndingAndParticipleChainNote(),
+  },
+  'bala-raksha-stotram': {
+    1: () => buildBalaRakshaSignificanceNote(),
+  },
+  'rama-raksha-stotram': {
+    Viniyoga: () => buildRamaRakshaSignificanceNote(),
+    'Verse 37': () => buildRamaCaseGarlandNote(),
+  },
+  'narasimha-kavacham': {
+    1: () => buildNarasimhaKavachamSignificanceNote(),
+    31: () => buildNarasimhaParticipleCascadeNote(),
   },
 };
 
@@ -676,6 +692,94 @@ function buildDualEndingAndParticipleChainNote() {
     bodyHtml: `
       <p>This poem opens by bowing not to Shiva alone but to Shiva-and-Pārvatī together, and its grammar says so before its meaning does: <em>kaḻābhyāṃ ... śaśikaḻābhyāṃ ... phalābhyāṃ ... phalābhyāṃ ... śivābhyāṃ ... śivābhyāṃ ... bhavābhyāṃ ... anubhavābhyāṃ</em> — eight words in four lines, every one of them ending in <em>-ābhyām</em>, the dual instrumental/dative ending Sanskrit reserves specifically for "the two of them." English has to keep repeating "the pair" or "both of them" to say what Sanskrit says once, structurally, by choosing this one ending and never letting go of it. <em>śivābhyām</em> itself appears twice — first the bare dual of शिव, then again as the last member of a compound (अस्तोकत्रिभुवनशिवाभ्यां, "abundant source of auspiciousness for all three worlds") — the same grammatical shape doing double duty.</p>
       <p>Verse 2 shifts to a different device for the same effect: <em>gaḻantī ... daḻantī ... patantī ... diśantī ... vasantī</em> — five feminine present participles in a row (flowing, breaking, falling, bestowing, dwelling), each one describing the wave of bliss the verse is building toward, which turns out at the very last word to be the poem's own name: <em>śivānandalaharī</em>, "the wave of Shiva-bliss" — the same phrase the whole book is titled after, woven into its own second verse. Naming a work inside itself like this is a real convention in Sanskrit devotional poetry, not a coincidence; it functions a bit like a composer's signature.</p>
+    `,
+  };
+}
+
+function buildBalaRakshaSignificanceNote() {
+  return {
+    title: 'Protection, All the Way Up',
+    subtitle: 'Sri Bala Raksha Stotram · Spiritual Significance',
+    bodyHtml: `
+      <p><strong>Who is being asked.</strong> Bālā ("the girl") is Tripurasundarī in her youngest form — the goddess of the Śrī Vidyā tradition, pictured as a nine-year-old child. In many Śrī Vidyā lineages her three-syllable mantra is the first one an initiate receives, before the fuller mantras of Lalitā herself; she is the doorway into the whole practice. That shows in the text: verse 8 asks for <em>sarvāvaraṇa-vidyā</em>, the ritual knowledge of the Śrī Chakra's nine enclosures (the same āvaraṇas the Soundarya Lahari's verse 11 note describes), and for <em>deśikāṅghri-smṛti</em>, remembrance of the guru's feet. This is a prayer written from inside an initiated practice, not a general-purpose charm.</p>
+      <p><strong>What "protection" turns out to mean.</strong> A rakṣā stotra is, by genre, a hymn asking a deity to guard the one who recites it. What makes this one worth studying is how far up it takes that request. It moves in clear stages:</p>
+      <ul>
+        <li><em>Verses 1-2</em> — outward harm: petty evils, the "nets" of the world's misfortunes.</li>
+        <li><em>Verses 3-6</em> — inward harm: sin carried over from a hundred, then a thousand, earlier births, done knowingly or not, by oneself or one's own people.</li>
+        <li><em>Verses 7-10</em> — the request turns positive: not only keep bad things away, but give good things — right action, communion with the deity, an unwavering mind, the state the gods themselves worship. The refrain <em>dēhi mē</em>, "grant me," takes over from <em>rakṣa</em>, "protect."</li>
+        <li><em>Verses 11-14</em> — the circle widens outward to kin, dependents, benefactors, friends — and even the enemy, who is to be <em>turned into</em> a friend (<em>dviṣantam anukūlaya</em>) rather than defeated.</li>
+        <li><em>Verses 15-18</em> — unconditioned bliss, unwavering devotion, and finally: lift me out of the ocean of worldly existence and set me at your feet.</li>
+      </ul>
+      <p>So by the last verse the danger being guarded against is no longer anything in the world — it is <em>bhava</em>, worldly existence itself. The tradition's point is that protection, followed far enough, becomes liberation: the fullest safety a goddess can give is to take the devotee out of the place where harm happens at all.</p>
+      <p><strong>Two verbs for "protect."</strong> Notice the stotra alternates two different roots: <em>rakṣa</em> (from √rakṣ, "guard" — the word the whole genre is named for) and <em>pāhi</em> (from √pā, "keep, shelter" — the root Sanskrit grammarians traditionally derived <em>pitṛ</em>, "father," from: <em>pāti iti pitā</em>, "he who protects is the father"). Click either one to see where each falls.</p>
+    `,
+  };
+}
+
+function buildRamaRakshaSignificanceNote() {
+  return {
+    title: 'A Story Worn as Armor',
+    subtitle: 'Sri Rama Raksha Stotram · Spiritual Significance',
+    bodyHtml: `
+      <p><strong>A hymn treated as a mantra.</strong> These first four lines are the <em>viniyoga</em>, the formal "specification" recited before a mantra is used. It names six things: the <em>ṛṣi</em> (the seer who first perceived it: Budhakauśika), the <em>devatā</em> (the deity it is addressed to: Sītā and Rāma together), the <em>chandas</em> (its meter: anuṣṭubh), the <em>śakti</em> (its power: Sītā), the <em>kīlaka</em> (its "pin" or lock: Hanumān), and the <em>viniyoga</em> proper (its purpose). A stotra that opens this way is claiming to be more than a poem of praise; it is presented as a working instrument. Hanumān as the kīlaka fits especially well: the pin that keeps the mantra's power fastened is the guardian-servant who never leaves Rāma's side.</p>
+      <p><strong>Where it came from.</strong> Verse 15 gives the text's own origin story: Śiva (<em>Hara</em>) recited it to Budhakauśika in a dream, and he wrote it down on waking. So a Vaiṣṇava hymn is presented as a Śaiva teaching. Śiva appears as Rāma's own devotee, a bridge the tradition values; the famous closing verse (38) is Śiva speaking to Pārvatī (<em>varānane</em>, "fair-faced one"), the same verse he speaks to her at the close of the Viṣṇu Sahasranāma, telling her that one repetition of Rāma's name equals the thousand names.</p>
+      <p><strong>The body as a map of the Rāmāyaṇa.</strong> Verses 4-9 are a true kavacham, walking head to feet, and each body part is given to a different title of Rāma that recalls an episode of his story. His forehead is guarded by the son of Daśaratha; the eyes by Kausalyā's son; the ears by Viśvāmitra's beloved; the arms by the one who broke Śiva's bow; the heart by the one who defeated Paraśurāma; the shins by the slayer of Rāvaṇa; the feet by the one who gave Vibhīṣaṇa his kingdom. Reciting the armor means retelling the epic onto one's own body, from Rāma's birth to his victory. Verse 14 names this armor the <em>vajrapañjara</em>, the "diamond cage."</p>
+      <p><strong>The name itself protects.</strong> After the body map, the stotra's focus shifts from Rāma's form to his name: those guarded by "the names of Rāma" cannot even be seen by hostile beings (v.11); remembering "Rāma" brings both worldly enjoyment and liberation (v.12); the roar of "Rāma, Rāma" roasts the seeds of rebirth (v.36). This is the root of the <em>Rāma-nāma</em> devotion that runs through later Indian religion; a widely told tradition holds that Śiva whispers Rāma's name into the ears of the dying at Kāśī as the <em>tāraka</em> mantra, the one that "carries across." As with every rakṣā text, the protection being asked for widens as it goes: from demons (v.11), to sin (v.12), to rebirth itself (v.25: those who praise him "are no longer bound to the round of rebirth"), ending in v.37's plea, "O Rāma, lift me up."</p>
+    `,
+  };
+}
+
+function buildRamaCaseGarlandNote() {
+  return {
+    title: 'Rāma in Every Case',
+    subtitle: 'Sri Rama Raksha Stotram · Verse 37 (with 16 and 36)',
+    bodyHtml: `
+      <p>This verse is a famous grammatical showpiece: it runs the name Rāma through all eight Sanskrit cases, in the traditional order, one per half-line:</p>
+      <ul>
+        <li><em>rāmō</em> rājamaṇiḥ... "Rāma is victorious": <strong>nominative</strong>, the subject</li>
+        <li><em>rāmaṃ</em> ramēśaṃ bhajē, "I worship Rāma": <strong>accusative</strong>, the object</li>
+        <li><em>rāmēṇ</em>ābhihatā, "struck down by Rāma": <strong>instrumental</strong>, the agent or means</li>
+        <li><em>rāmāya</em> tasmai namaḥ, "salutation to that Rāma": <strong>dative</strong>, the recipient</li>
+        <li><em>rāmān</em>nāsti parāyaṇam, "there is no refuge higher than Rāma": <strong>ablative</strong>, "than/from"</li>
+        <li><em>rāmasya</em> dāsō'smi, "I am Rāma's servant": <strong>genitive</strong>, possession</li>
+        <li><em>rāmē</em> chittalayaḥ, "mind dissolved in Rāma": <strong>locative</strong>, "in"</li>
+        <li><em>bhō rāma</em> māmuddhara, "O Rāma, lift me up": <strong>vocative</strong>, direct address</li>
+      </ul>
+      <p>The devotional point rides on the grammar: Rāma is made the subject, object, means, recipient, source, owner, location, and finally the one addressed. The name fills every relationship a word can have to a sentence, and by implication every relationship the devotee can have to the world. The last case, the vocative, is the only one that speaks <em>to</em> him rather than about him, and it is where the verse ends. Click any boxed form of Rāma here to see the others. (The instrumental <em>rāmēṇa</em> and ablative <em>rāmāt</em> are sandhi-fused to the words after them, <em>rāmēṇābhihatā</em> and <em>rāmānnāsti</em>, so they can't be boxed separately.)</p>
+      <p><strong>Two more wordplays in the same stotra.</strong> Verse 16 builds four words on the same root, √ram, "to delight, to rest": <em>ārāmaḥ</em> (a garden, "place of delight"), <em>virāmaḥ</em> (cessation, "the end" of calamities), <em>abhirāmaḥ</em> (delightful), and finally <em>rāmaḥ</em> himself. The prefix changes the sense each time, and the bare root, the name, comes last. Verse 36 is built on rhyme instead: <em>bharjanam</em> (roasting), <em>arjanam</em> (earning), <em>tarjanam</em> (terrifying), <em>garjanam</em> (roaring). The fourth word names what does the other three: the roar of "Rāma, Rāma."</p>
+    `,
+  };
+}
+
+function buildNarasimhaKavachamSignificanceNote() {
+  return {
+    title: 'The Protector Who Came for a Child',
+    subtitle: 'Sri Narasimha Kavacham · Spiritual Significance',
+    bodyHtml: `
+      <p><strong>Why Narasimha.</strong> Narasimha, the Man-Lion, is the form of Viṣṇu that appeared for one purpose: to protect a devotee. The demon-king Hiraṇyakaśipu had won a boon that he could be killed by neither man nor beast, neither by day nor by night, neither indoors nor outdoors, by no weapon, neither on earth nor in the sky, and he turned his power against his own son Prahlāda, a child devoted to Viṣṇu. When the father struck a pillar and asked whether Prahlāda's god was in it, Narasimha burst out of the pillar, neither man nor beast, at twilight, on the threshold, and killed him on his lap with his claws. A kavacham addressed to Narasimha therefore calls on the one form of God that is, by its whole story, protection answering a devotee in danger. It is fitting that the kavacham is put in Prahlāda's own mouth (v.1): the child who was protected becomes the teacher of protection.</p>
+      <p>Verse 8 compresses that theology into four words: <em>sarvagō'pi stambhavāsaḥ</em>, "though everywhere, he dwelt in the pillar." He was in the pillar because he is in everything. (Verse 13 names the demon he tore open as <em>Hiraṇyākṣa</em>, the brother whom Viṣṇu killed as the Boar, rather than Hiraṇyakaśipu; the text reads that way in this edition, whether as a conflation of the two brothers or an inherited variant.)</p>
+      <p><strong>How the armor is built.</strong> The kavacham has a clear architecture:</p>
+      <ul>
+        <li><em>Verses 2-6</em>: a <em>dhyāna</em>, a visualization of the deity to be held in mind, three-eyed, embraced by Lakṣmī, with Garuḍa praising him.</li>
+        <li><em>Verse 7</em>: "seat him in the lotus of your own heart, then recite." The protection begins from inside.</li>
+        <li><em>Verses 7-16</em>: the body, head to feet, each part given to a different name. It ends by handing the whole body to the "thousand-headed Person" (<em>sahasraśīrṣā puruṣaḥ</em>), the opening words of the Ṛg Veda's Puruṣa Sūkta, so Narasimha is identified with the cosmic Person himself.</li>
+        <li><em>Verses 17-19</em>: the space around the body, direction by direction (east, southeast, south, southwest, west, northwest, north, northeast). First the body is sealed, then the world around it.</li>
+      </ul>
+      <p><strong>A mantra hidden in the directions.</strong> Look at the names that guard the eight directions: <em>mahōgra</em>, <em>mahāvīra</em>, <em>mahāviṣṇu</em>, <em>mahājvāla</em>, <em>sarvatōmukha</em>, <em>nṛsiṃha</em>, <em>bhīṣaṇa</em>, <em>bhadra</em>, and then <em>mṛtyōr mṛtyuḥ</em>. These are, in order, the nine key words of Narasimha's most famous mantra, the <em>Mantrarāja</em>: <em>ugraṃ vīraṃ mahāviṣṇuṃ jvalantaṃ sarvatōmukham / nṛsiṃhaṃ bhīṣaṇaṃ bhadraṃ mṛtyumṛtyuṃ namāmyaham</em>. The directional armor is that mantra laid out around the body. (This also settles a variant: some copies read <em>bhūṣaṇavigrahaḥ</em>, "ornament-formed," in verse 18, but the mantra's <em>bhīṣaṇa</em>, "terrifying," is what belongs there.)</p>
+      <p><strong>From danger to death to deathlessness.</strong> The last protection asked for (v.19) is from <em>saṃsāra-bhaya</em>, the fear of worldly existence itself, and it is given by the one called <em>mṛtyōr mṛtyuḥ</em>, "the death of Death." The phala-śruti that follows (vv.20-30) mixes the worldly (long life, wealth, cures for scorpion sting and belly-ache) with the ritual: the kavacham can be written on birch bark or a palm leaf and worn at the wrist (v.24), or recited over sacred ash or water. The "armor" is meant both to be spoken and, quite literally, to be worn.</p>
+    `,
+  };
+}
+
+function buildNarasimhaParticipleCascadeNote() {
+  return {
+    title: 'Fourteen Participles, One Lion',
+    subtitle: 'Sri Narasimha Kavacham · Verse 31',
+    bodyHtml: `
+      <p>The kavacham closes on a single long verse in the <em>sragdharā</em> meter (21 syllables per line, in three groups of seven), and almost the whole verse is one device: fourteen present participles in a row, every one in the accusative ending <em>-antam</em>, all describing the lion before the verse finally reaches its verb, <em>namāmi</em>, "I bow."</p>
+      <p><em>garjantaṃ garjayantaṃ ... sphōṭayantaṃ haṭhantaṃ / rūpyantaṃ tāpayantaṃ ... kṣēpayantaṃ kṣipantam / krandantaṃ rōṣayantaṃ ... saṃharantaṃ bharantaṃ / vīkṣantaṃ ghūrṇayantaṃ ...</em></p>
+      <p>Several come in pairs that show off Sanskrit's causative, an <em>-aya-</em> inserted into the verb stem that turns "doing" into "making someone do": <em>garjantam</em>, "roaring," next to <em>garjayantam</em>, "making [others] roar"; <em>kṣipantam</em>, "hurling," beside <em>kṣēpayantam</em>, "causing to be hurled." The one that matters most theologically is the pair in the third line: <em>saṃharantam</em>, "destroying," immediately followed by <em>bharantam</em>, "sustaining." The same terrifying form that destroys the demons is the one holding the world up.</p>
+      <p>Compare the Shivananda Lahari's second verse, which uses the same technique on a smaller scale: five feminine participles in a row. Stacking participles lets a Sanskrit poet delay the main verb, so the listener sees the deity in motion before being told what to do about it. Here the delay is fourteen actions long, and the release is the simplest possible response: "I bow."</p>
     `,
   };
 }
@@ -1360,7 +1464,9 @@ const MEANING_CONCEPTS = [
   // genitive, "your eyes/glances") and दृशा (v.57, instrumental, "by your
   // glance"). Two verses apart, outside linkScope's adjacent window, but
   // still the same word in two cases.
-  { id: 'sl-drsh', deva: ['दृशः', 'दृशा'], iast: ['dṛśaḥ', 'dṛśā'], english: ['eyes', 'glance'] },
+  // दृशौ/dṛśau (dual, "the two eyes") — Rama Raksha v.5 and Narasimha
+  // Kavacham v.8, the kavacham body-map's eyes.
+  { id: 'sl-drsh', deva: ['दृशः', 'दृशा', 'दृशौ'], iast: ['dṛśaḥ', 'dṛśā', 'dṛśau'], english: ['eyes', 'glance'] },
   // नेत्र/nētra ("eye") — v.52's "इमे नेत्रे," "these two eyes," a clean
   // dual. v.53's नेत्रत्रितयम् and v.54's नेत्रैः are both sandhi-fused into
   // a bigger compound in this source ("त्वन्नेत्रत्रितयम्,"
@@ -1523,7 +1629,9 @@ const MEANING_CONCEPTS = [
   // (and this stotra's own title) is named for. v.1, v.2, v.11 (doubled,
   // "रक्ष रक्ष माम्"), v.13. परिरक्ष (v.12) is the same root under a
   // prefix, a different surface token, so left unboxed here.
-  { id: 'brs-raksha', deva: ['रक्ष'], iast: ['rakṣa'], english: ['protect'] },
+  // रक्षतु/rakṣatu, the third-person "may [he] protect" (Narasimha
+  // Kavacham v.8) — same root, added here rather than as a new concept.
+  { id: 'brs-raksha', deva: ['रक्ष', 'रक्षतु'], iast: ['rakṣa', 'rakṣatu'], english: ['protect'] },
   // पाहि मां/pāhi māṃ, "protect me" — a synonymous refrain built on a
   // different root (√pā, not √rakṣ), alternating with rakṣa's imperative
   // through the stotra: v.3, v.5, v.14 read "पाहि मां," while v.4 reverses
@@ -1546,6 +1654,75 @@ const MEANING_CONCEPTS = [
   { id: 'brs-parameshvari', deva: ['परमेश्वरि'], iast: ['paramēśvari'], english: ['supreme goddess'] },
   { id: 'brs-jagadishvari', deva: ['जगदीश्वरि'], iast: ['jagadīśvari'], english: ['ruler of the world'] },
   { id: 'brs-paradevate', deva: ['परदेवते'], iast: ['paradēvatē'], english: ['supreme deity'] },
+
+  // --- Shared across the Raksha Stotrams & Kavachams (chant-agnostic) ---
+  // पातु/pātu, "may [he] protect" — the third-person imperative every
+  // kavacham is built on, one per body part ("शिरो मे राघवः पातु," "may
+  // Raghava protect my head"). A different root (√pā) from रक्ष (√rakṣ),
+  // which is why the two stay separate concepts even though both gloss
+  // "protect" in English.
+  { id: 'patu', deva: ['पातु'], iast: ['pātu'], english: ['protect'] },
+  // The kavacham head-to-foot body map. Registered once, chant-agnostic,
+  // since every kavacham walks the same body in the same order — any
+  // future kavacham gets these connections with no new registration.
+  // Case-forms vary by text (Rama Raksha's कटी vs. Narasimha's कटिम्, ऊरू
+  // vs. ऊरु), so each attested surface form is catalogued individually.
+  { id: 'body-head', deva: ['शिरो', 'शिरः', 'शिरसा'], iast: ['śirō', 'śiraḥ', 'śirasā'], english: ['head'] },
+  { id: 'body-forehead', deva: ['भालं'], iast: ['bhālaṃ'], english: ['forehead'] },
+  { id: 'body-ears', deva: ['श्रुती'], iast: ['śrutī'], english: ['ears'] },
+  { id: 'body-nose', deva: ['घ्राणं', 'नासं'], iast: ['ghrāṇaṃ', 'nāsaṃ'], english: ['nose'] },
+  { id: 'body-mouth', deva: ['मुखं'], iast: ['mukhaṃ'], english: ['mouth'] },
+  { id: 'body-tongue', deva: ['जिह्वां', 'रसनां'], iast: ['jihvāṃ', 'rasanāṃ'], english: ['tongue'] },
+  { id: 'body-face', deva: ['वक्त्रं'], iast: ['vaktraṃ'], english: ['face'] },
+  { id: 'body-throat', deva: ['कण्ठं', 'कण्ठे'], iast: ['kaṇṭhaṃ', 'kaṇṭhē'], english: ['throat'] },
+  { id: 'body-shoulders', deva: ['स्कन्धौ'], iast: ['skandhau'], english: ['shoulders'] },
+  { id: 'body-arms', deva: ['भुजौ'], iast: ['bhujau'], english: ['arms'] },
+  { id: 'body-hands', deva: ['करौ'], iast: ['karau'], english: ['hands'] },
+  { id: 'body-heart', deva: ['हृदयं'], iast: ['hṛdayaṃ'], english: ['heart'] },
+  { id: 'body-waist', deva: ['मध्यं'], iast: ['madhyaṃ'], english: ['waist'] },
+  { id: 'body-navel', deva: ['नाभिं'], iast: ['nābhiṃ'], english: ['navel'] },
+  { id: 'body-hips', deva: ['कटी', 'कटिम्'], iast: ['kaṭī', 'kaṭim'], english: ['hips'] },
+  { id: 'body-thighs', deva: ['ऊरू', 'ऊरु'], iast: ['ūrū', 'ūru'], english: ['thighs'] },
+  { id: 'body-knees', deva: ['जानुनी'], iast: ['jānunī'], english: ['knees'] },
+  { id: 'body-shins', deva: ['जङ्घे'], iast: ['jaṅghē'], english: ['shins'] },
+  { id: 'body-feet', deva: ['पादौ'], iast: ['pādau'], english: ['feet'] },
+  { id: 'body-whole', deva: ['वपुः'], iast: ['vapuḥ'], english: ['body'] },
+  // भुक्तिं मुक्तिं, "worldly enjoyment and liberation" — the standard
+  // phala-śruti pairing; Rama Raksha v.12 and Narasimha Kavacham v.26
+  // close on the identical words ("भुक्तिं मुक्तिं च विन्दति").
+  { id: 'bhukti', deva: ['भुक्तिं'], iast: ['bhuktiṃ'], english: ['enjoyment'] },
+  { id: 'mukti', deva: ['मुक्तिं'], iast: ['muktiṃ'], english: ['liberation'] },
+  // शरणं/śaraṇaṃ, "refuge" — Rama Raksha's closing refrain (शरणं प्रपद्ये,
+  // "I take refuge," v.29/32/33), and also Soundarya Lahari v.1's
+  // "त्वमेव शरणं शिवे," so it connects there too.
+  { id: 'sharanam', deva: ['शरणं'], iast: ['śaraṇaṃ'], english: ['refuge'] },
+
+  // --- Sri Rama Raksha Stotram (Raksha Stotrams sub-section) ---
+  // राम in every clean case-form the stotra uses — v.37 deliberately runs
+  // the name through all eight cases in order (see its Σ note), though its
+  // instrumental (रामेणाभिहता) and ablative (रामान्नास्ति) are sandhi-fused
+  // to the next word and so can't be boxed.
+  {
+    id: 'rama',
+    deva: ['राम', 'रामः', 'रामो', 'रामं', 'रामाय', 'रामस्य', 'रामे'],
+    iast: ['rāma', 'rāmaḥ', 'rāmō', 'rāmaṃ', 'rāmāya', 'rāmasya', 'rāmē'],
+    english: ['rama'],
+  },
+  {
+    id: 'ramachandra',
+    deva: ['रामचन्द्रम्', 'रामचन्द्राय', 'रामचन्द्रः', 'रामचन्द्रो'],
+    iast: ['rāmachandram', 'rāmachandrāya', 'rāmachandraḥ', 'rāmachandrō'],
+    english: ['ramachandra'],
+  },
+  { id: 'raghava', deva: ['राघवः', 'राघवं'], iast: ['rāghavaḥ', 'rāghavaṃ'], english: ['raghava'] },
+
+  // --- Sri Narasimha Kavacham (Kavachams sub-section) ---
+  { id: 'narasimha', deva: ['नृसिंहं', 'नृसिंहो', 'नृसिंहः'], iast: ['nṛsiṃhaṃ', 'nṛsiṃhō', 'nṛsiṃhaḥ'], english: ['narasimha'] },
+  // नृकेसरी/नृहरिः, "Man-Lion" — synonyms of the name itself rather than
+  // the name (nṛ, "man" + kesarin, "maned one" / hari, "lion"). Glossed
+  // "man lion" without a hyphen since a hyphenated gloss can never match
+  // (the translation tokenizer splits on hyphens).
+  { id: 'nrkesari', deva: ['नृकेसरी', 'नृहरिः'], iast: ['nṛkēsarī', 'nṛhariḥ'], english: ['man lion'] },
 ];
 
 const MEANING_CONCEPTS_BY_ID = new Map(MEANING_CONCEPTS.map((c) => [c.id, c]));
