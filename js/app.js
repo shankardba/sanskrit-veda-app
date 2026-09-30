@@ -59,6 +59,7 @@ const CHANTS = [
   { id: 'narasimha-kavacham', label: 'Sri Narasimha Kavacham', language: 'sanskrit', category: 'kavacham' },
   { id: 'bala-krishna-raksha-kavacham', label: 'Bala Krishna Raksha Kavacham (Nandagopa)', language: 'sanskrit', category: 'kavacham' },
   { id: 'vakratunda-ganesha-kavacham', label: 'Vakratunda Ganesha Kavacham', language: 'sanskrit', category: 'kavacham' },
+  { id: 'devi-kavacham', label: 'Sri Durga Kavacham (Devi Kavacham)', language: 'sanskrit', category: 'kavacham' },
   { id: 'raghavendra-raksha-kavacham', label: 'Sri Raghavendra Raksha Kavacham', language: 'sanskrit', category: 'kavacham' },
   { id: 'pancharaksha-devi-stotrani', label: 'Pancharaksha Devi Stotrani (Buddhist)', language: 'sanskrit', category: 'raksha-stotram' },
   { id: 'raksha-kala-kara-stava', label: 'Raksha Kala Kara Stava (Buddhist)', language: 'sanskrit', category: 'raksha-stotram' },
@@ -161,6 +162,10 @@ const SECTION_NOTES = {
   },
   'raksha-kala-kara-stava': {
     Invocation: () => buildRakshaKalaKaraSignificanceNote(),
+  },
+  'devi-kavacham': {
+    Viniyoga: () => buildDeviKavachamSignificanceNote(),
+    'Verse 21': () => buildDeviKavachamWholePersonNote(),
   },
 };
 
@@ -1028,6 +1033,40 @@ function buildRakshaKalaKaraSignificanceNote() {
   };
 }
 
+function buildDeviKavachamSignificanceNote() {
+  return {
+    title: 'A Ring of Goddesses',
+    subtitle: 'Sri Durga Kavacham (Devi Kavacham) · Spiritual Significance',
+    bodyHtml: `
+      <p><strong>The gateway to the Durgā Saptaśatī.</strong> This is the kavacham most people mean by "Durga Kavach." It is the first of three preparatory texts (Kavacha, Argalā, Kīlaka) recited before the <em>Durgā Saptaśatī</em>, the seven hundred verses of the Devī Māhātmya that tell of the Goddess's victories over the demons. Verse 53 says so directly: "let one recite the Saptaśatī, the Chaṇḍī, having first recited the armor." Before entering the story of the Goddess's battles, the reciter puts on her armor.</p>
+      <p><strong>The nine Durgās (vv.3-5).</strong> Brahmā opens with a list that has become one of the best known in Hindu practice: Śailaputrī, Brahmachāriṇī, Chandraghaṇṭā, Kūṣmāṇḍā, Skandamātā, Kātyāyanī, Kālarātri, Mahāgaurī, Siddhidātrī, the <em>Navadurgā</em>. These are the nine forms worshipped one per night through the nine nights of Navarātri, and this kavacham is the standard source for their names and their order.</p>
+      <p><strong>The Mothers (vv.9-15).</strong> Then come the <em>Mātṛkās</em>, each on her mount: Chāmuṇḍā on a corpse, Vārāhī on a buffalo, Aindrī on an elephant, Vaiṣṇavī on Garuḍa, Māheśvarī on a bull, Kaumārī on a peacock, Brāhmī on a swan. They are the powers (<em>śaktis</em>) of the male gods (Indra, Viṣṇu, Śiva, Skanda, Brahmā, Viṣṇu's Boar), and in the Devī Māhātmya they stream out of those gods to fight beside the Goddess. Here they ride out in chariots, armed, "for the fearlessness of devotees."</p>
+      <p><strong>All the guardians are goddesses.</strong> The frame is male (Brahmā speaks it to the sage Mārkaṇḍeya, and the colophon credits Hari, Hara, and Brahmā together), but every one of the dozens of guardians it names is feminine. First the ten directions (east to northeast, then above and below), then the four sides (Jayā, Vijayā, Ajitā, Aparājitā, "Victory," "Triumph," "Unconquered," "Undefeated"), then the body. Among them is <em>Nārasiṃhī</em>, the female Man-Lion, guarding the ankles: the Narasimha of the Kavachams section, in the Goddess's form.</p>
+      <p><strong>True to its genre's name.</strong> Where the Rama Raksha and Narasimha Kavacham ask again and again with <em>pātu</em> (√pā), this kavacham almost never does. Its verbs come from √rakṣ, the root that gives the genre its name: <em>rakṣa</em>, <em>rakṣatu</em>, <em>rakṣet</em>. Verse 43 states the practice plainly: "one should not take a single step without the armor."</p>
+    `,
+  };
+}
+
+function buildDeviKavachamWholePersonNote() {
+  return {
+    title: 'From the Topknot to the Three Guṇas',
+    subtitle: 'Sri Durga Kavacham (Devi Kavacham) · Verses 21-42',
+    bodyHtml: `
+      <p>Every kavacham maps the body. This one maps the whole person, and it keeps going long after the other texts stop. Follow verses 21-42 in order and the protection moves steadily inward, then back outward into the world:</p>
+      <ul>
+        <li><strong>The body's surface</strong> (vv.21-33): topknot, crown, forehead, brows, nose, eyes, ears, cheeks, lips, tongue, teeth, throat, uvula, palate, chin, even <em>speech</em>, then down to the toes and the soles of the feet, and finally nails, hair, pores, and skin.</li>
+        <li><strong>The tissues</strong> (vv.34-36): blood, marrow, grease, flesh, bone, fat, and (v.36) semen, which is nearly the full list of the seven <em>dhātus</em>, the bodily tissues of Āyurveda; then the entrails, bile and phlegm (two of Āyurveda's three humors), and every joint.</li>
+        <li><strong>The shadow</strong> (v.36): <em>chhāyām chhatreśvarī</em>, "Chhatreśvarī, my shadow." Even the shape the body throws on the ground is covered.</li>
+        <li><strong>The inner instrument</strong> (v.36): ego, mind, and intellect.</li>
+        <li><strong>The breath</strong> (v.37): the five <em>prāṇas</em> (prāṇa, apāna, vyāna, samāna, udāna), the vital currents yoga describes, which also stand in for the third humor, <em>vāta</em>, wind.</li>
+        <li><strong>The senses and the guṇas</strong> (v.38): taste, form, smell, sound, and touch; then <em>sattva, rajas, tamas</em>, the three strands that, in Sāṃkhya thought, make up all of nature.</li>
+        <li><strong>A life</strong> (vv.39-41): life span, dharma, fame, fortune, wealth, learning, family line, cattle, sons, wife, the path one walks, the road, the king's gate.</li>
+      </ul>
+      <p>And then, in verse 42, the catch-all every thorough kavacham ends with: "whatever place is left without protection, not covered by the armor, protect all of it for me." Read in order, it is almost a map of how Indian thought describes a human being, from the outermost hair to the three guṇas at the root of nature and back out into a household and a kingdom, with a goddess stationed at every layer.</p>
+    `,
+  };
+}
+
 let mathModalOverlay = null;
 
 function ensureMathModal() {
@@ -1877,7 +1916,9 @@ const MEANING_CONCEPTS = [
   // prefix, a different surface token, so left unboxed here.
   // रक्षतु/rakṣatu, the third-person "may [he] protect" (Narasimha
   // Kavacham v.8) — same root, added here rather than as a new concept.
-  { id: 'brs-raksha', deva: ['रक्ष', 'रक्षतु'], iast: ['rakṣa', 'rakṣatu'], english: ['protect'] },
+  // रक्षेत्/रक्षेद् (optative) and रक्षसे ("you protect") — the Devi
+  // Kavacham's verbs, nearly all from √rakṣ.
+  { id: 'brs-raksha', deva: ['रक्ष', 'रक्षतु', 'रक्षेत्', 'रक्षेद्', 'रक्षसे'], iast: ['rakṣa', 'rakṣatu', 'rakṣēt', 'rakṣēd', 'rakṣasē'], english: ['protect'] },
   // पाहि मां/pāhi māṃ, "protect me" — a synonymous refrain built on a
   // different root (√pā, not √rakṣ), alternating with rakṣa's imperative
   // through the stotra: v.3, v.5, v.14 read "पाहि मां," while v.4 reverses
@@ -1918,35 +1959,35 @@ const MEANING_CONCEPTS = [
   // future kavacham gets these connections with no new registration.
   // Case-forms vary by text (Rama Raksha's कटी vs. Narasimha's कटिम्, ऊरू
   // vs. ऊरु), so each attested surface form is catalogued individually.
-  { id: 'body-head', deva: ['शिरो', 'शिरः', 'शिरसा', 'शिरसि', 'शीर्षं'], iast: ['śirō', 'śiraḥ', 'śirasā', 'śirasi', 'śīrṣaṃ'], english: ['head'] },
+  { id: 'body-head', deva: ['शिरो', 'शिरः', 'शिरसा', 'शिरसि', 'शीर्षं', 'मूर्ध्नि'], iast: ['śirō', 'śiraḥ', 'śirasā', 'śirasi', 'śīrṣaṃ', 'mūrdhni'], english: ['head'] },
   { id: 'body-topknot', deva: ['शिखां'], iast: ['śikhāṃ'], english: ['topknot'] },
   { id: 'body-crown', deva: ['मौलिं'], iast: ['mauliṃ'], english: ['crown'] },
   { id: 'body-brows', deva: ['भ्रुवौ'], iast: ['bhruvau'], english: ['brows'] },
   { id: 'body-beard', deva: ['कूर्चं'], iast: ['kūrchaṃ'], english: ['beard'] },
-  { id: 'body-cheeks', deva: ['गण्डौ'], iast: ['gaṇḍau'], english: ['cheeks'] },
+  { id: 'body-cheeks', deva: ['गण्डौ', 'कपोलौ'], iast: ['gaṇḍau', 'kapōlau'], english: ['cheeks'] },
   { id: 'body-lips', deva: ['ओष्ठाधरौ'], iast: ['ōṣṭhādharau'], english: ['lips'] },
   { id: 'body-teeth', deva: ['दन्तान्'], iast: ['dantān'], english: ['teeth'] },
   { id: 'body-chin', deva: ['चिबुकं'], iast: ['chibukaṃ'], english: ['chin'] },
-  { id: 'body-forehead', deva: ['भालं'], iast: ['bhālaṃ'], english: ['forehead'] },
+  { id: 'body-forehead', deva: ['भालं', 'ललाटे'], iast: ['bhālaṃ', 'lalāṭē'], english: ['forehead'] },
   { id: 'body-ears', deva: ['श्रुती', 'कर्णौ'], iast: ['śrutī', 'karṇau'], english: ['ears'] },
-  { id: 'body-nose', deva: ['घ्राणं', 'नासं', 'नासां'], iast: ['ghrāṇaṃ', 'nāsaṃ', 'nāsāṃ'], english: ['nose'] },
+  { id: 'body-nose', deva: ['घ्राणं', 'नासं', 'नासां', 'नासिके', 'नासिकायां'], iast: ['ghrāṇaṃ', 'nāsaṃ', 'nāsāṃ', 'nāsikē', 'nāsikāyāṃ'], english: ['nose'] },
   { id: 'body-mouth', deva: ['मुखं', 'मुखे'], iast: ['mukhaṃ', 'mukhē'], english: ['mouth'] },
-  { id: 'body-neck', deva: ['कंधरां'], iast: ['kaṃdharāṃ'], english: ['neck'] },
-  { id: 'body-tongue', deva: ['जिह्वां', 'रसनां'], iast: ['jihvāṃ', 'rasanāṃ'], english: ['tongue'] },
+  { id: 'body-neck', deva: ['कंधरां', 'ग्रीवायां'], iast: ['kaṃdharāṃ', 'grīvāyāṃ'], english: ['neck'] },
+  { id: 'body-tongue', deva: ['जिह्वां', 'रसनां', 'जिह्वायां'], iast: ['jihvāṃ', 'rasanāṃ', 'jihvāyāṃ'], english: ['tongue'] },
   { id: 'body-face', deva: ['वक्त्रं', 'वदनं'], iast: ['vaktraṃ', 'vadanaṃ'], english: ['face'] },
   { id: 'body-throat', deva: ['कण्ठं', 'कण्ठे'], iast: ['kaṇṭhaṃ', 'kaṇṭhē'], english: ['throat'] },
-  { id: 'body-shoulders', deva: ['स्कन्धौ'], iast: ['skandhau'], english: ['shoulders'] },
+  { id: 'body-shoulders', deva: ['स्कन्धौ', 'स्कन्धयोः'], iast: ['skandhau', 'skandhayōḥ'], english: ['shoulders'] },
   { id: 'body-arms', deva: ['भुजौ', 'बाहू'], iast: ['bhujau', 'bāhū'], english: ['arms'] },
-  { id: 'body-chest', deva: ['स्तनौ', 'वक्षो'], iast: ['stanau', 'vakṣō'], english: ['chest'] },
+  { id: 'body-chest', deva: ['स्तनौ', 'वक्षो'], iast: ['stanau', 'vakṣō'], english: ['chest', 'breasts'] },
   { id: 'body-fingers', deva: ['हस्ताङ्गुलीन्'], iast: ['hastāṅgulīn'], english: ['fingers'] },
   { id: 'body-sides', deva: ['पार्श्वे'], iast: ['pārśvē'], english: ['sides'] },
   { id: 'body-back', deva: ['पृष्ठं'], iast: ['pṛṣṭhaṃ'], english: ['back'] },
   { id: 'body-hands', deva: ['करौ'], iast: ['karau'], english: ['hands'] },
-  { id: 'body-heart', deva: ['हृदयं', 'हृदि'], iast: ['hṛdayaṃ', 'hṛdi'], english: ['heart'] },
-  { id: 'body-belly', deva: ['जठरं', 'कुक्षिं'], iast: ['jaṭharaṃ', 'kukṣiṃ'], english: ['belly'] },
+  { id: 'body-heart', deva: ['हृदयं', 'हृदि', 'हृदये'], iast: ['hṛdayaṃ', 'hṛdi', 'hṛdayē'], english: ['heart'] },
+  { id: 'body-belly', deva: ['जठरं', 'कुक्षिं', 'कुक्षौ', 'उदरे'], iast: ['jaṭharaṃ', 'kukṣiṃ', 'kukṣau', 'udarē'], english: ['belly'] },
   { id: 'body-waist', deva: ['मध्यं'], iast: ['madhyaṃ'], english: ['waist'] },
-  { id: 'body-navel', deva: ['नाभिं'], iast: ['nābhiṃ'], english: ['navel'] },
-  { id: 'body-hips', deva: ['कटी', 'कटिम्', 'कटिं', 'जघनं'], iast: ['kaṭī', 'kaṭim', 'kaṭiṃ', 'jaghanaṃ'], english: ['hips'] },
+  { id: 'body-navel', deva: ['नाभिं', 'नाभौ'], iast: ['nābhiṃ', 'nābhau'], english: ['navel'] },
+  { id: 'body-hips', deva: ['कटी', 'कटिम्', 'कटिं', 'जघनं', 'कट्यां'], iast: ['kaṭī', 'kaṭim', 'kaṭiṃ', 'jaghanaṃ', 'kaṭyāṃ'], english: ['hips'] },
   { id: 'body-haunches', deva: ['सक्थिनी'], iast: ['sakthinī'], english: ['haunches'] },
   // उरू (Shiva Raksha v.7) is the source's own spelling of ऊरू, kept as-is.
   { id: 'body-thighs', deva: ['ऊरू', 'ऊरु', 'उरू'], iast: ['ūrū', 'ūru', 'urū'], english: ['thighs'] },
@@ -1955,6 +1996,7 @@ const MEANING_CONCEPTS = [
   { id: 'body-ankles', deva: ['गुल्फौ'], iast: ['gulphau'], english: ['ankles'] },
   { id: 'body-feet', deva: ['पादौ'], iast: ['pādau'], english: ['feet'] },
   { id: 'body-whole', deva: ['वपुः', 'सर्वाङ्गे'], iast: ['vapuḥ', 'sarvāṅgē'], english: ['body'] },
+  { id: 'body-skin', deva: ['त्वचं'], iast: ['tvachaṃ'], english: ['skin'] },
   { id: 'body-limbs', deva: ['सर्वाङ्गानि'], iast: ['sarvāṅgāni'], english: ['limbs'] },
   // भुक्तिं मुक्तिं, "worldly enjoyment and liberation" — the standard
   // phala-śruti pairing; Rama Raksha v.12 and Narasimha Kavacham v.26
@@ -2003,6 +2045,15 @@ const MEANING_CONCEPTS = [
   // --- Rakṣā Kāla Kara Stava (Buddhist) — "रक्ष मां लोकनायक" closes 13 of
   // its 15 verses; रक्ष already connects via brs-raksha. ---
   { id: 'lokanayaka', deva: ['लोकनायक'], iast: ['lōkanāyaka'], english: ['lokanayaka'] },
+
+  // --- Sri Devi Kavacham / Durga Kavach (Kavachams sub-section) — the
+  // Mātṛkās and other goddess-guardians who recur across its verses. ---
+  { id: 'dk-varahi', deva: ['वाराही'], iast: ['vārāhī'], english: ['varahi'] },
+  { id: 'dk-vaishnavi', deva: ['वैष्णवी'], iast: ['vaiṣṇavī'], english: ['vaishnavi'] },
+  { id: 'dk-kaumari', deva: ['कौमारी'], iast: ['kaumārī'], english: ['kaumari'] },
+  { id: 'dk-brahmani', deva: ['ब्रह्माणी'], iast: ['brahmāṇī'], english: ['brahmani'] },
+  { id: 'dk-chandika', deva: ['चण्डिका', 'चण्डिके'], iast: ['chaṇḍikā', 'chaṇḍikē'], english: ['chandika'] },
+  { id: 'dk-shuladharini', deva: ['शूलधारिणी'], iast: ['śūladhāriṇī'], english: ['trident bearer'] },
 ];
 
 const MEANING_CONCEPTS_BY_ID = new Map(MEANING_CONCEPTS.map((c) => [c.id, c]));
