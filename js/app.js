@@ -50,6 +50,11 @@ const CHANTS = [
   { id: 'rama-raksha-stotram', label: 'Sri Rama Raksha Stotram', language: 'sanskrit', category: 'raksha-stotram' },
   // category: 'kavacham' — the sister genre ("armor"): same protective
   // purpose, but structured as an explicit head-to-foot body map.
+  { id: 'krishna-raksha-stotram', label: 'Sri Krishna Raksha (Gopi Krta)', language: 'sanskrit', category: 'raksha-stotram' },
+  { id: 'shiva-raksha-stotram', label: 'Sri Shiva Raksha Stotram', language: 'sanskrit', category: 'raksha-stotram' },
+  { id: 'vishnu-raksha-stotram', label: 'Sri Vishnu Raksha Stotram', language: 'sanskrit', category: 'raksha-stotram' },
+  { id: 'hanumad-raksha-stotram', label: 'Sri Hanumad Raksha Stotram', language: 'sanskrit', category: 'raksha-stotram' },
+  { id: 'shani-raksha-stava', label: 'Sri Shani Raksha Stava', language: 'sanskrit', category: 'raksha-stotram' },
   { id: 'narasimha-kavacham', label: 'Sri Narasimha Kavacham', language: 'sanskrit', category: 'kavacham' },
 ];
 
@@ -117,6 +122,21 @@ const SECTION_NOTES = {
   'narasimha-kavacham': {
     1: () => buildNarasimhaKavachamSignificanceNote(),
     31: () => buildNarasimhaParticipleCascadeNote(),
+  },
+  'krishna-raksha-stotram': {
+    1: () => buildKrishnaRakshaSignificanceNote(),
+  },
+  'shiva-raksha-stotram': {
+    Viniyoga: () => buildShivaRakshaSignificanceNote(),
+  },
+  'vishnu-raksha-stotram': {
+    114: () => buildVishnuRakshaSignificanceNote(),
+  },
+  'hanumad-raksha-stotram': {
+    1: () => buildHanumadRakshaSignificanceNote(),
+  },
+  'shani-raksha-stava': {
+    'Pūrvapīṭhikā': () => buildShaniRakshaSignificanceNote(),
   },
 };
 
@@ -780,6 +800,108 @@ function buildNarasimhaParticipleCascadeNote() {
       <p><em>garjantaṃ garjayantaṃ ... sphōṭayantaṃ haṭhantaṃ / rūpyantaṃ tāpayantaṃ ... kṣēpayantaṃ kṣipantam / krandantaṃ rōṣayantaṃ ... saṃharantaṃ bharantaṃ / vīkṣantaṃ ghūrṇayantaṃ ...</em></p>
       <p>Several come in pairs that show off Sanskrit's causative, an <em>-aya-</em> inserted into the verb stem that turns "doing" into "making someone do": <em>garjantam</em>, "roaring," next to <em>garjayantam</em>, "making [others] roar"; <em>kṣipantam</em>, "hurling," beside <em>kṣēpayantam</em>, "causing to be hurled." The one that matters most theologically is the pair in the third line: <em>saṃharantam</em>, "destroying," immediately followed by <em>bharantam</em>, "sustaining." The same terrifying form that destroys the demons is the one holding the world up.</p>
       <p>Compare the Shivananda Lahari's second verse, which uses the same technique on a smaller scale: five feminine participles in a row. Stacking participles lets a Sanskrit poet delay the main verb, so the listener sees the deity in motion before being told what to do about it. Here the delay is fourteen actions long, and the release is the simplest possible response: "I bow."</p>
+    `,
+  };
+}
+
+function buildKrishnaRakshaSignificanceNote() {
+  return {
+    title: 'When the Mothers Protect God',
+    subtitle: 'Sri Krishna Raksha (Gopi Krta) · Spiritual Significance',
+    bodyHtml: `
+      <p><strong>The scene.</strong> These eight verses come from the Bhāgavata Purāṇa (10.6.22-29). The demoness Pūtanā has just tried to kill the infant Kṛṣṇa by nursing him with poisoned milk, and he has sucked the life out of her instead. The cowherd women of Vraja rush in, find the baby playing on her corpse, and do what any village mothers would do: they perform a protective rite over him. They wave a cow's tail around him and mark twelve places on his body, each with one of Viṣṇu's twelve names (the same twelve that the Vishnu Raksha Stotram calls a "cage"). They touch the names onto their own bodies and then onto his, and recite this.</p>
+      <p><strong>The paradox the tradition loves.</strong> The names they call on (Aja, Acyuta, Keśava, Viṣṇu, Govinda, Mādhava, Nārāyaṇa) are all names of the child in their arms. The gopīs are asking Viṣṇu to protect Viṣṇu. Bhāgavata commentators treat this as the point rather than a slip: their love is <em>vātsalya</em>, parental love, so complete that it hides his divinity from them, and he lets it. In this tradition, God preferring to be protected by those who love him over being praised by those in awe of him is one of the highest forms devotion can take.</p>
+      <p><strong>How thoroughly they cover him.</strong> The protection is laid over the child in widening layers:</p>
+      <ul>
+        <li><em>Verse 1</em>: the body, from the feet up to the head (<em>kam</em>, an old word for "head").</li>
+        <li><em>Verse 2</em>: the space around him, in front, behind, at the sides and corners, above, below, and all around.</li>
+        <li><em>Verses 3-4</em>: his inner faculties: senses, breath, consciousness, mind, intellect, self.</li>
+        <li><em>Verses 4-5</em>: his activities, playing, sleeping, walking, sitting, eating. He is guarded not only in space but through the whole day.</li>
+      </ul>
+      <p><strong>What they are afraid of.</strong> Verses 6-8 name the enemies, and the list reads like a pediatric textbook, because in a sense it is one. The <em>bāla-grahas</em> or "child-seizers" (Revatī, Jyeṣṭhā, Pūtanā herself, the Mātṛkās) are the spirits that Āyurveda's pediatrics (<em>kaumārabhṛtya</em>) held responsible for childhood fevers, convulsions (<em>apasmāra</em>), and wasting. The final line turns on a pun: all these <em>grahas</em>, "seizers" (from √grah, "to seize"), flee in terror at the <em>grahaṇa</em>, the "seizing" (that is, the uttering) of Viṣṇu's name. The name takes hold before they can.</p>
+      <p>Two more verbs for "protect" appear here besides <em>pātu</em>: <em>avyāt</em> and <em>avatu</em>, both from a third root, √av. (They are glued by sandhi to the words before them, as in <em>nārāyaṇō'vatu</em>, so they can't be boxed.)</p>
+    `,
+  };
+}
+
+function buildShivaRakshaSignificanceNote() {
+  return {
+    title: 'The Mirror of the Rama Raksha',
+    subtitle: 'Sri Shiva Raksha Stotram · Spiritual Significance',
+    bodyHtml: `
+      <p><strong>One template, two gods.</strong> Read this beside the Rama Raksha Stotram and the resemblance is unmistakable, often word for word:</p>
+      <ul>
+        <li>v.1 <em>charitaṃ dēvadēvasya</em>, "the story of the god of gods," answers Rama Raksha v.1's <em>charitaṃ raghunāthasya</em>, "the story of the lord of the Raghus."</li>
+        <li>v.9 <em>ētāṃ śivabalōpētāṃ rakṣāṃ yaḥ sukṛtī paṭhēt</em> is Rama Raksha v.10 exactly, with <em>śiva</em> in place of <em>rāma</em>.</li>
+        <li>v.11's "named Abhayaṅkara... whoever wears it at the throat" mirrors Rama Raksha v.13-14's "named Vajrapañjara... whoever wears it at the throat."</li>
+        <li>v.12, the origin story, is the most striking: <em>Nārāyaṇa</em> teaches this Śiva-shield in a dream, and the yogi Yājñavalkya writes it down at dawn. In the Rama Raksha it is the other way round: <em>Śiva</em> teaches the Rāma-shield in a dream to Budhakauśika.</li>
+      </ul>
+      <p>Each god hands down the other's armor. Whichever text came first, the pairing says something the tradition says often: Viṣṇu and Śiva are each other's devotees, and a protection-hymn to either one is taught by the other. (Its alternative title, <em>Abhayaṅkara Kavacham</em>, means "the armor that makes one fearless.")</p>
+      <p><strong>The epithet fits the body part.</strong> This kavacham's body map is more carefully matched than most. The name chosen to guard each part is usually the one whose story involves that part:</p>
+      <ul>
+        <li>the <em>neck</em> is guarded by Śitikandhara, "the dark-necked," whose throat turned blue when he drank the world-poison;</li>
+        <li>the <em>throat</em> by Śrīkaṇṭha, "the beautiful-throated";</li>
+        <li>the <em>tongue</em> by Vāgīśvara, "the lord of speech";</li>
+        <li>the <em>head</em> by Gaṅgādhara, who catches the Ganges in his hair, and the <em>forehead</em> by the one who wears the crescent moon there;</li>
+        <li>the <em>hands</em> by the bearer of the Pināka bow; the <em>hips</em> by the one who wears the tiger skin at his waist.</li>
+      </ul>
+      <p><strong>Where it leads.</strong> The reward promised in verse 9 is <em>śiva-sāyujya</em>, "union with Śiva," the Śaiva name for liberation. As with the Rama Raksha, the shield that starts by warding off ghosts and planets ends by delivering the reciter into the god himself.</p>
+    `,
+  };
+}
+
+function buildVishnuRakshaSignificanceNote() {
+  return {
+    title: 'The Cage of Twelve Names',
+    subtitle: 'Sri Vishnu Raksha Stotram · Spiritual Significance',
+    bodyHtml: `
+      <p><strong>A daily practice, in its source text.</strong> This passage from the Nārada Purāṇa, taught by the sage Sanatkumāra, calls itself the <em>nāma-dvādaśa-pañjara</em>, "the cage of the twelve names," and it is "without a single gap" (<em>niśchidram</em>, v.126). The twelve names are the ones every Vaiṣṇava knows: Keśava, Nārāyaṇa, Mādhava, Govinda, Viṣṇu, Madhusūdana, Trivikrama, Vāmana, Śrīdhara, Hṛṣīkeśa, Padmanābha, Dāmodara. They are recited in the daily sipping-purification (<em>ācamana</em>), and they are the names spoken when the twelve <em>ūrdhvapuṇḍra</em>, the vertical tilaka marks, are drawn on twelve points of the body each morning. This passage is the scriptural form of that practice: placing God's names on the body as protection.</p>
+      <p><strong>Two passes.</strong> The armor goes on twice:</p>
+      <ul>
+        <li><em>Verses 114-117</em>: on the body, one name per part, in the canonical order of the twelve. Where the Rama, Shiva, Narasimha, and Shani texts all go head to foot, this one (like the gopīs' Krishna Raksha) starts at the <em>feet</em> (Keśava) and ends at the <em>head</em> (Dāmodara), building the protection upward from the ground. (The heart's guardian here is <em>Nara</em>, where the standard list has Vāmana; the text is kept as it reads.)</li>
+        <li><em>Verses 119-125</em>: "place them once more, meditating": the same names are set around the body, each with its own weapon and color (Keśava in front with the discus, gleaming like river gold; Nārāyaṇa behind with the conch, dark as a rain cloud; and so on through the directions, above, and below), making a ring of armed, luminous guardians.</li>
+      </ul>
+      <p>Then verse 125 closes it in both directions at once: may Dāmodara Hari guard the body <em>bāhyābhyantare</em>, "outside and within." Only then does the reciter say, in the first person, "I have entered it; no fear can ever touch me."</p>
+      <p><strong>A link to Narasimha.</strong> The chapter this comes from is about the mantras of Narasimha, and its last verse says this cage of names is "the rule for all the groups of mantras of the Man-Lion" (<em>nṛharēḥ</em>). So it was taught as the protective frame placed around Narasimha worship, which connects it to the Narasimha Kavacham in the Kavachams section.</p>
+    `,
+  };
+}
+
+function buildHanumadRakshaSignificanceNote() {
+  return {
+    title: 'Protection by Beholding',
+    subtitle: 'Sri Hanumad Raksha Stotram · Spiritual Significance',
+    bodyHtml: `
+      <p><strong>A rakṣā without a body map.</strong> Unlike the other texts here, this "protection hymn" never asks Hanumān to guard a single limb. It is six <em>dhyāna</em> verses, six portraits to be held in the mind. In this tradition, visualizing the protector clearly <em>is</em> the protection: to hold Hanumān's form steadily before the inner eye is to stand in his presence. Each verse paints a different aspect:</p>
+      <ul>
+        <li><em>v.1</em>: the warrior, with the mountain that shatters enemies in one hand (recalling the mountain of healing herbs he carried to revive Lakṣmaṇa) and a chisel that cuts chains in the other;</li>
+        <li><em>v.2</em>: the jeweled one, seated in a grove of golden plantains, the <em>kadalī-vana</em> the Mahābhārata places him in when Bhīma meets him on the road;</li>
+        <li><em>v.3</em>: the radiant scholar, "master of every science";</li>
+        <li><em>v.4</em>: the joy of Rāma's heart, his hands showing the gestures of fearlessness and boon-giving;</li>
+        <li><em>v.5</em>: the fighter who crushed Rāvaṇa's hands;</li>
+        <li><em>v.6</em>: the humble servant, palms joined in reverence.</li>
+      </ul>
+      <p>The sequence moves from power to devotion: the last image is not the warrior but the servant with folded hands. In the Rama Raksha, Hanumān is named as its <em>kīlaka</em>, the pin that holds its power fast. His own hymn suggests why: his strength is entirely in the service of someone else.</p>
+      <p><strong>One word, three animals.</strong> The last word the verse gives Hanumān is <em>hariṃ</em>, and here <em>hari</em> means "monkey." It is the same word that means <em>Viṣṇu</em> in the Krishna Raksha (<em>harir astu paśchāt</em>, "may Hari be behind you") and "lion" inside Narasimha's name <em>nṛhari</em>, "man-lion." The underlying sense is a color: the tawny, yellowish-green shared by the lion's mane, the monkey's fur, and the gold of Viṣṇu's garment. Because the same form means such different things from text to text, it is deliberately left unlinked here.</p>
+    `,
+  };
+}
+
+function buildShaniRakshaSignificanceNote() {
+  return {
+    title: 'Asking the Feared One to Guard',
+    subtitle: 'Sri Shani Raksha Stava · Spiritual Significance',
+    bodyHtml: `
+      <p><strong>A protector who is also the danger.</strong> Śani, the planet Saturn, is the most feared of the nine grahas in Indian astrology; his slow passage through a birth chart, above all the seven-and-a-half-year <em>sāḍhe-sātī</em>, is associated with hardship, delay, and loss. What makes this hymn distinctive is whom it asks for protection: not a god against Śani, but Śani himself. That is the logic of navagraha worship in general. The planets are not enemies to be defeated but powers to be honored, and the planet that could afflict is the one best placed to spare.</p>
+      <p><strong>His story in his names.</strong> Each part of the body is guarded by an epithet that carries Śani's mythology:</p>
+      <ul>
+        <li><em>Bhāskari</em> and <em>Ravinandana</em>, "son of the Sun," and <em>Chāyāsuta</em>, "son of Chāyā," Shadow, the wife the Sun took in his first wife's absence;</li>
+        <li><em>Kōṭarākṣa</em>, "hollow-eyed," and <em>Śikhikaṇṭhanibha</em>, "dark as a peacock's neck," his dark blue form;</li>
+        <li><em>Saṃvartaka</em>, "the dissolver," the fire at the end of an age;</li>
+        <li><em>Mandagati</em> and <em>Śanaiśchara</em>, "the slow-goer" (<em>śanaiḥ</em>, "slowly" + <em>chara</em>, "moving"). His very name is astronomy: Saturn is the slowest planet visible to the naked eye, taking about 29.5 years to circle the sky.</li>
+      </ul>
+      <p><strong>Built on the Rama Raksha.</strong> The body map follows the Rama Raksha almost part for part (head, forehead, eyes, ears, nose, mouth, shoulders, arms, heart, navel, hips, feet, and finally "the whole body," <em>akhilaṃ vapuḥ</em>), and the closing promise, <em>sukhī putrī chirāyuḥ</em>, "happy, blessed with children, long-lived," repeats Rama Raksha v.10 nearly word for word. The Rama Raksha served as a model that other rakṣā hymns were built on.</p>
+      <p><strong>The body as the mantra's home.</strong> Before the hymn proper comes a short <em>ṛṣyādinyāsa</em>: the reciter touches the head while naming the seer (Sindhudvīpa), the mouth while naming the meter, and the heart while naming the deity. The mantra's lineage is placed on the body in a logical order: its origin at the head, its sound at the mouth, its god in the heart. Then the whole body is dedicated to the purpose.</p>
     `,
   };
 }
@@ -1474,7 +1596,9 @@ const MEANING_CONCEPTS = [
   // now — a third word for "eye" in this stretch of the poem, alongside
   // दृष्टि and दृश् above, each grammatically its own noun rather than a
   // shared root's case-forms.
-  { id: 'sl-netra', deva: ['नेत्रे'], iast: ['nētrē'], english: ['eyes'] },
+  // नयने/nayanē (Shiva Raksha v.3), the same dual "two eyes" with a
+  // different noun, added to this concept rather than a new one.
+  { id: 'sl-netra', deva: ['नेत्रे', 'नयने'], iast: ['nētrē', 'nayanē'], english: ['eyes'] },
   // जननि/janani ("O mother," vocative) — v.28 and v.64, identical spelling
   // both times, far enough apart (36 verses) that linkScope keeps them
   // from cross-connecting, but each still boxes and links to "mother" on
@@ -1667,26 +1791,33 @@ const MEANING_CONCEPTS = [
   // future kavacham gets these connections with no new registration.
   // Case-forms vary by text (Rama Raksha's कटी vs. Narasimha's कटिम्, ऊरू
   // vs. ऊरु), so each attested surface form is catalogued individually.
-  { id: 'body-head', deva: ['शिरो', 'शिरः', 'शिरसा'], iast: ['śirō', 'śiraḥ', 'śirasā'], english: ['head'] },
+  { id: 'body-head', deva: ['शिरो', 'शिरः', 'शिरसा', 'शिरसि', 'शीर्षं'], iast: ['śirō', 'śiraḥ', 'śirasā', 'śirasi', 'śīrṣaṃ'], english: ['head'] },
   { id: 'body-forehead', deva: ['भालं'], iast: ['bhālaṃ'], english: ['forehead'] },
-  { id: 'body-ears', deva: ['श्रुती'], iast: ['śrutī'], english: ['ears'] },
+  { id: 'body-ears', deva: ['श्रुती', 'कर्णौ'], iast: ['śrutī', 'karṇau'], english: ['ears'] },
   { id: 'body-nose', deva: ['घ्राणं', 'नासं'], iast: ['ghrāṇaṃ', 'nāsaṃ'], english: ['nose'] },
-  { id: 'body-mouth', deva: ['मुखं'], iast: ['mukhaṃ'], english: ['mouth'] },
+  { id: 'body-mouth', deva: ['मुखं', 'मुखे'], iast: ['mukhaṃ', 'mukhē'], english: ['mouth'] },
+  { id: 'body-neck', deva: ['कंधरां'], iast: ['kaṃdharāṃ'], english: ['neck'] },
   { id: 'body-tongue', deva: ['जिह्वां', 'रसनां'], iast: ['jihvāṃ', 'rasanāṃ'], english: ['tongue'] },
   { id: 'body-face', deva: ['वक्त्रं'], iast: ['vaktraṃ'], english: ['face'] },
   { id: 'body-throat', deva: ['कण्ठं', 'कण्ठे'], iast: ['kaṇṭhaṃ', 'kaṇṭhē'], english: ['throat'] },
   { id: 'body-shoulders', deva: ['स्कन्धौ'], iast: ['skandhau'], english: ['shoulders'] },
   { id: 'body-arms', deva: ['भुजौ'], iast: ['bhujau'], english: ['arms'] },
+  { id: 'body-chest', deva: ['स्तनौ'], iast: ['stanau'], english: ['chest'] },
   { id: 'body-hands', deva: ['करौ'], iast: ['karau'], english: ['hands'] },
-  { id: 'body-heart', deva: ['हृदयं'], iast: ['hṛdayaṃ'], english: ['heart'] },
+  { id: 'body-heart', deva: ['हृदयं', 'हृदि'], iast: ['hṛdayaṃ', 'hṛdi'], english: ['heart'] },
+  { id: 'body-belly', deva: ['जठरं'], iast: ['jaṭharaṃ'], english: ['belly'] },
   { id: 'body-waist', deva: ['मध्यं'], iast: ['madhyaṃ'], english: ['waist'] },
   { id: 'body-navel', deva: ['नाभिं'], iast: ['nābhiṃ'], english: ['navel'] },
-  { id: 'body-hips', deva: ['कटी', 'कटिम्'], iast: ['kaṭī', 'kaṭim'], english: ['hips'] },
-  { id: 'body-thighs', deva: ['ऊरू', 'ऊरु'], iast: ['ūrū', 'ūru'], english: ['thighs'] },
+  { id: 'body-hips', deva: ['कटी', 'कटिम्', 'कटिं'], iast: ['kaṭī', 'kaṭim', 'kaṭiṃ'], english: ['hips'] },
+  { id: 'body-haunches', deva: ['सक्थिनी'], iast: ['sakthinī'], english: ['haunches'] },
+  // उरू (Shiva Raksha v.7) is the source's own spelling of ऊरू, kept as-is.
+  { id: 'body-thighs', deva: ['ऊरू', 'ऊरु', 'उरू'], iast: ['ūrū', 'ūru', 'urū'], english: ['thighs'] },
   { id: 'body-knees', deva: ['जानुनी'], iast: ['jānunī'], english: ['knees'] },
   { id: 'body-shins', deva: ['जङ्घे'], iast: ['jaṅghē'], english: ['shins'] },
+  { id: 'body-ankles', deva: ['गुल्फौ'], iast: ['gulphau'], english: ['ankles'] },
   { id: 'body-feet', deva: ['पादौ'], iast: ['pādau'], english: ['feet'] },
-  { id: 'body-whole', deva: ['वपुः'], iast: ['vapuḥ'], english: ['body'] },
+  { id: 'body-whole', deva: ['वपुः', 'सर्वाङ्गे'], iast: ['vapuḥ', 'sarvāṅgē'], english: ['body'] },
+  { id: 'body-limbs', deva: ['सर्वाङ्गानि'], iast: ['sarvāṅgāni'], english: ['limbs'] },
   // भुक्तिं मुक्तिं, "worldly enjoyment and liberation" — the standard
   // phala-śruti pairing; Rama Raksha v.12 and Narasimha Kavacham v.26
   // close on the identical words ("भुक्तिं मुक्तिं च विन्दति").

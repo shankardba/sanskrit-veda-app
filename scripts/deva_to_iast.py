@@ -38,6 +38,9 @@ OTHER = {
 VIRAMA = '्'
 NUKTA = '़'
 ACCENTS = {'॑', '॒', '᳚', '᳝'}
+# sanskritdocuments.org puts a ZWJ inside श‍ृ purely as a font-rendering
+# hint; it carries no sound, so it's dropped rather than copied into IAST.
+ZERO_WIDTH = {'‍', '‌'}
 
 
 def deva_to_iast(text: str) -> str:
@@ -49,7 +52,7 @@ def deva_to_iast(text: str) -> str:
         if ch in CONSONANTS:
             out.append(CONSONANTS[ch])
             j = i + 1
-            if j < n and text[j] == NUKTA:
+            while j < n and (text[j] == NUKTA or text[j] in ZERO_WIDTH):
                 j += 1
             # Vedic accents sit on the syllable's vowel, so skip past any
             # that precede the matra/virama and re-emit them after it.
@@ -71,6 +74,8 @@ def deva_to_iast(text: str) -> str:
             i += 1
         elif ch in OTHER:
             out.append(OTHER[ch])
+            i += 1
+        elif ch in ZERO_WIDTH:
             i += 1
         else:
             out.append(ch)
