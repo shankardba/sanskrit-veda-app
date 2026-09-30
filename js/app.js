@@ -22,13 +22,16 @@
 // chant under a subheading inside its collection (listed after the
 // ungrouped chants — see COLLECTIONS below).
 const CHANTS = [
-  { id: 'abirami-antati', label: 'Abirami Antati', language: 'tamil', collection: 'antati' },
-  { id: 'arpudha-tiruvantati', label: 'Arpudha Tiruvantati', language: 'tamil', collection: 'antati' },
-  { id: 'saraswati-antati', label: 'Saraswati Antati', language: 'tamil', collection: 'antati' },
-  { id: 'mudhal-tiruvantati', label: 'Mudhal Tiruvantati', language: 'tamil', collection: 'antati' },
-  { id: 'irandam-tiruvantati', label: 'Irandam Tiruvantati', language: 'tamil', collection: 'antati' },
-  { id: 'munram-tiruvantati', label: 'Munram Tiruvantati', language: 'tamil', collection: 'antati' },
-  { id: 'kanninun-cirutampu', label: 'Kanninun Cirutampu', language: 'tamil', collection: 'antati' },
+  { id: 'abirami-antati', label: 'Abirami Antati', language: 'tamil', collection: 'antati', subgroup: 'devi' },
+  { id: 'saraswati-antati', label: 'Saraswati Antati', language: 'tamil', collection: 'antati', subgroup: 'devi' },
+  { id: 'arpudha-tiruvantati', label: 'Arpudha Tiruvantati', language: 'tamil', collection: 'antati', subgroup: 'shaiva' },
+  { id: 'tiruvirattai-manimalai', label: 'Tiruvirattai Manimalai', language: 'tamil', collection: 'antati', subgroup: 'shaiva' },
+  { id: 'ponvannattantati', label: 'Ponvannattantati', language: 'tamil', collection: 'antati', subgroup: 'shaiva' },
+  { id: 'tiruttondar-tiruvantati', label: 'Tiruttondar Tiruvantati', language: 'tamil', collection: 'antati', subgroup: 'shaiva' },
+  { id: 'mudhal-tiruvantati', label: 'Mudhal Tiruvantati', language: 'tamil', collection: 'antati', subgroup: 'vaishnava' },
+  { id: 'irandam-tiruvantati', label: 'Irandam Tiruvantati', language: 'tamil', collection: 'antati', subgroup: 'vaishnava' },
+  { id: 'munram-tiruvantati', label: 'Munram Tiruvantati', language: 'tamil', collection: 'antati', subgroup: 'vaishnava' },
+  { id: 'kanninun-cirutampu', label: 'Kanninun Cirutampu', language: 'tamil', collection: 'antati', subgroup: 'vaishnava' },
   { id: 'thirukkural-arathuppal', label: 'Aratthuppal (Virtue)', language: 'tamil', collection: 'thirukkural' },
   { id: 'thirukkural-porutpal', label: 'Porutpal (Wealth)', language: 'tamil', collection: 'thirukkural' },
   { id: 'thirukkural-kaamathuppal', label: 'Kaamathuppal (Love)', language: 'tamil', collection: 'thirukkural' },
@@ -73,7 +76,17 @@ const CHANTS = [
 // Antati (CHANTS[0], also the default chant on a first visit) stays first.
 const LANGUAGE_LABELS = { tamil: 'Tamil', sanskrit: 'Sanskrit' };
 const COLLECTIONS = [
-  { id: 'antati', language: 'tamil', label: 'Antatis' },
+  {
+    id: 'antati',
+    language: 'tamil',
+    label: 'Antatis',
+    subgroups: [
+      { id: 'devi', label: 'Devi' },
+      { id: 'shaiva', label: 'Shaiva' },
+      { id: 'vaishnava', label: 'Vaishnava' },
+      { id: 'murugan', label: 'Murugan' },
+    ],
+  },
   { id: 'thirukkural', language: 'tamil', label: 'Thirukkural' },
   { id: 'tamil-hymns', language: 'tamil', label: 'Other Hymns' },
   { id: 'rudram', language: 'sanskrit', label: 'Sri Rudram' },
@@ -192,6 +205,15 @@ const SECTION_NOTES = {
   },
   'kanninun-cirutampu': {
     1: () => buildKanninunSignificanceNote(),
+  },
+  'tiruvirattai-manimalai': {
+    1: () => buildTiruvirattaiSignificanceNote(),
+  },
+  'ponvannattantati': {
+    1: () => buildPonvannattantatiSignificanceNote(),
+  },
+  'tiruttondar-tiruvantati': {
+    1: () => buildTiruttondarSignificanceNote(),
   },
 };
 
@@ -1184,6 +1206,47 @@ function buildKanninunSignificanceNote() {
   };
 }
 
+function buildTiruvirattaiSignificanceNote() {
+  return {
+    title: 'A Garland of Two Gems',
+    subtitle: 'Tiruvirattai Manimalai · Spiritual Significance',
+    bodyHtml: `
+      <p><strong>The form in the name.</strong> <em>Iraṭṭai maṇimālai</em> means "double gem garland." Like a necklace strung with two kinds of stone in turn, its twenty verses alternate between two meters: the odd verses are in <em>kaṭṭaḷaik kalitturai</em>, a long four-line stanza, and the even ones in <em>veṇpā</em>, the short, tight meter of the Thirukkural. It is also an antāti, each verse opening on the last word of the one before, and it closes the circle: the last verse ends on <em>kiḷarntu</em>, "rise up," and the first begins with the same word.</p>
+      <p><strong>The same poet as the Arpudha Tiruvantati.</strong> This is the second antāti of Kāraikkāl Ammaiyār (see the Arpudha Tiruvantati's note for her story), and it is in her unmistakable voice. She talks to her own heart ("O heart, do not shrink in fear," v.1; "O heart as deep as the sea, rise up," v.20). She also talks to Shiva with a familiarity only a very old devotee would dare. If Uma sees the Ganga sitting in your hair, what will you do? (v.5). How is anyone supposed to reach you through love, with a snake on you that lets no one near? (v.17). And, looking for a mount as fine as your bull for Uma and finding none, you simply took her up behind you (v.19).</p>
+      <p><strong>The poet in her own poem.</strong> Verse 15 pictures Shiva dancing on the cremation ground while "wailing, strong-mouthed ghouls stand and sing." Kāraikkāl Ammaiyār had asked to become exactly such a <em>pēy</em>, a ghoul of the burning ground, so that she could sing beside that dance. Tradition places her at Tiruvālaṅkāṭu, singing at the feet of the dancing Lord. In this verse she is describing her own place.</p>
+      <p><strong>Wordplay.</strong> Verse 12 turns on <em>kūṟṟu</em>, which means both "a share" and "Death": Shiva is the one who has Uma as his <em>kūṟṟu</em> (his other half) and who burned the <em>kūṟṟu</em> (Death himself). Verse 14 plays the same way on <em>āṟu</em> ("river") and <em>āṭi</em> ("bathing," "dancing"): a river bathes him, he dances in fire, he bathes in its ash, he bathes in ghee.</p>
+    `,
+  };
+}
+
+function buildPonvannattantatiSignificanceNote() {
+  return {
+    title: 'The Color of Gold',
+    subtitle: 'Ponvannattantati · Spiritual Significance',
+    bodyHtml: `
+      <p><strong>A king's antāti.</strong> The poet is Cēramāṉ Perumāḷ Nāyaṉār, a Chera king of Kerala and the close friend of the saint Sundarar. The tradition calls him <em>Kaḻaṟṟaṟivār</em>, "the one who knows what the anklets say," because each day, at the end of his worship, he heard the anklets of the dancing Shiva of Chidambaram. His hundred verses are addressed to that dancer, and verse 101, a traditional closing verse naming the author, tells the story of his end: when Shiva sent a white elephant to carry Sundarar to Kailāsa, Cēramāṉ rode after him on his horse and, before Shiva, recited his <em>Ulā</em>.</p>
+      <p><strong>Framed in gold.</strong> The first verse gives the poem its name: "Whatever the color of gold, that is the color of his body... and whatever color I turned when I saw him, that color has become the Lord's." The last verse answers it. Even a crow that flies near the golden mountain takes on "the color of gold" that same day, so what need is there to say that his devotees reach heaven? The title word, <em>poṉvaṇṇam</em>, opens the garland and closes it.</p>
+      <p><strong>Devotion as love-longing.</strong> Many of these verses are in the mode of Tamil <em>akam</em>, the classical poetry of love. The devotee becomes a young woman pining for Shiva, and we hear her mother, her friend, and her own voice. Her bangles slip from her wrists, the moon and the south wind torment her, her mother drags her away from the alms-seeking stranger (v.2). Sometimes she argues with him (v.63: "if he touches the flowers in my hair, I will be angry"). Tamil bhakti made this its most intimate register: the soul's desire for God, spoken as a girl's desire for her lover.</p>
+      <p><strong>Two portraits of the divided body.</strong> Verse 6 paints Shiva as <em>Harihara</em>, left half Vishnu and right half himself: tulasi on one side and konrai on the other, cloth and hide, discus and deer, dark and red. Verse 65 paints him as <em>Ardhanārīśvara</em>, right half Shiva and left half Uma: warrior's anklet and woman's anklet, ash and sandal paste, spear and ring, matted locks and cool tresses. The same body can be shared with the goddess or with Vishnu. Compare the Shiva Raksha Stotram's note on Vishnu and Shiva teaching each other's armor.</p>
+      <p><strong>Two classical devices.</strong> Verse 36 is a <em>respective</em> list: six nouns (teeth, life, half, body, head, hide), six owners (Sun, Death, Woman, Archer, Brahmin, Elephant), and six verbs (plucked, kicked, embraced, burned, cut, flayed), to be read across in order, each one Shiva's mythic deed. Verse 95 does the same for Shiva, Brahma, and Vishnu's abodes, colors, garlands, and mounts. And in verses 24-25 the king-poet apologizes for his "poor words" beside the gods' praise, like a firefly going out undaunted to meet the rising moon.</p>
+    `,
+  };
+}
+
+function buildTiruttondarSignificanceNote() {
+  return {
+    title: 'The Sixty-Three, One Verse Each',
+    subtitle: 'Tiruttondar Tiruvantati · Spiritual Significance',
+    bodyHtml: `
+      <p><strong>A saint's list, expanded.</strong> The saint Sundarar once sang a hymn of eleven verses, the <em>Tiruttoṇṭattokai</em> ("Collection of the Devotees"), naming Shiva's devotees one after another. In the tenth century Nampiyāṇṭār Nampi, the scholar who gathered the Tamil Shaiva hymns into the <em>Tirumurai</em>, expanded that list into this antāti: one verse for each of the sixty-three Nāyanmār, and a verse each for the groups of devotees Sundarar names. The first verse credits the knowledge to Gaṇapati: tradition says the elephant-faced god of Tirunāraiyūr revealed the saints' lives to Nampi. The verse labels here name the saint each verse is about. Two centuries later, Sekkiḻār's great <em>Periya Purāṇam</em> would tell these same lives at full length.</p>
+      <p><strong>Who the saints are.</strong> The list is striking for its range. There are kings (a Pandya, a Chola, a Pallava, a Chera) and a potter, a washerman, a fisherman, an oil-presser, a weaver, a hunter (Kaṇṇappa, v.12), and an outcaste, Nandanār, "the one who would go tomorrow" (v.21), before whom the three thousand priests of Chidambaram folded their hands. There are women (Kāraikkāl Ammaiyār, the Pandya queen Maṅkaiyarkkaraci, Sundarar's mother Icaiñāṉi) and a Buddhist who worshipped by throwing a stone (v.42). The claim is that devotion, not birth, makes the saint.</p>
+      <p><strong>Devotion without limit.</strong> Many of the deeds are extreme, and the text tells them without softening: a devotee who gives his wife to an ascetic who asks (v.4), a father who cooks his only son for a guest (v.44), a man who cuts off his wife's hand when she hesitates to serve a devotee (v.54), a Jain-defeating debate that ends in impalement (vv.27, 61). The hagiographic tradition presents these as tests where total surrender to Shiva outweighs every other duty, and in most of the stories Shiva restores what was given. Modern readers, including devout ones, often read them as a genre's extreme way of saying "hold nothing back," not as models to imitate.</p>
+      <p><strong>Other poets in this collection appear here as saints.</strong> Verse 29 is Kāraikkāl Ammaiyār, poet of the Arpudha Tiruvantati and the Tiruvirattai Manimalai, walking up Kailāsa on her head rather than set her feet on Shiva's mountain, and called "my mother" by Shiva himself. Verses 45-46 and 87 are Cēramāṉ Perumāḷ, poet of the Ponvannattantati, who once bowed to a washerman because the fuller's earth on his body looked like sacred ash.</p>
+      <p><strong>A book about a book.</strong> The closing verses turn to the source. Verse 88 counts the devotees: nine groups and sixty-three by name, seventy-two in all. Verse 89 quotes, in order, the opening words of each of the eleven verses of Sundarar's <em>Tiruttoṇṭattokai</em>. Verse 90 asks what penance the poet could ever have done to deserve to tell of them.</p>
+    `,
+  };
+}
+
 let mathModalOverlay = null;
 
 function ensureMathModal() {
@@ -1293,8 +1356,10 @@ function buildChantMenu(languageFilter) {
       };
       addItems(members.filter((c) => !c.subgroup));
       for (const subgroup of collection.subgroups || []) {
+        const inGroup = members.filter((c) => c.subgroup === subgroup.id);
+        if (!inGroup.length) continue;
         list.appendChild(el('div', 'chant-menu-subgroup', subgroup.label));
-        addItems(members.filter((c) => c.subgroup === subgroup.id));
+        addItems(inGroup);
       }
 
       section.append(toggle, list);
@@ -1721,7 +1786,15 @@ const MEANING_CONCEPTS = [
   // differently by register rather than by a real change in sense:
   // Araththuppāl mostly renders it "mind," Kaamaththuppāl's love poetry
   // mostly "heart"/"soul." All three glosses point at the same word.
-  { id: 'thirukkural-nenju', deva: ['நெஞ்சு'], iast: ['nenju'], english: ['mind', 'heart', 'soul'] },
+  // நெஞ்சே/நெஞ்சமே, "O heart" — the antātis' constant self-address (Kāraikkāl
+  // Ammaiyār, Cēramāṉ Perumāḷ, the Āḻvārs), in the ISO spelling their
+  // transliteration uses; Thirukkural's informal "nenju" is kept alongside.
+  {
+    id: 'thirukkural-nenju',
+    deva: ['நெஞ்சு', 'நெஞ்சே', 'நெஞ்சமே', 'நெஞ்சம்'],
+    iast: ['nenju', 'neñcē', 'neñcamē', 'neñcam'],
+    english: ['mind', 'heart', 'soul'],
+  },
   // --- 2026-09-26 deepening pass: corpus-wide frequency scan across all
   // three books surfaced these as consistent, checkable content words (see
   // buildRegisterVarianceNote at Araththuppāl 1 for why several of them
