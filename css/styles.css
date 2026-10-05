@@ -1383,6 +1383,11 @@ body.tamil-page .lang-hub-card-glyph {
   border: 0;
 }
 
+.vedic-math-frame {
+  height: 88vh;
+  min-height: 720px;
+}
+
 .lang-placeholder {
   font-family: var(--font-body);
   color: var(--color-text-muted);
