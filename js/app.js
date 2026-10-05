@@ -55,6 +55,8 @@ const CHANTS = [
   // so word recurrence across distant verses is ordinary vocabulary reuse
   // rather than a deliberate refrain.
   { id: 'shivananda-lahari', label: 'Shivananda Lahari', language: 'sanskrit', collection: 'lahari', linkScope: 'local' },
+  // Stotrams: single devotional hymns that belong to no larger corpus here.
+  { id: 'shiva-tandava-stotram', label: 'Shiva Tandava Stotram (Ravana)', language: 'sanskrit', collection: 'stotram' },
   // Protection hymns: rakṣā stotrams, and their sister genre the kavacham
   // ("armor"), which has the same purpose but is built as an explicit
   // head-to-foot body map. The two Buddhist rakṣā texts sit under their own
@@ -99,6 +101,7 @@ const COLLECTIONS = [
   { id: 'tamil-hymns', language: 'tamil', label: 'Other Hymns' },
   { id: 'rudram', language: 'sanskrit', label: 'Sri Rudram' },
   { id: 'lahari', language: 'sanskrit', label: 'Laharis of Shankara' },
+  { id: 'stotram', language: 'sanskrit', label: 'Stotrams' },
   { id: 'raksha', language: 'sanskrit', label: 'Raksha Stotrams', subgroups: [{ id: 'buddhist', label: 'Buddhist' }] },
   { id: 'kavacham', language: 'sanskrit', label: 'Kavachams' },
 ];
@@ -194,6 +197,11 @@ const SECTION_NOTES = {
   },
   'tantrokta-durga-kavacham': {
     Viniyoga: () => buildTantroktaDurgaKavachamSignificanceNote(),
+  },
+  'shiva-tandava-stotram': {
+    1: () => buildTandavaRhythmNote(),
+    9: () => buildTandavaCompositionNote(),
+    15: () => buildTandavaRavanaNote(),
   },
   'garbha-raksha-stotram': {
     1: () => buildGarbhaRakshaSignificanceNote(),
@@ -1116,6 +1124,87 @@ function buildTantroktaDurgaKavachamSignificanceNote() {
         <li><em>Bhūtalavāsinī</em>, "she who dwells on the earth," guards the feet, the part that touches the ground.</li>
       </ul>
       <p>Then the text steps back: "So you stand, O Goddess, as the protector of the three worlds: protect me in all my limbs" (v.8). The same Goddess who guards the worlds is asked to guard one body. Compare the Devī Kavacham's verse 21 note, where the longer text goes past the body to the mind, the breaths, and the household.</p>
+    `,
+  };
+}
+
+// Shiva Tandava Stotram: three notes, on the rhythm (v.1), the way the
+// hymn is put together (v.9, where its paired litany begins), and Ravana's
+// story and the question of authorship (v.15, the verse that names him).
+function buildTandavaRhythmNote() {
+  // v.1 line 1 split into its 16 syllables, each marked light (⏑) or heavy (–).
+  const sylls = ['ja', 'ṭā', 'ṭa', 'vī', 'ga', 'laj', 'ja', 'la', 'pra', 'vā', 'ha', 'pā', 'vi', 'tas', 'tha', 'lē'];
+  const marks = sylls.map((_, i) => (i % 2 ? '–' : '⏑'));
+  const row = (cells) => cells.map((c) => `<td>${c}</td>`).join('');
+  return {
+    title: 'The Rhythm of the Dance',
+    subtitle: 'Shiva Tandava Stotram · Meter and Sound',
+    bodyHtml: `
+      <p><strong>One beat, never broken.</strong> The hymn is in the <em>pañcacāmara</em> meter. Every line has sixteen syllables, and they alternate strictly: light, heavy, light, heavy, eight times over. A light syllable (<em>laghu</em>, ⏑) has a short vowel with at most one consonant after it. A heavy one (<em>guru</em>, –) has a long vowel, or a short vowel followed by two consonants, an anusvāra, or a visarga. Here is the opening line:</p>
+      <div class="math-table-wrap">
+        <table class="math-table">
+          <tbody><tr>${row(sylls)}</tr><tr>${row(marks)}</tr></tbody>
+        </table>
+      </div>
+      <p>Said aloud, that is <em>da-DUM da-DUM da-DUM da-DUM</em>, eight times a line, four lines a verse. Prosody manuals define the meter by its groups of three, <em>ja-ra-ja-ra-ja-ga</em> (⏑–⏑ –⏑– ⏑–⏑ –⏑– ⏑–⏑ –), which comes to the same thing. It is also exactly two lines of the short eight-syllable <em>pramāṇikā</em> meter joined end to end. Most classical meters mix long and short runs; this one never does. All 56 lines of verses 1-14 keep the pattern without a single exception, which is what gives the hymn its relentless, drumming drive.</p>
+      <p><strong>The drum is in the words.</strong> The poet builds the sound of the dance into the syllables themselves:</p>
+      <ul>
+        <li><em>ḍamaḍ-ḍamaḍ-ḍamaḍ-ḍaman</em> (v.1): the <em>ḍamaru</em>, Śiva's hourglass drum.</li>
+        <li><em>dhagad-dhagad-dhagaj-jvalat</em> (vv.2, 7): the crackle of the fire in his forehead.</li>
+        <li><em>dhimid-dhimid-dhimi</em> (v.11): the <em>mṛdaṅga</em> drum that keeps the beat.</li>
+      </ul>
+      <p>Each of these fits the meter exactly. In <em>ḍa-maḍ-ḍa-maḍ</em> the doubled consonant <em>ḍḍ</em> is what makes <em>maḍ</em> heavy, so the drum-sound produces the light-heavy pattern on its own: the drum beats out the meter.</p>
+      <p><strong>Long breaths.</strong> Many lines are a single compound word. The first line, all sixteen syllables, is one word: "on-the-ground-made-holy-by-the-stream-of-water-flowing-from-the-forest-of-his-hair." Read without a pause, these compounds pour on like the dance itself. The ear is also held by sound-play (<em>anuprāsa</em>): <em>bandhu-bandhura</em>, <em>māna-mānasē</em>, <em>nilimpa-nirjharī</em>, and the chiming <em>-cchidaṃ</em> and <em>-antakaṃ</em> of verses 9 and 10.</p>
+      <p><strong>The dance stops.</strong> Verse 15 changes meter, to <em>vasantatilakā</em>: fourteen syllables in an uneven pattern (– – ⏑ – ⏑ ⏑ ⏑ – ⏑ ⏑ – ⏑ – –). After fourteen verses of unbroken beat, the change is easy to hear: the dance is over and a calmer voice speaks about the hymn. That change of voice matters for who wrote what; see the note on verse 15.</p>
+    `,
+  };
+}
+
+function buildTandavaCompositionNote() {
+  return {
+    title: 'From the Dance to the Dancer',
+    subtitle: 'Shiva Tandava Stotram · How the Hymn Is Built',
+    bodyHtml: `
+      <p><strong>Three lines of picture, one line of prayer.</strong> Most verses pile up three lines of description, often one huge compound after another, and then resolve into a short wish in the last quarter: "may Śiva spread blessings over us" (v.1), "in him may my delight be, every moment" (v.2), "may my mind find its delight" (v.3). The long build and the short cadence work like a dancer's phrase landing on its final step.</p>
+      <p><strong>Opposites on one body.</strong> The same few images keep coming back, and they are deliberately at odds:</p>
+      <ul>
+        <li><em>water</em>: the Gaṅgā, "the gods' waterfall," caught in his matted hair (vv.1, 2, 8, 13);</li>
+        <li><em>fire</em>: the third eye blazing on his forehead (vv.2, 6, 7, 11);</li>
+        <li><em>the cool moon</em>, worn as a crest (vv.2, 5, 6, 8);</li>
+        <li><em>serpents</em> as garland and hair-tie (vv.1, 4, 5, 11, 12);</li>
+        <li><em>Pārvatī</em>, "daughter of the Mountain King" (vv.3, 7): the ascetic with burning eyes is also the lover who paints designs on his wife's breasts.</li>
+      </ul>
+      <p>Fire next to water, a moon next to snakes, the hermit next to the husband: the dance holds the whole world's opposites together in one moving body.</p>
+      <p><strong>The litany of verses 9 and 10.</strong> These two verses share the same second half, word for word, except that verse 9 ends each name in <em>-cchidam</em>, "the one who cut off," and verse 10 in <em>-antakam</em>, "the one who ended." Click any of them to see its pair. Each recalls one of Śiva's deeds:</p>
+      <ul>
+        <li><em>Smara</em> (Kāma, the god of love), burned to ash by the third eye (also vv.6-7);</li>
+        <li><em>Pura</em>, Tripura, the three flying cities of the demons, destroyed with a single arrow;</li>
+        <li><em>Bhava</em>, worldly existence itself, the cycle of birth and death;</li>
+        <li><em>Makha</em>, the sacrifice of Dakṣa, which Śiva's host wrecked after Dakṣa insulted him;</li>
+        <li><em>Gaja</em>, the elephant demon, whose hide Śiva wears (vv.4, 8), and <em>Andhaka</em>, the blind demon;</li>
+        <li><em>Antaka</em>, Death, who came for the boy Mārkaṇḍeya and was struck down. The series ends on <em>antakāntakam</em>, "the ender of the Ender."</li>
+      </ul>
+      <p><strong>Turning inward.</strong> After the dance (v.11), the hymn turns to the singer. Verse 12 lists pairs of opposites, a stone and a soft bed, a snake and a pearl necklace, a friend and an enemy, a beggar and a king, and asks for a mind that treats them alike. The Bhagavad Gītā describes the wise person in the same way (14.24: one to whom "a clod, a stone, and gold are the same"). Verse 13 is a private longing: to live in a thicket by the Gaṅgā, hands joined over the head, chanting "Śiva." The hymn moves from the cosmic spectacle to one person's wish to leave everything behind, which is all the more striking if the singer is Laṅkā's king (see the note on verse 15).</p>
+    `,
+  };
+}
+
+function buildTandavaRavanaNote() {
+  return {
+    title: 'Ravana Under the Mountain',
+    subtitle: 'Shiva Tandava Stotram · The Story and the History',
+    bodyHtml: `
+      <p><strong>The story.</strong> The <em>Uttara Kāṇḍa</em>, the last book of Vālmīki's Rāmāyaṇa, tells how Rāvaṇa got his name. Having defeated his half-brother Kubera and taken his flying chariot, the Puṣpaka, Rāvaṇa is flying north when the chariot stops dead near Mount Kailāsa. Nandin, Śiva's attendant, tells him the god is at play on the mountain and no one may pass. Rāvaṇa mocks Nandin's monkey-like face, and Nandin curses him: monkeys will one day destroy his race (a curse fulfilled by Hanumān and Rāma's army). Furious, Rāvaṇa thrusts his twenty arms under Kailāsa and lifts it. The mountain shakes. Śiva, unconcerned, presses down with one big toe, and Rāvaṇa's arms are pinned beneath the mountain. He lets out a roar that makes the three worlds tremble. On his ministers' advice he praises Śiva with hymns, and the tellings say he kept it up for a thousand years. Śiva, pleased, frees him, names him <em>Rāvaṇa</em>, "the one who made (the worlds) cry out," from <em>ru</em>, "to roar, to cry," and gives him a sword, the moon-bright Candrahāsa.</p>
+      <p><strong>The missing hymn.</strong> The Rāmāyaṇa says Rāvaṇa sang praises but does not give the words. The Śiva Tāṇḍava Stotram is the tradition's answer to "what did he sing?" The fit is good: a hymn full of drums and roaring fire for the demon king whose very name is a roar, and the singer of verse 13 longs to give up everything and live as a hermit, the opposite of a conqueror who tried to move a god's mountain.</p>
+      <p><strong>In stone and in Tamil.</strong> The scene was a favorite of sculptors. As <em>Rāvaṇānugraha-mūrti</em>, "Śiva granting grace to Rāvaṇa," it is carved at Elephanta and at Ellora, most famously in the great Kailāsa temple (Cave 16, eighth century), which is itself carved as a copy of the mountain. Rāvaṇa crouches below, many-armed and straining; above, Pārvatī clutches Śiva's arm while he calmly holds the mountain down. In Tamil Śaiva devotion the scene is everywhere: Tirujñānasambandar, one of the Tēvāram poets, gives almost every one of his hymns a verse (usually the eighth) on Rāvaṇa's pride crushed under Kailāsa and his grace restored. Pride broken into devotion is the lesson.</p>
+      <p><strong>Who really wrote it?</strong> Tradition says Rāvaṇa. The text itself is more careful:</p>
+      <ul>
+        <li>The hymn proper (vv.1-13) never names its author.</li>
+        <li>Verses 14 and 15 are <em>phala-śruti</em>, verses about the rewards of reciting, and they speak about the hymn from outside. Verse 15 calls it <em>daśavaktra-gītam</em>, "the song of the Ten-Faced One," in the third person, and it changes meter to do so. The attribution comes from this later frame, not from the singer.</li>
+        <li>The style, with its strict classical meter, compounds a line long, and dense sound-play, belongs to classical Sanskrit court poetry (<em>kāvya</em>), many centuries after the epic period.</li>
+        <li>The text is fluid: some editions add two more verses (beginning <em>nilimpanātha-nāgarī</em> and <em>pracaṇḍa-vāḍavānala</em>), and readings vary from edition to edition. That is typical of a popular hymn copied and sung for centuries.</li>
+      </ul>
+      <p>So the honest answer is: an unknown poet of real skill composed a hymn in Rāvaṇa's voice, and the closing verse handed it to him. That changes nothing about how it is used. Verse 15 prescribes reciting it at the end of worship, at <em>pradoṣa</em>, the twilight hour sacred to Śiva. In Śaiva tradition that is the hour when Śiva dances on Kailāsa, so the hymn of the dance is sung at the time of the dance.</p>
     `,
   };
 }
@@ -2175,8 +2264,8 @@ const MEANING_CONCEPTS = [
   // sandhi-fused there, not boxable.
   {
     id: 'sl-shambhu',
-    deva: ['शम्भोः', 'शम्भुं', 'शम्भो'],
-    iast: ['śambhōḥ', 'śambhuṃ', 'śambhō'],
+    deva: ['शम्भोः', 'शम्भुं', 'शम्भो', 'शम्भुः'],
+    iast: ['śambhōḥ', 'śambhuṃ', 'śambhō', 'śambhuḥ'],
     english: ['shambhu'],
   },
   // दृष्टि/dṛṣṭi ("glance") — v.51's "जननी दृष्टिः सकरुणा," "mother, let
@@ -2455,6 +2544,40 @@ const MEANING_CONCEPTS = [
   // the two fixed words of the Garbha Raksha Stotram's refrain.
   { id: 'bali', deva: ['बलिं'], iast: ['baliṃ'], english: ['offering'] },
   { id: 'garbhini', deva: ['गर्भिणीम्', 'गर्भिणीं'], iast: ['garbhiṇīm', 'garbhiṇīṃ'], english: ['pregnant'] },
+
+  // --- Shiva Tandava Stotram ---
+  // ताण्डव/tāṇḍava, the dance itself: चण्डताण्डवं "the fierce Tandava"
+  // in v.1 and प्रचण्डताण्डवः in v.11, the two verses that describe it.
+  { id: 'tandava', deva: ['चण्डताण्डवं', 'प्रचण्डताण्डवः'], iast: ['chaṇḍatāṇḍavaṃ', 'prachaṇḍatāṇḍavaḥ'], english: ['tandava'] },
+  // मनस्/manas, "mind" (मनो before a voiced sound, मनः otherwise) — vv.3,
+  // 4 and 12. मतिर्मम (v.7, "my thought") is fused and stays unlinked.
+  // Chant-agnostic, so it also links the Kavachams' "your mind" lines and
+  // Shivananda Lahari, where the same word is sometimes rendered "heart"
+  // (the Thirukkural's நெஞ்சு has the same mind/heart spread).
+  { id: 'manas', deva: ['मनो', 'मनः'], iast: ['manō', 'manaḥ'], english: ['mind', 'heart'] },
+  // भजे/bhajē, "I worship," the cadence of vv.9, 10 and 12. Polysemy: the
+  // root भज् first means "to share in, partake of," and "worship" grows out
+  // of that (to take part in the god). Soundarya Lahari v.38 uses the older
+  // sense, "I enjoy / savor," so its line is left without an English box.
+  { id: 'bhaje', deva: ['भजे'], iast: ['bhajē'], english: ['worship'] },
+  // कदा/kadā "when" and सदा/sadā "always" carry the longing of vv.12-13.
+  { id: 'kada', deva: ['कदा'], iast: ['kadā'], english: ['when'] },
+  // सदा is translated "ever" as often as "always" across the Raksha texts.
+  { id: 'sada', deva: ['सदा'], iast: ['sadā'], english: ['always', 'ever'] },
+  // श्री/śrī as "prosperity": श्रियै (dative, v.5), श्रियं (accusative, v.8).
+  { id: 'shri-prosperity', deva: ['श्रियै', 'श्रियं'], iast: ['śriyai', 'śriyaṃ'], english: ['prosperity'] },
+  // The paired litany of vv.9-10: the same six deeds named first with
+  // -च्छिदं "cutter" (v.9), then with -अन्तकं "ender" (v.10), so each pair
+  // links across the two verses. गज (the elephant demon) and अन्धक are one
+  // fused word in both verses, glossed by Andhaka. IAST forms are written
+  // lowercase (chchidaṃ, not the source's chChidaṃ) since normalizeToken
+  // lowercases every token before lookup.
+  { id: 'std-smara', deva: ['स्मरच्छिदं', 'स्मरान्तकं'], iast: ['smarachchidaṃ', 'smarāntakaṃ'], english: ['kama'] },
+  { id: 'std-pura', deva: ['पुरच्छिदं', 'पुरान्तकं'], iast: ['purachchidaṃ', 'purāntakaṃ'], english: ['tripura'] },
+  { id: 'std-bhava', deva: ['भवच्छिदं', 'भवान्तकं'], iast: ['bhavachchidaṃ', 'bhavāntakaṃ'], english: ['worldly existence'] },
+  { id: 'std-makha', deva: ['मखच्छिदं', 'मखान्तकं'], iast: ['makhachchidaṃ', 'makhāntakaṃ'], english: ['sacrifice'] },
+  { id: 'std-andhaka', deva: ['गजच्छिदान्धकच्छिदं', 'गजान्तकान्धकान्तकं'], iast: ['gajachchidāndhakachchidaṃ', 'gajāntakāndhakāntakaṃ'], english: ['andhaka'] },
+  { id: 'std-antaka', deva: ['तमन्तकच्छिदं', 'तमन्तकान्तकं'], iast: ['tamantakachchidaṃ', 'tamantakāntakaṃ'], english: ['death'] },
   // भुक्तिं मुक्तिं, "worldly enjoyment and liberation" — the standard
   // phala-śruti pairing; Rama Raksha v.12 and Narasimha Kavacham v.26
   // close on the identical words ("भुक्तिं मुक्तिं च विन्दति").
