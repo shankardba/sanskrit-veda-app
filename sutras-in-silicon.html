@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sūtras in Silicon — Mathematics — Vedavani</title>
+<meta name="description" content="Vedavani — where the methods of Vedic Mathematics reappear inside modern computer arithmetic, and where they do not.">
+<link rel="icon" href="assets/logo.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@400;500;600&family=Noto+Sans+Devanagari:wght@400;500;600&family=Gentium+Plus:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<header class="site-header">
+  <nav class="navbar">
+    <a href="index.html" class="logo-group">
+      <img src="assets/logo.svg" alt="Vedavani" class="logo-mark">
+      <span class="logo-word glow-gold">Vedavani</span>
+    </a>
+    <div class="nav-links">
+      <a href="index.html" class="nav-link">Chants</a>
+      <a href="language.html" class="nav-link">Sanskrit</a>
+      <a href="tamil.html" class="nav-link">Tamil</a>
+      <a href="mathematics.html" class="nav-link active">Mathematics</a>
+      <a href="yantras.html" class="nav-link">Yantras</a>
+    </div>
+  </nav>
+</header>
+
+<main id="top">
+  <div class="lang-hero container">
+    <h1 class="glow-gold">Sūtras in Silicon</h1>
+    <p>Mental shortcuts from <i>Vedic Mathematics</i> that turn up again inside computers — and where they stop.</p>
+  </div>
+
+  <div class="lang-body container">
+    <p class="lang-breadcrumb"><a href="mathematics.html">Mathematics</a> / Sūtras in Silicon</p>
+
+    <p class="lang-block-intro">
+      The methods in Bhāratī Kṛṣṇa Tīrtha’s book were designed for a person working in base 10. A computer works in
+      base 2⁶⁴ and multiplies two 64-bit numbers in a single instruction, so for ordinary-sized numbers no
+      digit-by-digit trick can be faster. But for <b>very large numbers</b> — the hundreds of digits used in
+      cryptography and exact arithmetic — several of the same ideas are standard techniques, discovered
+      independently and known by other names.
+    </p>
+
+    <div class="char-group">
+      <h3 class="char-group-title">Method by method</h3>
+      <p class="char-group-note">Each Vedic name links to its animated lesson.</p>
+      <div class="math-callouts sis-grid">
+        <div class="math-callout sis-card">
+          <div class="sis-status sis-used">in use</div>
+          <h4>Vertically and crosswise</h4>
+          <div class="formula"><a href="vedic-math-app/index.html#urdhva">Ūrdhva-Tiryagbhyām</a> → Comba (product-scanning) multiplication</div>
+          <div class="sequence">Computing the answer one column at a time — all the products that land in the same place, then the carry — is how big-number libraries multiply small and medium operands. P. G. Comba (1990) showed that column order needs far fewer memory writes than row-by-row multiplication.</div>
+        </div>
+        <div class="math-callout sis-card">
+          <div class="sis-status sis-used">in use</div>
+          <h4>Duplex squaring</h4>
+          <div class="formula"><a href="vedic-math-app/index.html#dvandva">Dvandva-yoga</a> → symmetric squaring</div>
+          <div class="sequence">When both factors are the same, every crosswise product appears twice. Libraries such as GMP compute each once and double it — the duplex — which makes squaring markedly cheaper than general multiplication.</div>
+        </div>
+        <div class="math-callout sis-card">
+          <div class="sis-status sis-used">in use</div>
+          <h4>All from nine, the last from ten</h4>
+          <div class="formula"><a href="vedic-math-app/index.html#nikdiv">Nikhilam division</a> → pseudo-Mersenne reduction</div>
+          <div class="sequence">Dividing by a number just below a power of the base reduces to multiplying by its small complement and adding. Cryptographers choose primes for exactly this: Curve25519 works modulo 2²⁵⁵ − 19, so every reduction is a Nikhilam step with complement 19 — and it runs in every modern secure web connection.</div>
+        </div>
+        <div class="math-callout sis-card">
+          <div class="sis-status sis-used">in use</div>
+          <h4>The vinculum</h4>
+          <div class="formula"><a href="vedic-math-app/index.html#vinculum">bar digits</a> → Booth recoding · signed-digit arithmetic</div>
+          <div class="sequence">Writing 576 as 6 2̄ 4̄ trades big digits for small negative ones. In binary the same idea — digits −1, 0, 1 — cuts the number of additions in hardware multipliers (A. D. Booth, 1951) and in elliptic-curve arithmetic (the non-adjacent form); redundant signed digits also let fast dividers add without waiting for carries (A. Avizienis, 1961).</div>
+        </div>
+        <div class="math-callout sis-card">
+          <div class="sis-status sis-used">in use</div>
+          <h4>Osculation</h4>
+          <div class="formula"><a href="vedic-math-app/index.html#osc">Veṣṭana</a> → Montgomery reduction</div>
+          <div class="sequence">Each osculation step adds a multiple of the divisor that makes the last digit 0, then drops that digit. That is precisely one step of P. L. Montgomery’s reduction (1985), the workhorse of RSA and elliptic-curve arithmetic — done in base 2⁶⁴ instead of base 10.</div>
+        </div>
+        <div class="math-callout sis-card">
+          <div class="sis-status sis-used">in use</div>
+          <h4>Recurring decimals by the ekādhika</h4>
+          <div class="formula"><a href="vedic-math-app/index.html#recip">Ekādhikena Pūrveṇa</a> → multiply-with-carry random numbers</div>
+          <div class="sequence">Generating 1/19 from the right — multiply by 2, keep the carry — is G. Marsaglia’s multiply-with-carry generator. With multiplier a and base b it outputs the digits of a fraction with denominator ab − 1; with a = 2 and b = 10 that fraction is 1/19.</div>
+        </div>
+        <div class="math-callout sis-card">
+          <div class="sis-status sis-same">same method</div>
+          <h4>Straight division</h4>
+          <div class="formula"><a href="vedic-math-app/index.html#straightdiv">Dhvajāṅka</a> → Knuth’s Algorithm D</div>
+          <div class="sequence">Guessing each quotient digit from the leading digit(s) of the divisor and then correcting by the rest is the standard long-division algorithm for big numbers (Knuth, <i>The Art of Computer Programming</i>, vol. 2). Same method, no speed-up.</div>
+        </div>
+        <div class="math-callout sis-card">
+          <div class="sis-status sis-same">same method</div>
+          <h4>Square and cube roots digit by digit</h4>
+          <div class="formula"><a href="vedic-math-app/index.html#sqrtgen">Vargamūla</a> → digit-recurrence roots</div>
+          <div class="sequence">Root extraction one digit at a time, subtracting duplexes, is the digit-recurrence method used in some hardware square-root units. Software usually prefers Newton’s iteration, which doubles the number of correct digits each step.</div>
+        </div>
+        <div class="math-callout sis-card">
+          <div class="sis-status sis-used">in use</div>
+          <h4>Casting out nines</h4>
+          <div class="formula"><a href="vedic-math-app/index.html#beejank">Guṇita-samuccaya</a> → checksums and residue checks</div>
+          <div class="sequence">Checking a calculation by its remainder modulo 9 is a residue check. Some processors check their arithmetic units with small residues, and the Internet checksum is arithmetic modulo 2¹⁶ − 1 — casting out in base 2¹⁶.</div>
+        </div>
+        <div class="math-callout sis-card">
+          <div class="sis-status sis-none">no gain</div>
+          <h4>Special-case tricks</h4>
+          <div class="formula"><a href="vedic-math-app/index.html#sq5">squares ending in 5 · × 999 · Antyayor</a> → none</div>
+          <div class="sequence">These depend on base-10 patterns that vanish in binary, and on numbers small enough to fit one machine word — where a single hardware multiply takes a few clock cycles. No gain.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="char-group">
+      <h3 class="char-group-title">The ceiling</h3>
+      <p class="char-group-note">
+        Vertically-and-crosswise multiplication takes about n² digit products for n-digit numbers. A. A. Karatsuba
+        (1962) needed only about n<sup>1.58</sup>, Toom–Cook and FFT-based methods fewer still, and D. Harvey and
+        J. van der Hoeven (2019) reached n log n. Libraries therefore use the column method only below a few dozen
+        machine words and switch to these for anything larger. None of the sūtras beats them.
+      </p>
+    </div>
+
+    <div class="char-group">
+      <h3 class="char-group-title">Where something may remain</h3>
+      <p class="char-group-note">
+        <b>Decimal arithmetic.</b> Financial software, decimal floating point and big numbers stored in base 10⁹ really
+        do work in powers of ten, so Nikhilam-style reduction by divisors near 10ᵏ and Ekādhika-style generation of
+        recurring decimals apply directly.
+        <b>Explanation.</b> The sūtras give short, memorable descriptions of algorithms that textbooks often present
+        only as code — a useful way to teach why they work.
+      </p>
+      <p class="lang-footnote">
+        References: P. G. Comba, “Exponentiation cryptosystems on the IBM PC” (1990); P. L. Montgomery, “Modular
+        multiplication without trial division” (1985); A. D. Booth (1951); A. Avizienis (1961); G. Marsaglia,
+        multiply-with-carry generators (1990s); D. E. Knuth, <i>The Art of Computer Programming</i> vol. 2;
+        D. J. Bernstein, Curve25519 (2006); A. A. Karatsuba (1962); D. Harvey &amp; J. van der Hoeven (2019).
+      </p>
+    </div>
+  </div>
+</main>
+
+<style>
+  .lang-body .math-callouts{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px;margin:12px 0 16px;}
+  .sis-grid{grid-template-columns:repeat(auto-fill,minmax(260px,1fr));}
+  .sis-card{position:relative;}
+  .sis-card .formula a{color:var(--color-gold-light);text-decoration:none;border-bottom:1px dotted var(--color-gold);}
+  .sis-status{position:absolute;top:10px;right:12px;font-family:var(--font-ui);font-size:0.68rem;font-weight:600;letter-spacing:.04em;text-transform:uppercase;border-radius:10px;padding:2px 8px;}
+  .sis-used{background:rgba(240,168,60,.18);color:var(--color-gold-light);}
+  .sis-same{background:rgba(199,171,184,.15);color:var(--color-text-muted);}
+  .sis-none{background:rgba(225,29,92,.15);color:#ff8fb0;}
+  .sis-card h4{padding-right:80px;}
+</style>
+</body>
+</html>

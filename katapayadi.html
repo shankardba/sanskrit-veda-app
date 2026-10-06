@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kaṭapayādi — Mathematics — Vedavani</title>
+<meta name="description" content="Vedavani — the Kaṭapayādi letter-number code: its Devanagari table, its rules, the π verse, and how it names and derives the 72 Mēḷakarta rāgas.">
+<link rel="icon" href="assets/logo.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@400;500;600&family=Noto+Sans+Devanagari:wght@400;500;600&family=Gentium+Plus:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<header class="site-header">
+  <nav class="navbar">
+    <a href="index.html" class="logo-group">
+      <img src="assets/logo.svg" alt="Vedavani" class="logo-mark">
+      <span class="logo-word glow-gold">Vedavani</span>
+    </a>
+    <div class="nav-links">
+      <a href="index.html" class="nav-link">Chants</a>
+      <a href="language.html" class="nav-link">Sanskrit</a>
+      <a href="tamil.html" class="nav-link">Tamil</a>
+      <a href="mathematics.html" class="nav-link active">Mathematics</a>
+      <a href="yantras.html" class="nav-link">Yantras</a>
+    </div>
+  </nav>
+</header>
+
+<main id="top">
+  <div class="lang-hero container">
+    <h1 class="glow-gold">Kaṭapayādi</h1>
+    <p>कटपयादि — the code that turns words into numbers, and names the 72 parent rāgas.</p>
+  </div>
+
+  <div class="lang-body container">
+    <p class="lang-breadcrumb"><a href="mathematics.html">Mathematics</a> / Kaṭapayādi</p>
+
+    <p class="lang-block-intro">
+      Kaṭapayādi (“starting with ka, ṭa, pa, ya”) gives every Sanskrit consonant a digit from 0 to 9. Because each
+      digit has several letters to choose from, a number can be written as an ordinary, meaningful word — and a long
+      number as a verse that is easy to memorise. Astronomers used it for tables and dates; Carnatic music uses it to
+      encode each Mēḷakarta rāga’s number in its name. Unlike Āryabhaṭa’s code (see
+      <a href="aryabhata-numeration.html">Āryabhaṭa Numeration</a>), vowels carry no value: only the consonant
+      before each vowel counts.
+    </p>
+
+    <div class="char-group">
+      <h3 class="char-group-title">The defining verse</h3>
+      <div class="ktp-verse" lang="sa">नञावचश्च शून्यानि सङ्ख्याः कटपयादयः ।<br>मिश्रे तूपान्त्यहल् सङ्ख्या न च चिन्त्यो हलस्वरः ॥</div>
+      <div class="ktp-verse-iast">nañāvacaśca śūnyāni saṅkhyāḥ kaṭapayādayaḥ |<br>miśre tūpāntyahal saṅkhyā na ca cintyo halasvaraḥ ||</div>
+      <p class="char-group-note">
+        “<b>na</b>, <b>ña</b> and the vowels (<b>a</b>, …) are zero; the numbers are [the consonant series] beginning
+        with <b>ka, ṭa, pa, ya</b>. In a conjunct, the consonant next to the vowel counts; a consonant with no vowel
+        of its own is not considered.” — quoted from Śaṅkaravarman’s <i>Sadratnamālā</i>.
+      </p>
+    </div>
+
+    <div class="char-group">
+      <h3 class="char-group-title">Consonant values</h3>
+      <p class="char-group-note">Four series, each counting from 1. The first two run to ten (ending on 0); the third stops at 5, the fourth at 8:</p>
+      <div class="consonant-table-wrap">
+        <table class="consonant-table ktp-table">
+          <thead><tr><th class="row-head">&nbsp;</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>0</th></tr></thead>
+          <tbody id="ktpRows"></tbody>
+        </table>
+      </div>
+      <div class="math-callouts">
+        <div class="math-callout">
+          <h4>Zero</h4>
+          <div class="formula">न ञ, and a vowel standing alone</div>
+          <div class="sequence">न (na) and ञ (ña) are the tenth letters of their series; a syllable that is only a vowel — अ, ई, ऋ … — also counts 0.</div>
+        </div>
+        <div class="math-callout">
+          <h4>Conjuncts</h4>
+          <div class="formula">only the consonant next to the vowel</div>
+          <div class="sequence">In ग्य (gya) only य counts (1); in न्ध (ndha) only ध (9). A half-consonant without a vowel of its own is ignored, and so are anusvāra and visarga.</div>
+        </div>
+        <div class="math-callout">
+          <h4>Direction</h4>
+          <div class="formula">अङ्कानां वामतो गतिः</div>
+          <div class="sequence"><i>aṅkānāṃ vāmato gatiḥ</i> — “numbers go to the left”. In dates and tables the first syllable is the units digit, so the digits are read in reverse. (The π verse below is read straight through, as a decimal fraction.)</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="char-group">
+      <h3 class="char-group-title">Decode a word</h3>
+      <p class="char-group-note">Type a word in IAST (e.g. <i>gopībhāgya</i>, <i>kharaharapriyā</i>) — each syllable shows the consonant that counts and its digit:</p>
+      <div class="ktp-decoder">
+        <input id="ktpIn" class="ktp-input" value="gopībhāgyamadhuvrāta" spellcheck="false" autocomplete="off" aria-label="Word in IAST">
+        <div id="ktpOut" class="ktp-out"></div>
+      </div>
+    </div>
+
+    <div class="char-group">
+      <h3 class="char-group-title">π in a couplet</h3>
+      <div class="ktp-verse" lang="sa">गोपीभाग्यमधुव्रात शृङ्गिशोदधिसन्धिग ।<br>खलजीवितखाताव गलहालारसन्धर ॥</div>
+      <div class="ktp-verse-iast">gopībhāgyamadhuvrāta śṛṅgiśodadhisandhiga |<br>khalajīvitakhātāva galahālārasandhara ||</div>
+      <p class="char-group-note">
+        Decoded syllable by syllable: <b>3 1 4 1 5 9 2 6 5 3 5 8 9 7 9 3 2 3 8 4 6 2 6 4 3 3 8 3 2 7 9 2</b> — that is,
+        π/10 = 0.31415926535897932384626433832792. The first 31 digits are correct (π continues …3279<b>5</b>0…). The
+        verse also reads as a hymn, which is the point of the code: the number hides inside meaningful words. Bhāratī
+        Kṛṣṇa Tīrtha quotes it in <a href="vedic-math.html"><i>Vedic Mathematics</i></a>.
+      </p>
+    </div>
+
+    <div class="char-group">
+      <h3 class="char-group-title">The 72 Mēḷakarta rāgas</h3>
+      <p class="char-group-note">
+        The 72 parent scales of Carnatic music are numbered so that the <b>first two syllables</b> of each name, read
+        as Kaṭapayādi digits and then <b>reversed</b>, give the rāga’s number. Hari-kāmbhojī: ह (ha) = 8, रि (ri) = 2 →
+        82 reversed → <b>28</b>. The number then fixes the whole scale, by a rule simple enough to work out in your
+        head.
+      </p>
+      <div class="math-callouts">
+        <div class="math-callout">
+          <h4>1 · Ma from the half</h4>
+          <div class="formula">1–36 → M1 (śuddha) · 37–72 → M2 (prati)</div>
+          <div class="sequence">Sa and Pa are fixed in every Mēḷakarta. The first 36 use the natural fourth, the second 36 the sharp fourth.</div>
+        </div>
+        <div class="math-callout">
+          <h4>2 · Chakra from groups of six</h4>
+          <div class="formula">chakra = ⌈n ÷ 6⌉</div>
+          <div class="sequence">Twelve chakras of six rāgas each. Within each half, the chakra fixes <b>Ri and Ga</b>, in the order R1G1, R1G2, R1G3, R2G2, R2G3, R3G3.</div>
+        </div>
+        <div class="math-callout">
+          <h4>3 · Position within the chakra</h4>
+          <div class="formula">position = n − 6(chakra − 1)</div>
+          <div class="sequence">The position 1–6 fixes <b>Dha and Ni</b>, in the same order: D1N1, D1N2, D1N3, D2N2, D2N3, D3N3.</div>
+        </div>
+      </div>
+      <p class="char-group-note">
+        Why 72? Ri and Ga share pitches (R2 = G1, R3 = G2), so a valid pair needs Ri’s index ≤ Ga’s: six pairs, not
+        nine. Dha and Ni are the same. Six Ri/Ga pairs × two Ma × six Dha/Ni pairs = 72. The chakra names are
+        themselves number words: Indu (moon, 1), Netra (eyes, 2), Agni (fires, 3), Veda (4), Bāṇa (arrows, 5), Ṛtu
+        (seasons, 6), Ṛṣi (sages, 7), Vasu (8), Brahma (9), Diśi (directions, 10), Rudra (11), Āditya (12).
+      </p>
+      <div class="ktp-derive">
+        <label for="melaSel">Choose a rāga:</label>
+        <select id="melaSel" class="ktp-input"></select>
+        <div id="melaOut" class="ktp-out"></div>
+      </div>
+    </div>
+
+    <div class="char-group">
+      <h3 class="char-group-title">All 72, decoded</h3>
+      <p class="char-group-note">Most names follow the rule exactly. The marked ones need one of the adjustments listed below the table.</p>
+      <div class="consonant-table-wrap">
+        <table class="consonant-table word-table ktp-mela">
+          <thead><tr><th>#</th><th>Rāga</th><th>First two syllables</th><th>Digits</th><th>Reversed</th><th>Chakra</th><th>Scale</th></tr></thead>
+          <tbody id="melaRows"></tbody>
+        </table>
+      </div>
+      <div class="math-callouts">
+        <div class="math-callout">
+          <h4>† Subscript y, r, v</h4>
+          <div class="sequence">Six names count the consonant <i>before</i> a following ya, ra or va, not the last one: Cakravākam (क्र → k = 1 → 16), Divyamaṇi (व्य → v = 4 → 48), Viśvambarī (श्व → ś = 5 → 54), Śyāmaḷāṅgī (श्या → ś = 5 → 55), Citrāmbarī (त्रा → t = 6 → 66) and Jyotisvarūpiṇī (ज्यो → j = 8 → 68). This is an observation from the names, not a rule stated in the defining verse — other names (Ratnāṅgī, Sūryakāntam) follow the verse’s rule.</div>
+        </div>
+        <div class="math-callout">
+          <h4>‡ Other adjustments</h4>
+          <div class="sequence"><b>Siṃhendramadhyamam</b> (57) works if spelt <i>Sihmendra-</i> so the second syllable carries m = 5. <b>Ṛṣabhapriyā</b> (62) counts the opening vowel ṛ as ra = 2. <b>Naṭabhairavī</b> (20) does not fit the standard table (na = 0, ṭa = 1 would give 10).</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="char-group">
+      <h3 class="char-group-title">History</h3>
+      <p class="char-group-note">
+        The oldest surviving use is Haridatta’s <i>Grahacāranibandhana</i> (683 CE), followed by Śaṅkaranārāyaṇa’s
+        <i>Laghubhāskarīyavivaraṇa</i> (869 CE); tradition credits the earlier <i>Candravākyāni</i> of Vararuci with
+        the first use. Nearly all known uses come from South India — in astronomical tables, in dates hidden in verse,
+        and in values of π such as the <i>Karaṇapaddhati</i>’s <i>caṇḍāṃśucandrādhamakuṃbhipālair</i> = 31415926536.
+        The Mēḷakarta names in their Kaṭapayādi form are associated with Govindācārya (18th century).
+      </p>
+      <p class="lang-footnote">
+        Sources: Wikipedia, <a href="https://en.wikipedia.org/wiki/Katapayadi_system" target="_blank" rel="noopener">Kaṭapayādi system</a>
+        and <a href="https://en.wikipedia.org/wiki/Melakarta" target="_blank" rel="noopener">Melakarta</a>. The rāga names
+        follow the standard table used by Wikipedia and karnatik.com. Practise decoding in the Kaṭapayādi lesson of
+        <a href="vedic-math.html">Vedic Mathematics</a>.
+      </p>
+    </div>
+  </div>
+</main>
+
+<style>
+  .lang-body .math-callouts{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px;margin:12px 0 16px;}
+  .ktp-verse{font-family:var(--font-sanskrit);font-size:1.35rem;line-height:1.9;color:var(--color-gold-light);text-align:center;margin:6px 0 2px;}
+  .ktp-verse-iast{font-family:var(--font-body);font-style:italic;font-size:1.1rem;color:var(--color-text-muted);text-align:center;margin-bottom:10px;}
+  .ktp-table td,.ktp-table th{text-align:center;}
+  .ktp-table .char-deva{font-family:var(--font-sanskrit);font-size:1.25rem;}
+  .ktp-decoder,.ktp-derive{background:var(--color-panel);border:1px solid var(--color-border);border-radius:10px;padding:14px 16px;margin-top:10px;}
+  .ktp-input{font-family:var(--font-ui);font-size:0.95rem;background:var(--color-bg-alt);color:var(--color-text);border:1px solid var(--color-border);border-radius:8px;padding:8px 10px;width:100%;max-width:420px;}
+  .ktp-derive label{font-family:var(--font-ui);font-size:0.85rem;color:var(--color-text-muted);margin-right:8px;}
+  .ktp-out{margin-top:12px;font-family:var(--font-ui);font-size:0.9rem;color:var(--color-text);}
+  .ktp-syls{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:8px;}
+  .ktp-syl{border:1px solid var(--color-border);border-radius:8px;padding:6px 8px;text-align:center;min-width:52px;}
+  .ktp-syl .d{font-family:var(--font-sanskrit);font-size:1.2rem;color:var(--color-gold-light);}
+  .ktp-syl .i{font-size:0.75rem;color:var(--color-text-muted);}
+  .ktp-syl .n{font-size:1.05rem;font-weight:600;color:var(--color-text);}
+  .ktp-syl .n.zero{color:var(--color-text-muted);}
+  .ktp-scale{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;}
+  .ktp-scale span{border:1px solid var(--color-border);border-radius:6px;padding:4px 8px;font-weight:600;}
+  .ktp-scale span.var{border-color:var(--color-gold);color:var(--color-gold-light);}
+  .ktp-mela td{font-family:var(--font-ui);font-size:0.85rem;}
+  .ktp-mela td .dv{font-family:var(--font-sanskrit);font-size:1.05rem;}
+  .ktp-mela .mark{color:var(--color-gold);font-weight:700;}
+  .ktp-mela .bad{color:var(--color-crimson);}
+</style>
+<script>
+(function(){
+  'use strict';
+  var KTP={k:1,kh:2,g:3,gh:4,'ṅ':5,c:6,ch:7,j:8,jh:9,'ñ':0,'ṭ':1,'ṭh':2,'ḍ':3,'ḍh':4,'ṇ':5,t:6,th:7,d:8,dh:9,n:0,p:1,ph:2,b:3,bh:4,m:5,y:1,r:2,l:3,v:4,'ś':5,'ṣ':6,s:7,h:8,'ḷ':3};
+  var DC={k:'क',kh:'ख',g:'ग',gh:'घ','ṅ':'ङ',c:'च',ch:'छ',j:'ज',jh:'झ','ñ':'ञ','ṭ':'ट','ṭh':'ठ','ḍ':'ड','ḍh':'ढ','ṇ':'ण',t:'त',th:'थ',d:'द',dh:'ध',n:'न',p:'प',ph:'फ',b:'ब',bh:'भ',m:'म',y:'य',r:'र',l:'ल',v:'व','ś':'श','ṣ':'ष',s:'स',h:'ह','ḷ':'ळ'};
+  var IV={a:'अ','ā':'आ',i:'इ','ī':'ई',u:'उ','ū':'ऊ','ṛ':'ऋ',e:'ए',ai:'ऐ',o:'ओ',au:'औ'}, MV={a:'','ā':'ा',i:'ि','ī':'ी',u:'ु','ū':'ू','ṛ':'ृ',e:'े',ai:'ै',o:'ो',au:'ौ'};
+  var VOW=['ai','au','ā','ī','ū','ṛ','e','o','a','i','u'];
+  var SERIES=[['k','kh','g','gh','ṅ','c','ch','j','jh','ñ'],['ṭ','ṭh','ḍ','ḍh','ṇ','t','th','d','dh','n'],['p','ph','b','bh','m'],['y','r','l','v','ś','ṣ','s','h']];
+  var SLAB=['ka-ādi','ṭa-ādi','pa-ādi','ya-ādi'];
+  var tb=document.getElementById('ktpRows');
+  SERIES.forEach(function(row,ri){
+    var tr=document.createElement('tr'); var th=document.createElement('th'); th.className='row-head'; th.textContent=SLAB[ri]; tr.appendChild(th);
+    for(var i=0;i<10;i++){ var td=document.createElement('td'); var c=row[i]; if(c){ td.innerHTML='<div class="char-deva">'+DC[c]+'</div><div class="char-iast">'+c+'a</div>'; } tr.appendChild(td); }
+    tb.appendChild(tr);
+  });
+  function syl(w){ w=w.toLowerCase().normalize('NFC'); var out=[],i=0,cons=[];
+    while(i<w.length){ var v=null; for(var k=0;k<VOW.length;k++) if(w.substr(i,VOW[k].length)===VOW[k]){ v=VOW[k]; break; }
+      if(v){ out.push({cons:cons.slice(),v:v}); cons=[]; i+=v.length; continue; }
+      var c=null; if((w.substr(i,2)) in KTP) c=w.substr(i,2); else if(w[i] in KTP) c=w[i];
+      if(c){ cons.push(c); i+=c.length; continue; } i++; }
+    return out; }
+  function deva(s){ return s.cons.length? s.cons.map(function(c){return DC[c];}).join('्')+MV[s.v] : IV[s.v]; }
+  function esc(t){ return String(t).replace(/[&<>]/g,function(m){return {'&':'&amp;','<':'&lt;','>':'&gt;'}[m];}); }
+  function decode(){
+    var ss=syl(document.getElementById('ktpIn').value), html='<div class="ktp-syls">', digits='';
+    ss.forEach(function(s){ var c=s.cons[s.cons.length-1], d=c? KTP[c] : 0; digits+=d;
+      html+='<div class="ktp-syl"><div class="d">'+deva(s)+'</div><div class="i">'+esc(s.cons.join('')+s.v)+(s.cons.length>1?' ('+c+')':'')+'</div><div class="n'+(d===0?' zero':'')+'">'+d+'</div></div>'; });
+    html+='</div>'+(digits? 'Digits in order: <b>'+digits+'</b> · reversed (aṅkānāṃ vāmato gatiḥ): <b>'+digits.split('').reverse().join('')+'</b>' : 'Type a word in IAST.');
+    document.getElementById('ktpOut').innerHTML=html;
+  }
+  document.getElementById('ktpIn').addEventListener('input',decode); decode();
+
+  var ROWS=[{"num":1,"name":"Kanakāngi","syl":["ka","na"],"deva":"कन","std":[1,0],"used":[1,0],"ok":true,"note":""},{"num":2,"name":"Ratnāngi","syl":["ra","tnā"],"deva":"रत्ना","std":[2,0],"used":[2,0],"ok":true,"note":""},{"num":3,"name":"Gānamūrti","syl":["gā","na"],"deva":"गान","std":[3,0],"used":[3,0],"ok":true,"note":""},{"num":4,"name":"Vanaspati","syl":["va","na"],"deva":"वन","std":[4,0],"used":[4,0],"ok":true,"note":""},{"num":5,"name":"Mānavati","syl":["mā","na"],"deva":"मान","std":[5,0],"used":[5,0],"ok":true,"note":""},{"num":6,"name":"Tānarūpi","syl":["tā","na"],"deva":"तान","std":[6,0],"used":[6,0],"ok":true,"note":""},{"num":7,"name":"Senāvati","syl":["se","nā"],"deva":"सेना","std":[7,0],"used":[7,0],"ok":true,"note":""},{"num":8,"name":"Hanumatōdi","syl":["ha","nu"],"deva":"हनु","std":[8,0],"used":[8,0],"ok":true,"note":""},{"num":9,"name":"Dhenukā","syl":["dhe","nu"],"deva":"धेनु","std":[9,0],"used":[9,0],"ok":true,"note":""},{"num":10,"name":"Nāṭakapriyā","syl":["nā","ṭa"],"deva":"नाट","std":[0,1],"used":[0,1],"ok":true,"note":""},{"num":11,"name":"Kōkilapriyā","syl":["ko","ki"],"deva":"कोकि","std":[1,1],"used":[1,1],"ok":true,"note":""},{"num":12,"name":"Rūpavati","syl":["rū","pa"],"deva":"रूप","std":[2,1],"used":[2,1],"ok":true,"note":""},{"num":13,"name":"Gāyakapriyā","syl":["gā","ya"],"deva":"गाय","std":[3,1],"used":[3,1],"ok":true,"note":""},{"num":14,"name":"Vakuḷābharaṇam","syl":["va","ku"],"deva":"वकु","std":[4,1],"used":[4,1],"ok":true,"note":""},{"num":15,"name":"Māyāmāḷavagowḷa","syl":["mā","yā"],"deva":"माया","std":[5,1],"used":[5,1],"ok":true,"note":""},{"num":16,"name":"Chakravākam","syl":["ca","kra"],"deva":"चक्र","std":[6,2],"used":[6,1],"ok":true,"note":"semivowel"},{"num":17,"name":"Sūryakāntam","syl":["sū","rya"],"deva":"सूर्य","std":[7,1],"used":[7,1],"ok":true,"note":""},{"num":18,"name":"Hāṭakāmbari","syl":["hā","ṭa"],"deva":"हाट","std":[8,1],"used":[8,1],"ok":true,"note":""},{"num":19,"name":"Jhankāradhvani","syl":["jha","ṅkā"],"deva":"झङ्का","std":[9,1],"used":[9,1],"ok":true,"note":""},{"num":20,"name":"Naṭabhairavi","syl":["na","ṭa"],"deva":"नट","std":[0,1],"used":[0,1],"ok":false,"note":"unresolved"},{"num":21,"name":"Kīravāṇi","syl":["kī","ra"],"deva":"कीर","std":[1,2],"used":[1,2],"ok":true,"note":""},{"num":22,"name":"Kharaharapriyā","syl":["kha","ra"],"deva":"खर","std":[2,2],"used":[2,2],"ok":true,"note":""},{"num":23,"name":"Gourimanōhari","syl":["gau","ri"],"deva":"गौरि","std":[3,2],"used":[3,2],"ok":true,"note":""},{"num":24,"name":"Varuṇapriyā","syl":["va","ru"],"deva":"वरु","std":[4,2],"used":[4,2],"ok":true,"note":""},{"num":25,"name":"Māraranjani","syl":["mā","ra"],"deva":"मार","std":[5,2],"used":[5,2],"ok":true,"note":""},{"num":26,"name":"Chārukēśi","syl":["cā","ru"],"deva":"चारु","std":[6,2],"used":[6,2],"ok":true,"note":""},{"num":27,"name":"Sarasāngi","syl":["sa","ra"],"deva":"सर","std":[7,2],"used":[7,2],"ok":true,"note":""},{"num":28,"name":"Harikāmbhōji","syl":["ha","ri"],"deva":"हरि","std":[8,2],"used":[8,2],"ok":true,"note":""},{"num":29,"name":"Dhīraśankarābharaṇam","syl":["dhī","ra"],"deva":"धीर","std":[9,2],"used":[9,2],"ok":true,"note":""},{"num":30,"name":"Nāgānandini","syl":["nā","gā"],"deva":"नागा","std":[0,3],"used":[0,3],"ok":true,"note":""},{"num":31,"name":"Yāgapriyā","syl":["yā","ga"],"deva":"याग","std":[1,3],"used":[1,3],"ok":true,"note":""},{"num":32,"name":"Rāgavardhini","syl":["rā","ga"],"deva":"राग","std":[2,3],"used":[2,3],"ok":true,"note":""},{"num":33,"name":"Gāngeyabhūṣaṇi","syl":["gā","ṅge"],"deva":"गाङ्गे","std":[3,3],"used":[3,3],"ok":true,"note":""},{"num":34,"name":"Vāgadhīśwari","syl":["vā","ga"],"deva":"वाग","std":[4,3],"used":[4,3],"ok":true,"note":""},{"num":35,"name":"Śūlini","syl":["śū","li"],"deva":"शूलि","std":[5,3],"used":[5,3],"ok":true,"note":""},{"num":36,"name":"Chalanāṭa","syl":["ca","la"],"deva":"चल","std":[6,3],"used":[6,3],"ok":true,"note":""},{"num":37,"name":"Sālagam","syl":["sā","la"],"deva":"साल","std":[7,3],"used":[7,3],"ok":true,"note":""},{"num":38,"name":"Jalārṇavam","syl":["ja","lā"],"deva":"जला","std":[8,3],"used":[8,3],"ok":true,"note":""},{"num":39,"name":"Jhālavarāḷi","syl":["jhā","la"],"deva":"झाल","std":[9,3],"used":[9,3],"ok":true,"note":""},{"num":40,"name":"Navanītam","syl":["na","va"],"deva":"नव","std":[0,4],"used":[0,4],"ok":true,"note":""},{"num":41,"name":"Pāvani","syl":["pā","va"],"deva":"पाव","std":[1,4],"used":[1,4],"ok":true,"note":""},{"num":42,"name":"Raghupriyā","syl":["ra","ghu"],"deva":"रघु","std":[2,4],"used":[2,4],"ok":true,"note":""},{"num":43,"name":"Gavāmbhōdi","syl":["ga","vā"],"deva":"गवा","std":[3,4],"used":[3,4],"ok":true,"note":""},{"num":44,"name":"Bhavapriyā","syl":["bha","va"],"deva":"भव","std":[4,4],"used":[4,4],"ok":true,"note":""},{"num":45,"name":"Śubhapantuvarāḷi","syl":["śu","bha"],"deva":"शुभ","std":[5,4],"used":[5,4],"ok":true,"note":""},{"num":46,"name":"Ṣaḍvidamārgini","syl":["ṣa","ḍvi"],"deva":"षड्वि","std":[6,4],"used":[6,4],"ok":true,"note":""},{"num":47,"name":"Suvarṇāngi","syl":["su","va"],"deva":"सुव","std":[7,4],"used":[7,4],"ok":true,"note":""},{"num":48,"name":"Divyamaṇi","syl":["di","vya"],"deva":"दिव्य","std":[8,1],"used":[8,4],"ok":true,"note":"semivowel"},{"num":49,"name":"Dhavaḷāmbari","syl":["dha","va"],"deva":"धव","std":[9,4],"used":[9,4],"ok":true,"note":""},{"num":50,"name":"Nāmanārāyaṇi","syl":["nā","ma"],"deva":"नाम","std":[0,5],"used":[0,5],"ok":true,"note":""},{"num":51,"name":"Kāmavardhini","syl":["kā","ma"],"deva":"काम","std":[1,5],"used":[1,5],"ok":true,"note":""},{"num":52,"name":"Rāmapriyā","syl":["rā","ma"],"deva":"राम","std":[2,5],"used":[2,5],"ok":true,"note":""},{"num":53,"name":"Gamanāśrama","syl":["ga","ma"],"deva":"गम","std":[3,5],"used":[3,5],"ok":true,"note":""},{"num":54,"name":"Viśvambari","syl":["vi","śva"],"deva":"विश्व","std":[4,4],"used":[4,5],"ok":true,"note":"semivowel"},{"num":55,"name":"Śyāmaḷāngi","syl":["śyā","ma"],"deva":"श्याम","std":[1,5],"used":[5,5],"ok":true,"note":"semivowel"},{"num":56,"name":"Ṣaṇmukhapriyā","syl":["ṣa","ṇmu"],"deva":"षण्मु","std":[6,5],"used":[6,5],"ok":true,"note":""},{"num":57,"name":"Simhēndramadhyamam","syl":["si","mhe"],"deva":"सिंहे","std":[7,8],"used":[7,5],"ok":true,"note":"sihmendra"},{"num":58,"name":"Hēmavati","syl":["he","ma"],"deva":"हेम","std":[8,5],"used":[8,5],"ok":true,"note":""},{"num":59,"name":"Dharmavati","syl":["dha","rma"],"deva":"धर्म","std":[9,5],"used":[9,5],"ok":true,"note":""},{"num":60,"name":"Nītimati","syl":["nī","ti"],"deva":"नीति","std":[0,6],"used":[0,6],"ok":true,"note":""},{"num":61,"name":"Kāntāmaṇi","syl":["kā","ntā"],"deva":"कान्ता","std":[1,6],"used":[1,6],"ok":true,"note":""},{"num":62,"name":"Ṛṣabhapriyā","syl":["ṛ","ṣa"],"deva":"ऋष","std":[0,6],"used":[2,6],"ok":true,"note":"rvowel"},{"num":63,"name":"Latāngi","syl":["la","tā"],"deva":"लता","std":[3,6],"used":[3,6],"ok":true,"note":""},{"num":64,"name":"Vāchaspati","syl":["vā","ca"],"deva":"वाच","std":[4,6],"used":[4,6],"ok":true,"note":""},{"num":65,"name":"Mēchakalyāni","syl":["me","ca"],"deva":"मेच","std":[5,6],"used":[5,6],"ok":true,"note":""},{"num":66,"name":"Chitrāmbari","syl":["ci","trā"],"deva":"चित्रा","std":[6,2],"used":[6,6],"ok":true,"note":"semivowel"},{"num":67,"name":"Sucharitra","syl":["su","ca"],"deva":"सुच","std":[7,6],"used":[7,6],"ok":true,"note":""},{"num":68,"name":"Jyōtiswarūpini","syl":["jyo","ti"],"deva":"ज्योति","std":[1,6],"used":[8,6],"ok":true,"note":"semivowel"},{"num":69,"name":"Dhātuvardhani","syl":["dhā","tu"],"deva":"धातु","std":[9,6],"used":[9,6],"ok":true,"note":""},{"num":70,"name":"Nāsikābhūṣaṇi","syl":["nā","si"],"deva":"नासि","std":[0,7],"used":[0,7],"ok":true,"note":""},{"num":71,"name":"Kōsalam","syl":["ko","sa"],"deva":"कोस","std":[1,7],"used":[1,7],"ok":true,"note":""},{"num":72,"name":"Rasikapriyā","syl":["ra","si"],"deva":"रसि","std":[2,7],"used":[2,7],"ok":true,"note":""}];
+  var CHAKRA=['Indu','Netra','Agni','Veda','Bāṇa','Ṛtu','Ṛṣi','Vasu','Brahma','Diśi','Rudra','Āditya'];
+  var PAIRS=[[1,1],[1,2],[1,3],[2,2],[2,3],[3,3]];
+  function scale(n){ var c=Math.ceil(n/6), pos=n-6*(c-1), half=n<=36?1:2, rg=PAIRS[(c-1)%6], dn=PAIRS[pos-1];
+    return {c:c,pos:pos,ma:half,rg:rg,dn:dn,notes:['S','R'+rg[0],'G'+rg[1],'M'+half,'P','D'+dn[0],'N'+dn[1]]}; }
+  var MARK={semivowel:'†',sihmendra:'‡',rvowel:'‡',unresolved:'‡'};
+  var mb=document.getElementById('melaRows'), sel=document.getElementById('melaSel');
+  ROWS.forEach(function(r){ var sc=scale(r.num), tr=document.createElement('tr');
+    var dg=r.used[0]+', '+r.used[1], rev=String(r.used[1])+String(r.used[0]);
+    tr.innerHTML='<td>'+r.num+'</td><td>'+esc(r.name)+(r.note?' <span class="mark">'+MARK[r.note]+'</span>':'')+'</td><td><span class="dv">'+r.deva+'</span> <span class="char-iast">'+esc(r.syl.join('-'))+'</span></td><td>'+dg+'</td><td class="'+(r.ok?'':'bad')+'">'+rev+(r.ok?'':' ≠ '+r.num)+'</td><td>'+sc.c+' · '+CHAKRA[sc.c-1]+'</td><td>'+sc.notes.join(' ')+'</td>';
+    mb.appendChild(tr);
+    var o=document.createElement('option'); o.value=r.num; o.textContent=r.num+' · '+r.name; sel.appendChild(o); });
+  function derive(){ var n=+sel.value, r=ROWS[n-1], sc=scale(n);
+    var html='<div class="ktp-syls"><div class="ktp-syl"><div class="d">'+r.deva+'</div><div class="i">'+esc(r.syl.join('-'))+'</div><div class="n">'+r.used[0]+' '+r.used[1]+'</div></div></div>';
+    html+='First two syllables give '+r.used[0]+', '+r.used[1]+' → reversed <b>'+r.used[1]+r.used[0]+'</b>'+(r.ok?'':' — <span class="bad">does not match '+n+' (see the note below the table)</span>')+'.<br>';
+    html+='<b>'+n+'</b> ≤ 36? '+(n<=36?'yes → M1':'no → M2')+'. Chakra ⌈'+n+' ÷ 6⌉ = <b>'+sc.c+'</b> ('+CHAKRA[sc.c-1]+') → R'+sc.rg[0]+' G'+sc.rg[1]+'. Position '+sc.pos+' → D'+sc.dn[0]+' N'+sc.dn[1]+'.';
+    html+='<div class="ktp-scale">'+sc.notes.map(function(x){ return '<span class="'+(x==='S'||x==='P'?'':'var')+'">'+x+'</span>'; }).join('')+'</div>';
+    document.getElementById('melaOut').innerHTML=html; }
+  sel.value='29'; sel.addEventListener('change',derive); derive();
+})();
+</script>
+</body>
+</html>
