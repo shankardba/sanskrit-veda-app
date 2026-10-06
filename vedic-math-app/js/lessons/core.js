@@ -1,364 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Vedic Mathematics</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Noto+Serif+Devanagari:wght@500;700&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --bg:#15122a;
-    --bg-2:#1d1938;
-    --border:rgba(212,166,60,.32);
-    --panel:#f4ead7;
-    --panel-dim:#ece0c8;
-    --ink:#2a2140;
-    --ink-soft:#6a5d7c;
-    --muted:#a69cbc;
-    --gold:#d4a63c;
-    --gold-light:#ecca7c;
-    /* meaning-named board tokens */
-    --active:#e0782a;        /* digits being worked on right now */
-    --active-wash:rgba(224,120,42,.18);
-    --deviation:#a23b4b;     /* distance from a base, complements, vinculum */
-    --result:#2d5fa8;        /* intermediate results */
-    --answer:#1f8a6a;        /* final answer */
-    --cross:#6b4fc0;         /* crosswise links */
-    --vertical:#2d5fa8;      /* vertical links */
-    --half-a:#2d5fa8;
-    --half-b:#c0532f;
-    --good:#1f8a6a;
-    --bad:#b53a3a;
-    --shadow:0 10px 30px -12px rgba(0,0,0,.6);
-  }
-  *{box-sizing:border-box;}
-  html,body{margin:0;padding:0;background:var(--bg);color:var(--panel);font-family:'Inter',sans-serif;min-height:100vh;}
-  a{color:var(--deviation);}
-  header{max-width:1320px;margin:0 auto;padding:26px 22px 8px;display:flex;align-items:baseline;gap:16px;flex-wrap:wrap;}
-  h1{font-family:'Fraunces',serif;font-weight:700;font-size:clamp(26px,4vw,36px);margin:0;color:var(--panel);}
-  header .sub{color:var(--muted);font-size:14px;}
-  header .sub i{color:var(--gold-light);font-style:normal;}
-
-  .layout{max-width:1320px;margin:0 auto;padding:12px 22px 60px;display:grid;grid-template-columns:minmax(300px,390px) minmax(0,1fr);gap:22px;align-items:start;}
-  aside{position:sticky;top:14px;max-height:calc(100vh - 28px);overflow:auto;display:flex;flex-direction:column;gap:12px;padding-right:4px;scrollbar-width:thin;scrollbar-color:var(--border) transparent;}
-  main{display:flex;flex-direction:column;gap:16px;min-width:0;}
-
-  .card{background:var(--panel);color:var(--ink);border-radius:14px;padding:16px 18px;box-shadow:var(--shadow);font-size:13.8px;line-height:1.58;}
-  .card.dim{background:var(--panel-dim);}
-  .card h2{font-family:'Fraunces',serif;font-size:15.5px;margin:0 0 8px;color:var(--deviation);font-weight:700;}
-  .card p{margin:0 0 8px;} .card p:last-child{margin-bottom:0;}
-  .card ol,.card ul{margin:0 0 6px;padding-left:20px;} .card li{margin:2px 0;}
-  .mono,code{font-family:'IBM Plex Mono',monospace;font-size:12.8px;}
-  .eqn{font-family:'IBM Plex Mono',monospace;font-size:12.8px;background:rgba(42,33,64,.06);border-left:3px solid var(--gold);padding:7px 10px;border-radius:4px;margin:6px 0 8px;white-space:pre-wrap;}
-  .note{font-size:12.6px;color:var(--ink-soft);}
-  .vinc{text-decoration:overline;}
-
-  .sutra-card{text-align:center;padding-top:14px;}
-  .sutra-card .kind{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.6px;color:var(--ink-soft);}
-  .sutra-card .dev{font-family:'Noto Serif Devanagari',serif;font-size:27px;font-weight:700;color:var(--ink);margin:4px 0 0;line-height:1.5;}
-  .sutra-card .iast{font-family:'Fraunces',serif;font-size:18px;font-weight:500;color:var(--deviation);margin-top:2px;}
-  .sutra-card .en{font-size:13.5px;color:var(--ink-soft);font-style:italic;margin-top:3px;}
-  .sutra-card .ch{display:inline-block;margin-top:8px;font-size:11.5px;border:1px solid rgba(162,59,75,.35);color:var(--deviation);border-radius:12px;padding:1px 10px;}
-
-  details.card summary{cursor:pointer;font-family:'Fraunces',serif;font-weight:700;color:var(--deviation);font-size:15px;list-style:none;}
-  details.card summary::-webkit-details-marker{display:none;}
-  details.card summary::before{content:'▸ ';color:var(--gold);}
-  details.card[open] summary::before{content:'▾ ';}
-  details.card[open] summary{margin-bottom:8px;}
-  .sutra-list{font-size:12.6px;margin:4px 0 8px;padding-left:22px;}
-  .sutra-list li.here{font-weight:600;}
-  .sutra-list li.here::after{content:' ●';color:var(--active);font-size:10px;}
-
-  /* picker */
-  .picker{display:flex;gap:10px;align-items:center;flex-wrap:wrap;}
-  .picker select{flex:1;min-width:240px;font-family:'Inter',sans-serif;font-size:15px;font-weight:600;padding:10px 12px;border-radius:10px;border:1.5px solid var(--gold);background:var(--bg-2);color:var(--panel);cursor:pointer;}
-  .picker select optgroup{color:var(--gold-light);font-style:normal;}
-  .picker select option{color:var(--panel);background:var(--bg-2);}
-  .btn{font-family:'Inter',sans-serif;font-size:13.5px;font-weight:600;border:1.5px solid var(--gold);background:transparent;color:var(--gold-light);border-radius:20px;padding:7px 15px;cursor:pointer;transition:background .15s,color .15s;white-space:nowrap;}
-  .btn:hover{background:var(--gold);color:var(--bg);}
-  .btn.solid{background:var(--gold);color:var(--bg);}
-  .btn.solid:hover{background:var(--gold-light);}
-  .btn.icon{width:38px;height:38px;padding:0;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:15px;}
-  .btn:disabled{opacity:.35;cursor:default;background:transparent;color:var(--gold-light);}
-  .short{color:var(--muted);font-size:14px;margin-top:-4px;}
-
-  /* board */
-  .board-card{padding:14px 14px 12px;}
-  .board-wrap{width:100%;display:flex;justify-content:center;overflow-x:auto;min-height:150px;}
-  #board{width:100%;height:auto;display:block;overflow:visible;}
-  .say{margin:10px 4px 0;min-height:66px;font-size:14.6px;line-height:1.6;color:var(--ink);border-top:1px dashed rgba(42,33,64,.18);padding-top:10px;}
-  .say b{color:var(--active);} .say i{color:var(--ink-soft);}
-  .say .ok{color:var(--answer);font-weight:700;} .say .no{color:var(--bad);font-weight:700;}
-  .controls{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:10px;}
-  .controls .btn{border-color:var(--ink-soft);color:var(--ink);}
-  .controls .btn:hover{background:var(--ink);color:var(--panel);}
-  .controls .btn.solid{background:var(--ink);color:var(--panel);border-color:var(--ink);}
-  .controls .btn:disabled{background:transparent;color:var(--ink);}
-  .stepno{font-family:'IBM Plex Mono',monospace;font-size:12.5px;color:var(--ink-soft);min-width:58px;text-align:center;}
-  .progress{flex:1;min-width:80px;height:5px;border-radius:3px;background:rgba(42,33,64,.12);overflow:hidden;}
-  .progress i{display:block;height:100%;width:0;background:var(--active);transition:width .3s;}
-  .speed{font-size:12px;color:var(--ink-soft);display:flex;align-items:center;gap:5px;}
-  .speed select{font-family:'Inter',sans-serif;font-size:12px;border-radius:6px;border:1px solid rgba(42,33,64,.25);background:transparent;color:var(--ink);padding:3px;}
-
-  /* svg board */
-  .it{transition:transform .6s cubic-bezier(.3,.75,.25,1),opacity .4s;}
-  .it text{font-family:'IBM Plex Mono',monospace;font-size:27px;font-weight:500;text-anchor:middle;dominant-baseline:central;fill:var(--ink);transition:fill .3s;}
-  .it .bg{fill:var(--active-wash);stroke:var(--active);stroke-width:1.4;opacity:0;transition:opacity .3s;}
-  .it .vin{stroke:var(--deviation);stroke-width:2.2;stroke-linecap:round;}
-  .it.hot .bg{opacity:1;} .it.hot text{fill:var(--active);font-weight:600;}
-  .it.op text{fill:var(--ink-soft);font-weight:400;}
-  .it.dim text{fill:#b3a88f;}
-  .it.dev text{fill:var(--deviation);}
-  .it.key text{fill:var(--active);font-weight:600;}
-  .it.res text{fill:var(--result);font-weight:600;}
-  .it.ans text{fill:var(--answer);font-weight:700;}
-  .it.bad text{fill:var(--bad);font-weight:700;}
-  .it.h1 text{fill:var(--half-a);font-weight:600;} .it.h2 text{fill:var(--half-b);font-weight:600;}
-  .it.gone text{fill:#b3a88f;text-decoration:line-through;}
-  .it.lbl text{font-family:'Inter',sans-serif;font-size:14px;font-weight:600;fill:var(--ink-soft);letter-spacing:.3px;text-anchor:start;}
-  .it.work text{font-size:19px;fill:var(--ink-soft);text-anchor:start;}
-  .it.work.hot text{fill:var(--active);}
-  .it.sup text,.it.carry text{font-size:15px;font-weight:600;}
-  .it.sup text{fill:var(--ink);}
-  .it.carry text{fill:var(--deviation);}
-  .it.carry.dim text{fill:#c4b49a;}
-  .ln{fill:none;stroke-width:2.3;stroke-linecap:round;opacity:.85;transition:opacity .3s;}
-  .ln.draw{stroke-dasharray:1;stroke-dashoffset:1;animation:draw .55s ease-out forwards;}
-  @keyframes draw{to{stroke-dashoffset:0;}}
-  .ln.x,.ln.x1{stroke:var(--cross);} .ln.x2{stroke:var(--cross);stroke-dasharray:5 5;opacity:.6;animation:none;}
-  .ln.v{stroke:var(--vertical);} .ln.link{stroke:var(--active);} .ln.pair{stroke:var(--deviation);}
-  .ln.rule{stroke:var(--ink);stroke-width:1.6;opacity:.7;} .ln.bar{stroke:var(--ink-soft);stroke-width:1.6;opacity:.6;}
-  .ln.group{stroke:var(--gold);stroke-width:3;opacity:.9;}
-  .ln.fade{opacity:0;}
-
-  /* try + practice */
-  .row{display:flex;gap:8px;align-items:center;flex-wrap:wrap;}
-  input.txt{font-family:'IBM Plex Mono',monospace;font-size:15px;padding:8px 12px;border-radius:9px;border:1.5px solid rgba(42,33,64,.25);background:#fffaf0;color:var(--ink);min-width:0;flex:1 1 170px;}
-  input.txt:focus{outline:none;border-color:var(--active);}
-  .err{color:var(--bad);font-size:12.5px;min-height:18px;margin-top:4px;}
-  .card .btn{border-color:var(--ink-soft);color:var(--ink);}
-  .card .btn:hover{background:var(--ink);color:var(--panel);}
-  .card .btn.solid{background:var(--active);border-color:var(--active);color:#fff;}
-  .card .btn.solid:hover{background:#c8661c;}
-  .q{font-family:'IBM Plex Mono',monospace;font-size:21px;overflow-wrap:anywhere;font-weight:600;color:var(--ink);margin:6px 0 10px;}
-  .q small{display:block;font-family:'Inter',sans-serif;font-size:12.5px;font-weight:500;color:var(--ink-soft);margin-top:2px;}
-  .fb{min-height:22px;margin-top:8px;font-size:14px;}
-  .fb .ok{color:var(--good);font-weight:700;} .fb .no{color:var(--bad);font-weight:700;}
-  .score{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--ink-soft);margin-left:auto;}
-  .two{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
-  .legend{display:flex;flex-wrap:wrap;gap:12px;font-size:12px;color:var(--ink-soft);margin-top:8px;}
-  .legend span::before{content:'';display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:5px;vertical-align:-1px;background:var(--c);}
-  /* embedded in a host page (e.g. Vedavani): the host supplies the title */
-  .embedded header{display:none;}
-  .embedded .layout{padding-top:16px;}
-  footer{max-width:1320px;margin:0 auto;padding:0 22px 30px;color:var(--muted);font-size:12px;}
-
-  @media (max-width:980px){
-    .layout{grid-template-columns:1fr;}
-    aside{position:static;max-height:none;overflow:visible;order:2;}
-    main{order:1;}
-    .two{grid-template-columns:1fr;}
-  }
-  @media (max-width:520px){
-    header,.layout,footer{padding-left:14px;padding-right:14px;}
-    .picker select{min-width:0;width:100%;}
-  }
-</style>
-</head>
-<body>
-<header>
-  <h1>Vedic Mathematics</h1>
-  <div class="sub">Sūtras, animated — after <i>Bhāratī Kṛṣṇa Tīrtha</i>, <span style="font-style:italic">Vedic Mathematics</span> (1965)</div>
-</header>
-
-<div class="layout">
-  <aside id="aside">
-    <div class="card sutra-card" id="sutraCard"></div>
-    <div class="card" id="briefCard"></div>
-    <div class="card dim" id="whyCard"></div>
-    <div class="card dim" id="histCard"></div>
-    <details class="card dim" id="aboutCard">
-      <summary>About the book &amp; the sixteen sūtras</summary>
-      <div id="aboutBody"></div>
-    </details>
-  </aside>
-
-  <main>
-    <div class="picker">
-      <button class="btn icon" id="prevTech" title="Previous technique" aria-label="Previous technique">‹</button>
-      <select id="techSel" aria-label="Technique"></select>
-      <button class="btn icon" id="nextTech" title="Next technique" aria-label="Next technique">›</button>
-    </div>
-    <div class="short" id="short"></div>
-
-    <div class="card board-card">
-      <div class="board-wrap"><svg id="board" xmlns="http://www.w3.org/2000/svg"><g id="lnLayer"></g><g id="itLayer"></g></svg></div>
-      <div class="say" id="say"></div>
-      <div class="controls">
-        <button class="btn icon" id="bRestart" title="Restart (Home)" aria-label="Restart">⟲</button>
-        <button class="btn icon" id="bPrev" title="Previous step (←)" aria-label="Previous step">◀</button>
-        <button class="btn icon solid" id="bPlay" title="Play / pause (space)" aria-label="Play">▶</button>
-        <button class="btn icon" id="bNext" title="Next step (→)" aria-label="Next step">▶︎|</button>
-        <span class="stepno" id="stepNo">1 / 1</span>
-        <div class="progress"><i id="prog"></i></div>
-        <label class="speed">speed
-          <select id="speed"><option value="3400">slow</option><option value="2300" selected>normal</option><option value="1300">fast</option><option value="550">very fast</option></select>
-        </label>
-      </div>
-      <div class="legend">
-        <span style="--c:var(--active)">working on now</span>
-        <span style="--c:var(--deviation)">deviation / complement / vinculum</span>
-        <span style="--c:var(--result)">partial result</span>
-        <span style="--c:var(--answer)">answer</span>
-      </div>
-    </div>
-
-    <div class="two">
-      <div class="card">
-        <h2>Try your own</h2>
-        <div class="row">
-          <input class="txt" id="ownIn" autocomplete="off" spellcheck="false">
-          <button class="btn solid" id="ownGo">Animate</button>
-          <button class="btn" id="ownRand" title="Random example">Random</button>
-        </div>
-        <div class="err" id="ownErr"></div>
-        <div class="note" id="ownHint"></div>
-      </div>
-      <div class="card">
-        <div class="row"><h2 style="margin:0">Practice</h2><span class="score" id="score"></span></div>
-        <div class="q" id="pq"></div>
-        <div class="row">
-          <input class="txt" id="pIn" autocomplete="off" spellcheck="false" placeholder="your answer">
-          <button class="btn solid" id="pCheck">Check</button>
-        </div>
-        <div class="row" style="margin-top:8px">
-          <button class="btn" id="pShow">Show steps</button>
-          <button class="btn" id="pNew">New problem</button>
-        </div>
-        <div class="fb" id="pFb"></div>
-      </div>
-    </div>
-  </main>
-</div>
-<footer>Every technique here is checked against ordinary arithmetic as it animates; if a step ever disagrees, the board says so. Book references are to the 1965 BHU edition (Motilal Banarsidass / Orient reprints share its chapter numbering).</footer>
-
-<script>
 'use strict';
-try{ if(window.self!==window.top) document.documentElement.classList.add('embedded'); }catch(e){ document.documentElement.classList.add('embedded'); }
-/* ============================================================
-   small helpers
-   ============================================================ */
-const $ = s => document.querySelector(s);
-const ri = (a,b) => a + Math.floor(Math.random()*(b-a+1));
-const pick = a => a[Math.floor(Math.random()*a.length)];
-const len = s => [...String(s)].length;
-const pad = (n,k) => String(n).padStart(k,'0');
-const M = '−';
-const fmt = n => n<0 ? M+Math.abs(n) : String(n);
-const sgn = n => n<0 ? M+Math.abs(n) : '+'+n;               // "+3" / "−4"
-const sp = n => n<0 ? M+' '+Math.abs(n) : '+ '+n;           // "+ 3" / "− 4"
-const digits = n => String(n).split('').map(Number);
-const gcd = (a,b) => { a=Math.abs(a); b=Math.abs(b); while(b){[a,b]=[b,a%b];} return a; };
-const dr = n => n===0 ? 0 : 1 + (n-1)%9;                    // digital root (bījāṅka)
-const normIn = s => String(s).trim().replace(/[−–—]/g,'-').replace(/[\s,]/g,'');
-function frac(n,d){ if(d<0){n=-n;d=-d;} const g=gcd(n,d)||1; return {n:n/g,d:d/g}; }
-const fracStr = f => f.d===1 ? fmt(f.n) : fmt(f.n)+'/'+f.d;
-function parseNum(s){
-  s = normIn(s);
-  let m = s.match(/^(-?\d+)\/(-?\d+)$/); if(m) return +m[1]/ +m[2];
-  if(/^-?\d*\.?\d+$/.test(s)) return +s;
-  return NaN;
-}
-const yesNo = s => { s=normIn(s).toLowerCase(); if(/^(y|yes|true|1|✓)$/.test(s)) return 'yes'; if(/^(n|no|false|0|✗)$/.test(s)) return 'no'; return null; };
-function nums(str){ return (normIn(str).replace(/[×x*÷/:]|by|and|r/gi,' ').match(/-?\d+/g)||[]).map(Number); }
-function binop(str, ops){
-  const s = String(str).replace(/[−–—]/g,'-');
-  const m = s.match(new RegExp('^\\s*(\\d+)\\s*(?:'+ops+')\\s*(\\d+)\\s*$','i'));
-  return m ? [+m[1], +m[2]] : null;
-}
-const MUL = '×|x|\\*|times';
-const DIV = '÷|/|by|:';
-
-/* ============================================================
-   Scene builder — a technique describes its animation as a list
-   of snapshots. Items are keyed: the same key in the next frame
-   moves (CSS transition) instead of being redrawn, which is what
-   makes digits visibly travel to where they're used.
-   Coordinates: x in monospace character cells, y in rows.
-   ============================================================ */
-class Sc{
-  constructor(){ this.it=new Map(); this.ln=new Map(); this.fr=[]; this.hot=new Set(); this.tl=[]; this.tc=new Map(); }
-  put(k,x,y,t,c='n',o={}){ this.it.set(k,{k,x,y,t:String(t),c,bar:!!o.bar,from:o.from||null}); return this; }
-  mv(k,x,y){ const i=this.it.get(k); if(i){i.x=x;i.y=y;} return this; }
-  set(k,props){ const i=this.it.get(k); if(i) Object.assign(i,props); return this; }
-  del(...ks){ ks.flat().forEach(k=>this.it.delete(k)); return this; }
-  has(k){ return this.it.has(k); }
-  get(k){ return this.it.get(k); }
-  hl(...ks){ ks.flat().forEach(k=>this.hot.add(k)); return this; }
-  tcls(k,c){ this.tc.set(k,c); return this; }
-  link(a,b,c='link',bend=0){ this.tl.push({k:'t:'+a+'>'+b+':'+c,a,b,c,bend}); return this; }
-  plink(k,a,b,c='link',bend=0){ this.ln.set(k,{k,a,b,c,bend}); return this; }
-  seg(k,x1,y1,x2,y2,c='rule'){ this.ln.set(k,{k,x1,y1,x2,y2,c}); return this; }
-  unseg(...ks){ ks.forEach(k=>this.ln.delete(k)); return this; }
-  snap(say){
-    const items=[...this.it.values()].map(i=>{
-      let c=i.c; if(this.hot.has(i.k)) c+=' hot'; if(this.tc.has(i.k)) c+=' '+this.tc.get(i.k);
-      return {...i,c};
-    });
-    this.fr.push({items, lines:[...this.ln.values(), ...this.tl], say});
-    this.it.forEach(i=>{i.from=null;}); this.hot.clear(); this.tl=[]; this.tc.clear();
-    return this;
-  }
-}
-/* lay tokens left-to-right on one row: [[key,text,cls,opts],...] */
-function lay(s,y,toks,x0=0,gap=0.6){ let x=x0; for(const [k,t,c,o] of toks){ s.put(k,x,y,t,c||'n',o||{}); x+=len(t)+gap; } return x; }
-/* put a number's digits right-aligned so its last digit sits at column xr (spacing w) */
-function digitsAt(s,pre,str,xr,y,c='n',w=1){ const a=[...String(str)]; a.forEach((ch,i)=>{ const fromRight=a.length-1-i; s.put(pre+fromRight, xr-fromRight*w, y, ch, c); }); return a.length; }
-
-/* ============================================================
-   Shared finishing step for the base-and-deviation family
-   (Nikhilam multiplication, Yāvadūnam squaring, Ānurūpyeṇa)
-   ============================================================ */
-function rightPart(v,k){ return v<0 ? {t:pad(-v,k), bar:true} : {t: v<10**k ? pad(v,k) : String(v), bar:false}; }
-function baseFinish(s,{left,right,B,k,W,y,label,expect}){
-  let Lf=left, R=right;
-  if(R>=B){
-    const c=Math.floor(R/B); Lf+=c; R%=B;
-    s.put('cy',W-len(left)-1.6,y-0.6,'+'+c,'carry',{from:'rt'}).hl('rt','cy');
-    s.snap(`The right part may hold only <b>${k}</b> digit${k>1?'s':''} (one for each zero in the base ${B}). ${right} is too big, so its extra <b>${c}</b> carries over into the left part.`);
-    s.put('lt',W-len(Lf),y,Lf,'res').put('rt',W+2,y,pad(R,k),'res').del('cy').hl('lt','rt');
-    s.snap(`${left} + ${c} = <b>${Lf}</b> on the left, and <b>${pad(R,k)}</b> stays on the right.`);
-  } else if(R<0){
-    const b=Math.ceil(-R/B); Lf-=b; R+=b*B;
-    s.hl('rt');
-    s.snap(`The right part is negative — written with a bar on top, the <i>vinculum</i> (<span class="vinc">${pad(-right,k)}</span> means −${-right}). Borrow ${b} from the left: one unit on the left is worth ${B} here.`);
-    s.put('lt',W-len(Lf),y,Lf,'res').put('rt',W+2,y,pad(R,k),'res').hl('lt','rt');
-    s.snap(`${left} − ${b} = <b>${Lf}</b> on the left; ${b*B} − ${-right} = <b>${pad(R,k)}</b> on the right.`);
-  }
-  const ans = Lf*B + R;
-  const ansStr = String(Lf)+pad(R,k);
-  const yA=y+1.5;
-  const pre=label+' =';
-  s.put('eqA',0,yA,pre,'op');
-  const x0=len(pre)+1;
-  s.put('ltA',x0,yA,String(Lf),'ans',{from:'lt'}).put('rtA',x0+len(Lf),yA,pad(R,k),'ans',{from:'rt'});
-  s.snap(`Join the two parts: <span class="ok">${label} = ${Number(ansStr)}</span>` + (expect!==undefined && Number(ansStr)!==expect ? ` <span class="no">(check failed: expected ${expect})</span>` : ''));
-  return ans;
-}
-
 /* ============================================================
    TECHNIQUES
    ============================================================ */
-const T=[];
-const def=o=>T.push(o);
 
 /* ---------- 1a. Ekādhikena: squares ending in 5 ---------- */
 def({
-  id:'sq5', group:'Sūtra 1 · Ekādhikena Pūrveṇa', name:'Squaring numbers that end in 5',
+  id:'sq5', ch:'also Ch. XXXII', chn:2, o:40, su:[1], group:'Sūtra 1 · Ekādhikena Pūrveṇa', name:'Squaring numbers that end in 5',
   sutra:{kind:'SŪTRA 1 OF 16', dev:'एकाधिकेन पूर्वेण', iast:'Ekādhikena Pūrveṇa', en:'“By one more than the previous one”'},
-  ch:'Ch. I–II · also Ch. XXXII',
   short:'Square any number ending in 5 in one line: (previous part) × (one more) | 25.',
   brief:`<p>For a number ending in 5, take the part <i>before</i> the 5, multiply it by its <b>ekādhika</b> (one more than itself), and write 25 after it.</p>
     <ol><li>Split <span class="mono">65</span> into <span class="mono">6</span> | <span class="mono">5</span>.</li><li>6 × (6+1) = 42 → left part.</li><li>5 × 5 = 25 → right part.</li><li>Answer: <span class="mono">4225</span>.</li></ol>
@@ -397,9 +45,8 @@ def({
 /* ---------- 1b. Ekādhikena: recurring decimals 1/x9 ---------- */
 function repetend(d){ let r=1, s=''; do{ r*=10; s+=Math.floor(r/d); r%=d; }while(r!==1 && s.length<500); return s; }
 def({
-  id:'recip', group:'Sūtra 1 · Ekādhikena Pūrveṇa', name:'Recurring decimals: 1/19, 1/29 …',
+  id:'recip', ch:'see also Ch. XXVI', chn:1, o:10, su:[1], group:'Sūtra 1 · Ekādhikena Pūrveṇa', name:'Recurring decimals: 1/19, 1/29 …',
   sutra:{kind:'SŪTRA 1 OF 16', dev:'एकाधिकेन पूर्वेण', iast:'Ekādhikena Pūrveṇa', en:'“By one more than the previous one”'},
-  ch:'Ch. I & Ch. XXVI',
   short:'Write the whole repeating block of 1/19 from right to left, multiplying by 2 each time.',
   brief:`<p>For a denominator ending in 9, its <b>ekādhika</b> is one more than the digits before the 9 (19 → 2, 29 → 3, 49 → 5).</p>
     <ol><li>Write <span class="mono">1</span> as the <i>last</i> digit.</li><li>Multiply it by the ekādhika, write the result to its left; carry tens like ordinary multiplication.</li><li>Keep multiplying the newest digit (plus carry) by the ekādhika until the block is complete.</li></ol>
@@ -455,9 +102,8 @@ def({
 /* ---------- 1c. Veṣṭana: divisibility by osculation ---------- */
 function osculator(d){ const u=d%10, m={9:1,3:3,7:7,1:9}[u]; return m ? {E:(d*m+1)/10, m} : null; }
 def({
-  id:'osc', group:'Sūtra 1 · Ekādhikena Pūrveṇa', name:'Divisibility test by osculation (Veṣṭana)',
+  id:'osc', verdict:true, chn:29, o:10, su:[1], sub:[5], group:'Sūtra 1 · Ekādhikena Pūrveṇa', name:'Divisibility test by osculation (Veṣṭana)',
   sutra:{kind:'SUB-SŪTRA 5 · USES SŪTRA 1', dev:'वेष्टनम्', iast:'Veṣṭanam', en:'“Osculation” — by the ekādhika of the divisor'},
-  ch:'Ch. XXIX–XXX',
   short:'Is 2774 divisible by 19? Repeatedly fold the last digit back in using the ekādhika.',
   brief:`<p>Find the divisor’s <b>osculator</b>: multiply it until it ends in 9, then take the ekādhika of what’s before the 9.</p>
     <ul><li>19 → 2 · 29 → 3 (already end in 9)</li><li>7 × 7 = 49 → 5 · 13 × 3 = 39 → 4 · 17 × 7 = 119 → 12</li></ul>
@@ -498,9 +144,8 @@ def({
 
 /* ---------- 2a. Nikhilam subtraction ---------- */
 def({
-  id:'niksub', group:'Sūtra 2 · Nikhilaṁ Navataścaramaṁ Daśataḥ', name:'Subtracting from 10, 100, 1000 …',
+  id:'niksub', chn:2, o:5, su:[2], group:'Sūtra 2 · Nikhilaṁ Navataścaramaṁ Daśataḥ', name:'Subtracting from 10, 100, 1000 …',
   sutra:{kind:'SŪTRA 2 OF 16', dev:'निखिलं नवतश्चरमं दशतः', iast:'Nikhilaṁ Navataścaramaṁ Daśataḥ', en:'“All from nine and the last from ten”'},
-  ch:'Ch. II–III',
   short:'1000 − 357: every digit from 9, the last from 10 — no borrowing.',
   brief:`<p>To subtract a number from a power of ten, take <b>each digit from 9</b> and the <b>last digit from 10</b>.</p>
     <ol><li>Pad the number with zeros to match the base’s zeros (1000 − 57 → 1000 − 057).</li><li>9 − 0, 9 − 5 → 9, 4 …</li><li>10 − 7 → 3 for the last non-zero digit. Trailing zeros stay zeros.</li></ol>
@@ -538,9 +183,8 @@ def({
 /* ---------- 2b. Nikhilam multiplication ---------- */
 function nearestBase(a,b){ let best=10, bs=1e18; for(let k=1;k<=6;k++){ const B=10**k, sc=Math.abs(a-B)+Math.abs(b-B); if(sc<bs){bs=sc;best=B;} } return best; }
 def({
-  id:'nikmul', group:'Sūtra 2 · Nikhilaṁ Navataścaramaṁ Daśataḥ', name:'Multiplying numbers near a base',
+  id:'nikmul', chn:2, o:10, su:[2], group:'Sūtra 2 · Nikhilaṁ Navataścaramaṁ Daśataḥ', name:'Multiplying numbers near a base',
   sutra:{kind:'SŪTRA 2 OF 16', dev:'निखिलं नवतश्चरमं दशतः', iast:'Nikhilaṁ Navataścaramaṁ Daśataḥ', en:'“All from nine and the last from ten”'},
-  ch:'Ch. III',
   short:'97 × 96: deviations −3 and −4 → cross 93 | product 12 → 9312.',
   brief:`<p>For numbers close to 10, 100, 1000…</p>
     <ol><li>Write each number’s <b>deviation</b> from the base (−3 for 97, +4 for 104).</li><li><b>Left part</b>: add one number to the <i>other’s</i> deviation (cross-wise). Both diagonals agree.</li><li><b>Right part</b>: multiply the deviations. It gets as many digits as the base has zeros.</li><li>Carry or borrow if the right part over- or under-flows.</li></ol>`,
@@ -618,13 +262,13 @@ function divGen(N,d,mode){
   let R=0; for(let j=qn;j<n;j++) R=R*10+tot[j];
   const yR=yT+1.4;
   const tidy = q.some(v=>v<0||v>9) || tot.slice(qn).some(v=>v<0||v>9);
-  s.put('QR',X0-1,yR,`Q = ${Q}   R = ${R}`,'work').hl('QR');
+  s.put('QR',X0-1,yR,`Q = ${Q} · R = ${R}`,'work').hl('QR');
   s.snap(tidy ? `Read the figures as place values (carrying or borrowing between columns as usual): quotient <b>${Q}</b>, remainder <b>${R}</b>.` : `Read them off: quotient <b>${Q}</b>, remainder <b>${R}</b>.`);
   let adjN=0;
   while(R>=d){ R-=d; Q++; adjN++; }
   while(R<0){ R+=d; Q--; adjN--; }
   if(adjN!==0){
-    s.put('QR',X0-1,yR,`Q = ${Q}   R = ${R}`,'work').hl('QR');
+    s.put('QR',X0-1,yR,`Q = ${Q} · R = ${R}`,'work').hl('QR');
     s.snap(adjN>0 ? `But the remainder is not smaller than ${d}: take ${d} out of it ${adjN>1?adjN+' times':'once more'}, adding ${adjN} to the quotient → Q = <b>${Q}</b>, R = <b>${R}</b>.` : `The remainder came out negative: borrow ${d} from the quotient${adjN<-1?' '+(-adjN)+' times':''} → Q = <b>${Q}</b>, R = <b>${R}</b>.`);
   }
   const ok=Q===Math.floor(N/d)&&R===N%d;
@@ -636,9 +280,8 @@ const divQ = p=>`${p.N} ÷ ${p.d}<small>answer as quotient r remainder, e.g. 13 
 const divAns = p=>`${Math.floor(p.N/p.d)} r ${p.N%p.d}`;
 const divCheck = (p,v)=>{ const m=(String(v).match(/\d+/g)||[]).map(Number); if(!m.length) return false; const r=m[1]??0; return m[0]===Math.floor(p.N/p.d) && r===p.N%p.d; };
 def({
-  id:'nikdiv', group:'Sūtra 2 · Nikhilaṁ Navataścaramaṁ Daśataḥ', name:'Division by numbers just below a base',
+  id:'nikdiv', chn:4, o:10, su:[2], group:'Sūtra 2 · Nikhilaṁ Navataścaramaṁ Daśataḥ', name:'Division by numbers just below a base',
   sutra:{kind:'SŪTRA 2 OF 16', dev:'निखिलं नवतश्चरमं दशतः', iast:'Nikhilaṁ Navataścaramaṁ Daśataḥ', en:'“All from nine and the last from ten”'},
-  ch:'Ch. IV',
   short:'1234 ÷ 89: divide using only the small complement 11 — no trial division.',
   brief:`<p>When the divisor is just under 10, 100, 1000 …, divide using its <b>complement</b> instead.</p>
     <ol><li>Complement of the divisor (89 → 11). Split off as many dividend digits on the right as the base has zeros.</li><li>Bring the first digit down: it’s the first quotient figure.</li><li>Multiply it by the complement digits; write them under the next columns.</li><li>Add the next column → next quotient figure; repeat.</li><li>Sum the remainder columns. If the remainder ≥ divisor, take the divisor out once more.</li></ol>`,
@@ -653,9 +296,8 @@ def({
 
 /* ---------- 3a. Ūrdhva-Tiryagbhyām ---------- */
 def({
-  id:'urdhva', group:'Sūtra 3 · Ūrdhva-Tiryagbhyām', name:'Multiplying any two numbers',
+  id:'urdhva', chn:3, o:10, su:[3], group:'Sūtra 3 · Ūrdhva-Tiryagbhyām', name:'Multiplying any two numbers',
   sutra:{kind:'SŪTRA 3 OF 16', dev:'ऊर्ध्वतिर्यग्भ्याम्', iast:'Ūrdhva-Tiryagbhyām', en:'“Vertically and crosswise”'},
-  ch:'Ch. III (and throughout)',
   short:'The general method: every column of the answer is a pattern of vertical and crosswise products.',
   brief:`<p>Write the numbers one above the other. Each answer digit, from the right, is a sum of products:</p>
     <ul><li><b>units</b>: vertical product of the units</li><li><b>tens</b>: the two crosswise products</li><li><b>hundreds</b> (3-digit): the two outer crosswise + the middle vertical</li><li>… then the pattern shrinks back</li></ul>
@@ -702,9 +344,8 @@ def({
 
 /* ---------- 3b. Dvandva-yoga straight squaring ---------- */
 def({
-  id:'dvandva', group:'Sūtra 3 · Ūrdhva-Tiryagbhyām', name:'Squaring any number (duplex)',
+  id:'dvandva', chn:33, o:10, su:[3], group:'Sūtra 3 · Ūrdhva-Tiryagbhyām', name:'Squaring any number (duplex)',
   sutra:{kind:'SŪTRA 3 · DVANDVA-YOGA', dev:'द्वन्द्वयोग', iast:'Dvandva-yoga', en:'“Duplex combination” — Ūrdhva applied to a number and itself'},
-  ch:'Ch. XXXIII (Straight Squaring)',
   short:'The square of any number column by column using “duplexes”: a², 2ab, 2ac + b² …',
   brief:`<p>The <b>duplex</b> D of a group of digits:</p>
     <ul><li>one digit <span class="mono">a</span> → a²</li><li>two <span class="mono">ab</span> → 2ab</li><li>three <span class="mono">abc</span> → 2ac + b²</li><li>four <span class="mono">abcd</span> → 2ad + 2bc</li></ul>
@@ -746,9 +387,8 @@ def({
 
 /* ---------- 4a. Parāvartya division ---------- */
 def({
-  id:'pardiv', group:'Sūtra 4 · Parāvartya Yojayet', name:'Division by numbers just above a base',
+  id:'pardiv', chn:5, o:10, su:[4], group:'Sūtra 4 · Parāvartya Yojayet', name:'Division by numbers just above a base',
   sutra:{kind:'SŪTRA 4 OF 16', dev:'परावर्त्य योजयेत्', iast:'Parāvartya Yojayet', en:'“Transpose and apply”'},
-  ch:'Ch. V',
   short:'1234 ÷ 112: transpose the excess 12 into −1 −2 and divide with tiny negative corrections.',
   brief:`<p>When the divisor is just above a base (12, 112, 1013 …):</p>
     <ol><li>Drop the leading 1; the remaining digits are the excess over the base.</li><li><b>Transpose</b> them — change their signs (12 → <span class="vinc">1</span> <span class="vinc">2</span>).</li><li>Proceed exactly as in Nikhilam division: bring down, multiply by the transposed digits, add columns.</li><li>If the remainder comes out negative, borrow one divisor from the quotient.</li></ol>`,
@@ -763,9 +403,8 @@ def({
 
 /* ---------- 4b. Parāvartya: simple equations ---------- */
 def({
-  id:'pareq', group:'Sūtra 4 · Parāvartya Yojayet', name:'Solving simple equations',
+  id:'pareq', chn:11, o:10, su:[4], group:'Sūtra 4 · Parāvartya Yojayet', name:'Solving simple equations',
   sutra:{kind:'SŪTRA 4 OF 16', dev:'परावर्त्य योजयेत्', iast:'Parāvartya Yojayet', en:'“Transpose and apply”'},
-  ch:'Ch. XI',
   short:'ax + b = cx + d ⇒ x = (d − b)/(a − c), and (x+a)(x+b) = (x+c)(x+d) in one line.',
   brief:`<p>A term that crosses the = sign <b>transposes</b>: + becomes −, × becomes ÷.</p>
     <ul><li><span class="mono">ax + b = cx + d</span> → x = (d − b) / (a − c)</li><li><span class="mono">(x+a)(x+b) = (x+c)(x+d)</span> → x = (cd − ab) / (a + b − c − d)</li></ul>
@@ -831,9 +470,8 @@ ax − cx = d − b
 
 /* ---------- 5. Śūnyaṁ Sāmyasamuccaye ---------- */
 def({
-  id:'sunyam', group:'Sūtra 5 · Śūnyaṁ Sāmyasamuccaye', name:'Equations solved by “same total ⇒ zero”',
+  id:'sunyam', chn:12, o:10, su:[5], group:'Sūtra 5 · Śūnyaṁ Sāmyasamuccaye', name:'Equations solved by “same total ⇒ zero”',
   sutra:{kind:'SŪTRA 5 OF 16', dev:'शून्यं साम्यसमुच्चये', iast:'Śūnyaṁ Sāmyasamuccaye', en:'“When the samuccaya is the same, that samuccaya is zero”'},
-  ch:'Ch. XII–XIV',
   short:'1/(x−7) + 1/(x−9) = 1/(x−6) + 1/(x−10): the denominators total the same, so that total is 0.',
   brief:`<p><i>Samuccaya</i> means “combination / total”. Recognise when the same total appears on both sides — then set it to zero.</p>
     <ul><li><b>Sum of denominators</b>: 1/(x+a) + 1/(x+b) = 1/(x+c) + 1/(x+d) with a + b = c + d → 2x + (a + b) = 0.</li><li><b>Numerators vs denominators</b>: N₁/D₁ = N₂/D₂ where N₁ + N₂ and D₁ + D₂ are the same (up to a factor) → N₁ + N₂ = 0.</li></ul>`,
@@ -890,9 +528,8 @@ def({
 
 /* ---------- 10. Yāvadūnam squaring ---------- */
 def({
-  id:'yavad', group:'Sūtra 10 · Yāvadūnam', name:'Squaring numbers near a base',
+  id:'yavad', ch:'also Ch. XXXII', chn:2, o:30, su:[10], sub:[7], group:'Sūtra 10 · Yāvadūnam', name:'Squaring numbers near a base',
   sutra:{kind:'SŪTRA 10 · SUB-SŪTRA 7', dev:'यावदूनं तावदूनीकृत्य वर्गं च योजयेत्', iast:'Yāvadūnaṁ Tāvadūnīkṛtya Vargañca Yojayet', en:'“Whatever the deficiency, lessen by that much, and set up the square of the deficiency”'},
-  ch:'Ch. XXXII',
   short:'97² → 97 − 3 = 94 | 3² = 09 → 9409.',
   brief:`<p>For a number near 10, 100, 1000 …</p>
     <ol><li>Find the deficiency (or surplus) from the base: 97 is 3 short.</li><li><b>Lessen by that much</b>: 97 − 3 = 94 (a surplus is added: 104 + 4 = 108).</li><li><b>Set up the square</b> of the deficiency: 3² = 09 (as many digits as the base has zeros).</li></ol>`,
@@ -923,9 +560,8 @@ def({
 
 /* ---------- sub-sūtra 1. Ānurūpyeṇa: working bases ---------- */
 def({
-  id:'anurupya', group:'Corollaries (Upa-sūtras)', name:'Ānurūpyeṇa — working bases (50, 60, 400 …)',
+  id:'anurupya', chn:2, o:20, sub:[1], group:'Corollaries (Upa-sūtras)', name:'Ānurūpyeṇa — working bases (50, 60, 400 …)',
   sutra:{kind:'SUB-SŪTRA 1', dev:'आनुरूप्येण', iast:'Ānurūpyeṇa', en:'“Proportionately”'},
-  ch:'Ch. III & XXXII',
   short:'48 × 47 with working base 50 = 100 ÷ 2 → (45 ÷ 2) | 06 → 2256.',
   brief:`<p>When numbers are near 50, 60, 300 … rather than a power of ten, use that as a <b>working base</b> and adjust <b>proportionately</b>.</p>
     <ol><li>Deviations from the working base W.</li><li>Cross-add as in Nikhilam.</li><li>Scale the left part by W’s ratio to the theoretical base (× 6 for 60 = 6 × 10; ÷ 2 for 50 = 100 ÷ 2).</li><li>Right part = product of deviations, as before.</li></ol>`,
@@ -979,47 +615,47 @@ def({
 
 /* ---------- sub-sūtra 8. Antyayor Daśake'pi ---------- */
 def({
-  id:'antya', group:'Corollaries (Upa-sūtras)', name:'Antyayor Daśake’pi — last digits adding to 10',
+  id:'antya', chn:2, o:50, sub:[8], group:'Corollaries (Upa-sūtras)', name:'Antyayor Daśake’pi — last digits adding to 10 (or 100)',
   sutra:{kind:'SUB-SŪTRA 8', dev:'अन्त्ययोर्दशकेऽपि', iast:'Antyayor Daśake’pi', en:'“Also when the last digits add up to ten”'},
-  ch:'Ch. III',
-  short:'47 × 43: same first part, last digits 7 + 3 = 10 → 4 × 5 | 7 × 3 → 2021.',
+  short:'47 × 43: same first part, last digits 7 + 3 = 10 → 4 × 5 | 7 × 3 → 2021. Also 191 × 109 → 1 × 2 | 91 × 09.',
   brief:`<p>When two numbers share everything except the last digit, and the last digits add to 10:</p>
     <ol><li>Left part: the shared part × its ekādhika (one more).</li><li>Right part: product of the last digits, always written with two digits.</li></ol>
+    <p>The same works when the last <b>two</b> digits add to 100 (then the right part gets four digits), and so on.</p>
     <p class="note">Squaring numbers ending in 5 is the special case 5 + 5 = 10.</p>`,
-  why:`<p>Let the numbers be 10p + u and 10p + v with u + v = 10:</p><div class="eqn">(10p+u)(10p+v) = 100p² + 10p(u+v) + uv
-                 = 100p² + 100p + uv
-                 = 100·p(p+1) + uv</div>`,
-  hist:`<p>This generalises Ekādhikena’s first example, and Tīrtha extends it to last <i>two</i> digits adding to 100 (e.g. 292 × 208 → 2 × 3 | 92 × 08). It is one of the most-quoted “Vedic tricks” in popular books.</p>`,
-  ex:{p:4,u:7}, ph:'47 × 43 or 112 × 118',
-  rand(){ return {p: Math.random()<.75? ri(1,9) : ri(10,25), u: ri(1,9)}; },
-  parse(str){ const b=binop(str,MUL); if(!b) throw 'Type it like 47 × 43.'; const [a,c]=b; if(Math.floor(a/10)!==Math.floor(c/10)) throw 'Both numbers need the same leading part (like 4_ and 4_).'; if(a%10+c%10!==10) throw 'The last digits must add up to 10.'; return {p:Math.floor(a/10),u:a%10}; },
-  q:p=>`${10*p.p+p.u} × ${10*p.p+10-p.u}`, ans:p=>String((10*p.p+p.u)*(10*p.p+10-p.u)),
-  gen({p,u}){
-    const s=new Sc(), v=10-u, a=10*p+u, b=10*p+v, P=String(p), lp=len(P), E=p+1, L1=p*E, R=u*v;
-    s.put('pa',0,0,P).put('ua',lp,0,u).put('x',lp+1.6,0,'×','op').put('pb',lp+3.2,0,P).put('ub',2*lp+3.2,0,v);
+  why:`<p>Let the numbers be 10ᵏp + u and 10ᵏp + v with u + v = 10ᵏ:</p><div class="eqn">(10ᵏp+u)(10ᵏp+v) = 10²ᵏp² + 10ᵏp(u+v) + uv
+                     = 10²ᵏ·p(p+1) + uv</div><p>With k = 1 that is “× 100, plus uv in two digits”; with k = 2, “× 10 000, plus uv in four digits”.</p>`,
+  hist:`<p>In Ch. II Tīrtha presents this right after the squares ending in 5 (its special case) and immediately extends it: “the last digits (in sets of 2, 3 and so on) together total 100, 1000 etc.”, e.g. 191 × 109 = 2/0819. It is one of the most-quoted “Vedic tricks” in popular books.</p>`,
+  ex:{p:4,u:7,k:1}, ph:'47 × 43, 112 × 118 or 191 × 109',
+  rand(){ return Math.random()<.8 ? {p: Math.random()<.75? ri(1,9) : ri(10,25), u: ri(1,9), k:1} : {p:ri(1,9), u:ri(1,99), k:2}; },
+  parse(str){ const b=binop(str,MUL); if(!b) throw 'Type it like 47 × 43.'; const [a,c]=b;
+    for(const k of [1,2,3]){ const B=10**k; if(Math.floor(a/B)===Math.floor(c/B) && a%B+c%B===B && Math.floor(a/B)>0) return {p:Math.floor(a/B),u:a%B,k}; }
+    throw 'Both numbers need the same leading part, with the endings adding to 10 (or 100, 1000).'; },
+  q:p=>{ const B=10**(p.k||1); return `${B*p.p+p.u} × ${B*p.p+B-p.u}`; }, ans:p=>{ const B=10**(p.k||1); return String((B*p.p+p.u)*(B*p.p+B-p.u)); },
+  gen({p,u,k=1}){
+    const s=new Sc(), B=10**k, v=B-u, a=B*p+u, b=B*p+v, P=String(p), lp=len(P), E=p+1, L1=p*E, R=u*v, U=pad(u,k), V=pad(v,k);
+    s.put('pa',0,0,P).put('ua',lp,0,U).put('x',lp+k+0.6,0,'×','op').put('pb',lp+k+2.2,0,P).put('ub',2*lp+k+2.2,0,V);
     s.snap(`<b>${a} × ${b}</b>: both start with <b>${P}</b>.`);
     s.hl('ua','ub').plink('lk','ua','ub','pair',-1.0);
-    s.snap(`And the last digits add up to ten: ${u} + ${v} = 10. <b>Antyayor Daśake’pi</b> applies.`);
+    s.snap(`And the endings add up to ${B}: ${U} + ${V} = ${B}. <b>Antyayor Daśake’pi</b> applies${k>1?` (with ${k}-digit endings)`:''}.`);
     s.unseg('lk');
     const y1=1.5;
     s.put('p2',0,y1,P,'n',{from:'pa'}).put('x1',lp+0.6,y1,'×','op').put('e',lp+2.2,y1,E,'key',{from:'pb'});
     s.put('eq1',lp+2.2+len(E)+0.6,y1,'=','op').put('l',lp+2.2+len(E)+2.2,y1,L1,'res').hl('p2','e','l');
     s.snap(`Left part: ${P} × its ekādhika ${E} = <b>${L1}</b>.`);
-    const y2=2.7;
-    s.put('u2',0,y2,u,'n',{from:'ua'}).put('x2',1.6,y2,'×','op').put('v2',3.2,y2,v,'n',{from:'ub'}).put('eq2',4.8,y2,'=','op').put('r',6.4,y2,pad(R,2),'res').hl('u2','v2','r');
-    s.snap(`Right part: ${u} × ${v} = <b>${R}</b>${R<10?` → written <b>${pad(R,2)}</b> (always two digits)`:''}.`);
+    const y2=2.7, W=2*k;
+    s.put('u2',0,y2,U,'n',{from:'ua'}).put('x2',k+0.6,y2,'×','op').put('v2',k+2.2,y2,V,'n',{from:'ub'}).put('eq2',2*k+2.8,y2,'=','op').put('r',2*k+4.4,y2,pad(R,W),'res').hl('u2','v2','r');
+    s.snap(`Right part: ${U} × ${V} = <b>${R}</b>${len(R)<W?` → written <b>${pad(R,W)}</b> (always ${W} digits)`:''}.`);
     const y3=4.1, ll=len(L1);
-    s.put('lA',0,y3,L1,'ans',{from:'l'}).put('rA',ll,y3,pad(R,2),'ans',{from:'r'});
-    s.snap(`<span class="ok">${a} × ${b} = ${a*b}</span>` + (Number(String(L1)+pad(R,2))!==a*b?` <span class="no">mismatch</span>`:''));
+    s.put('lA',0,y3,L1,'ans',{from:'l'}).put('rA',ll,y3,pad(R,W),'ans',{from:'r'});
+    s.snap(`<span class="ok">${a} × ${b} = ${a*b}</span>` + (Number(String(L1)+pad(R,W))!==a*b?` <span class="no">mismatch</span>`:''));
     return s.fr;
   }
 });
 
 /* ---------- 14. Ekanyūnena Pūrveṇa ---------- */
 def({
-  id:'ekanyuna', group:'Sūtra 14 · Ekanyūnena Pūrveṇa', name:'Multiplying by 9, 99, 999 …',
+  id:'ekanyuna', chn:2, o:60, su:[14], group:'Sūtra 14 · Ekanyūnena Pūrveṇa', name:'Multiplying by 9, 99, 999 …',
   sutra:{kind:'SŪTRA 14 OF 16', dev:'एकन्यूनेन पूर्वेण', iast:'Ekanyūnena Pūrveṇa', en:'“By one less than the previous one”'},
-  ch:'Ch. III',
   short:'457 × 999 → one less: 456 | all-from-9 of 456: 543 → 456543.',
   brief:`<p>To multiply by a row of nines (with at least as many nines as the number has digits):</p>
     <ol><li>Left part: <b>one less</b> than the number (457 → 456).</li><li>Right part: subtract each digit of that from 9 (456 → 543). Pad to the number of nines.</li></ol>`,
@@ -1050,15 +686,14 @@ def({
 
 /* ---------- 15. Guṇitasamuccayaḥ: digit-sum check ---------- */
 def({
-  id:'beejank', group:'Sūtra 15 · Guṇitasamuccayaḥ', name:'Checking answers with digit sums',
+  id:'beejank', ch:'arithmetic companion to the Ch. VII check', verdict:true, chn:7, o:90, su:[15], sub:[13], group:'Sūtra 15 · Guṇitasamuccayaḥ', name:'Guṇita-samuccaya for numbers — digit-sum check',
   sutra:{kind:'SŪTRA 15 OF 16', dev:'गुणितसमुच्चयः', iast:'Guṇitasamuccayaḥ', en:'“The product of the sum is the sum of the product”'},
-  ch:'Ch. II–III',
   short:'Is 4567 × 89 = 406463 right? Compare digit sums: 4 × 8 → 32 → 5 vs 4+0+6+4+6+3 → 23 → 5.',
   brief:`<p>Reduce every number to its <b>digit sum</b> (keep adding digits until one is left; 9 counts as 0 — “casting out nines”).</p>
     <ol><li>Digit sum of each factor.</li><li>Multiply them, reduce again.</li><li>Compare with the digit sum of the claimed product.</li></ol>
     <p class="note">Different ⇒ certainly wrong. Same ⇒ <i>probably</i> right — swapped digits or an error of a multiple of 9 slip through.</p>`,
   why:`<p>10 ≡ 1 (mod 9), so every power of ten is ≡ 1, and a number is ≡ the sum of its digits (mod 9). Remainders respect multiplication:</p><div class="eqn">a ≡ s(a),  b ≡ s(b)  ⇒  a·b ≡ s(a)·s(b)   (mod 9)</div><p>So s(a·b) must equal s(s(a)·s(b)) — the “sum of the product” equals the “product of the sums”.</p>`,
-  hist:`<p>Casting out nines is one of the oldest checks in arithmetic. Indian astronomers and arithmeticians used it; it travelled through the Arabic world and appears in Fibonacci’s <i>Liber Abaci</i> (1202). Tīrtha recommends it as the routine check after every Vedic computation, and also as the literal reading of Sūtra 15 for algebra: the sum of the coefficients of a product equals the product of the coefficient-sums.</p>`,
+  hist:`<p>In the book this sūtra appears at the end of Ch. VII as a check on <i>algebra</i>: the sum of the coefficients of a product equals the product of the coefficient-sums (put x = 1). Tīrtha does not spell out the arithmetic version, but it is the same idea with x = 10: digits are coefficients, and because 10 ≡ 1 (mod 9), carrying between columns changes a digit sum only by multiples of 9 — so the check holds <i>mod 9</i>.</p><p>That mod-9 form is the ancient “casting out nines”, used by Indian and Arab arithmeticians and in Fibonacci’s <i>Liber Abaci</i> (1202).</p>`,
   ex:{a:4567,b:89,c:406463}, ph:'4567 × 89 = 406463',
   rand(){ const a=ri(102,9999), b=ri(12,999); let c=a*b; const r=Math.random(); if(r<.25){ const s=String(c).split(''); const i=ri(0,s.length-2); if(s[i]!==s[i+1]){ [s[i],s[i+1]]=[s[i+1],s[i]]; c=+s.join(''); } } else if(r<.55){ const p=10**ri(0,len(c)-2); c+= pick([-1,1])*ri(1,8)*p; } return {a,b,c}; },
   parse(str){ const m=String(str).replace(/[−–—]/g,'-').match(/^\s*(\d+)\s*(?:×|x|\*)\s*(\d+)\s*=\s*(\d+)\s*$/i); if(!m) throw 'Type it like 4567 × 89 = 406463.'; return {a:+m[1],b:+m[2],c:+m[3]}; },
@@ -1092,9 +727,8 @@ def({
 /* ---------- sub-sūtra 12. Vilokanam: square roots ---------- */
 const sqEnd={0:[0],1:[1,9],4:[2,8],5:[5],6:[4,6],9:[3,7]};
 def({
-  id:'sqrt', group:'Corollaries (Upa-sūtras)', name:'Vilokanam — square roots of perfect squares',
+  id:'sqrt', chn:34, o:20, sub:[12], group:'Corollaries (Upa-sūtras)', name:'Vilokanam — square roots of perfect squares',
   sutra:{kind:'SUB-SŪTRA 12', dev:'विलोकनम्', iast:'Vilokanam', en:'“By mere observation”'},
-  ch:'Ch. XXXIV (cf. XXXV)',
   short:'√15129: ends in 9 → root ends in 3 or 7; 151 sits between 12² and 13² → 123 or 127; 151 < 12×13 → 123.',
   brief:`<p>For a <b>perfect</b> square:</p>
     <ol><li>Mark off pairs of digits from the right — one root digit per pair.</li><li>The last digit fixes the root’s last digit up to two choices (1↔1/9, 4↔2/8, 9↔3/7, 6↔4/6, 5↔5, 0↔0).</li><li>Drop the last pair. The largest a with a² ≤ what’s left gives the leading digits.</li><li>Choose between a·10 + small and a·10 + large: compare with a × (a+1) — that’s (a5)² without its 25.</li></ol>`,
@@ -1134,9 +768,8 @@ def({
 /* ---------- Vilokanam: cube roots of exact cubes ---------- */
 const cubeEnd={0:0,1:1,2:8,3:7,4:4,5:5,6:6,7:3,8:2,9:9};
 def({
-  id:'cbrt', group:'Corollaries (Upa-sūtras)', name:'Vilokanam — cube roots of exact cubes',
+  id:'cbrt', chn:35, o:10, sub:[12], group:'Corollaries (Upa-sūtras)', name:'Vilokanam — cube roots of exact cubes',
   sutra:{kind:'SUB-SŪTRA 12', dev:'विलोकनम्', iast:'Vilokanam', en:'“By mere observation”'},
-  ch:'Ch. XXXV',
   short:'∛438976: last digit 6 → 6; first group 438 lies between 7³ and 8³ → 76.',
   brief:`<p>For an <b>exact</b> cube (up to 6 digits → a 2-digit root):</p>
     <ol><li>Mark off groups of three digits from the right.</li><li>The last digit of the cube fixes the root’s last digit <i>uniquely</i>: 1→1, 8→2, 7→3, 4→4, 5→5, 6→6, 3→7, 2→8, 9→9, 0→0.</li><li>The largest a with a³ ≤ the first group gives the first digit.</li></ol>`,
@@ -1166,212 +799,3 @@ def({
   }
 });
 
-/* ============================================================
-   About the book (shared, bottom of left panel)
-   ============================================================ */
-const SUTRAS=['Ekādhikena Pūrveṇa','Nikhilaṁ Navataścaramaṁ Daśataḥ','Ūrdhva-Tiryagbhyām','Parāvartya Yojayet','Śūnyaṁ Sāmyasamuccaye','(Ānurūpye) Śūnyamanyat','Saṅkalana-vyavakalanābhyām','Pūraṇāpūraṇābhyām','Calana-Kalanābhyām','Yāvadūnam','Vyaṣṭisamaṣṭiḥ','Śeṣāṇyaṅkena Carameṇa','Sopāntyadvayamantyam','Ekanyūnena Pūrveṇa','Guṇitasamuccayaḥ','Guṇakasamuccayaḥ'];
-const SUBS=['Ānurūpyeṇa','Śiṣyate Śeṣasaṁjñaḥ','Ādyamādyenāntyamantyena','Kevalaiḥ Saptakaṁ Guṇyāt','Veṣṭanam','Yāvadūnaṁ Tāvadūnam','Yāvadūnaṁ Tāvadūnīkṛtya Vargañca Yojayet','Antyayor Daśake’pi','Antyayoreva','Samuccayaguṇitaḥ','Lopanasthāpanābhyām','Vilokanam','Guṇitasamuccayaḥ Samuccayaguṇitaḥ'];
-const SUTRA_HERE={1:['sq5','recip','osc'],2:['niksub','nikmul','nikdiv'],3:['urdhva','dvandva'],4:['pardiv','pareq'],5:['sunyam'],10:['yavad'],14:['ekanyuna'],15:['beejank']};
-const SUB_HERE={1:['anurupya'],5:['osc'],7:['yavad'],8:['antya'],12:['sqrt','cbrt']};
-function aboutHTML(id){
-  const li=(name,i,map)=>`<li class="${(map[i+1]||[]).includes(id)?'here':''}">${name}${map[i+1]?' <span class="note">· animated here</span>':''}</li>`;
-  return `<p><b>Jagadguru Śaṅkarācārya Bhāratī Kṛṣṇa Tīrtha</b> (1884–1960), born Venkatraman Shastri in the Tirunelveli region of Tamil Nadu, studied science, mathematics and Sanskrit before taking sannyāsa; from 1925 he headed the Govardhana Maṭha at Puri.</p>
-  <p>He said he reconstructed sixteen <i>sūtras</i> (aphorisms) and thirteen corollaries during years of study between 1911 and 1918, and wrote sixteen volumes expounding them — manuscripts that were reportedly lost. The single introductory volume we have was written from memory late in his life and published posthumously in <b>1965</b> by Banaras Hindu University, edited by V. S. Agrawala.</p>
-  <p class="note"><b>On the “Vedic” claim.</b> Tīrtha attributed the sūtras to a <i>pariśiṣṭa</i> (appendix) of the Atharvaveda, but the editor’s own foreword says they do not appear in the known pariśiṣṭas, and a note on the sūtra list says it was “compiled from stray references in the text”. Historians of Indian mathematics (e.g. K. S. Shukla, S. G. Dani) regard the system as Tīrtha’s own ingenious creation rather than ancient Vedic material. The <i>methods</i> are sound arithmetic either way — which is why every technique here shows the algebra that makes it work.</p>
-  <p class="note"><b>A Kaṭapayādi connection.</b> Ch. XXV describes the Kaṭapayādi letter-number code, with a verse that encodes π/10 to 31 decimals. It’s the same cipher that numbers the 72 Mēḷakarta rāgas of Carnatic music.</p>
-  <p><b>The sixteen sūtras</b></p><ol class="sutra-list">${SUTRAS.map((n,i)=>li(n,i,SUTRA_HERE)).join('')}</ol>
-  <p><b>The thirteen sub-sūtras (corollaries)</b></p><ol class="sutra-list">${SUBS.map((n,i)=>li(n,i,SUB_HERE)).join('')}</ol>`;
-}
-
-/* ============================================================
-   Board renderer — keyed reconciliation with transitions
-   ============================================================ */
-const CW=16.2, RH=50;   // CW = IBM Plex Mono advance (0.6em) at 27px, so adjacent tokens join seamlessly
-const svg=$('#board'), itLayer=$('#itLayer'), lnLayer=$('#lnLayer');
-const NS='http://www.w3.org/2000/svg';
-const live=new Map();   // key -> <g>
-const liveLn=new Map(); // key -> <path>
-let frames=[], idx=0, timer=null, view=null;
-
-function itemPos(it){ const w=len(it.t); return {cx:(it.x+w/2)*CW, cy:it.y*RH, w}; }
-function fitView(frs){
-  let x0=1e9,x1=-1e9,y0=1e9,y1=-1e9;
-  frs.forEach(f=>{ f.items.forEach(it=>{ const {cx,cy,w}=itemPos(it); const half=(it.c.includes('work')||it.c.includes('lbl'))? w*CW*(it.c.includes('work')?0.71:0.5) : w*CW/2;
-      const left=(it.c.includes('work')||it.c.includes('lbl'))? it.x*CW : cx-half, right=(it.c.includes('work')||it.c.includes('lbl'))? it.x*CW+half : cx+half;
-      x0=Math.min(x0,left); x1=Math.max(x1,right); y0=Math.min(y0,cy-RH*0.5); y1=Math.max(y1,cy+RH*0.5); });
-    f.lines.forEach(l=>{ if(l.x1!==undefined){ x0=Math.min(x0,l.x1*CW,l.x2*CW); x1=Math.max(x1,l.x1*CW,l.x2*CW); y0=Math.min(y0,l.y1*RH,l.y2*RH); y1=Math.max(y1,l.y1*RH,l.y2*RH);} });
-  });
-  const pad=16; x0-=pad; x1+=pad; y0-=pad*1.4; y1+=pad;
-  const w=x1-x0, h=y1-y0;
-  svg.setAttribute('viewBox',`${x0} ${y0} ${w} ${h}`);
-  svg.style.maxWidth=Math.round(w*1.15)+'px';
-  view={x0,y0,w,h};
-}
-function makeItem(it){
-  const g=document.createElementNS(NS,'g'); g.dataset.k=it.k;
-  const r=document.createElementNS(NS,'rect'); r.setAttribute('class','bg'); r.setAttribute('rx','7'); g.appendChild(r);
-  const t=document.createElementNS(NS,'text'); g.appendChild(t);
-  const v=document.createElementNS(NS,'line'); v.setAttribute('class','vin'); g.appendChild(v);
-  itLayer.appendChild(g); return g;
-}
-function paintItem(g,it){
-  const {cx,cy,w}=itemPos(it);
-  const isLeft=it.c.includes('work')||it.c.includes('lbl');
-  const tx=isLeft? it.x*CW : cx;
-  g.setAttribute('class','it '+it.c);
-  g.style.transform=`translate(${tx}px,${cy}px)`;
-  const t=g.querySelector('text'); if(t.textContent!==it.t) t.textContent=it.t;
-  const small=it.c.includes('sup')||it.c.includes('carry');
-  const bw=isLeft? w*CW*0.71+12 : (small? 16 : w*CW+10), bh=small?20:38;
-  const r=g.querySelector('rect'); r.setAttribute('x',isLeft?-6:-bw/2); r.setAttribute('y',-bh/2); r.setAttribute('width',bw); r.setAttribute('height',bh);
-  const v=g.querySelector('.vin');
-  if(it.bar){ v.setAttribute('x1',-w*CW/2+3); v.setAttribute('x2',w*CW/2-3); v.setAttribute('y1',-19); v.setAttribute('y2',-19); v.style.display=''; } else v.style.display='none';
-  return {tx,cy};
-}
-function lineD(l, pos){
-  let x1,y1,x2,y2;
-  if(l.x1!==undefined){ x1=l.x1*CW; y1=l.y1*RH; x2=l.x2*CW; y2=l.y2*RH; return `M${x1},${y1} L${x2},${y2}`; }
-  const A=pos.get(l.a), B=pos.get(l.b); if(!A||!B) return null;
-  x1=A.x; y1=A.y; x2=B.x; y2=B.y;
-  const dx=x2-x1, dy=y2-y1, d=Math.hypot(dx,dy)||1, sh=Math.min(16,d/3);
-  const ux=dx/d, uy=dy/d;
-  x1+=ux*sh; y1+=uy*sh; x2-=ux*sh; y2-=uy*sh;
-  if(l.bend){ const mx=(x1+x2)/2, my=(y1+y2)/2 + l.bend*RH; return `M${x1},${y1} Q${mx},${my} ${x2},${y2}`; }
-  return `M${x1},${y1} L${x2},${y2}`;
-}
-function render(i){
-  const f=frames[i]; if(!f) return;
-  const seen=new Set(), pos=new Map();
-  f.items.forEach(it=>{
-    seen.add(it.k);
-    let g=live.get(it.k);
-    const target=itemPos(it);
-    const isLeft=it.c.includes('work')||it.c.includes('lbl');
-    pos.set(it.k,{x: isLeft? it.x*CW+ len(it.t)*CW*0.3 : target.cx, y: target.cy});
-    if(!g){
-      g=makeItem(it); live.set(it.k,g);
-      const src=it.from && live.get(it.from);
-      if(src){ g.style.transition='none'; g.style.transform=src.style.transform; g.style.opacity='1';
-        paintItem(g,{...it}); g.style.transform=src.style.transform; g.getBoundingClientRect(); g.style.transition=''; paintItem(g,it); }
-      else { g.style.transition='none'; paintItem(g,it); g.style.opacity='0'; g.getBoundingClientRect(); g.style.transition=''; g.style.opacity='1'; }
-    } else { g.style.opacity='1'; paintItem(g,it); }
-  });
-  live.forEach((g,k)=>{ if(!seen.has(k)){ live.delete(k); g.style.opacity='0'; setTimeout(()=>g.remove(),420); } });
-  const seenL=new Set();
-  f.lines.forEach(l=>{
-    const d=lineD(l,pos); if(!d) return;
-    seenL.add(l.k);
-    let p=liveLn.get(l.k);
-    if(!p){ p=document.createElementNS(NS,'path'); p.setAttribute('pathLength','1'); lnLayer.appendChild(p); liveLn.set(l.k,p);
-      p.setAttribute('class','ln '+l.c+(l.x1===undefined?' draw':'')); }
-    else p.setAttribute('class','ln '+l.c);
-    p.setAttribute('d',d);
-  });
-  liveLn.forEach((p,k)=>{ if(!seenL.has(k)){ liveLn.delete(k); p.classList.add('fade'); setTimeout(()=>p.remove(),320); } });
-  $('#say').innerHTML=f.say||'';
-  $('#stepNo').textContent=`${i+1} / ${frames.length}`;
-  $('#prog').style.width=(frames.length>1? i/(frames.length-1)*100 : 100)+'%';
-  $('#bPrev').disabled=i===0; $('#bNext').disabled=i===frames.length-1;
-}
-function clearBoard(){ live.forEach(g=>g.remove()); live.clear(); liveLn.forEach(p=>p.remove()); liveLn.clear(); }
-function load(fr){
-  stop(); frames=fr; idx=0; clearBoard(); fitView(frames); render(0);
-}
-function go(i){ i=Math.max(0,Math.min(frames.length-1,i)); if(i<idx-1||i===0&&idx>1){ /* jumping back several: rebuild cleanly */ clearBoard(); }
-  idx=i; render(idx); }
-function play(){ if(timer) return; if(idx>=frames.length-1) go(0); $('#bPlay').textContent='❚❚'; $('#bPlay').setAttribute('aria-label','Pause');
-  const tick=()=>{ if(idx>=frames.length-1){ stop(); return; } go(idx+1); timer=setTimeout(tick, +$('#speed').value); };
-  timer=setTimeout(tick, Math.min(900,+$('#speed').value)); }
-function stop(){ if(timer){clearTimeout(timer); timer=null;} $('#bPlay').textContent='▶'; $('#bPlay').setAttribute('aria-label','Play'); }
-
-/* ============================================================
-   UI wiring
-   ============================================================ */
-let tech=T[0], prob=null, tries=0;
-const store={ get(k,d){ try{ const v=localStorage.getItem('vedic-math:'+k); return v?JSON.parse(v):d; }catch(e){ return d; } }, set(k,v){ try{ localStorage.setItem('vedic-math:'+k,JSON.stringify(v)); }catch(e){} } };
-let stats=store.get('stats',{});
-
-function buildSelect(){
-  const sel=$('#techSel'); let cur=null, og=null;
-  T.forEach((t,i)=>{ if(t.group!==cur){ og=document.createElement('optgroup'); og.label=t.group; sel.appendChild(og); cur=t.group; }
-    const o=document.createElement('option'); o.value=t.id; o.textContent=t.name; og.appendChild(o); });
-}
-function fillPanel(){
-  const t=tech, su=t.sutra;
-  $('#sutraCard').innerHTML=`<div class="kind">${su.kind}</div><div class="dev" lang="sa">${su.dev}</div><div class="iast">${su.iast}</div><div class="en">${su.en}</div><div class="ch">Tīrtha · ${t.ch}</div>`;
-  $('#briefCard').innerHTML=`<h2>The method</h2>${t.brief}`;
-  $('#whyCard').innerHTML=`<h2>Why it works</h2>${t.why}`;
-  $('#histCard').innerHTML=`<h2>History &amp; notes</h2>${t.hist}`;
-  $('#aboutBody').innerHTML=aboutHTML(t.id);
-  $('#short').textContent=t.short;
-  $('#ownIn').placeholder=t.ph; $('#ownIn').value=''; $('#ownErr').textContent='';
-  $('#ownHint').textContent= t.id==='sunyam' ? 'Equations here are generated so the sūtra’s condition holds.' : 'Animate shows every step for your numbers; Random picks a fresh example.';
-}
-function runParams(p){ try{ load(tech.gen(p)); }catch(e){ console.error(e); $('#say').innerHTML=`<span class="no">Couldn’t animate this one: ${e.message||e}</span>`; } }
-function selectTech(id, push=true){
-  tech=T.find(t=>t.id===id)||T[0];
-  $('#techSel').value=tech.id;
-  fillPanel(); runParams(tech.ex); newProblem();
-  store.set('last',tech.id);
-  if(push) try{ history.replaceState(null,'','#'+tech.id); }catch(e){}
-  $('#aside').scrollTop=0;
-}
-function scoreText(){ const s=stats[tech.id]; $('#score').textContent = s ? `${s.c}/${s.n} correct · streak ${s.st}` : ''; }
-function newProblem(){
-  prob = tech.prand ? tech.prand() : tech.rand();
-  tries=0; $('#pq').innerHTML=tech.q(prob); $('#pIn').value=''; $('#pFb').innerHTML=''; scoreText();
-}
-function checkAnswer(){
-  const v=$('#pIn').value; if(!v.trim()) return;
-  const ok = tech.check ? tech.check(prob,v) : normIn(v)===normIn(tech.ans(prob));
-  const s=stats[tech.id]||{c:0,n:0,st:0};
-  if(tries===0){ s.n++; if(ok){ s.c++; s.st++; } else s.st=0; stats[tech.id]=s; store.set('stats',stats); }
-  tries++;
-  const extra = tech.after ? tech.after(prob) : '';
-  $('#pFb').innerHTML = ok ? `<span class="ok">✓ Correct!</span>${extra} <span class="note">Enter for the next one.</span>` : `<span class="no">✗ Not quite.</span> Try again, or press <b>Show steps</b>.`;
-  if(ok) $('#pIn').dataset.done='1';
-  scoreText();
-}
-function showSteps(){
-  runParams(prob);
-  $('#pFb').innerHTML=`Answer: <b class="mono">${tech.ans(prob)}</b> — watch the board above.`+(tech.after?tech.after(prob):'');
-  if(tries===0){ const s=stats[tech.id]||{c:0,n:0,st:0}; s.n++; s.st=0; stats[tech.id]=s; store.set('stats',stats); tries=1; scoreText(); }
-  document.querySelector('.board-card').scrollIntoView({behavior:'smooth',block:'nearest'});
-  setTimeout(play,500);
-}
-
-buildSelect();
-$('#techSel').addEventListener('change',e=>selectTech(e.target.value));
-$('#prevTech').onclick=()=>{ const i=T.indexOf(tech); selectTech(T[(i-1+T.length)%T.length].id); };
-$('#nextTech').onclick=()=>{ const i=T.indexOf(tech); selectTech(T[(i+1)%T.length].id); };
-$('#bRestart').onclick=()=>{ stop(); clearBoard(); idx=0; render(0); };
-$('#bPrev').onclick=()=>{ stop(); go(idx-1); };
-$('#bNext').onclick=()=>{ stop(); go(idx+1); };
-$('#bPlay').onclick=()=>{ timer? stop() : play(); };
-$('#ownGo').onclick=()=>{ $('#ownErr').textContent=''; const v=$('#ownIn').value.trim(); if(!v){ $('#ownErr').textContent='Type a problem first — e.g. '+tech.ph; return; } try{ const p=tech.parse(v); runParams(p); setTimeout(play,400); }catch(e){ $('#ownErr').textContent= typeof e==='string'? e : (e.message||String(e)); } };
-$('#ownIn').addEventListener('keydown',e=>{ if(e.key==='Enter') $('#ownGo').click(); });
-$('#ownRand').onclick=()=>{ $('#ownErr').textContent=''; runParams(tech.rand()); setTimeout(play,400); };
-$('#pCheck').onclick=checkAnswer;
-$('#pIn').addEventListener('keydown',e=>{ if(e.key==='Enter'){ if($('#pIn').dataset.done==='1'){ delete $('#pIn').dataset.done; newProblem(); } else checkAnswer(); } });
-$('#pIn').addEventListener('input',()=>{ delete $('#pIn').dataset.done; });
-$('#pNew').onclick=()=>{ delete $('#pIn').dataset.done; newProblem(); $('#pIn').focus(); };
-$('#pShow').onclick=showSteps;
-document.addEventListener('keydown',e=>{
-  if(e.target.matches('input,select,textarea')) return;
-  if(e.key==='ArrowRight'){ stop(); go(idx+1); e.preventDefault(); }
-  else if(e.key==='ArrowLeft'){ stop(); go(idx-1); e.preventDefault(); }
-  else if(e.key===' '){ timer? stop() : play(); e.preventDefault(); }
-  else if(e.key==='Home'){ $('#bRestart').click(); }
-});
-const startId=(location.hash||'').slice(1) || store.get('last','sq5');
-selectTech(T.some(t=>t.id===startId)?startId:'sq5', false);
-
-/* exposed for self-tests in the console */
-window.VM={T, selfTest(){
-  const bad=[];
-  T.forEach(t=>{ for(let n=0;n<60;n++){ const p=n===0?t.ex:t.rand(); try{ const fr=t.gen(p); const last=fr[fr.length-1].say; if(/class="no"/.test(last) && t.id!=='beejank' && t.id!=='osc') bad.push([t.id,JSON.stringify(p),last]); if(t.id==='beejank'){/* verdict is data-dependent */} }catch(e){ bad.push([t.id,JSON.stringify(p),String(e)]); } } });
-  return bad;
-}};
-</script>
-</body>
-</html>

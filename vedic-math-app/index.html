@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vedic Mathematics</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Noto+Serif+Devanagari:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#15122a;
+    --bg-2:#1d1938;
+    --border:rgba(212,166,60,.32);
+    --panel:#f4ead7;
+    --panel-dim:#ece0c8;
+    --ink:#2a2140;
+    --ink-soft:#6a5d7c;
+    --muted:#a69cbc;
+    --gold:#d4a63c;
+    --gold-light:#ecca7c;
+    /* meaning-named board tokens */
+    --active:#e0782a;        /* digits being worked on right now */
+    --active-wash:rgba(224,120,42,.18);
+    --deviation:#a23b4b;     /* distance from a base, complements, vinculum */
+    --result:#2d5fa8;        /* intermediate results */
+    --answer:#1f8a6a;        /* final answer */
+    --cross:#6b4fc0;         /* crosswise links */
+    --vertical:#2d5fa8;      /* vertical links */
+    --half-a:#2d5fa8;
+    --half-b:#c0532f;
+    --good:#1f8a6a;
+    --bad:#b53a3a;
+    --shadow:0 10px 30px -12px rgba(0,0,0,.6);
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;background:var(--bg);color:var(--panel);font-family:'Inter',sans-serif;min-height:100vh;}
+  a{color:var(--deviation);}
+  header{max-width:1320px;margin:0 auto;padding:26px 22px 8px;display:flex;align-items:baseline;gap:16px;flex-wrap:wrap;}
+  h1{font-family:'Fraunces',serif;font-weight:700;font-size:clamp(26px,4vw,36px);margin:0;color:var(--panel);}
+  header .sub{color:var(--muted);font-size:14px;}
+  header .sub i{color:var(--gold-light);font-style:normal;}
+
+  .layout{max-width:1320px;margin:0 auto;padding:12px 22px 60px;display:grid;grid-template-columns:minmax(300px,390px) minmax(0,1fr);gap:22px;align-items:start;}
+  aside{position:sticky;top:14px;max-height:calc(100vh - 28px);overflow:auto;display:flex;flex-direction:column;gap:12px;padding-right:4px;scrollbar-width:thin;scrollbar-color:var(--border) transparent;}
+  main{display:flex;flex-direction:column;gap:16px;min-width:0;}
+
+  .card{background:var(--panel);color:var(--ink);border-radius:14px;padding:16px 18px;box-shadow:var(--shadow);font-size:13.8px;line-height:1.58;}
+  .card.dim{background:var(--panel-dim);}
+  .card h2{font-family:'Fraunces',serif;font-size:15.5px;margin:0 0 8px;color:var(--deviation);font-weight:700;}
+  .card p{margin:0 0 8px;} .card p:last-child{margin-bottom:0;}
+  .card ol,.card ul{margin:0 0 6px;padding-left:20px;} .card li{margin:2px 0;}
+  .mono,code{font-family:'IBM Plex Mono',monospace;font-size:12.8px;}
+  .eqn{font-family:'IBM Plex Mono',monospace;font-size:12.8px;background:rgba(42,33,64,.06);border-left:3px solid var(--gold);padding:7px 10px;border-radius:4px;margin:6px 0 8px;white-space:pre-wrap;}
+  .note{font-size:12.6px;color:var(--ink-soft);}
+  .vinc{text-decoration:overline;}
+
+  .sutra-card{text-align:center;padding-top:14px;}
+  .sutra-card .kind{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.6px;color:var(--ink-soft);}
+  .sutra-card .dev{font-family:'Noto Serif Devanagari',serif;font-size:27px;font-weight:700;color:var(--ink);margin:4px 0 0;line-height:1.5;}
+  .sutra-card .iast{font-family:'Fraunces',serif;font-size:18px;font-weight:500;color:var(--deviation);margin-top:2px;}
+  .sutra-card .en{font-size:13.5px;color:var(--ink-soft);font-style:italic;margin-top:3px;}
+  .sutra-card .ch{display:inline-block;line-height:1.45;margin-top:8px;font-size:11.5px;border:1px solid rgba(162,59,75,.35);color:var(--deviation);border-radius:12px;padding:1px 10px;}
+
+  details.card summary{cursor:pointer;font-family:'Fraunces',serif;font-weight:700;color:var(--deviation);font-size:15px;list-style:none;}
+  details.card summary::-webkit-details-marker{display:none;}
+  details.card summary::before{content:'▸ ';color:var(--gold);}
+  details.card[open] summary::before{content:'▾ ';}
+  details.card[open] summary{margin-bottom:8px;}
+  .sutra-list{font-size:12.6px;margin:4px 0 8px;padding-left:22px;}
+  .sutra-list li.here{font-weight:600;}
+  .sutra-list li.here::after{content:' ●';color:var(--active);font-size:10px;}
+
+  /* picker */
+  .picker{display:flex;gap:10px;align-items:center;flex-wrap:wrap;}
+  .picker select{flex:1;min-width:240px;font-family:'Inter',sans-serif;font-size:15px;font-weight:600;padding:10px 12px;border-radius:10px;border:1.5px solid var(--gold);background:var(--bg-2);color:var(--panel);cursor:pointer;}
+  .picker select optgroup{color:var(--gold-light);font-style:normal;}
+  .picker select option{color:var(--panel);background:var(--bg-2);}
+  .btn{font-family:'Inter',sans-serif;font-size:13.5px;font-weight:600;border:1.5px solid var(--gold);background:transparent;color:var(--gold-light);border-radius:20px;padding:7px 15px;cursor:pointer;transition:background .15s,color .15s;white-space:nowrap;}
+  .btn:hover{background:var(--gold);color:var(--bg);}
+  .btn.solid{background:var(--gold);color:var(--bg);}
+  .btn.solid:hover{background:var(--gold-light);}
+  .btn.icon{width:38px;height:38px;padding:0;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:15px;}
+  .btn:disabled{opacity:.35;cursor:default;background:transparent;color:var(--gold-light);}
+  .short{color:var(--muted);font-size:14px;margin-top:-4px;}
+
+  /* board */
+  .board-card{padding:14px 14px 12px;}
+  .board-wrap{width:100%;display:flex;justify-content:center;overflow-x:auto;min-height:150px;}
+  #board{width:100%;height:auto;display:block;overflow:visible;}
+  .say{margin:10px 4px 0;min-height:66px;font-size:14.6px;line-height:1.6;color:var(--ink);border-top:1px dashed rgba(42,33,64,.18);padding-top:10px;}
+  .say b{color:var(--active);} .say i{color:var(--ink-soft);}
+  .say .ok{color:var(--answer);font-weight:700;} .say .no{color:var(--bad);font-weight:700;}
+  .controls{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:10px;}
+  .controls .btn{border-color:var(--ink-soft);color:var(--ink);}
+  .controls .btn:hover{background:var(--ink);color:var(--panel);}
+  .controls .btn.solid{background:var(--ink);color:var(--panel);border-color:var(--ink);}
+  .controls .btn:disabled{background:transparent;color:var(--ink);}
+  .stepno{font-family:'IBM Plex Mono',monospace;font-size:12.5px;color:var(--ink-soft);min-width:58px;text-align:center;}
+  .progress{flex:1;min-width:80px;height:5px;border-radius:3px;background:rgba(42,33,64,.12);overflow:hidden;}
+  .progress i{display:block;height:100%;width:0;background:var(--active);transition:width .3s;}
+  .speed{font-size:12px;color:var(--ink-soft);display:flex;align-items:center;gap:5px;}
+  .speed select{font-family:'Inter',sans-serif;font-size:12px;border-radius:6px;border:1px solid rgba(42,33,64,.25);background:transparent;color:var(--ink);padding:3px;}
+
+  /* svg board */
+  .it{transition:transform .6s cubic-bezier(.3,.75,.25,1),opacity .4s;}
+  .it text{font-family:'IBM Plex Mono',monospace;font-size:27px;font-weight:500;text-anchor:middle;dominant-baseline:central;fill:var(--ink);transition:fill .3s;}
+  .it .bg{fill:var(--active-wash);stroke:var(--active);stroke-width:1.4;opacity:0;transition:opacity .3s;}
+  .it .vin{stroke:var(--deviation);stroke-width:2.2;stroke-linecap:round;}
+  .it.hot .bg{opacity:1;} .it.hot text{fill:var(--active);font-weight:600;}
+  .it.op text{fill:var(--ink-soft);font-weight:400;}
+  .it.dim text{fill:#b3a88f;}
+  .it.dev text{fill:var(--deviation);}
+  .it.key text{fill:var(--active);font-weight:600;}
+  .it.res text{fill:var(--result);font-weight:600;}
+  .it.ans text{fill:var(--answer);font-weight:700;}
+  .it.bad text{fill:var(--bad);font-weight:700;}
+  .it.h1 text{fill:var(--half-a);font-weight:600;} .it.h2 text{fill:var(--half-b);font-weight:600;}
+  .it.gone text{fill:#b3a88f;text-decoration:line-through;}
+  .it.lbl text{font-family:'Inter',sans-serif;font-size:14px;font-weight:600;fill:var(--ink-soft);letter-spacing:.3px;text-anchor:start;}
+  .it.work text{font-size:19px;fill:var(--ink-soft);text-anchor:start;}
+  .it.work.hot text{fill:var(--active);}
+  .it.sup text,.it.carry text{font-size:15px;font-weight:600;}
+  .it.sup text{fill:var(--ink);}
+  .it.carry text{fill:var(--deviation);}
+  .it.carry.dim text{fill:#c4b49a;}
+  .ln{fill:none;stroke-width:2.3;stroke-linecap:round;opacity:.85;transition:opacity .3s;}
+  .ln.draw{stroke-dasharray:1;stroke-dashoffset:1;animation:draw .55s ease-out forwards;}
+  @keyframes draw{to{stroke-dashoffset:0;}}
+  .ln.x,.ln.x1{stroke:var(--cross);} .ln.x2{stroke:var(--cross);stroke-dasharray:5 5;opacity:.6;animation:none;}
+  .ln.v{stroke:var(--vertical);} .ln.link{stroke:var(--active);} .ln.pair{stroke:var(--deviation);}
+  .ln.rule{stroke:var(--ink);stroke-width:1.6;opacity:.7;} .ln.bar{stroke:var(--ink-soft);stroke-width:1.6;opacity:.6;}
+  .ln.group{stroke:var(--gold);stroke-width:3;opacity:.9;}
+  .ln.fade{opacity:0;}
+
+
+  .grp-toggle{display:inline-flex;border:1px solid var(--border);border-radius:16px;overflow:hidden;flex-shrink:0;}
+  .grp-toggle button{font-family:'Inter',sans-serif;font-size:12px;font-weight:600;background:transparent;color:var(--muted);border:0;padding:4px 11px;cursor:pointer;}
+  .grp-toggle button.on{background:var(--gold);color:var(--bg);}
+  .sutra-card .ch .also{opacity:.75;}
+  /* geometry */
+  .shp{transition:transform .8s cubic-bezier(.3,.75,.25,1),opacity .4s;}
+  .shp path{stroke:var(--ink);stroke-width:2;stroke-linejoin:round;transition:fill .4s,stroke .4s;}
+  .shp.g0 path{fill:none;stroke:var(--ink-soft);stroke-dasharray:5 4;}
+  .shp.g1 path{fill:rgba(45,95,168,.22);} .shp.g2 path{fill:rgba(192,83,47,.25);} .shp.g3 path{fill:rgba(31,138,106,.25);}
+  .shp.g4 path{fill:rgba(212,166,60,.35);} .shp.g5 path{fill:rgba(107,79,192,.22);}
+  .shp.hot path{stroke:var(--active);stroke-width:3;}
+  .shp.axis path{fill:none;stroke:var(--ink-soft);stroke-width:1.4;}
+  .shp.line path{fill:none;stroke:var(--result);stroke-width:2.6;}
+  .shp.dot path{fill:var(--ink);}
+  /* try + practice */
+  .row{display:flex;gap:8px;align-items:center;flex-wrap:wrap;}
+  input.txt{font-family:'IBM Plex Mono',monospace;font-size:15px;padding:8px 12px;border-radius:9px;border:1.5px solid rgba(42,33,64,.25);background:#fffaf0;color:var(--ink);min-width:0;flex:1 1 170px;}
+  input.txt:focus{outline:none;border-color:var(--active);}
+  .err{color:var(--bad);font-size:12.5px;min-height:18px;margin-top:4px;}
+  .card .btn{border-color:var(--ink-soft);color:var(--ink);}
+  .card .btn:hover{background:var(--ink);color:var(--panel);}
+  .card .btn.solid{background:var(--active);border-color:var(--active);color:#fff;}
+  .card .btn.solid:hover{background:#c8661c;}
+  .q{font-family:'IBM Plex Mono',monospace;font-size:21px;overflow-wrap:anywhere;font-weight:600;color:var(--ink);margin:6px 0 10px;}
+  .q small{display:block;font-family:'Inter',sans-serif;font-size:12.5px;font-weight:500;color:var(--ink-soft);margin-top:2px;}
+  .fb{min-height:22px;margin-top:8px;font-size:14px;}
+  .fb .ok{color:var(--good);font-weight:700;} .fb .no{color:var(--bad);font-weight:700;}
+  .score{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--ink-soft);margin-left:auto;}
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  .legend{display:flex;flex-wrap:wrap;gap:12px;font-size:12px;color:var(--ink-soft);margin-top:8px;}
+  .legend span::before{content:'';display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:5px;vertical-align:-1px;background:var(--c);}
+  /* embedded in a host page (e.g. Vedavani): the host supplies the title */
+  .embedded header{display:none;}
+  .embedded .layout{padding-top:16px;}
+  footer{max-width:1320px;margin:0 auto;padding:0 22px 30px;color:var(--muted);font-size:12px;}
+
+  @media (max-width:980px){
+    .layout{grid-template-columns:1fr;}
+    aside{position:static;max-height:none;overflow:visible;order:2;}
+    main{order:1;}
+    .two{grid-template-columns:1fr;}
+  }
+  @media (max-width:520px){
+    header,.layout,footer{padding-left:14px;padding-right:14px;}
+    .picker select{min-width:0;width:100%;}
+  }
+</style>
+</head>
+<body>
+<header>
+  <h1>Vedic Mathematics</h1>
+  <div class="sub">Sūtras, animated — after <i>Bhāratī Kṛṣṇa Tīrtha</i>, <span style="font-style:italic">Vedic Mathematics</span> (1965)</div>
+</header>
+
+<div class="layout">
+  <aside id="aside">
+    <div class="card sutra-card" id="sutraCard"></div>
+    <div class="card" id="briefCard"></div>
+    <div class="card dim" id="whyCard"></div>
+    <div class="card dim" id="histCard"></div>
+    <details class="card dim" id="aboutCard">
+      <summary>About the book &amp; the sixteen sūtras</summary>
+      <div id="aboutBody"></div>
+    </details>
+  </aside>
+
+  <main>
+    <div class="picker">
+      <button class="btn icon" id="prevTech" title="Previous technique" aria-label="Previous technique">‹</button>
+      <select id="techSel" aria-label="Technique"></select>
+      <button class="btn icon" id="nextTech" title="Next technique" aria-label="Next technique">›</button>
+    </div>
+    <div class="row" style="justify-content:space-between">
+      <div class="short" id="short"></div>
+      <div class="grp-toggle" role="group" aria-label="Group lessons by"><button data-g="chapter">Book order</button><button data-g="sutra">By sūtra</button></div>
+    </div>
+
+    <div class="card board-card">
+      <div class="board-wrap"><svg id="board" xmlns="http://www.w3.org/2000/svg"><g id="shLayer"></g><g id="lnLayer"></g><g id="itLayer"></g></svg></div>
+      <div class="say" id="say"></div>
+      <div class="controls">
+        <button class="btn icon" id="bRestart" title="Restart (Home)" aria-label="Restart">⟲</button>
+        <button class="btn icon" id="bPrev" title="Previous step (←)" aria-label="Previous step">◀</button>
+        <button class="btn icon solid" id="bPlay" title="Play / pause (space)" aria-label="Play">▶</button>
+        <button class="btn icon" id="bNext" title="Next step (→)" aria-label="Next step">▶︎|</button>
+        <span class="stepno" id="stepNo">1 / 1</span>
+        <div class="progress"><i id="prog"></i></div>
+        <label class="speed">speed
+          <select id="speed"><option value="3400">slow</option><option value="2300" selected>normal</option><option value="1300">fast</option><option value="550">very fast</option></select>
+        </label>
+      </div>
+      <div class="legend">
+        <span style="--c:var(--active)">working on now</span>
+        <span style="--c:var(--deviation)">deviation / complement / vinculum</span>
+        <span style="--c:var(--result)">partial result</span>
+        <span style="--c:var(--answer)">answer</span>
+      </div>
+    </div>
+
+    <div class="two">
+      <div class="card">
+        <h2>Try your own</h2>
+        <div class="row">
+          <input class="txt" id="ownIn" autocomplete="off" spellcheck="false">
+          <button class="btn solid" id="ownGo">Animate</button>
+          <button class="btn" id="ownRand" title="Random example">Random</button>
+        </div>
+        <div class="err" id="ownErr"></div>
+        <div class="note" id="ownHint"></div>
+      </div>
+      <div class="card">
+        <div class="row"><h2 style="margin:0">Practice</h2><span class="score" id="score"></span></div>
+        <div class="q" id="pq"></div>
+        <div class="row">
+          <input class="txt" id="pIn" autocomplete="off" spellcheck="false" placeholder="your answer">
+          <button class="btn solid" id="pCheck">Check</button>
+        </div>
+        <div class="row" style="margin-top:8px">
+          <button class="btn" id="pShow">Show steps</button>
+          <button class="btn" id="pNew">New problem</button>
+        </div>
+        <div class="fb" id="pFb"></div>
+      </div>
+    </div>
+  </main>
+</div>
+<footer>Every technique here is checked against ordinary arithmetic as it animates; if a step ever disagrees, the board says so. Book references are to the 1965 BHU edition (Motilal Banarsidass / Orient reprints share its chapter numbering).</footer>
+
+<script src="js/engine.js"></script>
+<script src="js/lessons/core.js"></script>
+<script src="js/lessons/ch01-06.js"></script>
+<script src="js/lessons/ch07-16.js"></script>
+<script src="js/lessons/ch17-25.js"></script>
+<script src="js/lessons/ch26-30.js"></script>
+<script src="js/lessons/ch31-39.js"></script>
+<!--LESSONS-->
+<script src="js/app.js"></script>
+</body>
+</html>
