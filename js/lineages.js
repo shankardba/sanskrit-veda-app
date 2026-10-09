@@ -14,77 +14,102 @@
 const LINEAGES = {
   ramakrishna: { name: 'Ramakrishna–Vivekananda', note: 'Advaita Vedānta · Ramakrishna Order' },
   kriya: { name: 'Kriyā Yoga', note: 'Babaji · Lahiri · Yukteswar · Yogananda' },
-  root: { name: 'Shared root', note: '' }
+  chinmaya: { name: 'Chinmaya', note: 'Sivananda · Tapovan · Chinmayananda' },
+  root: { name: 'Root', note: '' },
+  order: { name: 'Daśanāmī orders', note: '' }
 };
 
 const PEOPLE = [
   {
-    id: 'shankara', lineage: 'root', col: 3, row: 0,
+    id: 'shankara', lineage: 'root', col: 4, row: 0,
     name: 'Ādi Śaṅkara', deva: 'आदि शङ्कर', dates: 'c. 8th century',
     role: 'Advaita teacher; organiser of the Daśanāmī monastic orders',
-    summary: 'Tradition credits Śaṅkara with gathering wandering renunciates into ten named orders (daśa-nāmī, "ten names") — Giri, Purī, Bhāratī, Sarasvatī and others. Both lineages on this page took their sannyāsa through these orders: Ramakrishna through a Purī monk, Yukteswar and Yogananda as Giris.'
+    summary: 'Tradition credits Śaṅkara with gathering wandering renunciates into ten named orders (daśa-nāmī, "ten names") — Giri, Purī, Bhāratī, Sarasvatī and others. All three lineages on this page take their sannyāsa through these orders: Ramakrishna through a Purī monk, Yukteswar and Yogananda as Giris, Sivananda and Chinmayananda as Sarasvatīs.'
+  },
+
+  // --- The three Daśanāmī branches that carry these lineages ---------------
+  {
+    id: 'puri', lineage: 'order', col: 2, row: 1, kind: 'order',
+    name: 'Purī order', deva: 'पुरी', dates: 'Daśanāmī branch',
+    role: 'One of the ten names; traditionally attached to the Śṛṅgerī maṭha',
+    etym: 'purī — "city, fortress".',
+    summary: 'Totāpurī was a Purī monk, and Ramakrishna\'s sannyāsa came through him; the Ramakrishna Order is therefore usually counted in the Purī line, though its monks do not use the suffix.'
+  },
+  {
+    id: 'giri', lineage: 'order', col: 5, row: 1, kind: 'order',
+    name: 'Giri order', deva: 'गिरि', dates: 'Daśanāmī branch',
+    role: 'One of the ten names; traditionally attached to the Jyotir maṭha (Joshimath)',
+    etym: 'giri — "mountain".',
+    summary: 'Sri Yukteswar took formal sannyāsa as a Giri and gave the same to Yogananda in 1915; Kriyā Yoga itself came to them separately, through Babaji and Lahiri Mahasaya. SRF monastics who take final vows still receive Giri names.'
+  },
+  {
+    id: 'sarasvati', lineage: 'order', col: 7, row: 1, kind: 'order',
+    name: 'Sarasvatī order', deva: 'सरस्वती', dates: 'Daśanāmī branch',
+    role: 'One of the ten names; traditionally attached to the Śṛṅgerī maṭha',
+    etym: 'sarasvatī — the goddess of learning; also the river.',
+    summary: 'Swami Sivananda received sannyāsa in this order in 1924 from Swami Viśvānanda Sarasvatī, and passed it on to Chinmayananda, whose monks still carry the Sarasvatī name.'
   },
 
   // --- Ramakrishna–Vivekananda ---------------------------------------------
   {
-    id: 'bhairavi', lineage: 'ramakrishna', col: 0, row: 1,
+    id: 'bhairavi', lineage: 'ramakrishna', col: 0, row: 2,
     name: 'Bhairavī Brāhmaṇī', deva: 'भैरवी ब्राह्मणी', dates: 'fl. 1860s',
     role: 'Tantric teacher of Ramakrishna (from 1861)',
     summary: 'A wandering woman ascetic who guided Ramakrishna through the full course of Tantric sādhana at Dakshineswar and was among the first to declare him an avatāra.'
   },
   {
-    id: 'totapuri', lineage: 'ramakrishna', col: 2, row: 1,
+    id: 'totapuri', lineage: 'ramakrishna', col: 2, row: 2,
     name: 'Totāpurī', deva: 'तोतापुरी', dates: 'fl. 1860s',
     role: 'Purī-order Advaita monk; gave Ramakrishna sannyāsa (c. 1865)',
     summary: 'A naked (nāgā) monk of the Purī order who stayed eleven months at Dakshineswar, initiated Ramakrishna into sannyāsa and taught him nirvikalpa samādhi — the formless, non-dual absorption of Advaita.'
   },
   {
-    id: 'ramakrishna', lineage: 'ramakrishna', col: 1, row: 2,
+    id: 'ramakrishna', lineage: 'ramakrishna', col: 1, row: 3,
     name: 'Śrī Rāmakṛṣṇa', deva: 'श्री रामकृष्ण', dates: '1836–1886', born: 'Gadadhar Chattopadhyay',
     role: 'Priest of the Kālī temple at Dakshineswar',
     etym: 'Rāma + Kṛṣṇa — the two great avatāras of Viṣṇu in one name.',
     summary: 'Practised Tantra, Vaiṣṇava devotion and Advaita in turn (and, briefly, Islam and Christianity) and taught that they arrive at one reality. His conversations, recorded by "M.", became the Kathāmṛta (The Gospel of Sri Ramakrishna).'
   },
   {
-    id: 'sarada', lineage: 'ramakrishna', col: 0, row: 3,
+    id: 'sarada', lineage: 'ramakrishna', col: 0, row: 4,
     name: 'Śāradā Devī', deva: 'शारदा देवी', dates: '1853–1920',
     role: 'Wife and spiritual consort of Ramakrishna; the "Holy Mother"',
     summary: 'After Ramakrishna\'s death she became the guide of his young monastic disciples and gave initiation to many; the Ramakrishna Order regards her as its spiritual mother.'
   },
   {
-    id: 'vivekananda', lineage: 'ramakrishna', col: 1, row: 3,
+    id: 'vivekananda', lineage: 'ramakrishna', col: 1, row: 4,
     name: 'Svāmī Vivekānanda', deva: 'स्वामी विवेकानन्द', dates: '1863–1902', born: 'Narendranath Datta',
     role: 'Chief disciple of Ramakrishna; brought Vedānta to the West',
     etym: 'viveka ("discernment" — telling the real from the unreal) + ānanda ("bliss").',
     summary: 'Met Ramakrishna in 1881. Spoke at the Parliament of the World\'s Religions in Chicago (1893), founded the Vedanta Society of New York (1894) and the Ramakrishna Mission (1897), and wrote Rāja Yoga (1896), an influential commentary on Patañjali.'
   },
   {
-    id: 'mgupta', lineage: 'ramakrishna', col: 2, row: 3,
+    id: 'mgupta', lineage: 'ramakrishna', col: 2, row: 4,
     name: 'Mahendranāth Gupta ("M.")', deva: 'महेन्द्रनाथ गुप्त', dates: '1854–1932',
     role: 'Householder disciple; recorder of the Kathāmṛta',
     summary: 'A Calcutta schoolmaster who kept a diary of Ramakrishna\'s conversations from 1882 to 1886, published in Bengali as Śrī Śrī Rāmakṛṣṇa Kathāmṛta. Yogananda knew him as a boy — "Master Mahasaya" in Autobiography of a Yogi.'
   },
   {
-    id: 'brahmananda', lineage: 'ramakrishna', col: 0, row: 4,
+    id: 'brahmananda', lineage: 'ramakrishna', col: 0, row: 5,
     name: 'Svāmī Brahmānanda', deva: 'स्वामी ब्रह्मानन्द', dates: '1863–1922', born: 'Rakhal Chandra Ghosh',
     role: 'Brother-disciple of Vivekananda; first President of the Ramakrishna Math & Mission',
     etym: 'brahma + ānanda — "the bliss of Brahman".',
     summary: 'Ramakrishna regarded him as his "spiritual son". He led the young Order for over two decades after Vivekananda\'s death.'
   },
   {
-    id: 'rkmission', lineage: 'ramakrishna', col: 0, row: 5, kind: 'institution',
+    id: 'rkmission', lineage: 'ramakrishna', col: 0, row: 6, kind: 'institution',
     name: 'Ramakrishna Math & Mission', dates: 'founded 1897', place: 'Belur Math, near Kolkata',
     role: 'The monastic order and its service wing',
     summary: 'Founded by Vivekananda on 1 May 1897. Its monks receive sannyāsa within the Order and take names ending in -ānanda; its branch centres overseas include the Vedanta Societies.'
   },
   {
-    id: 'vsny', lineage: 'ramakrishna', col: 1, row: 5, kind: 'institution',
+    id: 'vsny', lineage: 'ramakrishna', col: 1, row: 6, kind: 'institution',
     name: 'Vedanta Society of New York', dates: 'founded 1894', place: 'New York',
     role: 'The first Vedānta society in the West',
     summary: 'Founded by Vivekananda during his first American tour; it has been led ever since by monks sent from the Ramakrishna Order.'
   },
   {
-    id: 'sarvapriyananda', lineage: 'ramakrishna', col: 1, row: 6,
+    id: 'sarvapriyananda', lineage: 'ramakrishna', col: 1, row: 7,
     name: 'Svāmī Sarvapriyānanda', deva: 'स्वामी सर्वप्रियानन्द', dates: 'living',
     role: 'Minister and spiritual leader, Vedanta Society of New York (since 2017)',
     etym: 'sarva ("all") + priya ("dear") + ānanda ("bliss") — "the bliss that is dear to all".',
@@ -93,7 +118,7 @@ const PEOPLE = [
 
   // --- Kriyā Yoga ----------------------------------------------------------
   {
-    id: 'babaji', lineage: 'kriya', col: 5, row: 1,
+    id: 'babaji', lineage: 'kriya', col: 4, row: 2,
     name: 'Mahāvatār Bābājī', deva: 'महावतार बाबाजी', dates: 'dates unknown',
     role: 'Revived Kriyā Yoga (per tradition)',
     etym: 'mahā-avatāra ("great descent") + bābājī ("revered father").',
@@ -101,52 +126,105 @@ const PEOPLE = [
     caveat: 'Historicity rests on lineage testimony; no independent records.'
   },
   {
-    id: 'lahiri', lineage: 'kriya', col: 5, row: 2,
+    id: 'lahiri', lineage: 'kriya', col: 4, row: 3,
     name: 'Lāhiṛī Mahāśaya', deva: 'लाहिड़ी महाशय', dates: '1828–1895', born: 'Shyama Charan Lahiri',
     role: 'Householder yogi of Varanasi; spread Kriyā Yoga',
     etym: 'mahāśaya — "great-souled", an honorific.',
     summary: 'A clerk in the military engineering department who kept his job and family while teaching Kriyā to anyone sincere, regardless of caste or creed. He is the link the popular "Babaji → Yukteswar" shorthand skips.'
   },
   {
-    id: 'yukteswar', lineage: 'kriya', col: 5, row: 3,
+    id: 'yukteswar', lineage: 'kriya', col: 4, row: 4,
     name: 'Svāmī Śrī Yukteśvar Giri', deva: 'श्रीयुक्तेश्वर गिरि', dates: '1855–1936', born: 'Priya Nath Karar',
     role: 'Disciple of Lahiri; guru of Yogananda',
     etym: 'yukta ("united") + īśvara ("the Lord") — "one united with God". Giri ("mountain") is his Daśanāmī branch.',
     summary: 'Ran ashrams at Serampore and Puri. At Babaji\'s request (after their meeting at the 1894 Kumbha Mela) he wrote Kaivalya Darśanam — The Holy Science, comparing the Bible with Hindu scripture and setting out his yuga chronology.'
   },
   {
-    id: 'yogananda', lineage: 'kriya', col: 5, row: 4,
+    id: 'yogananda', lineage: 'kriya', col: 4, row: 5,
     name: 'Paramahaṃsa Yogānanda', deva: 'परमहंस योगानन्द', dates: '1893–1952', born: 'Mukunda Lal Ghosh',
     role: 'Brought Kriyā Yoga to the West; author of Autobiography of a Yogi',
     etym: 'yoga + ānanda — "bliss through union".',
     summary: 'Met Yukteswar in 1910 and took Giri-order sannyāsa from him in 1915. Founded Yogoda Satsanga Society (1917) in India, sailed to America in 1920 to speak in Boston, and founded Self-Realization Fellowship.'
   },
   {
-    id: 'srf', lineage: 'kriya', col: 5, row: 5, kind: 'institution',
+    id: 'srf', lineage: 'kriya', col: 4, row: 6, kind: 'institution',
     name: 'Self-Realization Fellowship / YSS', dates: 'founded 1917 · 1920', place: 'Los Angeles · Ranchi',
     role: 'Yogananda\'s organisations',
     summary: 'Yogoda Satsanga Society of India (1917) and Self-Realization Fellowship (1920; Mount Washington HQ from 1925) carry on Kriyā initiation through Yogananda\'s lessons and monastic order.'
   },
   {
-    id: 'dayamata', lineage: 'kriya', col: 6, row: 5.5,
+    id: 'dayamata', lineage: 'kriya', col: 5, row: 6.5,
     name: 'Śrī Dayā Mātā', deva: 'दया माता', dates: '1914–2010', born: 'Faye Wright',
     role: 'President of SRF/YSS 1955–2010',
     etym: 'dayā ("compassion") + mātā ("mother").',
     summary: 'A direct disciple who entered Yogananda\'s ashram at seventeen, she led the organisations for 55 years.'
   },
   {
-    id: 'chidananda', lineage: 'kriya', col: 5, row: 6,
+    id: 'chidananda', lineage: 'kriya', col: 4, row: 7,
     name: 'Svāmī Cidānanda Giri', deva: 'स्वामी चिदानन्द गिरि', dates: 'living',
     role: 'President of SRF/YSS (since 2017)',
     etym: 'cit ("consciousness") + ānanda ("bliss").',
     summary: 'Known as Brother Chidananda; a monk of the SRF order since 1977, he succeeded Mrinalini Mata (president 2011–2017) and is the present-day head of Yogananda\'s line.'
+  },
+  // --- Chinmaya --------------------------------------------------------------
+  {
+    id: 'sivananda', lineage: 'chinmaya', col: 6, row: 2,
+    name: 'Svāmī Śivānanda Sarasvatī', deva: 'स्वामी शिवानन्द', dates: '1887–1963', born: 'Kuppuswami',
+    role: 'Founder of the Divine Life Society, Rishikesh (1936); gave Chinmayananda sannyāsa',
+    etym: 'Śiva + ānanda — "the bliss of Śiva".',
+    summary: 'A Tamil physician who practised in Malaya before renouncing, he took sannyāsa in Rishikesh in 1924 and wrote some two hundred books. In 1949 he gave sannyāsa to Balakrishna Menon, naming him Chinmayananda.'
+  },
+  {
+    id: 'tapovan', lineage: 'chinmaya', col: 8, row: 2,
+    name: 'Svāmī Tapovan Mahārāj', deva: 'स्वामी तपोवन', dates: '1889–1957', born: 'Chippukutty Nair',
+    role: 'Himalayan Vedānta master at Uttarkashi; Chinmayananda\'s teacher',
+    etym: 'tapo-vana — "the forest of austerity".',
+    summary: 'A recluse who lived by the Ganga at Uttarkashi and Gangotri and wrote Wanderings in the Himalayas. Sivananda sent Chinmayananda to him, and he taught him the Upaniṣads and Gītā in the traditional way for about eight years.'
+  },
+  {
+    id: 'chinmayananda', lineage: 'chinmaya', col: 7, row: 3,
+    name: 'Svāmī Cinmayānanda', deva: 'स्वामी चिन्मयानन्द', dates: '1916–1993', born: 'Balakrishna Menon',
+    role: 'Brought Vedānta to lay audiences in English; founded Chinmaya Mission',
+    etym: 'cit-maya ("made of pure consciousness") + ānanda.',
+    summary: 'A journalist who went to Rishikesh in 1947 intending to expose the sādhus and stayed. From 1951 his public "Gītā Jñāna Yajñas" taught the Gītā and Upaniṣads — long reserved for monks and Sanskrit scholars — in English to anyone. Chinmaya Mission grew up around these talks from 1953.'
+  },
+  {
+    id: 'chinmayamission', lineage: 'chinmaya', col: 7, row: 4, kind: 'institution',
+    name: 'Chinmaya Mission', dates: 'founded 1953', place: 'Mumbai · worldwide',
+    role: 'Chinmayananda\'s organisation',
+    summary: 'Formed by his listeners in 1953; its residential Vedānta course at Sandeepany Sadhanalaya, Mumbai (1963) trains its teachers, and Chinmaya Mission West (1975) runs its centres abroad.'
+  },
+  {
+    id: 'dayananda', lineage: 'chinmaya', col: 8, row: 4,
+    name: 'Svāmī Dayānanda Sarasvatī', deva: 'स्वामी दयानन्द', dates: '1930–2015',
+    role: 'Disciple of Chinmayananda; founder of Arsha Vidya Gurukulam',
+    etym: 'dayā ("compassion") + ānanda.',
+    summary: 'Took sannyāsa from Chinmayananda in 1962 and later founded his own teaching line, Arsha Vidya, with gurukulams in Pennsylvania and Coimbatore. Not the 19th-century Ārya Samāj founder of the same name.'
+  },
+  {
+    id: 'tejomayananda', lineage: 'chinmaya', col: 7, row: 5.5,
+    name: 'Svāmī Tejomayānanda', deva: 'स्वामी तेजोमयानन्द', dates: 'b. 1950',
+    role: 'Head of Chinmaya Mission 1993–2017',
+    etym: 'tejo-maya ("full of radiance") + ānanda.',
+    summary: 'Trained under Chinmayananda and led the Mission worldwide for 24 years after his death.'
+  },
+  {
+    id: 'swaroopananda', lineage: 'chinmaya', col: 7, row: 7,
+    name: 'Svāmī Svarūpānanda', deva: 'स्वामी स्वरूपानन्द', dates: 'living',
+    role: 'Head of Chinmaya Mission (since 2017)',
+    etym: 'svarūpa ("one\'s own true nature") + ānanda.',
+    summary: 'The present head of Chinmaya Mission worldwide, succeeding Tejomayananda.'
   }
 ];
 
 const LINKS = [
   // Shared root
-  { from: 'shankara', to: 'totapuri', type: 'sannyasa', label: 'Purī order' },
-  { from: 'shankara', to: 'yukteswar', type: 'sannyasa', label: 'Giri order', toSide: 'left' },
+  { from: 'shankara', to: 'puri', type: 'sannyasa', label: 'Daśanāmī branch' },
+  { from: 'shankara', to: 'giri', type: 'sannyasa', label: 'Daśanāmī branch' },
+  { from: 'shankara', to: 'sarasvati', type: 'sannyasa', label: 'Daśanāmī branch' },
+  { from: 'puri', to: 'totapuri', type: 'sannyasa', label: 'Purī monk' },
+  { from: 'giri', to: 'yukteswar', type: 'sannyasa', label: 'Giri sannyāsa', toSide: 'right' },
+  { from: 'sarasvati', to: 'sivananda', type: 'sannyasa', label: 'sannyāsa from Viśvānanda Sarasvatī, 1924' },
 
   // Ramakrishna line
   { from: 'bhairavi', to: 'ramakrishna', type: 'diksha', label: 'Tantric training, 1861–63' },
@@ -164,13 +242,22 @@ const LINKS = [
   // Kriyā line
   { from: 'babaji', to: 'lahiri', type: 'diksha', label: 'Kriyā initiation, 1861' },
   { from: 'lahiri', to: 'yukteswar', type: 'diksha', label: 'Kriyā initiation' },
-  { from: 'babaji', to: 'yukteswar', type: 'encounter', label: 'Kumbha Mela, 1894 — asked to write The Holy Science', bend: 'right' },
+  { from: 'babaji', to: 'yukteswar', type: 'encounter', label: 'Kumbha Mela, 1894 — asked to write The Holy Science', bend: 'left' },
   { from: 'yukteswar', to: 'yogananda', type: 'diksha', label: 'disciple 1910; sannyāsa 1915' },
   { from: 'lahiri', to: 'yogananda', type: 'encounter', label: 'blessed him as an infant; initiated his parents', bend: 'right' },
   { from: 'yogananda', to: 'srf', type: 'succession', label: 'founded 1917 / 1920' },
   { from: 'yogananda', to: 'dayamata', type: 'diksha', label: 'disciple from 1931' },
   { from: 'srf', to: 'dayamata', type: 'succession', label: 'President 1955–2010' },
   { from: 'srf', to: 'chidananda', type: 'succession', label: 'President since 2017' },
+
+  // Chinmaya line
+  { from: 'sivananda', to: 'chinmayananda', type: 'diksha', label: 'sannyāsa, 1949' },
+  { from: 'tapovan', to: 'chinmayananda', type: 'diksha', label: 'studied Vedānta under him, c. 1949–57' },
+  { from: 'chinmayananda', to: 'chinmayamission', type: 'succession', label: 'founded 1953' },
+  { from: 'chinmayananda', to: 'dayananda', type: 'diksha', label: 'sannyāsa, 1962' },
+  { from: 'chinmayananda', to: 'tejomayananda', type: 'diksha', label: 'disciple', bend: 'left' },
+  { from: 'chinmayamission', to: 'tejomayananda', type: 'succession', label: 'Head 1993–2017' },
+  { from: 'tejomayananda', to: 'swaroopananda', type: 'succession', label: 'succeeded as Head, 2017' },
 
   // Between the lineages
   { from: 'mgupta', to: 'yogananda', type: 'encounter', cross: true,
@@ -182,9 +269,12 @@ const LINKS = [
   { from: 'vsny', to: 'srf', type: 'parallel', cross: true,
     label: 'Western institutions',
     detail: 'The Vedanta Society of New York (1894) and Self-Realization Fellowship (1920) are among the oldest Hindu-rooted spiritual organisations in continuous operation in the United States, and each is still led by a monastic order founded by its lineage.' },
+  { from: 'vivekananda', to: 'chinmayananda', type: 'parallel', cross: true,
+    label: 'Vedānta for everyone, in English',
+    detail: 'Vivekananda\'s lectures (1890s) and Chinmayananda\'s Gītā Jñāna Yajñas (from 1951) did the same unconventional thing two generations apart: taught Advaita, normally passed on in Sanskrit to renunciates, publicly in English to householders. Both then built missions with monks trained to keep teaching that way.' },
   { from: 'sarvapriyananda', to: 'chidananda', type: 'parallel', cross: true,
     label: 'Present-day heads, both since 2017',
-    detail: 'The two lines\' living representatives on this chart both took up their posts in 2017: Sarvapriyananda at the Vedanta Society of New York, Chidananda as President of SRF/YSS.' }
+    detail: 'All three lines\' present-day heads on this chart took up their posts in 2017: Sarvapriyananda at the Vedanta Society of New York, Chidananda as President of SRF/YSS, and Swaroopananda as Head of Chinmaya Mission.' }
 ];
 
 const LINK_TYPES = {
@@ -198,11 +288,14 @@ const LINK_TYPES = {
 (function () {
   const canvas = document.getElementById('lineage-canvas');
   const svg = document.getElementById('lineage-edges');
+  // Parallels are drawn above the cards: they span branches, so beneath the
+  // cards they'd vanish behind the middle lineage when shown.
+  const svgTop = document.getElementById('lineage-edges-top');
   const detail = document.getElementById('lineage-detail');
   const crossList = document.getElementById('lineage-cross');
   if (!canvas) return;
 
-  const COL_W = 152, ROW_H = 132, PAD = 12;
+  const COL_W = 148, ROW_H = 132, PAD = 12;
   const byId = Object.fromEntries(PEOPLE.map(p => [p.id, p]));
   const cards = {};
   let selected = null;
@@ -213,7 +306,7 @@ const LINK_TYPES = {
   canvas.style.height = (maxRow + 1) * ROW_H + PAD * 2 + 'px';
 
   // Lineage header bands
-  [['ramakrishna', 0, 3], ['kriya', 4, 3]].forEach(([key, col, span]) => {
+  [['ramakrishna', 0, 3], ['kriya', 4, 2], ['chinmaya', 6, 3]].forEach(([key, col, span]) => {
     const band = document.createElement('div');
     band.className = 'lineage-band lineage-band-' + key;
     band.style.left = PAD + col * COL_W + 'px';
@@ -225,7 +318,7 @@ const LINK_TYPES = {
   PEOPLE.forEach(p => {
     const el = document.createElement('button');
     el.type = 'button';
-    el.className = `lineage-node lineage-${p.lineage}` + (p.kind === 'institution' ? ' is-institution' : '');
+    el.className = `lineage-node lineage-${p.lineage}` + (p.kind ? ` is-${p.kind}` : '');
     el.style.left = PAD + p.col * COL_W + 'px';
     el.style.top = PAD + p.row * ROW_H + 28 + 'px';
     el.dataset.id = p.id;
@@ -247,9 +340,11 @@ const LINK_TYPES = {
   }
 
   function drawEdges() {
-    svg.setAttribute('width', canvas.offsetWidth);
-    svg.setAttribute('height', canvas.offsetHeight);
-    svg.innerHTML = '';
+    [svg, svgTop].forEach(el => {
+      el.setAttribute('width', canvas.offsetWidth);
+      el.setAttribute('height', canvas.offsetHeight);
+      el.innerHTML = '';
+    });
     LINKS.forEach((l, i) => {
       const a = byId[l.from], b = byId[l.to];
       const ea = cards[l.from], eb = cards[l.to];
@@ -262,7 +357,7 @@ const LINK_TYPES = {
         d = `M${p1} C${bx},${p1[1]} ${bx},${p2[1]} ${p2}`;
       } else if (l.toSide) {
         p1 = anchor(ea, 'bottom'); p2 = anchor(eb, l.toSide);
-        d = `M${p1} C${p1[0]},${p2[1]} ${p1[0]},${p2[1]} ${p2}`;
+        d = `M${p1} L${p1[0]},${p2[1] - 24} Q${p1[0]},${p2[1]} ${p2}`;
       } else if (b.row > a.row + 0.4) {
         p1 = anchor(ea, 'bottom'); p2 = anchor(eb, 'top');
         const my = (p1[1] + p2[1]) / 2;
@@ -281,17 +376,20 @@ const LINK_TYPES = {
       const title = document.createElementNS('http://www.w3.org/2000/svg', 'title');
       title.textContent = `${byId[l.from].name} → ${byId[l.to].name}: ${l.label}`;
       path.appendChild(title);
-      svg.appendChild(path);
+      (l.type === 'parallel' ? svgTop : svg).appendChild(path);
     });
     highlight();
   }
 
   function highlight() {
-    svg.querySelectorAll('.lineage-edge').forEach(path => {
+    canvas.querySelectorAll('.lineage-edges .lineage-edge').forEach(path => {
       const l = LINKS[path.dataset.idx];
       const on = selected && (l.from === selected || l.to === selected);
       path.classList.toggle('is-active', !!on);
       path.classList.toggle('is-dim', !!selected && !on);
+      // Parallels aren't lineage links; drawing them all would cross the
+      // tree, so they appear only for the selected person.
+      if (l.type === 'parallel') path.classList.toggle('is-hidden', !on);
     });
     Object.entries(cards).forEach(([id, el]) => {
       const linked = selected && LINKS.some(l =>
@@ -350,8 +448,8 @@ const LINK_TYPES = {
 
   // Legend
   document.getElementById('lineage-legend').innerHTML = Object.entries(LINK_TYPES).map(([k, v]) =>
-    `<span class="legend-item"><svg width="34" height="10"><path d="M2,5 L32,5" class="lineage-edge edge-${k}"/></svg>${v}</span>`
-  ).join('') + '<span class="legend-item"><span class="legend-inst"></span>Institution</span>';
+    `<span class="legend-item"><svg width="34" height="10"><path d="M2,5 L32,5" class="lineage-edge edge-${k}"/></svg>${v}${k === 'parallel' ? ' (on selection)' : ''}</span>`
+  ).join('') + '<span class="legend-item"><span class="legend-inst"></span>Institution</span><span class="legend-item"><span class="legend-inst legend-order"></span>Daśanāmī order</span>';
 
   drawEdges();
   if (document.fonts) document.fonts.ready.then(drawEdges);

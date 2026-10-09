@@ -2782,3 +2782,17 @@ body.tamil-page .lang-hub-card-glyph {
   .nav-links { flex-wrap: wrap; gap: 6px 14px; }
   .nav-link { font-size: 0.85rem; }
 }
+.lineage-page .lang-body { max-width: 1420px; }
+.lineage-page .lang-block-intro { max-width: 820px; }
+.lineage-band-chinmaya { color: #ff9a5a; }
+.lineage-node.lineage-chinmaya { border-color: rgba(255, 154, 90, 0.35); }
+.lineage-chinmaya .lineage-node-deva { color: #ffb98a; }
+.lineage-node.is-order {
+  background: rgba(240, 168, 60, 0.08);
+  border: 1px dotted var(--color-gold-light);
+  border-radius: 999px;
+  padding: 7px 8px;
+}
+.legend-inst.legend-order { border: 1px dotted var(--color-gold-light); border-radius: 999px; background: rgba(240, 168, 60, 0.08); }
+.lineage-edge.is-hidden { display: none; }
+.lineage-edges-top { z-index: 2; }
