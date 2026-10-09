@@ -693,12 +693,70 @@ const LINK_TYPES = {
     if (window.innerWidth < 900) detail.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
   }
 
+  // ∑ notes — same badge and modal as the chant pages' section notes. The
+  // text lives once, on the Guide page; each note is one of its sections.
+  let guideDoc = null;
+  async function openNote(key) {
+    if (!guideDoc) {
+      const html = await fetch('lineages-guide.html').then(r => r.text());
+      guideDoc = new DOMParser().parseFromString(html, 'text/html');
+    }
+    const section = guideDoc.getElementById('note-' + key);
+    if (!section) return;
+    const body = section.cloneNode(true);
+    const title = body.querySelector('h2').textContent;
+    body.querySelector('h2').remove();
+    const chain = body.querySelector('.guide-chain');
+    const subtitle = chain ? chain.textContent : '';
+    if (chain) chain.remove();
+    const overlay = ensureModal();
+    overlay.querySelector('.modal-title span').textContent = title;
+    overlay.querySelector('.modal-subtitle').textContent = subtitle;
+    overlay.querySelector('.modal-body').innerHTML = body.innerHTML +
+      `<p class="modal-more"><a href="lineages-guide.html#note-${key}">Open the full guide →</a></p>`;
+    overlay.hidden = false;
+  }
+  let modal = null;
+  function ensureModal() {
+    if (modal) return modal;
+    modal = document.createElement('div');
+    modal.className = 'modal-overlay';
+    modal.hidden = true;
+    modal.innerHTML = `
+      <div class="modal-box" role="dialog" aria-modal="true">
+        <button type="button" class="modal-close" aria-label="Close">&times;</button>
+        <h2 class="modal-title"><span class="glow-gold"></span></h2>
+        <p class="modal-subtitle"></p>
+        <div class="modal-body"></div>
+      </div>`;
+    document.body.appendChild(modal);
+    const close = () => { modal.hidden = true; };
+    modal.querySelector('.modal-close').addEventListener('click', close);
+    modal.addEventListener('click', e => { if (e.target === modal) close(); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape' && !modal.hidden) close(); });
+    return modal;
+  }
+
   document.addEventListener('click', e => {
+    const note = e.target.closest('[data-note]');
+    if (note) {
+      e.preventDefault();
+      e.stopPropagation();
+      openNote(note.dataset.note);
+      return;
+    }
     const a = e.target.closest('[data-goto]');
-    if (!a) return;
+    if (!a || modal && !modal.hidden && modal.contains(a)) return;
     e.preventDefault();
     select(a.dataset.goto);
     cards[a.dataset.goto].scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'center' });
+  });
+
+  document.addEventListener('keydown', e => {
+    if ((e.key === 'Enter' || e.key === ' ') && e.target.matches('.lineage-branch')) {
+      e.preventDefault();
+      e.target.click();
+    }
   });
 
   // "Between the lineages" cards
@@ -716,6 +774,16 @@ const LINK_TYPES = {
   ).join('') + '<span class="legend-item"><span class="legend-inst"></span>Institution</span><span class="legend-item"><span class="legend-inst legend-order"></span>Daśanāmī order</span>';
 
   drawEdges();
+  // Deep links from the guide page: lineages.html#<person-id>
+  function goToHash() {
+    const hashId = decodeURIComponent(location.hash.slice(1));
+    if (!byId[hashId]) return;
+    if (modal) modal.hidden = true;
+    select(hashId);
+    setTimeout(() => cards[hashId].scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'center' }), 50);
+  }
+  goToHash();
+  window.addEventListener('hashchange', goToHash);
   if (document.fonts) document.fonts.ready.then(() => { drawEdges(); applyZoom(); });
   window.addEventListener('resize', () => { drawEdges(); applyZoom(); });
   applyZoom();

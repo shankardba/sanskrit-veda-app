@@ -35,29 +35,48 @@
     <p>Guru to disciple, down to the present day — and where the lines touch.</p>
   </div>
 
+  <nav class="lang-subnav">
+    <a href="lineages.html" class="active">Tree</a>
+    <a href="lineages-guide.html">Guide</a>
+  </nav>
+
   <div class="lang-body container">
-    <p class="lang-block-intro">
+    <p class="lang-block-intro lineage-lede">
       A <em>paramparā</em> (परम्परा, "one after another") is a chain of teachers, each passing on what they
-      received. At its centre is <strong>Ādi Śaṅkara</strong>, who learned from Govinda Bhagavatpāda, who
-      learned from Gauḍapāda; above them runs the legendary chain back to Vyāsa and Nārāyaṇa. Tradition credits
-      Śaṅkara with organising renunciates into ten named orders, and the tree follows three of those branches down to the present:
-      the <strong>Purī</strong> line through Totāpurī to Ramakrishna, Vivekananda and Swami Sarvapriyananda;
-      the <strong>Giri</strong> line of Sri Yukteswar and Paramahansa Yogananda, whose <em>Kriyā Yoga</em> came
-      separately through Babaji and Lahiri Mahasaya and divides after him into Self-Realization Fellowship and
-      Swami Kriyananda's Ananda; and the <strong>Sarasvatī</strong> line of Swami Sivananda
-      and Swami Chinmayananda, who also studied under Tapovan Maharaj. A fourth branch,
-      <strong>Ramana Maharshi</strong>, took no order and had no human guru. It joins the root by teaching,
-      not ordination, and reaches the present through Papaji to Gangaji and Mooji. Beside Śaṅkara stands a separate root, the
-      <strong>Nāth</strong> yogis of Matsyendranāth and Gorakhnāth (not Śaṅkara's teachers: a different Śaiva
-      order, centuries later). From the Nāth tradition descends the householder <strong>Inchegiri</strong>
-      line of Siddharameshwar and <strong>Nisargadatta Maharaj</strong>, whose <em>I Am That</em> was recorded by
-      a devotee of Ramana. Purple dashed lines mark links that rest on tradition or a single source. Solid lines are teacher to disciple,
-      dotted lines are order membership, and the coloured links show where the branches meet. Select anyone to
-      see who they learned from and who they taught.
+      received <button type="button" class="sigma-badge" data-note="what" aria-label="What is a paramparā?">∑</button>.
+      Six branches are traced here to teachers alive today. Tap anyone in the tree to see who taught them and whom they taught.
     </p>
+
+    <div class="lineage-branches">
+      <div class="lineage-branch b-root" data-goto="shankara" role="button" tabindex="0">
+        <strong>Advaita root <button type="button" class="sigma-badge" data-note="root" aria-label="About the Advaita root branch">∑</button></strong>
+        <span>Gauḍapāda → Govinda → Śaṅkara</span>
+      </div>
+      <div class="lineage-branch b-ramakrishna" data-goto="vivekananda" role="button" tabindex="0">
+        <strong>Ramakrishna <button type="button" class="sigma-badge" data-note="ramakrishna" aria-label="About the Ramakrishna branch">∑</button></strong>
+        <span>Vivekananda → Sarvapriyananda</span>
+      </div>
+      <div class="lineage-branch b-kriya" data-goto="yogananda" role="button" tabindex="0">
+        <strong>Kriyā Yoga <button type="button" class="sigma-badge" data-note="kriya" aria-label="About the Kriyā Yoga branch">∑</button></strong>
+        <span>Babaji → Yogananda → SRF &amp; Ananda</span>
+      </div>
+      <div class="lineage-branch b-chinmaya" data-goto="chinmayananda" role="button" tabindex="0">
+        <strong>Chinmaya <button type="button" class="sigma-badge" data-note="chinmaya" aria-label="About the Chinmaya branch">∑</button></strong>
+        <span>Sivananda → Chinmayananda</span>
+      </div>
+      <div class="lineage-branch b-ramana" data-goto="ramana" role="button" tabindex="0">
+        <strong>Ramana <button type="button" class="sigma-badge" data-note="ramana" aria-label="About the Ramana branch">∑</button></strong>
+        <span>Arunachala → Papaji → Mooji</span>
+      </div>
+      <div class="lineage-branch b-nath" data-goto="nisargadatta" role="button" tabindex="0">
+        <strong>Nāth · Inchegiri <button type="button" class="sigma-badge" data-note="nath" aria-label="About the Nāth · Inchegiri branch">∑</button></strong>
+        <span>Gorakhnāth → Nisargadatta</span>
+      </div>
+    </div>
 
     <div class="lineage-toolbar">
       <div class="lineage-legend" id="lineage-legend"></div>
+      <button type="button" class="lineage-howto" data-note="read">How to read the tree <span class="sigma-badge" aria-hidden="true">∑</span></button>
       <div class="lineage-zoom" role="group" aria-label="Zoom">
         <button type="button" data-zoom="fit" class="active">Fit</button>
         <button type="button" data-zoom="full">100%</button>

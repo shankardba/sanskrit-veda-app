@@ -2837,3 +2837,79 @@ body.tamil-page .lang-hub-card-glyph {
 .lineage-node.is-legend { border-style: dashed; background: transparent; font-style: italic; }
 .edge-traditional { stroke: #b58cff; stroke-dasharray: 6 4; stroke-width: 1.8; }
 .chip-traditional { color: #b58cff; }
+
+/* Lineages: short lede + branch shortcuts, and the companion guide page. */
+.lineage-lede a { color: var(--color-gold-light); border-bottom: 1px dotted var(--color-border); white-space: nowrap; }
+.lineage-branches {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 10px;
+  margin: -8px 0 22px;
+}
+.lineage-branch {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 10px 14px;
+  background: var(--color-panel);
+  border: 1px solid var(--color-border);
+  border-left: 3px solid var(--branch, var(--color-gold));
+  border-radius: 10px;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+.lineage-branch:hover { box-shadow: 0 0 12px rgba(240, 168, 60, 0.18); border-color: var(--branch, var(--color-gold)); }
+.lineage-branch strong { font-family: var(--font-display); font-size: 0.9rem; color: var(--branch, var(--color-gold-light)); }
+.lineage-branch span { font-family: var(--font-body); font-size: 0.95rem; color: var(--color-text-muted); }
+.b-root { --branch: var(--color-gold-light); }
+.b-ramakrishna { --branch: var(--color-gold); }
+.b-kriya { --branch: var(--color-magenta); }
+.b-chinmaya { --branch: #ff9a5a; }
+.b-ramana { --branch: #7fd6c2; }
+.b-nath { --branch: #b58cff; }
+
+.guide-section { max-width: 760px; margin: 0 auto 44px; font-family: var(--font-body); font-size: 1.08rem; line-height: 1.7; color: var(--color-text); }
+.guide-section h2 { font-family: var(--font-display); font-size: 1.35rem; color: var(--branch, var(--color-gold-light)); margin-bottom: 4px; }
+.guide-section .guide-chain { font-family: var(--font-ui); font-size: 0.8rem; color: var(--color-text-muted); margin-bottom: 12px; }
+.guide-section p { margin-bottom: 12px; }
+.guide-section a { color: var(--color-gold-light); border-bottom: 1px dotted var(--color-border); }
+.guide-key { list-style: none; padding: 0; }
+.guide-key li { display: flex; gap: 12px; align-items: baseline; margin-bottom: 8px; }
+.guide-key svg { flex-shrink: 0; transform: translateY(-2px); }
+/* ∑ badge — same look as the chant pages' .section-label.has-note::after */
+.sigma-badge {
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  line-height: 1;
+  color: var(--color-gold);
+  background: transparent;
+  border: 1px solid var(--color-border);
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
+  cursor: pointer;
+  font-style: normal;
+}
+.sigma-badge:hover, .lineage-howto:hover .sigma-badge { border-color: var(--color-gold); color: var(--color-gold-light); }
+.lineage-branch { cursor: pointer; }
+.lineage-branch strong { display: inline-flex; align-items: center; gap: 7px; }
+.lineage-howto {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  flex-shrink: 0;
+  font-family: var(--font-ui);
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 2px 0;
+}
+.lineage-howto:hover { color: var(--color-gold-light); }
+.modal-more a { color: var(--color-gold-light); border-bottom: 1px dotted var(--color-border); font-family: var(--font-ui); font-size: 0.85rem; }
+.modal-body .guide-key { list-style: none; padding: 0; }
