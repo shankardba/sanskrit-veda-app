@@ -2831,3 +2831,9 @@ body.tamil-page .lang-hub-card-glyph {
 .edge-split { stroke: #ff6b6b; stroke-dasharray: 3 3; stroke-width: 2.4; }
 .chip-split { color: #ff6b6b; }
 .lineage-rel-detail { font-size: 0.95rem; color: var(--color-text-muted); margin: 4px 0 4px 12px; padding-left: 10px; border-left: 2px solid var(--color-border); }
+.lineage-band-nath { color: #b58cff; text-align: left; padding-left: 40px; }
+.lineage-node.lineage-nath { border-color: rgba(181, 140, 255, 0.4); }
+.lineage-nath .lineage-node-deva { color: #cdb3ff; }
+.lineage-node.is-legend { border-style: dashed; background: transparent; font-style: italic; }
+.edge-traditional { stroke: #b58cff; stroke-dasharray: 6 4; stroke-width: 1.8; }
+.chip-traditional { color: #b58cff; }

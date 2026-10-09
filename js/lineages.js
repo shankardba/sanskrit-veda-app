@@ -12,6 +12,8 @@
 //   parallel    — a thematic parallel between the lineages (no meeting)
 //   textual     — a teaching carried by text/translation rather than initiation
 //   split       — a separation or dispute between a teacher and an institution
+//   traditional — a link asserted by tradition or one source, not historically
+//                 attested (legendary teachers, contested identifications)
 //
 // Routing flags: `late` bends just above the child (so a fan of children
 // in the next row doesn't cut through a sibling card), `bend` arcs out to
@@ -24,10 +26,57 @@ const LINEAGES = {
   chinmaya: { name: 'Chinmaya', note: 'Sivananda · Tapovan · Chinmayananda' },
   ramana: { name: 'Ramaṇa', note: 'Arunachala · self-enquiry' },
   root: { name: 'Root', note: '' },
+  nath: { name: 'Nāth', note: 'Matsyendranāth · Gorakhnāth' },
   order: { name: 'Daśanāmī orders', note: '' }
 };
 
 const PEOPLE = [
+  // --- Above Śaṅkara: the Advaita guru-paramparā -------------------------
+  {
+    id: 'legendary', lineage: 'root', col: 5, row: -3, kind: 'legend',
+    name: 'Traditional paramparā', deva: 'नारायण → ब्रह्मा → … → शुक', dates: 'legendary',
+    role: 'The chain recited before every Advaita teaching',
+    summary: 'Advaita monks still chant their lineage as Nārāyaṇa → Brahmā → Vasiṣṭha → Śakti → Parāśara → Vyāsa → Śuka → Gauḍapāda → Govinda → Śaṅkara. It runs from god to the Vedic sages Vasiṣṭha and Parāśara, then to Vyāsa, compiler of the Vedas, and his son Śuka. Gauḍapāda is the first name generally treated as historical.',
+    caveat: 'Mythic and legendary down to Śuka; Śuka teaching Gauḍapāda directly is chronologically impossible.'
+  },
+  {
+    id: 'gaudapada', lineage: 'root', col: 5, row: -2,
+    name: 'Gauḍapāda', deva: 'गौडपाद', dates: 'c. 6th–7th century',
+    role: 'Author of the Māṇḍūkya Kārikā; Śaṅkara\'s guru\'s guru',
+    etym: 'gauḍa (the Bengal region) + pāda ("venerable"): "the venerable one of Gauḍa".',
+    summary: 'His Māṇḍūkya Kārikā, 215 verses on the Māṇḍūkya Upaniṣad, is the earliest surviving systematic text of Advaita. It argues ajāti-vāda, that nothing has ever really come into being. Śaṅkara wrote a commentary on it.'
+  },
+  {
+    id: 'govinda', lineage: 'root', col: 5, row: -1,
+    name: 'Govinda Bhagavatpāda', deva: 'गोविन्द भगवत्पाद', dates: 'c. 7th–8th century',
+    role: 'Śaṅkara\'s guru',
+    etym: 'Govinda, a name of Kṛṣṇa, + bhagavat-pāda ("the Lord\'s feet"), an honorific later also given to Śaṅkara.',
+    summary: 'Tradition says the boy Śaṅkara found him in a cave on the banks of the Narmada, took sannyāsa from him, and studied with him until he was sent to Kāśī to write his commentaries. Almost nothing else is known of him.'
+  },
+
+  // --- Nāth (a separate root) ----------------------------------------------
+  {
+    id: 'adinatha', lineage: 'nath', col: 3, row: -3, kind: 'legend',
+    name: 'Ādinātha (Śiva)', deva: 'आदिनाथ', dates: 'legendary',
+    role: 'The "first lord": Śiva as source of the Nāth teaching',
+    etym: 'ādi ("first") + nātha ("lord, protector"). Every Nāth name ends in -nātha.',
+    summary: 'Nāth tradition traces its yoga to Śiva himself, teaching Pārvatī.'
+  },
+  {
+    id: 'matsyendra', lineage: 'nath', col: 3, row: -2,
+    name: 'Matsyendranāth', deva: 'मत्स्येन्द्रनाथ', dates: 'c. 10th century',
+    role: 'Founder-figure of the Nāth yogis',
+    etym: 'matsya ("fish") + indra ("lord") + nātha: "lord of fishes".',
+    summary: 'Legend says he overheard Śiva teaching Pārvatī while inside the belly of a fish, then emerged as a yogi. The seated twist matsyendrāsana is named after him. He is revered in Nepal and, as Luipa, in Tibetan Buddhism.'
+  },
+  {
+    id: 'gorakhnath', lineage: 'nath', col: 3, row: -1,
+    name: 'Gorakhnāth', deva: 'गोरखनाथ', dates: 'c. 11th–12th century',
+    role: 'Disciple of Matsyendranāth; organiser of the Nāth order',
+    etym: 'Gorakṣa-nātha: go-rakṣa ("protector of cows", i.e. "cowherd") + nātha.',
+    summary: 'He shaped the Kānphaṭa ("split-ear") Nāth yogis and is credited with early haṭha-yoga texts such as the Gorakṣa Śataka. Gorakhpur is named after him, and Nepal\'s Gorkhas trace their name to him. He is not Śaṅkara\'s guru: the Nāths are a separate Śaiva yogic order, several centuries after Śaṅkara.'
+  },
+
   {
     id: 'shankara', lineage: 'root', col: 5, row: 0,
     name: 'Ādi Śaṅkara', deva: 'आदि शङ्कर', dates: 'c. 8th century',
@@ -304,6 +353,15 @@ const PEOPLE = [
 ];
 
 const LINKS = [
+  // Above Śaṅkara
+  { from: 'legendary', to: 'gaudapada', type: 'traditional', label: 'Śuka said to have taught him' },
+  { from: 'gaudapada', to: 'govinda', type: 'diksha', label: 'disciple' },
+  { from: 'govinda', to: 'shankara', type: 'diksha', label: 'sannyāsa on the Narmada' },
+
+  // Nāth
+  { from: 'adinatha', to: 'matsyendra', type: 'traditional', label: 'heard Śiva\'s teaching (legend)' },
+  { from: 'matsyendra', to: 'gorakhnath', type: 'diksha', label: 'disciple' },
+
   // Shared root
   { from: 'shankara', to: 'puri', type: 'sannyasa', label: 'Daśanāmī branch' },
   { from: 'shankara', to: 'giri', type: 'sannyasa', label: 'Daśanāmī branch' },
@@ -368,6 +426,15 @@ const LINKS = [
   { from: 'chandrasekharendra', to: 'brunton', type: 'encounter', cross: true,
     label: 'Sent Brunton to Ramana, 1931',
     detail: 'In A Search in Secret India, Paul Brunton describes meeting the Śaṅkarācārya of Kanchi near Chingleput in January 1931. Brunton asked him for a living master, and he named the sage of Arunachala. So a Sarasvatī-order Śaṅkarācārya is the link that brought Ramana to the West.' },
+  { from: 'babaji', to: 'shankara', type: 'traditional', cross: true, onSelect: true,
+    label: 'Kriyā initiation, per Autobiography of a Yogi',
+    detail: 'Chapter 33 of Autobiography of a Yogi presents Babaji as deathless and says he initiated Śaṅkara, and Śaṅkara\'s guru Govinda, into Kriyā Yoga. No Advaita source records this. It rests on the Kriyā lineage\'s own testimony, which is why it\'s drawn as a traditional link rather than an initiation.' },
+  { from: 'gorakhnath', to: 'babaji', type: 'traditional', cross: true, late: true,
+    label: 'Through the Tamil Siddhas (contested)',
+    detail: 'In Marshall Govindan\'s "Babaji\'s Kriya Yoga" tradition, separate from Yogananda\'s, Babaji learned from the Tamil Siddhas Boganathar and Agastya. Tamil lists of the 18 Siddhars include Korakkar, often identified with Gorakhnāth. Each step is traditional, not historical. The two traditions also share a lot of practice: both teach breath and energy (prāṇāyāma, kuṇḍalinī) as the path to liberation.' },
+  { from: 'gaudapada', to: 'sarvapriyananda', type: 'textual', cross: true, onSelect: true,
+    label: 'Māṇḍūkya Kārikā lectures',
+    detail: 'Swami Sarvapriyananda\'s best-known teaching is a long lecture series on the Māṇḍūkya Upaniṣad with Gauḍapāda\'s Kārikā, given at the Vedanta Society of New York. It brings a 7th-century text to the present day.' },
   { from: 'yogananda', to: 'ramana', type: 'encounter', cross: true, onSelect: true,
     label: 'Visit to Arunachala, 1935',
     detail: 'On his 1935–36 return to India, Yogananda visited Ramana at Tiruvannamalai, an episode he includes in Autobiography of a Yogi. It is the one recorded meeting between the Kriyā line and Ramana.' },
@@ -395,7 +462,8 @@ const LINK_TYPES = {
   encounter: 'Documented meeting',
   parallel: 'Parallel between lineages',
   textual: 'Teaching through texts',
-  split: 'Separation / dispute'
+  split: 'Separation / dispute',
+  traditional: 'Traditional / contested claim'
 };
 
 (function () {
@@ -438,11 +506,12 @@ const LINK_TYPES = {
 
   const maxCol = Math.max(...PEOPLE.map(p => p.col));
   const maxRow = Math.max(...PEOPLE.map(p => p.row));
+  const minRow = Math.min(...PEOPLE.map(p => p.row)); // rows above Śaṅkara are negative
   canvas.style.width = (maxCol + 1) * COL_W + PAD * 2 + 'px';
-  canvas.style.height = (maxRow + 1) * ROW_H + PAD * 2 + 'px';
+  canvas.style.height = (maxRow - minRow + 1) * ROW_H + PAD * 2 + 'px';
 
   // Lineage header bands
-  [['ramakrishna', 0, 3], ['kriya', 3, 3], ['chinmaya', 6, 3], ['ramana', 9, 3]].forEach(([key, col, span]) => {
+  [['ramakrishna', 0, 3], ['nath', 3, 1], ['kriya', 3, 3], ['chinmaya', 6, 3], ['ramana', 9, 3]].forEach(([key, col, span]) => {
     const band = document.createElement('div');
     band.className = 'lineage-band lineage-band-' + key;
     band.style.left = PAD + col * COL_W + 'px';
@@ -456,7 +525,7 @@ const LINK_TYPES = {
     el.type = 'button';
     el.className = `lineage-node lineage-${p.lineage}` + (p.kind ? ` is-${p.kind}` : '');
     el.style.left = PAD + p.col * COL_W + 'px';
-    el.style.top = PAD + p.row * ROW_H + 28 + 'px';
+    el.style.top = PAD + (p.row - minRow) * ROW_H + 28 + 'px';
     el.dataset.id = p.id;
     el.innerHTML =
       (p.deva ? `<span class="lineage-node-deva">${p.deva}</span>` : '') +
