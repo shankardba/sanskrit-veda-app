@@ -434,7 +434,7 @@ const PEOPLE = [
 
   // --- Ramaṇa ------------------------------------------------------------------
   {
-    id: 'ramana', lineage: 'ramana', col: 12, row: 3,
+    id: 'ramana', lineage: 'ramana', col: 12, row: 3, note: 'ramana',
     name: 'Śrī Ramaṇa Maharṣi', deva: 'श्री रमण महर्षि', dates: '1879–1950', born: 'Venkataraman Iyer',
     role: 'Sage of Arunachala, Tiruvannamalai; teacher of self-enquiry',
     etym: 'Ramaṇa, short for Venkataraman, + mahā-ṛṣi ("great seer"): the name Ganapati Muni gave him in 1907.',
@@ -470,6 +470,54 @@ const PEOPLE = [
     name: 'H. W. L. Poonja ("Papaji")', dates: '1910–1997',
     role: 'Disciple of Ramana; teacher at Lucknow',
     summary: 'Met Ramana in 1944. Decades later his satsangs in Lucknow drew a wave of Western seekers, several of whom became teachers of self-enquiry in their own right.'
+  },
+  {
+    id: 'sivaprakasam', lineage: 'ramana', col: 12, row: 4,
+    name: 'Śivaprakāśam Pillai', dates: 'met Ramana 1902',
+    role: 'Questioner behind "Who am I?" (Nān Yār?)',
+    summary: 'A revenue official sent to Tiruvannamalai to audit the town\'s accounts. In 1902 he found the young Ramana on the slopes of Arunachala, still keeping silence, and put questions to him that Ramana answered in writing. Those answers, later published as Nān Yār? ("Who am I?"), became the core text of Ramana\'s teaching.'
+  },
+  {
+    id: 'annamalai', lineage: 'ramana', col: 14, row: 4,
+    name: 'Annāmalai Swāmi', deva: 'அண்ணாமலை சுவாமி', dates: '1906–1995',
+    role: 'Attendant; builder of the ashram',
+    summary: 'He served Ramana through the 1930s and early 1940s and supervised much of the ashram\'s construction, then lived and taught in his own small ashram nearby. His life and talks are in David Godman\'s Living by the Words of Bhagavan.'
+  },
+  {
+    id: 'osborne', lineage: 'ramana', col: 14, row: 5,
+    name: 'Arthur Osborne', dates: '1906–1970',
+    role: 'Biographer; founder of The Mountain Path (1964)',
+    summary: 'An English scholar who settled at Tiruvannamalai. He wrote Ramana Maharshi and the Path of Self-Knowledge, the standard biography, and in 1964 founded The Mountain Path, the ashram\'s journal. Its review of I Am That later sent Ramesh Balsekar to Nisargadatta.'
+  },
+  {
+    id: 'sadhuom', lineage: 'ramana', col: 11, row: 6.5,
+    name: 'Sādhu Ōm', deva: 'சாது ஓம்', dates: '1922–1985',
+    role: 'Muruganār\'s collaborator; author of The Path of Sri Ramana',
+    summary: 'A Tamil poet-renunciate who met Ramana in 1946 and became Muruganār\'s long-time literary collaborator. After Muruganār\'s death he spent years copying out and arranging his unpublished verses. His own book, The Path of Sri Ramana, is a careful exposition of self-enquiry.'
+  },
+  {
+    id: 'ashrampres', lineage: 'ramana', col: 12, row: 6.5,
+    name: 'Ashram presidents', dates: '1916 → today',
+    role: 'Niranjanānanda → T. N. Venkataraman → V. S. Ramanan → Dr. Venkat S. Ramanan',
+    summary: 'Ramana approved a will leaving the ashram\'s management with his brother\'s descendants. His brother Niranjanānanda Swāmi ran it until 1953. His son T. N. Venkataraman led it from 1953 to 1994, then V. S. Ramanan from 1994 to 2020. The present president, Dr. Venkat S. Ramanan, was inaugurated in June 2020.'
+  },
+  {
+    id: 'lakshmana', lineage: 'ramana', col: 14, row: 6.5,
+    name: 'Lakṣmaṇa Swāmy', dates: 'b. 1925',
+    role: 'Realised the Self in Ramana\'s presence, 1949',
+    summary: 'Born in Gudur, Andhra Pradesh. After years of practice he realised the Self while sitting before Ramana in 1949. He lived quietly, accepting very few disciples, and later settled near Ramanasramam. His story is told in David Godman\'s No Mind – I Am the Self.'
+  },
+  {
+    id: 'michaeljames', lineage: 'ramana', col: 11, row: 9,
+    name: 'Michael James', dates: 'living',
+    role: 'Translator of Ramana\'s Tamil writings',
+    summary: 'An Englishman who came to Tiruvannamalai in 1976 and studied for years with Sādhu Ōm. He is now among the most careful translators and explainers of Ramana\'s own Tamil texts.'
+  },
+  {
+    id: 'sarada', lineage: 'ramana', col: 14, row: 9,
+    name: 'Mathru Śrī Sāradā', dates: 'realised 1978',
+    role: 'Disciple of Lakṣmaṇa Swāmy',
+    summary: 'She realised the Self in Lakṣmaṇa Swāmy\'s presence in 1978, a second generation of realisation in Ramana\'s line. The two later lived together near Ramanasramam.'
   },
   {
     id: 'gangaji', lineage: 'ramana', col: 12, row: 9,
@@ -573,6 +621,15 @@ const LINKS = [
   { from: 'ramana', to: 'muruganar', type: 'diksha', label: 'disciple from 1923', late: true },
   { from: 'ramana', to: 'ramanasramam', type: 'succession', label: 'grew around him from 1922' },
   { from: 'ramana', to: 'papaji', type: 'diksha', label: 'met 1944', late: true },
+  { from: 'ramana', to: 'sivaprakasam', type: 'diksha', label: 'questions answered 1902 → Nān Yār?' },
+  { from: 'ramana', to: 'annamalai', type: 'diksha', label: 'attendant from 1928', late: true },
+  { from: 'ramana', to: 'osborne', type: 'diksha', label: 'devotee; biographer', late: true },
+  { from: 'ramana', to: 'lakshmana', type: 'diksha', label: 'realised in his presence, 1949' },
+  { from: 'muruganar', to: 'sadhuom', type: 'diksha', label: 'literary collaborator' },
+  { from: 'ramana', to: 'sadhuom', type: 'diksha', label: 'met him 1946', onSelect: true },
+  { from: 'sadhuom', to: 'michaeljames', type: 'diksha', label: 'studied with him from 1976' },
+  { from: 'ramanasramam', to: 'ashrampres', type: 'succession', label: 'managed by his brother\'s family' },
+  { from: 'lakshmana', to: 'sarada', type: 'diksha', label: 'realised in his presence, 1978' },
   { from: 'papaji', to: 'gangaji', type: 'diksha', label: 'met 1990', late: true },
   { from: 'papaji', to: 'mooji', type: 'diksha', label: 'met 1993' },
 
@@ -592,6 +649,9 @@ const LINKS = [
   { from: 'frydman', to: 'ramana', type: 'encounter', cross: true, onSelect: true,
     label: 'A Ramana devotee carries Nisargadatta to the world',
     detail: 'Maurice Frydman spent long periods with Ramana Maharshi before he met Nisargadatta, and he edited I Am That for the same Western readers who knew Ramana. The two teachings, Ramana\'s "Who am I?" and Nisargadatta\'s "stay with I am", are now usually read side by side. Ramana belonged to no order, and Nisargadatta\'s line comes through a householder Nāth branch, so both reached the West outside the monastic Advaita orders.' },
+  { from: 'osborne', to: 'balsekar', type: 'textual', cross: true, onSelect: true,
+    label: 'The Mountain Path review of I Am That',
+    detail: 'Ramesh Balsekar recalled that a review of I Am That in The Mountain Path, the Ramanasramam journal Arthur Osborne founded, moved him so much that he went to Nisargadatta at once, in 1978. It is a second thread from Ramana\'s world into Nisargadatta\'s, after Maurice Frydman.' },
   { from: 'gaudapada', to: 'sarvapriyananda', type: 'textual', cross: true, onSelect: true,
     label: 'Māṇḍūkya Kārikā lectures',
     detail: 'Swami Sarvapriyananda\'s best-known teaching is a long lecture series on the Māṇḍūkya Upaniṣad with Gauḍapāda\'s Kārikā, given at the Vedanta Society of New York. It brings a 7th-century text to the present day.' },
@@ -617,7 +677,8 @@ const LINKS = [
 
 const NOTE_TITLES = {
   root: 'Lineages before Śaṅkara',
-  mathas: 'The four maṭhas'
+  mathas: 'The four maṭhas',
+  ramana: 'The Ramana branch'
 };
 
 const LINK_TYPES = {
@@ -677,7 +738,7 @@ const LINK_TYPES = {
   canvas.style.height = (maxRow - minRow + 1) * ROW_H + PAD * 2 + 'px';
 
   // Lineage header bands
-  [['nath', 0, 2], ['ramakrishna', 2, 3], ['kriya', 5, 3], ['chinmaya', 8, 3], ['ramana', 11, 3]].forEach(([key, col, span]) => {
+  [['nath', 0, 2], ['ramakrishna', 2, 3], ['kriya', 5, 3], ['chinmaya', 8, 3], ['ramana', 11, 4]].forEach(([key, col, span]) => {
     const band = document.createElement('div');
     band.className = 'lineage-band lineage-band-' + key;
     band.style.left = PAD + col * COL_W + 'px';
