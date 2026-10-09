@@ -2932,3 +2932,30 @@ body.tamil-page .lang-hub-card-glyph {
 .lineage-node.lineage-yoga { border-color: rgba(198, 216, 107, 0.5); border-left: 3px solid #c6d86b; border-radius: 4px; }
 .lineage-yoga .lineage-node-deva { color: #dbe89a; }
 .b-yoga { --branch: #c6d86b; }
+
+/* Lineage time axis: year labels in a left gutter, faint gridlines across. */
+.lineage-axis { position: absolute; inset: 0; pointer-events: none; }
+.axis-grid {
+  position: absolute;
+  left: 64px;
+  right: 8px;
+  border-top: 1px dashed rgba(240, 168, 60, 0.10);
+}
+.axis-label {
+  position: absolute;
+  left: 4px;
+  width: 56px;
+  text-align: right;
+  font-family: var(--font-ui);
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  opacity: 0.8;
+}
+.axis-legend-line {
+  position: absolute;
+  left: 64px;
+  right: 8px;
+  border-top: 1px solid rgba(181, 140, 255, 0.35);
+}
+.axis-label-legend { font-weight: 500; font-style: italic; color: #b58cff; }
