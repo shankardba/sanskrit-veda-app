@@ -11,6 +11,7 @@
 //   encounter   — a documented meeting outside the formal line
 //   parallel    — a thematic parallel between the lineages (no meeting)
 //   textual     — a teaching carried by text/translation rather than initiation
+//   split       — a separation or dispute between a teacher and an institution
 //
 // Routing flags: `late` bends just above the child (so a fan of children
 // in the next row doesn't cut through a sibling card), `bend` arcs out to
@@ -160,11 +161,30 @@ const PEOPLE = [
     summary: 'Yogoda Satsanga Society of India (1917) and Self-Realization Fellowship (1920; Mount Washington HQ from 1925) carry on Kriyā initiation through Yogananda\'s lessons and monastic order.'
   },
   {
-    id: 'dayamata', lineage: 'kriya', col: 5, row: 6.5,
+    id: 'dayamata', lineage: 'kriya', col: 3, row: 7,
     name: 'Śrī Dayā Mātā', deva: 'दया माता', dates: '1914–2010', born: 'Faye Wright',
     role: 'President of SRF/YSS 1955–2010',
     etym: 'dayā ("compassion") + mātā ("mother").',
     summary: 'A direct disciple who entered Yogananda\'s ashram at seventeen, she led the organisations for 55 years.'
+  },
+  {
+    id: 'kriyananda', lineage: 'kriya', col: 5, row: 6,
+    name: 'Svāmī Kriyānanda', deva: 'स्वामी क्रियानन्द', dates: '1926–2013', born: 'James Donald Walters',
+    role: 'Direct disciple of Yogananda; founder of Ananda',
+    etym: 'kriyā ("action", as in Kriyā Yoga) + ānanda — "the bliss of Kriyā".',
+    summary: 'Born to American parents in Romania, he read Autobiography of a Yogi and went straight to Yogananda in 1948, who made him a monk. He took sannyāsa in SRF in 1955 and rose to Vice-President, but was dismissed in 1962. In 1968 he founded Ananda, a spiritual cooperative community. He wrote The Path (1977), an account of his years with Yogananda.'
+  },
+  {
+    id: 'ananda', lineage: 'kriya', col: 5, row: 7, kind: 'institution',
+    name: 'Ananda Sangha', dates: 'founded 1968', place: 'Ananda Village, near Nevada City, California',
+    role: 'Kriyananda\'s communities and Kriyā line',
+    summary: 'It began as a rural cooperative village and now has communities and centres in the United States, Italy and India. Ananda gives Kriyā initiation in Yogananda\'s name independently of SRF, and spells his title "Paramhansa", as his early books did.'
+  },
+  {
+    id: 'novaks', lineage: 'kriya', col: 5, row: 8,
+    name: 'Jyotish & Devi Novak', dates: 'living',
+    role: 'Spiritual directors of Ananda Worldwide',
+    summary: 'Among Ananda\'s earliest members, they were named by Kriyananda to lead it after him. As "Nayaswamis" they belong to the renunciate order Kriyananda founded in 2009, which is open to married couples.'
   },
   {
     id: 'chidananda', lineage: 'kriya', col: 4, row: 7,
@@ -312,9 +332,15 @@ const LINKS = [
   { from: 'yukteswar', to: 'yogananda', type: 'diksha', label: 'disciple 1910; sannyāsa 1915' },
   { from: 'lahiri', to: 'yogananda', type: 'encounter', label: 'blessed him as an infant; initiated his parents', bend: 'right' },
   { from: 'yogananda', to: 'srf', type: 'succession', label: 'founded 1917 / 1920' },
-  { from: 'yogananda', to: 'dayamata', type: 'diksha', label: 'disciple from 1931' },
+  { from: 'yogananda', to: 'dayamata', type: 'diksha', label: 'disciple from 1931', bend: 'left' },
   { from: 'srf', to: 'dayamata', type: 'succession', label: 'President 1955–2010' },
   { from: 'srf', to: 'chidananda', type: 'succession', label: 'President since 2017' },
+
+  { from: 'yogananda', to: 'kriyananda', type: 'diksha', label: 'disciple from 1948' },
+  { from: 'srf', to: 'kriyananda', type: 'split', label: 'Vice-President; dismissed 1962',
+    detail: 'SRF dismissed Kriyananda in 1962. When Ananda later published Yogananda\'s original-edition writings and used "Self-realization" in its name, SRF sued (1990–2002). The courts largely sided with Ananda on the name and on works no longer under copyright.' },
+  { from: 'kriyananda', to: 'ananda', type: 'succession', label: 'founded 1968' },
+  { from: 'ananda', to: 'novaks', type: 'succession', label: 'spiritual directors after Kriyananda' },
 
   // Chinmaya line
   { from: 'sivananda', to: 'chinmayananda', type: 'diksha', label: 'sannyāsa, 1949' },
@@ -368,7 +394,8 @@ const LINK_TYPES = {
   succession: 'Founded / led an institution',
   encounter: 'Documented meeting',
   parallel: 'Parallel between lineages',
-  textual: 'Teaching through texts'
+  textual: 'Teaching through texts',
+  split: 'Separation / dispute'
 };
 
 (function () {
@@ -415,7 +442,7 @@ const LINK_TYPES = {
   canvas.style.height = (maxRow + 1) * ROW_H + PAD * 2 + 'px';
 
   // Lineage header bands
-  [['ramakrishna', 0, 3], ['kriya', 4, 2], ['chinmaya', 6, 3], ['ramana', 9, 3]].forEach(([key, col, span]) => {
+  [['ramakrishna', 0, 3], ['kriya', 3, 3], ['chinmaya', 6, 3], ['ramana', 9, 3]].forEach(([key, col, span]) => {
     const band = document.createElement('div');
     band.className = 'lineage-band lineage-band-' + key;
     band.style.left = PAD + col * COL_W + 'px';
@@ -519,7 +546,8 @@ const LINK_TYPES = {
       const other = l.from === id ? l.to : l.from;
       const dir = l.from === id ? '→' : '←';
       return `<li><span class="lineage-chip chip-${l.type}">${LINK_TYPES[l.type]}</span>
-        ${dir} ${personLink(other)} <span class="lineage-rel-label">— ${l.label}</span></li>`;
+        ${dir} ${personLink(other)} <span class="lineage-rel-label">— ${l.label}</span>
+        ${l.detail && !l.cross ? `<div class="lineage-rel-detail">${l.detail}</div>` : ''}</li>`;
     }).join('');
     detail.innerHTML = `
       <div class="lineage-detail-head">

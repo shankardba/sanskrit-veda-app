@@ -2828,3 +2828,6 @@ body.tamil-page .lang-hub-card-glyph {
   background: rgba(240, 168, 60, 0.16);
   color: var(--color-gold-light);
 }
+.edge-split { stroke: #ff6b6b; stroke-dasharray: 3 3; stroke-width: 2.4; }
+.chip-split { color: #ff6b6b; }
+.lineage-rel-detail { font-size: 0.95rem; color: var(--color-text-muted); margin: 4px 0 4px 12px; padding-left: 10px; border-left: 2px solid var(--color-border); }
