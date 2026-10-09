@@ -2590,3 +2590,195 @@ body.tamil-page .lang-hub-card-glyph {
 @media (prefers-reduced-motion: reduce) {
   .slm-rule { transition: none; }
 }
+
+/* --- Lineages (guru–disciple chart) --------------------------------------- */
+
+.lineage-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 18px;
+  font-family: var(--font-ui);
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+  margin-bottom: 18px;
+}
+.lineage-legend .legend-item { display: inline-flex; align-items: center; gap: 6px; }
+.legend-inst {
+  display: inline-block;
+  width: 22px;
+  height: 12px;
+  border: 1px dashed var(--color-gold);
+  border-radius: 3px;
+}
+
+.lineage-scroll {
+  overflow-x: auto;
+  border: 1px solid var(--color-border);
+  border-radius: 14px;
+  background:
+    radial-gradient(circle at 25% 30%, rgba(240, 168, 60, 0.06), transparent 50%),
+    radial-gradient(circle at 75% 60%, rgba(255, 46, 166, 0.06), transparent 50%),
+    var(--color-bg-alt);
+}
+.lineage-canvas { position: relative; margin: 0 auto; }
+.lineage-edges { position: absolute; inset: 0; pointer-events: none; }
+
+.lineage-band {
+  position: absolute;
+  top: 10px;
+  text-align: center;
+  font-family: var(--font-display);
+  font-size: 0.8rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--color-gold);
+}
+.lineage-band-kriya { color: var(--color-magenta); }
+
+.lineage-node {
+  position: absolute;
+  width: 136px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 9px 8px;
+  background: var(--color-panel);
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+  color: var(--color-text);
+  cursor: pointer;
+  text-align: center;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease, opacity 0.15s ease;
+  z-index: 1;
+}
+.lineage-node:hover, .lineage-node:focus-visible {
+  border-color: var(--color-gold);
+  box-shadow: 0 0 14px rgba(240, 168, 60, 0.22);
+  outline: none;
+}
+.lineage-node.lineage-kriya { border-color: rgba(255, 46, 166, 0.3); }
+.lineage-node.lineage-root { border-color: var(--color-gold-light); }
+.lineage-node.is-institution {
+  border-style: dashed;
+  background: transparent;
+}
+.lineage-node.is-selected {
+  border-color: var(--color-gold-light);
+  box-shadow: 0 0 18px rgba(255, 210, 122, 0.45);
+}
+.lineage-node.is-linked { border-color: var(--color-gold); }
+.lineage-node-deva {
+  font-family: var(--font-sanskrit);
+  font-size: 0.82rem;
+  color: var(--color-gold-light);
+}
+.lineage-kriya .lineage-node-deva { color: #ff8fcf; }
+.lineage-node-name {
+  font-family: var(--font-body);
+  font-size: 0.98rem;
+  font-weight: 600;
+  line-height: 1.15;
+}
+.lineage-node-dates {
+  font-family: var(--font-ui);
+  font-size: 0.66rem;
+  color: var(--color-text-muted);
+}
+
+.lineage-edge {
+  fill: none;
+  stroke-width: 1.8;
+  transition: opacity 0.15s ease, stroke-width 0.15s ease;
+}
+.edge-diksha { stroke: var(--color-gold); }
+.edge-sannyasa { stroke: var(--color-gold-light); stroke-dasharray: 2 4; stroke-linecap: round; }
+.edge-succession { stroke: var(--color-text-muted); stroke-dasharray: 7 5; }
+.edge-encounter { stroke: var(--color-magenta); stroke-dasharray: 1 5; stroke-linecap: round; stroke-width: 2.4; }
+.edge-parallel { stroke: var(--color-crimson); stroke-dasharray: 10 4 2 4; opacity: 0.75; }
+.lineage-edge.is-active { stroke-width: 3; opacity: 1; }
+.lineage-edge.is-dim { opacity: 0.18; }
+
+.lineage-detail {
+  margin-top: 18px;
+  padding: 22px 26px;
+  background: var(--color-panel);
+  border: 1px solid var(--color-border);
+  border-radius: 14px;
+  font-family: var(--font-body);
+  font-size: 1.05rem;
+  line-height: 1.55;
+}
+.lineage-detail-deva {
+  font-family: var(--font-sanskrit);
+  font-size: 1.4rem;
+  color: var(--color-gold-light);
+}
+.lineage-detail h2 {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  margin: 2px 0 4px;
+}
+.lineage-detail h3 {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  color: var(--color-gold);
+  margin: 16px 0 8px;
+}
+.lineage-detail p { margin-bottom: 10px; }
+.lineage-detail-meta { font-family: var(--font-ui); font-size: 0.78rem; color: var(--color-text-muted); }
+.lineage-detail-role { font-style: italic; color: var(--color-text-muted); margin: 6px 0 12px; }
+.lineage-detail-etym { color: var(--color-gold-light); }
+.lineage-detail-caveat { font-size: 0.92rem; color: var(--color-text-muted); font-style: italic; }
+.lineage-detail a, .lineage-cross-card a {
+  color: var(--color-gold-light);
+  border-bottom: 1px dotted var(--color-border);
+}
+.lineage-rels { list-style: none; padding: 0; }
+.lineage-rels li { margin-bottom: 6px; }
+.lineage-rel-label { color: var(--color-text-muted); }
+
+.lineage-chip {
+  display: inline-block;
+  font-family: var(--font-ui);
+  font-size: 0.66rem;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 999px;
+  border: 1px solid currentColor;
+  vertical-align: middle;
+}
+.chip-diksha { color: var(--color-gold); }
+.chip-sannyasa { color: var(--color-gold-light); }
+.chip-succession { color: var(--color-text-muted); }
+.chip-encounter { color: var(--color-magenta); }
+.chip-parallel { color: var(--color-crimson); }
+
+.lineage-cross-section { margin-top: 56px; }
+.lineage-cross-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 18px;
+}
+.lineage-cross-card {
+  background: var(--color-panel);
+  border: 1px solid var(--color-border);
+  border-radius: 14px;
+  padding: 20px 22px;
+  font-family: var(--font-body);
+  line-height: 1.5;
+}
+.lineage-cross-card h3 {
+  font-family: var(--font-body);
+  font-size: 1.15rem;
+  margin: 10px 0 2px;
+}
+.lineage-cross-arrow { color: var(--color-magenta); }
+.lineage-cross-label { font-family: var(--font-ui); font-size: 0.75rem; color: var(--color-gold); margin-bottom: 8px; }
+.lineage-cross-card p { color: var(--color-text-muted); }
+
+/* Six top-level links: let them wrap and tighten on phones. */
+@media (max-width: 600px) {
+  .nav-links { flex-wrap: wrap; gap: 6px 14px; }
+  .nav-link { font-size: 0.85rem; }
+}

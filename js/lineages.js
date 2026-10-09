@@ -1,0 +1,359 @@
+// Guru–disciple lineages: data + a small layout/renderer.
+//
+// Nodes sit on a hand-assigned grid (col, row) so each lineage reads top-down
+// as a column; edges are drawn afterwards in an SVG overlay measured from the
+// rendered cards, so card heights can vary freely.
+//
+// Edge types:
+//   diksha      — initiation / direct discipleship
+//   sannyasa    — monastic order (Daśanāmī branch) the monk was ordained into
+//   succession  — institutional continuity (founded / led)
+//   encounter   — a documented meeting outside the formal line
+//   parallel    — a thematic parallel between the lineages (no meeting)
+
+const LINEAGES = {
+  ramakrishna: { name: 'Ramakrishna–Vivekananda', note: 'Advaita Vedānta · Ramakrishna Order' },
+  kriya: { name: 'Kriyā Yoga', note: 'Babaji · Lahiri · Yukteswar · Yogananda' },
+  root: { name: 'Shared root', note: '' }
+};
+
+const PEOPLE = [
+  {
+    id: 'shankara', lineage: 'root', col: 3, row: 0,
+    name: 'Ādi Śaṅkara', deva: 'आदि शङ्कर', dates: 'c. 8th century',
+    role: 'Advaita teacher; organiser of the Daśanāmī monastic orders',
+    summary: 'Tradition credits Śaṅkara with gathering wandering renunciates into ten named orders (daśa-nāmī, "ten names") — Giri, Purī, Bhāratī, Sarasvatī and others. Both lineages on this page took their sannyāsa through these orders: Ramakrishna through a Purī monk, Yukteswar and Yogananda as Giris.'
+  },
+
+  // --- Ramakrishna–Vivekananda ---------------------------------------------
+  {
+    id: 'bhairavi', lineage: 'ramakrishna', col: 0, row: 1,
+    name: 'Bhairavī Brāhmaṇī', deva: 'भैरवी ब्राह्मणी', dates: 'fl. 1860s',
+    role: 'Tantric teacher of Ramakrishna (from 1861)',
+    summary: 'A wandering woman ascetic who guided Ramakrishna through the full course of Tantric sādhana at Dakshineswar and was among the first to declare him an avatāra.'
+  },
+  {
+    id: 'totapuri', lineage: 'ramakrishna', col: 2, row: 1,
+    name: 'Totāpurī', deva: 'तोतापुरी', dates: 'fl. 1860s',
+    role: 'Purī-order Advaita monk; gave Ramakrishna sannyāsa (c. 1865)',
+    summary: 'A naked (nāgā) monk of the Purī order who stayed eleven months at Dakshineswar, initiated Ramakrishna into sannyāsa and taught him nirvikalpa samādhi — the formless, non-dual absorption of Advaita.'
+  },
+  {
+    id: 'ramakrishna', lineage: 'ramakrishna', col: 1, row: 2,
+    name: 'Śrī Rāmakṛṣṇa', deva: 'श्री रामकृष्ण', dates: '1836–1886', born: 'Gadadhar Chattopadhyay',
+    role: 'Priest of the Kālī temple at Dakshineswar',
+    etym: 'Rāma + Kṛṣṇa — the two great avatāras of Viṣṇu in one name.',
+    summary: 'Practised Tantra, Vaiṣṇava devotion and Advaita in turn (and, briefly, Islam and Christianity) and taught that they arrive at one reality. His conversations, recorded by "M.", became the Kathāmṛta (The Gospel of Sri Ramakrishna).'
+  },
+  {
+    id: 'sarada', lineage: 'ramakrishna', col: 0, row: 3,
+    name: 'Śāradā Devī', deva: 'शारदा देवी', dates: '1853–1920',
+    role: 'Wife and spiritual consort of Ramakrishna; the "Holy Mother"',
+    summary: 'After Ramakrishna\'s death she became the guide of his young monastic disciples and gave initiation to many; the Ramakrishna Order regards her as its spiritual mother.'
+  },
+  {
+    id: 'vivekananda', lineage: 'ramakrishna', col: 1, row: 3,
+    name: 'Svāmī Vivekānanda', deva: 'स्वामी विवेकानन्द', dates: '1863–1902', born: 'Narendranath Datta',
+    role: 'Chief disciple of Ramakrishna; brought Vedānta to the West',
+    etym: 'viveka ("discernment" — telling the real from the unreal) + ānanda ("bliss").',
+    summary: 'Met Ramakrishna in 1881. Spoke at the Parliament of the World\'s Religions in Chicago (1893), founded the Vedanta Society of New York (1894) and the Ramakrishna Mission (1897), and wrote Rāja Yoga (1896), an influential commentary on Patañjali.'
+  },
+  {
+    id: 'mgupta', lineage: 'ramakrishna', col: 2, row: 3,
+    name: 'Mahendranāth Gupta ("M.")', deva: 'महेन्द्रनाथ गुप्त', dates: '1854–1932',
+    role: 'Householder disciple; recorder of the Kathāmṛta',
+    summary: 'A Calcutta schoolmaster who kept a diary of Ramakrishna\'s conversations from 1882 to 1886, published in Bengali as Śrī Śrī Rāmakṛṣṇa Kathāmṛta. Yogananda knew him as a boy — "Master Mahasaya" in Autobiography of a Yogi.'
+  },
+  {
+    id: 'brahmananda', lineage: 'ramakrishna', col: 0, row: 4,
+    name: 'Svāmī Brahmānanda', deva: 'स्वामी ब्रह्मानन्द', dates: '1863–1922', born: 'Rakhal Chandra Ghosh',
+    role: 'Brother-disciple of Vivekananda; first President of the Ramakrishna Math & Mission',
+    etym: 'brahma + ānanda — "the bliss of Brahman".',
+    summary: 'Ramakrishna regarded him as his "spiritual son". He led the young Order for over two decades after Vivekananda\'s death.'
+  },
+  {
+    id: 'rkmission', lineage: 'ramakrishna', col: 0, row: 5, kind: 'institution',
+    name: 'Ramakrishna Math & Mission', dates: 'founded 1897', place: 'Belur Math, near Kolkata',
+    role: 'The monastic order and its service wing',
+    summary: 'Founded by Vivekananda on 1 May 1897. Its monks receive sannyāsa within the Order and take names ending in -ānanda; its branch centres overseas include the Vedanta Societies.'
+  },
+  {
+    id: 'vsny', lineage: 'ramakrishna', col: 1, row: 5, kind: 'institution',
+    name: 'Vedanta Society of New York', dates: 'founded 1894', place: 'New York',
+    role: 'The first Vedānta society in the West',
+    summary: 'Founded by Vivekananda during his first American tour; it has been led ever since by monks sent from the Ramakrishna Order.'
+  },
+  {
+    id: 'sarvapriyananda', lineage: 'ramakrishna', col: 1, row: 6,
+    name: 'Svāmī Sarvapriyānanda', deva: 'स्वामी सर्वप्रियानन्द', dates: 'living',
+    role: 'Minister and spiritual leader, Vedanta Society of New York (since 2017)',
+    etym: 'sarva ("all") + priya ("dear") + ānanda ("bliss") — "the bliss that is dear to all".',
+    summary: 'Joined the Ramakrishna Order in 1994 and taught at its institutions in India before taking charge of the New York society in January 2017 — the society Vivekananda founded. Widely followed for lectures on the Māṇḍūkya Upaniṣad, Advaita and consciousness.'
+  },
+
+  // --- Kriyā Yoga ----------------------------------------------------------
+  {
+    id: 'babaji', lineage: 'kriya', col: 5, row: 1,
+    name: 'Mahāvatār Bābājī', deva: 'महावतार बाबाजी', dates: 'dates unknown',
+    role: 'Revived Kriyā Yoga (per tradition)',
+    etym: 'mahā-avatāra ("great descent") + bābājī ("revered father").',
+    summary: 'Known almost entirely through his disciples\' accounts, chiefly Autobiography of a Yogi (1946). He is said to have initiated Lahiri Mahasaya in the Himalayan foothills near Ranikhet in 1861.',
+    caveat: 'Historicity rests on lineage testimony; no independent records.'
+  },
+  {
+    id: 'lahiri', lineage: 'kriya', col: 5, row: 2,
+    name: 'Lāhiṛī Mahāśaya', deva: 'लाहिड़ी महाशय', dates: '1828–1895', born: 'Shyama Charan Lahiri',
+    role: 'Householder yogi of Varanasi; spread Kriyā Yoga',
+    etym: 'mahāśaya — "great-souled", an honorific.',
+    summary: 'A clerk in the military engineering department who kept his job and family while teaching Kriyā to anyone sincere, regardless of caste or creed. He is the link the popular "Babaji → Yukteswar" shorthand skips.'
+  },
+  {
+    id: 'yukteswar', lineage: 'kriya', col: 5, row: 3,
+    name: 'Svāmī Śrī Yukteśvar Giri', deva: 'श्रीयुक्तेश्वर गिरि', dates: '1855–1936', born: 'Priya Nath Karar',
+    role: 'Disciple of Lahiri; guru of Yogananda',
+    etym: 'yukta ("united") + īśvara ("the Lord") — "one united with God". Giri ("mountain") is his Daśanāmī branch.',
+    summary: 'Ran ashrams at Serampore and Puri. At Babaji\'s request (after their meeting at the 1894 Kumbha Mela) he wrote Kaivalya Darśanam — The Holy Science, comparing the Bible with Hindu scripture and setting out his yuga chronology.'
+  },
+  {
+    id: 'yogananda', lineage: 'kriya', col: 5, row: 4,
+    name: 'Paramahaṃsa Yogānanda', deva: 'परमहंस योगानन्द', dates: '1893–1952', born: 'Mukunda Lal Ghosh',
+    role: 'Brought Kriyā Yoga to the West; author of Autobiography of a Yogi',
+    etym: 'yoga + ānanda — "bliss through union".',
+    summary: 'Met Yukteswar in 1910 and took Giri-order sannyāsa from him in 1915. Founded Yogoda Satsanga Society (1917) in India, sailed to America in 1920 to speak in Boston, and founded Self-Realization Fellowship.'
+  },
+  {
+    id: 'srf', lineage: 'kriya', col: 5, row: 5, kind: 'institution',
+    name: 'Self-Realization Fellowship / YSS', dates: 'founded 1917 · 1920', place: 'Los Angeles · Ranchi',
+    role: 'Yogananda\'s organisations',
+    summary: 'Yogoda Satsanga Society of India (1917) and Self-Realization Fellowship (1920; Mount Washington HQ from 1925) carry on Kriyā initiation through Yogananda\'s lessons and monastic order.'
+  },
+  {
+    id: 'dayamata', lineage: 'kriya', col: 6, row: 5.5,
+    name: 'Śrī Dayā Mātā', deva: 'दया माता', dates: '1914–2010', born: 'Faye Wright',
+    role: 'President of SRF/YSS 1955–2010',
+    etym: 'dayā ("compassion") + mātā ("mother").',
+    summary: 'A direct disciple who entered Yogananda\'s ashram at seventeen, she led the organisations for 55 years.'
+  },
+  {
+    id: 'chidananda', lineage: 'kriya', col: 5, row: 6,
+    name: 'Svāmī Cidānanda Giri', deva: 'स्वामी चिदानन्द गिरि', dates: 'living',
+    role: 'President of SRF/YSS (since 2017)',
+    etym: 'cit ("consciousness") + ānanda ("bliss").',
+    summary: 'Known as Brother Chidananda; a monk of the SRF order since 1977, he succeeded Mrinalini Mata (president 2011–2017) and is the present-day head of Yogananda\'s line.'
+  }
+];
+
+const LINKS = [
+  // Shared root
+  { from: 'shankara', to: 'totapuri', type: 'sannyasa', label: 'Purī order' },
+  { from: 'shankara', to: 'yukteswar', type: 'sannyasa', label: 'Giri order', toSide: 'left' },
+
+  // Ramakrishna line
+  { from: 'bhairavi', to: 'ramakrishna', type: 'diksha', label: 'Tantric training, 1861–63' },
+  { from: 'totapuri', to: 'ramakrishna', type: 'diksha', label: 'sannyāsa, c. 1865' },
+  { from: 'ramakrishna', to: 'sarada', type: 'diksha', label: 'wife; taught by him' },
+  { from: 'ramakrishna', to: 'vivekananda', type: 'diksha', label: 'disciple from 1881' },
+  { from: 'ramakrishna', to: 'mgupta', type: 'diksha', label: 'householder disciple' },
+  { from: 'ramakrishna', to: 'brahmananda', type: 'diksha', label: 'disciple' },
+  { from: 'vivekananda', to: 'rkmission', type: 'succession', label: 'founded 1897' },
+  { from: 'brahmananda', to: 'rkmission', type: 'succession', label: 'first President' },
+  { from: 'vivekananda', to: 'vsny', type: 'succession', label: 'founded 1894' },
+  { from: 'rkmission', to: 'sarvapriyananda', type: 'succession', label: 'monk of the Order, 1994' },
+  { from: 'vsny', to: 'sarvapriyananda', type: 'succession', label: 'Minister since 2017' },
+
+  // Kriyā line
+  { from: 'babaji', to: 'lahiri', type: 'diksha', label: 'Kriyā initiation, 1861' },
+  { from: 'lahiri', to: 'yukteswar', type: 'diksha', label: 'Kriyā initiation' },
+  { from: 'babaji', to: 'yukteswar', type: 'encounter', label: 'Kumbha Mela, 1894 — asked to write The Holy Science', bend: 'right' },
+  { from: 'yukteswar', to: 'yogananda', type: 'diksha', label: 'disciple 1910; sannyāsa 1915' },
+  { from: 'lahiri', to: 'yogananda', type: 'encounter', label: 'blessed him as an infant; initiated his parents', bend: 'right' },
+  { from: 'yogananda', to: 'srf', type: 'succession', label: 'founded 1917 / 1920' },
+  { from: 'yogananda', to: 'dayamata', type: 'diksha', label: 'disciple from 1931' },
+  { from: 'srf', to: 'dayamata', type: 'succession', label: 'President 1955–2010' },
+  { from: 'srf', to: 'chidananda', type: 'succession', label: 'President since 2017' },
+
+  // Between the lineages
+  { from: 'mgupta', to: 'yogananda', type: 'encounter', cross: true,
+    label: 'Yogananda\'s boyhood visits',
+    detail: 'As a teenager in Calcutta, Yogananda often visited M. — the recorder of Ramakrishna\'s Gospel — and devotes chapter 9 of Autobiography of a Yogi ("The Blissful Devotee and His Cosmic Romance") to him as "Master Mahasaya". It is the one direct personal thread between the two lines.' },
+  { from: 'vivekananda', to: 'yogananda', type: 'parallel', cross: true,
+    label: 'Chicago 1893 · Boston 1920',
+    detail: 'Each lineage reached America through one Bengali monk speaking at a religious congress: Vivekananda at the Parliament of the World\'s Religions (Chicago, 1893), Yogananda at the International Congress of Religious Liberals (Boston, 1920). Both then founded lasting American institutions — and both framed yoga as a science of experience rather than a creed.' },
+  { from: 'vsny', to: 'srf', type: 'parallel', cross: true,
+    label: 'Western institutions',
+    detail: 'The Vedanta Society of New York (1894) and Self-Realization Fellowship (1920) are among the oldest Hindu-rooted spiritual organisations in continuous operation in the United States, and each is still led by a monastic order founded by its lineage.' },
+  { from: 'sarvapriyananda', to: 'chidananda', type: 'parallel', cross: true,
+    label: 'Present-day heads, both since 2017',
+    detail: 'The two lines\' living representatives on this chart both took up their posts in 2017: Sarvapriyananda at the Vedanta Society of New York, Chidananda as President of SRF/YSS.' }
+];
+
+const LINK_TYPES = {
+  diksha: 'Initiation / discipleship',
+  sannyasa: 'Monastic order (Daśanāmī)',
+  succession: 'Founded / led an institution',
+  encounter: 'Documented meeting',
+  parallel: 'Parallel between lineages'
+};
+
+(function () {
+  const canvas = document.getElementById('lineage-canvas');
+  const svg = document.getElementById('lineage-edges');
+  const detail = document.getElementById('lineage-detail');
+  const crossList = document.getElementById('lineage-cross');
+  if (!canvas) return;
+
+  const COL_W = 152, ROW_H = 132, PAD = 12;
+  const byId = Object.fromEntries(PEOPLE.map(p => [p.id, p]));
+  const cards = {};
+  let selected = null;
+
+  const maxCol = Math.max(...PEOPLE.map(p => p.col));
+  const maxRow = Math.max(...PEOPLE.map(p => p.row));
+  canvas.style.width = (maxCol + 1) * COL_W + PAD * 2 + 'px';
+  canvas.style.height = (maxRow + 1) * ROW_H + PAD * 2 + 'px';
+
+  // Lineage header bands
+  [['ramakrishna', 0, 3], ['kriya', 4, 3]].forEach(([key, col, span]) => {
+    const band = document.createElement('div');
+    band.className = 'lineage-band lineage-band-' + key;
+    band.style.left = PAD + col * COL_W + 'px';
+    band.style.width = span * COL_W + 'px';
+    band.innerHTML = `<span>${LINEAGES[key].name}</span>`;
+    canvas.appendChild(band);
+  });
+
+  PEOPLE.forEach(p => {
+    const el = document.createElement('button');
+    el.type = 'button';
+    el.className = `lineage-node lineage-${p.lineage}` + (p.kind === 'institution' ? ' is-institution' : '');
+    el.style.left = PAD + p.col * COL_W + 'px';
+    el.style.top = PAD + p.row * ROW_H + 28 + 'px';
+    el.dataset.id = p.id;
+    el.innerHTML =
+      (p.deva ? `<span class="lineage-node-deva">${p.deva}</span>` : '') +
+      `<span class="lineage-node-name">${p.name}</span>` +
+      `<span class="lineage-node-dates">${p.dates}</span>`;
+    el.addEventListener('click', () => select(p.id));
+    canvas.appendChild(el);
+    cards[p.id] = el;
+  });
+
+  function anchor(el, side) {
+    const x = el.offsetLeft, y = el.offsetTop, w = el.offsetWidth, h = el.offsetHeight;
+    return {
+      top: [x + w / 2, y], bottom: [x + w / 2, y + h],
+      left: [x, y + h / 2], right: [x + w, y + h / 2]
+    }[side];
+  }
+
+  function drawEdges() {
+    svg.setAttribute('width', canvas.offsetWidth);
+    svg.setAttribute('height', canvas.offsetHeight);
+    svg.innerHTML = '';
+    LINKS.forEach((l, i) => {
+      const a = byId[l.from], b = byId[l.to];
+      const ea = cards[l.from], eb = cards[l.to];
+      let p1, p2, d;
+      if (l.bend) {
+        // Skip-a-generation link in the same column: arc out to the side so
+        // it isn't hidden behind the straight line through the middle card.
+        p1 = anchor(ea, l.bend); p2 = anchor(eb, l.bend);
+        const bx = l.bend === 'right' ? Math.max(p1[0], p2[0]) + 46 : Math.min(p1[0], p2[0]) - 46;
+        d = `M${p1} C${bx},${p1[1]} ${bx},${p2[1]} ${p2}`;
+      } else if (l.toSide) {
+        p1 = anchor(ea, 'bottom'); p2 = anchor(eb, l.toSide);
+        d = `M${p1} C${p1[0]},${p2[1]} ${p1[0]},${p2[1]} ${p2}`;
+      } else if (b.row > a.row + 0.4) {
+        p1 = anchor(ea, 'bottom'); p2 = anchor(eb, 'top');
+        const my = (p1[1] + p2[1]) / 2;
+        d = `M${p1} C${p1[0]},${my} ${p2[0]},${my} ${p2}`;
+      } else {
+        const rightward = b.col > a.col;
+        p1 = anchor(ea, rightward ? 'right' : 'left');
+        p2 = anchor(eb, rightward ? 'left' : 'right');
+        const mx = (p1[0] + p2[0]) / 2;
+        d = `M${p1} C${mx},${p1[1]} ${mx},${p2[1]} ${p2}`;
+      }
+      const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+      path.setAttribute('d', d);
+      path.setAttribute('class', `lineage-edge edge-${l.type}`);
+      path.dataset.idx = i;
+      const title = document.createElementNS('http://www.w3.org/2000/svg', 'title');
+      title.textContent = `${byId[l.from].name} → ${byId[l.to].name}: ${l.label}`;
+      path.appendChild(title);
+      svg.appendChild(path);
+    });
+    highlight();
+  }
+
+  function highlight() {
+    svg.querySelectorAll('.lineage-edge').forEach(path => {
+      const l = LINKS[path.dataset.idx];
+      const on = selected && (l.from === selected || l.to === selected);
+      path.classList.toggle('is-active', !!on);
+      path.classList.toggle('is-dim', !!selected && !on);
+    });
+    Object.entries(cards).forEach(([id, el]) => {
+      const linked = selected && LINKS.some(l =>
+        (l.from === selected && l.to === id) || (l.to === selected && l.from === id));
+      el.classList.toggle('is-selected', id === selected);
+      el.classList.toggle('is-linked', !!linked);
+    });
+  }
+
+  function personLink(id) {
+    return `<a href="#" data-goto="${id}">${byId[id].name}</a>`;
+  }
+
+  function select(id) {
+    selected = id;
+    const p = byId[id];
+    const rels = LINKS.filter(l => l.from === id || l.to === id).map(l => {
+      const other = l.from === id ? l.to : l.from;
+      const dir = l.from === id ? '→' : '←';
+      return `<li><span class="lineage-chip chip-${l.type}">${LINK_TYPES[l.type]}</span>
+        ${dir} ${personLink(other)} <span class="lineage-rel-label">— ${l.label}</span></li>`;
+    }).join('');
+    detail.innerHTML = `
+      <div class="lineage-detail-head">
+        ${p.deva ? `<div class="lineage-detail-deva">${p.deva}</div>` : ''}
+        <h2>${p.name}</h2>
+        <div class="lineage-detail-meta">${p.dates}${p.born ? ` · born ${p.born}` : ''}${p.place ? ` · ${p.place}` : ''}</div>
+        <div class="lineage-detail-role">${p.role}</div>
+      </div>
+      ${p.etym ? `<p class="lineage-detail-etym"><strong>Name:</strong> ${p.etym}</p>` : ''}
+      <p>${p.summary}</p>
+      ${p.caveat ? `<p class="lineage-detail-caveat">${p.caveat}</p>` : ''}
+      <h3>Connections</h3>
+      <ul class="lineage-rels">${rels}</ul>`;
+    detail.hidden = false;
+    highlight();
+    if (window.innerWidth < 900) detail.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+
+  document.addEventListener('click', e => {
+    const a = e.target.closest('[data-goto]');
+    if (!a) return;
+    e.preventDefault();
+    select(a.dataset.goto);
+    cards[a.dataset.goto].scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'center' });
+  });
+
+  // "Between the lineages" cards
+  crossList.innerHTML = LINKS.filter(l => l.cross).map(l => `
+    <div class="lineage-cross-card">
+      <span class="lineage-chip chip-${l.type}">${LINK_TYPES[l.type]}</span>
+      <h3>${personLink(l.from)} <span class="lineage-cross-arrow">⇄</span> ${personLink(l.to)}</h3>
+      <div class="lineage-cross-label">${l.label}</div>
+      <p>${l.detail}</p>
+    </div>`).join('');
+
+  // Legend
+  document.getElementById('lineage-legend').innerHTML = Object.entries(LINK_TYPES).map(([k, v]) =>
+    `<span class="legend-item"><svg width="34" height="10"><path d="M2,5 L32,5" class="lineage-edge edge-${k}"/></svg>${v}</span>`
+  ).join('') + '<span class="legend-item"><span class="legend-inst"></span>Institution</span>';
+
+  drawEdges();
+  if (document.fonts) document.fonts.ready.then(drawEdges);
+  window.addEventListener('resize', drawEdges);
+})();

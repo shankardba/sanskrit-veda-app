@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lineages — Vedavani</title>
+<meta name="description" content="Vedavani — guru–disciple lineages: Ramakrishna to Vivekananda to Sarvapriyananda, and the Kriyā Yoga line of Babaji, Lahiri Mahasaya, Yukteswar and Yogananda, with the connections between them.">
+<link rel="icon" href="assets/logo.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@400;500;600&family=Noto+Sans+Devanagari:wght@400;500;600&family=Gentium+Plus:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<header class="site-header">
+  <nav class="navbar">
+    <a href="index.html" class="logo-group">
+      <img src="assets/logo.svg" alt="Vedavani" class="logo-mark">
+      <span class="logo-word glow-gold">Vedavani</span>
+    </a>
+    <div class="nav-links">
+      <a href="index.html" class="nav-link">Chants</a>
+      <a href="language.html" class="nav-link">Sanskrit</a>
+      <a href="tamil.html" class="nav-link">Tamil</a>
+      <a href="mathematics.html" class="nav-link">Mathematics</a>
+      <a href="yantras.html" class="nav-link">Yantras</a>
+      <a href="lineages.html" class="nav-link active">Lineages</a>
+    </div>
+  </nav>
+</header>
+
+<main id="top">
+  <div class="lang-hero container">
+    <h1 class="glow-gold">Lineages</h1>
+    <p>Guru to disciple, down to the present day — and where the lines touch.</p>
+  </div>
+
+  <div class="lang-body container">
+    <p class="lang-block-intro">
+      A <em>paramparā</em> (परम्परा, "one after another") is a chain of teachers, each passing on what they
+      received. Two such chains are charted here: the Advaita line of <strong>Ramakrishna → Vivekananda</strong>,
+      carried to the present by the Ramakrishna Order and Swami Sarvapriyananda, and the <strong>Kriyā Yoga</strong>
+      line of Babaji, Lahiri Mahasaya, Sri Yukteswar and Paramahansa Yogananda. Lahiri Mahasaya is the link
+      usually skipped between Babaji and Yukteswar. Both lines take their monastic vows from the orders
+      traditionally traced to Ādi Śaṅkara. Select anyone to see who they learned from and who they taught.
+    </p>
+
+    <div class="lineage-legend" id="lineage-legend"></div>
+
+    <div class="lineage-layout">
+      <div class="lineage-scroll">
+        <div class="lineage-canvas" id="lineage-canvas">
+          <svg class="lineage-edges" id="lineage-edges" aria-hidden="true"></svg>
+        </div>
+      </div>
+      <aside class="lineage-detail" id="lineage-detail" hidden></aside>
+    </div>
+
+    <section class="lang-block lineage-cross-section">
+      <h2 class="lang-block-title">Between the lineages</h2>
+      <p class="lang-block-intro">
+        The two lines never merged, but they cross at one person and run in parallel at several points.
+      </p>
+      <div class="lineage-cross-grid" id="lineage-cross"></div>
+    </section>
+  </div>
+</main>
+
+<script src="js/lineages.js"></script>
+</body>
+</html>
