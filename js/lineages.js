@@ -79,6 +79,54 @@ const PEOPLE = [
     summary: 'A retired president of the Bank of India who came to Nisargadatta in 1978 and served as his interpreter. Afterwards he taught Advaita in Mumbai and wrote Pointers from Nisargadatta Maharaj (1982) and many other books.'
   },
 
+  // --- Through Gorakhnāth: the order, the Marathi saints, kings and seats ----
+  {
+    id: 'kanphata', lineage: 'nath', col: 0, row: 0, kind: 'institution', note: 'gorakh',
+    name: 'Kānphaṭa Nāth order', deva: 'कानफटा', dates: '12 panths',
+    role: 'The "split-ear" yogis who trace themselves to Gorakhnāth',
+    etym: 'kān ("ear") + phaṭā ("split"): initiates have the ear cartilage split for large rings (kuṇḍala or mudrā).',
+    summary: 'Organised in twelve sub-orders (bārah panth). Its yogis keep a sacred fire (dhūnī), greet each other with "Alakh Niranjan" ("the unseen, the stainless"), and wandered the whole subcontinent. Their great seats include Gorakhpur, Tilla Jogian in Pakistani Punjab, and Kadri in Mangalore.'
+  },
+  {
+    id: 'bhartrhari', lineage: 'nath', col: 0, row: 1, note: 'gorakh',
+    name: 'Rājā Bhartṛhari', deva: 'भर्तृहरि', dates: 'legendary',
+    role: 'King of Ujjain turned Nāth yogi',
+    summary: 'In the legend he gives up his kingdom to his brother Vikramāditya after Gorakhnāth shows him the illusory nature of the world. The Vairāgya-śataka ("Hundred verses on detachment") is credited to him. He and his nephew Gopīcand of Bengal are the heroes of bardic songs sung by Nāth jogis from Rajasthan to Bengal.',
+    caveat: 'Whether the yogi-king, the poet and the grammarian Bhartṛhari were one person or several is unresolved.'
+  },
+  {
+    id: 'gorakhmath', lineage: 'nath', col: 0, row: 2, kind: 'institution', note: 'gorakh',
+    name: 'Gorakhnath Math', deva: 'गोरखनाथ मठ', dates: 'Gorakhpur', place: 'Gorakhpur, Uttar Pradesh',
+    role: 'Chief seat of the order; the city is named after him',
+    summary: 'Its 20th-century mahants were Brahmanāth, Digvijaynāth (from 1935), Avaidyanāth (from 1969) and, since 2014, Yogi Adityanāth, who has also been Chief Minister of Uttar Pradesh since 2017. At Makar Saṅkrānti pilgrims offer khichdi to Gorakhnāth here.',
+    caveat: 'Sources differ by a year or two on some succession dates.'
+  },
+  {
+    id: 'gahini', lineage: 'nath', col: 2, row: -1, note: 'gorakh',
+    name: 'Gahinīnāth', deva: 'गहिनीनाथ', dates: 'one of the Navnāth',
+    role: 'Nāth master in the Marathi tradition',
+    summary: 'One of the "Nine Nāths". With Gorakhnāth he is credited with founding Marathi mystical literature. Tradition says he initiated the boy Nivṛtti in a cave on the Anjani hill.'
+  },
+  {
+    id: 'nivritti', lineage: 'nath', col: 2, row: 0, note: 'gorakh',
+    name: 'Nivṛttināth', deva: 'निवृत्तिनाथ', dates: 'c. 1273–1297',
+    role: 'Elder brother and guru of Jñāneśvar',
+    summary: 'The eldest of four orphaned siblings who became saints. Initiated into the Nāth path by Gahinīnāth, he in turn initiated his brother Jñāneśvar, and Gahinīnāth told him to spread devotion to Kṛṣṇa.'
+  },
+  {
+    id: 'jnaneshwar', lineage: 'nath', col: 2, row: 1, note: 'gorakh',
+    name: 'Jñāneśvar', deva: 'ज्ञानेश्वर', dates: '1275–1296',
+    role: 'Marathi saint-poet; author of the Jñāneśvarī',
+    etym: 'jñāna ("knowledge") + īśvara ("lord").',
+    summary: 'At about fifteen he gave the Jñāneśvarī (1290), a Marathi verse commentary on the Gītā and a founding work of Marathi literature, which opens by saluting his guru Nivṛttināth. Revered as the first saint of the Vārkarī devotional movement (later Nāmdev, Ekanāth, Tukārām), he entered samādhi at Alandi at twenty-one.'
+  },
+  {
+    id: 'nanak', lineage: 'nath', col: 2, row: 2, note: 'gorakh',
+    name: 'Guru Nānak', deva: 'गुरु नानक', dates: '1469–1539',
+    role: 'Founder of Sikhism; debated the Nāth siddhas',
+    summary: 'The Siddh Gosht ("discourse with the Siddhas", Guru Granth Sahib, Rāg Rāmkalī) records his debates with the Nāth yogis, who traced their authority to Gorakhnāth. It sets his path of the Name and inner yoga against their austerities. Sikh sources place the meetings at Achal Batala, Gorakh Matta and the Himalayas, and tradition also says he stayed at Tilla Jogian.'
+  },
+
   // --- Above Śaṅkara: the Advaita guru-paramparā -------------------------
   {
     id: 'daiva', lineage: 'root', col: 7, row: -4, kind: 'legend', note: 'root',
@@ -160,7 +208,7 @@ const PEOPLE = [
     summary: 'Legend says he overheard Śiva teaching Pārvatī while inside the belly of a fish, then emerged as a yogi. The seated twist matsyendrāsana is named after him. He is revered in Nepal and, as Luipa, in Tibetan Buddhism.'
   },
   {
-    id: 'gorakhnath', lineage: 'nath', col: 1, row: -1,
+    id: 'gorakhnath', lineage: 'nath', col: 1, row: -1, note: 'gorakh',
     name: 'Gorakhnāth', deva: 'गोरखनाथ', dates: 'c. 11th–12th century',
     role: 'Disciple of Matsyendranāth; organiser of the Nāth order',
     etym: 'Gorakṣa-nātha: go-rakṣa ("protector of cows", i.e. "cowherd") + nātha.',
@@ -569,6 +617,14 @@ const LINKS = [
   { from: 'nisargadatta', to: 'frydman', type: 'textual', label: 'recorded and translated I Am That, 1973', late: true },
   { from: 'nisargadatta', to: 'balsekar', type: 'diksha', label: 'disciple and interpreter from 1978' },
 
+  // Through Gorakhnāth
+  { from: 'gorakhnath', to: 'kanphata', type: 'succession', label: 'organised the order (tradition)' },
+  { from: 'gorakhnath', to: 'bhartrhari', type: 'traditional', label: 'renounced at his teaching (legend)', late: true },
+  { from: 'kanphata', to: 'gorakhmath', type: 'succession', label: 'chief seat' },
+  { from: 'gorakhnath', to: 'gahini', type: 'traditional', label: 'Navnāth tradition' },
+  { from: 'gahini', to: 'nivritti', type: 'diksha', label: 'initiated him (tradition)' },
+  { from: 'nivritti', to: 'jnaneshwar', type: 'diksha', label: 'elder brother and guru' },
+
   // Shared root
   { from: 'shankara', to: 'padmapada', type: 'diksha', label: 'disciple', late: true },
   { from: 'shankara', to: 'sureshvara', type: 'diksha', label: 'disciple', late: true },
@@ -675,6 +731,9 @@ const LINKS = [
   { from: 'patanjali', to: 'gorakhnath', type: 'parallel', cross: true,
     label: 'Haṭha yoga as the ladder to rāja-yoga',
     detail: 'The Haṭha Yoga Pradīpikā (15th century), which honours Gorakhnāth among the masters of haṭha, opens by saying that haṭha yoga is a stairway for those who want to climb to rāja-yoga, the meditative yoga later identified with Patañjali\'s. The Nāth body-practice and Patañjali\'s mind-discipline are thus presented as one path.' },
+  { from: 'kanphata', to: 'nanak', type: 'encounter', cross: true,
+    label: 'Siddh Gosht',
+    detail: 'Guru Nānak\'s debates with the Nāth siddhas are recorded in the Siddh Gosht of the Guru Granth Sahib. Against their split ears, ash and austerity he set an inner yoga of the Name lived inside ordinary life. Gorakh also appears by name in the Japji: "the Guru is Īśar (Śiva), the Guru is Gorakh, and Brahmā", where Gorakh is often read as the sustainer, Viṣṇu.' },
   { from: 'gaudapada', to: 'sarvapriyananda', type: 'textual', cross: true, onSelect: true,
     label: 'Māṇḍūkya Kārikā lectures',
     detail: 'Swami Sarvapriyananda\'s best-known teaching is a long lecture series on the Māṇḍūkya Upaniṣad with Gauḍapāda\'s Kārikā, given at the Vedanta Society of New York. It brings a 7th-century text to the present day.' },
@@ -702,7 +761,8 @@ const NOTE_TITLES = {
   root: 'Lineages before Śaṅkara',
   mathas: 'The four maṭhas',
   ramana: 'The Ramana branch',
-  patanjali: 'Patañjali and the Yoga Sūtras'
+  patanjali: 'Patañjali and the Yoga Sūtras',
+  gorakh: 'Gorakhnāth in the wider culture'
 };
 
 const LINK_TYPES = {
@@ -968,7 +1028,8 @@ const LINK_TYPES = {
   let guideDoc = null;
   async function openNote(key) {
     if (!guideDoc) {
-      const html = await fetch('lineages-guide.html').then(r => r.text());
+      // no-cache = revalidate, so an edited guide never shows stale notes
+      const html = await fetch('lineages-guide.html', { cache: 'no-cache' }).then(r => r.text());
       guideDoc = new DOMParser().parseFromString(html, 'text/html');
     }
     const section = guideDoc.getElementById('note-' + key);
