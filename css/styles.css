@@ -2913,3 +2913,19 @@ body.tamil-page .lang-hub-card-glyph {
 .lineage-howto:hover { color: var(--color-gold-light); }
 .modal-more a { color: var(--color-gold-light); border-bottom: 1px dotted var(--color-border); font-family: var(--font-ui); font-size: 0.85rem; }
 .modal-body .guide-key { list-style: none; padding: 0; }
+.lineage-node.is-text {
+  border-radius: 4px;
+  border-left: 3px solid #7fd6c2;
+  background: rgba(127, 214, 194, 0.05);
+}
+.edge-influence { stroke: #8fa8ff; stroke-dasharray: 1 4 6 4; stroke-linecap: round; stroke-width: 1.8; }
+.chip-influence { color: #8fa8ff; }
+.lineage-detail-note { margin: 4px 0 6px; font-size: 0.8rem; color: var(--color-gold-light); }
+.note-verse { margin: 10px 0 16px; padding: 12px 16px; border-left: 2px solid var(--color-gold); background: rgba(240, 168, 60, 0.05); }
+.note-verse .v-deva { font-family: var(--font-sanskrit); font-size: 1.05rem; color: var(--color-gold-light); line-height: 1.8; }
+.note-verse .v-iast { white-space: pre-line; font-family: 'Gentium Plus', var(--font-body); font-style: italic; font-size: 0.95rem; color: var(--color-text-muted); margin-top: 6px; }
+.note-verse .v-tr { font-size: 0.98rem; margin-top: 8px; }
+.guide-table { width: 100%; border-collapse: collapse; margin: 8px 0 16px; font-size: 0.98rem; }
+.guide-table th, .guide-table td { text-align: left; vertical-align: top; padding: 6px 10px; border-bottom: 1px solid var(--color-border); }
+.guide-table th { font-family: var(--font-ui); font-size: 0.72rem; color: var(--color-gold); font-weight: 600; letter-spacing: 0.3px; }
+.guide-section h3, .modal-body h3 { font-family: var(--font-display); font-size: 1rem; color: var(--color-gold); margin: 18px 0 6px; }

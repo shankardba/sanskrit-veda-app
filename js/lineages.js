@@ -12,6 +12,7 @@
 //   parallel    — a thematic parallel between the lineages (no meeting)
 //   textual     — a teaching carried by text/translation rather than initiation
 //   split       — a separation or dispute between a teacher and an institution
+//   influence   — a scholarly, debated influence (ideas, not a teacher)
 //   traditional — a link asserted by tradition or one source, not historically
 //                 attested (legendary teachers, contested identifications)
 //
@@ -79,21 +80,53 @@ const PEOPLE = [
 
   // --- Above Śaṅkara: the Advaita guru-paramparā -------------------------
   {
-    id: 'legendary', lineage: 'root', col: 7, row: -3, kind: 'legend',
-    name: 'Traditional paramparā', deva: 'नारायण → ब्रह्मा → … → शुक', dates: 'legendary',
-    role: 'The chain recited before every Advaita teaching',
-    summary: 'Advaita monks still chant their lineage as Nārāyaṇa → Brahmā → Vasiṣṭha → Śakti → Parāśara → Vyāsa → Śuka → Gauḍapāda → Govinda → Śaṅkara. It runs from god to the Vedic sages Vasiṣṭha and Parāśara, then to Vyāsa, compiler of the Vedas, and his son Śuka. Gauḍapāda is the first name generally treated as historical.',
-    caveat: 'Mythic and legendary down to Śuka; Śuka teaching Gauḍapāda directly is chronologically impossible.'
+    id: 'daiva', lineage: 'root', col: 7, row: -4, kind: 'legend', note: 'root',
+    name: 'Divine teachers', deva: 'नारायण → ब्रह्मा', dates: 'daiva-paramparā',
+    role: 'The teaching\'s source in God',
+    summary: 'The recited lineage opens with Nārāyaṇa (Viṣṇu) teaching Brahmā, the "lotus-born" creator. A Śaiva form of the same chant begins instead from Sadāśiva, and many Advaitins honour Dakṣiṇāmūrti, Śiva as the silent first teacher, to whom Śaṅkara wrote a famous hymn.',
+    caveat: 'Divine, not historical: this stage says the teaching is not man-made.'
   },
   {
-    id: 'gaudapada', lineage: 'root', col: 7, row: -2,
+    id: 'legendary', lineage: 'root', col: 7, row: -3, kind: 'legend', note: 'root',
+    name: 'The sages', deva: 'वसिष्ठ → शक्ति → पराशर → व्यास → शुक', dates: 'ṛṣi-paramparā',
+    role: 'Five generations, father to son',
+    summary: 'Vasiṣṭha, the Vedic seer; his son Śakti; Śakti\'s son Parāśara, author of the Viṣṇu Purāṇa; Parāśara\'s son Vyāsa, compiler of the Vedas, credited with the Mahābhārata and the Brahma Sūtras; and Vyāsa\'s son Śuka, the born renunciate who recites the Bhāgavata Purāṇa.',
+    caveat: 'Legendary. Śuka is said to have taught Gauḍapāda, which would span many centuries.'
+  },
+  {
+    id: 'prasthana', lineage: 'root', col: 6, row: -2, kind: 'text', note: 'root',
+    name: 'Prasthāna-traya', deva: 'उपनिषद् · ब्रह्मसूत्र · गीता', dates: 'the three foundations',
+    role: 'Upaniṣads · Brahma Sūtras · Bhagavad Gītā',
+    etym: 'prasthāna ("setting out, source") + traya ("triad").',
+    summary: 'Every Vedānta school must comment on these three, and Śaṅkara\'s commentaries on them are his main works. From the Upaniṣads come Uddālaka Āruṇi\'s "tat tvam asi" ("you are that") and Yājñavalkya\'s "neti neti" ("not this, not this"). The Brahma Sūtras of Bādarāyaṇa, whom tradition identifies with Vyāsa, summarise the Upaniṣads in terse aphorisms.'
+  },
+  {
+    id: 'vedantins', lineage: 'root', col: 5, row: -1, kind: 'text', note: 'root',
+    name: 'Earlier Vedāntins', dates: 'before c. 700 CE',
+    role: 'Upavarṣa · Dramiḍācārya · Bhartṛprapañca',
+    summary: 'Commentators whose works are lost and known only from quotations. Śaṅkara cites "the revered Upavarṣa" and Dramiḍācārya with approval, and argues at length against Bhartṛprapañca, who held that Brahman and the world are both different and not different (bhedābheda).'
+  },
+  {
+    id: 'buddhist', lineage: 'root', col: 8, row: -2, kind: 'text', note: 'root',
+    name: 'Madhyamaka · Yogācāra', dates: 'c. 2nd–5th century',
+    role: 'Mahāyāna Buddhist philosophy (Nāgārjuna, Vasubandhu)',
+    summary: 'The fourth chapter of Gauḍapāda\'s Kārikā borrows Buddhist arguments and vocabulary. "No-origination" (ajāti) closely echoes Nāgārjuna, and Gauḍapāda even uses the image of a whirling firebrand (alāta-cakra). Rival schools later called Śaṅkara a "Buddhist in disguise" (pracchanna bauddha). Most scholars see Gauḍapāda adapting Buddhist arguments, and Śaṅkara anchoring them back in the Upaniṣads.'
+  },
+  {
+    id: 'mimamsa', lineage: 'root', col: 8, row: -1, kind: 'text', note: 'root',
+    name: 'Mīmāṃsā', deva: 'मीमांसा', dates: 'Śabara · Kumārila',
+    role: 'The school of Vedic ritual interpretation',
+    summary: 'Śaṅkara took Mīmāṃsā\'s rules for reading scripture but rejected its conclusion that the Veda is mainly about ritual action. Legend has him meet the dying Kumārila Bhaṭṭa, then defeat the Mīmāṃsaka Maṇḍana Miśra in a debate judged by Maṇḍana\'s wife Ubhaya Bhāratī. Tradition says Maṇḍana then became Śaṅkara\'s disciple Sureśvara.'
+  },
+  {
+    id: 'gaudapada', lineage: 'root', col: 7, row: -2, note: 'root',
     name: 'Gauḍapāda', deva: 'गौडपाद', dates: 'c. 6th–7th century',
     role: 'Author of the Māṇḍūkya Kārikā; Śaṅkara\'s guru\'s guru',
     etym: 'gauḍa (the Bengal region) + pāda ("venerable"): "the venerable one of Gauḍa".',
     summary: 'His Māṇḍūkya Kārikā, 215 verses on the Māṇḍūkya Upaniṣad, is the earliest surviving systematic text of Advaita. It argues ajāti-vāda, that nothing has ever really come into being. Śaṅkara wrote a commentary on it.'
   },
   {
-    id: 'govinda', lineage: 'root', col: 7, row: -1,
+    id: 'govinda', lineage: 'root', col: 7, row: -1, note: 'root',
     name: 'Govinda Bhagavatpāda', deva: 'गोविन्द भगवत्पाद', dates: 'c. 7th–8th century',
     role: 'Śaṅkara\'s guru',
     etym: 'Govinda, a name of Kṛṣṇa, + bhagavat-pāda ("the Lord\'s feet"), an honorific later also given to Śaṅkara.',
@@ -124,7 +157,7 @@ const PEOPLE = [
   },
 
   {
-    id: 'shankara', lineage: 'root', col: 7, row: 0,
+    id: 'shankara', lineage: 'root', col: 7, row: 0, note: 'root',
     name: 'Ādi Śaṅkara', deva: 'आदि शङ्कर', dates: 'c. 8th century',
     role: 'Advaita teacher; organiser of the Daśanāmī monastic orders',
     summary: 'Tradition credits Śaṅkara with gathering wandering renunciates into ten named orders (daśa-nāmī, "ten names") — Giri, Purī, Bhāratī, Sarasvatī and others. All three lineages on this page take their sannyāsa through these orders: Ramakrishna through a Purī monk, Yukteswar and Yogananda as Giris, Sivananda and Chinmayananda as Sarasvatīs. Ramana Maharshi belongs to no order, but his teaching links back to Śaṅkara\'s texts.'
@@ -400,7 +433,13 @@ const PEOPLE = [
 
 const LINKS = [
   // Above Śaṅkara
+  { from: 'daiva', to: 'legendary', type: 'traditional', label: 'Brahmā to Vasiṣṭha, his mind-born son' },
   { from: 'legendary', to: 'gaudapada', type: 'traditional', label: 'Śuka said to have taught him' },
+  { from: 'prasthana', to: 'gaudapada', type: 'textual', label: 'Māṇḍūkya Upaniṣad → his Kārikā' },
+  { from: 'prasthana', to: 'shankara', type: 'textual', label: 'his commentaries (bhāṣyas) on all three', toSide: 'left' },
+  { from: 'vedantins', to: 'shankara', type: 'textual', label: 'cites Upavarṣa; refutes Bhartṛprapañca', toSide: 'left' },
+  { from: 'buddhist', to: 'gaudapada', type: 'influence', label: 'arguments and vocabulary of Kārikā ch. 4' },
+  { from: 'mimamsa', to: 'shankara', type: 'influence', label: 'method kept, conclusions rejected', toSide: 'right' },
   { from: 'gaudapada', to: 'govinda', type: 'diksha', label: 'disciple' },
   { from: 'govinda', to: 'shankara', type: 'diksha', label: 'sannyāsa on the Narmada' },
 
@@ -521,7 +560,8 @@ const LINK_TYPES = {
   parallel: 'Parallel between lineages',
   textual: 'Teaching through texts',
   split: 'Separation / dispute',
-  traditional: 'Traditional / contested claim'
+  traditional: 'Traditional / contested claim',
+  influence: 'Scholarly influence (debated)'
 };
 
 (function () {
@@ -686,6 +726,7 @@ const LINK_TYPES = {
       ${p.etym ? `<p class="lineage-detail-etym"><strong>Name:</strong> ${p.etym}</p>` : ''}
       <p>${p.summary}</p>
       ${p.caveat ? `<p class="lineage-detail-caveat">${p.caveat}</p>` : ''}
+      ${p.note ? `<button type="button" class="lineage-howto lineage-detail-note" data-note="${p.note}">Lineages before Śaṅkara <span class="sigma-badge" aria-hidden="true">∑</span></button>` : ''}
       <h3>Connections</h3>
       <ul class="lineage-rels">${rels}</ul>`;
     detail.hidden = false;
