@@ -642,6 +642,78 @@ const LINK_TYPES = {
     }[side];
   }
 
+  // --- Keeping lines off other cards -------------------------------------
+  // Each link is first drawn as its natural curve. If that curve crosses any
+  // card other than its own two ends, it is rerouted orthogonally through
+  // the free lanes of the grid: the horizontal channels just above each row
+  // and the vertical gutters between columns (cards are COL_W - 12 wide).
+  const GAP = 6;     // half the column gutter
+  const CH = 14;     // channel sits this far above a row's card tops
+  function rectOf(el) {
+    return { l: el.offsetLeft, t: el.offsetTop, r: el.offsetLeft + el.offsetWidth, b: el.offsetTop + el.offsetHeight };
+  }
+  function hitsCard(x, y, skip, pad = 3) {
+    for (const [id, el] of Object.entries(cards)) {
+      if (skip.includes(id)) continue;
+      const c = rectOf(el);
+      if (x > c.l - pad && x < c.r + pad && y > c.t - pad && y < c.b + pad) return true;
+    }
+    return false;
+  }
+  function pathCrossesCards(path, skip) {
+    const len = path.getTotalLength();
+    for (let d = 0; d <= len; d += 5) {
+      const pt = path.getPointAtLength(d);
+      if (hitsCard(pt.x, pt.y, skip)) return true;
+    }
+    return false;
+  }
+  function segmentFree(x1, y1, x2, y2, skip) {
+    const n = Math.max(1, Math.ceil(Math.hypot(x2 - x1, y2 - y1) / 5));
+    for (let i = 0; i <= n; i++) {
+      if (hitsCard(x1 + (x2 - x1) * i / n, y1 + (y2 - y1) * i / n, skip)) return false;
+    }
+    return true;
+  }
+  function channels() {
+    const ys = [];
+    for (let r = minRow; r <= maxRow + 1; r += 0.5) ys.push(PAD + (r - minRow) * ROW_H + 28 - CH);
+    return ys.filter(y => y > 2 && y < canvas.offsetHeight - 2);
+  }
+  // Polyline with softly rounded corners.
+  function roundedPath(pts, rad = 8) {
+    const P = pts.filter((p, i) => i === 0 || p[0] !== pts[i - 1][0] || p[1] !== pts[i - 1][1]);
+    let d = `M${P[0]}`;
+    for (let i = 1; i < P.length - 1; i++) {
+      const [a, b, c] = [P[i - 1], P[i], P[i + 1]];
+      const r1 = Math.min(rad, Math.hypot(b[0] - a[0], b[1] - a[1]) / 2);
+      const r2 = Math.min(rad, Math.hypot(c[0] - b[0], c[1] - b[1]) / 2);
+      const u = (p, q, r) => { const L = Math.hypot(q[0] - p[0], q[1] - p[1]) || 1; return [q[0] + (p[0] - q[0]) * r / L, q[1] + (p[1] - q[1]) * r / L]; };
+      d += ` L${u(a, b, r1)} Q${b} ${u(c, b, r2)}`;
+    }
+    return d + ` L${P[P.length - 1]}`;
+  }
+  function orthogonalRoute(ea, eb, skip) {
+    const S = rectOf(ea), T = rectOf(eb);
+    const scx = (S.l + S.r) / 2, tcx = (T.l + T.r) / 2;
+    const ys = channels();
+    const down = T.t >= S.b - 4 || T.t > S.t + 20;           // target lies lower
+    // leave S through the channel next to it, enter T through the one next to it
+    const a0 = down ? ys.find(y => y > S.b + 3) : [...ys].reverse().find(y => y < S.t - 3);
+    const b0 = down ? [...ys].reverse().find(y => y < T.t - 3) : ys.find(y => y > T.b + 3);
+    if (a0 === undefined || b0 === undefined) return null;
+    const toRight = tcx > scx + 1, toLeft = tcx < scx - 1;
+    const gS = toLeft ? S.l - GAP : S.r + GAP;
+    const gT = toRight ? T.l - GAP : toLeft ? T.r + GAP : gS;
+    const lo = Math.min(gS, gT), hi = Math.max(gS, gT);
+    const free = y => segmentFree(lo, y, hi, y, skip);
+    const mid = (a0 + b0) / 2;
+    const A = [a0, b0, ...ys.slice().sort((p, q) => Math.abs(p - mid) - Math.abs(q - mid))].find(free);
+    if (A === undefined) return null;
+    const sy = down ? S.b : S.t, ty = down ? T.t : T.b;
+    return roundedPath([[scx, sy], [scx, a0], [gS, a0], [gS, A], [gT, A], [gT, b0], [tcx, b0], [tcx, ty]]);
+  }
+
   function drawEdges() {
     [svg, svgTop].forEach(el => {
       el.setAttribute('width', canvas.offsetWidth);
@@ -680,6 +752,10 @@ const LINK_TYPES = {
       title.textContent = `${byId[l.from].name} → ${byId[l.to].name}: ${l.label}`;
       path.appendChild(title);
       (onSelectOnly(l) ? svgTop : svg).appendChild(path);
+      if (pathCrossesCards(path, [l.from, l.to])) {
+        const routed = orthogonalRoute(ea, eb, [l.from, l.to]);
+        if (routed) path.setAttribute('d', routed);
+      }
     });
     highlight();
   }
