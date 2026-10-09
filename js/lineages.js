@@ -34,45 +34,45 @@ const LINEAGES = {
 const PEOPLE = [
   // --- Inchegiri (Navnāth) → Nisargadatta -----------------------------------
   {
-    id: 'nimbargi', lineage: 'nath', col: 1, row: 1,
+    id: 'nimbargi', lineage: 'nath', col: 1, row: 3,
     name: 'Nimbargi Mahārāj', dates: '1789–1875',
     role: 'Gurulingajangam Mahārāj; source of the Inchegiri line',
     summary: 'A shepherd-householder of Nimbargi in northern Karnataka. His followers place him in the Navnāth Sampradāya, the "Nine Nāths" tradition whose legendary masters include Matsyendranāth and Gorakhnāth. He taught a simple practice of meditating on a mantra while continuing with family and work.'
   },
   {
-    id: 'bhausaheb', lineage: 'nath', col: 1, row: 2,
+    id: 'bhausaheb', lineage: 'nath', col: 1, row: 4,
     name: 'Bhāusāheb Mahārāj', dates: '1843–1914',
     role: 'Founder of the Inchegiri branch',
     summary: 'A village official who became Nimbargi Mahārāj\'s disciple and set up his centre at Inchegiri, Karnataka, which gave the branch its name. He taught the "ant\'s way", slow and steady meditation, as opposed to the "bird\'s way" of direct insight.'
   },
   {
-    id: 'siddharameshwar', lineage: 'nath', col: 1, row: 3,
+    id: 'siddharameshwar', lineage: 'nath', col: 1, row: 5,
     name: 'Siddharāmeśvar Mahārāj', deva: 'सिद्धरामेश्वर', dates: '1888–1936',
     role: 'Disciple of Bhāusāheb; guru of Nisargadatta and Ranjit',
     etym: 'siddha ("perfected") + Rāma + īśvara ("lord").',
     summary: 'He took the Inchegiri teaching from the "ant\'s way" to the "bird\'s way": immediate recognition of the Self through enquiry and understanding. His Marathi talks are collected as Master of Self-Realization.'
   },
   {
-    id: 'ranjit', lineage: 'nath', col: 0, row: 4,
+    id: 'ranjit', lineage: 'nath', col: 0, row: 6,
     name: 'Rañjit Mahārāj', dates: '1913–2000',
     role: 'Disciple of Siddharāmeśvar; Nisargadatta\'s brother-disciple',
     summary: 'He met Siddharāmeśvar as a youth in 1924 and began teaching publicly only late in life, after Nisargadatta\'s death, drawing Western visitors to Mumbai with talks collected as Illusion vs. Reality.'
   },
   {
-    id: 'nisargadatta', lineage: 'nath', col: 1, row: 4,
+    id: 'nisargadatta', lineage: 'nath', col: 1, row: 6,
     name: 'Nisargadatta Mahārāj', deva: 'निसर्गदत्त महाराज', dates: '1897–1981', born: 'Maruti Shivrampant Kambli',
     role: 'Mumbai shopkeeper-sage; teacher of "I Am That"',
     etym: 'nisarga ("nature, the natural state") + datta ("given"): "one given to the natural state".',
     summary: 'He ran a small shop selling bīḍīs (hand-rolled cigarettes) in Mumbai and met Siddharāmeśvar in 1933. His guru told him to hold to the bare sense "I am", and within three years he was established in the Self. From his attic room in Khetwadi he taught in Marathi, in sharp, often fierce dialogue. I Am That (1973) made him known worldwide.'
   },
   {
-    id: 'frydman', lineage: 'nath', col: 0, row: 5,
+    id: 'frydman', lineage: 'nath', col: 0, row: 7,
     name: 'Maurice Frydman', dates: 'd. 1976',
     role: 'Translator and editor of I Am That',
     summary: 'A Polish-Jewish engineer who settled in India and became Swami Bhāratānanda. He was a devotee of Ramana and friend of both Gandhi and J. Krishnamurti. He recorded Nisargadatta\'s dialogues and translated them into English as I Am That (1973).'
   },
   {
-    id: 'balsekar', lineage: 'nath', col: 1, row: 5.5,
+    id: 'balsekar', lineage: 'nath', col: 1, row: 7.5,
     name: 'Ramesh Balsekar', dates: '1917–2009',
     role: 'Disciple and translator of Nisargadatta',
     summary: 'A retired president of the Bank of India who came to Nisargadatta in 1978 and served as his interpreter. Afterwards he taught Advaita in Mumbai and wrote Pointers from Nisargadatta Maharaj (1982) and many other books.'
@@ -163,89 +163,143 @@ const PEOPLE = [
     summary: 'Tradition credits Śaṅkara with gathering wandering renunciates into ten named orders (daśa-nāmī, "ten names") — Giri, Purī, Bhāratī, Sarasvatī and others. All three lineages on this page take their sannyāsa through these orders: Ramakrishna through a Purī monk, Yukteswar and Yogananda as Giris, Sivananda and Chinmayananda as Sarasvatīs. Ramana Maharshi belongs to no order, but his teaching links back to Śaṅkara\'s texts.'
   },
 
+  // --- Śaṅkara's four disciples and the four maṭhas ------------------------
+  {
+    id: 'padmapada', lineage: 'root', col: 5, row: 1, note: 'mathas',
+    name: 'Padmapāda', deva: 'पद्मपाद', dates: 'c. 8th century',
+    role: 'Disciple of Śaṅkara; first head of the Govardhana maṭha (tradition)',
+    etym: 'padma ("lotus") + pāda ("foot"): "lotus-footed".',
+    summary: 'Born Sanandana. Legend says Śaṅkara called him from across the Ganga and he walked straight onto the water, with a lotus rising under each step. His Pañcapādikā, a commentary on the opening of Śaṅkara\'s Brahma Sūtra commentary, became the root of the Vivaraṇa school of Advaita.'
+  },
+  {
+    id: 'sureshvara', lineage: 'root', col: 6, row: 1, note: 'mathas',
+    name: 'Sureśvara', deva: 'सुरेश्वर', dates: 'c. 8th century',
+    role: 'Disciple of Śaṅkara; first head of Śṛṅgerī (tradition)',
+    etym: 'sura ("god") + īśvara ("lord"): "lord of the gods".',
+    summary: 'The "author of the Vārttikas", verse commentaries on Śaṅkara\'s Bṛhadāraṇyaka and Taittirīya commentaries. He also wrote the Naiṣkarmya-siddhi. Tradition identifies him with Maṇḍana Miśra, the Mīmāṃsaka whom Śaṅkara defeated in debate, though many scholars think they were two different people.'
+  },
+  {
+    id: 'totaka', lineage: 'root', col: 7, row: 1, note: 'mathas',
+    name: 'Toṭaka', deva: 'तोटक', dates: 'c. 8th century',
+    role: 'Disciple of Śaṅkara; first head of Jyotirmaṭha (tradition)',
+    etym: 'Named after the toṭaka metre of the hymn he composed.',
+    summary: 'Originally called Giri, a devoted servant whom the other disciples thought dull. One day, the story goes, he burst out with the Toṭakāṣṭakam, eight flawless verses to his guru in the toṭaka metre, and was called Toṭaka from then on.'
+  },
+  {
+    id: 'hastamalaka', lineage: 'root', col: 8, row: 1, note: 'mathas',
+    name: 'Hastāmalaka', deva: 'हस्तामलक', dates: 'c. 8th century',
+    role: 'Disciple of Śaṅkara; first head of the Dvārakā maṭha (tradition)',
+    etym: 'hasta ("hand") + āmalaka (the amla fruit): knowledge as plain as "an amla in the palm of the hand".',
+    summary: 'A boy his family thought mute. When Śaṅkara asked who he was, he answered with twelve verses on the Self (the Hastāmalakīyam), and Śaṅkara took him as a disciple.'
+  },
+  {
+    id: 'govardhana', lineage: 'root', col: 5, row: 2, kind: 'institution', note: 'mathas',
+    name: 'Govardhana Maṭha', deva: 'गोवर्धन मठ', dates: 'East · Ṛgveda', place: 'Puri, Odisha',
+    role: 'Eastern seat; mahāvākya "prajñānam brahma"',
+    summary: 'Guardian of the Ṛgveda and its great saying prajñānam brahma ("consciousness is Brahman", Aitareya Upaniṣad). Its monks take the names Vana and Araṇya, two orders with no branch on this tree.'
+  },
+  {
+    id: 'sringeri', lineage: 'root', col: 6, row: 2, kind: 'institution', note: 'mathas',
+    name: 'Śṛṅgerī Śāradā Pīṭham', deva: 'शृङ्गेरी', dates: 'South · Yajurveda', place: 'Sringeri, Karnataka',
+    role: 'Southern seat; mahāvākya "ahaṃ brahmāsmi"',
+    summary: 'Guardian of the Yajurveda and aham brahmāsmi ("I am Brahman", Bṛhadāraṇyaka Upaniṣad). Its orders are Sarasvatī, Bhāratī and Purī. On this tree that makes it the source of both the Ramakrishna line (through Totāpurī) and the Sivananda–Chinmaya line.'
+  },
+  {
+    id: 'jyotirmath', lineage: 'root', col: 7, row: 2, kind: 'institution', note: 'mathas',
+    name: 'Jyotirmaṭha', deva: 'ज्योतिर्मठ', dates: 'North · Atharvaveda', place: 'Joshimath, Uttarakhand',
+    role: 'Northern seat; mahāvākya "ayam ātmā brahma"',
+    summary: 'Guardian of the Atharvaveda and ayam ātmā brahma ("this Self is Brahman", Māṇḍūkya Upaniṣad). Its orders are Giri, Parvata and Sāgara, so Yukteswar and Yogananda\'s Giri vows trace here. The seat lay vacant for well over a century before its revival in 1941.'
+  },
+  {
+    id: 'dvaraka', lineage: 'root', col: 8, row: 2, kind: 'institution', note: 'mathas',
+    name: 'Dvārakā Śāradā Pīṭham', deva: 'द्वारका', dates: 'West · Sāmaveda', place: 'Dwarka, Gujarat',
+    role: 'Western seat; mahāvākya "tat tvam asi"',
+    summary: 'Guardian of the Sāmaveda and tat tvam asi ("you are that", Chāndogya Upaniṣad). Its monks take the names Tīrtha and Āśrama, two orders with no branch on this tree.'
+  },
+
   // --- The three Daśanāmī branches that carry these lineages ---------------
   {
-    id: 'puri', lineage: 'order', col: 4, row: 1, kind: 'order',
+    id: 'puri', lineage: 'order', col: 4, row: 3, kind: 'order',
     name: 'Purī order', deva: 'पुरी', dates: 'Daśanāmī branch',
-    role: 'One of the ten names; traditionally attached to the Śṛṅgerī maṭha',
+    note: 'mathas', role: 'One of the ten names; belongs to the Śṛṅgerī maṭha',
     etym: 'purī — "city, fortress".',
     summary: 'Totāpurī was a Purī monk, and Ramakrishna\'s sannyāsa came through him; the Ramakrishna Order is therefore usually counted in the Purī line, though its monks do not use the suffix.'
   },
   {
-    id: 'giri', lineage: 'order', col: 7, row: 1, kind: 'order',
+    id: 'giri', lineage: 'order', col: 7, row: 3, kind: 'order',
     name: 'Giri order', deva: 'गिरि', dates: 'Daśanāmī branch',
-    role: 'One of the ten names; traditionally attached to the Jyotir maṭha (Joshimath)',
+    note: 'mathas', role: 'One of the ten names; belongs to Jyotirmaṭha (Joshimath)',
     etym: 'giri — "mountain".',
     summary: 'Sri Yukteswar took formal sannyāsa as a Giri and gave the same to Yogananda in 1915; Kriyā Yoga itself came to them separately, through Babaji and Lahiri Mahasaya. SRF monastics who take final vows still receive Giri names.'
   },
   {
-    id: 'sarasvati', lineage: 'order', col: 9, row: 1, kind: 'order',
+    id: 'sarasvati', lineage: 'order', col: 9, row: 3, kind: 'order',
     name: 'Sarasvatī order', deva: 'सरस्वती', dates: 'Daśanāmī branch',
-    role: 'One of the ten names; traditionally attached to the Śṛṅgerī maṭha',
+    note: 'mathas', role: 'One of the ten names; belongs to the Śṛṅgerī maṭha',
     etym: 'sarasvatī — the goddess of learning; also the river.',
     summary: 'Swami Sivananda received sannyāsa in this order in 1924 from Swami Viśvānanda Sarasvatī, and passed it on to Chinmayananda, whose monks still carry the Sarasvatī name.'
   },
 
   // --- Ramakrishna–Vivekananda ---------------------------------------------
   {
-    id: 'bhairavi', lineage: 'ramakrishna', col: 2, row: 2,
+    id: 'bhairavi', lineage: 'ramakrishna', col: 2, row: 4,
     name: 'Bhairavī Brāhmaṇī', deva: 'भैरवी ब्राह्मणी', dates: 'fl. 1860s',
     role: 'Tantric teacher of Ramakrishna (from 1861)',
     summary: 'A wandering woman ascetic who guided Ramakrishna through the full course of Tantric sādhana at Dakshineswar and was among the first to declare him an avatāra.'
   },
   {
-    id: 'totapuri', lineage: 'ramakrishna', col: 4, row: 2,
+    id: 'totapuri', lineage: 'ramakrishna', col: 4, row: 4,
     name: 'Totāpurī', deva: 'तोतापुरी', dates: 'fl. 1860s',
     role: 'Purī-order Advaita monk; gave Ramakrishna sannyāsa (c. 1865)',
     summary: 'A naked (nāgā) monk of the Purī order who stayed eleven months at Dakshineswar, initiated Ramakrishna into sannyāsa and taught him nirvikalpa samādhi — the formless, non-dual absorption of Advaita.'
   },
   {
-    id: 'ramakrishna', lineage: 'ramakrishna', col: 3, row: 3,
+    id: 'ramakrishna', lineage: 'ramakrishna', col: 3, row: 5,
     name: 'Śrī Rāmakṛṣṇa', deva: 'श्री रामकृष्ण', dates: '1836–1886', born: 'Gadadhar Chattopadhyay',
     role: 'Priest of the Kālī temple at Dakshineswar',
     etym: 'Rāma + Kṛṣṇa — the two great avatāras of Viṣṇu in one name.',
     summary: 'Practised Tantra, Vaiṣṇava devotion and Advaita in turn (and, briefly, Islam and Christianity) and taught that they arrive at one reality. His conversations, recorded by "M.", became the Kathāmṛta (The Gospel of Sri Ramakrishna).'
   },
   {
-    id: 'sarada', lineage: 'ramakrishna', col: 2, row: 4,
+    id: 'sarada', lineage: 'ramakrishna', col: 2, row: 6,
     name: 'Śāradā Devī', deva: 'शारदा देवी', dates: '1853–1920',
     role: 'Wife and spiritual consort of Ramakrishna; the "Holy Mother"',
     summary: 'After Ramakrishna\'s death she became the guide of his young monastic disciples and gave initiation to many; the Ramakrishna Order regards her as its spiritual mother.'
   },
   {
-    id: 'vivekananda', lineage: 'ramakrishna', col: 3, row: 4,
+    id: 'vivekananda', lineage: 'ramakrishna', col: 3, row: 6,
     name: 'Svāmī Vivekānanda', deva: 'स्वामी विवेकानन्द', dates: '1863–1902', born: 'Narendranath Datta',
     role: 'Chief disciple of Ramakrishna; brought Vedānta to the West',
     etym: 'viveka ("discernment" — telling the real from the unreal) + ānanda ("bliss").',
     summary: 'Met Ramakrishna in 1881. Spoke at the Parliament of the World\'s Religions in Chicago (1893), founded the Vedanta Society of New York (1894) and the Ramakrishna Mission (1897), and wrote Rāja Yoga (1896), an influential commentary on Patañjali.'
   },
   {
-    id: 'mgupta', lineage: 'ramakrishna', col: 4, row: 4,
+    id: 'mgupta', lineage: 'ramakrishna', col: 4, row: 6,
     name: 'Mahendranāth Gupta ("M.")', deva: 'महेन्द्रनाथ गुप्त', dates: '1854–1932',
     role: 'Householder disciple; recorder of the Kathāmṛta',
     summary: 'A Calcutta schoolmaster who kept a diary of Ramakrishna\'s conversations from 1882 to 1886, published in Bengali as Śrī Śrī Rāmakṛṣṇa Kathāmṛta. Yogananda knew him as a boy — "Master Mahasaya" in Autobiography of a Yogi.'
   },
   {
-    id: 'brahmananda', lineage: 'ramakrishna', col: 2, row: 5,
+    id: 'brahmananda', lineage: 'ramakrishna', col: 2, row: 7,
     name: 'Svāmī Brahmānanda', deva: 'स्वामी ब्रह्मानन्द', dates: '1863–1922', born: 'Rakhal Chandra Ghosh',
     role: 'Brother-disciple of Vivekananda; first President of the Ramakrishna Math & Mission',
     etym: 'brahma + ānanda — "the bliss of Brahman".',
     summary: 'Ramakrishna regarded him as his "spiritual son". He led the young Order for over two decades after Vivekananda\'s death.'
   },
   {
-    id: 'rkmission', lineage: 'ramakrishna', col: 2, row: 6, kind: 'institution',
+    id: 'rkmission', lineage: 'ramakrishna', col: 2, row: 8, kind: 'institution',
     name: 'Ramakrishna Math & Mission', dates: 'founded 1897', place: 'Belur Math, near Kolkata',
     role: 'The monastic order and its service wing',
     summary: 'Founded by Vivekananda on 1 May 1897. Its monks receive sannyāsa within the Order and take names ending in -ānanda; its branch centres overseas include the Vedanta Societies.'
   },
   {
-    id: 'vsny', lineage: 'ramakrishna', col: 3, row: 6, kind: 'institution',
+    id: 'vsny', lineage: 'ramakrishna', col: 3, row: 8, kind: 'institution',
     name: 'Vedanta Society of New York', dates: 'founded 1894', place: 'New York',
     role: 'The first Vedānta society in the West',
     summary: 'Founded by Vivekananda during his first American tour; it has been led ever since by monks sent from the Ramakrishna Order.'
   },
   {
-    id: 'sarvapriyananda', lineage: 'ramakrishna', col: 3, row: 7,
+    id: 'sarvapriyananda', lineage: 'ramakrishna', col: 3, row: 9,
     name: 'Svāmī Sarvapriyānanda', deva: 'स्वामी सर्वप्रियानन्द', dates: 'living',
     role: 'Minister and spiritual leader, Vedanta Society of New York (since 2017)',
     etym: 'sarva ("all") + priya ("dear") + ānanda ("bliss") — "the bliss that is dear to all".',
@@ -254,7 +308,7 @@ const PEOPLE = [
 
   // --- Kriyā Yoga ----------------------------------------------------------
   {
-    id: 'babaji', lineage: 'kriya', col: 6, row: 2,
+    id: 'babaji', lineage: 'kriya', col: 6, row: 4,
     name: 'Mahāvatār Bābājī', deva: 'महावतार बाबाजी', dates: 'dates unknown',
     role: 'Revived Kriyā Yoga (per tradition)',
     etym: 'mahā-avatāra ("great descent") + bābājī ("revered father").',
@@ -262,60 +316,60 @@ const PEOPLE = [
     caveat: 'Historicity rests on lineage testimony; no independent records.'
   },
   {
-    id: 'lahiri', lineage: 'kriya', col: 6, row: 3,
+    id: 'lahiri', lineage: 'kriya', col: 6, row: 5,
     name: 'Lāhiṛī Mahāśaya', deva: 'लाहिड़ी महाशय', dates: '1828–1895', born: 'Shyama Charan Lahiri',
     role: 'Householder yogi of Varanasi; spread Kriyā Yoga',
     etym: 'mahāśaya — "great-souled", an honorific.',
     summary: 'A clerk in the military engineering department who kept his job and family while teaching Kriyā to anyone sincere, regardless of caste or creed. He is the link the popular "Babaji → Yukteswar" shorthand skips.'
   },
   {
-    id: 'yukteswar', lineage: 'kriya', col: 6, row: 4,
+    id: 'yukteswar', lineage: 'kriya', col: 6, row: 6,
     name: 'Svāmī Śrī Yukteśvar Giri', deva: 'श्रीयुक्तेश्वर गिरि', dates: '1855–1936', born: 'Priya Nath Karar',
     role: 'Disciple of Lahiri; guru of Yogananda',
     etym: 'yukta ("united") + īśvara ("the Lord") — "one united with God". Giri ("mountain") is his Daśanāmī branch.',
     summary: 'Ran ashrams at Serampore and Puri. At Babaji\'s request (after their meeting at the 1894 Kumbha Mela) he wrote Kaivalya Darśanam — The Holy Science, comparing the Bible with Hindu scripture and setting out his yuga chronology.'
   },
   {
-    id: 'yogananda', lineage: 'kriya', col: 6, row: 5,
+    id: 'yogananda', lineage: 'kriya', col: 6, row: 7,
     name: 'Paramahaṃsa Yogānanda', deva: 'परमहंस योगानन्द', dates: '1893–1952', born: 'Mukunda Lal Ghosh',
     role: 'Brought Kriyā Yoga to the West; author of Autobiography of a Yogi',
     etym: 'yoga + ānanda — "bliss through union".',
     summary: 'Met Yukteswar in 1910 and took Giri-order sannyāsa from him in 1915. Founded Yogoda Satsanga Society (1917) in India, sailed to America in 1920 to speak in Boston, and founded Self-Realization Fellowship.'
   },
   {
-    id: 'srf', lineage: 'kriya', col: 6, row: 6, kind: 'institution',
+    id: 'srf', lineage: 'kriya', col: 6, row: 8, kind: 'institution',
     name: 'Self-Realization Fellowship / YSS', dates: 'founded 1917 · 1920', place: 'Los Angeles · Ranchi',
     role: 'Yogananda\'s organisations',
     summary: 'Yogoda Satsanga Society of India (1917) and Self-Realization Fellowship (1920; Mount Washington HQ from 1925) carry on Kriyā initiation through Yogananda\'s lessons and monastic order.'
   },
   {
-    id: 'dayamata', lineage: 'kriya', col: 5, row: 7,
+    id: 'dayamata', lineage: 'kriya', col: 5, row: 9,
     name: 'Śrī Dayā Mātā', deva: 'दया माता', dates: '1914–2010', born: 'Faye Wright',
     role: 'President of SRF/YSS 1955–2010',
     etym: 'dayā ("compassion") + mātā ("mother").',
     summary: 'A direct disciple who entered Yogananda\'s ashram at seventeen, she led the organisations for 55 years.'
   },
   {
-    id: 'kriyananda', lineage: 'kriya', col: 7, row: 6,
+    id: 'kriyananda', lineage: 'kriya', col: 7, row: 8,
     name: 'Svāmī Kriyānanda', deva: 'स्वामी क्रियानन्द', dates: '1926–2013', born: 'James Donald Walters',
     role: 'Direct disciple of Yogananda; founder of Ananda',
     etym: 'kriyā ("action", as in Kriyā Yoga) + ānanda — "the bliss of Kriyā".',
     summary: 'Born to American parents in Romania, he read Autobiography of a Yogi and went straight to Yogananda in 1948, who made him a monk. He took sannyāsa in SRF in 1955 and rose to Vice-President, but was dismissed in 1962. In 1968 he founded Ananda, a spiritual cooperative community. He wrote The Path (1977), an account of his years with Yogananda.'
   },
   {
-    id: 'ananda', lineage: 'kriya', col: 7, row: 7, kind: 'institution',
+    id: 'ananda', lineage: 'kriya', col: 7, row: 9, kind: 'institution',
     name: 'Ananda Sangha', dates: 'founded 1968', place: 'Ananda Village, near Nevada City, California',
     role: 'Kriyananda\'s communities and Kriyā line',
     summary: 'It began as a rural cooperative village and now has communities and centres in the United States, Italy and India. Ananda gives Kriyā initiation in Yogananda\'s name independently of SRF, and spells his title "Paramhansa", as his early books did.'
   },
   {
-    id: 'novaks', lineage: 'kriya', col: 7, row: 8,
+    id: 'novaks', lineage: 'kriya', col: 7, row: 10,
     name: 'Jyotish & Devi Novak', dates: 'living',
     role: 'Spiritual directors of Ananda Worldwide',
     summary: 'Among Ananda\'s earliest members, they were named by Kriyananda to lead it after him. As "Nayaswamis" they belong to the renunciate order Kriyananda founded in 2009, which is open to married couples.'
   },
   {
-    id: 'chidananda', lineage: 'kriya', col: 6, row: 7,
+    id: 'chidananda', lineage: 'kriya', col: 6, row: 9,
     name: 'Svāmī Cidānanda Giri', deva: 'स्वामी चिदानन्द गिरि', dates: 'living',
     role: 'President of SRF/YSS (since 2017)',
     etym: 'cit ("consciousness") + ānanda ("bliss").',
@@ -323,55 +377,55 @@ const PEOPLE = [
   },
   // --- Chinmaya --------------------------------------------------------------
   {
-    id: 'sivananda', lineage: 'chinmaya', col: 8, row: 2,
+    id: 'sivananda', lineage: 'chinmaya', col: 8, row: 4,
     name: 'Svāmī Śivānanda Sarasvatī', deva: 'स्वामी शिवानन्द', dates: '1887–1963', born: 'Kuppuswami',
     role: 'Founder of the Divine Life Society, Rishikesh (1936); gave Chinmayananda sannyāsa',
     etym: 'Śiva + ānanda — "the bliss of Śiva".',
     summary: 'A Tamil physician who practised in Malaya before renouncing, he took sannyāsa in Rishikesh in 1924 and wrote some two hundred books. In 1949 he gave sannyāsa to Balakrishna Menon, naming him Chinmayananda.'
   },
   {
-    id: 'tapovan', lineage: 'chinmaya', col: 10, row: 2,
+    id: 'tapovan', lineage: 'chinmaya', col: 10, row: 4,
     name: 'Svāmī Tapovan Mahārāj', deva: 'स्वामी तपोवन', dates: '1889–1957', born: 'Chippukutty Nair',
     role: 'Himalayan Vedānta master at Uttarkashi; Chinmayananda\'s teacher',
     etym: 'tapo-vana — "the forest of austerity".',
     summary: 'A recluse who lived by the Ganga at Uttarkashi and Gangotri and wrote Wanderings in the Himalayas. Sivananda sent Chinmayananda to him, and he taught him the Upaniṣads and Gītā in the traditional way for about eight years.'
   },
   {
-    id: 'chinmayananda', lineage: 'chinmaya', col: 9, row: 3,
+    id: 'chinmayananda', lineage: 'chinmaya', col: 9, row: 5,
     name: 'Svāmī Cinmayānanda', deva: 'स्वामी चिन्मयानन्द', dates: '1916–1993', born: 'Balakrishna Menon',
     role: 'Brought Vedānta to lay audiences in English; founded Chinmaya Mission',
     etym: 'cit-maya ("made of pure consciousness") + ānanda.',
     summary: 'A journalist who went to Rishikesh in 1947 intending to expose the sādhus and stayed. From 1951 his public "Gītā Jñāna Yajñas" taught the Gītā and Upaniṣads — long reserved for monks and Sanskrit scholars — in English to anyone. Chinmaya Mission grew up around these talks from 1953.'
   },
   {
-    id: 'chinmayamission', lineage: 'chinmaya', col: 9, row: 4, kind: 'institution',
+    id: 'chinmayamission', lineage: 'chinmaya', col: 9, row: 6, kind: 'institution',
     name: 'Chinmaya Mission', dates: 'founded 1953', place: 'Mumbai · worldwide',
     role: 'Chinmayananda\'s organisation',
     summary: 'Formed by his listeners in 1953; its residential Vedānta course at Sandeepany Sadhanalaya, Mumbai (1963) trains its teachers, and Chinmaya Mission West (1975) runs its centres abroad.'
   },
   {
-    id: 'dayananda', lineage: 'chinmaya', col: 10, row: 4,
+    id: 'dayananda', lineage: 'chinmaya', col: 10, row: 6,
     name: 'Svāmī Dayānanda Sarasvatī', deva: 'स्वामी दयानन्द', dates: '1930–2015',
     role: 'Disciple of Chinmayananda; founder of Arsha Vidya Gurukulam',
     etym: 'dayā ("compassion") + ānanda.',
     summary: 'Took sannyāsa from Chinmayananda in 1962 and later founded his own teaching line, Arsha Vidya, with gurukulams in Pennsylvania and Coimbatore. Not the 19th-century Ārya Samāj founder of the same name.'
   },
   {
-    id: 'tejomayananda', lineage: 'chinmaya', col: 9, row: 5.5,
+    id: 'tejomayananda', lineage: 'chinmaya', col: 9, row: 7.5,
     name: 'Svāmī Tejomayānanda', deva: 'स्वामी तेजोमयानन्द', dates: 'b. 1950',
     role: 'Head of Chinmaya Mission 1993–2017',
     etym: 'tejo-maya ("full of radiance") + ānanda.',
     summary: 'Trained under Chinmayananda and led the Mission worldwide for 24 years after his death.'
   },
   {
-    id: 'swaroopananda', lineage: 'chinmaya', col: 9, row: 7,
+    id: 'swaroopananda', lineage: 'chinmaya', col: 9, row: 9,
     name: 'Svāmī Svarūpānanda', deva: 'स्वामी स्वरूपानन्द', dates: 'living',
     role: 'Head of Chinmaya Mission (since 2017)',
     etym: 'svarūpa ("one\'s own true nature") + ānanda.',
     summary: 'The present head of Chinmaya Mission worldwide, succeeding Tejomayananda.'
   },
   {
-    id: 'chandrasekharendra', lineage: 'chinmaya', col: 10, row: 1,
+    id: 'chandrasekharendra', lineage: 'chinmaya', col: 10, row: 3,
     name: 'Candraśekharendra Sarasvatī', deva: 'चन्द्रशेखरेन्द्र सरस्वती', dates: '1894–1994',
     role: '68th Śaṅkarācārya of the Kanchi Kāmakoṭi Pīṭham; "Mahā Periyavā"',
     etym: 'candra-śekhara ("moon-crested", an epithet of Śiva) + indra ("lord").',
@@ -380,51 +434,51 @@ const PEOPLE = [
 
   // --- Ramaṇa ------------------------------------------------------------------
   {
-    id: 'ramana', lineage: 'ramana', col: 12, row: 1,
+    id: 'ramana', lineage: 'ramana', col: 12, row: 3,
     name: 'Śrī Ramaṇa Maharṣi', deva: 'श्री रमण महर्षि', dates: '1879–1950', born: 'Venkataraman Iyer',
     role: 'Sage of Arunachala, Tiruvannamalai; teacher of self-enquiry',
     etym: 'Ramaṇa, short for Venkataraman, + mahā-ṛṣi ("great seer"): the name Ganapati Muni gave him in 1907.',
     summary: 'At sixteen, in Madurai, a sudden experience of death left him established in the Self. Weeks later he walked to Arunachala and never left it. He took no sannyāsa and had no human guru, and said the hill itself was his guru. His teaching is ātma-vicāra, self-enquiry, put most simply in the Tamil Nān Yār? ("Who am I?").'
   },
   {
-    id: 'brunton', lineage: 'ramana', col: 11, row: 2,
+    id: 'brunton', lineage: 'ramana', col: 11, row: 4,
     name: 'Paul Brunton', dates: '1898–1981',
     role: 'Journalist; introduced Ramana to the West',
     summary: 'Met Ramana in 1931 after the Kanchi Śaṅkarācārya directed him there. His book A Search in Secret India (1934) made Ramana known in Europe and America.'
   },
   {
-    id: 'ganapati', lineage: 'ramana', col: 13, row: 2,
+    id: 'ganapati', lineage: 'ramana', col: 13, row: 4,
     name: 'Gaṇapati Muni', deva: 'गणपति मुनि', dates: '1878–1936',
     role: 'Sanskrit poet-scholar; gave Ramana his name',
     etym: 'Called Kāvyakaṇṭha, "poetry in the throat", for his gift of extempore Sanskrit verse.',
     summary: 'In 1907 he came to the young ascetic with his doubts and, after the answer, proclaimed him Bhagavān Śrī Ramaṇa Maharṣi. He recorded Ramana\'s answers as the Sanskrit Śrī Ramaṇa Gītā.'
   },
   {
-    id: 'muruganar', lineage: 'ramana', col: 11, row: 3,
+    id: 'muruganar', lineage: 'ramana', col: 11, row: 5,
     name: 'Muruganār', deva: 'முருகனார்', dates: '1890–1973',
     role: 'Tamil poet; compiler of Guru Vācaka Kōvai',
     summary: 'A Tamil scholar who spent his life at Ramana\'s side writing thousands of verses. His Guru Vācaka Kōvai ("Garland of the Guru\'s Sayings") is the fullest record of the teaching, and Ramana revised it himself.'
   },
   {
-    id: 'ramanasramam', lineage: 'ramana', col: 12, row: 3, kind: 'institution',
+    id: 'ramanasramam', lineage: 'ramana', col: 12, row: 5, kind: 'institution',
     name: 'Sri Ramanasramam', dates: 'from 1922', place: 'Tiruvannamalai',
     role: 'The ashram at the foot of Arunachala',
     summary: 'It grew up around Ramana after he moved down the hill to his mother\'s shrine in 1922. His brother\'s family still manages it, and his samādhi shrine is there.'
   },
   {
-    id: 'papaji', lineage: 'ramana', col: 13, row: 3,
+    id: 'papaji', lineage: 'ramana', col: 13, row: 5,
     name: 'H. W. L. Poonja ("Papaji")', dates: '1910–1997',
     role: 'Disciple of Ramana; teacher at Lucknow',
     summary: 'Met Ramana in 1944. Decades later his satsangs in Lucknow drew a wave of Western seekers, several of whom became teachers of self-enquiry in their own right.'
   },
   {
-    id: 'gangaji', lineage: 'ramana', col: 12, row: 7,
+    id: 'gangaji', lineage: 'ramana', col: 12, row: 9,
     name: 'Gangaji', deva: 'गङ्गाजी', dates: 'b. 1942',
     role: 'American teacher of self-enquiry',
     summary: 'Met Papaji in 1990, and he gave her the name Gangaji. She teaches in the United States through the Gangaji Foundation.'
   },
   {
-    id: 'mooji', lineage: 'ramana', col: 13, row: 7,
+    id: 'mooji', lineage: 'ramana', col: 13, row: 9,
     name: 'Mooji', dates: 'b. 1954',
     role: 'Jamaican-born teacher; Monte Sahaja, Portugal',
     summary: 'Born Anthony Paul Moo-Young in Jamaica, he met Papaji in Lucknow in 1993. He now teaches self-enquiry from Monte Sahaja in Portugal.'
@@ -457,9 +511,18 @@ const LINKS = [
   { from: 'nisargadatta', to: 'balsekar', type: 'diksha', label: 'disciple and interpreter from 1978' },
 
   // Shared root
-  { from: 'shankara', to: 'puri', type: 'sannyasa', label: 'Daśanāmī branch' },
-  { from: 'shankara', to: 'giri', type: 'sannyasa', label: 'Daśanāmī branch' },
-  { from: 'shankara', to: 'sarasvati', type: 'sannyasa', label: 'Daśanāmī branch' },
+  { from: 'shankara', to: 'padmapada', type: 'diksha', label: 'disciple', late: true },
+  { from: 'shankara', to: 'sureshvara', type: 'diksha', label: 'disciple', late: true },
+  { from: 'shankara', to: 'totaka', type: 'diksha', label: 'disciple' },
+  { from: 'shankara', to: 'hastamalaka', type: 'diksha', label: 'disciple', late: true },
+  { from: 'padmapada', to: 'govardhana', type: 'succession', label: 'first head (tradition)' },
+  { from: 'sureshvara', to: 'sringeri', type: 'succession', label: 'first head (tradition)' },
+  { from: 'totaka', to: 'jyotirmath', type: 'succession', label: 'first head (tradition)' },
+  { from: 'hastamalaka', to: 'dvaraka', type: 'succession', label: 'first head (tradition)' },
+  { from: 'mimamsa', to: 'sureshvara', type: 'traditional', label: 'Maṇḍana Miśra became Sureśvara (tradition)' },
+  { from: 'sringeri', to: 'puri', type: 'sannyasa', label: 'Purī order' },
+  { from: 'sringeri', to: 'sarasvati', type: 'sannyasa', label: 'Sarasvatī order' },
+  { from: 'jyotirmath', to: 'giri', type: 'sannyasa', label: 'Giri order' },
   { from: 'puri', to: 'totapuri', type: 'sannyasa', label: 'Purī monk' },
   { from: 'giri', to: 'yukteswar', type: 'sannyasa', label: 'Giri sannyāsa', toSide: 'right' },
   { from: 'sarasvati', to: 'sivananda', type: 'sannyasa', label: 'sannyāsa from Viśvānanda Sarasvatī, 1924' },
@@ -551,6 +614,11 @@ const LINKS = [
     label: 'Present-day heads, both since 2017',
     detail: 'All three lines\' present-day heads on this chart took up their posts in 2017: Sarvapriyananda at the Vedanta Society of New York, Chidananda as President of SRF/YSS, and Swaroopananda as Head of Chinmaya Mission.' }
 ];
+
+const NOTE_TITLES = {
+  root: 'Lineages before Śaṅkara',
+  mathas: 'The four maṭhas'
+};
 
 const LINK_TYPES = {
   diksha: 'Initiation / discipleship',
@@ -802,7 +870,7 @@ const LINK_TYPES = {
       ${p.etym ? `<p class="lineage-detail-etym"><strong>Name:</strong> ${p.etym}</p>` : ''}
       <p>${p.summary}</p>
       ${p.caveat ? `<p class="lineage-detail-caveat">${p.caveat}</p>` : ''}
-      ${p.note ? `<button type="button" class="lineage-howto lineage-detail-note" data-note="${p.note}">Lineages before Śaṅkara <span class="sigma-badge" aria-hidden="true">∑</span></button>` : ''}
+      ${p.note ? `<button type="button" class="lineage-howto lineage-detail-note" data-note="${p.note}">${NOTE_TITLES[p.note]} <span class="sigma-badge" aria-hidden="true">∑</span></button>` : ''}
       <h3>Connections</h3>
       <ul class="lineage-rels">${rels}</ul>`;
     detail.hidden = false;
