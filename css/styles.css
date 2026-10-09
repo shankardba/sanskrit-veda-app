@@ -2620,7 +2620,8 @@ body.tamil-page .lang-hub-card-glyph {
     radial-gradient(circle at 75% 60%, rgba(255, 46, 166, 0.06), transparent 50%),
     var(--color-bg-alt);
 }
-.lineage-canvas { position: relative; margin: 0 auto; }
+.lineage-sizer { margin: 0 auto; }
+.lineage-canvas { position: relative; transform-origin: 0 0; }
 .lineage-edges { position: absolute; inset: 0; pointer-events: none; }
 
 .lineage-band {
@@ -2796,3 +2797,34 @@ body.tamil-page .lang-hub-card-glyph {
 .legend-inst.legend-order { border: 1px dotted var(--color-gold-light); border-radius: 999px; background: rgba(240, 168, 60, 0.08); }
 .lineage-edge.is-hidden { display: none; }
 .lineage-edges-top { z-index: 2; }
+
+.lineage-band-ramana { color: #7fd6c2; }
+.lineage-node.lineage-ramana { border-color: rgba(127, 214, 194, 0.35); }
+.lineage-ramana .lineage-node-deva { color: #a6e8d8; }
+.edge-textual { stroke: #7fd6c2; stroke-dasharray: 12 4 2 4 2 4; stroke-width: 2; }
+.chip-textual { color: #7fd6c2; }
+.lineage-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 14px;
+}
+.lineage-toolbar .lineage-legend { margin-bottom: 0; }
+.lineage-zoom { display: flex; gap: 6px; flex-shrink: 0; }
+.lineage-zoom button {
+  font-family: var(--font-ui);
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 5px 12px;
+  border-radius: 999px;
+  border: 1px solid var(--color-border);
+  background: transparent;
+  color: var(--color-text-muted);
+  cursor: pointer;
+}
+.lineage-zoom button.active {
+  border-color: var(--color-gold);
+  background: rgba(240, 168, 60, 0.16);
+  color: var(--color-gold-light);
+}

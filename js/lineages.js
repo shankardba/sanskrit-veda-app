@@ -10,21 +10,28 @@
 //   succession  — institutional continuity (founded / led)
 //   encounter   — a documented meeting outside the formal line
 //   parallel    — a thematic parallel between the lineages (no meeting)
+//   textual     — a teaching carried by text/translation rather than initiation
+//
+// Routing flags: `late` bends just above the child (so a fan of children
+// in the next row doesn't cut through a sibling card), `bend` arcs out to
+// a side, `toSide` drops straight down into a card's side, and `onSelect`
+// draws the link only when one of its ends is selected.
 
 const LINEAGES = {
   ramakrishna: { name: 'Ramakrishna–Vivekananda', note: 'Advaita Vedānta · Ramakrishna Order' },
   kriya: { name: 'Kriyā Yoga', note: 'Babaji · Lahiri · Yukteswar · Yogananda' },
   chinmaya: { name: 'Chinmaya', note: 'Sivananda · Tapovan · Chinmayananda' },
+  ramana: { name: 'Ramaṇa', note: 'Arunachala · self-enquiry' },
   root: { name: 'Root', note: '' },
   order: { name: 'Daśanāmī orders', note: '' }
 };
 
 const PEOPLE = [
   {
-    id: 'shankara', lineage: 'root', col: 4, row: 0,
+    id: 'shankara', lineage: 'root', col: 5, row: 0,
     name: 'Ādi Śaṅkara', deva: 'आदि शङ्कर', dates: 'c. 8th century',
     role: 'Advaita teacher; organiser of the Daśanāmī monastic orders',
-    summary: 'Tradition credits Śaṅkara with gathering wandering renunciates into ten named orders (daśa-nāmī, "ten names") — Giri, Purī, Bhāratī, Sarasvatī and others. All three lineages on this page take their sannyāsa through these orders: Ramakrishna through a Purī monk, Yukteswar and Yogananda as Giris, Sivananda and Chinmayananda as Sarasvatīs.'
+    summary: 'Tradition credits Śaṅkara with gathering wandering renunciates into ten named orders (daśa-nāmī, "ten names") — Giri, Purī, Bhāratī, Sarasvatī and others. All three lineages on this page take their sannyāsa through these orders: Ramakrishna through a Purī monk, Yukteswar and Yogananda as Giris, Sivananda and Chinmayananda as Sarasvatīs. Ramana Maharshi belongs to no order, but his teaching links back to Śaṅkara\'s texts.'
   },
 
   // --- The three Daśanāmī branches that carry these lineages ---------------
@@ -214,6 +221,65 @@ const PEOPLE = [
     role: 'Head of Chinmaya Mission (since 2017)',
     etym: 'svarūpa ("one\'s own true nature") + ānanda.',
     summary: 'The present head of Chinmaya Mission worldwide, succeeding Tejomayananda.'
+  },
+  {
+    id: 'chandrasekharendra', lineage: 'chinmaya', col: 8, row: 1,
+    name: 'Candraśekharendra Sarasvatī', deva: 'चन्द्रशेखरेन्द्र सरस्वती', dates: '1894–1994',
+    role: '68th Śaṅkarācārya of the Kanchi Kāmakoṭi Pīṭham; "Mahā Periyavā"',
+    etym: 'candra-śekhara ("moon-crested", an epithet of Śiva) + indra ("lord").',
+    summary: 'Head of the Kanchi maṭha for 87 years, known in Tamil as Mahā Periyavā ("the great elder"). In January 1931 he received the young English journalist Paul Brunton and sent him on to Ramana Maharshi. Kanchi\'s claim to be one of Śaṅkara\'s own foundations is disputed by the other maṭhas.'
+  },
+
+  // --- Ramaṇa ------------------------------------------------------------------
+  {
+    id: 'ramana', lineage: 'ramana', col: 10, row: 1,
+    name: 'Śrī Ramaṇa Maharṣi', deva: 'श्री रमण महर्षि', dates: '1879–1950', born: 'Venkataraman Iyer',
+    role: 'Sage of Arunachala, Tiruvannamalai; teacher of self-enquiry',
+    etym: 'Ramaṇa, short for Venkataraman, + mahā-ṛṣi ("great seer"): the name Ganapati Muni gave him in 1907.',
+    summary: 'At sixteen, in Madurai, a sudden experience of death left him established in the Self. Weeks later he walked to Arunachala and never left it. He took no sannyāsa and had no human guru, and said the hill itself was his guru. His teaching is ātma-vicāra, self-enquiry, put most simply in the Tamil Nān Yār? ("Who am I?").'
+  },
+  {
+    id: 'brunton', lineage: 'ramana', col: 9, row: 2,
+    name: 'Paul Brunton', dates: '1898–1981',
+    role: 'Journalist; introduced Ramana to the West',
+    summary: 'Met Ramana in 1931 after the Kanchi Śaṅkarācārya directed him there. His book A Search in Secret India (1934) made Ramana known in Europe and America.'
+  },
+  {
+    id: 'ganapati', lineage: 'ramana', col: 11, row: 2,
+    name: 'Gaṇapati Muni', deva: 'गणपति मुनि', dates: '1878–1936',
+    role: 'Sanskrit poet-scholar; gave Ramana his name',
+    etym: 'Called Kāvyakaṇṭha, "poetry in the throat", for his gift of extempore Sanskrit verse.',
+    summary: 'In 1907 he came to the young ascetic with his doubts and, after the answer, proclaimed him Bhagavān Śrī Ramaṇa Maharṣi. He recorded Ramana\'s answers as the Sanskrit Śrī Ramaṇa Gītā.'
+  },
+  {
+    id: 'muruganar', lineage: 'ramana', col: 9, row: 3,
+    name: 'Muruganār', deva: 'முருகனார்', dates: '1890–1973',
+    role: 'Tamil poet; compiler of Guru Vācaka Kōvai',
+    summary: 'A Tamil scholar who spent his life at Ramana\'s side writing thousands of verses. His Guru Vācaka Kōvai ("Garland of the Guru\'s Sayings") is the fullest record of the teaching, and Ramana revised it himself.'
+  },
+  {
+    id: 'ramanasramam', lineage: 'ramana', col: 10, row: 3, kind: 'institution',
+    name: 'Sri Ramanasramam', dates: 'from 1922', place: 'Tiruvannamalai',
+    role: 'The ashram at the foot of Arunachala',
+    summary: 'It grew up around Ramana after he moved down the hill to his mother\'s shrine in 1922. His brother\'s family still manages it, and his samādhi shrine is there.'
+  },
+  {
+    id: 'papaji', lineage: 'ramana', col: 11, row: 3,
+    name: 'H. W. L. Poonja ("Papaji")', dates: '1910–1997',
+    role: 'Disciple of Ramana; teacher at Lucknow',
+    summary: 'Met Ramana in 1944. Decades later his satsangs in Lucknow drew a wave of Western seekers, several of whom became teachers of self-enquiry in their own right.'
+  },
+  {
+    id: 'gangaji', lineage: 'ramana', col: 10, row: 7,
+    name: 'Gangaji', deva: 'गङ्गाजी', dates: 'b. 1942',
+    role: 'American teacher of self-enquiry',
+    summary: 'Met Papaji in 1990, and he gave her the name Gangaji. She teaches in the United States through the Gangaji Foundation.'
+  },
+  {
+    id: 'mooji', lineage: 'ramana', col: 11, row: 7,
+    name: 'Mooji', dates: 'b. 1954',
+    role: 'Jamaican-born teacher; Monte Sahaja, Portugal',
+    summary: 'Born Anthony Paul Moo-Young in Jamaica, he met Papaji in Lucknow in 1993. He now teaches self-enquiry from Monte Sahaja in Portugal.'
   }
 ];
 
@@ -259,7 +325,26 @@ const LINKS = [
   { from: 'chinmayamission', to: 'tejomayananda', type: 'succession', label: 'Head 1993–2017' },
   { from: 'tejomayananda', to: 'swaroopananda', type: 'succession', label: 'succeeded as Head, 2017' },
 
+  // Ramaṇa line
+  { from: 'sarasvati', to: 'chandrasekharendra', type: 'sannyasa', label: 'Sarasvatī name; Kanchi pīṭham' },
+  { from: 'ramana', to: 'brunton', type: 'diksha', label: 'met 1931', late: true },
+  { from: 'ramana', to: 'ganapati', type: 'diksha', label: 'disciple from 1907; named him', late: true },
+  { from: 'ramana', to: 'muruganar', type: 'diksha', label: 'disciple from 1923', late: true },
+  { from: 'ramana', to: 'ramanasramam', type: 'succession', label: 'grew around him from 1922' },
+  { from: 'ramana', to: 'papaji', type: 'diksha', label: 'met 1944', late: true },
+  { from: 'papaji', to: 'gangaji', type: 'diksha', label: 'met 1990', late: true },
+  { from: 'papaji', to: 'mooji', type: 'diksha', label: 'met 1993' },
+
   // Between the lineages
+  { from: 'shankara', to: 'ramana', type: 'textual', cross: true,
+    label: 'Vivekacūḍāmaṇi in Tamil',
+    detail: 'Ramana belonged to no order and had no human guru, but in his early years at Arunachala he translated works attributed to Śaṅkara into Tamil prose: Vivekacūḍāmaṇi, Dṛg-Dṛśya-Viveka, Ātma Bodha. His self-enquiry is often read as Śaṅkara\'s Advaita made direct. The link to the root is by teaching, not by ordination.' },
+  { from: 'chandrasekharendra', to: 'brunton', type: 'encounter', cross: true,
+    label: 'Sent Brunton to Ramana, 1931',
+    detail: 'In A Search in Secret India, Paul Brunton describes meeting the Śaṅkarācārya of Kanchi near Chingleput in January 1931. Brunton asked him for a living master, and he named the sage of Arunachala. So a Sarasvatī-order Śaṅkarācārya is the link that brought Ramana to the West.' },
+  { from: 'yogananda', to: 'ramana', type: 'encounter', cross: true, onSelect: true,
+    label: 'Visit to Arunachala, 1935',
+    detail: 'On his 1935–36 return to India, Yogananda visited Ramana at Tiruvannamalai, an episode he includes in Autobiography of a Yogi. It is the one recorded meeting between the Kriyā line and Ramana.' },
   { from: 'mgupta', to: 'yogananda', type: 'encounter', cross: true,
     label: 'Yogananda\'s boyhood visits',
     detail: 'As a teenager in Calcutta, Yogananda often visited M. — the recorder of Ramakrishna\'s Gospel — and devotes chapter 9 of Autobiography of a Yogi ("The Blissful Devotee and His Cosmic Romance") to him as "Master Mahasaya". It is the one direct personal thread between the two lines.' },
@@ -282,7 +367,8 @@ const LINK_TYPES = {
   sannyasa: 'Monastic order (Daśanāmī)',
   succession: 'Founded / led an institution',
   encounter: 'Documented meeting',
-  parallel: 'Parallel between lineages'
+  parallel: 'Parallel between lineages',
+  textual: 'Teaching through texts'
 };
 
 (function () {
@@ -296,6 +382,29 @@ const LINK_TYPES = {
   if (!canvas) return;
 
   const COL_W = 148, ROW_H = 132, PAD = 12;
+  const onSelectOnly = l => l.type === 'parallel' || l.onSelect;
+
+  // Fit-to-width zoom: the canvas keeps its natural size for layout (so
+  // edge measurements stay simple) and is scaled inside a sizer box.
+  const scroller = canvas.parentElement;
+  const sizer = document.createElement('div');
+  sizer.className = 'lineage-sizer';
+  scroller.insertBefore(sizer, canvas);
+  sizer.appendChild(canvas);
+  let zoomMode = 'fit';
+  function applyZoom() {
+    const W = canvas.offsetWidth, H = canvas.offsetHeight;
+    const s = zoomMode === 'fit' ? Math.max(0.6, Math.min(1, (scroller.clientWidth - 2) / W)) : 1;
+    canvas.style.transform = `scale(${s})`;
+    sizer.style.width = W * s + 'px';
+    sizer.style.height = H * s + 'px';
+    document.querySelectorAll('[data-zoom]').forEach(b =>
+      b.classList.toggle('active', b.dataset.zoom === zoomMode));
+  }
+  document.querySelectorAll('[data-zoom]').forEach(b => b.addEventListener('click', () => {
+    zoomMode = b.dataset.zoom;
+    applyZoom();
+  }));
   const byId = Object.fromEntries(PEOPLE.map(p => [p.id, p]));
   const cards = {};
   let selected = null;
@@ -306,7 +415,7 @@ const LINK_TYPES = {
   canvas.style.height = (maxRow + 1) * ROW_H + PAD * 2 + 'px';
 
   // Lineage header bands
-  [['ramakrishna', 0, 3], ['kriya', 4, 2], ['chinmaya', 6, 3]].forEach(([key, col, span]) => {
+  [['ramakrishna', 0, 3], ['kriya', 4, 2], ['chinmaya', 6, 3], ['ramana', 9, 3]].forEach(([key, col, span]) => {
     const band = document.createElement('div');
     band.className = 'lineage-band lineage-band-' + key;
     band.style.left = PAD + col * COL_W + 'px';
@@ -360,7 +469,7 @@ const LINK_TYPES = {
         d = `M${p1} L${p1[0]},${p2[1] - 24} Q${p1[0]},${p2[1]} ${p2}`;
       } else if (b.row > a.row + 0.4) {
         p1 = anchor(ea, 'bottom'); p2 = anchor(eb, 'top');
-        const my = (p1[1] + p2[1]) / 2;
+        const my = l.late ? p2[1] - 22 : (p1[1] + p2[1]) / 2;
         d = `M${p1} C${p1[0]},${my} ${p2[0]},${my} ${p2}`;
       } else {
         const rightward = b.col > a.col;
@@ -376,7 +485,7 @@ const LINK_TYPES = {
       const title = document.createElementNS('http://www.w3.org/2000/svg', 'title');
       title.textContent = `${byId[l.from].name} → ${byId[l.to].name}: ${l.label}`;
       path.appendChild(title);
-      (l.type === 'parallel' ? svgTop : svg).appendChild(path);
+      (onSelectOnly(l) ? svgTop : svg).appendChild(path);
     });
     highlight();
   }
@@ -389,7 +498,7 @@ const LINK_TYPES = {
       path.classList.toggle('is-dim', !!selected && !on);
       // Parallels aren't lineage links; drawing them all would cross the
       // tree, so they appear only for the selected person.
-      if (l.type === 'parallel') path.classList.toggle('is-hidden', !on);
+      if (onSelectOnly(l)) path.classList.toggle('is-hidden', !on);
     });
     Object.entries(cards).forEach(([id, el]) => {
       const linked = selected && LINKS.some(l =>
@@ -452,6 +561,7 @@ const LINK_TYPES = {
   ).join('') + '<span class="legend-item"><span class="legend-inst"></span>Institution</span><span class="legend-item"><span class="legend-inst legend-order"></span>Daśanāmī order</span>';
 
   drawEdges();
-  if (document.fonts) document.fonts.ready.then(drawEdges);
-  window.addEventListener('resize', drawEdges);
+  if (document.fonts) document.fonts.ready.then(() => { drawEdges(); applyZoom(); });
+  window.addEventListener('resize', () => { drawEdges(); applyZoom(); });
+  applyZoom();
 })();
