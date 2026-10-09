@@ -226,7 +226,7 @@ const PEOPLE = [
   {
     id: 'padmapada', lineage: 'root', col: 5, note: 'mathas',
     name: 'Padmapāda', deva: 'पद्मपाद', dates: 'c. 8th century',
-    role: 'Disciple of Śaṅkara; first head of the Govardhana maṭha (tradition)',
+    role: 'Disciple of Śaṅkara; first head of Govardhana or Dvārakā (accounts differ)',
     etym: 'padma ("lotus") + pāda ("foot"): "lotus-footed".',
     summary: 'Born Sanandana. Legend says Śaṅkara called him from across the Ganga and he walked straight onto the water, with a lotus rising under each step. His Pañcapādikā, a commentary on the opening of Śaṅkara\'s Brahma Sūtra commentary, became the root of the Vivaraṇa school of Advaita.'
   },
@@ -247,7 +247,7 @@ const PEOPLE = [
   {
     id: 'hastamalaka', lineage: 'root', col: 8, note: 'mathas',
     name: 'Hastāmalaka', deva: 'हस्तामलक', dates: 'c. 8th century',
-    role: 'Disciple of Śaṅkara; first head of the Dvārakā maṭha (tradition)',
+    role: 'Disciple of Śaṅkara; first head of Dvārakā or Govardhana (accounts differ)',
     etym: 'hasta ("hand") + āmalaka (the amla fruit): knowledge as plain as "an amla in the palm of the hand".',
     summary: 'A boy his family thought mute. When Śaṅkara asked who he was, he answered with twelve verses on the Self (the Hastāmalakīyam), and Śaṅkara took him as a disciple.'
   },
@@ -274,6 +274,22 @@ const PEOPLE = [
     name: 'Dvārakā Śāradā Pīṭham', deva: 'द्वारका', dates: 'West · Sāmaveda', place: 'Dwarka, Gujarat',
     role: 'Western seat; mahāvākya "tat tvam asi"',
     summary: 'Guardian of the Sāmaveda and tat tvam asi ("you are that", Chāndogya Upaniṣad). Its monks take the names Tīrtha and Āśrama, two orders with no branch on this tree.'
+  },
+
+  {
+    id: 'kanchi', lineage: 'root', col: 10, kind: 'institution', note: 'mathas',
+    name: 'Kanchi Kāmakoṭi Pīṭham', deva: 'काञ्ची कामकोटि पीठम्', dates: 'Kanchipuram', place: 'Kanchipuram, Tamil Nadu',
+    role: 'Claims to be a fifth seat founded by Śaṅkara himself',
+    summary: 'In Kanchi\'s own tradition Śaṅkara founded this seat, spent his last days and attained samādhi at Kanchi, and left it to the boy Sarvajñātman with Sureśvara as guardian. Its list of Śaṅkarācāryas runs back to the 5th century BCE. Chandraśekharendra Sarasvatī, "Mahā Periyavā", was its 68th head.',
+    caveat: 'The other four seats do not accept the claim, and historians treat the early part of its succession list as tradition rather than record. Other traditions place Śaṅkara\'s samādhi at Kedarnath or at Thrissur.'
+  },
+  {
+    id: 'sarvajnatman', lineage: 'root', col: 11, note: 'mathas',
+    name: 'Sarvajñātman', deva: 'सर्वज्ञात्मन्', dates: 'c. 10th century (scholars)',
+    role: 'Author of the Saṃkṣepa-śārīraka; Kanchi\'s second head (tradition)',
+    etym: 'sarva-jña ("all-knowing") + ātman ("self").',
+    summary: 'His Saṃkṣepa-śārīraka, a verse summary of Śaṅkara\'s Brahma Sūtra commentary, is a classic of later Advaita. Kanchi tradition says he was a seven-year-old prodigy who debated Śaṅkara for three days, whom Śaṅkara then named head of the Kanchi seat under Sureśvara\'s care.',
+    caveat: 'Scholars doubt that he was Sureśvara\'s direct pupil and place him around the 10th century, not the 8th.'
   },
 
   // --- The three Daśanāmī branches that carry these lineages ---------------
@@ -630,10 +646,16 @@ const LINKS = [
   { from: 'shankara', to: 'sureshvara', type: 'diksha', label: 'disciple', late: true },
   { from: 'shankara', to: 'totaka', type: 'diksha', label: 'disciple' },
   { from: 'shankara', to: 'hastamalaka', type: 'diksha', label: 'disciple', late: true },
-  { from: 'padmapada', to: 'govardhana', type: 'succession', label: 'first head (tradition)' },
+  { from: 'padmapada', to: 'govardhana', type: 'succession', label: 'first head, per the common list',
+    detail: 'Accounts differ on these two seats. The commonly repeated list puts Padmapāda at the Govardhana maṭha in Puri and Hastāmalaka at Dvārakā; Śṛṅgerī\'s own account of the four disciples reverses them. Both versions agree on Sureśvara at Śṛṅgerī and Toṭaka at Jyotirmaṭha.' },
+  { from: 'padmapada', to: 'dvaraka', type: 'traditional', onSelect: true, label: 'first head, per Śṛṅgerī',
+    detail: 'Accounts differ on these two seats. The commonly repeated list puts Padmapāda at the Govardhana maṭha in Puri and Hastāmalaka at Dvārakā; Śṛṅgerī\'s own account of the four disciples reverses them. Both versions agree on Sureśvara at Śṛṅgerī and Toṭaka at Jyotirmaṭha.' },
   { from: 'sureshvara', to: 'sringeri', type: 'succession', label: 'first head (tradition)' },
   { from: 'totaka', to: 'jyotirmath', type: 'succession', label: 'first head (tradition)' },
-  { from: 'hastamalaka', to: 'dvaraka', type: 'succession', label: 'first head (tradition)' },
+  { from: 'hastamalaka', to: 'dvaraka', type: 'succession', label: 'first head, per the common list',
+    detail: 'Accounts differ on these two seats. The commonly repeated list puts Padmapāda at the Govardhana maṭha in Puri and Hastāmalaka at Dvārakā; Śṛṅgerī\'s own account of the four disciples reverses them. Both versions agree on Sureśvara at Śṛṅgerī and Toṭaka at Jyotirmaṭha.' },
+  { from: 'hastamalaka', to: 'govardhana', type: 'traditional', onSelect: true, label: 'first head, per Śṛṅgerī',
+    detail: 'Accounts differ on these two seats. The commonly repeated list puts Padmapāda at the Govardhana maṭha in Puri and Hastāmalaka at Dvārakā; Śṛṅgerī\'s own account of the four disciples reverses them. Both versions agree on Sureśvara at Śṛṅgerī and Toṭaka at Jyotirmaṭha.' },
   { from: 'mimamsa', to: 'sureshvara', type: 'traditional', label: 'Maṇḍana Miśra became Sureśvara (tradition)' },
   { from: 'sringeri', to: 'puri', type: 'sannyasa', label: 'Purī order' },
   { from: 'sringeri', to: 'sarasvati', type: 'sannyasa', label: 'Sarasvatī order' },
@@ -682,7 +704,11 @@ const LINKS = [
   { from: 'tejomayananda', to: 'swaroopananda', type: 'succession', label: 'succeeded as Head, 2017' },
 
   // Ramaṇa line
-  { from: 'sarasvati', to: 'chandrasekharendra', type: 'sannyasa', label: 'Sarasvatī name; Kanchi pīṭham' },
+  { from: 'sarasvati', to: 'chandrasekharendra', type: 'sannyasa', label: 'Sarasvatī name' },
+  { from: 'shankara', to: 'kanchi', type: 'traditional', label: 'founded by Śaṅkara (Kanchi\'s claim)' },
+  { from: 'sureshvara', to: 'sarvajnatman', type: 'traditional', label: 'his teacher and guardian (Kanchi tradition)' },
+  { from: 'kanchi', to: 'sarvajnatman', type: 'succession', label: 'second head (Kanchi tradition)' },
+  { from: 'kanchi', to: 'chandrasekharendra', type: 'succession', label: '68th Śaṅkarācārya, from 1907' },
   { from: 'ramana', to: 'brunton', type: 'diksha', label: 'met 1931', late: true },
   { from: 'ramana', to: 'ganapati', type: 'diksha', label: 'disciple from 1907; named him', late: true },
   { from: 'ramana', to: 'muruganar', type: 'diksha', label: 'disciple from 1923', late: true },
@@ -790,7 +816,7 @@ const YEAR = {
   prasthana: -500, patanjali: 200, buddhist: 250, mimamsa: 500, vedantins: 550,
   gaudapada: 600, govinda: 660, shankara: 720,
   padmapada: 745, sureshvara: 745, totaka: 745, hastamalaka: 745,
-  govardhana: 760, sringeri: 760, jyotirmath: 760, dvaraka: 760,
+  govardhana: 760, sringeri: 760, jyotirmath: 760, dvaraka: 760, kanchi: 760, sarvajnatman: 800,
   puri: 775, giri: 775, sarasvati: 775,
   matsyendra: 950, gorakhnath: 1100, kanphata: 1150, bhartrhari: 1160,
   gahini: 1240, nivritti: 1280, jnaneshwar: 1290, nanak: 1500,
@@ -810,7 +836,7 @@ const YEAR = {
 };
 const APPROX = new Set(['prasthana', 'patanjali', 'buddhist', 'mimamsa', 'vedantins',
   'gaudapada', 'govinda', 'shankara', 'padmapada', 'sureshvara', 'totaka', 'hastamalaka',
-  'govardhana', 'sringeri', 'jyotirmath', 'dvaraka', 'puri', 'giri', 'sarasvati',
+  'govardhana', 'sringeri', 'jyotirmath', 'dvaraka', 'kanchi', 'sarvajnatman', 'puri', 'giri', 'sarasvati',
   'matsyendra', 'gorakhnath', 'kanphata', 'bhartrhari', 'gahini', 'nivritti', 'nanak',
   'nimbargi', 'bhausaheb', 'siddharameshwar', 'frydman', 'babaji', 'totapuri', 'tapovan',
   'tejomayananda', 'swaroopananda', 'novaks', 'osborne']);
