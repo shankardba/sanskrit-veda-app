@@ -27,6 +27,7 @@ const LINEAGES = {
   chinmaya: { name: 'Chinmaya', note: 'Sivananda · Tapovan · Chinmayananda' },
   ramana: { name: 'Ramaṇa', note: 'Arunachala · self-enquiry' },
   root: { name: 'Root', note: '' },
+  yoga: { name: 'Yoga', note: 'Patañjali' },
   nath: { name: 'Nāth · Inchegiri', note: 'Matsyendranāth · Gorakhnāth · Nisargadatta' },
   order: { name: 'Daśanāmī orders', note: '' }
 };
@@ -131,6 +132,16 @@ const PEOPLE = [
     role: 'Śaṅkara\'s guru',
     etym: 'Govinda, a name of Kṛṣṇa, + bhagavat-pāda ("the Lord\'s feet"), an honorific later also given to Śaṅkara.',
     summary: 'Tradition says the boy Śaṅkara found him in a cave on the banks of the Narmada, took sannyāsa from him, and studied with him until he was sent to Kāśī to write his commentaries. Almost nothing else is known of him.'
+  },
+
+  // --- Patañjali (a textual root shared by several branches) ---------------
+  {
+    id: 'patanjali', lineage: 'yoga', col: 3, row: -3, note: 'patanjali',
+    name: 'Patañjali · Yoga Sūtras', deva: 'पतञ्जलि', dates: 'c. 2nd c. BCE – 4th c. CE',
+    role: 'Compiler of the Yoga Sūtras',
+    etym: 'pata ("fallen") + añjali ("cupped hands"): legend says he fell as a tiny serpent into his mother\'s cupped hands. Tradition sees him as an incarnation of Ādiśeṣa, the serpent Viṣṇu rests on.',
+    summary: '196 terse aphorisms that define yoga as "the stilling of the movements of the mind" (yogaś citta-vṛtti-nirodhaḥ, 1.2) and set out the eight limbs (aṣṭāṅga). Sūtra 2.1 defines kriyā-yoga as austerity, self-study and surrender to God. Tradition also identifies him with Patañjali the grammarian, author of the Mahābhāṣya, which is why one famous verse praises him for purifying mind, speech and body.',
+    caveat: 'Whether the yoga author and the grammarian are one person is doubted by most scholars; dates for the Sūtras range widely, with much recent work placing them (with their Vyāsa commentary) around the 4th century CE.'
   },
 
   // --- Nāth (a separate root) ----------------------------------------------
@@ -652,6 +663,18 @@ const LINKS = [
   { from: 'osborne', to: 'balsekar', type: 'textual', cross: true, onSelect: true,
     label: 'The Mountain Path review of I Am That',
     detail: 'Ramesh Balsekar recalled that a review of I Am That in The Mountain Path, the Ramanasramam journal Arthur Osborne founded, moved him so much that he went to Nisargadatta at once, in 1978. It is a second thread from Ramana\'s world into Nisargadatta\'s, after Maurice Frydman.' },
+  { from: 'patanjali', to: 'yogananda', type: 'textual', cross: true,
+    label: 'Kriyā-yoga, Yoga Sūtra 2.1',
+    detail: 'Patañjali defines kriyā-yoga in Yoga Sūtra 2.1 as tapas (austerity), svādhyāya (self-study) and īśvara-praṇidhāna (surrender to God). Yogananda quotes this in Autobiography of a Yogi to place Lahiri Mahasaya\'s Kriyā in Patañjali\'s tradition. Sri Yukteswar likewise read the sūtras as the science behind the technique.' },
+  { from: 'patanjali', to: 'vivekananda', type: 'textual', cross: true,
+    label: 'Rāja Yoga (1896)',
+    detail: 'Vivekananda\'s Rāja Yoga is a translation of and commentary on the Yoga Sūtras, given as lectures in New York. It was the book that introduced Patañjali to a wide Western audience, decades before modern postural yoga.' },
+  { from: 'patanjali', to: 'shankara', type: 'influence', cross: true,
+    label: 'Yoga accepted as practice, rejected as philosophy',
+    detail: 'In his Brahma Sūtra commentary (on 2.1.3, "by this, Yoga is refuted") Śaṅkara rejects the dualism of Sāṅkhya-Yoga, the separate soul and matter, while accepting yoga\'s methods of concentration. A sub-commentary on the Yoga Sūtras, the Pātañjala-yoga-śāstra-vivaraṇa, is attributed to him, but scholars disagree about whether it is really his.' },
+  { from: 'patanjali', to: 'gorakhnath', type: 'parallel', cross: true,
+    label: 'Haṭha yoga as the ladder to rāja-yoga',
+    detail: 'The Haṭha Yoga Pradīpikā (15th century), which honours Gorakhnāth among the masters of haṭha, opens by saying that haṭha yoga is a stairway for those who want to climb to rāja-yoga, the meditative yoga later identified with Patañjali\'s. The Nāth body-practice and Patañjali\'s mind-discipline are thus presented as one path.' },
   { from: 'gaudapada', to: 'sarvapriyananda', type: 'textual', cross: true, onSelect: true,
     label: 'Māṇḍūkya Kārikā lectures',
     detail: 'Swami Sarvapriyananda\'s best-known teaching is a long lecture series on the Māṇḍūkya Upaniṣad with Gauḍapāda\'s Kārikā, given at the Vedanta Society of New York. It brings a 7th-century text to the present day.' },
@@ -678,7 +701,8 @@ const LINKS = [
 const NOTE_TITLES = {
   root: 'Lineages before Śaṅkara',
   mathas: 'The four maṭhas',
-  ramana: 'The Ramana branch'
+  ramana: 'The Ramana branch',
+  patanjali: 'Patañjali and the Yoga Sūtras'
 };
 
 const LINK_TYPES = {

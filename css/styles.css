@@ -2842,7 +2842,7 @@ body.tamil-page .lang-hub-card-glyph {
 .lineage-lede a { color: var(--color-gold-light); border-bottom: 1px dotted var(--color-border); white-space: nowrap; }
 .lineage-branches {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(165px, 1fr));
   gap: 10px;
   margin: -8px 0 22px;
 }
@@ -2929,3 +2929,6 @@ body.tamil-page .lang-hub-card-glyph {
 .guide-table th, .guide-table td { text-align: left; vertical-align: top; padding: 6px 10px; border-bottom: 1px solid var(--color-border); }
 .guide-table th { font-family: var(--font-ui); font-size: 0.72rem; color: var(--color-gold); font-weight: 600; letter-spacing: 0.3px; }
 .guide-section h3, .modal-body h3 { font-family: var(--font-display); font-size: 1rem; color: var(--color-gold); margin: 18px 0 6px; }
+.lineage-node.lineage-yoga { border-color: rgba(198, 216, 107, 0.5); border-left: 3px solid #c6d86b; border-radius: 4px; }
+.lineage-yoga .lineage-node-deva { color: #dbe89a; }
+.b-yoga { --branch: #c6d86b; }
